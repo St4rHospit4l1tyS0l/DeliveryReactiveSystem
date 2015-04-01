@@ -1,0 +1,170 @@
+﻿@using CentralManagement.Resources
+<script>
+    app.service('sharedSvc', function ($timeout, $q) {
+
+        //Dialogo para la espera de algún evento
+        var dlgProcessing = $('#ProcessingDlgId');
+        var th = this;
+        this.cfgProc = { toProcessing: undefined, procCount: 0 };
+
+        this.onProcTimeOut = function () {
+            th.cfgProc.procCount++;
+            if (th.cfgProc.procCount > 100)
+                th.cfgProc.procCount = 0;
+            th.cfgProc.toProcessing = $timeout(th.onProcTimeOut, 150);
+        }
+
+        this.showProcessing = function () {
+            dlgProcessing.modal('show');
+            th.cfgProc.procCount = 1;
+            th.cfgProc.toProcessing = $timeout(th.onProcTimeOut, 400);
+        };
+
+        this.hideProcessing = function () {
+            $timeout.cancel(th.cfgProc.toProcessing);
+            dlgProcessing.modal('hide');
+        };
+
+        //Dialogo para mensajes con acciones de éxito, información, advertencia o error
+        var dlgMsgBox = $('#MessageBoxDlgId');
+
+        this.cfgMsg = { Title: '', Message: '', Type: '' }
+        this.respMsg = {};
+
+        this.showDlg = function (cfg) {
+            th.cfgMsg = cfg;
+            var def = $q.defer();
+
+            $timeout(function () {
+                dlgMsgBox.modal('show');
+                dlgMsgBox.on('hidden.bs.modal', function () {
+                    if (th.respMsg.IsOk === true) {
+                        def.resolve();
+                    }
+                    else {
+                        def.reject();
+                    }
+                });
+            }, 1);
+
+            return def.promise;
+        };
+
+        this.showMsg = function (cfg) {
+            dlgMsgBox = $('#MessageBoxDlgId');
+            return th.showDlg(cfg);
+        };
+
+
+        this.showConf = function (cfg) {
+            dlgMsgBox = $('#ConfirmationDlgId');
+            return th.showDlg(cfg);
+        };
+
+        this.hideMsg = function (rMsg) {
+            th.respMsg = rMsg;
+            dlgMsgBox.modal('hide');
+        };
+
+    });
+
+
+    app.controller('processingController', function ($scope, sharedSvc) {
+        $scope.sharedSvc = sharedSvc;
+        $scope.count = 0;
+
+        $scope.$watch('sharedSvc.cfgProc.procCount', function (count) {
+            $scope.count = count;
+        });
+    });
+
+    app.controller('messageController', function ($scope, $sce, sharedSvc) {
+        $scope.sharedSvc = sharedSvc;
+
+        $scope.$watch('sharedSvc.cfgMsg', function (cfg) {
+            $scope.Title = cfg.Title;
+            $scope.Message = $sce.trustAsHtml(cfg.Message);
+            $scope.Type = cfg.Type;
+        });
+
+        $scope.ok = function () {
+            $scope.IsOk = true;
+            sharedSvc.hideMsg($scope);
+        }
+    });
+
+
+    app.controller('confirmationController', function ($scope, $sce, sharedSvc) {
+        $scope.sharedSvc = sharedSvc;
+
+        $scope.$watch('sharedSvc.cfgMsg', function (cfg) {
+            $scope.Title = cfg.Title;
+            $scope.Message = $sce.trustAsHtml(cfg.Message);
+            $scope.Type = cfg.Type;
+        });
+
+        $scope.yes = function () {
+            $scope.IsOk = true;
+            sharedSvc.hideMsg($scope);
+        }
+
+        $scope.no = function () {
+            $scope.IsOk = false;
+            sharedSvc.hideMsg($scope);
+        }
+    });
+
+</script>
+
+<div id="ProcessingDlgId" class="modal fade" ng-controller="processingController" data-backdrop="static" data-keyboard="false" ng-cloak>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="alert alert-info"><h4>@ResShared.TITLE_PROCESSING</h4></div>
+                <br />
+                <progressbar class="progress-striped active" value="count" type="info"></progressbar>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="MessageBoxDlgId" class="modal fade" ng-controller="messageController" data-backdrop="static" ng-cloak>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="alert alert-{{Type=='primary'?'info':Type}}">
+                    <button type="button" class="close" ng-click="ok()">&times;</button>
+                    <h4 class="modal-title element-center">{{Title}}</h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="element-center" ng-bind-html="Message"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-{{Type}}" ng-click="ok()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="ConfirmationDlgId" class="modal fade" ng-controller="confirmationController" data-backdrop="static" ng-cloak>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="alert alert-{{Type=='primary'?'info':Type}}">
+                    <button type="button" class="close" ng-click="no()">&times;</button>
+                    <h4 class="modal-title element-center">{{Title}}</h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="element-center" ng-bind-html="Message"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-{{Type}}" ng-click="yes()">Si</button>
+                <button type="button" class="btn btn-default" ng-click="no()">No</button>
+            </div>
+        </div>
+    </div>
+</div>

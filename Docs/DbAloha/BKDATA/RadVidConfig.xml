@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<RadVid>
+	<RadVidApi>
+		<Primary>192.168.0.102</Primary>
+		<Backup>192.168.0.103</Backup>
+		<PrimarySearchTime>30</PrimarySearchTime>
+		<LimitKPSDevices>NO</LimitKPSDevices>
+		<LimitKPSDeviceList>
+			<KPS>
+				<VideoNumber>5</VideoNumber>
+				<SerialNumber>b28720</SerialNumber>
+			</KPS>
+			<KPS>
+				<VideoNumber>2</VideoNumber>
+				<SerialNumber>b26159</SerialNumber>
+			</KPS>
+			<KPS>
+				<VideoNumber>4</VideoNumber>
+				<SerialNumber>b29017</SerialNumber>
+			</KPS>
+			<KPS>
+				<VideoNumber>6</VideoNumber>
+				<SerialNumber>b29106</SerialNumber>
+			</KPS>
+			<KPS>
+				<VideoNumber>3</VideoNumber>
+				<SerialNumber>b26995</SerialNumber>
+			</KPS>
+			<KPS>
+				<VideoNumber>1</VideoNumber>
+				<SerialNumber>b26059</SerialNumber>
+			</KPS>
+		</LimitKPSDeviceList>
+	</RadVidApi>
+	<RadVidSetup>
+		<KiwiDiscoverTimeout>5</KiwiDiscoverTimeout>
+	</RadVidSetup>
+</RadVid>

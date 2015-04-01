@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CommonConfiguration>
+    <AutoCloseCheck>true</AutoCloseCheck>
+    <TakePartInSettleAll>true</TakePartInSettleAll>
+    <SettlePerTerminal>false</SettlePerTerminal>
+    <PartialPaymentWindow>true</PartialPaymentWindow>
+    <Tips>false</Tips>
+    <MaxTip>0</MaxTip>
+    <Cashback>false</Cashback>
+    <MaxCashback>0</MaxCashback>
+    <PayWindowX>285</PayWindowX>
+    <PayWindowY>0</PayWindowY>
+    <PayWindowHeight>500</PayWindowHeight>
+    <PayWindoWidth>515</PayWindoWidth>
+    <PayWindowBackgroudColour />
+    <PayWindowTextColour Web="Black" />
+    <PayWindowActiveTextBoxColour Web="LightYellow" />
+    <PayWindowTextBoxColour Web="White" />
+    <ConfirmationDialogTimeout>3000</ConfirmationDialogTimeout>
+    <X>20</X>
+    <Y>40</Y>
+    <Width>500</Width>
+    <Height>350</Height>
+    <BackgroundColour Web="#F0F1F1" />
+    <ButtonColour Web="LightYellow" />
+    <TextColour Web="Black" />
+  </CommonConfiguration>
+  <ComPort>0</ComPort>
+  <SilentSettlement>false</SilentSettlement>
+  <AllowTipAdjustments>false</AllowTipAdjustments>
+  <DisplayMessageTimeout>5000</DisplayMessageTimeout>
+  <Currency>MXN</Currency>
+  <Company>B787</Company>
+  <Branch>001</Branch>
+  <Country>MEX</Country>
+  <Merchant>51379</Merchant>
+  <Operation>11</Operation>
+  <Type>V / MC</Type>
+  <Url>https://dev.mitec.com.mx</Url>
+  <PrintVoucherInAloha>true</PrintVoucherInAloha>
+  <Terminals>
+    <Terminals>
+      <TerminalId>1</TerminalId>
+      <User>B787SDUS0</User>
+      <Password>NCRCP0508</Password>
+    </Terminals>
+  </Terminals>
+</Configuration>

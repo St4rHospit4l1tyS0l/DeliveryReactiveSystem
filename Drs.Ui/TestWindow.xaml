@@ -1,0 +1,10 @@
+﻿<Window x:Class="Drs.Ui.TestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TestWindow" Height="350" Width="525">
+    <Grid>
+        <TextBox Margin="20" Width="100" Height="28" Text="{Binding Username}" />
+        <Button Margin="20" Width="100" Height="28" Content="Generar" Command="{Binding GenerateCommand}" />
+
+   </Grid>
+</Window>

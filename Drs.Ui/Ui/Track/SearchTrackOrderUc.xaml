@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Track.SearchTrackOrderUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewShr="clr-namespace:Drs.Ui.Ui.Shared"
+             xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
+             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vmShr:AutoCompleteTextVm}">
+            <viewShr:AutoCompleteGenericUc/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel>
+        <StackPanel HorizontalAlignment="Stretch">
+            <Label Content="Búsqueda de la orden por teléfono o nombre del cliente" FontSize="20" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FF729DB7" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+        </StackPanel>
+        <Grid Margin="0 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"></ColumnDefinition>
+                <ColumnDefinition Width="40"></ColumnDefinition>
+                <ColumnDefinition Width="400"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Height="45" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
+                <ContentControl  Content="{Binding PhoneSearchVm}" VerticalAlignment="Center" Height="45" FontSize="16" Width="400" 
+                         HorizontalAlignment="Center" >
+                </ContentControl>
+            </StackPanel>
+            <StackPanel Height="45" Grid.Column="2" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
+                <ContentControl  Content="{Binding NameSearchVm}" VerticalAlignment="Center" Height="45" FontSize="16" Width="400" 
+                         HorizontalAlignment="Center" >
+                </ContentControl>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+
+
+</UserControl>

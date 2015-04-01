@@ -1,0 +1,1487 @@
+  Check* 60019 (6291475): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :    26.97
+    Net Sales          :    25.21
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.76  TaxId: 2
+    Excl Taxable by Cat:     6.95  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.49  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     3.50  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.25  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    14.76  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     1.02  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    25.21  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    26.97  TndrId: 1
+    Guest Count        : 2
+    Net Sales By Cat   :     6.95  Cat: 1
+    Net Sales By Cat   :     3.50  Cat: 8
+    Net Sales By Cat   :    14.76  Cat: 12
+    Grs Sales By Cat   :     7.44  Cat: 1
+    Grs Sales By Cat   :     3.75  Cat: 8
+    Grs Sales By Cat   :    15.78  Cat: 12
+  Check* 60022 (6291478): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :     8.03
+    Net Sales          :     7.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.53  TaxId: 2
+    Excl Taxable by Cat:     7.50  TaxId: 2  Cat: 5
+    Excl Tax by Cat    :     0.53  TaxId: 2  Cat: 5
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     7.50  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :     8.03  TndrId: 1
+    Guest Count        : 2
+    Net Sales By Cat   :     7.50  Cat: 5
+    Grs Sales By Cat   :     8.03  Cat: 5
+  Check* 70003 (7340035): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :    20.07
+    Net Sales          :    18.76
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.31  TaxId: 2
+    Excl Taxable by Cat:     3.50  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.25  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    15.26  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     1.06  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    18.76  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    20.07  TndrId: 1
+    Guest Count        : 2
+    Net Sales By Cat   :     3.50  Cat: 8
+    Net Sales By Cat   :    15.26  Cat: 12
+    Grs Sales By Cat   :     3.75  Cat: 8
+    Grs Sales By Cat   :    16.32  Cat: 12
+  Check* 10018 (1048594): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :    24.61
+    Net Sales          :    23.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.61  TaxId: 2
+    Excl Taxable by Cat:     6.28  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.44  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     2.49  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.17  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    14.23  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.00  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    23.00  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    24.61  TndrId: 1
+    Promo*              :     2.45  PromId: 10
+    Promo* By Category  :     0.67  Cat: 1
+    Promo* By Category  :     0.26  Cat: 8
+    Promo* By Category  :     1.52  Cat: 11
+    Guest Count        : 1
+    Net Sales By Cat   :     6.28  Cat: 1
+    Net Sales By Cat   :     2.49  Cat: 8
+    Net Sales By Cat   :    14.23  Cat: 11
+    Grs Sales By Cat   :     7.39  Cat: 1
+    Grs Sales By Cat   :     2.92  Cat: 8
+    Grs Sales By Cat   :    16.75  Cat: 11
+  Check* 60023 (6291479): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :    30.75
+    Net Sales          :    28.74
+    Voids              :     1.75
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     2.01  TaxId: 2
+    Excl Taxable by Cat:     4.75  TaxId: 2  Cat: 4
+    Excl Tax by Cat    :     0.33  TaxId: 2  Cat: 4
+    Excl Taxable by Cat:     2.99  TaxId: 2  Cat: 5
+    Excl Tax by Cat    :     0.21  TaxId: 2  Cat: 5
+    Excl Taxable by Cat:     9.00  TaxId: 2  Cat: 9
+    Excl Tax by Cat    :     0.63  TaxId: 2  Cat: 9
+    Excl Taxable by Cat:    12.00  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     0.84  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    28.74  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    30.75  TndrId: 1
+    Guest Count        : 4
+    Net Sales By Cat   :     4.75  Cat: 4
+    Net Sales By Cat   :     2.99  Cat: 5
+    Net Sales By Cat   :     9.00  Cat: 9
+    Net Sales By Cat   :    12.00  Cat: 12
+    Grs Sales By Cat   :     5.08  Cat: 4
+    Grs Sales By Cat   :     3.20  Cat: 5
+    Grs Sales By Cat   :     9.63  Cat: 9
+    Grs Sales By Cat   :    12.84  Cat: 12
+  Check* 10020 (1048596): Emp: 303 Yackelin Garrido RevCtr: 1 
+    Complete Total     :    30.76
+    Net Sales          :    28.75
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     2.01  TaxId: 2
+    Excl Taxable by Cat:     5.95  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.42  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     6.10  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.43  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    16.70  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.16  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    28.75  ModeId: 2
+    Payment            :    32.76  TndrId: 8
+    NonCash Tendered   :    32.76
+    Cash Change        :    -2.00  TndrId: 1
+    Promo*              :     4.20  PromId: 13
+    Promo* By Category  :     1.00  Cat: 1
+    Promo* By Category  :     0.40  Cat: 8
+    Promo* By Category  :     2.80  Cat: 11
+    Guest Count        : 2
+    Net Sales By Cat   :     5.95  Cat: 1
+    Net Sales By Cat   :     6.10  Cat: 8
+    Net Sales By Cat   :    16.70  Cat: 11
+    Grs Sales By Cat   :     7.37  Cat: 1
+    Grs Sales By Cat   :     6.93  Cat: 8
+    Grs Sales By Cat   :    20.66  Cat: 11
+  Check* 10019 (1048595): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :    22.47
+    Net Sales          :    21.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.47  TaxId: 2
+    Excl Taxable by Cat:     5.25  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.37  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    15.75  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.10  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    21.00  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    22.47  TndrId: 1
+    Guest Count        : 3
+    Net Sales By Cat   :     5.25  Cat: 8
+    Net Sales By Cat   :    15.75  Cat: 11
+    Grs Sales By Cat   :     5.62  Cat: 8
+    Grs Sales By Cat   :    16.85  Cat: 11
+  Check* 60024 (6291480): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :     6.96
+    Net Sales          :     6.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.46  TaxId: 2
+    Excl Taxable by Cat:     4.75  TaxId: 2  Cat: 4
+    Excl Tax by Cat    :     0.33  TaxId: 2  Cat: 4
+    Excl Taxable by Cat:     1.75  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.13  TaxId: 2  Cat: 8
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     6.50  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :     6.96  TndrId: 1
+    Guest Count        : 1
+    Net Sales By Cat   :     4.75  Cat: 4
+    Net Sales By Cat   :     1.75  Cat: 8
+    Grs Sales By Cat   :     5.08  Cat: 4
+    Grs Sales By Cat   :     1.88  Cat: 8
+  Check* 10039 (1048615): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :    24.61
+    Net Sales          :    23.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.61  TaxId: 2
+    Excl Taxable by Cat:     6.28  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.44  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     2.49  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.17  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    14.23  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.00  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    23.00  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    24.61  TndrId: 1
+    Promo*              :     2.45  PromId: 10
+    Promo* By Category  :     0.67  Cat: 1
+    Promo* By Category  :     0.26  Cat: 8
+    Promo* By Category  :     1.52  Cat: 11
+    Guest Count        : 2
+    Net Sales By Cat   :     6.28  Cat: 1
+    Net Sales By Cat   :     2.49  Cat: 8
+    Net Sales By Cat   :    14.23  Cat: 11
+    Grs Sales By Cat   :     7.39  Cat: 1
+    Grs Sales By Cat   :     2.92  Cat: 8
+    Grs Sales By Cat   :    16.75  Cat: 11
+  Check* 20094 (2097246): Emp: 303 Yackelin Garrido RevCtr: 1 
+    Complete Total     :    13.38
+    Net Sales          :    12.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.88  TaxId: 2
+    Excl Taxable by Cat:    12.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.88  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    12.50  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :    13.38  TndrId: 1
+    Guest Count        : 1
+    Net Sales By Cat   :    12.50  Cat: 11
+    Grs Sales By Cat   :    13.38  Cat: 11
+  Check* 20084 (2097236): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :    26.75
+    Net Sales          :    25.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.75  TaxId: 2
+    Excl Taxable by Cat:     6.00  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.42  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     2.37  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.17  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    16.63  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     1.16  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    25.00  ModeId: 1
+    Payment            :    26.75  TndrId: 3
+    NonCash Tendered   :    26.75
+    Promo*              :     3.95  PromId: 13
+    Promo* By Category  :     0.95  Cat: 1
+    Promo* By Category  :     0.38  Cat: 8
+    Promo* By Category  :     2.62  Cat: 12
+    Guest Count        : 1
+    Net Sales By Cat   :     6.00  Cat: 1
+    Net Sales By Cat   :     2.37  Cat: 8
+    Net Sales By Cat   :    16.63  Cat: 12
+    Grs Sales By Cat   :     7.37  Cat: 1
+    Grs Sales By Cat   :     2.92  Cat: 8
+    Grs Sales By Cat   :    20.41  Cat: 12
+  Check* 20103 (2097255): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :    22.41
+    Net Sales          :    20.94
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.47  TaxId: 2
+    Excl Taxable by Cat:     3.19  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.22  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     3.50  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.25  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    14.25  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.00  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    20.94  ModeId: 1
+    Payment            :    23.00  TndrId: 8
+    NonCash Tendered   :    23.00
+    Cash Change        :    -0.59  TndrId: 1
+    Promo*              :     5.81  PromId: 2
+    Promo* By Category  :     1.06  Cat: 1
+    Promo* By Category  :     4.75  Cat: 11
+    Guest Count        : 0
+    Net Sales By Cat   :     3.19  Cat: 1
+    Net Sales By Cat   :     3.50  Cat: 8
+    Net Sales By Cat   :    14.25  Cat: 11
+    Grs Sales By Cat   :     4.47  Cat: 1
+    Grs Sales By Cat   :     3.75  Cat: 8
+    Grs Sales By Cat   :    20.00  Cat: 11
+  Check* 20101 (2097253): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :    28.36
+    Net Sales          :    26.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.86  TaxId: 2
+    Excl Taxable by Cat:     7.50  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.53  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    19.00  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.33  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    26.50  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    28.36  TndrId: 1
+    Guest Count        : 4
+    Net Sales By Cat   :     7.50  Cat: 8
+    Net Sales By Cat   :    19.00  Cat: 11
+    Grs Sales By Cat   :     8.03  Cat: 8
+    Grs Sales By Cat   :    20.33  Cat: 11
+  Check* 20004 (2097156): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :     7.22
+    Net Sales          :     6.75
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.47  TaxId: 2
+    Excl Taxable by Cat:     4.75  TaxId: 2  Cat: 4
+    Excl Tax by Cat    :     0.33  TaxId: 2  Cat: 4
+    Excl Taxable by Cat:     2.00  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.14  TaxId: 2  Cat: 8
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     6.75  ModeId: 1
+    Payment            :     7.22  TndrId: 8
+    NonCash Tendered   :     7.22
+    Guest Count        : 2
+    Net Sales By Cat   :     4.75  Cat: 4
+    Net Sales By Cat   :     2.00  Cat: 8
+    Grs Sales By Cat   :     5.08  Cat: 4
+    Grs Sales By Cat   :     2.14  Cat: 8
+  Check* 20006 (2097158): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :     5.08
+    Net Sales          :     4.75
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.33  TaxId: 2
+    Excl Taxable by Cat:     4.75  TaxId: 2  Cat: 4
+    Excl Tax by Cat    :     0.33  TaxId: 2  Cat: 4
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     4.75  ModeId: 1
+    Payment            :     5.08  TndrId: 8
+    NonCash Tendered   :     5.08
+    Guest Count        : 2
+    Net Sales By Cat   :     4.75  Cat: 4
+    Grs Sales By Cat   :     5.08  Cat: 4
+  Check* 20009 (2097161): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    24.61
+    Net Sales          :    23.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.61  TaxId: 2
+    Excl Taxable by Cat:     6.40  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.45  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     2.53  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.18  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    14.07  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     0.98  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    23.00  ModeId: 1
+    Payment            :    27.07  TndrId: 3
+    NonCash Tendered   :    27.07
+    Cash Change        :    -2.46  TndrId: 1
+    Promo*              :     1.96  PromId: 10
+    Promo* By Category  :     0.55  Cat: 1
+    Promo* By Category  :     0.22  Cat: 8
+    Promo* By Category  :     1.19  Cat: 12
+    Guest Count        : 2
+    Net Sales By Cat   :     6.40  Cat: 1
+    Net Sales By Cat   :     2.53  Cat: 8
+    Net Sales By Cat   :    14.07  Cat: 12
+    Grs Sales By Cat   :     7.40  Cat: 1
+    Grs Sales By Cat   :     2.93  Cat: 8
+    Grs Sales By Cat   :    16.24  Cat: 12
+  Check* 60003 (6291459): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :     6.37
+    Net Sales          :     5.95
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.42  TaxId: 2
+    Excl Taxable by Cat:     5.95  TaxId: 2  Cat: 9
+    Excl Tax by Cat    :     0.42  TaxId: 2  Cat: 9
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     5.95  ModeId: 2
+    Payment            :     7.37  TndrId: 8
+    NonCash Tendered   :     7.37
+    Cash Change        :    -1.00  TndrId: 1
+    Guest Count        : 1
+    Net Sales By Cat   :     5.95  Cat: 9
+    Grs Sales By Cat   :     6.37  Cat: 9
+  Check* 60001 (6291457): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    55.05
+    Net Sales          :    51.45
+    Voids              :     1.75
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     3.60  TaxId: 2
+    Excl Taxable by Cat:     6.95  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.49  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:    13.25  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.93  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    18.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.30  TaxId: 2  Cat: 11
+    Excl Taxable by Cat:    12.75  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     0.88  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    51.45  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    55.05  TndrId: 1
+    Guest Count        : 3
+    Net Sales By Cat   :     6.95  Cat: 1
+    Net Sales By Cat   :    13.25  Cat: 8
+    Net Sales By Cat   :    18.50  Cat: 11
+    Net Sales By Cat   :    12.75  Cat: 12
+    Grs Sales By Cat   :     7.44  Cat: 1
+    Grs Sales By Cat   :    14.18  Cat: 8
+    Grs Sales By Cat   :    19.80  Cat: 11
+    Grs Sales By Cat   :    13.63  Cat: 12
+  Check* 60004 (6291460): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    14.87
+    Net Sales          :    13.90
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.97  TaxId: 2
+    Excl Taxable by Cat:    13.90  TaxId: 2  Cat: 9
+    Excl Tax by Cat    :     0.97  TaxId: 2  Cat: 9
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    13.90  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    14.87  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    13.90  Cat: 9
+    Grs Sales By Cat   :    14.87  Cat: 9
+  Check* 60005 (6291461): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    14.87
+    Net Sales          :    13.90
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.97  TaxId: 2
+    Excl Taxable by Cat:    13.90  TaxId: 2  Cat: 9
+    Excl Tax by Cat    :     0.97  TaxId: 2  Cat: 9
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    13.90  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    14.87  TndrId: 1
+    Guest Count        : 4
+    Net Sales By Cat   :    13.90  Cat: 9
+    Grs Sales By Cat   :    14.87  Cat: 9
+  Check* 60008 (6291464): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    44.62
+    Net Sales          :    41.70
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     2.92  TaxId: 2
+    Excl Taxable by Cat:     6.95  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.49  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     9.00  TaxId: 2  Cat: 4
+    Excl Tax by Cat    :     0.63  TaxId: 2  Cat: 4
+    Excl Taxable by Cat:     7.50  TaxId: 2  Cat: 6
+    Excl Tax by Cat    :     0.53  TaxId: 2  Cat: 6
+    Excl Taxable by Cat:     5.25  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.37  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    13.00  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.90  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    41.70  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    44.62  TndrId: 1
+    Guest Count        : 3
+    Net Sales By Cat   :     6.95  Cat: 1
+    Net Sales By Cat   :     9.00  Cat: 4
+    Net Sales By Cat   :     7.50  Cat: 6
+    Net Sales By Cat   :     5.25  Cat: 8
+    Net Sales By Cat   :    13.00  Cat: 11
+    Grs Sales By Cat   :     7.44  Cat: 1
+    Grs Sales By Cat   :     9.63  Cat: 4
+    Grs Sales By Cat   :     8.03  Cat: 6
+    Grs Sales By Cat   :     5.62  Cat: 8
+    Grs Sales By Cat   :    13.90  Cat: 11
+  Check* 10002 (1048578): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :     9.90
+    Net Sales          :     9.25
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.65  TaxId: 2
+    Excl Taxable by Cat:     2.75  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.19  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     4.75  TaxId: 2  Cat: 4
+    Excl Tax by Cat    :     0.33  TaxId: 2  Cat: 4
+    Excl Taxable by Cat:     1.75  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.13  TaxId: 2  Cat: 8
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     9.25  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :     9.90  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     2.75  Cat: 1
+    Net Sales By Cat   :     4.75  Cat: 4
+    Net Sales By Cat   :     1.75  Cat: 8
+    Grs Sales By Cat   :     2.94  Cat: 1
+    Grs Sales By Cat   :     5.08  Cat: 4
+    Grs Sales By Cat   :     1.88  Cat: 8
+  Check* 10012 (1048588): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    13.10
+    Net Sales          :    12.24
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.86  TaxId: 2
+    Excl Taxable by Cat:     2.99  TaxId: 2  Cat: 5
+    Excl Tax by Cat    :     0.21  TaxId: 2  Cat: 5
+    Excl Taxable by Cat:     7.50  TaxId: 2  Cat: 6
+    Excl Tax by Cat    :     0.53  TaxId: 2  Cat: 6
+    Excl Taxable by Cat:     1.75  TaxId: 2  Cat: 10
+    Excl Tax by Cat    :     0.12  TaxId: 2  Cat: 10
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    12.24  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    13.10  TndrId: 1
+    Guest Count        : 2
+    Net Sales By Cat   :     2.99  Cat: 5
+    Net Sales By Cat   :     7.50  Cat: 6
+    Net Sales By Cat   :     1.75  Cat: 10
+    Grs Sales By Cat   :     3.20  Cat: 5
+    Grs Sales By Cat   :     8.03  Cat: 6
+    Grs Sales By Cat   :     1.87  Cat: 10
+  Check* 10010 (1048586): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    32.10
+    Net Sales          :    30.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     2.10  TaxId: 2
+    Excl Taxable by Cat:     4.75  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.33  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     6.75  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.47  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    18.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.30  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    30.00  ModeId: 1
+    Payment            :    32.10  TndrId: 3
+    NonCash Tendered   :    32.10
+    Guest Count        : 4
+    Net Sales By Cat   :     4.75  Cat: 1
+    Net Sales By Cat   :     6.75  Cat: 8
+    Net Sales By Cat   :    18.50  Cat: 11
+    Grs Sales By Cat   :     5.08  Cat: 1
+    Grs Sales By Cat   :     7.22  Cat: 8
+    Grs Sales By Cat   :    19.80  Cat: 11
+  Check* 60012 (6291468): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    48.90
+    Net Sales          :    45.70
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     3.20  TaxId: 2
+    Excl Taxable by Cat:    11.70  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.82  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     9.00  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.63  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    25.00  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.75  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    45.70  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    48.90  TndrId: 1
+    Guest Count        : 4
+    Net Sales By Cat   :    11.70  Cat: 1
+    Net Sales By Cat   :     9.00  Cat: 8
+    Net Sales By Cat   :    25.00  Cat: 11
+    Grs Sales By Cat   :    12.52  Cat: 1
+    Grs Sales By Cat   :     9.63  Cat: 8
+    Grs Sales By Cat   :    26.75  Cat: 11
+  Check* 10014 (1048590): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    19.40
+    Net Sales          :    18.13
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.27  TaxId: 2
+    Excl Taxable by Cat:     3.50  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.25  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:     0.75  TaxId: 2  Cat: 10
+    Excl Tax by Cat    :     0.05  TaxId: 2  Cat: 10
+    Excl Taxable by Cat:    13.88  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     0.97  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    18.13  ModeId: 1
+    Payment            :    22.40  TndrId: 3
+    NonCash Tendered   :    22.40
+    Cash Change        :    -3.00  TndrId: 1
+    Guest Count        : 1
+    Net Sales By Cat   :     3.50  Cat: 8
+    Net Sales By Cat   :     0.75  Cat: 10
+    Net Sales By Cat   :    13.88  Cat: 12
+    Grs Sales By Cat   :     3.75  Cat: 8
+    Grs Sales By Cat   :     0.80  Cat: 10
+    Grs Sales By Cat   :    14.85  Cat: 12
+  Check* 60013 (6291469): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    10.17
+    Net Sales          :     9.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.67  TaxId: 2
+    Excl Taxable by Cat:     6.00  TaxId: 2  Cat: 6
+    Excl Tax by Cat    :     0.42  TaxId: 2  Cat: 6
+    Excl Taxable by Cat:     1.75  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.12  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:     1.75  TaxId: 2  Cat: 10
+    Excl Tax by Cat    :     0.13  TaxId: 2  Cat: 10
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     9.50  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    10.17  TndrId: 1
+    Guest Count        : 1
+    Net Sales By Cat   :     6.00  Cat: 6
+    Net Sales By Cat   :     1.75  Cat: 8
+    Net Sales By Cat   :     1.75  Cat: 10
+    Grs Sales By Cat   :     6.42  Cat: 6
+    Grs Sales By Cat   :     1.87  Cat: 8
+    Grs Sales By Cat   :     1.88  Cat: 10
+  Check* 20042 (2097194): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :     8.82
+    Net Sales          :     8.24
+    Voids              :     3.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.58  TaxId: 2
+    Excl Taxable by Cat:     8.24  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.58  TaxId: 2  Cat: 1
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     8.24  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :     8.82  TndrId: 1
+    Comp               :     1.46  CompId: 3
+    Comp By Category   :     1.46  Cat: 1
+    Guest Count        : 3
+    Net Sales By Cat   :     8.24  Cat: 1
+    Grs Sales By Cat   :    10.28  Cat: 1
+  Check* 60015 (6291471): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    13.64
+    Net Sales          :    12.75
+    Voids              :     3.75
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.89  TaxId: 2
+    Excl Taxable by Cat:    12.75  TaxId: 2  Cat: 6
+    Excl Tax by Cat    :     0.89  TaxId: 2  Cat: 6
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    12.75  ModeId: 1
+    Payment            :    13.64  TndrId: 8
+    NonCash Tendered   :    13.64
+    Comp               :     2.25  CompId: 3
+    Comp By Category   :     2.25  Cat: 6
+    Guest Count        : 0
+    Net Sales By Cat   :    12.75  Cat: 6
+    Grs Sales By Cat   :    15.89  Cat: 6
+  Check* 60016 (6291472): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :     0.00
+    Net Sales          :     0.00
+    Voids              :     3.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.00  TaxId: 2
+    Exclusive Tax      :     0.00  TaxId: 3
+    NonCash Tendered   :     0.00
+    ZERO CHECK
+  Check* 60018 (6291474): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    53.50
+    Net Sales          :    50.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     3.50  TaxId: 2
+    Excl Taxable by Cat:     9.00  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.63  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     7.50  TaxId: 2  Cat: 6
+    Excl Tax by Cat    :     0.53  TaxId: 2  Cat: 6
+    Excl Taxable by Cat:     6.25  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.44  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    27.25  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.90  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    50.00  ModeId: 1
+    Payment            :    58.85  TndrId: 3
+    NonCash Tendered   :    58.85
+    Cash Change        :    -5.35  TndrId: 1
+    Guest Count        : 3
+    Net Sales By Cat   :     9.00  Cat: 1
+    Net Sales By Cat   :     7.50  Cat: 6
+    Net Sales By Cat   :     6.25  Cat: 8
+    Net Sales By Cat   :    27.25  Cat: 11
+    Grs Sales By Cat   :     9.63  Cat: 1
+    Grs Sales By Cat   :     8.03  Cat: 6
+    Grs Sales By Cat   :     6.69  Cat: 8
+    Grs Sales By Cat   :    29.15  Cat: 11
+  Check* 10016 (1048592): Emp: 312 Jairo Mesa RevCtr: 2 
+    Complete Total     :    15.78
+    Net Sales          :    14.75
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.03  TaxId: 2
+    Excl Taxable by Cat:    14.75  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.03  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    14.75  ModeId: 1
+    NonCash Tendered   :     0.00
+    Cash Payment       :    15.78  TndrId: 1
+    Guest Count        : 3
+    Net Sales By Cat   :    14.75  Cat: 11
+    Grs Sales By Cat   :    15.78  Cat: 11
+  Check* 40002 (4194306): Emp: 6004 JOHAN SEBASTIAN RevCtr: 3 
+    Complete Total     :    24.61
+    Net Sales          :    23.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.61  TaxId: 2
+    Excl Taxable by Cat:     6.54  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.46  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     2.59  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.18  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    13.87  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.97  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    23.00  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    24.61  TndrId: 1
+    Promo*              :     1.45  PromId: 10
+    Promo* By Category  :     0.41  Cat: 1
+    Promo* By Category  :     0.16  Cat: 8
+    Promo* By Category  :     0.88  Cat: 11
+    Guest Count        : 0
+    Net Sales By Cat   :     6.54  Cat: 1
+    Net Sales By Cat   :     2.59  Cat: 8
+    Net Sales By Cat   :    13.87  Cat: 11
+    Grs Sales By Cat   :     7.41  Cat: 1
+    Grs Sales By Cat   :     2.93  Cat: 8
+    Grs Sales By Cat   :    15.72  Cat: 11
+  Check* 20002 (2097154): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :    17.07
+    Net Sales          :    15.95
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.12  TaxId: 2
+    Excl Taxable by Cat:     2.97  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.21  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:    12.98  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     0.91  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    15.95  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :    17.07  TndrId: 1
+    Promo*              :     2.81  PromId: 1
+    Promo* By Category  :     0.53  Cat: 1
+    Promo* By Category  :     2.28  Cat: 12
+    Guest Count        : 0
+    Net Sales By Cat   :     2.97  Cat: 1
+    Net Sales By Cat   :    12.98  Cat: 12
+    Grs Sales By Cat   :     3.71  Cat: 1
+    Grs Sales By Cat   :    16.17  Cat: 12
+  Check* 20003 (2097155): Emp: 312 Jairo Mesa RevCtr: 3 
+    Complete Total     :    13.91
+    Net Sales          :    13.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.91  TaxId: 2
+    Excl Taxable by Cat:    13.00  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.91  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    13.00  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    13.91  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    13.00  Cat: 11
+    Grs Sales By Cat   :    13.91  Cat: 11
+  Check* 10001 (1048577): Emp: 102 EIRA MADRID RevCtr: 1 
+    Complete Total     :     0.00
+    Net Sales          :     0.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.00  TaxId: 2
+    Exclusive Tax      :     0.00  TaxId: 3
+    NonCash Tendered   :     0.00
+    Comp               :    16.00  CompId: 3
+    Comp By Category   :     1.50  Cat: 10
+    Comp By Category   :    14.50  Cat: 11
+    ZERO CHECK
+    Grs Sales By Cat   :     1.50  Cat: 10
+    Grs Sales By Cat   :    14.50  Cat: 11
+  Check* 20007 (2097159): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :     4.82
+    Net Sales          :     4.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.32  TaxId: 2
+    Excl Taxable by Cat:     4.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.32  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     4.50  ModeId: 2
+    Payment            :     4.82  TndrId: 3
+    NonCash Tendered   :     4.82
+    Guest Count        : 0
+    Net Sales By Cat   :     4.50  Cat: 11
+    Grs Sales By Cat   :     4.82  Cat: 11
+  Check* 20008 (2097160): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :    12.84
+    Net Sales          :    12.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.84  TaxId: 2
+    Excl Taxable by Cat:    12.00  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     0.84  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    12.00  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :    12.84  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    12.00  Cat: 12
+    Grs Sales By Cat   :    12.84  Cat: 12
+  Check* 20010 (2097162): Emp: 6005 JHONNY SERRANO RevCtr: 3 
+    Complete Total     :    20.33
+    Net Sales          :    19.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.33  TaxId: 2
+    Excl Taxable by Cat:    19.00  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.33  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    19.00  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    20.33  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    19.00  Cat: 11
+    Grs Sales By Cat   :    20.33  Cat: 11
+  Check* 40003 (4194307): Emp: 6006 KAMILO MOTATO RevCtr: 3 
+    Complete Total     :    29.43
+    Net Sales          :    27.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.93  TaxId: 2
+    Excl Taxable by Cat:     9.00  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.63  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:    18.50  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     1.30  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    27.50  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    29.43  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     9.00  Cat: 1
+    Net Sales By Cat   :    18.50  Cat: 12
+    Grs Sales By Cat   :     9.63  Cat: 1
+    Grs Sales By Cat   :    19.80  Cat: 12
+  Check* 20011 (2097163): Emp: 6003 MARCO PARRA RevCtr: 3 
+    Complete Total     :    51.52
+    Net Sales          :    48.15
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     3.37  TaxId: 2
+    Excl Taxable by Cat:     2.75  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.19  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:     1.50  TaxId: 2  Cat: 10
+    Excl Tax by Cat    :     0.11  TaxId: 2  Cat: 10
+    Excl Taxable by Cat:    43.90  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     3.07  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    48.15  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    51.52  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     2.75  Cat: 8
+    Net Sales By Cat   :     1.50  Cat: 10
+    Net Sales By Cat   :    43.90  Cat: 12
+    Grs Sales By Cat   :     2.94  Cat: 8
+    Grs Sales By Cat   :     1.61  Cat: 10
+    Grs Sales By Cat   :    46.97  Cat: 12
+  Check* 10007 (1048583): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :     5.08
+    Net Sales          :     4.75
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.33  TaxId: 2
+    Excl Taxable by Cat:     4.75  TaxId: 2  Cat: 4
+    Excl Tax by Cat    :     0.33  TaxId: 2  Cat: 4
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     4.75  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :     5.08  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     4.75  Cat: 4
+    Grs Sales By Cat   :     5.08  Cat: 4
+  Check* 20026 (2097178): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :     4.82
+    Net Sales          :     4.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.32  TaxId: 2
+    Excl Taxable by Cat:     4.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.32  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     4.50  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :     4.82  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     4.50  Cat: 11
+    Grs Sales By Cat   :     4.82  Cat: 11
+  Check* 50001 (5242881): Emp: 6004 JOHAN SEBASTIAN RevCtr: 3 
+    Complete Total     :    37.45
+    Net Sales          :    35.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     2.45  TaxId: 2
+    Excl Taxable by Cat:    35.00  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     2.45  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    35.00  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    37.45  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    35.00  Cat: 11
+    Grs Sales By Cat   :    37.45  Cat: 11
+  Check* 20029 (2097181): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :     8.56
+    Net Sales          :     8.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.56  TaxId: 2
+    Excl Taxable by Cat:     8.00  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.56  TaxId: 2  Cat: 1
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     8.00  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :     8.56  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     8.00  Cat: 1
+    Grs Sales By Cat   :     8.56  Cat: 1
+  Check* 20030 (2097182): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :     6.37
+    Net Sales          :     5.95
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.42  TaxId: 2
+    Excl Taxable by Cat:     5.95  TaxId: 2  Cat: 9
+    Excl Tax by Cat    :     0.42  TaxId: 2  Cat: 9
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     5.95  ModeId: 2
+    Payment            :     6.37  TndrId: 8
+    NonCash Tendered   :     6.37
+    Guest Count        : 0
+    Net Sales By Cat   :     5.95  Cat: 9
+    Grs Sales By Cat   :     6.37  Cat: 9
+  Check* 20031 (2097183): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :     5.30
+    Net Sales          :     4.95
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.35  TaxId: 2
+    Excl Taxable by Cat:     4.95  TaxId: 2  Cat: 9
+    Excl Tax by Cat    :     0.35  TaxId: 2  Cat: 9
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     4.95  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :     5.30  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     4.95  Cat: 9
+    Grs Sales By Cat   :     5.30  Cat: 9
+  Check* 50002 (5242882): Emp: 6002 RUBEM GUZMAN RevCtr: 3 
+    Complete Total     :    33.71
+    Net Sales          :    31.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     2.21  TaxId: 2
+    Excl Taxable by Cat:    31.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     2.21  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    31.50  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    33.71  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    31.50  Cat: 11
+    Grs Sales By Cat   :    33.71  Cat: 11
+  Check* 50003 (5242883): Emp: 6005 JHONNY SERRANO RevCtr: 3 
+    Complete Total     :    19.80
+    Net Sales          :    18.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.30  TaxId: 2
+    Excl Taxable by Cat:    18.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.30  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    18.50  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    19.80  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    18.50  Cat: 11
+    Grs Sales By Cat   :    19.80  Cat: 11
+  Check* 30001 (3145729): Emp: 102 EIRA MADRID RevCtr: 1 
+    Complete Total     :     0.00
+    Net Sales          :     0.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.00  TaxId: 2
+    Exclusive Tax      :     0.00  TaxId: 3
+    NonCash Tendered   :     0.00
+    Comp               :    16.00  CompId: 3
+    Comp By Category   :     1.50  Cat: 10
+    Comp By Category   :    14.50  Cat: 11
+    ZERO CHECK
+    Grs Sales By Cat   :     1.50  Cat: 10
+    Grs Sales By Cat   :    14.50  Cat: 11
+  Check* 20043 (2097195): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :     0.00
+    Net Sales          :     0.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.00  TaxId: 2
+    Exclusive Tax      :     0.00  TaxId: 3
+    NonCash Tendered   :     0.00
+    Guest Count        : 0
+  Check* 20054 (2097206): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :    13.91
+    Net Sales          :    13.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.91  TaxId: 2
+    Excl Taxable by Cat:    13.00  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.91  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    13.00  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :    13.91  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    13.00  Cat: 11
+    Grs Sales By Cat   :    13.91  Cat: 11
+  Check* 20056 (2097208): Emp: 102 EIRA MADRID RevCtr: 1 
+    Complete Total     :    15.52
+    Net Sales          :    14.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.02  TaxId: 2
+    Excl Taxable by Cat:    14.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.02  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    14.50  ModeId: 2
+    Payment            :    15.52  TndrId: 4
+    NonCash Tendered   :    15.52
+    Guest Count        : 0
+    Net Sales By Cat   :    14.50  Cat: 11
+    Grs Sales By Cat   :    15.52  Cat: 11
+  Check* 50004 (5242884): Emp: 6004 JOHAN SEBASTIAN RevCtr: 3 
+    Complete Total     :    45.46
+    Net Sales          :    42.49
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     2.97  TaxId: 2
+    Excl Taxable by Cat:     2.67  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.19  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:     1.50  TaxId: 2  Cat: 10
+    Excl Tax by Cat    :     0.11  TaxId: 2  Cat: 10
+    Excl Taxable by Cat:    38.32  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     2.67  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    42.49  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    45.46  TndrId: 1
+    Promo*              :     0.51  PromId: 16
+    Promo* By Category  :     0.08  Cat: 8
+    Promo* By Category  :     0.43  Cat: 11
+    Guest Count        : 0
+    Net Sales By Cat   :     2.67  Cat: 8
+    Net Sales By Cat   :     1.50  Cat: 10
+    Net Sales By Cat   :    38.32  Cat: 11
+    Grs Sales By Cat   :     2.94  Cat: 8
+    Grs Sales By Cat   :     1.61  Cat: 10
+    Grs Sales By Cat   :    41.42  Cat: 11
+  Check* 20058 (2097210): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :     1.61
+    Net Sales          :     1.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.11  TaxId: 2
+    Excl Taxable by Cat:     1.50  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.11  TaxId: 2  Cat: 8
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     1.50  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :     1.61  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     1.50  Cat: 8
+    Grs Sales By Cat   :     1.61  Cat: 8
+  Check* 50005 (5242885): Emp: 6004 JOHAN SEBASTIAN RevCtr: 3 
+    Complete Total     :    23.27
+    Net Sales          :    21.75
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.52  TaxId: 2
+    Excl Taxable by Cat:     6.50  TaxId: 2  Cat: 2
+    Excl Tax by Cat    :     0.46  TaxId: 2  Cat: 2
+    Excl Taxable by Cat:     2.75  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.19  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    12.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.87  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    21.75  ModeId: 3
+    Payment            :    25.27  TndrId: 8
+    NonCash Tendered   :    25.27
+    Cash Change        :    -2.00  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     6.50  Cat: 2
+    Net Sales By Cat   :     2.75  Cat: 8
+    Net Sales By Cat   :    12.50  Cat: 11
+    Grs Sales By Cat   :     6.96  Cat: 2
+    Grs Sales By Cat   :     2.94  Cat: 8
+    Grs Sales By Cat   :    13.37  Cat: 11
+  Check* 50006 (5242886): Emp: 6003 MARCO PARRA RevCtr: 3 
+    Complete Total     :    19.80
+    Net Sales          :    18.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.30  TaxId: 2
+    Excl Taxable by Cat:    18.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.30  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    18.50  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    19.80  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    18.50  Cat: 11
+    Grs Sales By Cat   :    19.80  Cat: 11
+  Check* 20062 (2097214): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :    13.38
+    Net Sales          :    12.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.88  TaxId: 2
+    Excl Taxable by Cat:    12.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.88  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    12.50  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :    13.38  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    12.50  Cat: 11
+    Grs Sales By Cat   :    13.38  Cat: 11
+  Check* 50007 (5242887): Emp: 6002 RUBEM GUZMAN RevCtr: 3 
+    Complete Total     :    12.84
+    Net Sales          :    12.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.84  TaxId: 2
+    Excl Taxable by Cat:    12.00  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.84  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    12.00  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    12.84  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    12.00  Cat: 11
+    Grs Sales By Cat   :    12.84  Cat: 11
+  Check* 20063 (2097215): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :    18.73
+    Net Sales          :    17.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.23  TaxId: 2
+    Excl Taxable by Cat:    17.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.23  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    17.50  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :    18.73  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    17.50  Cat: 11
+    Grs Sales By Cat   :    18.73  Cat: 11
+  Check* 20064 (2097216): Emp: 312 Jairo Mesa RevCtr: 1 
+    Complete Total     :    13.91
+    Net Sales          :    13.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.91  TaxId: 2
+    Excl Taxable by Cat:    13.00  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.91  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    13.00  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :    13.91  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    13.00  Cat: 11
+    Grs Sales By Cat   :    13.91  Cat: 11
+  Check* 50008 (5242888): Emp: 6005 JHONNY SERRANO RevCtr: 3 
+    Complete Total     :    19.78
+    Net Sales          :    18.49
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.29  TaxId: 2
+    Excl Taxable by Cat:     2.75  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.19  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     2.75  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.19  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    12.99  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.91  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    18.49  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    19.78  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     2.75  Cat: 1
+    Net Sales By Cat   :     2.75  Cat: 8
+    Net Sales By Cat   :    12.99  Cat: 11
+    Grs Sales By Cat   :     2.94  Cat: 1
+    Grs Sales By Cat   :     2.94  Cat: 8
+    Grs Sales By Cat   :    13.90  Cat: 11
+  Check* 20066 (2097218): Emp: 303 Yackelin Garrido RevCtr: 2 
+    Complete Total     :    20.60
+    Net Sales          :    19.25
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.35  TaxId: 2
+    Excl Taxable by Cat:    19.25  TaxId: 2  Cat: 12
+    Excl Tax by Cat    :     1.35  TaxId: 2  Cat: 12
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    19.25  ModeId: 2
+    Payment            :    20.60  TndrId: 3
+    NonCash Tendered   :    20.60
+    Guest Count        : 0
+    Net Sales By Cat   :    19.25  Cat: 12
+    Grs Sales By Cat   :    20.60  Cat: 12
+  Check* 20067 (2097219): Emp: 6006 KAMILO MOTATO RevCtr: 3 
+    Complete Total     :    26.75
+    Net Sales          :    25.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.75  TaxId: 2
+    Excl Taxable by Cat:     6.16  TaxId: 2  Cat: 1
+    Excl Tax by Cat    :     0.43  TaxId: 2  Cat: 1
+    Excl Taxable by Cat:     2.44  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.17  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    16.40  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.15  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    25.00  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    26.75  TndrId: 1
+    Promo*              :     3.20  PromId: 13
+    Promo* By Category  :     0.79  Cat: 1
+    Promo* By Category  :     0.31  Cat: 8
+    Promo* By Category  :     2.10  Cat: 11
+    Guest Count        : 0
+    Net Sales By Cat   :     6.16  Cat: 1
+    Net Sales By Cat   :     2.44  Cat: 8
+    Net Sales By Cat   :    16.40  Cat: 11
+    Grs Sales By Cat   :     7.38  Cat: 1
+    Grs Sales By Cat   :     2.92  Cat: 8
+    Grs Sales By Cat   :    19.65  Cat: 11
+  Check* 20068 (2097220): Emp: 6002 RUBEM GUZMAN RevCtr: 3 
+    Complete Total     :    17.39
+    Net Sales          :    16.25
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.14  TaxId: 2
+    Excl Taxable by Cat:     1.50  TaxId: 2  Cat: 10
+    Excl Tax by Cat    :     0.11  TaxId: 2  Cat: 10
+    Excl Taxable by Cat:    14.75  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.03  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    16.25  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    17.39  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     1.50  Cat: 10
+    Net Sales By Cat   :    14.75  Cat: 11
+    Grs Sales By Cat   :     1.61  Cat: 10
+    Grs Sales By Cat   :    15.78  Cat: 11
+  Check* 50009 (5242889): Emp: 6002 RUBEM GUZMAN RevCtr: 3 
+    Complete Total     :    15.78
+    Net Sales          :    14.75
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.03  TaxId: 2
+    Excl Taxable by Cat:    14.75  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.03  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    14.75  ModeId: 3
+    NonCash Tendered   :     0.00
+    Cash Payment       :    15.78  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :    14.75  Cat: 11
+    Grs Sales By Cat   :    15.78  Cat: 11
+  Check* 20070 (2097222): Emp: 303 Yackelin Garrido RevCtr: 1 
+    Complete Total     :     5.23
+    Net Sales          :     4.89
+    Voids              :     4.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.34  TaxId: 2
+    Excl Taxable by Cat:     3.40  TaxId: 2  Cat: 6
+    Excl Tax by Cat    :     0.24  TaxId: 2  Cat: 6
+    Excl Taxable by Cat:     1.49  TaxId: 2  Cat: 10
+    Excl Tax by Cat    :     0.10  TaxId: 2  Cat: 10
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     4.89  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :     5.23  TndrId: 1
+    Comp               :     0.86  CompId: 3
+    Comp By Category   :     0.60  Cat: 6
+    Comp By Category   :     0.26  Cat: 10
+    Guest Count        : 0
+    Net Sales By Cat   :     3.40  Cat: 6
+    Net Sales By Cat   :     1.49  Cat: 10
+    Grs Sales By Cat   :     4.24  Cat: 6
+    Grs Sales By Cat   :     1.85  Cat: 10
+  Check* 20073 (2097225): Emp: 202 Jonathan Montes RevCtr: 1 
+    Complete Total     :     4.82
+    Net Sales          :     4.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.32  TaxId: 2
+    Excl Taxable by Cat:     4.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.32  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     4.50  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :     4.82  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     4.50  Cat: 11
+    Grs Sales By Cat   :     4.82  Cat: 11
+  Check* 10047 (1048623): Emp: 303 Yackelin Garrido RevCtr: 1 
+    Complete Total     :     4.50
+    Net Sales          :     4.21
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.29  TaxId: 2
+    Excl Taxable by Cat:     4.21  TaxId: 2  Cat: 9
+    Excl Tax by Cat    :     0.29  TaxId: 2  Cat: 9
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :     4.21  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :     4.50  TndrId: 1
+    Comp               :     0.74  CompId: 3
+    Comp By Category   :     0.74  Cat: 9
+    Guest Count        : 0
+    Net Sales By Cat   :     4.21  Cat: 9
+    Grs Sales By Cat   :     5.24  Cat: 9
+  Check* 20092 (2097244): Emp: 303 Yackelin Garrido RevCtr: 1 
+    Complete Total     :    14.98
+    Net Sales          :    14.00
+    Voids              :    17.50
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     0.98  TaxId: 2
+    Excl Taxable by Cat:     2.00  TaxId: 2  Cat: 8
+    Excl Tax by Cat    :     0.14  TaxId: 2  Cat: 8
+    Excl Taxable by Cat:    12.00  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     0.84  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    14.00  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :    14.98  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     2.00  Cat: 8
+    Net Sales By Cat   :    12.00  Cat: 11
+    Grs Sales By Cat   :     2.14  Cat: 8
+    Grs Sales By Cat   :    12.84  Cat: 11
+  Check* 20093 (2097245): Emp: 303 Yackelin Garrido RevCtr: 1 
+    Complete Total     :    21.40
+    Net Sales          :    20.00
+    Exclusive Tax      :     0.00  TaxId: 1
+    Exclusive Tax      :     1.40  TaxId: 2
+    Excl Taxable by Cat:     1.50  TaxId: 2  Cat: 10
+    Excl Tax by Cat    :     0.11  TaxId: 2  Cat: 10
+    Excl Taxable by Cat:    18.50  TaxId: 2  Cat: 11
+    Excl Tax by Cat    :     1.29  TaxId: 2  Cat: 11
+    Exclusive Tax      :     0.00  TaxId: 3
+    Net Sales by Mode  :    20.00  ModeId: 2
+    NonCash Tendered   :     0.00
+    Cash Payment       :    21.40  TndrId: 1
+    Guest Count        : 0
+    Net Sales By Cat   :     1.50  Cat: 10
+    Net Sales By Cat   :    18.50  Cat: 11
+    Grs Sales By Cat   :     1.61  Cat: 10
+    Grs Sales By Cat   :    19.79  Cat: 11
+
+SALE GRIND SUMMARY:
+
+Begin type 1: SALES
+  Subtotal id     1:   134.90
+  Subtotal id     2:     6.50
+  Subtotal id     3:     0.00
+  Subtotal id     4:    37.50
+  Subtotal id     5:    13.48
+  Subtotal id     6:    47.50
+  Subtotal id     8:   112.00
+  Subtotal id     9:    58.60
+  Subtotal id    10:    15.00
+  Subtotal id    11:   652.24
+  Subtotal id    12:   212.07
+  TOTAL type 1: SALES:  1289.79
+Begin type 2: TAX
+  Subtotal id     2:    85.72
+  TOTAL type 2: TAX:    85.72
+Begin type 4: PAYMENT
+  Subtotal id     1:   980.59
+  Subtotal id     3:   192.59
+  Subtotal id     4:    15.52
+  Subtotal id     8:   120.71
+  TOTAL type 4: PAYMENT:  1309.41
+Begin type 5: COMP
+  Subtotal id     3:    37.31
+  TOTAL type 5: COMP:    37.31
+Begin type 6: PROMO
+  Subtotal id     1:     2.81
+  Subtotal id     2:     5.81
+  Subtotal id    10:     8.31
+  Subtotal id    13:    11.35
+  Subtotal id    16:     0.51
+  TOTAL type 6: PROMO:    28.79
+Begin type 10: GUESTS
+  Subtotal id     0:    63.00
+  TOTAL type 10: GUESTS:    63.00
+Begin type 11: CHECKS
+  Subtotal id     0:    68.00
+  TOTAL type 11: CHECKS:    68.00
+Begin type 13: DELETES
+  Subtotal id     0:    34.75
+  TOTAL type 13: DELETES:    34.75
+Begin type 15: PETTYCASH
+  Subtotal id     1:   200.00
+  Subtotal id     2:  -200.00
+  Subtotal id     3:  -249.60
+  TOTAL type 15: PETTYCASH:  -249.60
+Begin type 19: COMP BY CATEGORY
+  Subtotal id     1:     1.46
+  Subtotal id     6:     2.85
+  Subtotal id     9:     0.74
+  Subtotal id    10:     3.26
+  Subtotal id    11:    29.00
+  TOTAL type 19: COMP BY CATEGORY:    37.31
+Begin type 20: PROMO BY CATEGORY
+  Subtotal id     1:     6.63
+  Subtotal id     8:     2.07
+  Subtotal id    11:    14.00
+  Subtotal id    12:     6.09
+  TOTAL type 20: PROMO BY CATEGORY:    28.79
+Begin type 21: PERFORMANCE
+  Subtotal id     1:    97.07
+  Subtotal id     2:   144.36
+  TOTAL type 21: PERFORMANCE:   241.43
+Begin type 22: DECLAREDCASH
+  Subtotal id     0:     0.00
+  TOTAL type 22: DECLAREDCASH:     0.00
+Begin type 24: TAX BY CATEGORY
+  Subtotal id     1:     8.89
+  Subtotal id     2:     0.46
+  Subtotal id     4:     2.61
+  Subtotal id     5:     0.95
+  Subtotal id     6:     3.14
+  Subtotal id     8:     7.74
+  Subtotal id     9:     4.05
+  Subtotal id    10:     0.84
+  Subtotal id    11:    42.66
+  Subtotal id    12:    14.38
+  TOTAL type 24: TAX BY CATEGORY:    85.72
+Begin type 31: NET SALES BY MODE
+  Subtotal id     1:   592.16
+  Subtotal id     2:   246.65
+  Subtotal id     3:   384.88
+  TOTAL type 31: NET SALES BY MODE:  1223.69
+Begin type 43: CHECKS BY MODE
+  Subtotal id     1:    28.00
+  Subtotal id     2:    24.00
+  Subtotal id     3:    16.00
+  TOTAL type 43: CHECKS BY MODE:    68.00
+Begin type 47: NOSALE COUNT
+  Subtotal id     0:     0.00
+  TOTAL type 47: NOSALE COUNT:     0.00
+Begin type 49: GUESTS BY MODE
+  Subtotal id     1:    59.00
+  Subtotal id     2:     4.00
+  TOTAL type 49: GUESTS BY MODE:    63.00
+Begin type 51: EXCLUSIVE TAXABLE BY CATEGORY
+  Subtotal id     1:   126.81
+  Subtotal id     2:     6.50
+  Subtotal id     4:    37.50
+  Subtotal id     5:    13.48
+  Subtotal id     6:    44.65
+  Subtotal id     8:   109.93
+  Subtotal id     9:    57.86
+  Subtotal id    10:    11.74
+  Subtotal id    11:   609.24
+  Subtotal id    12:   205.98
+  TOTAL type 51: EXCLUSIVE TAXABLE BY CATEGORY:  1223.69
+Begin type 52: NET SALES BY CATEGORY
+  Subtotal id     1:   126.81
+  Subtotal id     2:     6.50
+  Subtotal id     4:    37.50
+  Subtotal id     5:    13.48
+  Subtotal id     6:    44.65
+  Subtotal id     8:   109.93
+  Subtotal id     9:    57.86
+  Subtotal id    10:    11.74
+  Subtotal id    11:   609.24
+  Subtotal id    12:   205.98
+  TOTAL type 52: NET SALES BY CATEGORY:  1223.69
+Begin type 53: GROSS SALES BY CATEGORY
+  Subtotal id     1:   143.79
+  Subtotal id     2:     6.96
+  Subtotal id     4:    40.11
+  Subtotal id     5:    14.43
+  Subtotal id     6:    50.64
+  Subtotal id     8:   119.74
+  Subtotal id     9:    62.65
+  Subtotal id    10:    15.84
+  Subtotal id    11:   694.90
+  Subtotal id    12:   226.45
+  TOTAL type 53: GROSS SALES BY CATEGORY:  1375.51
+Begin type 64: ZERO CHECKS
+  Subtotal id     0:     3.00
+  TOTAL type 64: ZERO CHECKS:     3.00
+Begin type 71: DELETES BY CATEGORY
+  Subtotal id     6:     4.00
+  Subtotal id     8:    16.00
+  Subtotal id    11:    14.75
+  TOTAL type 71: DELETES BY CATEGORY:    34.75
+Begin type 75: CLEARS
+  Subtotal id     0:   486.37
+  TOTAL type 75: CLEARS:   486.37
+Begin type 76: CLEARS BY CATEGORY
+  Subtotal id     1:    16.40
+  Subtotal id     5:     5.50
+  Subtotal id     6:    38.50
+  Subtotal id     8:    35.45
+  Subtotal id     9:    15.00
+  Subtotal id    10:    14.25
+  Subtotal id    11:   297.49
+  Subtotal id    12:    63.78
+  TOTAL type 76: CLEARS BY CATEGORY:   486.37
+
+ANALYSIS:
+
+TOTAL Calculated Cash
+---------------------------------
+ Net Sales             :  1223.69
+  + Tax                :    85.72
+  + GST Tax            :     0.00
+  + Sold Gift Certific :     0.00
+  + Revenue Items      :     0.00
+  - Non-Cash Tenders   :   328.82
+  - Delivery           :     0.00
+  + Tip Reduction      :     0.00
+  + Order Mode Charges :     0.00
+  + Surcharges         :     0.00
+  + Not Redeemed Tender:     0.00
+  + Petty Cash         :   -49.60
+  -Driver Fees         :     0.00
+  = Calculated Cash    :   930.99
+---------------------------------
+ 
+TOTAL Net Sales by Mode:  1223.69
+TOTAL Net Sales by Cat :  1223.69
+    Sales              :  1289.79
+  - Comps              :    37.31
+  - Promos             :    28.79
+  - Inclusive Taxes    :     0.00  (but NOT GST)
+  = Net Sales          :  1223.69
+TOTAL Grs Sales by Cat :  1375.51
+    Sales              :  1289.79
+  + Exclusive Taxes    :    85.72
+  = Gross Sales        :  1375.51
+
+    Sales              :  1289.79
+  - Comps              :    37.31
+  - Promos             :    28.79
+  + Exclusive Taxes    :    85.72
+  + Gratuity           :     0.00
+  + Surcharge Collected:     0.00
+  + Mode Charges       :     0.00
+  + Additional Svc Chg :     0.00
+  + Exclusive GST      :     0.00
+  + Rounding Adjustment:     0.00 (if using 'round to nickel')
+  = Complete Total     :  1309.41  This is the sum of the amount due on ALL checks

@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Menu.MenuItemUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="200" Height="170" Width="240" Padding="10">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="MouseOverBrush">#FF2F5078</SolidColorBrush>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border x:Name="RootBorder" Padding="0" BorderBrush="#FF007CD3"  >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding ExecuteCommand}" Cursor="Hand">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="{Binding MenuItemBackgroundColor}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter Content="{TemplateBinding Content}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{Binding MenuItemBackgroundOverColor}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{Binding MenuItemBackgroundPressedColor}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <UserControl>
+                    <UserControl.Template>
+                        <ControlTemplate TargetType="UserControl">
+                            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" >
+                                <StackPanel VerticalAlignment="Center" Width="90" Margin="10,0,0,0">
+                                    <Image Source="{Binding MenuItemLogo}" Width="75" Height="75" ></Image>
+                                </StackPanel>
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="110">
+                                    <Label Content="{Binding Title}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Corbel" FontSize="20" />
+                                </StackPanel>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </UserControl.Template>
+                </UserControl>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

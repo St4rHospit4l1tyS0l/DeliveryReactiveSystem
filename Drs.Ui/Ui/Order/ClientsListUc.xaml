@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Order.ClientsListUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:ui="clr-namespace:Drs.Infrastructure.Ui;assembly=Drs.Infrastructure"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="1024" HorizontalAlignment="Stretch" Margin="30,0,30,0">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDarkLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{StaticResource WhiteColor}"  />
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource WhiteColor}"  />
+            <CollectionViewSource x:Key="LstClientsKey" Source="{Binding LstClients}">
+                <CollectionViewSource.SortDescriptions>
+                    <componentModel:SortDescription PropertyName="FirstName"/>
+                </CollectionViewSource.SortDescriptions>
+            </CollectionViewSource>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource AccentColorBrush}">
+            <Label Content="3) Agregue o elija al cliente:   " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                <Button Width="34" Cursor="Hand" Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding AddClient}" 
+            		x:Name="AddClient" Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
+                    <Rectangle Width="12"
+            			Height="12"
+            			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+            					Visual="{DynamicResource appbar_add}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+                <Label Content="Agregar      " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                               Foreground="#FFF" />
+                <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=ClientDtGrid}" 
+                        Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding RemoveClient}" 
+            		    x:Name="RemoveClient" Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
+                    <Rectangle Width="12"
+            			Height="12"
+            			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+            					Visual="{DynamicResource appbar_close}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+                <Label Content="Eliminar " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                               Foreground="#FFF" />
+            </StackPanel>
+        </DockPanel>
+        <Grid HorizontalAlignment="Stretch">
+
+            <DataGrid x:Name="ClientDtGrid" TextOptions.TextFormattingMode="Display" Margin="0"
+                  ItemsSource="{Binding Source={StaticResource LstClientsKey}}" SelectionMode="Single"
+                  Style="{DynamicResource AzureDataGrid}" SelectedItem="{Binding ClientSelection}"
+                  AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">
+                        <Setter Property="ui:GridBehaviours.DoubleClickCommand" 
+                                Value="{Binding ElementName=ClientDtGrid, Path=DataContext.EditClient}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding EditClient}"
+                                                CommandParameter="{Binding SelectedItems, ElementName=ClientDtGrid}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="  Acción" MinWidth="140"  MaxWidth="200">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="10,0,10,0" MinWidth="120">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Rectangle Width="17" Height="17" Visibility="{Binding IsClientOk}" HorizontalAlignment="Center" Fill="LimeGreen" >
+                                            <Rectangle.OpacityMask >
+                                                <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_check}" />
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                        <Button Width="25" Height="25"  Cursor="Hand" Command="{Binding DataContext.RetrySaveClient, ElementName=ClientDtGrid}"
+                                                CommandParameter="{Binding SelectedItems, ElementName=ClientDtGrid}"
+                                                HorizontalAlignment="Center" Visibility="{Binding IsClientError}" 
+                                                BorderBrush="Transparent" Style="{DynamicResource MetroCircleButtonStyle}">
+                                            <Rectangle Width="15" Height="15" ToolTip="Intentar de nuevo" Fill="red">
+                                                <Rectangle.OpacityMask>
+                                                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_redo_curve}" />
+                                                </Rectangle.OpacityMask>
+                                            </Rectangle>
+                                        </Button>
+                                        <ProgressBar IsIndeterminate="True" Minimum="0" Maximum="100" Height="6" MinWidth="90" HorizontalAlignment="Stretch" 
+                                                     HorizontalContentAlignment="Center" Style="{DynamicResource ProgressBarStyle}" 
+                                                     Background="#FF00D1FF" Foreground="#FFD1FF00" Visibility="{Binding IsClientSaveInProgress}" Margin="10, 0, 10, 0"   />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsClientError}" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding ClientMsgErr}" Foreground="Red" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Stretch" FontSize="9"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Nombre"  MinWidth="160" 
+                                    Binding="{Binding ClientInfo.FirstName}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Apellidos" MinWidth="190"
+                                    Binding="{Binding ClientInfo.LastName}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Empresa" MinWidth="120"
+                                    Binding="{Binding ClientInfo.Company}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Correo electrónico" MinWidth="180"
+                                    Binding="{Binding ClientInfo.Email}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Categoría" MinWidth="80"
+                                    Binding="{Binding ClientInfo.Category}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </StackPanel>
+</UserControl>

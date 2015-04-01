@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Shared.BackPreviousUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="60" Width="60" Height="60">
+    <StackPanel>
+        <Button Command="{Binding BackCommand}" Cursor="Hand" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <StackPanel Orientation="Horizontal" >
+                                    <Image x:Name="image" Source="/Drs.Ui;component/Resources/Images/BackIconI.png" Width="40" />
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="image" Property="Source" Value="/Drs.Ui;component/Resources/Images/BackIconI-MoI.png" />
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter TargetName="image" Property="Source" Value="/Drs.Ui;component/Resources/Images/BackIconI-Mo.png" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+            <UserControl>
+                <UserControl.Template>
+                    <ControlTemplate TargetType="UserControl">
+                        <Image Source="/Drs.Ui;component/Resources/Images/BackIconI.png" ></Image>
+                    </ControlTemplate>
+                </UserControl.Template>
+            </UserControl>
+        </Button>
+
+    </StackPanel>
+</UserControl>

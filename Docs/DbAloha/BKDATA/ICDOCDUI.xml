@@ -1,0 +1,2504 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<RSS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ICDSchema.xsd" Version="1.0">
+	<Frames BaseTop="0" BaseLeft="800">
+		<Frame Name="C1200_Attract" FrameID="1" Top="0" Left="0" Height="600" Width="800" BackgroundColor="#1234e6">
+			<AnimationBoxes>
+				<AnimationBox ControlID="10" Top="0" Left="0" Height="600" Width="800" AnimationID="100">
+					<Actions>
+						<Action ActionCode="2" Param1="34"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</AnimationBox>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200_Attract_png" FrameID="2" Top="0" Left="0" Height="600" Width="800" ImageID="43"/>
+		<Frame Name="C1200_Promo_png" FrameID="3" Top="0" Left="0" Height="600" Width="300" ImageID="13"/>
+		<Frame Name="C1200_Promo" FrameID="4" Top="0" Left="0" Height="600" Width="300">
+			<AnimationBoxes>
+				<AnimationBox ControlID="40" Top="0" Left="0" Height="600" Width="300" AnimationID="101"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200_NAAttract" FrameID="5" Top="0" Left="0" Height="600" Width="800" ImageID="44"/>
+		<Frame Name="Receipt" FrameID="7" Top="0" Left="300" Height="600" Width="500" ImageID="27">
+			<Buttons>
+				<Button ControlID="70" Name="AttractScreen" Top="0" Left="0" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Set State -->
+					</Actions>
+				</Button>
+				<Button ControlID="71" Name="ScrollUp" Top="5" Left="75" Height="50" Width="335" TextColor="#ffffff" MessageID="172" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" LinkedControl="76" ImageID="25">
+					<Actions>
+						<Action ActionCode="6" Param1="-1"/>
+						<!-- Scroll List Window -->
+					</Actions>
+				</Button>
+				<Button ControlID="72" Name="ScrollDown" Top="545" Left="75" Height="50" Width="335" TextColor="#ffffff" MessageID="173" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" LinkedControl="76" ImageID="26">
+					<Actions>
+						<Action ActionCode="6" Param1="1"/>
+						<!-- Scroll List Window -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="73" Top="73" Left="15" Height="23" Width="80" TextColor="#000000" MessageID="3" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="74" Top="73" Left="95" Height="23" Width="275" TextColor="#000000" MessageID="4" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="75" Top="73" Left="370" Height="23" Width="100" TextColor="#000000" MessageID="5" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+			</Texts>
+			<ListWindows>
+				<ListWindow ControlID="76" Top="110" Left="15" Height="335" Width="450" DataBinding="Receipt" ColumnHeaders="false" FontFamily="Helvetica" FontSize="16" FontStyle="Bold">
+					<Column MsgID="3" Width="80" DataBinding="Quantity" HAlign="C"/>
+					<Column MsgID="4" Width="275" DataBinding="ItemDesc" HAlign="L"/>
+					<Column MsgID="5" Width="100" DataBinding="ItemPrice" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="77" Top="445" Left="15" Height="25" Width="450" DataBinding="Subtotal" ColumnHeaders="false" FontFamily="Helvetica" FontSize="16" FontStyle="Bold">
+					<Column Width="310" MsgID="6" DataBinding="Label" HAlign="R"/>
+					<Column Width="145" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="78" Top="470" Left="15" Height="25" Width="450" DataBinding="Tax" ColumnHeaders="false" FontFamily="Helvetica" FontSize="16" FontStyle="Bold">
+					<Column Width="310" MsgID="7" DataBinding="Label" HAlign="R"/>
+					<Column Width="145" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="79" Top="495" Left="15" Height="25" Width="450" DataBinding="Total" ColumnHeaders="false" FontFamily="Helvetica" FontSize="16" FontStyle="Bold">
+					<Column Width="310" MsgID="8" DataBinding="Label" HAlign="R"/>
+					<Column Width="145" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+			</ListWindows>
+		</Frame>
+		<Frame Name="OrderConfirm" FrameID="8" Top="0" Left="0" Height="600" Width="800" Timeout="10" TimeoutButton="69" ImageID="15">
+			<Buttons>
+				<Button ControlID="69" Name="NewOrder" Top="10" Left="10" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Set State -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="80" Top="10" Left="60" Height="105" Width="380" TextColor="#000000" MessageID="150" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+				<Text ControlID="81" Top="120" Left="60" Height="60" Width="380" TextColor="#000000" DataBinding="OrderNum" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="45" FontStyle="Bold"/>
+				<Text ControlID="82" Top="250" Left="335" Height="45" Width="240" TextColor="#000000" MessageID="197" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="83" Top="315" Left="335" Height="45" Width="240" TextColor="#000000" MessageID="198" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="84" Top="375" Left="335" Height="45" Width="240" TextColor="#000000" MessageID="199" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="85" Top="250" Left="575" Height="45" Width="190" TextColor="#000000" DataBinding="FinalTotal" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="86" Top="315" Left="575" Height="45" Width="190" TextColor="#000000" DataBinding="TenderAmount" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="87" Top="375" Left="575" Height="45" Width="190" TextColor="#000000" DataBinding="Change" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="88" Top="540" Left="200" Height="45" Width="400" TextColor="#000000" MessageID="9" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="30" FontStyle="Bold"/>
+				<Text ControlID="68" Top="45" Left="500" Height="170" Width="250" TextColor="#ffffff" ImageID="41"/>
+			</Texts>
+		</Frame>
+		<Frame Name="OrderConfirm_ExOrderThankYou" FrameID="9" Top="0" Left="0" Height="600" Width="800" ImageID="15" Timeout="10" TimeoutButton="89">
+			<Buttons>
+				<Button ControlID="89" Name="NewOrder" Top="10" Left="10" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Set State -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="90" Top="10" Left="60" Height="105" Width="380" TextColor="#000000" MessageID="150" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+				<Text ControlID="91" Top="120" Left="60" Height="60" Width="380" TextColor="#000000" DataBinding="OrderNum" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="45" FontStyle="Bold"/>
+				<Text ControlID="92" Top="250" Left="335" Height="45" Width="240" TextColor="#000000" MessageID="197" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="93" Top="315" Left="335" Height="45" Width="240" TextColor="#000000" MessageID="198" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="94" Top="375" Left="335" Height="45" Width="240" TextColor="#000000" MessageID="199" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="95" Top="250" Left="575" Height="45" Width="190" TextColor="#000000" DataBinding="FinalTotal" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="96" Top="315" Left="575" Height="45" Width="190" TextColor="#000000" DataBinding="TenderAmount" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="97" Top="375" Left="575" Height="45" Width="190" TextColor="#000000" DataBinding="Change" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="98" Top="540" Left="5" Height="45" Width="460" TextColor="#000000" MessageID="190" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="30" FontStyle="Bold"/>
+				<Text ControlID="99" Top="520" Left="470" Height="90" Width="260" TextColor="#000000" ImageID="30"/>
+				<Text ControlID="67" Top="45" Left="500" Height="170" Width="250" TextColor="#ffffff" ImageID="41"/>
+			</Texts>
+		</Frame>
+		<Frame Name="ExpressOrderRecall" FrameID="10" Top="0" Left="0" Height="600" Width="800" Timeout="30" TimeoutButton="100" ImageID="16">
+			<Buttons>
+				<Button ControlID="100" Name="NeedMoreTime_CancelOrder" Top="0" Left="0" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="15"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="101" Name="PreviousPage" Top="120" Left="290" Height="280" Width="80" TextColor="#ffffff" MessageID="170" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="13" FontStyle="Bold" ImageID="23">
+					<Actions>
+						<Action ActionCode="7" Param1="ExpressOrder" Param2="-1"/>
+						<!-- Scroll Control Group -->
+					</Actions>
+				</Button>
+				<Button ControlID="102" Name="NextPage" Top="120" Left="715" Height="280" Width="80" TextColor="#ffffff" MessageID="171" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="13" FontStyle="Bold" ImageID="22">
+					<Actions>
+						<Action ActionCode="7" Param1="ExpressOrder" Param2="1"/>
+						<!-- Scroll Control Group -->
+					</Actions>
+				</Button>
+				<Button ControlID="103" Name="ScrollUp" Top="5" Left="375" Height="50" Width="335" TextColor="#ffffff" MessageID="172" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" LinkedControl="119" ImageID="25">
+					<Actions>
+						<Action ActionCode="6" Param1="-1"/>
+						<!-- Scroll List Window -->
+					</Actions>
+				</Button>
+				<Button ControlID="104" Name="ScrollDown" Top="470" Left="375" Height="50" Width="335" TextColor="#ffffff" MessageID="173" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" LinkedControl="119" ImageID="26">
+					<Actions>
+						<Action ActionCode="6" Param1="1"/>
+						<!-- Scroll List Window -->
+					</Actions>
+				</Button>
+				<Button ControlID="105" Name="OrderDineIn" Top="525" Left="375" Height="70" Width="165" TextColor="#ffffff" MessageID="182" LinkedControl="119" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10002"/>
+						<!-- Sell Express Order -->
+						<Action ActionCode="5" SubactionCode="0" Param1="DestID" Param2="-1"/>
+						<!-- Save Variable -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOSelectTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="8"/>
+						<!-- Navigate Screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="106" Name="OrderToGo" Top="525" Left="545" Height="70" Width="165" TextColor="#ffffff" MessageID="174" LinkedControl="119" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10002"/>
+						<!-- Sell Express Order -->
+						<Action ActionCode="5" SubactionCode="0" Param1="DestID" Param2="-1"/>
+						<!-- Save Variable -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOSelectTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="8"/>
+						<!-- Navigate Screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="107" Name="Language" Top="400" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="206" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="20" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="1" Param1="2"/>
+						<!-- Change Language to Spanish -->
+					</Actions>
+					<Toggle>
+						<Actions>
+							<Action ActionCode="1" Param1="1"/>
+							<!-- Change Language to English -->
+						</Actions>
+					</Toggle>
+				</Button>
+				<Button ControlID="109" Name="Cancel" Top="520" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="24">
+					<Actions>
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOCancelTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="110" Name="DateOrdered" Top="64" Left="380" Height="25" Width="325" TextColor="#ffffff" MessageID="151" LinkedControl="119" DataBinding="LastOrderedTimestamp" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="17" FontStyle="Bold"/>
+				<Text ControlID="111" Name="OrderXofY" Top="84" Left="380" Height="25" Width="325" TextColor="#ffffff" MessageID="152" LinkedControl="119" DataBinding="ControlGroupIndex" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="17" FontStyle="Bold"/>
+				<Text ControlID="112" Name="HelloMessage" Top="60" Left="10" Height="60" Width="250" TextColor="#000000" MessageID="175" DataBinding="MSRFirstName" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="23" FontStyle="Bold"/>
+				<Text ControlID="113" Name="WelcomeBackMessage" Top="130" Left="10" Height="30" Width="250" TextColor="#000000" MessageID="193" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="20" FontStyle="Bold"/>
+				<!-- <Text ControlID="114" Name="Whataburger" Top="160" Left="10" Height="30" Width="250" TextColor="#f6821e" MessageID="194" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="20" FontStyle="Bold"/>-->
+				<Text ControlID="115" Name="BrowseMessage" Top="195" Left="20" Height="50" Width="190" TextColor="#000000" MessageID="195" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="14" FontStyle="Bold"/>
+				<Text ControlID="116" Name="InstructionsMessage" Top="205" Left="20" Height="190" Width="190" TextColor="#000000" MessageID="196" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="14" FontStyle="Bold"/>
+				<Text ControlID="117" Top="5" Left="10" Height="50" Width="250" TextColor="#ffffff" ImageID="40"/>
+			</Texts>
+			<ListWindows>
+				<ListWindow ControlID="119" Top="110" Left="380" Height="345" Width="325" DataBinding="ExpressOrder" BindingParameter="0" ColumnHeaders="false" FontFamily="Helvetica" FontSize="16" FontStyle="Bold">
+					<Column MsgID="3" Width="60" DataBinding="Quantity" HAlign="C"/>
+					<Column MsgID="4" Width="265" DataBinding="ItemDesc" HAlign="L"/>
+				</ListWindow>
+			</ListWindows>
+		</Frame>
+		<Frame Name="TenderOrder" FrameID="12" Top="0" Left="0" Height="600" Width="300" Timeout="30" TimeoutButton="120" ImageID="36">
+			<Buttons>
+				<Button ControlID="120" Name="NeedMoreTime_CancelOrder" Top="0" Left="0" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="15"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="123" Name="PayWithCredit" Top="320" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="177" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="15" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10005" Param1="VAR:DestID"/>
+						<!-- Finalize Order -->
+						<Action ActionCode="10006"/>
+						<!-- Apply CC Payment -->
+						<Action ActionCode="10007"/>
+						<!-- Close Order -->
+					</Actions>
+				</Button>
+				<Button ControlID="124" Name="PayWithCash" Top="400" Left="20" Height="70" Width="165" DataBinding="PayCashier" TextColor="#ffffff" MessageID="178" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="15" FontStyle="Bold" ImageID="19" Visible="false">
+					<Actions>
+						<Action ActionCode="10004" Param1="MSG:200"/>
+						<!-- Display POS Message -->
+						<Action ActionCode="10020"/>
+						<!-- Print receipt -->
+						<Action ActionCode="2" Param1="20"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="125" Name="Cancel" Top="520" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="24">
+					<Actions>
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOCancelTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to Frame -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="126" Top="73" Left="315" Height="23" Width="80" TextColor="#000000" MessageID="3" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="127" Top="73" Left="395" Height="23" Width="275" TextColor="#000000" MessageID="4" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="128" Top="73" Left="670" Height="23" Width="100" TextColor="#000000" MessageID="5" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="129" Name="PaymentOptionsMessage" Top="65" Left="10" Height="60" Width="250" TextColor="#000000" MessageID="211" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="20" FontStyle="Bold"/>
+				<Text ControlID="130" Name="PayCardMessage" Top="125" Left="10" Height="100" Width="250" TextColor="#000000" MessageID="208" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="131" Name="PayCashMessage" Top="145" Left="10" Height="200" Width="250" DataBinding="PayCashier" TextColor="#000000" MessageID="209" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" Visible="false"/>
+				<Text ControlID="132" Name="ClientLogo" Top="5" Left="10" Height="50" Width="250" TextColor="#ffffff" ImageID="40"/>
+			</Texts>
+		</Frame>
+		<Frame Name="ExpressOrderUnavailable" FrameID="14" Top="0" Left="0" Height="600" Width="800" Timeout="5" TimeoutButton="140" ImageID="29">
+			<Buttons>
+				<Button ControlID="140" Name="OK" Top="365" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="191" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Set State -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="141" Name="ExOUnavailableMessage" Top="60" Left="200" Height="300" Width="400" TextColor="#000000" MessageID="179" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame Name="ExpressOrderNoOrders" FrameID="15" Top="0" Left="0" Height="600" Width="800" Timeout="5" TimeoutButton="150" ImageID="29">
+			<Buttons>
+				<Button ControlID="150" Name="OK" Top="365" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="191" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Set State -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="151" Name="NoOrdersMessage" Top="60" Left="200" Height="300" Width="400" TextColor="#000000" MessageID="180" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame Name="CardSwipeFrame" FrameID="16" Top="0" Left="0" Height="600" Width="800" Timeout="90" TimeoutButton="160" ImageID="29">
+			<Buttons>
+				<Button ControlID="160" Name="NeedMoreTime" Top="10" Left="10" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="10" SubactionCode="0" Param1="164" Param2="0"/>
+						<!-- turn off cancel button on Card Swipe Frame -->
+						<Action ActionCode="13" Param1="VAR:GiftCardFlow?" Param2="15" Param3="2"/>
+						<!-- Check GiftCardFlow? variable - if the Enter button has been pressed on the Enter Amount screen, go to the Need More Time screen, othewise go to the In Order screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="164" Name="Cancel" Top="520" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="24" Visible="false">
+					<Actions>
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="10" SubactionCode="0" Param1="164" Param2="0"/>
+						<!-- turn off cancel button on Card Swipe Frame -->
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="161" Name="SwipeMessage" DataBinding="CardSwipeMessage" Top="30" Left="200" Height="210" Width="400" TextColor="#000000" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="33" FontStyle="Bold"/>
+				<Text ControlID="163" Name="CardSwipeGraphic" Top="240" Left="210" Height="230" Width="450" TextColor="#ffffff" ImageID="34"/>
+			</Texts>
+		</Frame>
+		<Frame Name="ExOrderJoinThankYou" FrameID="19" Top="0" Left="0" Height="600" Width="800" ImageID="29" Timeout="10" TimeoutButton="190">
+			<Buttons>
+				<Button ControlID="190" Name="OK" Top="400" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="191" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="30" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="191" Name="ThankYouMessage" Top="100" Left="200" Height="250" Width="400" TextColor="#ffffff" MessageID="190" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="30" FontStyle="Bold"/>
+				<Text ControlID="193" Name="ExOGraphic" Top="200" Left="200" Height="123" Width="412" TextColor="#ffffff" ImageID="30"/>
+			</Texts>
+		</Frame>
+		<Frame Name="ExOrderCancelled" FrameID="20" Top="0" Left="0" Height="600" Width="800" Timeout="10" TimeoutButton="200" ImageID="29">
+			<Buttons>
+				<Button ControlID="200" Name="OK" Top="365" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="191" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Attract Screen -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="201" Name="CancelledMessage" Top="30" Left="200" Height="180" Width="400" TextColor="#000000" MessageID="192" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+				<Text ControlID="203" Name="OrderCancelledGraphic" Top="210" Left="286" Height="240" Width="228" TextColor="#ffffff" ImageID="35"/>
+			</Texts>
+		</Frame>
+		<Frame Name="NeedMoreTime_CancelOrder?" FrameID="23" Top="0" Left="0" Height="600" Width="800" Timeout="10" TimeoutButton="231" ImageID="29">
+			<Buttons>
+				<Button ControlID="230" Name="YES" Top="265" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="212" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="2" SubactionCode="1"/>
+						<!-- Go back to previous screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="231" Name="NO" Top="345" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="213" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to Frame -->
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOCancelTime"/>
+						<!-- Save Variable -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="232" Name="NeedMoreTime?" Top="60" Left="200" Height="240" Width="400" TextColor="#000000" MessageID="214" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame Name="NeedMoreTime_SkipCancelOrder?" FrameID="24" Top="0" Left="0" Height="600" Width="800" Timeout="10" TimeoutButton="241" ImageID="29">
+			<Buttons>
+				<Button ControlID="240" Name="YES" Top="265" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="212" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="2" SubactionCode="1"/>
+						<!-- Go back to previous screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="241" Name="NO" Top="345" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="213" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Set state -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="242" Name="NeedMoreTime?" Top="60" Left="200" Height="240" Width="400" TextColor="#000000" MessageID="214" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame Name="RecoverableError" FrameID="25" Top="0" Left="0" Height="600" Width="800" Timeout="10" TimeoutButton="250" ImageID="29">
+			<Buttons>
+				<Button ControlID="250" Name="OK" Top="365" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="191" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10" SubactionCode="0" Param1="253" Param2="0"/>
+						<!-- turn off cancel button on Recoverable Error Frame -->
+						<Action ActionCode="13" SubactionCode="1" Param1="VAR:PartialPayment" Param2="29" Param3="0"/>
+						<!-- Check PartialPayment variable - if the Partial Payment screen has been visitied, navigate to the Insufficient Funds screen -->
+						<Action ActionCode="10010" Param1="8" Param2="21"/>
+					</Actions>
+				</Button>
+				<Button ControlID="253" Name="Cancel" Top="520" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="24" Visible="false">
+					<Actions>
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="10" SubactionCode="0" Param1="253" Param2="0"/>
+						<!-- turn off cancel button on Recoverable Error Frame -->
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="251" Name="ErrorMessage" DataBinding="ErrorMessage" Top="30" Left="200" Height="300" Width="400" TextColor="#000000" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="33" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame Name="CreditProcessing" FrameID="26" Top="0" Left="0" Height="600" Width="800" ImageID="29">
+			<Texts>
+				<Text ControlID="261" Name="CreditProcessing" MessageID="219" Top="30" Left="200" Height="300" Width="400" TextColor="#000000" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+			</Texts>
+			<AnimationBoxes>
+				<AnimationBox ControlID="263" Top="530" Left="200" Height="60" Width="400" AnimationID="104"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="Keypad" FrameID="30" Top="0" Left="0" Height="600" Width="800" Timeout="30" TimeoutButton="314" ImageID="38">
+			<Buttons>
+				<Button ControlID="301" Name="1" Top="95" Left="50" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="221" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="1"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="302" Name="2" Top="95" Left="160" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="222" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="2"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="303" Name="3" Top="95" Left="265" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="223" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="3"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="304" Name="4" Top="190" Left="50" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="224" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="4"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="305" Name="5" Top="190" Left="160" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="225" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="5"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="306" Name="6" Top="190" Left="265" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="226" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="6"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="307" Name="7" Top="285" Left="50" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="227" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="7"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="308" Name="8" Top="285" Left="160" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="228" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="8"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="309" Name="9" Top="285" Left="265" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="229" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="9"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="310" Name="Clear" Top="380" Left="50" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="231" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="20" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" SubactionCode="1"/>
+						<!-- Echo clear keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="311" Name="zero" Top="380" Left="160" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="230" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="0"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="312" Name="backspace" Top="380" Left="265" Height="90" Width="90" TextColor="#ffffff" LinkedControl="300" MessageID="232" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="18" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" SubactionCode="2"/>
+						<!-- Echo backspace keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="313" Name="Enter" Top="350" Left="500" Height="70" Width="165" TextColor="#ffffff" LinkedControl="300" MessageID="233" ImageID="19" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="10009" SubactionCode="1"/>
+						<!-- Set order name -->
+						<Action ActionCode="10005" Param1="VAR:DestID"/>
+						<!-- Finalize Order -->
+						<Action ActionCode="10006"/>
+						<!-- Apply CC Payment -->
+						<Action ActionCode="10007"/>
+						<!-- Close Order -->
+					</Actions>
+				</Button>
+				<Button ControlID="314" Name="NeedMoreTime_CancelOrder" Top="0" Left="0" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="15"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="315" Name="Instructions1" Top="20" Left="425" Height="100" Width="375" TextColor="#000000" MessageID="234" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="316" Name="Instructions2" Top="120" Left="425" Height="100" Width="375" TextColor="#000000" MessageID="235" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="317" Name="Instructions3" Top="220" Left="425" Height="100" Width="375" TextColor="#000000" MessageID="236" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="318" Name="ThankYouMessage" Top="540" Left="5" Height="45" Width="460" TextColor="#ffffff" MessageID="190" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="30" FontStyle="Bold"/>
+				<Text ControlID="319" Name="ExOGraphic" Top="520" Left="470" Height="90" Width="260" TextColor="#ffffff" ImageID="30"/>
+				<Text ControlID="300" Name="EchoText" Top="30" Left="30" Height="60" Width="350" TextColor="#ffffff" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="40" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame Name="PayWithCashMessage" FrameID="33" Top="0" Left="0" Height="600" Width="800" Timeout="7" TimeoutButton="330" ImageID="29">
+			<Buttons>
+				<Button ControlID="330" Name="OK" Top="365" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="191" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="5" SubactionCode="1" Param1="EOCashierTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="2"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="331" Name="PayWithCashMessage" Top="30" Left="200" Height="350" Width="400" TextColor="#000000" MessageID="237" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame Name="IfPayingWithCreditMessage" FrameID="34" Top="0" Left="0" Height="600" Width="300" Timeout="30" TimeoutButton="120" ImageID="39">
+			<Buttons>
+				<Button ControlID="340" Name="NeedMoreTime_CancelOrder" Top="0" Left="0" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="15"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="341" Name="IfPayingWithCreditMessage" Top="5" Left="10" Height="230" Width="300" DataBinding="PayCashier" TextColor="#000000" MessageID="238" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+			</Texts>
+			<AnimationBoxes>
+				<AnimationBox ControlID="342" Top="190" Left="0" Height="300" Width="300" AnimationID="103"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="WaitingForTotal" FrameID="35" Top="0" Left="0" Height="600" Width="300" Timeout="7" TimeoutButton="351" ImageID="39">
+			<Buttons>
+				<Button ControlID="351" Name="timeout" Top="0" Left="0" Height="10" Width="1" TextColor="#ffffff" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="2" Param1="2"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="352" Name="waitingfortotal" Top="100" Left="30" Height="400" Width="280" DataBinding="PayCashier" TextColor="#000000" MessageID="249" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="26" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame Name="VerifyTotal" FrameID="36" Top="0" Left="0" Height="600" Width="300" ImageID="39">
+			<Buttons>
+				<Button ControlID="362" Name="ok" Top="350" Left="35" Height="70" Width="165" TextColor="#ffffff" MessageID="191" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10004" Param1="Customer verified charge."/>
+						<!-- Send message to POS -->
+						<Action ActionCode="10006"/>
+						<!-- Apply CC Payment -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="363" Name="VerifyTotal" Top="50" Left="30" Height="350" Width="280" DataBinding="PayCashier" TextColor="#000000" MessageID="250" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame Name="C1200_NAAttract" FrameID="37" Top="0" Left="0" Height="600" Width="800">
+			<AnimationBoxes>
+				<AnimationBox ControlID="8999" Top="0" Left="0" Height="600" Width="800" AnimationID="404"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200_NAAttract_DP1" FrameID="38" Top="0" Left="0" Height="600" Width="800">
+			<AnimationBoxes>
+				<AnimationBox ControlID="9000" Top="0" Left="0" Height="600" Width="800" AnimationID="400"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200_NAAttract_DP2" FrameID="39" Top="0" Left="0" Height="600" Width="800">
+			<AnimationBoxes>
+				<AnimationBox ControlID="9001" Top="0" Left="0" Height="600" Width="800" AnimationID="401"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200_NAAttract_DP3" FrameID="40" Top="0" Left="0" Height="600" Width="800">
+			<AnimationBoxes>
+				<AnimationBox ControlID="9002" Top="0" Left="0" Height="600" Width="800" AnimationID="402"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200_NAAttract_DP4" FrameID="41" Top="0" Left="0" Height="600" Width="800">
+			<AnimationBoxes>
+				<AnimationBox ControlID="9003" Top="0" Left="0" Height="600" Width="800" AnimationID="403"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="OrderConfirmGiftCard" FrameID="380" Top="0" Left="0" Height="600" Width="800" ImageID="15" Timeout="15" TimeoutButton="380">
+			<Buttons>
+				<Button ControlID="380" Name="NewOrder" Top="10" Left="10" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Set State -->
+					</Actions>
+				</Button>
+				<Button ControlID="381" Name="AddToGiftCard" Top="350" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="240" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="19" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10004" Param1="Customer is adding value to their gift card."/>
+						<!-- Send message to POS -->
+						<Action ActionCode="10001" Param1="11"/>
+						<!-- Set State to Add to Card -->
+						<Action ActionCode="2" Param1="26"/>
+						<!-- Navigate to Enter Amount screen -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="382" Top="10" Left="60" Height="105" Width="380" TextColor="#000000" MessageID="150" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+				<Text ControlID="383" Top="120" Left="60" Height="60" Width="380" TextColor="#000000" DataBinding="OrderNum" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="45" FontStyle="Bold"/>
+				<Text ControlID="384" Top="250" Left="345" Height="45" Width="240" TextColor="#000000" MessageID="197" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="386" Top="375" Left="335" Height="45" Width="250" TextColor="#000000" MessageID="239" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="387" Top="250" Left="585" Height="45" Width="190" TextColor="#000000" DataBinding="FinalTotal" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="389" Top="375" Left="585" Height="45" Width="190" TextColor="#000000" DataBinding="GiftCardBalance" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="390" Top="540" Left="5" Height="45" Width="460" TextColor="#000000" MessageID="190" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="30" FontStyle="Bold"/>
+				<Text ControlID="391" Top="520" Left="470" Height="90" Width="260" TextColor="#ffffff" ImageID="30"/>
+				<Text ControlID="392" Top="45" Left="500" Height="170" Width="250" TextColor="#ffffff" ImageID="41"/>
+			</Texts>
+		</Frame>
+		<Frame Name="EnterAmount" FrameID="400" Top="0" Left="0" Height="600" Width="800" Timeout="30" TimeoutButton="414" ImageID="38">
+			<Buttons>
+				<Button ControlID="401" Name="1" Top="95" Left="50" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="221" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="1"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="402" Name="2" Top="95" Left="160" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="222" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="2"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="403" Name="3" Top="95" Left="265" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="223" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="3"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="404" Name="4" Top="190" Left="50" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="224" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="4"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="405" Name="5" Top="190" Left="160" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="225" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="5"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="406" Name="6" Top="190" Left="265" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="226" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="6"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="407" Name="7" Top="285" Left="50" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="227" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="7"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="408" Name="8" Top="285" Left="160" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="228" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="8"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="409" Name="9" Top="285" Left="265" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="229" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="9"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="410" Name="Clear" Top="380" Left="50" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="231" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="20" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" SubactionCode="1"/>
+						<!-- Echo clear keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="411" Name="zero" Top="380" Left="160" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="230" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="35" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" Param1="0"/>
+						<!-- Echo keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="412" Name="backspace" Top="380" Left="265" Height="90" Width="90" TextColor="#ffffff" LinkedControl="417" MessageID="232" ImageID="37" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="18" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="8" SubactionCode="2"/>
+						<!-- Echo backspace keypad -->
+					</Actions>
+				</Button>
+				<Button ControlID="413" Name="Enter" Top="350" Left="500" Height="70" Width="165" TextColor="#ffffff" LinkedControl="417" MessageID="233" ImageID="19" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold">
+					<Actions>
+						<Action ActionCode="5" SubactionCode="0" Param1="GiftCardFlow?" Param2="1"/>
+						<!-- Set GiftCardFlow? variable to true so Card Swipe frame will know what timeout screen to navigate to -->
+						<Action ActionCode="10" SubactionCode="0" Param1="164" Param2="1"/>
+						<!-- turn on cancel button on Card Swipe Frame -->
+						<Action ActionCode="10" SubactionCode="0" Param1="253" Param2="1"/>
+						<!-- turn on cancel button on Recoverable Error Frame -->
+						<Action ActionCode="14" Param1="AmountToCharge" Param2="VAR:CNTRL417"/>
+						<!-- save echo window text -->
+						<Action ActionCode="2" Param1="27"/>
+						<!-- Navigate to Swipe CC for Gift Card frame -->
+					</Actions>
+				</Button>
+				<Button ControlID="414" Name="NeedMoreTime_CancelOrder" Top="0" Left="0" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="15"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="420" Name="Cancel" Top="525" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="24">
+					<Actions>
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOCancelTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="415" Name="Instructions1" Top="20" Left="425" Height="100" Width="375" TextColor="#000000" MessageID="241" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="416" Name="Instructions2" Top="120" Left="425" Height="100" Width="375" TextColor="#000000" MessageID="242" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="418" Name="GiftCardBalance" Top="230" Left="425" Height="45" Width="320" TextColor="#0000ff" MessageID="239" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="30" FontStyle="Bold"/>
+				<Text ControlID="419" Name="GiftCardBalanceAmount" Top="280" Left="425" Height="55" Width="320" TextColor="#0000ff" DataBinding="GiftCardBalance" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="40" FontStyle="Bold"/>
+				<Text ControlID="417" Name="EchoText" Top="30" Left="30" Height="60" Width="350" TextColor="#ffffff" DataBinding="GiftCardAddValueAmount" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="40" FontStyle="Bold" NumberFormat="$#,##0.00;($#,##0.00);$#,##0.00" MinValue="0" MaxValue="999.99"/>
+				<Text ControlID="421" Name="ClientLogo" Top="540" Left="550" Height="50" Width="250" TextColor="#ffffff" ImageID="40"/>
+			</Texts>
+		</Frame>
+		<Frame Name="SwipeCCForGiftCard" FrameID="500" Top="0" Left="0" Height="600" Width="800" Timeout="30" TimeoutButton="500" ImageID="42">
+			<Buttons>
+				<Button ControlID="500" Name="NeedMoreTime" Top="10" Left="10" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="15"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="506" Name="Cancel" Top="525" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="24">
+					<Actions>
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOCancelTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="501" Name="SwipeCCForGiftCardMessage" Top="10" Left="150" Height="210" Width="500" TextColor="#000000" MessageID="243" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+				<Text ControlID="503" Top="315" Left="335" Height="45" Width="275" TextColor="#000000" MessageID="244" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="504" Top="315" Left="610" Height="45" Width="170" TextColor="#000000" DataBinding="AmountToCharge" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="507" Name="ClientLogo" Top="540" Left="550" Height="50" Width="250" TextColor="#ffffff" ImageID="40"/>
+			</Texts>
+			<AnimationBoxes>
+				<AnimationBox ControlID="505" Top="190" Left="0" Height="300" Width="300" AnimationID="103"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="ChargeCCForGiftCardConfirm" FrameID="600" Top="0" Left="0" Height="600" Width="800" Timeout="30" TimeoutButton="600" ImageID="42">
+			<Buttons>
+				<Button ControlID="600" Name="OK" Top="350" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="191" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="30" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="601" Name="ChargeCCForGiftCardConfirmMessage" Top="10" Left="100" Height="210" Width="600" TextColor="#000000" MessageID="245" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+				<Text ControlID="602" Top="250" Left="330" Height="45" Width="275" TextColor="#000000" MessageID="244" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="603" Top="250" Left="605" Height="45" Width="170" TextColor="#000000" DataBinding="AmountToCharge" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="604" Top="375" Left="330" Height="45" Width="275" TextColor="#000000" MessageID="239" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="605" Top="375" Left="605" Height="45" Width="170" TextColor="#000000" DataBinding="GiftCardBalance" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="606" Name="ClientLogo" Top="540" Left="550" Height="50" Width="250" TextColor="#ffffff" ImageID="40"/>
+			</Texts>
+		</Frame>
+		<Frame Name="InsufficientFundsOnGiftCard" FrameID="700" Top="0" Left="0" Height="600" Width="800" Timeout="30" TimeoutButton="700" ImageID="42">
+			<Buttons>
+				<Button ControlID="700" Name="NeedMoreTime" Top="10" Left="10" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="15"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="702" Name="Cancel" Top="525" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="24">
+					<Actions>
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOCancelTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="703" Name="InsufficientFundsOnGiftCardMessage" Top="10" Left="100" Height="210" Width="600" TextColor="#000000" MessageID="246" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+				<Text ControlID="704" Top="250" Left="330" Height="45" Width="275" TextColor="#000000" MessageID="197" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="705" Top="250" Left="605" Height="45" Width="170" TextColor="#000000" DataBinding="Total" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="706" Top="315" Left="330" Height="45" Width="275" TextColor="#000000" MessageID="239" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="707" Top="315" Left="605" Height="45" Width="170" TextColor="#000000" DataBinding="GiftCardBalance" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="708" Top="375" Left="330" Height="45" Width="275" TextColor="#000000" MessageID="247" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+				<Text ControlID="709" Top="375" Left="605" Height="45" Width="170" TextColor="#000000" DataBinding="RemainderDue" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="24" FontStyle="Bold"/>
+			</Texts>
+			<AnimationBoxes>
+				<AnimationBox ControlID="710" Top="190" Left="0" Height="300" Width="300" AnimationID="103"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="OrderCancelled_GiftCard" FrameID="800" Top="0" Left="0" Height="600" Width="800" Timeout="15" TimeoutButton="800" ImageID="42">
+			<Buttons>
+				<Button ControlID="800" Name="NeedMoreTime" Top="10" Left="10" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="1"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="801" Name="AddToGiftCard" Top="250" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="240" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="19" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="10004" Param1="Customer is adding value to their gift card."/>
+						<!-- Send message to POS -->
+						<Action ActionCode="10001" Param1="11"/>
+						<!-- Set State to Add to Card -->
+						<Action ActionCode="2" Param1="26"/>
+						<!-- Navigate to Enter Amount screen -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="802" Name="OrderCanceled_GiftCardMessage" Top="10" Left="150" Height="210" Width="500" TextColor="#000000" MessageID="248" HAlign="C" VAlign="T" FontFamily="Helvetica" FontSize="35" FontStyle="Bold"/>
+				<Text ControlID="803" Top="315" Left="330" Height="45" Width="275" TextColor="#000000" MessageID="239" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="23" FontStyle="Bold"/>
+				<Text ControlID="804" Top="315" Left="605" Height="45" Width="170" TextColor="#000000" DataBinding="GiftCardBalance" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="23" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame Name="MyMenuFrame" FrameID="900" Top="0" Left="0" Height="600" Width="800" ImageID="51" Timeout="30" TimeoutButton="900">
+			<Buttons>
+				<Button ControlID="900" Name="NeedMoreTime_CancelOrder" Top="0" Left="0" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="15"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="901" Name="CompleteOrder" Top="537" Left="573" Height="60" Width="200" TextColor="#ffffff" MessageID="260" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="52">
+					<Actions>
+						<Action ActionCode="2" Param1="32"/>
+						<!-- Navigate to Destination Selection screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="902" Name="CancelLastItem" Top="477" Left="560" Height="55" Width="105" TextColor="#ffffff" MessageID="258" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="15" FontStyle="Bold" ImageID="49">
+					<Actions>
+						<!--Cancel Last Item -->
+						<Action ActionCode="10013" Param1="0"/>
+					</Actions>
+				</Button>
+				<Button ControlID="903" Name="CancelOrder" Top="477" Left="685" Height="55" Width="105" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="15" FontStyle="Bold" ImageID="50">
+					<Actions>
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOCancelTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</Button>
+				<Button ControlID="904" Name="Language" Top="15" Left="595" Height="70" Width="165" TextColor="#ffffff" MessageID="206" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="20" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="1" Param1="2"/>
+						<!-- Change Language to Spanish -->
+					</Actions>
+					<Toggle>
+						<Actions>
+							<Action ActionCode="1" Param1="1"/>
+							<!-- Change Language to English -->
+						</Actions>
+					</Toggle>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="910" Name="MyMenuHeader1" Top="18" Left="10" Height="32" Width="550" TextColor="#000000" MessageID="257" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="25" FontStyle="Bold"/>
+				<Text ControlID="911" Name="MyMenuHeader2" Top="55" Left="10" Height="23" Width="550" TextColor="#000000" MessageID="261" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="15" FontStyle="Bold"/>
+			</Texts>
+			<ListWindows>
+				<ListWindow ControlID="920" Name="ItemsAndPrices" Top="100" Left="560" Height="290" Width="230" DataBinding="Receipt" ColumnHeaders="false" FontFamily="Helvetica" FontSize="12" FontStyle="Bold">
+					<Column MsgID="1" Width="140" DataBinding="ItemDesc" HAlign="L"/>
+					<Column MsgID="2" Width="90" DataBinding="ItemPrice" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="921" Top="390" Left="560" Height="25" Width="230" DataBinding="Subtotal" ColumnHeaders="false" FontFamily="Helvetica" FontSize="12" FontStyle="Bold">
+					<Column Width="140" MsgID="16" DataBinding="Label" HAlign="R"/>
+					<Column Width="90" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="922" Top="415" Left="560" Height="25" Width="230" DataBinding="Tax" ColumnHeaders="false" FontFamily="Helvetica" FontSize="12" FontStyle="Bold">
+					<Column Width="140" MsgID="17" DataBinding="Label" HAlign="R"/>
+					<Column Width="90" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="923" Top="440" Left="560" Height="25" Width="230" DataBinding="Total" ColumnHeaders="false" FontFamily="Helvetica" FontSize="12" FontStyle="Bold">
+					<Column Width="140" MsgID="18" DataBinding="Label" HAlign="R"/>
+					<Column Width="90" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+			</ListWindows>
+			<MyMenuBoxes>
+				<MyMenuBox ControlID="930" Top="100" Left="10" Height="490" Width="540" ButtonWidth="261" ButtonHeight="42" ButtonSpacingX="9" HeaderTextColor="#ffffff" HeaderImageID="45" ButtonTextColor="#000000" ButtonImageID="46" FontFamily="Arial" PageUpImageID="47" PageDownImageID="48"/>
+			</MyMenuBoxes>
+		</Frame>
+		<Frame Name="C1200_Attract_DP1_png" FrameID="1000" Top="0" Left="0" Height="600" Width="800" ImageID="200"/>
+		<Frame Name="C1200_Attract_DP2_png" FrameID="1002" Top="0" Left="0" Height="600" Width="800" ImageID="202"/>
+		<Frame Name="C1200_Attract_DP3_png" FrameID="1004" Top="0" Left="0" Height="600" Width="800" ImageID="204"/>
+		<Frame Name="C1200_Attract_DP4_png" FrameID="1006" Top="0" Left="0" Height="600" Width="800" ImageID="206"/>
+		<Frame Name="C1200_Attract_DP1" FrameID="1010" Top="0" Left="0" Height="600" Width="800">
+			<AnimationBoxes>
+				<AnimationBox ControlID="1010" Top="0" Left="0" Height="600" Width="800" AnimationID="200">
+					<Actions>
+						<Action ActionCode="2" Param1="34"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</AnimationBox>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200_Attract_DP2" FrameID="1012" Top="0" Left="0" Height="600" Width="800">
+			<AnimationBoxes>
+				<AnimationBox ControlID="1012" Top="0" Left="0" Height="600" Width="800" AnimationID="202">
+					<Actions>
+						<Action ActionCode="2" Param1="34"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</AnimationBox>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200_Attract_DP3" FrameID="1014" Top="0" Left="0" Height="600" Width="800">
+			<AnimationBoxes>
+				<AnimationBox ControlID="1014" Top="0" Left="0" Height="600" Width="800" AnimationID="204">
+					<Actions>
+						<Action ActionCode="2" Param1="34"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</AnimationBox>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200_Attract_DP4" FrameID="1016" Top="0" Left="0" Height="600" Width="800">
+			<AnimationBoxes>
+				<AnimationBox ControlID="1016" Top="0" Left="0" Height="600" Width="800" AnimationID="206">
+					<Actions>
+						<Action ActionCode="2" Param1="34"/>
+						<!-- Navigate to frame -->
+					</Actions>
+				</AnimationBox>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200_Attractinfo_swf" FrameID="1018" Top="0" Left="300" Height="600" Width="500" ImageID="27" Timeout="10" TimeoutButton="1019">
+			<Buttons>
+				<Button ControlID="1019" Name="AttractScreen" Top="0" Left="0" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Set State -->
+					</Actions>
+				</Button>
+				<Button ControlID="1020" Name="ScrollUp" Top="5" Left="75" Height="50" Width="335" TextColor="#ffffff" MessageID="172" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" LinkedControl="76" ImageID="25">
+					<Actions>
+						<Action ActionCode="6" Param1="-1"/>
+						<!-- Scroll List Window -->
+					</Actions>
+				</Button>
+				<Button ControlID="1021" Name="ScrollDown" Top="545" Left="75" Height="50" Width="335" TextColor="#ffffff" MessageID="173" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" LinkedControl="76" ImageID="26">
+					<Actions>
+						<Action ActionCode="6" Param1="1"/>
+						<!-- Scroll List Window -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="1022" Top="73" Left="15" Height="23" Width="80" TextColor="#000000" MessageID="3" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="1023" Top="73" Left="95" Height="23" Width="275" TextColor="#000000" MessageID="4" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="1024" Top="73" Left="370" Height="23" Width="100" TextColor="#000000" MessageID="5" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+			</Texts>
+			<ListWindows>
+				<ListWindow ControlID="1025" Top="110" Left="15" Height="335" Width="450" DataBinding="Receipt" ColumnHeaders="false" FontFamily="Helvetica" FontSize="16" FontStyle="Bold">
+					<Column MsgID="3" Width="80" DataBinding="Quantity" HAlign="C"/>
+					<Column MsgID="4" Width="275" DataBinding="ItemDesc" HAlign="L"/>
+					<Column MsgID="5" Width="100" DataBinding="ItemPrice" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="1026" Top="445" Left="15" Height="25" Width="450" DataBinding="Subtotal" ColumnHeaders="false" FontFamily="Helvetica" FontSize="16" FontStyle="Bold">
+					<Column Width="310" MsgID="6" DataBinding="Label" HAlign="R"/>
+					<Column Width="145" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="1029" Top="470" Left="15" Height="25" Width="450" DataBinding="Tax" ColumnHeaders="false" FontFamily="Helvetica" FontSize="16" FontStyle="Bold">
+					<Column Width="310" MsgID="7" DataBinding="Label" HAlign="R"/>
+					<Column Width="145" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="1030" Top="495" Left="15" Height="25" Width="450" DataBinding="Total" ColumnHeaders="false" FontFamily="Helvetica" FontSize="16" FontStyle="Bold">
+					<Column Width="310" MsgID="8" DataBinding="Label" HAlign="R"/>
+					<Column Width="145" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+			</ListWindows>
+		</Frame>
+		<Frame Name="C1200promo_DP1_png" FrameID="2000" Top="0" Left="0" Height="600" Width="300" ImageID="300"/>
+		<Frame Name="C1200promo_DP2_png" FrameID="2002" Top="0" Left="0" Height="600" Width="300" ImageID="302"/>
+		<Frame Name="C1200promo_DP3_png" FrameID="2004" Top="0" Left="0" Height="600" Width="300" ImageID="304"/>
+		<Frame Name="C1200promo_DP4_png" FrameID="2006" Top="0" Left="0" Height="600" Width="300" ImageID="306"/>
+		<Frame Name="C1200promo_DP1" FrameID="2010" Top="0" Left="0" Height="600" Width="300">
+			<AnimationBoxes>
+				<AnimationBox ControlID="2010" Top="0" Left="0" Height="600" Width="300" AnimationID="300"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200promo_DP2" FrameID="2012" Top="0" Left="0" Height="600" Width="300">
+			<AnimationBoxes>
+				<AnimationBox ControlID="2012" Top="0" Left="0" Height="600" Width="300" AnimationID="302"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200promo_DP3" FrameID="2014" Top="0" Left="0" Height="600" Width="300">
+			<AnimationBoxes>
+				<AnimationBox ControlID="2014" Top="0" Left="0" Height="600" Width="300" AnimationID="304"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200promo_DP4" FrameID="2016" Top="0" Left="0" Height="600" Width="300">
+			<AnimationBoxes>
+				<AnimationBox ControlID="2016" Top="0" Left="0" Height="600" Width="300" AnimationID="306"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame Name="C1200NAAttract_DP1_png" FrameID="2017" Top="0" Left="0" Height="600" Width="800" ImageID="400"/>
+		<Frame Name="C1200NAAttract_DP2_png" FrameID="2018" Top="0" Left="0" Height="600" Width="800" ImageID="401"/>
+		<Frame Name="C1200NAAttract_DP3_png" FrameID="2019" Top="0" Left="0" Height="600" Width="800" ImageID="402"/>
+		<Frame Name="C1200NAAttract_DP4_png" FrameID="2020" Top="0" Left="0" Height="600" Width="800" ImageID="403"/>
+		<Frame Name="DestinationSelection" FrameID="2100" Top="0" Left="0" Height="600" Width="300" Timeout="30" TimeoutButton="2100" ImageID="36">
+			<Buttons>
+				<Button ControlID="2100" Name="NeedMoreTime_CancelOrder" Top="0" Left="0" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="15"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="2101" Name="OrderDineIn" Top="320" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="182" LinkedControl="119" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="5" SubactionCode="0" Param1="DestID" Param2="-1"/>
+						<!-- Save Variable -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOSelectTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="8"/>
+						<!-- Navigate Screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="2102" Name="OrderToGo" Top="400" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="174" LinkedControl="119" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="5" SubactionCode="0" Param1="DestID" Param2="-1"/>
+						<!-- Save Variable -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOSelectTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="8"/>
+						<!-- Navigate Screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="10003" Name="Cancel" Top="520" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="24">
+					<Actions>
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOCancelTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to Frame -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="2103" Name="DestinationSelectionMessage" Top="65" Left="10" Height="60" Width="250" TextColor="#000000" MessageID="259" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="20" FontStyle="Bold"/>
+				<Text ControlID="2104" Name="ClientLogo" Top="5" Left="10" Height="50" Width="250" TextColor="#ffffff" ImageID="40"/>
+			</Texts>
+		</Frame>
+		<Frame Name="TenderOrder_EnterTableTent" FrameID="2200" Top="0" Left="0" Height="600" Width="300" Timeout="30" TimeoutButton="2200" ImageID="36">
+			<Buttons>
+				<Button ControlID="2200" Name="NeedMoreTime_CancelOrder" Top="0" Left="0" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="2" Param1="15"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="2203" Name="PayWithCard" Top="320" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="177" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="15" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="2" Param1="19"/>
+						<!-- Navigate to EnterTableTent screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="2204" Name="PayWithCash" Top="400" Left="20" Height="70" Width="165" DataBinding="PayCashier" TextColor="#ffffff" MessageID="178" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="15" FontStyle="Bold" ImageID="19" Visible="false">
+					<Actions>
+						<Action ActionCode="10004" Param1="MSG:200"/>
+						<!-- Display POS Message -->
+						<Action ActionCode="10020"/>
+						<!-- Print receipt -->
+						<Action ActionCode="2" Param1="20"/>
+						<!-- Navigate to screen -->
+					</Actions>
+				</Button>
+				<Button ControlID="2205" Name="Cancel" Top="520" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="24">
+					<Actions>
+						<Action ActionCode="10003"/>
+						<!-- Cancel Order -->
+						<Action ActionCode="5" SubactionCode="1" Param1="EOCancelTime"/>
+						<!-- Save Variable -->
+						<Action ActionCode="2" Param1="9"/>
+						<!-- Navigate to Frame -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="2206" Top="73" Left="315" Height="23" Width="80" TextColor="#000000" MessageID="3" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="2207" Top="73" Left="395" Height="23" Width="275" TextColor="#000000" MessageID="4" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="2208" Top="73" Left="670" Height="23" Width="100" TextColor="#000000" MessageID="5" HAlign="R" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="2209" Name="PaymentOptionsMessage" Top="60" Left="10" Height="60" Width="250" TextColor="#000000" MessageID="211" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="20" FontStyle="Bold"/>
+				<Text ControlID="2210" Name="PayCardMessage" Top="125" Left="10" Height="100" Width="250" TextColor="#000000" MessageID="208" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold"/>
+				<Text ControlID="2211" Name="PayCashMessage" Top="145" Left="10" Height="200" Width="250" DataBinding="PayCashier" TextColor="#000000" MessageID="209" HAlign="L" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" Visible="false"/>
+				<Text ControlID="2212" Top="5" Left="10" Height="50" Width="250" TextColor="#ffffff" ImageID="40"/>
+			</Texts>
+		</Frame>
+		<Frame Name="PromptedItemsModal" FrameID="2300" Top="175" Left="150" Height="350" Width="500" Timeout="30" TimeoutButton="2300" ImageID="53">
+			<Buttons>
+				<Button ControlID="2300" Name="NeedMoreTime_CancelOrder" Top="0" Left="0" Height="70" Width="165" TextColor="#ffffff" MessageID="176" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="24" Visible="false">
+					<Actions>
+						<Action ActionCode="16" SubactionCode="3"/>
+						<!-- Close modal with NO value -->
+					</Actions>
+				</Button>
+				<Button ControlID="2301" Name="Yes" Top="195" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="212" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="16" SubactionCode="7"/>
+						<!-- Close modal with YES value -->
+					</Actions>
+				</Button>
+				<Button ControlID="2302" Name="No" Top="265" Left="20" Height="70" Width="165" TextColor="#ffffff" MessageID="213" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="16" FontStyle="Bold" ImageID="19">
+					<Actions>
+						<Action ActionCode="16" SubactionCode="3"/>
+						<!-- Close modal with NO value -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="2303" Name="PromptedItemsmodalMessage" Top="10" Left="50" Height="100" Width="400" TextColor="#000000" MessageID="262" DataBinding="PromptedItemName" HAlign="C" VAlign="M" FontFamily="Helvetica" FontSize="20" FontStyle="Bold"/>
+			</Texts>
+		</Frame>
+		<Frame FrameID="5000" Name="C500_Attract" Top="0" Left="0" Height="240" Width="320">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5001" Top="0" Left="0" Height="240" Width="320" AnimationID="5000"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5001" Name="C500_Attract_png" Top="0" Left="0" Height="240" Width="320" ImageID="5000"/>
+		<Frame FrameID="5100" Name="C500_Receipt" Top="0" Left="85" Height="240" Width="235" ImageID="5100">
+			<ListWindows>
+				<ListWindow ControlID="5101" Name="Receipt" Top="16" Left="10" Height="160" Width="225" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold" DataBinding="Receipt">
+					<Column Width="30" HAlign="R" DataBinding="Quantity"/>
+					<Column Width="135" HAlign="L" DataBinding="ItemDesc"/>
+					<Column Width="60" HAlign="R" DataBinding="ItemPrice"/>
+				</ListWindow>
+				<ListWindow ControlID="5102" Top="181" Left="10" Height="17" Width="225" DataBinding="Subtotal" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="155" MsgID="6" DataBinding="Label" HAlign="R"/>
+					<Column Width="70" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="5103" Top="198" Left="10" Height="17" Width="225" DataBinding="Tax" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="155" MsgID="7" DataBinding="Label" HAlign="R"/>
+					<Column Width="70" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="5104" Top="215" Left="10" Height="17" Width="225" DataBinding="Total" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="155" MsgID="8" DataBinding="Label" HAlign="R"/>
+					<Column Width="70" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+			</ListWindows>
+		</Frame>
+		<Frame FrameID="5110" Name="C500_Promo" Top="0" Left="0" Height="240" Width="85">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5111" Top="0" Left="0" Height="240" Width="85" AnimationID="5110"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5111" Name="C500_Promo_png" Top="0" Left="0" Height="240" Width="85" ImageID="5400"/>
+		<Frame FrameID="5120" Name="C500_Promo_DP1" Top="0" Left="0" Height="240" Width="85">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5112" Top="0" Left="0" Height="240" Width="85" AnimationID="5120"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5121" Name="C500_Promo_DP1_png" Top="0" Left="0" Height="240" Width="85" ImageID="5401"/>
+		<Frame FrameID="5130" Name="C500_Promo_DP2" Top="0" Left="0" Height="240" Width="85">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5113" Top="0" Left="0" Height="240" Width="85" AnimationID="5130"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5131" Name="C500_Promo_DP2_png" Top="0" Left="0" Height="240" Width="85" ImageID="5402"/>
+		<Frame FrameID="5140" Name="C500_Promo_DP3" Top="0" Left="0" Height="240" Width="85">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5114" Top="0" Left="0" Height="240" Width="85" AnimationID="5140"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5141" Name="C500_Promo_DP3_png" Top="0" Left="0" Height="240" Width="85" ImageID="5403"/>
+		<Frame FrameID="5150" Name="C500_Promo_DP4" Top="0" Left="0" Height="240" Width="85">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5115" Top="0" Left="0" Height="240" Width="85" AnimationID="5150"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5151" Name="C500_Promo_DP4_png" Top="0" Left="0" Height="240" Width="85" ImageID="5404"/>
+		<Frame FrameID="5200" Name="C500_Receipt_Wide" Top="0" Left="0" Height="240" Width="320" ImageID="5200">
+			<ListWindows>
+				<ListWindow ControlID="5201" Name="ReceiptWide" Top="16" Left="0" Height="160" Width="320" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold" DataBinding="Receipt">
+					<Column Width="30" HAlign="R" DataBinding="Quantity"/>
+					<Column Width="185" HAlign="L" DataBinding="ItemDesc"/>
+					<Column Width="105" HAlign="R" DataBinding="ItemPrice"/>
+				</ListWindow>
+				<ListWindow ControlID="5202" Top="181" Left="0" Height="17" Width="320" DataBinding="Subtotal" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="190" MsgID="6" DataBinding="Label" HAlign="R"/>
+					<Column Width="130" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="5203" Top="198" Left="0" Height="17" Width="320" DataBinding="Tax" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="190" MsgID="7" DataBinding="Label" HAlign="R"/>
+					<Column Width="130" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="5204" Top="215" Left="0" Height="17" Width="320" DataBinding="Total" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="190" MsgID="8" DataBinding="Label" HAlign="R"/>
+					<Column Width="130" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+			</ListWindows>
+		</Frame>
+		<Frame FrameID="5300" Name="C500_Confirm" Top="0" Left="85" Height="240" Width="320" ImageID="5100" Timeout="10" TimeoutButton="5350">
+			<Buttons>
+				<Button ControlID="5350" Name="NewOrder" Top="10" Left="10" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Set State -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="5301" Top="16" Left="10" Height="60" Width="225" TextColor="#000000" HAlign="C" VAlign="M" MessageID="150" FontFamily="Microsoft Sans Serif" FontSize="20" FontStyle="Bold"/>
+				<Text ControlID="5302" Top="76" Left="10" Height="100" Width="225" TextColor="#000000" HAlign="C" VAlign="M" DataBinding="OrderNum" FontFamily="Microsoft Sans Serif" FontSize="28" FontStyle="Bold"/>
+			</Texts>
+			<ListWindows>
+				<ListWindow ControlID="5303" Top="181" Left="10" Height="17" Width="225" DataBinding="TenderAmount" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="155" MsgID="10" DataBinding="Label" HAlign="R"/>
+					<Column Width="70" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="5304" Top="198" Left="10" Height="17" Width="225" DataBinding="FinalTotal" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="155" MsgID="8" DataBinding="Label" HAlign="R"/>
+					<Column Width="70" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="5305" Top="215" Left="10" Height="17" Width="225" DataBinding="Change" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="155" MsgID="11" DataBinding="Label" HAlign="R"/>
+					<Column Width="70" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+			</ListWindows>
+		</Frame>
+		<Frame FrameID="5400" Name="C500_Confirm_Wide" Top="0" Left="0" Height="240" Width="320" ImageID="5200" Timeout="10" TimeoutButton="5450">
+			<Buttons>
+				<Button ControlID="5450" Name="NewOrder" Top="10" Left="10" Height="1" Width="1" TextColor="#ffffff" Visible="false">
+					<Actions>
+						<Action ActionCode="10001" Param1="1"/>
+						<!-- Set State -->
+					</Actions>
+				</Button>
+			</Buttons>
+			<Texts>
+				<Text ControlID="5401" Top="16" Left="0" Height="60" Width="320" TextColor="#000000" HAlign="C" VAlign="M" MessageID="150" FontFamily="Microsoft Sans Serif" FontSize="20" FontStyle="Bold"/>
+				<Text ControlID="5402" Top="76" Left="0" Height="100" Width="320" TextColor="#000000" HAlign="C" VAlign="M" DataBinding="OrderNum" FontFamily="Microsoft Sans Serif" FontSize="28" FontStyle="Bold"/>
+			</Texts>
+			<ListWindows>
+				<ListWindow ControlID="5403" Top="181" Left="0" Height="17" Width="320" DataBinding="TenderAmount" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="190" MsgID="10" DataBinding="Label" HAlign="R"/>
+					<Column Width="130" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="5404" Top="198" Left="0" Height="17" Width="320" DataBinding="FinalTotal" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="190" MsgID="8" DataBinding="Label" HAlign="R"/>
+					<Column Width="130" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+				<ListWindow ControlID="5405" Top="215" Left="0" Height="17" Width="320" DataBinding="Change" ColumnHeaders="false" FontFamily="Microsoft Sans Serif" FontSize="10" FontStyle="Bold">
+					<Column Width="190" MsgID="11" DataBinding="Label" HAlign="R"/>
+					<Column Width="130" DataBinding="Value" HAlign="R"/>
+				</ListWindow>
+			</ListWindows>
+		</Frame>
+		<Frame FrameID="5500" Name="C500NAAttract" Top="0" Left="0" Height="240" Width="320">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5501" Top="0" Left="0" Height="240" Width="320" AnimationID="5100"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5501" Name="C500NAAttract_png" Top="0" Left="0" Height="240" Width="320" ImageID="5300"/>
+		<Frame FrameID="5600" Name="C500NAAttract_DP1" Top="0" Left="0" Height="240" Width="320">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5601" Top="0" Left="0" Height="240" Width="320" AnimationID="6000"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5601" Name="C500NAAttract_DP1_png" Top="0" Left="0" Height="240" Width="320" ImageID="5301"/>
+		<Frame FrameID="5700" Name="C500NAAttract_DP2" Top="0" Left="0" Height="240" Width="320">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5701" Top="0" Left="0" Height="240" Width="320" AnimationID="6100"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5701" Name="C500NAAttract_DP2_png" Top="0" Left="0" Height="240" Width="320" ImageID="5302"/>
+		<Frame FrameID="5800" Name="C500NAAttract_DP3" Top="0" Left="0" Height="240" Width="320">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5801" Top="0" Left="0" Height="240" Width="320" AnimationID="6200"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5801" Name="C500NAAttract_DP3_png" Top="0" Left="0" Height="240" Width="320" ImageID="5303"/>
+		<Frame FrameID="5900" Name="C500NAAttract_DP4" Top="0" Left="0" Height="240" Width="320">
+			<AnimationBoxes>
+				<AnimationBox ControlID="5901" Top="0" Left="0" Height="240" Width="320" AnimationID="6300"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="5901" Name="C500NAAttract_DP4_png" Top="0" Left="0" Height="240" Width="320" ImageID="5304"/>
+		<Frame FrameID="6000" Name="C500_Attract_DP1" Top="0" Left="0" Height="240" Width="320">
+			<AnimationBoxes>
+				<AnimationBox ControlID="6001" Top="0" Left="0" Height="240" Width="320" AnimationID="6400"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="6001" Name="C500_Attract_DP1_png" Top="0" Left="0" Height="240" Width="320" ImageID="5001"/>
+		<Frame FrameID="6100" Name="C500_Attract_DP2" Top="0" Left="0" Height="240" Width="320">
+			<AnimationBoxes>
+				<AnimationBox ControlID="6101" Top="0" Left="0" Height="240" Width="320" AnimationID="6500"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="6101" Name="C500_Attract_DP2_png" Top="0" Left="0" Height="240" Width="320" ImageID="5002"/>
+		<Frame FrameID="6200" Name="C500_Attract_DP3" Top="0" Left="0" Height="240" Width="320">
+			<AnimationBoxes>
+				<AnimationBox ControlID="6201" Top="0" Left="0" Height="240" Width="320" AnimationID="6600"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="6201" Name="C500_Attract_DP3_png" Top="0" Left="0" Height="240" Width="320" ImageID="5003"/>
+		<Frame FrameID="6300" Name="C500_Attract_DP4" Top="0" Left="0" Height="240" Width="320">
+			<AnimationBoxes>
+				<AnimationBox ControlID="6301" Top="0" Left="0" Height="240" Width="320" AnimationID="6700"/>
+			</AnimationBoxes>
+		</Frame>
+		<Frame FrameID="6301" Name="C500_Attract_DP4_png" Top="0" Left="0" Height="240" Width="320" ImageID="5004"/>
+	</Frames>
+	<Screens>
+		<Screen ScreenID="1" Name="Attract">
+			<Panel PlaylistID="1"/>
+			<!-- Attract playlist -->
+			<ByDaypart DaypartID="1">
+				<Panel PlaylistID="10"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="2">
+				<Panel PlaylistID="11"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="3">
+				<Panel PlaylistID="12"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="4">
+				<Panel PlaylistID="13"/>
+			</ByDaypart>
+		</Screen>
+		<Screen ScreenID="2" Name="InOrder">
+			<Panel FrameID="7"/>
+			<!-- Receipt frame -->
+			<Panel PlaylistID="2"/>
+			<!-- Promo playlist -->
+			<ByDaypart DaypartID="1">
+				<Panel FrameID="7"/>
+				<Panel PlaylistID="14"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="2">
+				<Panel FrameID="7"/>
+				<Panel PlaylistID="15"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="3">
+				<Panel FrameID="7"/>
+				<Panel PlaylistID="16"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="4">
+				<Panel FrameID="7"/>
+				<Panel PlaylistID="17"/>
+			</ByDaypart>
+		</Screen>
+		<Screen ScreenID="3" Name="ExpressOrderRecall">
+			<Panel FrameID="10"/>
+			<!-- ExpressOrderRecall Frame -->
+		</Screen>
+		<Screen ScreenID="4" Name="OrderConfirm">
+			<Panel FrameID="8"/>
+			<!-- Order Confirm Frame -->
+		</Screen>
+		<Screen ScreenID="5" Name="EOUnavailable">
+			<Panel FrameID="14"/>
+			<!-- Express Order Unavailable Frame -->
+		</Screen>
+		<Screen ScreenID="6" Name="EONoOrders">
+			<Panel FrameID="15"/>
+			<!-- Express Order No Orders Frame -->
+		</Screen>
+		<Screen ScreenID="8" Name="TenderOrder">
+			<Panel FrameID="12"/>
+			<!-- Tender EO Frame -->
+			<Panel FrameID="7"/>
+			<!-- Receipt frame -->
+		</Screen>
+		<Screen ScreenID="9" Name="EOOrderCancelled">
+			<Panel FrameID="20"/>
+			<!-- Order Cancelled Frame -->
+		</Screen>
+		<Screen ScreenID="11" Name="EOOrderJoinThankYou">
+			<Panel FrameID="19"/>
+			<!-- Thank you for joining EO Frame -->
+		</Screen>
+		<Screen ScreenID="13" Name="CardSwipe">
+			<Panel FrameID="16"/>
+			<!-- EO Description Frame -->
+		</Screen>
+		<Screen ScreenID="14" Name="OrderConfirm_ExOrderThankyou">
+			<Panel FrameID="9"/>
+			<!-- ExO Order Confirm Frame -->
+		</Screen>
+		<Screen ScreenID="15" Name="NeedMoreTime_CancelOrder?">
+			<Panel FrameID="23"/>
+			<!-- Need More Time? Frame -->
+		</Screen>
+		<Screen ScreenID="16" Name="NeedMoreTime_SkipCancelOrder?">
+			<Panel FrameID="24"/>
+			<!-- Need More Time? Frame -->
+		</Screen>
+		<Screen ScreenID="17" Name="RecoverableError">
+			<Panel FrameID="25"/>
+			<!-- Generic Error Frame -->
+		</Screen>
+		<Screen ScreenID="18" Name="CreditProcessing">
+			<Panel FrameID="26"/>
+			<!-- Credit Processing Frame -->
+		</Screen>
+		<Screen ScreenID="19" Name="EnterTableTent">
+			<Panel FrameID="30"/>
+			<!-- Keypad Frame -->
+		</Screen>
+		<Screen ScreenID="20" Name="PleasePayCashier">
+			<Panel FrameID="33"/>
+			<!-- PleasePayCashier Frame -->
+		</Screen>
+		<Screen ScreenID="21" Name="IfPayingWithCredit">
+			<Panel FrameID="34"/>
+			<!-- IfPayingWithCreditMessage frame -->
+			<Panel FrameID="7"/>
+			<!-- Receipt frame -->
+		</Screen>
+		<Screen ScreenID="22" Name="WaitingForTotal">
+			<Panel FrameID="35"/>
+			<!-- WaitingForTotal frame -->
+			<Panel FrameID="7"/>
+			<!-- Receipt frame -->
+		</Screen>
+		<Screen ScreenID="23" Name="VerifyTotal">
+			<Panel FrameID="36"/>
+			<!-- VerifyTotal frame -->
+			<Panel FrameID="7"/>
+			<!-- Receipt frame -->
+		</Screen>
+		<Screen ScreenID="24" Name="NotAvailableAttract">
+			<Panel PlaylistID="3"/>
+			<!-- Attract playlist -->
+			<ByDaypart DaypartID="1">
+				<Panel PlaylistID="4"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="2">
+				<Panel PlaylistID="5"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="3">
+				<Panel PlaylistID="6"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="4">
+				<Panel PlaylistID="7"/>
+			</ByDaypart>
+		</Screen>
+		<Screen ScreenID="25" Name="OrderConfirmGiftCard">
+			<Panel FrameID="380"/>
+			<!-- OrderConfirmGiftCard frame -->
+		</Screen>
+		<Screen ScreenID="26" Name="EnterAmount">
+			<Panel FrameID="400"/>
+			<!-- EnterAmount frame -->
+		</Screen>
+		<Screen ScreenID="27" Name="SwipeCCForGiftCard">
+			<Panel FrameID="500"/>
+			<!-- SwipeCCForGiftCard frame -->
+		</Screen>
+		<Screen ScreenID="28" Name="ChargeCCForGiftCardConfirm">
+			<Panel FrameID="600"/>
+			<!-- ChargeCCForGiftCardConfirm frame -->
+		</Screen>
+		<Screen ScreenID="29" Name="InsufficientFundsOnGiftCard">
+			<Panel FrameID="700"/>
+			<!-- InsufficientFundsOnGiftCard frame -->
+		</Screen>
+		<Screen ScreenID="30" Name="OrderCanceled_GiftCard">
+			<Panel FrameID="800"/>
+			<!-- OrderCanceled_GiftCard frame -->
+		</Screen>
+		<Screen ScreenID="31" Name="MyMenuRecall">
+			<Panel FrameID="900"/>
+			<!-- MyMenuRecall frame -->
+		</Screen>
+		<Screen ScreenID="32" Name="DestinationSelection">
+			<Panel FrameID="2100"/>
+			<!-- DestinationSelection frame -->
+			<Panel FrameID="7"/>
+			<!-- Receipt frame -->
+		</Screen>
+		<Screen ScreenID="33" Name="TenderOrder_EnterTableTent">
+			<Panel FrameID="2200"/>
+			<!-- Tender EO Frame with TableTent -->
+			<Panel FrameID="7"/>
+			<!-- Receipt frame -->
+		</Screen>
+		<Screen ScreenID="34" Name="ICDAttractInfo">
+			<Panel FrameID="1018"/>
+			<!--<Panel FrameID="7"/>-->
+			<!-- Receipt frame -->
+			<Panel PlaylistID="2"/>
+			<!-- Promo playlist -->
+			<ByDaypart DaypartID="1">
+				<Panel FrameID="1018"/>
+				<Panel PlaylistID="14"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="2">
+				<Panel FrameID="1018"/>
+				<Panel PlaylistID="15"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="3">
+				<Panel FrameID="1018"/>
+				<Panel PlaylistID="16"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="4">
+				<Panel FrameID="1018"/>
+				<Panel PlaylistID="17"/>
+			</ByDaypart>
+		</Screen>
+		<Screen ScreenID="5000" Name="C500Attract">
+			<Panel PlaylistID="20"/>
+			<!-- Attract frame -->
+			<ByDaypart DaypartID="1">
+				<Panel PlaylistID="21"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="2">
+				<Panel PlaylistID="22"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="3">
+				<Panel PlaylistID="23"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="4">
+				<Panel PlaylistID="24"/>
+			</ByDaypart>
+		</Screen>
+		<Screen ScreenID="5001" Name="C500Promo">
+			<Panel PlaylistID="40"/>
+			<Panel FrameID="5100"/>
+			<ByDaypart DaypartID="1">
+				<Panel PlaylistID="41"/>
+				<Panel FrameID="5100"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="2">
+				<Panel PlaylistID="42"/>
+				<Panel FrameID="5100"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="3">
+				<Panel PlaylistID="43"/>
+				<Panel FrameID="5100"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="4">
+				<Panel PlaylistID="44"/>
+				<Panel FrameID="5100"/>
+			</ByDaypart>
+		</Screen>
+		<Screen ScreenID="5002" Name="C500Confirm">
+			<Panel PlaylistID="40"/>
+			<Panel FrameID="5300"/>
+			<ByDaypart DaypartID="1">
+				<Panel PlaylistID="41"/>
+				<Panel FrameID="5300"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="2">
+				<Panel PlaylistID="42"/>
+				<Panel FrameID="5300"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="3">
+				<Panel PlaylistID="43"/>
+				<Panel FrameID="5300"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="4">
+				<Panel PlaylistID="44"/>
+				<Panel FrameID="5300"/>
+			</ByDaypart>
+		</Screen>
+		<Screen ScreenID="5003" Name="C500OrderWide">
+			<Panel FrameID="5200"/>
+		</Screen>
+		<Screen ScreenID="5004" Name="C500ConfirmWide">
+			<Panel FrameID="5400"/>
+		</Screen>
+		<Screen ScreenID="5005" Name="C500NAAttract">
+			<Panel PlaylistID="30"/>
+			<!-- NotAvailableAttract frame -->
+			<ByDaypart DaypartID="1">
+				<Panel PlaylistID="31"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="2">
+				<Panel PlaylistID="32"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="3">
+				<Panel PlaylistID="33"/>
+			</ByDaypart>
+			<ByDaypart DaypartID="4">
+				<Panel PlaylistID="34"/>
+			</ByDaypart>
+		</Screen>
+	</Screens>
+	<Dayparts>
+		<Daypart Name="Daypart1" DaypartID="1" StartTime="06:00:00" Mon="false" Tue="false" Wed="false" Thu="false" Fri="false" Sat="false" Sun="false"/>
+		<Daypart Name="Daypart2" DaypartID="2" StartTime="10:30:00" Mon="false" Tue="false" Wed="false" Thu="false" Fri="false" Sat="false" Sun="false"/>
+		<Daypart Name="Daypart3" DaypartID="3" StartTime="13:00:00" Mon="false" Tue="false" Wed="false" Thu="false" Fri="false" Sat="false" Sun="false"/>
+		<Daypart Name="Daypart4" DaypartID="4" StartTime="23:00:00" Mon="false" Tue="false" Wed="false" Thu="false" Fri="false" Sat="false" Sun="false"/>
+	</Dayparts>
+	<Playlists>
+		<Playlist PlaylistID="1" Name="C1200Attract">
+			<PlayFrame FrameID="1" DwellTime="8"/>
+			<PlayFrame FrameID="2" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="2" Name="C1200Promo">
+			<PlayFrame FrameID="3" DwellTime="8"/>
+			<PlayFrame FrameID="4" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="3" Name="C1200NAAttract">
+			<PlayFrame FrameID="37" DwellTime="8"/>
+			<PlayFrame FrameID="5" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="4" Name="C1200NAAttract_DP1">
+			<PlayFrame FrameID="38" DwellTime="8"/>
+			<PlayFrame FrameID="2017" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="5" Name="C1200NAAttract_DP2">
+			<PlayFrame FrameID="39" DwellTime="8"/>
+			<PlayFrame FrameID="2018" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="6" Name="C1200NAAttract_DP3">
+			<PlayFrame FrameID="40" DwellTime="8"/>
+			<PlayFrame FrameID="2019" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="7" Name="C1200NAAttract_DP4">
+			<PlayFrame FrameID="41" DwellTime="8"/>
+			<PlayFrame FrameID="2020" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="10" Name="C1200Attract_DP1">
+			<PlayFrame FrameID="1010" DwellTime="8"/>
+			<PlayFrame FrameID="1000" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="11" Name="C1200Attract_DP2">
+			<PlayFrame FrameID="1012" DwellTime="8"/>
+			<PlayFrame FrameID="1002" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="12" Name="C1200Attract_DP3">
+			<PlayFrame FrameID="1014" DwellTime="8"/>
+			<PlayFrame FrameID="1004" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="13" Name="C1200Attract_DP4">
+			<PlayFrame FrameID="1016" DwellTime="8"/>
+			<PlayFrame FrameID="1006" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="14" Name="C1200Promo_DP1">
+			<PlayFrame FrameID="2010" DwellTime="8"/>
+			<PlayFrame FrameID="2000" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="15" Name="C1200Promo_DP2">
+			<PlayFrame FrameID="2012" DwellTime="8"/>
+			<PlayFrame FrameID="2002" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="16" Name="C1200Promo_DP3">
+			<PlayFrame FrameID="2014" DwellTime="8"/>
+			<PlayFrame FrameID="2004" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="17" Name="C1200Promo_DP4">
+			<PlayFrame FrameID="2016" DwellTime="8"/>
+			<PlayFrame FrameID="2006" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="20" Name="C500Attract">
+			<PlayFrame FrameID="5000" DwellTime="8"/>
+			<PlayFrame FrameID="5001" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="21" Name="C500Attract_DP1">
+			<PlayFrame FrameID="6000" DwellTime="8"/>
+			<PlayFrame FrameID="6001" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="22" Name="C500Attract_DP2">
+			<PlayFrame FrameID="6100" DwellTime="8"/>
+			<PlayFrame FrameID="6101" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="23" Name="C500Attract_DP3">
+			<PlayFrame FrameID="6200" DwellTime="8"/>
+			<PlayFrame FrameID="6201" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="24" Name="C500AttractDP4">
+			<PlayFrame FrameID="6300" DwellTime="8"/>
+			<PlayFrame FrameID="6301" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="30" Name="C500NAAttract">
+			<PlayFrame FrameID="5500" DwellTime="8"/>
+			<PlayFrame FrameID="5501" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="31" Name="C500NAAttract_DP1">
+			<PlayFrame FrameID="5600" DwellTime="8"/>
+			<PlayFrame FrameID="5601" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="32" Name="C500NAAttract_DP2">
+			<PlayFrame FrameID="5700" DwellTime="8"/>
+			<PlayFrame FrameID="5701" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="33" Name="C500NAAttract_DP3">
+			<PlayFrame FrameID="5800" DwellTime="8"/>
+			<PlayFrame FrameID="5801" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="34" Name="C500NAAttractDP4">
+			<PlayFrame FrameID="5900" DwellTime="8"/>
+			<PlayFrame FrameID="5901" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="40" Name="C500Promo">
+			<PlayFrame FrameID="5110" DwellTime="8"/>
+			<PlayFrame FrameID="5111" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="41" Name="C500Promo_DP1">
+			<PlayFrame FrameID="5120" DwellTime="8"/>
+			<PlayFrame FrameID="5121" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="42" Name="C500Promo_DP2">
+			<PlayFrame FrameID="5130" DwellTime="8"/>
+			<PlayFrame FrameID="5131" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="43" Name="C500Promo_DP3">
+			<PlayFrame FrameID="5140" DwellTime="8"/>
+			<PlayFrame FrameID="5141" DwellTime="8"/>
+		</Playlist>
+		<Playlist PlaylistID="44" Name="C500Promo">
+			<PlayFrame FrameID="5150" DwellTime="8"/>
+			<PlayFrame FrameID="5151" DwellTime="8"/>
+		</Playlist>
+	</Playlists>
+	<ICDRole Name="MainConfig">
+		<ICDConfig ConfigID="1" Name="ICD" AutoEnroll="true">
+			<Attract ScreenID="1"/>
+			<NotAvailableAttract ScreenID="24"/>
+			<OrderRecall ScreenID="3"/>
+			<MyMenuRecall ScreenID="31"/>
+			<InOrder ScreenID="2"/>
+			<TenderOrder ScreenID="8"/>
+			<OrderConfirm ScreenID="4"/>
+			<EOOrderConfirm ScreenID="14"/>
+			<OrderConfirmGiftCard ScreenID="25"/>
+			<AddGiftCardValueConfirm ScreenID="28"/>
+			<PartialPayment ScreenID="29"/>
+			<EOUnavailable ScreenID="5"/>
+			<EONoOrders ScreenID="6"/>
+			<CardSwipe ScreenID="13"/>
+			<CreditProcessing ScreenID="18"/>
+			<CashierTender ScreenID="21"/>
+			<WaitingForTotal ScreenID="22"/>
+			<VerifyTotal ScreenID="23"/>
+			<ItemPrompt FrameID="2300"/>
+			<Error ScreenID="17"/>
+			<Unavailable ScreenID="24"/>
+			<Rules>
+				<ItemRestriction DaypartID="1" MinItemID="0" MaxItemID="0"/>
+				<ItemRestriction DaypartID="2" MinItemID="0" MaxItemID="0"/>
+				<ItemRestriction DaypartID="3" MinItemID="0" MaxItemID="0"/>
+				<ItemRestriction DaypartID="4" MinItemID="0" MaxItemID="0"/>
+				<MenuCategory MinID="0" MaxID="0" PromoID="0" PromoName="Unknown"/>
+				<PromptedItemCategory CategoryID="0"/>
+			</Rules>
+		</ICDConfig>
+		<ICDConfig ConfigID="2" Name="OCD" AutoEnroll="true" AppHeight="240" AppWidth="320" BaseLeft="800" BaseTop="0">
+			<Attract ScreenID="5000"/>
+			<NotAvailableAttract ScreenID="5005"/>
+			<InOrder ScreenID="5001"/>
+			<OrderConfirm ScreenID="5002"/>
+			<Unavailable ScreenID="5005"/>
+		</ICDConfig>
+		<ICDConfig ConfigID="3" Name="OCDInternational" AutoEnroll="true" AppHeight="240" AppWidth="320" BaseLeft="800" BaseTop="0">
+			<Attract ScreenID="5000"/>
+			<NotAvailableAttract ScreenID="5005"/>
+			<InOrder ScreenID="5003"/>
+			<OrderConfirm ScreenID="5004"/>
+			<Unavailable ScreenID="5005"/>
+		</ICDConfig>
+	</ICDRole>
+	<Languages>
+		<Language LanguageID="1" Name="English" Default="true"/>
+		<Language LanguageID="2" Name="Spanish" Default="false"/>
+	</Languages>
+	<Messages>
+		<Message MessageID="3" Name="Qty">
+			<Language LanguageID="1">Qty</Language>
+			<Language LanguageID="2">Ctd</Language>
+		</Message>
+		<Message MessageID="4" Name="Description">
+			<Language LanguageID="1">Description</Language>
+			<Language LanguageID="2">Descripción</Language>
+		</Message>
+		<Message MessageID="5" Name="Price">
+			<Language LanguageID="1">Price</Language>
+			<Language LanguageID="2">Precio</Language>
+		</Message>
+		<Message MessageID="6" Name="Subtotal">
+			<Language LanguageID="1">Subtotal</Language>
+			<Language LanguageID="2">Importe</Language>
+		</Message>
+		<Message MessageID="7" Name="Tax">
+			<Language LanguageID="1">Tax</Language>
+			<Language LanguageID="2">Impuesto</Language>
+		</Message>
+		<Message MessageID="8" Name="Total">
+			<Language LanguageID="1">Total</Language>
+			<Language LanguageID="2">Total</Language>
+		</Message>
+		<Message MessageID="9" Name="ThankYou">
+			<Language LanguageID="1">Thank You!</Language>
+			<Language LanguageID="2">¡Grácias!</Language>
+		</Message>
+		<Message MessageID="10" Name="Tendered">
+			<Language LanguageID="1">Amount Tendered</Language>
+			<Language LanguageID="2">Importe Pagado</Language>
+		</Message>
+		<Message MessageID="11" Name="Change">
+			<Language LanguageID="1">Change</Language>
+			<Language LanguageID="2">Cambio</Language>
+		</Message>
+		<Message MessageID="150" Name="OrderNum2">
+			<Language LanguageID="1">Your order number is:</Language>
+			<Language LanguageID="2">Su número de pedido es:</Language>
+		</Message>
+		<Message MessageID="151" Name="LastOrderedDate">
+			<Language LanguageID="1">Last Ordered: %s</Language>
+			<Language LanguageID="2">Último pedido: %s</Language>
+		</Message>
+		<Message MessageID="152" Name="OrderIndex">
+			<Language LanguageID="1">Order: %s</Language>
+			<Language LanguageID="2">Pedido: %s</Language>
+		</Message>
+		<Message MessageID="170" Name="PreviousOrder">
+			<Language LanguageID="1">Prev Order</Language>
+			<Language LanguageID="2">Pedido anterior</Language>
+		</Message>
+		<Message MessageID="171" Name="NextOrder">
+			<Language LanguageID="1">Next Order</Language>
+			<Language LanguageID="2">Próximo pedido</Language>
+		</Message>
+		<Message MessageID="172" Name="MoveUp">
+			<Language LanguageID="1">Move Up</Language>
+			<Language LanguageID="2">Arriba</Language>
+		</Message>
+		<Message MessageID="173" Name="MoveDown">
+			<Language LanguageID="1">Move Down</Language>
+			<Language LanguageID="2">Abajo</Language>
+		</Message>
+		<Message MessageID="174" Name="PurchaseOrderToGo">
+			<Language LanguageID="1">Order this    TO GO</Language>
+			<Language LanguageID="2">Pida esto PARA LLEVAR</Language>
+		</Message>
+		<Message MessageID="175" Name="ExOrderHello">
+			<Language LanguageID="1">Hello, %s!</Language>
+			<Language LanguageID="2">¡Hola, %s!</Language>
+		</Message>
+		<Message MessageID="176" Name="ExOrderCancel">
+			<Language LanguageID="1">Cancel Order</Language>
+			<Language LanguageID="2">Cancele Pedido</Language>
+		</Message>
+		<Message MessageID="177" Name="ExOrderPayCredit">
+			<Language LanguageID="1"> Pay using a CARD</Language>
+			<Language LanguageID="2">Compra con Crédito</Language>
+		</Message>
+		<Message MessageID="178" Name="ExOrderPayCash">
+			<Language LanguageID="1"> Pay using CASH</Language>
+			<Language LanguageID="2">Compra con Efectivo</Language>
+		</Message>
+		<Message MessageID="179" Name="ExOrderUnavailable">
+			<Language LanguageID="1">Express Order is currently unavailable</Language>
+			<Language LanguageID="2">'Pedido Rápido' no está disponible.</Language>
+		</Message>
+		<Message MessageID="180" Name="ExOrderNoOrders">
+			<Language LanguageID="1">There are no orders stored for this card.  Please order with cashier.</Language>
+			<Language LanguageID="2">No hay pedidos almacenados para esta tarjeta.  Por favor pedido pagarle al cajero.</Language>
+		</Message>
+		<Message MessageID="182" Name="PurchaseOrderDineIn">
+			<Language LanguageID="1">Order this  FOR HERE</Language>
+			<Language LanguageID="2">Pida esto PARA AQUÍ</Language>
+		</Message>
+		<Message MessageID="181" Name="BadCardSwipe">
+			<Language LanguageID="1">Card not recognized. Please swipe your card again.</Language>
+			<Language LanguageID="2">Tarjeta no reconicida. Por favor pase la tarjeta por el lector.</Language>
+		</Message>
+		<Message MessageID="183" Name="SwipeCard">
+			<Language LanguageID="1">Please swipe a valid card to use for payment</Language>
+			<Language LanguageID="2">Por favor pase una tarjeta de crédito válida por el lector.</Language>
+		</Message>
+		<Message MessageID="184" Name="InvalidCardType">
+			<Language LanguageID="1">This type of card is not accepted. Please swipe a valid card.</Language>
+			<Language LanguageID="2">Este tipo de tarjeta no es aceptada. Por favor pase una tarjeta válida por el lector.</Language>
+		</Message>
+		<Message MessageID="185" Name="ExOrderJoin?">
+			<Language LanguageID="1">Would you like to join Express Order?</Language>
+			<Language LanguageID="2">¿Quiere inscribirse en 'Pedido Rápido'?</Language>
+		</Message>
+		<Message MessageID="186" Name="YesJoin">
+			<Language LanguageID="1">Yes, join</Language>
+			<Language LanguageID="2">Sí, inscribame</Language>
+		</Message>
+		<Message MessageID="187" Name="NoThanks">
+			<Language LanguageID="1">No thanks</Language>
+			<Language LanguageID="2">No, gracias</Language>
+		</Message>
+		<Message MessageID="188" Name="ExOrderMissingItems">
+			<Language LanguageID="1">%s item(s) previously ordered is no longer available</Language>
+			<Language LanguageID="2">%s artículo(s) no están disponible.</Language>
+		</Message>
+		<Message MessageID="189" Name="ExOrderMissingAllItems">
+			<Language LanguageID="1">There are no items in this order that are available</Language>
+			<Language LanguageID="2">Los artículos en este pedido no están disponible.</Language>
+		</Message>
+		<Message MessageID="190" Name="ThankYouForUsing">
+			<Language LanguageID="1">Thank you for using</Language>
+			<Language LanguageID="2">Gracias para usar</Language>
+		</Message>
+		<Message MessageID="191" Name="OK">
+			<Language LanguageID="1">OK</Language>
+			<Language LanguageID="2">OK</Language>
+		</Message>
+		<Message MessageID="192" Name="OrderCancelled">
+			<Language LanguageID="1">Your order has been canceled</Language>
+			<Language LanguageID="2">Su pedido ha sido cancelado</Language>
+		</Message>
+		<Message MessageID="193" Name="WelcomeBack">
+			<Language LanguageID="1">Welcome back!</Language>
+			<Language LanguageID="2">Bienvenidos</Language>
+		</Message>
+		<Message MessageID="194" Name="BigByteBurgers">
+			<Language LanguageID="1">Big Byte Burgers!</Language>
+			<Language LanguageID="2">Big Byte Burgers!</Language>
+		</Message>
+		<Message MessageID="195" Name="BrowseMessage">
+			<Language LanguageID="1">Browse your previous orders.</Language>
+			<Language LanguageID="2">Vea sus pedidos anteriores.</Language>
+		</Message>
+		<Message MessageID="196" Name="TouchMessage">
+			<Language LanguageID="1">Then touch "FOR HERE" or "TO GO" to make your selection.</Language>
+			<Language LanguageID="2">Luego oprima "PARA AQUÍ" o "PARA LLEVAR" para elegir.</Language>
+		</Message>
+		<Message MessageID="197" Name="YourTotal:">
+			<Language LanguageID="1">Your total:</Language>
+			<Language LanguageID="2">Su total:</Language>
+		</Message>
+		<Message MessageID="198" Name="You paid:">
+			<Language LanguageID="1">You paid:</Language>
+			<Language LanguageID="2">Usted pagó:</Language>
+		</Message>
+		<Message MessageID="199" Name="ChangeDue:">
+			<Language LanguageID="1">Change due:</Language>
+			<Language LanguageID="2">Su cambio:</Language>
+		</Message>
+		<Message MessageID="200" Name="Pay Cashier">
+			<Language LanguageID="1">Customer has chosen to pay by cashier. Touch here to close this message box.</Language>
+			<Language LanguageID="2">El cliente ha pedido pagarle al cajero</Language>
+		</Message>
+		<Message MessageID="201" Name="UsingExpressOrder">
+			<Language LanguageID="1">Customer is using Express Order. Touch here to close this message box.</Language>
+			<Language LanguageID="2">El cliente esta usando 'Pedido Rápido'</Language>
+		</Message>
+		<Message MessageID="202" Name="MissingItems1">
+			<Language LanguageID="1">Sorry, order invalid.</Language>
+			<Language LanguageID="2">Lo sentimos, pedido invalido.</Language>
+		</Message>
+		<Message MessageID="203" Name="MissingItems2">
+			<Language LanguageID="1">Some items are no</Language>
+			<Language LanguageID="2">Algunas cosas no están</Language>
+		</Message>
+		<Message MessageID="204" Name="MissingItems3">
+			<Language LanguageID="1">longer available.</Language>
+			<Language LanguageID="2">disponible.</Language>
+		</Message>
+		<Message MessageID="205" Name="English">
+			<Language LanguageID="1">English</Language>
+			<Language LanguageID="2">Español</Language>
+		</Message>
+		<Message MessageID="206" Name="Spanish">
+			<Language LanguageID="1">Español</Language>
+			<Language LanguageID="2">English</Language>
+		</Message>
+		<Message MessageID="207" Name="WhatIsIt?">
+			<Language LanguageID="1">What is it?</Language>
+			<Language LanguageID="2">¿Que es esto?</Language>
+		</Message>
+		<Message MessageID="208" Name="PayWithCard">
+			<Language LanguageID="1">You can pay with your card.</Language>
+			<Language LanguageID="2">Puede pagar con su tarjeta de crédito.</Language>
+		</Message>
+		<Message MessageID="209" Name="OrPayWithCash">
+			<Language LanguageID="1">Or you can pay with cash.</Language>
+			<Language LanguageID="2">O puede pagar con efectivo.</Language>
+		</Message>
+		<Message MessageID="210" Name="ExpressOrderDescription">
+			<Language LanguageID="1">Express Order allows you to use your card to store your favorite orders.  See the cashier for more information.</Language>
+			<Language LanguageID="2">'Pedido Rapido' le permite usar su tarjeta para almacenar sus pedidos favoritos.  Hable con el cajero para más información.</Language>
+		</Message>
+		<Message MessageID="211" Name="ChoosePaymentType">
+			<Language LanguageID="1">Choose your payment type:</Language>
+			<Language LanguageID="2">Elija el tipo de pago:</Language>
+		</Message>
+		<Message MessageID="212" Name="YES">
+			<Language LanguageID="1">Yes</Language>
+			<Language LanguageID="2">Sí</Language>
+		</Message>
+		<Message MessageID="213" Name="NO">
+			<Language LanguageID="1">No</Language>
+			<Language LanguageID="2">No</Language>
+		</Message>
+		<Message MessageID="214" Name="NeedMoreTime?">
+			<Language LanguageID="1">Do you need more time?</Language>
+			<Language LanguageID="2">¿Necesita más tiempo?</Language>
+		</Message>
+		<Message MessageID="215" Name="PaymentFailed">
+			<Language LanguageID="1">Unable to apply payment.</Language>
+			<Language LanguageID="2">No pudimos aplicar su pago.</Language>
+		</Message>
+		<Message MessageID="216" Name="GenericGuestName">
+			<Language LanguageID="1">Guest</Language>
+			<Language LanguageID="2">Huésped</Language>
+		</Message>
+		<Message MessageID="217" Name="CreditCardDenied">
+			<Language LanguageID="1">Unable to process card. Please swipe a valid card.</Language>
+			<Language LanguageID="2">No pudimos procesar su tarjeta. Por favor pase una tarjeta válida por el lector.</Language>
+		</Message>
+		<Message MessageID="218" Name="CreditCardExpired">
+			<Language LanguageID="1">Your card has expired. Please swipe a valid card.</Language>
+			<Language LanguageID="2">Su tarjeta ha expirado. Por favor pase una tarjeta válida por el lector.</Language>
+		</Message>
+		<Message MessageID="219" Name="ProcessingCard">
+			<Language LanguageID="1">Processing Card. Please Wait.</Language>
+			<Language LanguageID="2">Procesando su tarjeta de crédito. Espere un momento por favor.</Language>
+		</Message>
+		<Message MessageID="220" Name="CreditNetworkDown">
+			<Language LanguageID="1">The credit network is not responding. Please try again later.</Language>
+			<Language LanguageID="2">La red de crédito no está disponible. Por favor intente otra vez un poco más tarde.</Language>
+		</Message>
+		<Message MessageID="221" Name="Keypad #1">
+			<Language LanguageID="1">1</Language>
+			<Language LanguageID="2">1</Language>
+		</Message>
+		<Message MessageID="222" Name="Keypad #2">
+			<Language LanguageID="1">2</Language>
+			<Language LanguageID="2">2</Language>
+		</Message>
+		<Message MessageID="223" Name="Keypad #3">
+			<Language LanguageID="1">3</Language>
+			<Language LanguageID="2">3</Language>
+		</Message>
+		<Message MessageID="224" Name="Keypad #4">
+			<Language LanguageID="1">4</Language>
+			<Language LanguageID="2">4</Language>
+		</Message>
+		<Message MessageID="225" Name="Keypad #5">
+			<Language LanguageID="1">5</Language>
+			<Language LanguageID="2">5</Language>
+		</Message>
+		<Message MessageID="226" Name="Keypad #6">
+			<Language LanguageID="1">6</Language>
+			<Language LanguageID="2">6</Language>
+		</Message>
+		<Message MessageID="227" Name="Keypad #7">
+			<Language LanguageID="1">7</Language>
+			<Language LanguageID="2">7</Language>
+		</Message>
+		<Message MessageID="228" Name="Keypad #8">
+			<Language LanguageID="1">8</Language>
+			<Language LanguageID="2">8</Language>
+		</Message>
+		<Message MessageID="229" Name="Keypad #9">
+			<Language LanguageID="1">9</Language>
+			<Language LanguageID="2">9</Language>
+		</Message>
+		<Message MessageID="230" Name="Keypad #0">
+			<Language LanguageID="1">0</Language>
+			<Language LanguageID="2">0</Language>
+		</Message>
+		<Message MessageID="231" Name="Keypad Clear">
+			<Language LanguageID="1">Clear</Language>
+			<Language LanguageID="2">Despejar</Language>
+		</Message>
+		<Message MessageID="232" Name="Keypad Backspace">
+			<Language LanguageID="1">Back space</Language>
+			<Language LanguageID="2">Retroceder</Language>
+		</Message>
+		<Message MessageID="233" Name="Keypad Enter">
+			<Language LanguageID="1">Enter</Language>
+			<Language LanguageID="2">ENTRE</Language>
+		</Message>
+		<Message MessageID="234" Name="Keypad Instructions1">
+			<Language LanguageID="1">1) Take a table tent from the counter.</Language>
+			<Language LanguageID="2">1) Tome una tienda de mesa del mostrador.</Language>
+		</Message>
+		<Message MessageID="235" Name="Keypad Instructions2">
+			<Language LanguageID="1">2) Enter the number using the keypad.</Language>
+			<Language LanguageID="2">2) Entre el número usando el teclado.</Language>
+		</Message>
+		<Message MessageID="236" Name="Keypad Instructions3">
+			<Language LanguageID="1">3) Press ENTER.</Language>
+			<Language LanguageID="2">3) Oprima ENTRE.</Language>
+		</Message>
+		<Message MessageID="237" Name="PleasePayCashier">
+			<Language LanguageID="1">Please pay cashier.</Language>
+			<Language LanguageID="2">Por favor pague al cajero.</Language>
+		</Message>
+		<Message MessageID="238" Name="IfPayingWithCredit">
+			<Language LanguageID="1">If you are paying with a card, please swipe now.</Language>
+			<Language LanguageID="2">Si piensa pagar con crédito, por favor pase su tarjeta por el lector ahora.</Language>
+		</Message>
+		<Message MessageID="239" Name="GiftCardBalance">
+			<Language LanguageID="1">Card balance:</Language>
+			<Language LanguageID="2">Su tarjeta total:</Language>
+		</Message>
+		<Message MessageID="240" Name="AddToGiftCardBalance">
+			<Language LanguageID="1">Add to card</Language>
+			<Language LanguageID="2">Añadir a tarjeta</Language>
+		</Message>
+		<Message MessageID="241" Name="EnterTotalInstructions1">
+			<Language LanguageID="1">1.  Enter amount to add to your gift card.</Language>
+			<Language LanguageID="2">1.  Introducza importe a añadir a tarjeta.</Language>
+		</Message>
+		<Message MessageID="242" Name="EnterTotalInstructions2">
+			<Language LanguageID="1">2.  Press ENTER.</Language>
+			<Language LanguageID="2">2.  Oprima ENTRE.</Language>
+		</Message>
+		<Message MessageID="243" Name="SwipeCCForGiftCard">
+			<Language LanguageID="1">Please swipe a credit card to add value to your gift card.</Language>
+			<Language LanguageID="2">Pase una tarjeta de crédito para añadir valor a tarjeta de regalo.</Language>
+		</Message>
+		<Message MessageID="244" Name="AmountToCharge">
+			<Language LanguageID="1">Charge amount:</Language>
+			<Language LanguageID="2">Importe:</Language>
+		</Message>
+		<Message MessageID="245" Name="ChargeCCForGiftCardConfirm">
+			<Language LanguageID="1">Your card has been charged and that amount has been added to your gift card.</Language>
+			<Language LanguageID="2">Su tarjeta ha sido cargado con el valor introducido.</Language>
+		</Message>
+		<Message MessageID="246" Name="InsufficientFundsOnGiftCard">
+			<Language LanguageID="1">Please swipe another card to pay the remaining balance due.</Language>
+			<Language LanguageID="2">Pase otra tarjeta para pagar el balance.</Language>
+		</Message>
+		<Message MessageID="247" Name="RemainderDue">
+			<Language LanguageID="1">Remainder due:</Language>
+			<Language LanguageID="2">Importe debida:</Language>
+		</Message>
+		<Message MessageID="248" Name="OrderCanceled_GiftCard">
+			<Language LanguageID="1">Your order has been canceled.  Please come again.</Language>
+			<Language LanguageID="2">Orden cancelado.  Por favor, visítenos otra vez.</Language>
+		</Message>
+		<Message MessageID="249" Name="WaitingForTotal">
+			<Language LanguageID="1">Card swipe accepted.  Thank you.</Language>
+			<Language LanguageID="2">Tarjeta acceptada.  Gracias.</Language>
+		</Message>
+		<Message MessageID="250" Name="VerifyTotal">
+			<Language LanguageID="1">Press 'OK' to charge your card.</Language>
+			<Language LanguageID="2">Oprima 'OK' para cobrar su tarjeta.</Language>
+		</Message>
+		<Message MessageID="251" Name="ICDUnavailable">
+			<Language LanguageID="1">Please use another station.</Language>
+			<Language LanguageID="2">Utilice otra terminál, por favor.</Language>
+		</Message>
+		<Message MessageID="252" Name="WaitingForTotalApproval">
+			<Language LanguageID="1">Waiting for customer to approve total amount.  Touch here to close this message box.</Language>
+			<Language LanguageID="2">Esperando confirmación de cliente...</Language>
+		</Message>
+		<Message MessageID="253" Name="RestrictedItems1">
+			<Language LanguageID="1">We're sorry, but some</Language>
+			<Language LanguageID="2">Algunos de los</Language>
+		</Message>
+		<Message MessageID="254" Name="RestrictedItems2">
+			<Language LanguageID="1">items in this order are</Language>
+			<Language LanguageID="2">artículos en este pedido</Language>
+		</Message>
+		<Message MessageID="255" Name="RestrictedItems3">
+			<Language LanguageID="1">not available during</Language>
+			<Language LanguageID="2">no están disponibles</Language>
+		</Message>
+		<Message MessageID="256" Name="RestrictedItems4">
+			<Language LanguageID="1">this time of day.</Language>
+			<Language LanguageID="2">esta parte del día.</Language>
+		</Message>
+		<Message MessageID="257" Name="MyMenuHeader1">
+			<Language LanguageID="1">MyMenu</Language>
+			<Language LanguageID="2">MiMenú</Language>
+		</Message>
+		<Message MessageID="258" Name="CancelLastItem">
+			<Language LanguageID="1">Cancel Last Item</Language>
+			<Language LanguageID="2">Anular último</Language>
+		</Message>
+		<Message MessageID="259" Name="DestinationSelectionMessage">
+			<Language LanguageID="1">Choose your destination...</Language>
+			<Language LanguageID="2">Seleccione destino...</Language>
+		</Message>
+		<Message MessageID="260" Name="CompleteOrder">
+			<Language LanguageID="1">Complete Order</Language>
+			<Language LanguageID="2">Finalizar pedido</Language>
+		</Message>
+		<Message MessageID="261" Name="MyMenuHeader2">
+			<Language LanguageID="1">Your Favorite Items.  The Way You Like Them.</Language>
+			<Language LanguageID="2">Sus Artículos Favoritos. De La Manera Que Le Gustan.</Language>
+		</Message>
+		<Message MessageID="262" Name="PromptedItemsmodalMessage">
+			<Language LanguageID="1">Please make sure that a %s is available before continuing.</Language>
+			<Language LanguageID="2">Por favor asegúrese de que hay %s antes de continuar.</Language>
+		</Message>
+	</Messages>
+	<Images>
+		<Image ImageID="13">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Promo.png"/>
+		</Image>
+		<Image ImageID="15">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_OrderNum.png"/>
+		</Image>
+		<Image ImageID="16">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_ChooseOrder.png"/>
+		</Image>
+		<Image ImageID="19">
+			<Language LanguageID="1" Location="..\BMP\C1200_165x70_BtnBlank.png"/>
+		</Image>
+		<Image ImageID="22">
+			<Language LanguageID="1" Location="..\BMP\C1200_80x280_BtnNext.png"/>
+		</Image>
+		<Image ImageID="23">
+			<Language LanguageID="1" Location="..\BMP\C1200_80x280_BtnPrev.png"/>
+		</Image>
+		<Image ImageID="24">
+			<Language LanguageID="1" Location="..\BMP\C1200_165x70_BtnCancel.png"/>
+		</Image>
+		<Image ImageID="25">
+			<Language LanguageID="1" Location="..\BMP\C1200_335x50_BtnUp.png"/>
+		</Image>
+		<Image ImageID="26">
+			<Language LanguageID="1" Location="..\BMP\C1200_335x50_BtnDown.png"/>
+		</Image>
+		<Image ImageID="27">
+			<Language LanguageID="1" Location="..\BMP\C1200_500x600_OrderConfirm.png"/>
+		</Image>
+		<Image ImageID="29">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Plain.png"/>
+		</Image>
+		<Image ImageID="30">
+			<Language LanguageID="1" Location="..\BMP\C1200_412x123_ExO.png"/>
+			<Language LanguageID="2" Location="..\BMP\C1200_412x123_ExO_Sp.png"/>
+		</Image>
+		<Image ImageID="34">
+			<Language LanguageID="1" Location="..\BMP\C1200_450x230_CardSwipe.png"/>
+		</Image>
+		<Image ImageID="35">
+			<Language LanguageID="1" Location="..\BMP\C1200_228x240_OrderCancel.png"/>
+		</Image>
+		<Image ImageID="36">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_OrderConfirm.png"/>
+		</Image>
+		<Image ImageID="37">
+			<Language LanguageID="1" Location="..\BMP\C1200_90x90_BtnBlankKeypad.png"/>
+		</Image>
+		<Image ImageID="38">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Keypad.png"/>
+		</Image>
+		<Image ImageID="39">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Plain.png"/>
+		</Image>
+		<Image ImageID="40">
+			<Language LanguageID="1" Location="..\BMP\C1200_250x50_ClientLogo.png"/>
+		</Image>
+		<Image ImageID="41">
+			<Language LanguageID="1" Location="..\BMP\C1200_250x170_ClientLogo.png"/>
+		</Image>
+		<Image ImageID="42">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_GiftCardBalance.png"/>
+			<!-- used on screens that only display the gift card balance -->
+		</Image>
+		<Image ImageID="43">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Attract.png"/>
+		</Image>
+		<Image ImageID="44">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_NAAttract.png"/>
+		</Image>
+		<Image ImageID="45">
+			<!-- MyMenu category header-->
+			<Language LanguageID="1" Location="..\BMP\C1200_261x42_CatHeader.png"/>
+		</Image>
+		<Image ImageID="46">
+			<!-- MyMenu button-->
+			<Language LanguageID="1" Location="..\BMP\C1200_261x42_BtnBlank.png"/>
+		</Image>
+		<Image ImageID="47">
+			<Language LanguageID="1" Location="..\BMP\C1200_261x42_BtnPrev.png"/>
+			<Language LanguageID="2" Location="..\BMP\C1200_261x42_BtnPrev_Sp.png"/>
+		</Image>
+		<Image ImageID="48">
+			<Language LanguageID="1" Location="..\BMP\C1200_261x42_BtnNext.png"/>
+			<Language LanguageID="2" Location="..\BMP\C1200_261x42_BtnNext_Sp.png"/>
+		</Image>
+		<Image ImageID="49">
+			<Language LanguageID="1" Location="..\BMP\C1200_99x55_BtnCancelItem.png"/>
+		</Image>
+		<Image ImageID="50">
+			<Language LanguageID="1" Location="..\BMP\C1200_99x55_BtnCancelOrder.png"/>
+		</Image>
+		<Image ImageID="51">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_MyMenu.png"/>
+		</Image>
+		<Image ImageID="52">
+			<Language LanguageID="1" Location="..\BMP\C1200_200x60_BtnCompleteOrder.png"/>
+		</Image>
+		<Image ImageID="53">
+			<Language LanguageID="1" Location="..\BMP\C1200_500x350_Modal.png"/>
+		</Image>
+		<Image ImageID="200">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Attract_DP1.png"/>
+		</Image>
+		<Image ImageID="202">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Attract_DP2.png"/>
+		</Image>
+		<Image ImageID="204">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Attract_DP3.png"/>
+		</Image>
+		<Image ImageID="206">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Attract_DP4.png"/>
+		</Image>
+		<Image ImageID="300">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Promo_DP1.png"/>
+		</Image>
+		<Image ImageID="302">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Promo_DP2.png"/>
+		</Image>
+		<Image ImageID="304">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Promo_DP3.png"/>
+		</Image>
+		<Image ImageID="306">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Promo_DP4.png"/>
+		</Image>
+		<Image ImageID="400">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_NAAttract_DP1.png"/>
+		</Image>
+		<Image ImageID="401">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_NAAttract_DP2.png"/>
+		</Image>
+		<Image ImageID="402">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_NAAttract_DP3.png"/>
+		</Image>
+		<Image ImageID="403">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_NAAttract_DP4.png"/>
+		</Image>
+		<Image ImageID="5000">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Attract.png"/>
+		</Image>
+		<Image ImageID="5001">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Attract_DP1.png"/>
+		</Image>
+		<Image ImageID="5002">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Attract_DP2.png"/>
+		</Image>
+		<Image ImageID="5003">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Attract_DP3.png"/>
+		</Image>
+		<Image ImageID="5004">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Attract_DP4.png"/>
+		</Image>
+		<Image ImageID="5100">
+			<Language LanguageID="1" Location="..\BMP\C500_235x240_Receipt.png"/>
+		</Image>
+		<Image ImageID="5200">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Receipt.png"/>
+		</Image>
+		<Image ImageID="5300">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_NAAttract.png"/>
+		</Image>
+		<Image ImageID="5301">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_NAAttract_DP1.png"/>
+		</Image>
+		<Image ImageID="5302">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_NAAttract_DP2.png"/>
+		</Image>
+		<Image ImageID="5303">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_NAAttract_DP3.png"/>
+		</Image>
+		<Image ImageID="5304">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_NAAttract_DP4.png"/>
+		</Image>
+		<Image ImageID="5400">
+			<Language LanguageID="1" Location="..\BMP\C500_85x240_Receipt.png"/>
+		</Image>
+		<Image ImageID="5401">
+			<Language LanguageID="1" Location="..\BMP\C500_85x240_Promo_DP1.png"/>
+		</Image>
+		<Image ImageID="5402">
+			<Language LanguageID="1" Location="..\BMP\C500_85x240_Promo_DP2.png"/>
+		</Image>
+		<Image ImageID="5403">
+			<Language LanguageID="1" Location="..\BMP\C500_85x240_Promo_DP3.png"/>
+		</Image>
+		<Image ImageID="5404">
+			<Language LanguageID="1" Location="..\BMP\C500_85x240_Promo_DP4.png"/>
+		</Image>
+	</Images>
+	<Animations>
+		<Animation AnimationID="100" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Attract.swf"/>
+		</Animation>
+		<Animation AnimationID="101" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Promo.swf"/>
+		</Animation>
+		<Animation AnimationID="103" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x300_CardSwipe.swf"/>
+		</Animation>
+		<Animation AnimationID="104" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_400x60_Processing.swf"/>
+		</Animation>
+		<Animation AnimationID="200" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Attract_DP1.swf"/>
+		</Animation>
+		<Animation AnimationID="202" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Attract_DP2.swf"/>
+		</Animation>
+		<Animation AnimationID="204" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Attract_DP3.swf"/>
+		</Animation>
+		<Animation AnimationID="206" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_Attract_DP4.swf"/>
+		</Animation>
+		<Animation AnimationID="300" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Promo_DP1.swf"/>
+		</Animation>
+		<Animation AnimationID="302" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Promo_DP2.swf"/>
+		</Animation>
+		<Animation AnimationID="304" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Promo_DP3.swf"/>
+		</Animation>
+		<Animation AnimationID="306" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_300x600_Promo_DP4.swf"/>
+		</Animation>
+		<Animation AnimationID="400" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_NAAttract_DP1.swf"/>
+		</Animation>
+		<Animation AnimationID="401" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_NAAttract_DP2.swf"/>
+		</Animation>
+		<Animation AnimationID="402" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_NAAttract_DP3.swf"/>
+		</Animation>
+		<Animation AnimationID="403" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_NAAttract_DP4.swf"/>
+		</Animation>
+		<Animation AnimationID="404" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C1200_800x600_NAAttract.swf"/>
+		</Animation>
+		<Animation AnimationID="5000" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Attract.swf"/>
+		</Animation>
+		<Animation AnimationID="5100" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_NAAttract.swf"/>
+		</Animation>
+		<Animation AnimationID="5110" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_85x240_Promo.swf"/>
+		</Animation>
+		<Animation AnimationID="5120" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_85x240_Promo_DP1.swf"/>
+		</Animation>
+		<Animation AnimationID="5130" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_85x240_Promo_DP2.swf"/>
+		</Animation>
+		<Animation AnimationID="5140" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_85x240_Promo_DP3.swf"/>
+		</Animation>
+		<Animation AnimationID="5150" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_85x240_Promo_DP4.swf"/>
+		</Animation>
+		<Animation AnimationID="6000" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_NAAttract_DP1.swf"/>
+		</Animation>
+		<Animation AnimationID="6100" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_NAAttract_DP2.swf"/>
+		</Animation>
+		<Animation AnimationID="6200" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_NAAttract_DP3.swf"/>
+		</Animation>
+		<Animation AnimationID="6300" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_NAAttract_DP4.swf"/>
+		</Animation>
+		<Animation AnimationID="6400" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Attract_DP1.swf"/>
+		</Animation>
+		<Animation AnimationID="6500" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Attract_DP2.swf"/>
+		</Animation>
+		<Animation AnimationID="6600" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Attract_DP3.swf"/>
+		</Animation>
+		<Animation AnimationID="6700" Loop="true">
+			<Language LanguageID="1" Location="..\BMP\C500_320x240_Attract_DP4.swf"/>
+		</Animation>
+	</Animations>
+</RSS>

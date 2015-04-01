@@ -1,0 +1,66 @@
+﻿<controls:Flyout x:Class="Drs.Ui.Ui.Order.UpsertClientFo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:shared="clr-namespace:Drs.Ui.Ui.Shared"
+             xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
+             mc:Ignorable="d" Height="480" Width="800" Header="Agregar / Actualizar cliente"
+                 Position="Left" IsOpen="{Binding IsOpen}" Theme="Adapt" IsModal="True" Margin="100,0,0,150" AnimateOnPositionChange="False" AnimateOpacity="False" >
+
+    <ContentControl.Resources>
+        <DataTemplate DataType="{x:Type vmShr:AutoCompleteTextVm}">
+            <shared:AutoCompleteGenericUc/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmShr:AutoCompletePhoneVm}">
+            <shared:AutoCompleteSecPhoneUc/>
+        </DataTemplate>
+    </ContentControl.Resources>
+    
+    <StackPanel Margin="50 0" Orientation="Vertical"  VerticalAlignment="Stretch">
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch" FocusManager.IsFocusScope="True">
+            <TextBox Margin="4" Width="292" IsVisibleChanged="Storyboard_OnCompleted" x:Name="FirstName"
+                controls:TextboxHelper.Watermark="*Nombre del cliente"
+                controls:TextboxHelper.UseFloatingWatermark="True"
+                Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                FontFamily="Segoe UI" FontSize="12" />
+
+            <TextBox Margin="4" Width="292"
+                     controls:TextboxHelper.Watermark="*Apellidos"
+                     controls:TextboxHelper.UseFloatingWatermark="True"
+                     Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                     FontFamily="Segoe UI" FontSize="12" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch">
+            <TextBox Margin="4" Width="292"
+                     controls:TextboxHelper.Watermark="Correo electrónico"
+                         controls:TextboxHelper.UseFloatingWatermark="True"
+                         Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" FontFamily="Segoe UI" FontSize="12" />
+
+            <ContentControl Content="{Binding CompanySearchVm}" IsTabStop="False" VerticalAlignment="Center" Margin="4" Width="292" FontSize="12" >
+            </ContentControl>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch">
+            <ContentControl Content="{Binding SecondPhoneVm}" IsTabStop="False" VerticalAlignment="Center" Margin="4" Width="292" FontSize="12" >
+            </ContentControl>
+            <DatePicker Width="292"
+                            Margin="4"
+                            FontSize="12"
+                            HorizontalAlignment="Center"
+                            SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}"
+                            controls:TextboxHelper.Watermark="Fecha de nacimiento" />
+        </StackPanel>
+        <StackPanel>
+            <Label Content="* Datos requeridos" FontSize="9"></Label>
+        </StackPanel>
+        <Rectangle Margin="0, 5, 0, 5" Stroke="{DynamicResource AccentColorBrush}" StrokeThickness="2" />
+        <StackPanel Margin="0,5,0,0"
+                    Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="0,0,10,0" Content="  Agregar / Actualizar  " Style="{DynamicResource AccentedSquareButtonStyle}" 
+                    Command="{Binding UpsertCommand}" controls:ButtonHelper.PreserveTextCase="True" />
+            <Button Content="  Cancelar  " Style="{DynamicResource SquareButtonStyle}" Command="{Binding CancelCommand}" controls:ButtonHelper.PreserveTextCase="True" />
+        </StackPanel>
+
+    </StackPanel>
+</controls:Flyout>

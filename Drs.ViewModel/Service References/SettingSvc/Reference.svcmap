@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4d6b19b7-27b9-49c3-a412-867f565ffa98" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2898/Setting/Setting.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Setting.xsd" MetadataType="Schema" ID="85141587-6f59-43e2-b90e-2168d424b014" SourceId="1" SourceUrl="http://localhost:2898/Setting/Setting.svc?xsd=xsd1" />
+    <MetadataFile FileName="Setting1.xsd" MetadataType="Schema" ID="4a45e7b3-fe0c-4f7b-9ee9-50154ad603ca" SourceId="1" SourceUrl="http://localhost:2898/Setting/Setting.svc?xsd=xsd0" />
+    <MetadataFile FileName="Setting2.xsd" MetadataType="Schema" ID="f6283df5-ddd5-4def-99fc-9ccde99ccf09" SourceId="1" SourceUrl="http://localhost:2898/Setting/Setting.svc?xsd=xsd3" />
+    <MetadataFile FileName="Setting3.xsd" MetadataType="Schema" ID="a6cb6dab-dd77-432b-b0fe-22e2858af24b" SourceId="1" SourceUrl="http://localhost:2898/Setting/Setting.svc?xsd=xsd2" />
+    <MetadataFile FileName="SettingSvc.wsdl" MetadataType="Wsdl" ID="e3a096cd-e432-4cd3-aaf3-7d2a4004ecf9" SourceId="1" SourceUrl="http://localhost:2898/Setting/Setting.svc?wsdl" />
+    <MetadataFile FileName="Setting4.xsd" MetadataType="Schema" ID="c4124c4a-b317-4b7b-8937-cdcbe1c06a91" SourceId="1" SourceUrl="http://localhost:2898/Setting/Setting.svc?xsd=xsd4" />
+    <MetadataFile FileName="Setting.disco" MetadataType="Disco" ID="96ee0e1d-95fe-4005-acef-c6524ff81f82" SourceId="1" SourceUrl="http://localhost:2898/Setting/Setting.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

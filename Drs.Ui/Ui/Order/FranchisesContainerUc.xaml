@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Order.FranchisesContainerUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:order="clr-namespace:Drs.Ui.Ui.Order"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="1200" Height="125">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,0,0,3">
+            <Label Content="2) Elija la franquicia a emplear:   " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FF729DB7" FontWeight="SemiBold" Height="32"/>
+            <Label Content="{Binding ChosenFranchise}" FontSize="16" FontFamily="Segoe WP" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FF00598F" FontWeight="SemiBold"/>
+        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Items}" Height="90">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <order:FranchiseUc></order:FranchiseUc>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </StackPanel>
+</UserControl>

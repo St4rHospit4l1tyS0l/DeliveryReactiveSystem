@@ -1,0 +1,267 @@
+ISO Currency code Numeric,Country,Currency,ISO Currency Code Alpha
+4,Afghanistan,Afghani,AFA
+8,Albania,Lek,ALL
+12,Algeria,Algerian Dinar,DZD
+840,American Samoa,US Dollar,USD
+724,Andorra,Spanish Peseta,ESP
+250,,French Franc,FRF
+20,,Andorran Peseta,ADP
+24,Angola,New Kwanza,AON
+982,,Kwanza Reajustado,AOR
+951,Anguilla,East Caribbean Dollar,XCD
+951,Antigua and Barbuda,East Caribbean Dollar,XCD
+32,Argentina,Argentine Peso,ARS
+51,Armenia,Armenian Dram,AMD
+533,Aruba,Aruban Guilder,AWG
+36,Australia,Australian Dollar,AUD
+40,Austria,Schilling,ATS
+31,Azerbaijan,Azerbaijanian Manat,AZM
+44,Bahamas,Bahamian Dollar,BSD
+48,Bahrain,Bahraini Dinar,BHD
+50,Bangladesh,Taka,BDT
+52,Barbados,Barbados Dollar,BBD
+974,Belarus,Belarussian Ruble,BYR
+56,Belgium,Belgian Franc,BEF
+84,Belize,Belize Dollar,BZD
+952,Benin,CFA Franc BCEAO,XOF
+60,Bermuda,Bermudian Dollar,BMD
+356,Bhutan,Indian Rupee,INR
+64,,Ngultrum,BTN
+977,Bosnia and Herzegovina,Convertible Marks,BAM
+72,Botswana,Pula,BWP
+578,Bouvet Island,Norwegian Krone,NOK
+986,Brazil,Brazilian Real,BRL
+840,British Indian Ocean Territory,US Dollar,USD
+96,Brunei Darussalam,Brunei Dollar,BND
+100,Bulgaria,Lev,BGL
+975,,Bulgarian LEV,BGN
+952,Burkina Faso,CFA Franc BCEAO,XOF
+108,Burundi,Burundi Franc,BIF
+116,Cambodia,Riel,KHR
+950,Cameroon,CFA Franc BEAC,XAF
+124,Canada,Canadian Dollar,CAD
+132,Cape Verde,Cape Verde Escudo,CVE
+136,Cayman Islands,Cayman Islands Dollar,KYD
+950,Central African Republic,CFA Franc BEAC,XAF
+950,Chad,CFA Franc BEAC,XAF
+152,Chile,Chilean Peso,CLP
+990,,Unidades de fomento,CLF
+156,China,Yuan Renminbi,CNY
+36,Christmas Island,Australian Dollar,AUD
+36,Cocos (Keeling) Islands,Australian Dollar,AUD
+170,Colombia,Colombian Peso,COP
+174,Comoros,Comoro Franc,KMF
+950,Congo,CFA Franc BEAC,XAF
+976,"Congo, The Democratic Republic Of",Franc Congolais,CDF
+554,Cook Islands,New Zealand Dollar,NZD
+188,Costa Rica,Costa Rican Colon,CRC
+952,Cote D'ivoire,CFA Franc BCEAO,XOF
+191,Croatia,Kuna,HRK
+192,Cuba,Cuban Peso,CUP
+196,Cyprus,Cyprus Pound,CYP
+203,Czech Republic,Czech Koruna,CZK
+208,Denmark,Danish Krone,DKK
+262,Djibouti,Djibouti Franc,DJF
+951,Dominica,East Caribbean Dollar,XCD
+214,Dominican Republic,Dominican Peso,DOP
+626,East Timor,Timor Escudo,TPE
+360,,Rupiah,IDR
+218,Ecuador,Sucre,ECS
+983,,Unidad de Valor Constante (UVC),ECV
+818,Egypt,Egyptian Pound,EGP
+222,El Salvador,El Salvador Colon,SVC
+950,Equatorial Guinea,CFA Franc BEAC,XAF
+233,Estonia,Kroon,EEK
+232,Eritrea,Nakfa,ERN
+230,Ethiopia,Ethiopian Birr,ETB
+208,Faeroe Islands,Danish Krone,DKK
+238,Falkland Islands (Malvinas),Pound,FKP
+242,Fiji,Fiji Dollar,FJD
+246,Finland,Markka,FIM
+250,France,French Franc,FRF
+250,French Guiana,French Franc,FRF
+953,French Polynesia,CFP Franc,XPF
+250,French Southern Territories,French Franc,FRF
+950,Gabon,CFA Franc BEAC,XAF
+270,Gambia,Dalasi,GMD
+981,Georgia,Lari,GEL
+280,Germany,Deutsche Mark,DEM
+288,Ghana,Cedi,GHC
+292,Gibraltar,Gibraltar Pound,GIP
+300,Greece,Drachma,GRD
+208,Greenland,Danish Krone,DKK
+951,Grenada,East Caribbean Dollar,XCD
+250,Guadeloupe,French Franc,FRF
+840,Guam,US Dollar,USD
+320,Guatemala,Quetzal,GTQ
+324,Guinea,Guinea Franc,GNF
+624,Guinea-Bissau,Guinea-Bissau Peso,GWP
+952,,CFA Franc BCEAO,XOF
+328,Guyana,Guyana Dollar,GYD
+332,Haiti,Gourde,HTG
+840,,US Dollar,USD
+36,Heard and Mcdonald Islands,Australian Dollar,AUD
+340,Honduras,Lempira,HNL
+344,Hong Kong,Hong Kong Dollar,HKD
+348,Hungary,Forint,HUF
+352,Iceland,Iceland Krona,ISK
+356,India,Indian Rupee,INR
+360,Indonesia,Rupiah,IDR
+960,International Monetary Fund (Imf),SDR,XDR
+364,Iran (Islamic Republic Of),Iranian Rial,IRR
+368,Iraq,Iraqi Dinar,IQD
+372,Ireland,Irish Pound,IEP
+376,Israel,New Israeli Sheqel,ILS
+380,Italy,Italian Lira,ITL
+388,Jamaica,Jamaican Dollar,JMD
+392,Japan,Yen,JPY
+400,Jordan,Jordanian Dinar,JOD
+398,Kazakhstan,Tenge,KZT
+404,Kenya,Kenyan Shilling,KES
+36,Kiribati,Australian Dollar,AUD
+408,"Korea, Democratic People's Republic Of",North Korean Won,KPW
+410,"Korea, Republic Of",Won,KRW
+414,Kuwait,Kuwaiti Dinar,KWD
+417,Kyrgyzstan,Som,KGS
+418,Lao People's Democratic Republic,Kip,LAK
+428,Latvia,Latvian Lats,LVL
+422,Lebanon,Lebanese Pound,LBP
+710,Lesotho,Rand,ZAR
+991,,(financial Rand),ZAL
+426,,Loti,LSL
+430,Liberia,Liberian Dollar,LRD
+434,Libyan Arab Jamahiriya,Libyan Dinar,LYD
+756,Liechtenstein,Swiss Franc,CHF
+440,Lithuania,Lithuanian Litas,LTL
+442,Luxembourg,Luxembourg Franc,LUF
+446,Macau,Pataca,MOP
+807,"Macedonia, The Former Yugoslav Republic Of",Denar,MKD
+450,Madagascar,Malagasy Franc,MGF
+454,Malawi,Kwacha,MWK
+458,Malaysia,Malaysian Ringgit,MYR
+462,Maldives,Rufiyaa,MVR
+952,Mali,CFA Franc BCEAO,XOF
+470,Malta,Maltese Lira,MTL
+840,Marshall Islands,US Dollar,USD
+250,Martinique,French Franc,FRF
+478,Mauritania,Ouguiya,MRO
+480,Mauritius,Mauritius Rupee,MUR
+484,Mexico,Mexican Peso,MXN
+979,,Mexican Unidad de Inversion (UDI),MXV
+840,Micronesia,US Dollar,USD
+498,"Moldova, Republic Of",Moldovan Leu,MDL
+250,Monaco,French Franc,FRF
+496,Mongolia,Tugrik,MNT
+951,Montserrat,East Caribbean Dollar,XCD
+504,Morocco,Moroccan Dirham,MAD
+508,Mozambique,Metical,MZM
+104,Myanmar,Kyat,MMK
+710,Namibia,Rand,ZAR
+516,,Namibia Dollar,NAD
+36,Nauru,Australian Dollar,AUD
+524,Nepal,Nepalese Rupee,NPR
+528,Netherlands,Netherlands Guilder,NLG
+532,Netherlands Antilles,Antillian Guilder,ANG
+953,New Caledonia,CFP Franc,XPF
+554,New Zealand,New Zealand Dollar,NZD
+558,Nicaragua,Cordoba Oro,NIO
+952,Niger,CFA Franc BCEAO,XOF
+566,Nigeria,Naira,NGN
+554,Niue,New Zealand Dollar,NZD
+36,Norfolk Island,Australian Dollar,AUD
+840,Northern Mariana Islands,US Dollar,USD
+578,Norway,Norwegian Krone,NOK
+512,Oman,Rial Omani,OMR
+586,Pakistan,Pakistan Rupee,PKR
+840,Palau,US Dollar,USD
+590,Panama,Balboa,PAB
+840,,US Dollar,USD
+598,Papua New Guinea,Kina,PGK
+600,Paraguay,Guarani,PYG
+604,Peru,Nuevo Sol,PEN
+608,Philippines,Philippine Peso,PHP
+554,Pitcairn,New Zealand Dollar,NZD
+985,Poland,Zloty,PLN
+620,Portugal,Portuguese Escudo,PTE
+840,Puerto Rico,US Dollar,USD
+634,Qatar,Qatari Rial,QAR
+250,Reunion,French Franc,FRF
+642,Romania,Leu,ROL
+810,Russian Federation,Russian Ruble,RUR
+643,,Russian Ruble,RUB
+646,Rwanda,Rwanda Franc,RWF
+654,St Helena,St Helena Pound,SHP
+951,St Kitts - Nevis,East Caribbean Dollar,XCD
+951,Saint Lucia,East Caribbean Dollar,XCD
+250,St Pierre and Miquelon,French Franc,FRF
+951,Saint Vincent and The Grenadines,East Caribbean Dollar,XCD
+882,Samoa,Tala,WST
+380,San Marino,Italian Lira,ITL
+678,Sao Tome and Principe,Dobra,STD
+682,Saudi Arabia,Saudi Riyal,SAR
+952,Senegal,CFA Franc BCEAO,XOF
+690,Seychelles,Seychelles Rupee,SCR
+694,Sierra Leone,Leone,SLL
+702,Singapore,Singapore Dollar,SGD
+703,Slovakia,Slovak Koruna,SKK
+705,Slovenia,Tolar,SIT
+90,Solomon Islands,Solomon Islands Dollar,SBD
+706,Somalia,Somali Shilling,SOS
+710,South Africa,Rand,ZAR
+724,Spain,Spanish Peseta,ESP
+144,Sri Lanka,Sri Lanka Rupee,LKR
+736,Sudan,Sudanese Dinar,SDD
+740,Suriname,Surinam Guilder,SRG
+578,Svalbard and Jan Mayen Islands,Norwegian Krone,NOK
+748,Swaziland,Lilangeni,SZL
+752,Sweden,Swedish Krona,SEK
+756,Switzerland,Swiss Franc,CHF
+760,Syrian Arab Republic,Syrian Pound,SYP
+901,"Taiwan, Province Of China",New Taiwan Dollar,TWD
+972,Tajikistan,Somoni,TJS
+762,Tajikistan (Old),Tajik Ruble (old),TJR
+834,"Tanzania, United Republic Of",Tanzanian Shilling,TZS
+764,Thailand,Baht,THB
+952,Togo,CFA Franc BCEAO,XOF
+554,Tokelau,New Zealand Dollar,NZD
+776,Tonga,Pa'anga,TOP
+780,Trinidad and Tobago,Trinidad and Tobago Dollar,TTD
+788,Tunisia,Tunisian Dinar,TND
+792,Turkey,Turkish Lira,TRL
+795,Turkmenistan,Manat,TMM
+840,Turks and Caicos Islands,US Dollar,USD
+36,Tuvalu,Australian Dollar,AUD
+800,Uganda,Uganda Shilling,UGX
+980,Ukraine,Hryvnia,UAH
+784,United Arab Emirates,UAE Dirham,AED
+826,United Kingdom,Pound Sterling,GBP
+840,United States,US Dollar,USD
+998,,(Same day),USS
+997,,(Next day),USN
+840,United States Minor Outlaying Islands,US Dollar,USD
+858,Uruguay,Peso Uruguayo,UYU
+860,Uzbekistan,Uzbekistan Sum,UZS
+548,Vanuatu,Vatu,VUV
+380,Vatican City State (Holy See),Italian Lira,ITL
+862,Venezuela,Bolivar,VEB
+704,Vietnam,Dong,VND
+840,Virgin Islands (British),US Dollar,USD
+840,Virgin Islands (U.S.),US Dollar,USD
+953,Wallis and Futuna Islands,CFP Franc,XPF
+504,Western Sahara,Moroccan Dirham,MAD
+886,Yemen,Yemeni Rial,YER
+891,Yugoslavia,New Dinar,YUM
+180,Zaire,New Zaire,ZRN
+894,Zambia,Kwacha,ZMK
+716,Zimbabwe,Zimbabwe Dollar,ZWD
+959,,Gold Bond Markets Units,XAU
+955,,European Composite Unit (EURCO),XBA
+956,,European Monetary Unit (E.M.U.-6),XBB
+957,,European Unit of Account 9 (E.U.A.- 9),XBC
+958,,European Unit of Account 17 (E.U.A.- 17),XBD
+964,,Palladium,XPD
+962,,Platinum,XPT
+961,,Silver,XAG
+963,,Codes specifically reserved for testing purposes,XTS
+999,,The codes assigned for transactions where no currency is involved are:,XXX
+978,,Euro,EUR

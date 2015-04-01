@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosIntegrationConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <InterfaceTerminalPrefix>Aps</InterfaceTerminalPrefix>
+  <InterfaceServerTerminalId>1</InterfaceServerTerminalId>
+  <InterfaceServerAddress />
+  <PayProcessingItemId>5000</PayProcessingItemId>
+  <FailureItemId>5001</FailureItemId>
+  <DeclineTender>501</DeclineTender>
+  <FailureTender>502</FailureTender>
+</PosIntegrationConfig>

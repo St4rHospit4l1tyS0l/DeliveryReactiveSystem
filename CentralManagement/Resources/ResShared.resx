@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BUTTON_CANCEL" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="BUTTON_CONTACT" xml:space="preserve">
+    <value>Contacto</value>
+  </data>
+  <data name="BUTTON_END" xml:space="preserve">
+    <value>Finalizar</value>
+  </data>
+  <data name="BUTTON_HOME" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
+  <data name="BUTTON_OK" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="BUTTON_PACKAGE_BUY" xml:space="preserve">
+    <value>ADQUIRIR</value>
+  </data>
+  <data name="BUTTON_PACKAGE_TRIAL" xml:space="preserve">
+    <value>PRUEBA GRATIS</value>
+  </data>
+  <data name="BUTTON_RETRY" xml:space="preserve">
+    <value>Reintentar</value>
+  </data>
+  <data name="BUTTON_RETURN" xml:space="preserve">
+    <value>Regresar</value>
+  </data>
+  <data name="BUTTON_SAVE" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="ERROR_IMAGE_SIZE_TOOLONG" xml:space="preserve">
+    <value>El tamaño del archivo no debe ser mayor a {0} bytes. Por favor elija un archivo de menor tamaño.</value>
+  </data>
+  <data name="ERROR_INVALID_MODEL" xml:space="preserve">
+    <value>Existe uno o más campos inválidos. Por favor revise sus datos e intente de nuevo.</value>
+  </data>
+  <data name="ERROR_INVALID_MODEL_HTML" xml:space="preserve">
+    <value>Existe uno o más campos inválidos. &lt;br/&gt;Por favor revise sus datos e intente de nuevo.</value>
+  </data>
+  <data name="ERROR_LOGO_ISSUER_NOTFOUND" xml:space="preserve">
+    <value>Usted no tiene permisos para realizar esta acción o el emisor ya no está activo</value>
+  </data>
+  <data name="ERROR_MESSAGE_NOT_AUTHORIZED" xml:space="preserve">
+    <value>No está autorizado para realizar esta acción</value>
+  </data>
+  <data name="ERROR_MODEL_NOTFOUND" xml:space="preserve">
+    <value>No se encontró el registro a eliminar. &lt;br/&gt; Por favor actualice la información e intente de nuevo la operación.</value>
+  </data>
+  <data name="ERROR_NOTSINGLE_FILEFOUND" xml:space="preserve">
+    <value>No hay archivos que subir o es más de un archivo. Por favor intente de nuevo la operación</value>
+  </data>
+  <data name="ERROR_NOT_IMAGEFILE" xml:space="preserve">
+    <value>La extensión del archivo no pertence a una imagen. Por favor elija otro archivo.</value>
+  </data>
+  <data name="ERROR_NOT_NETWORK" xml:space="preserve">
+    <value>Se sucitó un problema de red. Por favor revise que esté conectado a Internet e intente de nuevo.</value>
+  </data>
+  <data name="ERROR_NOT_SESION_ONACTION" xml:space="preserve">
+    <value>Su sesión ha caducado, por favor ingrese de nuevo e intente de nuevo</value>
+  </data>
+  <data name="ERROR_NO_PERMISSION_UPLOADFILE" xml:space="preserve">
+    <value>El paquete al que pertenece el emisor no tiene el servicio adicional de establecer logotipo en representación impresa</value>
+  </data>
+  <data name="ERROR_SECTOR_FAILED" xml:space="preserve">
+    <value>No puede cambiar un sector con subsectores activos</value>
+  </data>
+  <data name="ERROR_SECTOR_ITSELF" xml:space="preserve">
+    <value>Error asignando sector</value>
+  </data>
+  <data name="ERROR_SECTOR_OBSOLETE_FAILED" xml:space="preserve">
+    <value>No se puede poner obsoleto el elemento seleccionado, revise que no tenga elementos dependientes</value>
+  </data>
+  <data name="ERROR_UNKOWN" xml:space="preserve">
+    <value>Error desconocido. </value>
+  </data>
+  <data name="ERROR_UPLOADFILE_UNKNOW_ERROR" xml:space="preserve">
+    <value>Se sucitó un error inesperado al subir el archivo. Por favor vuelva a intentar la operación.</value>
+  </data>
+  <data name="ERROR_UPLOAD_NOSINGLEIMAGE" xml:space="preserve">
+    <value>Sólo es posible añadir un imagen a la vez</value>
+  </data>
+  <data name="INFO_REGISTER_SAVED" xml:space="preserve">
+    <value>El registro fue guardado de forma exitosa</value>
+  </data>
+  <data name="LENGTH_FIELD" xml:space="preserve">
+    <value>Longitud mínima {2}  y longitud máxima {1}</value>
+  </data>
+  <data name="MSG_ERROR_CANCEL_DOC" xml:space="preserve">
+    <value>Se presento el siguiente problema al intentar cancelar el documento : {0}</value>
+  </data>
+  <data name="MSG_ERROR_CANCEL_DOC_GENERAL" xml:space="preserve">
+    <value>Se ha presentado un problema al intentar cancelar el documento</value>
+  </data>
+  <data name="REQUIRED_FIELD" xml:space="preserve">
+    <value>{0} es un campo requerido</value>
+  </data>
+  <data name="TITLE_ADICIONAL_SERVICES" xml:space="preserve">
+    <value>Asistencia Telefónica</value>
+  </data>
+  <data name="TITLE_BUTTON_CONTINUE" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+  <data name="TITLE_DAY" xml:space="preserve">
+    <value>día</value>
+  </data>
+  <data name="TITLE_DAYS" xml:space="preserve">
+    <value>días</value>
+  </data>
+  <data name="TITLE_ERROR_CANCEL_DOC" xml:space="preserve">
+    <value>Error al cancelar el docuemento</value>
+  </data>
+  <data name="TITLE_HADREAD_PRIVACYNOTICE" xml:space="preserve">
+    <value>He leído el aviso de privacidad</value>
+  </data>
+  <data name="TITLE_HADREAD_SERVICETERMS" xml:space="preserve">
+    <value>He leído y acepto los términos y condiciones del servicio</value>
+  </data>
+  <data name="TITLE_LICENCE" xml:space="preserve">
+    <value>Licenciamiento</value>
+  </data>
+  <data name="TITLE_LOGIN" xml:space="preserve">
+    <value>Ingresar</value>
+  </data>
+  <data name="TITLE_LOGOFF" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
+  <data name="TITLE_MENU_AUTH" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="TITLE_MENU_AUTH_ALLOW" xml:space="preserve">
+    <value>Autorizar</value>
+  </data>
+  <data name="TITLE_MENU_AUTH_SERVICES" xml:space="preserve">
+    <value>Servicios adicionales</value>
+  </data>
+  <data name="TITLE_MENU_BUYPACKAGES" xml:space="preserve">
+    <value>Adquirir paquete</value>
+  </data>
+  <data name="TITLE_MENU_CAT_CATEGORIES" xml:space="preserve">
+    <value>Catálogo de categorías</value>
+  </data>
+  <data name="TITLE_MENU_CAT_SECTOR" xml:space="preserve">
+    <value>Catálogo de sectores</value>
+  </data>
+  <data name="TITLE_MENU_CONFIGURATION" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="TITLE_MENU_CONTACT" xml:space="preserve">
+    <value>Contacto</value>
+  </data>
+  <data name="TITLE_MENU_DOCUMENTS" xml:space="preserve">
+    <value>Documentos</value>
+  </data>
+  <data name="TITLE_MENU_DOCUMENT_ISSUED" xml:space="preserve">
+    <value>Documentos emitidos</value>
+  </data>
+  <data name="TITLE_MENU_MEASURE_UNIT" xml:space="preserve">
+    <value>Unidades de medida</value>
+  </data>
+  <data name="TITLE_MENU_MY_ISSUED_DOCUMENTS" xml:space="preserve">
+    <value>Mis documentos emitidos</value>
+  </data>
+  <data name="TITLE_MENU_PACKAGE" xml:space="preserve">
+    <value>Paquetes</value>
+  </data>
+  <data name="TITLE_MENU_TEMPLATE_EMAIL" xml:space="preserve">
+    <value>Plantillas de correos</value>
+  </data>
+  <data name="TITLE_MY_ACCOUNT" xml:space="preserve">
+    <value>Mi Cuenta</value>
+  </data>
+  <data name="TITLE_NA" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="TITLE_OBSOLETE_FAILED" xml:space="preserve">
+    <value>Borrado fallido</value>
+  </data>
+  <data name="TITLE_OBSOLETE_SUCCESS" xml:space="preserve">
+    <value>Borrado exitoso</value>
+  </data>
+  <data name="TITLE_PRICE" xml:space="preserve">
+    <value>Precio</value>
+  </data>
+  <data name="TITLE_PROCESSING" xml:space="preserve">
+    <value>Procesando su petición...</value>
+  </data>
+  <data name="TITLE_REGISTER_FAILED" xml:space="preserve">
+    <value>Registro fallido</value>
+  </data>
+  <data name="TITLE_REGISTER_SUCCESS" xml:space="preserve">
+    <value>Registro exitoso</value>
+  </data>
+  <data name="TITLE_TOTAL_DOCUMENTS" xml:space="preserve">
+    <value>Documentos</value>
+  </data>
+  <data name="TITLE_TOTAL_ISSUERS" xml:space="preserve">
+    <value>Emisores</value>
+  </data>
+  <data name="TITLE_UNLIMITED" xml:space="preserve">
+    <value>Ilimitado</value>
+  </data>
+  <data name="TITLE_UPLOAD_LOGO" xml:space="preserve">
+    <value>Logotipo de la representación impresa</value>
+  </data>
+  <data name="TITLE_VALID_DAYS" xml:space="preserve">
+    <value>Vigencia</value>
+  </data>
+  <data name="TITLE_WELCOME" xml:space="preserve">
+    <value>Bienvenido</value>
+  </data>
+  <data name="TITTLE_MENU_CATALOGS" xml:space="preserve">
+    <value>Catálogos</value>
+  </data>
+  <data name="TITTLE_MENU_WHO_WE_ARE" xml:space="preserve">
+    <value>¿Quiénes somos?</value>
+  </data>
+  <data name="TTILE_MENU_BUYPACKAGE" xml:space="preserve">
+    <value>Adquirir paquetes</value>
+  </data>
+  <data name="TTILE_MENU_CATISSUERS" xml:space="preserve">
+    <value>Emisores</value>
+  </data>
+  <data name="TTILE_MENU_CATRECEIVERS" xml:space="preserve">
+    <value>Clientes</value>
+  </data>
+  <data name="TTILE_MENU_MYISSUERS" xml:space="preserve">
+    <value>Mis emisores</value>
+  </data>
+  <data name="TTILE_MENU_MYPACKAGES" xml:space="preserve">
+    <value>Mis paquetes</value>
+  </data>
+  <data name="TTILE_MENU_MYRECEIVERS" xml:space="preserve">
+    <value>Mis clientes</value>
+  </data>
+  <data name="TTILE_MENU_PRICE_COMPARATIVE" xml:space="preserve">
+    <value>Comparativa de precios</value>
+  </data>
+</root>

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PmsConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EnablePms>false</EnablePms>
+  <DefaultPluginPms>E2076CE4-D77E-4C44-B6FB-A9061FFBF8CF</DefaultPluginPms>
+</PmsConfig>

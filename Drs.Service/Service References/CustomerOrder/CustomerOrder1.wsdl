@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CustomerOrder" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import schemaLocation="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/LASA_CallCenter_Interface_Ws.Model" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICustomerOrder_AddCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCustomer" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_AddCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_UpdateCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_UpdateCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_DeleteCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCustomer" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_DeleteCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_AddOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrder" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_AddOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_CalculteTaxAndTotal_InputMessage">
+    <wsdl:part name="parameters" element="tns:CalculteTaxAndTotal" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_CalculteTaxAndTotal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CalculteTaxAndTotalResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="ICustomerOrder_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICustomerOrder">
+    <wsdl:operation name="AddCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerOrder/AddCustomer" message="tns:ICustomerOrder_AddCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerOrder/AddCustomerResponse" message="tns:ICustomerOrder_AddCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerOrder/UpdateCustomer" message="tns:ICustomerOrder_UpdateCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerOrder/UpdateCustomerResponse" message="tns:ICustomerOrder_UpdateCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerOrder/DeleteCustomer" message="tns:ICustomerOrder_DeleteCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerOrder/DeleteCustomerResponse" message="tns:ICustomerOrder_DeleteCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerOrder/AddOrder" message="tns:ICustomerOrder_AddOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerOrder/AddOrderResponse" message="tns:ICustomerOrder_AddOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CalculteTaxAndTotal">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerOrder/CalculteTaxAndTotal" message="tns:ICustomerOrder_CalculteTaxAndTotal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerOrder/CalculteTaxAndTotalResponse" message="tns:ICustomerOrder_CalculteTaxAndTotal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerOrder/Ping" message="tns:ICustomerOrder_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerOrder/PingResponse" message="tns:ICustomerOrder_Ping_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICustomerOrder" type="tns:ICustomerOrder">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddCustomer">
+      <soap:operation soapAction="http://tempuri.org/ICustomerOrder/AddCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <soap:operation soapAction="http://tempuri.org/ICustomerOrder/UpdateCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCustomer">
+      <soap:operation soapAction="http://tempuri.org/ICustomerOrder/DeleteCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOrder">
+      <soap:operation soapAction="http://tempuri.org/ICustomerOrder/AddOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculteTaxAndTotal">
+      <soap:operation soapAction="http://tempuri.org/ICustomerOrder/CalculteTaxAndTotal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/ICustomerOrder/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomerOrder">
+    <wsdl:port name="BasicHttpBinding_ICustomerOrder" binding="tns:BasicHttpBinding_ICustomerOrder">
+      <soap:address location="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/CustomerOrder" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

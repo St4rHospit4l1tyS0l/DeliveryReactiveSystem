@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A67CD0C8-4F5F-40B1-90EC-AAE243668513}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Drs.ViewModel</RootNamespace>
+    <AssemblyName>Drs.ViewModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Cors.3.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReactiveUI, Version=6.4.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\reactiveui-core.6.4.0.1\lib\Net45\ReactiveUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading">
+      <HintPath>..\packages\Rx-XAML.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\LoginVm.cs" />
+    <Compile Include="Account\ILoginVm.cs" />
+    <Compile Include="BootstrapperBase.cs" />
+    <Compile Include="Main\IShellContainerVm.cs" />
+    <Compile Include="Main\ShellContainerVm.cs" />
+    <Compile Include="Menu\IMenuItemVm.cs" />
+    <Compile Include="Menu\MenuItemVm.cs" />
+    <Compile Include="Order\AddressListVm.cs" />
+    <Compile Include="Order\IAddressListVm.cs" />
+    <Compile Include="Order\ISendOrderVm.cs" />
+    <Compile Include="Order\IOrderPosVm.cs" />
+    <Compile Include="Order\IUpsertAddressFoVm.cs" />
+    <Compile Include="Order\SendOrderVm.cs" />
+    <Compile Include="Order\OrderPosVm.cs" />
+    <Compile Include="Order\UpsertAddressFoVm.cs" />
+    <Compile Include="Service References\SettingSvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\SettingConfigureWs.cs" />
+    <Compile Include="Shared\IWizItem.cs" />
+    <Compile Include="Order\OrderSummaryVm.cs" />
+    <Compile Include="Order\IOrderSummaryVm.cs" />
+    <Compile Include="Order\UpsertClientFoVm.cs" />
+    <Compile Include="Order\ClientsListVm.cs" />
+    <Compile Include="Order\IUpsertClientFoVm.cs" />
+    <Compile Include="Order\IClientsListVm.cs" />
+    <Compile Include="Order\SearchNewPhoneVm.cs" />
+    <Compile Include="Order\ISearchNewPhoneVm.cs" />
+    <Compile Include="Shared\AutoCompleteTextVm.cs" />
+    <Compile Include="Shared\FlyoutBaseVm.cs" />
+    <Compile Include="Shared\IAutoCompleteTextVm.cs" />
+    <Compile Include="Shared\IFlyoutBaseVm.cs" />
+    <Compile Include="Shared\IBackPreviousVm.cs" />
+    <Compile Include="Menu\IMenuVm.cs" />
+    <Compile Include="Shared\BackPreviousVm.cs" />
+    <Compile Include="Menu\MenuVm.cs" />
+    <Compile Include="Order\IMainOrderVm.cs" />
+    <Compile Include="Order\MainOrderVm.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\LoginSvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Order\IFranchiseContainerVm.cs" />
+    <Compile Include="Order\FranchiseContainerVm.cs" />
+    <Compile Include="Order\IFranchiseVm.cs" />
+    <Compile Include="Order\FranchiseVm.cs" />
+    <Compile Include="Shared\NotifyingBase.cs" />
+    <Compile Include="Shared\UcViewModelBase.cs" />
+    <Compile Include="Shared\IUcViewModel.cs" />
+    <Compile Include="Shared\SplashVm.cs" />
+    <Compile Include="SignalR\Hubs\PosReceiverHub.cs" />
+    <Compile Include="SignalR\Startup.cs" />
+    <Compile Include="Track\IOrderDetailVm.cs" />
+    <Compile Include="Track\OrderDetailVm.cs" />
+    <Compile Include="Track\OrdersListVm.cs" />
+    <Compile Include="Track\IOrdersListVm.cs" />
+    <Compile Include="Track\ISearchTrackOrderVm.cs" />
+    <Compile Include="Track\ITrackOrderVm.cs" />
+    <Compile Include="Track\SearchTrackOrderVm.cs" />
+    <Compile Include="Track\TrackOrderVm.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\Drs.Model.Settings.ResponseMessageSetting.datasource" />
+    <None Include="Properties\DataSources\Drs.Model.Shared.ResponseMessage.datasource" />
+    <None Include="Service References\LoginSvc\Login.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoginSvc\Login1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoginSvc\Login2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoginSvc\Login3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoginSvc\LoginSvc.wsdl" />
+    <None Include="Service References\SettingSvc\Setting.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SettingSvc\Setting1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SettingSvc\Setting2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SettingSvc\Setting3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SettingSvc\Setting4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SettingSvc\SettingSvc.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Drs.Infrastructure\Drs.Infrastructure.csproj">
+      <Project>{E25F131F-855A-4A55-A9B6-66CF415FFE15}</Project>
+      <Name>Drs.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Drs.Model\Drs.Model.csproj">
+      <Project>{3FFC893E-2E6F-44C5-A3D1-0BEF4DA3F271}</Project>
+      <Name>Drs.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Drs.Repository\Drs.Repository.csproj">
+      <Project>{BF14A5CA-658C-45DA-8580-A8D309B45A83}</Project>
+      <Name>Drs.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Drs.Resources\Drs.Resources.csproj">
+      <Project>{2CC9F539-A4C4-4F80-98BF-FC00D6F540D3}</Project>
+      <Name>Drs.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Drs.Service\Drs.Service.csproj">
+      <Project>{9CF99951-CA77-427A-8C13-F979FA45F585}</Project>
+      <Name>Drs.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MahApps.Metro\MahApps.Metro.NET45.csproj">
+      <Project>{942D11C4-29F5-46C4-8C14-4B976D56C637}</Project>
+      <Name>MahApps.Metro.NET45</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\LoginSvc\" />
+    <WCFMetadataStorage Include="Service References\SettingSvc\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginSvc\Login.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginSvc\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginSvc\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SettingSvc\Setting.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SettingSvc\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SettingSvc\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SettingSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

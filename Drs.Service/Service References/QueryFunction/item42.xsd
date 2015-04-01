@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element name="addressesField" nillable="true" type="tns:ArrayOfCustomerAddressesAddress" />
+      <xs:element name="customerIdField" nillable="true" type="xs:string" />
+      <xs:element name="emailAddressField" nillable="true" type="xs:string" />
+      <xs:element name="firstNameField" nillable="true" type="xs:string" />
+      <xs:element name="lastNameField" nillable="true" type="xs:string" />
+      <xs:element name="orderCountField" nillable="true" type="xs:string" />
+      <xs:element name="phoneNumbersField" nillable="true" type="tns:ArrayOfCustomerPhoneNumbersPhoneNumber" />
+      <xs:element name="referenceIdField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Customer" nillable="true" type="tns:Customer" />
+  <xs:complexType name="ArrayOfCustomerAddressesAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomerAddressesAddress" nillable="true" type="tns:CustomerAddressesAddress" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomerAddressesAddress" nillable="true" type="tns:ArrayOfCustomerAddressesAddress" />
+  <xs:complexType name="CustomerAddressesAddress">
+    <xs:sequence>
+      <xs:element name="addressLine1Field" nillable="true" type="xs:string" />
+      <xs:element name="addressLine2Field" nillable="true" type="xs:string" />
+      <xs:element name="cityField" nillable="true" type="xs:string" />
+      <xs:element name="companyField" nillable="true" type="xs:string" />
+      <xs:element name="countryField" nillable="true" type="xs:string" />
+      <xs:element name="isPreferredField" nillable="true" type="xs:string" />
+      <xs:element name="stateField" nillable="true" type="xs:string" />
+      <xs:element name="typeField" nillable="true" type="xs:string" />
+      <xs:element name="zipCodeField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomerAddressesAddress" nillable="true" type="tns:CustomerAddressesAddress" />
+  <xs:complexType name="ArrayOfCustomerPhoneNumbersPhoneNumber">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomerPhoneNumbersPhoneNumber" nillable="true" type="tns:CustomerPhoneNumbersPhoneNumber" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomerPhoneNumbersPhoneNumber" nillable="true" type="tns:ArrayOfCustomerPhoneNumbersPhoneNumber" />
+  <xs:complexType name="CustomerPhoneNumbersPhoneNumber">
+    <xs:sequence>
+      <xs:element name="extensionField" nillable="true" type="xs:string" />
+      <xs:element name="isPreferredField" nillable="true" type="xs:string" />
+      <xs:element name="numberField" nillable="true" type="xs:string" />
+      <xs:element name="typeField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomerPhoneNumbersPhoneNumber" nillable="true" type="tns:CustomerPhoneNumbersPhoneNumber" />
+  <xs:complexType name="Customers">
+    <xs:sequence>
+      <xs:element name="itemsField" nillable="true" type="tns:ArrayOfCustomersCustomer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Customers" nillable="true" type="tns:Customers" />
+  <xs:complexType name="ArrayOfCustomersCustomer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomersCustomer" nillable="true" type="tns:CustomersCustomer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomersCustomer" nillable="true" type="tns:ArrayOfCustomersCustomer" />
+  <xs:complexType name="CustomersCustomer">
+    <xs:sequence>
+      <xs:element name="addressesField" nillable="true" type="tns:ArrayOfCustomersCustomerAddressesAddress" />
+      <xs:element name="customerIdField" nillable="true" type="xs:string" />
+      <xs:element name="emailAddressField" nillable="true" type="xs:string" />
+      <xs:element name="firstNameField" nillable="true" type="xs:string" />
+      <xs:element name="lastNameField" nillable="true" type="xs:string" />
+      <xs:element name="orderCountField" nillable="true" type="xs:string" />
+      <xs:element name="phoneNumbersField" nillable="true" type="tns:ArrayOfCustomersCustomerPhoneNumbersPhoneNumber" />
+      <xs:element name="referenceIdField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomersCustomer" nillable="true" type="tns:CustomersCustomer" />
+  <xs:complexType name="ArrayOfCustomersCustomerAddressesAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomersCustomerAddressesAddress" nillable="true" type="tns:CustomersCustomerAddressesAddress" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomersCustomerAddressesAddress" nillable="true" type="tns:ArrayOfCustomersCustomerAddressesAddress" />
+  <xs:complexType name="CustomersCustomerAddressesAddress">
+    <xs:sequence>
+      <xs:element name="addressLine1Field" nillable="true" type="xs:string" />
+      <xs:element name="addressLine2Field" nillable="true" type="xs:string" />
+      <xs:element name="cityField" nillable="true" type="xs:string" />
+      <xs:element name="companyField" nillable="true" type="xs:string" />
+      <xs:element name="countryField" nillable="true" type="xs:string" />
+      <xs:element name="isPreferredField" nillable="true" type="xs:string" />
+      <xs:element name="stateField" nillable="true" type="xs:string" />
+      <xs:element name="typeField" nillable="true" type="xs:string" />
+      <xs:element name="zipCodeField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomersCustomerAddressesAddress" nillable="true" type="tns:CustomersCustomerAddressesAddress" />
+  <xs:complexType name="ArrayOfCustomersCustomerPhoneNumbersPhoneNumber">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomersCustomerPhoneNumbersPhoneNumber" nillable="true" type="tns:CustomersCustomerPhoneNumbersPhoneNumber" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomersCustomerPhoneNumbersPhoneNumber" nillable="true" type="tns:ArrayOfCustomersCustomerPhoneNumbersPhoneNumber" />
+  <xs:complexType name="CustomersCustomerPhoneNumbersPhoneNumber">
+    <xs:sequence>
+      <xs:element name="extensionField" nillable="true" type="xs:string" />
+      <xs:element name="isPreferredField" nillable="true" type="xs:string" />
+      <xs:element name="numberField" nillable="true" type="xs:string" />
+      <xs:element name="typeField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomersCustomerPhoneNumbersPhoneNumber" nillable="true" type="tns:CustomersCustomerPhoneNumbersPhoneNumber" />
+  <xs:complexType name="Driver">
+    <xs:sequence>
+      <xs:element name="completedOrderCountField" nillable="true" type="xs:string" />
+      <xs:element name="currentOrderCountField" nillable="true" type="xs:string" />
+      <xs:element name="driverIdField" nillable="true" type="xs:string" />
+      <xs:element name="firstNameField" nillable="true" type="xs:string" />
+      <xs:element name="lastDispatchTimeField" nillable="true" type="xs:string" />
+      <xs:element name="lastNameField" nillable="true" type="xs:string" />
+      <xs:element name="lastReturnTimeField" nillable="true" type="xs:string" />
+      <xs:element name="statusField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Driver" nillable="true" type="tns:Driver" />
+  <xs:complexType name="Drivers">
+    <xs:sequence>
+      <xs:element name="itemsField" nillable="true" type="tns:ArrayOfDriversDriver" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Drivers" nillable="true" type="tns:Drivers" />
+  <xs:complexType name="ArrayOfDriversDriver">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DriversDriver" nillable="true" type="tns:DriversDriver" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDriversDriver" nillable="true" type="tns:ArrayOfDriversDriver" />
+  <xs:complexType name="DriversDriver">
+    <xs:sequence>
+      <xs:element name="completedOrderCountField" nillable="true" type="xs:string" />
+      <xs:element name="currentOrderCountField" nillable="true" type="xs:string" />
+      <xs:element name="driverIdField" nillable="true" type="xs:string" />
+      <xs:element name="firstNameField" nillable="true" type="xs:string" />
+      <xs:element name="lastDispatchTimeField" nillable="true" type="xs:string" />
+      <xs:element name="lastNameField" nillable="true" type="xs:string" />
+      <xs:element name="lastReturnTimeField" nillable="true" type="xs:string" />
+      <xs:element name="statusField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DriversDriver" nillable="true" type="tns:DriversDriver" />
+  <xs:complexType name="Order">
+    <xs:sequence>
+      <xs:element name="closedTimeField" nillable="true" type="xs:string" />
+      <xs:element name="customerField" nillable="true" type="tns:ArrayOfOrderCustomer" />
+      <xs:element name="estimatedSubTotalField" nillable="true" type="xs:string" />
+      <xs:element name="estimatedTaxField" nillable="true" type="xs:string" />
+      <xs:element name="firstPaymentTimeField" nillable="true" type="xs:string" />
+      <xs:element name="firstSentToKitchenTimeField" nillable="true" type="xs:string" />
+      <xs:element name="fulfilledTimeField" nillable="true" type="xs:string" />
+      <xs:element name="itemsField" nillable="true" type="tns:ArrayOfOrderItems" />
+      <xs:element name="lastPaymentTimeField" nillable="true" type="xs:string" />
+      <xs:element name="lastSentToKitchenTimeField" nillable="true" type="xs:string" />
+      <xs:element name="modeChargeField" nillable="true" type="xs:string" />
+      <xs:element name="modeField" nillable="true" type="xs:string" />
+      <xs:element name="orderIdField" nillable="true" type="xs:string" />
+      <xs:element name="orderNotesField" nillable="true" type="xs:string" />
+      <xs:element name="orderNumberField" nillable="true" type="xs:string" />
+      <xs:element name="orderTimeField" nillable="true" type="xs:string" />
+      <xs:element name="overrideModeChargeField" nillable="true" type="xs:string" />
+      <xs:element name="paymentTotalField" nillable="true" type="xs:string" />
+      <xs:element name="prepTimeField" nillable="true" type="xs:string" />
+      <xs:element name="promiseTimeField" nillable="true" type="xs:string" />
+      <xs:element name="referenceIdField" nillable="true" type="xs:string" />
+      <xs:element name="sequenceNumberField" nillable="true" type="xs:string" />
+      <xs:element name="sourceField" nillable="true" type="xs:string" />
+      <xs:element name="statusField" nillable="true" type="xs:string" />
+      <xs:element name="subTotalField" nillable="true" type="xs:string" />
+      <xs:element name="tableIdField" nillable="true" type="xs:string" />
+      <xs:element name="taxExemptField" nillable="true" type="xs:string" />
+      <xs:element name="taxField" nillable="true" type="xs:string" />
+      <xs:element name="tenderedField" nillable="true" type="xs:string" />
+      <xs:element name="tendersField" nillable="true" type="tns:ArrayOfOrderTendersTender" />
+      <xs:element name="totalField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Order" nillable="true" type="tns:Order" />
+  <xs:complexType name="ArrayOfOrderCustomer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderCustomer" nillable="true" type="tns:OrderCustomer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderCustomer" nillable="true" type="tns:ArrayOfOrderCustomer" />
+  <xs:complexType name="OrderCustomer">
+    <xs:sequence>
+      <xs:element name="addressLine1Field" nillable="true" type="xs:string" />
+      <xs:element name="addressLine2Field" nillable="true" type="xs:string" />
+      <xs:element name="addressNotesField" nillable="true" type="xs:string" />
+      <xs:element name="addressTypeField" nillable="true" type="xs:string" />
+      <xs:element name="cityField" nillable="true" type="xs:string" />
+      <xs:element name="customerIdField" nillable="true" type="xs:string" />
+      <xs:element name="deliveryZoneField" nillable="true" type="xs:string" />
+      <xs:element name="emailAddressField" nillable="true" type="xs:string" />
+      <xs:element name="firstNameField" nillable="true" type="xs:string" />
+      <xs:element name="lastNameField" nillable="true" type="xs:string" />
+      <xs:element name="notesField" nillable="true" type="xs:string" />
+      <xs:element name="orderCountField" nillable="true" type="xs:string" />
+      <xs:element name="phoneNumberField" nillable="true" type="xs:string" />
+      <xs:element name="phoneTypeField" nillable="true" type="xs:string" />
+      <xs:element name="referenceIdField" nillable="true" type="xs:string" />
+      <xs:element name="saveAddressField" nillable="true" type="xs:string" />
+      <xs:element name="stateField" nillable="true" type="xs:string" />
+      <xs:element name="zipCodeField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderCustomer" nillable="true" type="tns:OrderCustomer" />
+  <xs:complexType name="ArrayOfOrderItems">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItems" nillable="true" type="tns:OrderItems" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderItems" nillable="true" type="tns:ArrayOfOrderItems" />
+  <xs:complexType name="OrderItems">
+    <xs:sequence>
+      <xs:element name="failedItemField" nillable="true" type="tns:ArrayOfOrderItemsFailedItem" />
+      <xs:element name="itemField" nillable="true" type="tns:ArrayOfOrderItemsItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderItems" nillable="true" type="tns:OrderItems" />
+  <xs:complexType name="ArrayOfOrderItemsFailedItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItemsFailedItem" nillable="true" type="tns:OrderItemsFailedItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderItemsFailedItem" nillable="true" type="tns:ArrayOfOrderItemsFailedItem" />
+  <xs:complexType name="OrderItemsFailedItem">
+    <xs:sequence>
+      <xs:element name="entryTypeField" nillable="true" type="xs:string" />
+      <xs:element name="itemIdField" nillable="true" type="xs:string" />
+      <xs:element name="levelField" nillable="true" type="xs:string" />
+      <xs:element name="menuItemIdField" nillable="true" type="xs:string" />
+      <xs:element name="modCodeIdField" nillable="true" type="xs:string" />
+      <xs:element name="modGroupIdField" nillable="true" type="xs:string" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="posEntryIdField" nillable="true" type="xs:string" />
+      <xs:element name="priceField" nillable="true" type="xs:string" />
+      <xs:element name="quantityField" nillable="true" type="xs:string" />
+      <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderItemsFailedItem" nillable="true" type="tns:OrderItemsFailedItem" />
+  <xs:complexType name="ArrayOfOrderItemsItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItemsItem" nillable="true" type="tns:OrderItemsItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderItemsItem" nillable="true" type="tns:ArrayOfOrderItemsItem" />
+  <xs:complexType name="OrderItemsItem">
+    <xs:sequence>
+      <xs:element name="entryTypeField" nillable="true" type="xs:string" />
+      <xs:element name="itemIdField" nillable="true" type="xs:string" />
+      <xs:element name="levelField" nillable="true" type="xs:string" />
+      <xs:element name="menuItemIdField" nillable="true" type="xs:string" />
+      <xs:element name="modCodeIdField" nillable="true" type="xs:string" />
+      <xs:element name="modGroupIdField" nillable="true" type="xs:string" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="posEntryIdField" nillable="true" type="xs:string" />
+      <xs:element name="priceField" nillable="true" type="xs:string" />
+      <xs:element name="quantityField" nillable="true" type="xs:string" />
+      <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderItemsItem" nillable="true" type="tns:OrderItemsItem" />
+  <xs:complexType name="ArrayOfOrderTendersTender">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderTendersTender" nillable="true" type="tns:OrderTendersTender" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderTendersTender" nillable="true" type="tns:ArrayOfOrderTendersTender" />
+  <xs:complexType name="OrderTendersTender">
+    <xs:sequence>
+      <xs:element name="amountField" nillable="true" type="xs:string" />
+      <xs:element name="payBalanceField" nillable="true" type="xs:string" />
+      <xs:element name="statusField" nillable="true" type="xs:string" />
+      <xs:element name="typeField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderTendersTender" nillable="true" type="tns:OrderTendersTender" />
+  <xs:complexType name="Orders">
+    <xs:sequence>
+      <xs:element name="orderField" nillable="true" type="tns:ArrayOfOrdersOrder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Orders" nillable="true" type="tns:Orders" />
+  <xs:complexType name="ArrayOfOrdersOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrdersOrder" nillable="true" type="tns:OrdersOrder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrdersOrder" nillable="true" type="tns:ArrayOfOrdersOrder" />
+  <xs:complexType name="OrdersOrder">
+    <xs:sequence>
+      <xs:element name="closedTimeField" nillable="true" type="xs:string" />
+      <xs:element name="customerField" nillable="true" type="tns:ArrayOfOrdersOrderCustomer" />
+      <xs:element name="estimatedSubTotalField" nillable="true" type="xs:string" />
+      <xs:element name="estimatedTaxField" nillable="true" type="xs:string" />
+      <xs:element name="firstPaymentTimeField" nillable="true" type="xs:string" />
+      <xs:element name="firstSentToKitchenTimeField" nillable="true" type="xs:string" />
+      <xs:element name="fulfilledTimeField" nillable="true" type="xs:string" />
+      <xs:element name="itemsField" nillable="true" type="tns:ArrayOfOrdersOrderItemsItem" />
+      <xs:element name="lastPaymentTimeField" nillable="true" type="xs:string" />
+      <xs:element name="lastSentToKitchenTimeField" nillable="true" type="xs:string" />
+      <xs:element name="modeChargeField" nillable="true" type="xs:string" />
+      <xs:element name="modeField" nillable="true" type="xs:string" />
+      <xs:element name="orderIdField" nillable="true" type="xs:string" />
+      <xs:element name="orderNumberField" nillable="true" type="xs:string" />
+      <xs:element name="orderTimeField" nillable="true" type="xs:string" />
+      <xs:element name="overrideModeChargeField" nillable="true" type="xs:string" />
+      <xs:element name="paymentTotalField" nillable="true" type="xs:string" />
+      <xs:element name="prepTimeField" nillable="true" type="xs:string" />
+      <xs:element name="promiseTimeField" nillable="true" type="xs:string" />
+      <xs:element name="referenceIdField" nillable="true" type="xs:string" />
+      <xs:element name="sequenceNumberField" nillable="true" type="xs:string" />
+      <xs:element name="sourceField" nillable="true" type="xs:string" />
+      <xs:element name="statusField" nillable="true" type="xs:string" />
+      <xs:element name="subTotalField" nillable="true" type="xs:string" />
+      <xs:element name="tableIdField" nillable="true" type="xs:string" />
+      <xs:element name="taxExemptField" nillable="true" type="xs:string" />
+      <xs:element name="taxField" nillable="true" type="xs:string" />
+      <xs:element name="tenderedField" nillable="true" type="xs:string" />
+      <xs:element name="totalField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrdersOrder" nillable="true" type="tns:OrdersOrder" />
+  <xs:complexType name="ArrayOfOrdersOrderCustomer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrdersOrderCustomer" nillable="true" type="tns:OrdersOrderCustomer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrdersOrderCustomer" nillable="true" type="tns:ArrayOfOrdersOrderCustomer" />
+  <xs:complexType name="OrdersOrderCustomer">
+    <xs:sequence>
+      <xs:element name="addressLine1Field" nillable="true" type="xs:string" />
+      <xs:element name="addressLine2Field" nillable="true" type="xs:string" />
+      <xs:element name="addressTypeField" nillable="true" type="xs:string" />
+      <xs:element name="cityField" nillable="true" type="xs:string" />
+      <xs:element name="customerIdField" nillable="true" type="xs:string" />
+      <xs:element name="deliveryZoneField" nillable="true" type="xs:string" />
+      <xs:element name="emailAddressField" nillable="true" type="xs:string" />
+      <xs:element name="firstNameField" nillable="true" type="xs:string" />
+      <xs:element name="lastNameField" nillable="true" type="xs:string" />
+      <xs:element name="orderCountField" nillable="true" type="xs:string" />
+      <xs:element name="phoneNumberField" nillable="true" type="xs:string" />
+      <xs:element name="phoneTypeField" nillable="true" type="xs:string" />
+      <xs:element name="referenceIdField" nillable="true" type="xs:string" />
+      <xs:element name="saveAddressField" nillable="true" type="xs:string" />
+      <xs:element name="stateField" nillable="true" type="xs:string" />
+      <xs:element name="zipCodeField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrdersOrderCustomer" nillable="true" type="tns:OrdersOrderCustomer" />
+  <xs:complexType name="ArrayOfOrdersOrderItemsItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrdersOrderItemsItem" nillable="true" type="tns:OrdersOrderItemsItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrdersOrderItemsItem" nillable="true" type="tns:ArrayOfOrdersOrderItemsItem" />
+  <xs:complexType name="OrdersOrderItemsItem">
+    <xs:sequence>
+      <xs:element name="entryTypeField" nillable="true" type="xs:string" />
+      <xs:element name="itemIdField" nillable="true" type="xs:string" />
+      <xs:element name="levelField" nillable="true" type="xs:string" />
+      <xs:element name="menuItemIdField" nillable="true" type="xs:string" />
+      <xs:element name="modCodeIdField" nillable="true" type="xs:string" />
+      <xs:element name="modGroupIdField" nillable="true" type="xs:string" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="posEntryIdField" nillable="true" type="xs:string" />
+      <xs:element name="priceField" nillable="true" type="xs:string" />
+      <xs:element name="quantityField" nillable="true" type="xs:string" />
+      <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="subItemsField" nillable="true" type="tns:ArrayOfOrdersOrderItemsItemSubItemsItem" />
+      <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrdersOrderItemsItem" nillable="true" type="tns:OrdersOrderItemsItem" />
+  <xs:complexType name="ArrayOfOrdersOrderItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrdersOrderItemsItemSubItemsItem" nillable="true" type="tns:OrdersOrderItemsItemSubItemsItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrdersOrderItemsItemSubItemsItem" nillable="true" type="tns:ArrayOfOrdersOrderItemsItemSubItemsItem" />
+  <xs:complexType name="OrdersOrderItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element name="entryTypeField" nillable="true" type="xs:string" />
+      <xs:element name="itemIdField" nillable="true" type="xs:string" />
+      <xs:element name="levelField" nillable="true" type="xs:string" />
+      <xs:element name="menuItemIdField" nillable="true" type="xs:string" />
+      <xs:element name="modCodeIdField" nillable="true" type="xs:string" />
+      <xs:element name="modGroupIdField" nillable="true" type="xs:string" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="posEntryIdField" nillable="true" type="xs:string" />
+      <xs:element name="priceField" nillable="true" type="xs:string" />
+      <xs:element name="quantityField" nillable="true" type="xs:string" />
+      <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="subItemsField" nillable="true" type="tns:ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItem" />
+      <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrdersOrderItemsItemSubItemsItem" nillable="true" type="tns:OrdersOrderItemsItemSubItemsItem" />
+  <xs:complexType name="ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrdersOrderItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrdersOrderItemsItemSubItemsItemSubItemsItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItem" />
+  <xs:complexType name="OrdersOrderItemsItemSubItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element name="entryTypeField" nillable="true" type="xs:string" />
+      <xs:element name="itemIdField" nillable="true" type="xs:string" />
+      <xs:element name="levelField" nillable="true" type="xs:string" />
+      <xs:element name="menuItemIdField" nillable="true" type="xs:string" />
+      <xs:element name="modCodeIdField" nillable="true" type="xs:string" />
+      <xs:element name="modGroupIdField" nillable="true" type="xs:string" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="posEntryIdField" nillable="true" type="xs:string" />
+      <xs:element name="priceField" nillable="true" type="xs:string" />
+      <xs:element name="quantityField" nillable="true" type="xs:string" />
+      <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrdersOrderItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrdersOrderItemsItemSubItemsItemSubItemsItem" />
+</xs:schema>

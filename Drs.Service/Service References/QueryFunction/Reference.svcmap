@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fcde9baa-05ee-4b8d-87d8-d06b89986933" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Microsoft.Owin" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="QueryFunction1.wsdl" MetadataType="Wsdl" ID="9b30ff9a-473e-45b8-a270-1a5e0f00ee0b" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?wsdl" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="35f7ac03-f265-4403-90a9-53df70fd229d" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd1" />
+    <MetadataFile FileName="item41.xsd" MetadataType="Schema" ID="7b8291f2-91ca-4838-bba4-62468d62eae2" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd0" />
+    <MetadataFile FileName="item42.xsd" MetadataType="Schema" ID="7c504fa0-da08-4d21-8443-e3119d6b827d" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd3" />
+    <MetadataFile FileName="item43.xsd" MetadataType="Schema" ID="deef2543-242c-471e-a21d-a77eb75b2460" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd2" />
+    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="52c78cb5-fc6e-4a8e-837e-ba4d961feeb1" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

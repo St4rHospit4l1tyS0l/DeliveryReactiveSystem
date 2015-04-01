@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<RadVid>
+	<RadVidApi>
+		<Primary>192.168.10.212</Primary>
+		<Backup>192.168.10.212</Backup>
+		<PrimarySearchTime>30</PrimarySearchTime>
+		<LimitKPSDevices>NO</LimitKPSDevices>
+		<LimitKPSDeviceList></LimitKPSDeviceList>
+	</RadVidApi>
+	<RadVidSetup>
+		<KiwiDiscoverTimeout>2</KiwiDiscoverTimeout>
+	</RadVidSetup>
+</RadVid>

@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Shared.AutoCompleteTextUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" VerticalAlignment="Stretch" x:Name="AutoCmp" HorizontalAlignment="Stretch">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="NormalItemBackground" Color="White" />
+        <SolidColorBrush x:Key="HotItemBackground" Color="#FF0075BA" />
+        <SolidColorBrush x:Key="SelectedItemBackground" Color="#FF729DB7" />
+        <Style x:Key="ListboxItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="{StaticResource NormalItemBackground}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" />
+                            <Border Background="#BEFFFFFF" Margin="0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                </Grid>
+                            </Border>
+                            <ContentPresenter Margin="0" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="IsSelected" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource HotItemBackground}" />
+                            </MultiTrigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{StaticResource SelectedItemBackground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
+            <Setter Property="ItemContainerStyle" Value="{DynamicResource ListboxItemStyle}" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid HorizontalAlignment="Stretch">
+        <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
+            <TextBox Background="{DynamicResource WindowBackgroundBrush}" FontSize="{Binding FontSize, ElementName=AutoCmp}" Margin="0,0,0,0" FontFamily="Segoe UI"
+                                 HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                 Height="{Binding Height, ElementName=AutoCmp}"  Width="{Binding Width, ElementName=AutoCmp}"
+                                 VerticalAlignment="Stretch" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=Search}"
+                     Name="SearchTxtBox">
+            </TextBox>
+
+            <Popup IsOpen="True" Name="PopupList" Placement="Bottom" HorizontalOffset="0" PopupAnimation="Slide" Width="{Binding ElementName=SearchTxtBox, Path=ActualWidth}" >
+                <ListBox Name="ListData" Style="{StaticResource ListBoxStyle}"
+                MaxHeight="400"
+                Background="#FF515151"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                ItemsSource="{Binding Path=ListData}"
+                SelectedValuePath="Key">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid >
+                                <TextBlock Text="{Binding Value}" FontFamily="Segoe UI"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <!--SelectedItem="{Binding Path=SelectedListBoxItem}"
+                SelectedValue="{Binding Path=SelectedListBoxValue}" 
+                SelectedIndex="{Binding Path=SelectedListBoxIndex}"-->
+            </Popup>
+        </StackPanel>
+        <Button Content="{Binding IsDone, Mode=TwoWay}" Name="IsDone" Command="{Binding ExecuteEvent}" Visibility="Hidden"></Button>
+    </Grid>
+</UserControl>

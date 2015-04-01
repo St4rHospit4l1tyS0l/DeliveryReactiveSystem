@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Port>64321</Port>
+  <MaxResults>5</MaxResults>
+  <ExpireInterval>500</ExpireInterval>
+  <MaxTime>5</MaxTime>
+</DiscoveryConfig>

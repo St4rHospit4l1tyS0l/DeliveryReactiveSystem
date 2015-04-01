@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Track.OrdersListUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="1024" HorizontalAlignment="Stretch" Margin="20,0,20,10">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDarkLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{StaticResource WhiteColor}"  />
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource WhiteColor}"  />
+            <CollectionViewSource x:Key="LstItemsKey" Source="{Binding LstItems}">
+            </CollectionViewSource>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
+        <StackPanel Margin="10 0 10 5" Orientation="Vertical">
+            <Label Content="{Binding TotalFound}" FontSize="11" HorizontalAlignment="Right" Foreground="{DynamicResource AccentColorBrush}" HorizontalContentAlignment="Right" FontWeight="Bold"/>
+        </StackPanel>
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource AccentColorBrush}">
+            <Rectangle Width="25" Margin="10,0,10,0" Height="25" HorizontalAlignment="Center" Fill="#FFF" >
+                <Rectangle.OpacityMask >
+                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_people_profile}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <Label Content="Órdenes encontradas " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
+        </DockPanel>
+        <Grid HorizontalAlignment="Stretch">
+            <DataGrid x:Name="ItemDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="250"
+                  ItemsSource="{Binding Source={StaticResource LstItemsKey}}" SelectionMode="Single"
+                  SelectedItem="{Binding ItemSelection}"
+                  AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Detalle" MinWidth="60">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="10,0,10,0" Width="60">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Width="28" Height="28"  Cursor="Hand" Command="{Binding DataContext.CmdShowDetail, ElementName=ItemDtGrid}"
+                                                CommandParameter="{Binding SelectedItems, ElementName=ItemDtGrid}"
+                                                HorizontalAlignment="Center" 
+                                                BorderBrush="Transparent" Style="{DynamicResource MetroCircleButtonStyle}">
+                                            <Rectangle Width="15" Height="15" ToolTip="Mostrar detalle del pedido" Fill="{DynamicResource AccentColorBrush}">
+                                                <Rectangle.OpacityMask>
+                                                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_cloud_download}" />
+                                                </Rectangle.OpacityMask>
+                                            </Rectangle>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Teléfono"  MinWidth="140" 
+                                    Binding="{Binding Phone}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Fecha / Hora"  MinWidth="160" 
+                                    Binding="{Binding DateTimeOrder}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--<DataGridTextColumn Header="Fecha"  MinWidth="100" 
+                                    Binding="{Binding DateOrder}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Hora"  MinWidth="100" 
+                                    Binding="{Binding TimeOrder}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>-->
+                    <DataGridTextColumn Header="Nombre completo" MinWidth="220"
+                                    Binding="{Binding FullName}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Id Orden" MinWidth="120"
+                                    Binding="{Binding OrderAtoId}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Tienda" MinWidth="140"
+                                    Binding="{Binding StoreName}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Total de la orden" MinWidth="150"
+                                    Binding="{Binding CurrOrderTotal}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0de67d1e-44ac-4ccd-97d9-eb3bc442b4cd" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2898/Account/Login.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Login.xsd" MetadataType="Schema" ID="2366440f-9619-43c9-8eca-8f7c84f3f836" SourceId="1" SourceUrl="http://localhost:2898/Account/Login.svc?xsd=xsd1" />
+    <MetadataFile FileName="Login1.xsd" MetadataType="Schema" ID="bd2694cf-cbdc-45d3-94d6-b53a9c013988" SourceId="1" SourceUrl="http://localhost:2898/Account/Login.svc?xsd=xsd3" />
+    <MetadataFile FileName="LoginSvc.wsdl" MetadataType="Wsdl" ID="1e81e5a4-1308-458f-813f-4677eb92579c" SourceId="1" SourceUrl="http://localhost:2898/Account/Login.svc?wsdl" />
+    <MetadataFile FileName="Login.disco" MetadataType="Disco" ID="80de1b11-5f09-48b7-ae33-38e0d467eb74" SourceId="1" SourceUrl="http://localhost:2898/Account/Login.svc?disco" />
+    <MetadataFile FileName="Login2.xsd" MetadataType="Schema" ID="5047d753-087c-47ec-977d-56f36de3ef26" SourceId="1" SourceUrl="http://localhost:2898/Account/Login.svc?xsd=xsd0" />
+    <MetadataFile FileName="Login3.xsd" MetadataType="Schema" ID="5ed3a69a-0ae9-4b2d-b485-8de4c1f5a5a8" SourceId="1" SourceUrl="http://localhost:2898/Account/Login.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,9 @@
+
+1.- Creas variables de Ambiente en Windows: AlohaLeft = 0, AlohaTop=0, 
+AlohaXRes=800 y AlohaYRes=600 esto es para colocarlo en la esquina superior 
+izquierda con resolucion de 800x600. 
+2.- No se puede, Aloha trabaja como TopMost siempre. 
+3.- Te mando la data de: BK que es Quick Service, Terpel: Quick Service en 
+Colombia, usan numeros bieeeen grandes alli asi que tienen que validar que 
+puedan soportar esos montos 1$=2,000; Crepes Table Service en Colombia, 
+Power Chicken Quick Servicen en Honduras. 

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F81B6B4-ACF7-4152-A655-09D0B2CE0919}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Drs.PosInterface</RootNamespace>
+    <AssemblyName>Drs.PosInterface</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AdmInterceptActivity">
+      <HintPath>..\Lib\AdmInterceptActivity.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Com\InterfacePosActCom.cs" />
+    <Compile Include="Com\InterfacePosActComV10.cs" />
+    <Compile Include="Com\InterfacePosActComV11.cs" />
+    <Compile Include="Com\InterfacePosActComV12.cs" />
+    <Compile Include="Com\InterfacePosActComV2.cs" />
+    <Compile Include="Com\InterfacePosActComV3.cs" />
+    <Compile Include="Com\InterfacePosActComV4.cs" />
+    <Compile Include="Com\InterfacePosActComV5.cs" />
+    <Compile Include="Com\InterfacePosActComV6.cs" />
+    <Compile Include="Com\InterfacePosActComV7.cs" />
+    <Compile Include="Com\InterfacePosActComV8.cs" />
+    <Compile Include="Com\InterfacePosActComV9.cs" />
+    <Compile Include="Configuration\ConfigurationProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Drs.Infrastructure\Drs.Infrastructure.csproj">
+      <Project>{E25F131F-855A-4A55-A9B6-66CF415FFE15}</Project>
+      <Name>Drs.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Drs.Model\Drs.Model.csproj">
+      <Project>{3FFC893E-2E6F-44C5-A3D1-0BEF4DA3F271}</Project>
+      <Name>Drs.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Drs.PosService\Drs.PosService.csproj">
+      <Project>{5EBE94C8-C9AB-41B4-9C43-AA99CF2EE328}</Project>
+      <Name>Drs.PosService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Drs.Service\Drs.Service.csproj">
+      <Project>{9CF99951-CA77-427A-8C13-F979FA45F585}</Project>
+      <Name>Drs.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Drs.ViewModel\Drs.ViewModel.csproj">
+      <Project>{A67CD0C8-4F5F-40B1-90EC-AAE243668513}</Project>
+      <Name>Drs.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

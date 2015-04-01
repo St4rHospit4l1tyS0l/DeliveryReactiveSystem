@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Track.TrackOrderUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewShr="clr-namespace:Drs.Ui.Ui.Shared"
+             xmlns:vmTrack="clr-namespace:Drs.ViewModel.Track;assembly=Drs.ViewModel"
+             xmlns:viewTrack="clr-namespace:Drs.Ui.Ui.Track"
+             xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1400" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{StaticResource WhiteColor}"  />
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource WhiteColor}"  />
+            <DataTemplate DataType="{x:Type vmShr:BackPreviousVm}">
+                <viewShr:BackPreviousUc/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmTrack:SearchTrackOrderVm}">
+                <viewTrack:SearchTrackOrderUc/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmTrack:OrdersListVm}">
+                <viewTrack:OrdersListUc/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmTrack:OrderDetailVm}">
+                <viewTrack:OrderDetailUc/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <StackPanel Orientation="Vertical" Margin="0,6,0,0">
+                    <Rectangle Width="35" Margin="0,0,20,0" Height="35" HorizontalAlignment="Center" Fill="#a10606" >
+                        <Rectangle.OpacityMask >
+                            <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_magnify_browse}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+                <Label Content="RASTREO DE PEDIDOS" HorizontalContentAlignment="Center" Foreground="#FF676767" FontFamily="Kalinga" FontSize="23" />
+            </StackPanel>
+
+            <ContentControl  Content="{Binding BackPrevious}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" >
+            </ContentControl>
+
+            <StackPanel Margin="0, 0" Grid.Column="1" Grid.Row="1">
+                <StackPanel>
+                    <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="{DynamicResource AccentColorBrush}" Margin="0,0,0,0"></Rectangle>
+                    <ContentControl  Content="{Binding SearchTrack}" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                    HorizontalAlignment="Center" Margin="0, 5, 0, 0" >
+                    </ContentControl>
+                </StackPanel>
+                <StackPanel Visibility="{Binding OrderListVisibility}">
+                    <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="{DynamicResource AccentColorBrush}" Margin="0,0,0,0"></Rectangle>
+                    <ContentControl  Content="{Binding OrdersListTrack}" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                    HorizontalAlignment="Center" Margin="0, 5, 0, 5" >
+                    </ContentControl>
+                </StackPanel>
+                <StackPanel Visibility="{Binding OrderDetailVisibility}">
+                    <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="{DynamicResource AccentColorBrush}" Margin="0,0,0,0"></Rectangle>
+                    <ContentControl  Content="{Binding OrderDetail}" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                    HorizontalAlignment="Center" Margin="0, 0, 0, 0" >
+                    </ContentControl>
+                </StackPanel>
+                <StackPanel  Visibility="{Binding ErrorVisibility}" Margin="0, 10, 0, 0">
+                    <TextBlock  Text="{Binding ErrorMsg}"  TextWrapping="Wrap" MaxWidth="1000" FontSize="12" TextAlignment="Center" FontWeight="SemiBold" Foreground="Red"></TextBlock>
+                    <Rectangle HorizontalAlignment="Stretch" Height="2" MaxWidth="1000" Stroke="Red" Margin="0,10,0,20"></Rectangle>
+                </StackPanel>
+                <StackPanel Visibility="{Binding LoadingVisibility}">
+                    <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="{DynamicResource AccentColorBrush}" Margin="0,0,0,0"></Rectangle>
+                    <TextBlock  Text="{Binding EventsMsg}"  TextWrapping="Wrap" FontSize="20" TextAlignment="Center" FontWeight="SemiBold" Foreground="#FF4C4B4D"></TextBlock>
+                    <controls:MetroProgressBar Height="25" Margin="40 20 40 0" Width="400" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
+                              EllipseDiameter="6" EllipseOffset="10" IsIndeterminate="True" Foreground="#FF38A69C" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TenderMapConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CardPrefixToTenderMap />
+  <CardSchemaToTenderMap>
+    <KeyTenderPair>
+      <Key>
+        <ECardSchema>Visa</ECardSchema>
+      </Key>
+      <Tender>
+        <int>7</int>
+      </Tender>
+    </KeyTenderPair>
+    <KeyTenderPair>
+      <Key>
+        <ECardSchema>AmaricanExpress</ECardSchema>
+      </Key>
+      <Tender>
+        <int>8</int>
+      </Tender>
+    </KeyTenderPair>
+    <KeyTenderPair>
+      <Key>
+        <ECardSchema>MasterCard</ECardSchema>
+      </Key>
+      <Tender>
+        <int>9</int>
+      </Tender>
+    </KeyTenderPair>
+    <KeyTenderPair>
+      <Key>
+        <ECardSchema>Cash</ECardSchema>
+      </Key>
+      <Tender>
+        <int>1</int>
+      </Tender>
+    </KeyTenderPair>
+  </CardSchemaToTenderMap>
+</TenderMapConfig>

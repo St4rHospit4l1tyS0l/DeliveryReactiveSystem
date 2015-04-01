@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="QueryFunction" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LASA_CallCenter_Interface_Ws.Model" />
+      <xsd:import schemaLocation="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IQueryFunction_GetOrderById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderById" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetOrderById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetCustomerById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerById" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetCustomerById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetCustomerByReferenceId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerByReferenceId" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetCustomerByReferenceId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerByReferenceIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetCustomersByPhoneNumber_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomersByPhoneNumber" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetCustomersByPhoneNumber_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomersByPhoneNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetDriverById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDriverById" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetDriverById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDriverByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_CancelOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelOrder" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_CancelOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetAllFutureOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllFutureOrders" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetAllFutureOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllFutureOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetAllDrivers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDrivers" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetAllDrivers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDriversResponse" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetAllCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCustomers" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetAllCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCustomersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetAllCurrentOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCurrentOrders" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_GetAllCurrentOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCurrentOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IQueryFunction_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IQueryFunction">
+    <wsdl:operation name="GetOrderById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/GetOrderById" message="tns:IQueryFunction_GetOrderById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/GetOrderByIdResponse" message="tns:IQueryFunction_GetOrderById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/GetCustomerById" message="tns:IQueryFunction_GetCustomerById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/GetCustomerByIdResponse" message="tns:IQueryFunction_GetCustomerById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerByReferenceId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/GetCustomerByReferenceId" message="tns:IQueryFunction_GetCustomerByReferenceId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/GetCustomerByReferenceIdResponse" message="tns:IQueryFunction_GetCustomerByReferenceId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomersByPhoneNumber">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/GetCustomersByPhoneNumber" message="tns:IQueryFunction_GetCustomersByPhoneNumber_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/GetCustomersByPhoneNumberResponse" message="tns:IQueryFunction_GetCustomersByPhoneNumber_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDriverById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/GetDriverById" message="tns:IQueryFunction_GetDriverById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/GetDriverByIdResponse" message="tns:IQueryFunction_GetDriverById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/CancelOrder" message="tns:IQueryFunction_CancelOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/CancelOrderResponse" message="tns:IQueryFunction_CancelOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFutureOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/GetAllFutureOrders" message="tns:IQueryFunction_GetAllFutureOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/GetAllFutureOrdersResponse" message="tns:IQueryFunction_GetAllFutureOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDrivers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/GetAllDrivers" message="tns:IQueryFunction_GetAllDrivers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/GetAllDriversResponse" message="tns:IQueryFunction_GetAllDrivers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/GetAllCustomers" message="tns:IQueryFunction_GetAllCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/GetAllCustomersResponse" message="tns:IQueryFunction_GetAllCustomers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCurrentOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/GetAllCurrentOrders" message="tns:IQueryFunction_GetAllCurrentOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/GetAllCurrentOrdersResponse" message="tns:IQueryFunction_GetAllCurrentOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/IQueryFunction/Ping" message="tns:IQueryFunction_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IQueryFunction/PingResponse" message="tns:IQueryFunction_Ping_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IQueryFunction" type="tns:IQueryFunction">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOrderById">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/GetOrderById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerById">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/GetCustomerById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerByReferenceId">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/GetCustomerByReferenceId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomersByPhoneNumber">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/GetCustomersByPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDriverById">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/GetDriverById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelOrder">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/CancelOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFutureOrders">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/GetAllFutureOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDrivers">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/GetAllDrivers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCustomers">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/GetAllCustomers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCurrentOrders">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/GetAllCurrentOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/IQueryFunction/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="QueryFunction">
+    <wsdl:port name="BasicHttpBinding_IQueryFunction" binding="tns:BasicHttpBinding_IQueryFunction">
+      <soap:address location="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/QueryFunction" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

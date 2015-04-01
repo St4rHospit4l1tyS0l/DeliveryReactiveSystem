@@ -1,0 +1,117 @@
+﻿@using CentralManagement.Controllers
+@using Drs.Model.Constants
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Licensing Call Center</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    @RenderSection("css", false)
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <script src="~/Scripts/js/jquery-2.1.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="~/Scripts/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/app/main/licenseDr.js"></script>
+    <script src="~/Scripts/common.js"></script>
+    <script src="~/Scripts/js/inspinia.js"></script>
+    <script src="~/Scripts/js/plugins/pace/pace.min.js"></script>
+
+</head>
+<body ng-app="licenseDr">
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="image" width="50" height="50" style="margin-left: 35px;" class="img-circle" src="~/Content/img/Logo.png" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">@User.Identity.Name</strong>
+                                    </span> <span class="text-muted block"> @HomeController.GetRolesByUser(@User) <b class="caret"></b></span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("LogOff", "Account", new { area = "" })">Salir</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            CM
+                        </div>
+                    </li>
+                    @if (Roles.IsUserInRole(RoleConstants.MANAGER))
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "User",new {area = "Management"})"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span> </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Tableros de control</span> </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "License", new { area = "" })"><i class="fa fa-lock"></i> <span class="nav-label">Licenciamiento</span> </a>
+                        </li>
+                    }
+                    
+                    @if (Roles.IsUserInRole(RoleConstants.INSTALLER))
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "User",new {area = "Management"})"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span> </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "License", new { area = "" })"><i class="fa fa-lock"></i> <span class="nav-label">Licenciamiento</span> </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message">Administración central del sistema <strong>Advanced Delivery Management</strong> </span>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("LogOff", "Account", new { area = "" })">
+                                <i class="fa fa-sign-out"></i> Salir
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+            @RenderBody()
+            @Html.Partial("_SharedServices")
+            <hr />
+            <div id="dlgUpsert"></div>
+            <div class="footer fixed">
+                <div class="pull-right">
+                    Licensing Call Center.
+                </div>
+                <div>
+                    <strong>Copyright</strong> Star Hospitality Solutions &copy; 2015
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderSection("scripts", false)
+
+</body>
+</html>

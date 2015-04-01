@@ -1,0 +1,137 @@
+CODEPAGEID,DESCRIPTION
+437,OEM US
+500,IBM International
+708,Arabic
+709,Arabic
+710,Arabic
+720,Arabic
+737,OEM Greek
+775,OEM Baltic
+850,OEM Latin 1
+852,OEM Latin 2
+855,OEM Cyrillic (Russian)
+857,OEM Turkish
+858,OEM Latin 1 + Euro symbol
+860,OEM Portuguese
+861,OEM Icelandic
+862,OEM Hebrew
+863,OEM French Canadian
+864,OEM Arabic
+865,OEM Nordic
+866,OEM Cyrillic (Russian)
+869,OEM Modern Greek
+870,IBM Latin 2
+874,ANSI Thai
+875,IBM Modern Greek
+932,ANSI Japanese
+936,ANSI Simplified Chinese (PRC)
+949,ANSI Korean
+950,ANSI Traditional Chinese
+999,Default
+1026,IBM Turkish
+1047,IBM Latin 1
+1140,IBM US-Canada + Euro symbol
+1141,IBM Germany
+1142,IBM Denmark-Norway + Euro symbol
+1143,IBM Finland-Sweden + Euro symbol
+1144,IBM Italy
+1145,IBM Latin America-Spain + Euro symbol
+1146,IBM UK + Euro symbol
+1147,IBM France + Euro symbol
+1148,IBM International + Euro symbol
+1149,IBM Icelandic
+1200,Unicode UTF-16 (little endian)
+1201,Unicode UTF-16 (big endian)
+1250,ANSI Central European
+1251,ANSI Cyrillic
+1252,ANSI Latin 1
+1253,ANSI Greek
+1254,ANSI Turkish
+1255,ANSI Hebrew
+1256,ANSI Arabic
+1257,ANSI Baltic
+1258,ANSI Vietnamese
+1361,Korean (Johab)
+12000,Unicode UTF-32 (little endian)
+12001,Unicode UTF-32 (big endian)
+20000,CNS Taiwan
+20001,TCA Taiwan
+20002,Eten Taiwan
+20003,IBM Taiwan
+20004,TeleText Taiwan
+20005,Wang Taiwan
+20105,IA5 Wester European
+20106,IA5 German
+20107,IA5 Swedish
+20108,IA5 Norwegian
+20127,US-ASCII
+20261,T.61
+20269,ISO 6937 Non-Spacing Accent
+20273,IBM Germany
+20277,IBM Denmark-Norway
+20278,IBM Finland-Sweden
+20280,IBM Italy
+20284,IBM Latin America-Spain
+20285,IBM United Kingdom
+20290,IBM Japanese Katakana Extended
+20297,IBM France
+20420,IBM Arabic
+20423,IBM Greek
+20424,IBM Hebrew
+20833,IBM Korean Extended
+20838,IBM Thai
+20866,KOI8 Cyrillic (Russian)
+20871,IBM Icelandic
+20880,IBM Cyrillic (Russian)
+20905,IBM Turkish
+20924,IBM Latin 1 + Euro symbol
+20932,Japanese
+20936,Simplified Chinese
+20949,Korean Wansung
+21025,IBM Cyrillic (Serbian-Bulgarian)
+21027,
+21866,KOI8 Ukrainian-Cyrillic
+28591,ISO 8859-1 Latin 1
+28592,ISO 8859-2 Central European
+28593,ISO 8859-3 Latin 3
+28594,ISO 8859-4 Baltic
+28595,ISO 8859-5 Cyrillic
+28596,ISO 8859-6 Arabic
+28597,ISO 8859-7 Greek
+28598,ISO 8859-8 Hebrew
+28599,ISO 8859-9 Turkish
+28603,ISO 8859-13 Estonian
+28605,ISO 8859-15 Latin 9
+29001,Europa 3
+38598,ISO 8859-8 Hebrew
+50220,ISO 2022 Japanese (no halfwidth Katakana)
+50221,ISO 2022 Japanese (with halfwidth Katakana)
+50222,
+50225,ISO 2022 Korean 
+50227,ISO 2022 Simplified Chinese
+50229,ISO 2022 Traditional Chinese
+50930,EBCDIC Japanese (Katakana)
+50931,EBCDIC US-Canada and Japanese
+50933,EBCDIC Korean Extended and Korean
+50935,EBCDIC Simplified Chinese
+50936,EBCDIC Simplified Chinese
+50937,EBCDIC US-Canada and Traditional Chinese
+50939,EBCDIC Japanese (Latin) 
+51932,EUC Japanese
+51936,EUC Simplified Chinese
+51949,EUC Korean
+51950,EUC Traditional Chinese
+52936,HZ-GB2312 Simplified Chinese
+54936,GB18030 Simplified Chinese (XP and later)
+57002,ISCII Devanagari
+57003,ISCII Bengali
+57004,ISCII Tamil
+57005,ISCII Telugu
+57006,ISCII Assamese
+57007,ISCII Oriya
+57008,ISCII Kannada
+57009,ISCII Malayalam
+57010,ISCII Gujarati
+57011,ISCII Punjabi
+65000,Unicode (UTF-7)
+65001,Unicode (UTF-8)

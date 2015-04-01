@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Track.OrderDetailUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:shared="clr-namespace:Drs.Ui.Ui.Shared"
+             xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             mc:Ignorable="d" Height="500" Width="1080">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{StaticResource WhiteColor}"  />
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource WhiteColor}"  />
+            <DataTemplate DataType="{x:Type vmShr:AutoCompleteTextVm}">
+                <shared:AutoCompleteGenericUc/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmShr:AutoCompletePhoneVm}">
+                <shared:AutoCompleteSecPhoneUc/>
+            </DataTemplate>
+            <CollectionViewSource x:Key="LstOrderKey" Source="{Binding OrderDetail.LstOrderPos}">
+                <CollectionViewSource.SortDescriptions>
+                    <componentModel:SortDescription PropertyName="Name"/>
+                </CollectionViewSource.SortDescriptions>
+            </CollectionViewSource>
+            <CollectionViewSource x:Key="LstOrderLogKey" Source="{Binding OrderDetail.LstOrderLog}">
+            </CollectionViewSource>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Rectangle Width="25" Margin="0,0,20,0" Height="25" HorizontalAlignment="Center" Fill="#F9A700" >
+                <Rectangle.OpacityMask >
+                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_resource_group}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <Label Content="Detalles del pedido" FontSize="18" Foreground="{DynamicResource AccentColorBrush}"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label Content="Teléfono: " FontSize="15" Foreground="{DynamicResource AccentColorBrush}"></Label>
+            <TextBlock Text="{Binding OrderDetail.Phone}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Margin="20 0" FontSize="14"></TextBlock>
+            <Label Margin="20 0 0 0" Content="Cliente: " FontSize="15" Foreground="{DynamicResource AccentColorBrush}"></Label>
+            <TextBlock Text="{Binding OrderDetail.FullName}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Margin="20 0" FontSize="14"></TextBlock>
+        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="125"></ColumnDefinition>
+                <ColumnDefinition Width="170"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="145"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="145"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="140"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Fecha / Hora pedido:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"></Label>
+            <Label Content="ID Orden:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right"></Label>
+            <Label Content="Tienda:" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right"></Label>
+            <Label Content="Franquicia:" Grid.Row="0" Grid.Column="6" HorizontalAlignment="Right"></Label>
+            <Label Content="Último estado:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"></Label>
+            <Label Content="Tiempo promesa:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right"></Label>
+            <Label Content="Modo:" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Right"></Label>
+            <Label Content="Total de la orden:" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Right"></Label>
+            <Label Content="Fecha / Hora cerrado:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"></Label>
+            <Label Content="Usuario:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right"></Label>
+
+            <TextBlock Text="{Binding OrderDetail.DateTimeOrder}" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.OrderAtoId}" Grid.Row="0" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.StoreName}" Grid.Row="0" Grid.Column="5" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.FranchiseName}" Grid.Row="0" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.LastStatusEx}" Grid.Row="1" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.PromiseTime}" Grid.Row="1" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.Mode}" Grid.Row="1" Grid.Column="5" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.CurrOrderTotal}" Grid.Row="1" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.StrEndDatetime}" Grid.Row="2" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.UserTakeOrder}" Grid.Row="2" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+
+        </Grid>
+        <StackPanel Visibility="{Binding VisiblityStoreErrMsg}">
+            <Label Margin="20 0 0 0" Content="{Binding OrderDetail.StoreErrMsg}"  FontSize="12" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Foreground="Red"></Label>
+        </StackPanel>
+        <Grid Margin="0 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="325"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="10">
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#8B00FF">
+                    <Rectangle Width="20" Margin="10,0,5,0" Height="20" HorizontalAlignment="Center" Fill="#FFF" >
+                        <Rectangle.OpacityMask >
+                            <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_checkmark}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <Label Content="Listado del pedido" FontSize="13" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
+                </DockPanel>
+                <Grid HorizontalAlignment="Stretch">
+                    <DataGrid x:Name="OrderDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="200"
+                          ItemsSource="{Binding Source={StaticResource LstOrderKey}}" SelectionMode="Single"
+                          AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Producto"  MinWidth="380" 
+                                    Binding="{Binding Name}" >
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Precio"  MinWidth="100" 
+                                    Binding="{Binding CurPrice}" >
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Orientation="Vertical" Margin="10">
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF6A6A6A">
+                    <Rectangle Width="20" Margin="10,0,5,0" Height="20" HorizontalAlignment="Center" Fill="#FFF" >
+                        <Rectangle.OpacityMask >
+                            <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_list}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <Label Content="Historial del pedido" FontSize="13" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
+                </DockPanel>
+                <Grid HorizontalAlignment="Stretch">
+                    <DataGrid x:Name="OrderLogDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="200"
+                          ItemsSource="{Binding Source={StaticResource LstOrderLogKey}}" SelectionMode="Single"
+                          AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Fecha / Hora"  MinWidth="170" 
+                                    Binding="{Binding StrTimestamp}" >
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Estado"  MinWidth="280" 
+                                    Binding="{Binding StatusEx}" >
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,77 @@
+﻿<Window x:Class="Drs.Ui.Ui.Splash.SplashWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DRS" Height="508" Width="800" WindowStyle="None" 
+        AllowsTransparency="True" Background="{x:Null}" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" SnapsToDevicePixels="True">
+    <Window.Resources>
+        <SolidColorBrush x:Key="LogoBrush" Color="#FF008641" />
+        <SolidColorBrush x:Key="LogoBrush2" Color="#FFF09609" />
+        <SolidColorBrush x:Key="LogoBrush3" Color="#FF2E8BCC" />
+        <SolidColorBrush x:Key="LogoBrush4" Color="#FF7b4f9d" />      
+    </Window.Resources>
+    <Grid>
+        <Canvas>
+            <Rectangle x:Name="Bar1" Width="300" Height="300" Fill="{StaticResource LogoBrush}" Canvas.Left="150" />
+            <Rectangle x:Name="Bar2" Width="300" Height="300" Fill="{StaticResource LogoBrush2}" Canvas.Left="350" Canvas.Top="100" />
+            <Rectangle x:Name="Bar3" Width="300" Height="300" Fill="{StaticResource LogoBrush3}" Canvas.Left="250" Canvas.Top="200" />
+
+            <StackPanel Canvas.Left="230" Canvas.Top="58">
+                <TextBlock Text="Advanced" Foreground="White" FontSize="28" FontFamily="helvetica neue" FontWeight="Thin" />
+            </StackPanel>
+            <StackPanel Canvas.Left="450" Canvas.Top="136">
+                <TextBlock Text="Delivery" Foreground="White" FontSize="28" FontFamily="helvetica neue" FontWeight="Thin" />
+            </StackPanel>
+            <StackPanel Canvas.Left="322" Canvas.Top="263">
+                <TextBlock Text="Management" Foreground="White" FontSize="28" FontFamily="helvetica neue" FontWeight="Thin" HorizontalAlignment="Center" />
+                <TextBlock Text="" Foreground="White" FontSize="28" FontFamily="helvetica neue" FontWeight="Thin" />
+                <TextBlock Text="Call Center Client" Foreground="White" FontSize="22" FontFamily="helvetica neue" FontWeight="Thin" HorizontalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Canvas.Left="262" Canvas.Top="449">
+                <Ellipse Height="40" Width="40" StrokeThickness="2" Stroke="White" >
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="/Drs.Ui;component/Resources/Images/NgIconI.png">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.7" ScaleY="0.7"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </StackPanel>
+            <StackPanel Canvas.Left="599" Canvas.Top="350" RenderTransformOrigin="10.733,-3.5">
+                <Ellipse Height="40" Width="40" StrokeThickness="2" Stroke="White" >
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="/Drs.Ui;component/Resources/Images/NgIconIII.png"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </StackPanel>
+            <StackPanel Canvas.Left="159" Canvas.Top="251" RenderTransformOrigin="10.733,-3.5">
+                <Ellipse Height="40" Width="40" StrokeThickness="2" Stroke="White" >
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="/Drs.Ui;component/Resources/Images/NgIconVII.png">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.7" ScaleY="0.7"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </StackPanel>
+            <StackPanel Canvas.Left="474" Canvas.Top="483">
+                <TextBlock Text="Version 0.1.0" Foreground="#FFD9DEE4" FontSize="12" FontFamily="helvetica neue" HorizontalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Canvas.Left="320" Canvas.Top="405" Width="160">
+                <ProgressBar Value="{Binding Progress}" Height="20" Background="White" BorderBrush="{x:Null}" Foreground="#FF7b4f9d" Style="{DynamicResource ProgressBarStyle}" />
+            </StackPanel>
+        </Canvas>
+    </Grid>
+</Window>

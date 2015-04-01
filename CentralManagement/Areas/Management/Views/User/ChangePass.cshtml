@@ -1,0 +1,85 @@
+﻿@model Drs.Repository.Entities.Metadata.UserChangePassword
+@{
+    Layout = null;
+}
+
+<script>
+
+    $(document).ready(function () {
+        window.showModalFormDlg("#dlgUpModalId", "#FormCatId");
+    });
+
+</script>
+
+<div class="modal inmodal" id="dlgUpModalId" tabindex="-1" ng-controller="upsertController" role="dialog" aria-hidden="true" ng-cloak>
+    <div class="modal-dialog" style="width:920px" ng-controller="userController">
+        <div class="modal-content animated flipInY">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <i class="fa fa-key modal-icon"></i>
+                <h4 class="modal-title">Cambio de contraseña</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ibox">
+                            <div class="ibox-title navy-bg">
+                                <h5>Información de la contraseña</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form id="FormCatId" name="FormCatId" ng-submit="submit('#FormCatId')" class="form-horizontal" role="form">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="Id" name="Id" ng-model="m.Id" ng-init="m.Id = '@Model.Id';" ng-update-hidden />
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label class="col-xs-3 control-label font-noraml">Contraseña:</label>
+                                    <div class="col-xs-9">
+                                        <input type="password" name="Password" ng-model="m.Password" ng-init="m.Password = '@Model.Password'"
+                                               placeholder="Ingrese la contraseña"
+                                               required="required" ng-minlength="6" ng-maxlength="200" class="form-control">
+                                        <span class="error" ng-show="FormCatId.Password.$error.required">*Campo requerido</span>
+                                        <span class="error" ng-show="FormCatId.Password.$error.minlength">*Longitud mínima es de 6 caracteres</span>
+                                        <span class="error" ng-show="FormCatId.Password.$error.maxlength">*Longitud máxima de 200 caracteres</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="col-xs-3 control-label font-noraml">Confirmación:</label>
+                                    <div class="col-xs-9">
+                                        <input type="password" name="Confirm" ng-model="m.Confirm" ng-init="m.Confirm = '@Model.Confirm'"
+                                               placeholder="Ingrese la confirmación de la contraseña"
+                                               required="required" ng-minlength="6" ng-maxlength="200" class="form-control">
+                                        <span class="error" ng-show="FormCatId.Confirm.$error.required">*Campo requerido</span>
+                                        <span class="error" ng-show="FormCatId.Confirm.$error.minlength">*Longitud mínima es de 6 caracteres</span>
+                                        <span class="error" ng-show="FormCatId.Confirm.$error.maxlength">*Longitud máxima de 200 caracteres</span>
+                                        <span class="error" ng-show="m.Confirm !== m.Password">*Los campos no coinciden</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div ng-show="MsgError" class="alert alert-danger element-center">
+                                    {{MsgError}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span class="btn btn-white" ng-click="cancel()">
+                    Cancelar
+                </span>
+                <span class="btn btn-primary " ng-disabled="WaitFor==true"
+                      ng-click="submit('#FormCatId', '@Url.Action("DoChangePass", "User", new{area = "Management"})')">
+                    Guardar
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

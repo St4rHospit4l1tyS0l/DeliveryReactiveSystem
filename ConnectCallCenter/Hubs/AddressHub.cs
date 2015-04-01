@@ -1,0 +1,141 @@
+﻿using System;
+using Autofac;
+using Drs.Model.Address;
+using Drs.Model.Constants;
+using Drs.Model.Shared;
+using Drs.Service.Address;
+using Drs.Service.Order;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
+
+namespace ConnectCallCenter.Hubs
+{
+    [HubName(SharedConstants.Server.ADDRESS_HUB)]
+    public class AddressHub : Hub
+    {
+        [HubMethodName(SharedConstants.Server.SEARCH_HIERARCHY_BY_ZIPCODE_ADDRESS_HUB_METHOD)]
+        public ResponseMessageData<AddressResponseSearch> SearchHierarchyByZipCode(String zipCode)
+        {
+            try
+            {
+                return new ResponseMessageData<AddressResponseSearch>
+                {
+                    IsSuccess = true,
+                    LstData = AppInit.Container.Resolve<IAddressService>().SearchHierarchyByZipCode(zipCode)
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<AddressResponseSearch>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message + ex.StackTrace
+                };
+            }
+        }
+
+        [HubMethodName(SharedConstants.Server.SEARCH_BY_ZIPCODE_ADDRESS_HUB_METHOD)]
+        public ResponseMessageData<ListItemModel> SearchByZipCode(String zipCode)
+        {
+            try
+            {
+                return new ResponseMessageData<ListItemModel>
+                {
+                    IsSuccess = true,
+                    LstData = AppInit.Container.Resolve<IAddressService>().SearchByZipCode(zipCode)
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<ListItemModel>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message + ex.StackTrace
+                };
+            }
+        }
+        
+        [HubMethodName(SharedConstants.Server.FILL_NEXT_LIST_BYNAME_ADDRESS_HUB_METHOD)]
+        public ResponseMessageData<ListItemModel> FillNextListByName(AddressQuery addressQuery)
+        {
+            try
+            {
+                string sControlName;
+                var response = new ResponseMessageData<ListItemModel>
+                {
+                    IsSuccess = true,
+                    LstData = AppInit.Container.Resolve<IAddressService>().FillNextListByName(addressQuery.NextRegion, addressQuery.ItemSelId, out sControlName),
+                    Message = sControlName
+                };
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<ListItemModel>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message + ex.StackTrace
+                };
+            }
+        }
+
+
+        [HubMethodName(SharedConstants.Server.SAVE_ADDRESS_ADDRESS_HUB_METHOD)]
+        public ResponseMessageData<AddressInfoModel> SaveClient(AddressInfoModel model)
+        {
+            try
+            {
+                return AppInit.Container.Resolve<IAddressService>().SaveAddress(model);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<AddressInfoModel>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message// + ex.StackTrace
+                };
+            }
+        }
+        
+        [HubMethodName(SharedConstants.Server.SEARCH_ADDRESS_BY_PHONE_ADDRESS_HUB_METHOD)]
+        public ResponseMessageData<AddressInfoModel> SearchAddressByPhone(String phone)
+        {
+            try
+            {
+                return new ResponseMessageData<AddressInfoModel>
+                {
+                    IsSuccess = true,
+                    LstData = AppInit.Container.Resolve<IAddressService>().SearchAddressByPhone(phone)
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<AddressInfoModel>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message + ex.StackTrace
+                };
+            }
+        }
+
+
+        [HubMethodName(SharedConstants.Server.REMOVE_REL_PHONECLIENT_ADDRESS_HUB_METHOD)]
+        public ResponseMessageData<bool> RemoveRelPhoneClient(AddressPhoneModel model)
+        {
+            try
+            {
+                return AppInit.Container.Resolve<IOrderService>().RemoveRelPhoneAddress(model);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<bool>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message// + ex.StackTrace
+                };
+            }
+        }
+    }
+
+}
