@@ -72,6 +72,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Reactive.Core">
       <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
     </Reference>
@@ -105,6 +106,7 @@
     <Compile Include="Extensions\Enumerables\Stale.cs" />
     <Compile Include="Extensions\Io\UriExtension.cs" />
     <Compile Include="Extensions\Io\DirExt.cs" />
+    <Compile Include="Hinfo\ManagemenExt.cs" />
     <Compile Include="JqGrid\JqGridClause.cs" />
     <Compile Include="JqGrid\JqGridQueryWhere.cs" />
     <Compile Include="JqGrid\Model\JqGridFilterModel.cs" />
@@ -116,6 +118,8 @@
     <Compile Include="Logging\DebugLoggerFactory.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Logging\ILog.cs" />
+    <Compile Include="Model\ConnectionInfoModel.cs" />
+    <Compile Include="Model\ConnectionInfoResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ResponseMessageModel.cs" />
     <Compile Include="Resources\ResShared.Designer.cs">
@@ -142,9 +146,7 @@
       <LastGenOutput>ResShared.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

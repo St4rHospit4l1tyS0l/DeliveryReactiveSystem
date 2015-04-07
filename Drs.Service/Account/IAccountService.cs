@@ -9,5 +9,6 @@ namespace Drs.Service.Account
     {
         ResponseMessage Login(LoginModel login);
         IEnumerable<ButtonItemModel> GetMenuByUser(string username);
+        string GetAccountInfo(string s, string s1);
     }
 }

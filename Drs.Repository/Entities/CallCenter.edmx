@@ -105,8 +105,7 @@
             <PropertyRef Name="ClientInfoId" />
           </Key>
           <Property Name="ClientInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ServerInfoId" Type="int" Nullable="false" />
-          <Property Name="ClientHost" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ClientHost" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ClientCode" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CallCenterInfoId" Type="int" Nullable="false" />
         </EntityType>
@@ -409,7 +408,7 @@
             <PropertyRef Name="ServerInfoId" />
           </Key>
           <Property Name="ServerInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ServerName" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ServerName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ServerCode" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CallCenterInfoId" Type="int" Nullable="false" />
         </EntityType>
@@ -1583,9 +1582,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="AspNetUserClaims" EntityType="CallCenterModel.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="CallCenterModel.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="CallCenterModel.AspNetUsers" />
-          <EntitySet Name="CallCenterInfo" EntityType="CallCenterModel.CallCenterInfo" />
           <EntitySet Name="Client" EntityType="CallCenterModel.Client" />
-          <EntitySet Name="ClientInfo" EntityType="CallCenterModel.ClientInfo" />
           <EntitySet Name="ClientPhone" EntityType="CallCenterModel.ClientPhone" />
           <EntitySet Name="ClientPhoneStatistics" EntityType="CallCenterModel.ClientPhoneStatistics" />
           <EntitySet Name="ClientStatistics" EntityType="CallCenterModel.ClientStatistics" />
@@ -1610,7 +1607,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="RegionB" EntityType="CallCenterModel.RegionB" />
           <EntitySet Name="RegionC" EntityType="CallCenterModel.RegionC" />
           <EntitySet Name="RegionD" EntityType="CallCenterModel.RegionD" />
-          <EntitySet Name="ServerInfo" EntityType="CallCenterModel.ServerInfo" />
           <EntitySet Name="Setting" EntityType="CallCenterModel.Setting" />
           <EntitySet Name="StoreAddressDistribution" EntityType="CallCenterModel.StoreAddressDistribution" />
           <EntitySet Name="StoreStatus" EntityType="CallCenterModel.StoreStatus" />
@@ -1698,14 +1694,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <AssociationSet Name="FK_PosOrder_AspNetUsers" Association="CallCenterModel.FK_PosOrder_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="PosOrder" EntitySet="PosOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientInfo_CallCenterInfo" Association="CallCenterModel.FK_ClientInfo_CallCenterInfo">
-            <End Role="CallCenterInfo" EntitySet="CallCenterInfo" />
-            <End Role="ClientInfo" EntitySet="ClientInfo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServerInfo_CallCenterInfo" Association="CallCenterModel.FK_ServerInfo_CallCenterInfo">
-            <End Role="CallCenterInfo" EntitySet="CallCenterInfo" />
-            <End Role="ServerInfo" EntitySet="ServerInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_Client_Company" Association="CallCenterModel.FK_Client_Company">
             <End Role="Company" EntitySet="Company" />
@@ -1857,6 +1845,17 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UserDetail" EntitySet="UserDetail" />
           </AssociationSet>
+          <EntitySet Name="CallCenterInfo" EntityType="CallCenterModel.CallCenterInfo" />
+          <EntitySet Name="ServerInfo" EntityType="CallCenterModel.ServerInfo" />
+          <AssociationSet Name="FK_ServerInfo_CallCenterInfo" Association="CallCenterModel.FK_ServerInfo_CallCenterInfo">
+            <End Role="CallCenterInfo" EntitySet="CallCenterInfo" />
+            <End Role="ServerInfo" EntitySet="ServerInfo" />
+          </AssociationSet>
+          <EntitySet Name="ClientInfo" EntityType="CallCenterModel.ClientInfo" />
+          <AssociationSet Name="FK_ClientInfo_CallCenterInfo" Association="CallCenterModel.FK_ClientInfo_CallCenterInfo">
+            <End Role="CallCenterInfo" EntitySet="CallCenterInfo" />
+            <End Role="ClientInfo" EntitySet="ClientInfo" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -1954,15 +1953,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="UserDetail" Relationship="CallCenterModel.FK_UserDetail_AspNetUsers" FromRole="AspNetUsers" ToRole="UserDetail" />
         </EntityType>
-        <EntityType Name="CallCenterInfo">
-          <Key>
-            <PropertyRef Name="CallCenterInfoId" />
-          </Key>
-          <Property Name="CallCenterInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ActivationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ClientInfo" Relationship="CallCenterModel.FK_ClientInfo_CallCenterInfo" FromRole="CallCenterInfo" ToRole="ClientInfo" />
-          <NavigationProperty Name="ServerInfo" Relationship="CallCenterModel.FK_ServerInfo_CallCenterInfo" FromRole="CallCenterInfo" ToRole="ServerInfo" />
-        </EntityType>
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ClientId" />
@@ -1977,17 +1967,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="ClientStatistics" Relationship="CallCenterModel.FK_ClientStatistics_Client" FromRole="Client" ToRole="ClientStatistics" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="Client" ToRole="OrderToStore" />
           <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneClient" FromRole="Client" ToRole="ClientPhone" />
-        </EntityType>
-        <EntityType Name="ClientInfo">
-          <Key>
-            <PropertyRef Name="ClientInfoId" />
-          </Key>
-          <Property Name="ClientInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ServerInfoId" Type="Int32" Nullable="false" />
-          <Property Name="ClientHost" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="ClientCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CallCenterInfoId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CallCenterInfo" Relationship="CallCenterModel.FK_ClientInfo_CallCenterInfo" FromRole="ClientInfo" ToRole="CallCenterInfo" />
         </EntityType>
         <EntityType Name="ClientPhone">
           <Key>
@@ -2335,16 +2314,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_RegionD_RegionC" FromRole="RegionD" ToRole="RegionC" />
           <NavigationProperty Name="ZipCode" Relationship="CallCenterModel.FK_RegionD_ZipCode" FromRole="RegionD" ToRole="ZipCode" />
         </EntityType>
-        <EntityType Name="ServerInfo">
-          <Key>
-            <PropertyRef Name="ServerInfoId" />
-          </Key>
-          <Property Name="ServerInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ServerName" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="ServerCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CallCenterInfoId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CallCenterInfo" Relationship="CallCenterModel.FK_ServerInfo_CallCenterInfo" FromRole="ServerInfo" ToRole="CallCenterInfo" />
-        </EntityType>
         <EntityType Name="Setting">
           <Key>
             <PropertyRef Name="SettingId" />
@@ -2648,30 +2617,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Principal>
             <Dependent Role="PosOrder">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientInfo_CallCenterInfo">
-          <End Type="CallCenterModel.CallCenterInfo" Role="CallCenterInfo" Multiplicity="1" />
-          <End Type="CallCenterModel.ClientInfo" Role="ClientInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CallCenterInfo">
-              <PropertyRef Name="CallCenterInfoId" />
-            </Principal>
-            <Dependent Role="ClientInfo">
-              <PropertyRef Name="CallCenterInfoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServerInfo_CallCenterInfo">
-          <End Type="CallCenterModel.CallCenterInfo" Role="CallCenterInfo" Multiplicity="1" />
-          <End Type="CallCenterModel.ServerInfo" Role="ServerInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CallCenterInfo">
-              <PropertyRef Name="CallCenterInfoId" />
-            </Principal>
-            <Dependent Role="ServerInfo">
-              <PropertyRef Name="CallCenterInfoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3115,6 +3060,59 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CallCenterInfo">
+          <Key>
+            <PropertyRef Name="CallCenterInfoId" />
+          </Key>
+          <Property Name="CallCenterInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServerInfo" Relationship="CallCenterModel.FK_ServerInfo_CallCenterInfo" FromRole="CallCenterInfo" ToRole="ServerInfo" />
+          <NavigationProperty Name="ClientInfo" Relationship="CallCenterModel.FK_ClientInfo_CallCenterInfo" FromRole="CallCenterInfo" ToRole="ClientInfo" />
+        </EntityType>
+        <EntityType Name="ServerInfo">
+          <Key>
+            <PropertyRef Name="ServerInfoId" />
+          </Key>
+          <Property Name="ServerInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ServerCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CallCenterInfoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CallCenterInfo" Relationship="CallCenterModel.FK_ServerInfo_CallCenterInfo" FromRole="ServerInfo" ToRole="CallCenterInfo" />
+        </EntityType>
+        <Association Name="FK_ServerInfo_CallCenterInfo">
+          <End Type="CallCenterModel.CallCenterInfo" Role="CallCenterInfo" Multiplicity="1" />
+          <End Type="CallCenterModel.ServerInfo" Role="ServerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CallCenterInfo">
+              <PropertyRef Name="CallCenterInfoId" />
+            </Principal>
+            <Dependent Role="ServerInfo">
+              <PropertyRef Name="CallCenterInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClientInfo">
+          <Key>
+            <PropertyRef Name="ClientInfoId" />
+          </Key>
+          <Property Name="ClientInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientHost" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CallCenterInfoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CallCenterInfo" Relationship="CallCenterModel.FK_ClientInfo_CallCenterInfo" FromRole="ClientInfo" ToRole="CallCenterInfo" />
+        </EntityType>
+        <Association Name="FK_ClientInfo_CallCenterInfo">
+          <End Type="CallCenterModel.CallCenterInfo" Role="CallCenterInfo" Multiplicity="1" />
+          <End Type="CallCenterModel.ClientInfo" Role="ClientInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CallCenterInfo">
+              <PropertyRef Name="CallCenterInfoId" />
+            </Principal>
+            <Dependent Role="ClientInfo">
+              <PropertyRef Name="CallCenterInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3194,14 +3192,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CallCenterInfo">
-            <EntityTypeMapping TypeName="CallCenterModel.CallCenterInfo">
-              <MappingFragment StoreEntitySet="CallCenterInfo">
-                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
-                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="CallCenterModel.Client">
               <MappingFragment StoreEntitySet="Client">
@@ -3211,17 +3201,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClientInfo">
-            <EntityTypeMapping TypeName="CallCenterModel.ClientInfo">
-              <MappingFragment StoreEntitySet="ClientInfo">
-                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
-                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
-                <ScalarProperty Name="ClientHost" ColumnName="ClientHost" />
-                <ScalarProperty Name="ServerInfoId" ColumnName="ServerInfoId" />
-                <ScalarProperty Name="ClientInfoId" ColumnName="ClientInfoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3519,16 +3498,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ServerInfo">
-            <EntityTypeMapping TypeName="CallCenterModel.ServerInfo">
-              <MappingFragment StoreEntitySet="ServerInfo">
-                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
-                <ScalarProperty Name="ServerCode" ColumnName="ServerCode" />
-                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
-                <ScalarProperty Name="ServerInfoId" ColumnName="ServerInfoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Setting">
             <EntityTypeMapping TypeName="CallCenterModel.Setting">
               <MappingFragment StoreEntitySet="Setting">
@@ -3629,6 +3598,34 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CallCenterInfo">
+            <EntityTypeMapping TypeName="CallCenterModel.CallCenterInfo">
+              <MappingFragment StoreEntitySet="CallCenterInfo">
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServerInfo">
+            <EntityTypeMapping TypeName="CallCenterModel.ServerInfo">
+              <MappingFragment StoreEntitySet="ServerInfo">
+                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
+                <ScalarProperty Name="ServerCode" ColumnName="ServerCode" />
+                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+                <ScalarProperty Name="ServerInfoId" ColumnName="ServerInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientInfo">
+            <EntityTypeMapping TypeName="CallCenterModel.ClientInfo">
+              <MappingFragment StoreEntitySet="ClientInfo">
+                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="ClientHost" ColumnName="ClientHost" />
+                <ScalarProperty Name="ClientInfoId" ColumnName="ClientInfoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

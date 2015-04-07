@@ -60,6 +60,16 @@ namespace Drs.Repository.Account
                     }).OrderBy(e => e.Position).ToList();
         }
 
+        public string GetComputerInfo(string eInfo)
+        {
+            return DbEntities.ClientInfo.Where(e => e.ClientHost == eInfo).Select(e => e.ClientCode).FirstOrDefault();
+        }
+
+        public void AddComputerInfo(string eInfo, string encrypt)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public bool IsValidUser(string id)
         {
             return DbEntities.UserDetail.Any(e => e.Id == id && e.IsObsolete == false);

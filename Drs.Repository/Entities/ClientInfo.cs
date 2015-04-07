@@ -15,7 +15,6 @@ namespace Drs.Repository.Entities
     public partial class ClientInfo
     {
         public int ClientInfoId { get; set; }
-        public int ServerInfoId { get; set; }
         public string ClientHost { get; set; }
         public string ClientCode { get; set; }
         public int CallCenterInfoId { get; set; }

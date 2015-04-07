@@ -20,16 +20,41 @@ namespace ConnectCallCenter.Hubs
             {
                 return new ResponseMessageData<ButtonItemModel>
                 {
-                    IsSuccess    = true,
+                    IsSuccess = true,
                     LstData = AppInit.Container.Resolve<IAccountService>().GetMenuByUser(username)
-                }; 
+                };
             }
             catch (Exception ex)
             {
                 return new ResponseMessageData<ButtonItemModel>
                 {
                     IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace 
+                    Message = ex.Message + ex.StackTrace
+                };
+            }
+        }
+
+
+        [HubMethodName(SharedConstants.Server.MENU_INFO_ACCOUNT_HUB_METHOD)]
+        public ResponseMessageData<string> GetAccountInfo()
+        {
+            try
+            {
+
+
+                return new ResponseMessageData<string>
+                {
+                    IsSuccess = true,
+                    Data = AppInit.Container.Resolve<IAccountService>()
+                        .GetAccountInfo(Context.Headers[SharedConstants.Server.USERNAME_HEADER], Context.Headers[SharedConstants.Server.CONNECTION_ID_HEADER])
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<string>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message + ex.StackTrace
                 };
             }
         }

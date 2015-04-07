@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 using Drs.Infrastructure.Crypto;
+using Drs.Infrastructure.Model;
 using Drs.Model.Account;
+using Drs.Model.Constants;
 using Drs.Model.Menu;
 using Drs.Model.Shared;
 using Drs.Repository.Account;
-using Drs.Resources.Account;
 
 namespace Drs.Service.Account
 {
@@ -42,6 +44,67 @@ namespace Drs.Service.Account
                 var profileId = _repository.GetRoleIdByUsername(username);
                 return _repository.GetMenuByRole(profileId);
             }
+        }
+
+        public string GetAccountInfo(string sMaInfo, string sConnInfo)
+        {
+            var eInfo = Cypher.Encrypt(sMaInfo);
+            var mConnInfo = Cypher.Decrypt(sConnInfo);
+
+            using (_repository)
+            {
+                var computerInfo = _repository.GetComputerInfo(eInfo);
+
+                if (computerInfo == null){
+                    return CreateComputerInfo(eInfo, sConnInfo);
+                }
+
+                if (IsUpdatedComputerInfo(mConnInfo) == false)
+                {
+                    var response = UpdateComputerInfo(eInfo, sConnInfo);
+                    if (string.IsNullOrWhiteSpace(response) == false)
+                        return response;
+                }
+
+                return IsValidComputerInfo(mConnInfo);
+
+            }
+        }
+
+        private string IsValidComputerInfo(string mConnInfo)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string UpdateComputerInfo(string eInfo, string sConnInfo)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool IsUpdatedComputerInfo(string mConnInfo)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string CreateComputerInfo(string eInfo, string sConnInfo)
+        {
+            var model = new ConnectionInfoModel
+            {
+                Hk = Cypher.Decrypt(sConnInfo),
+                Hn = Cypher.Decrypt(Cypher.Decrypt(eInfo)),
+                St = DateTime.MinValue,
+                Et = DateTime.MinValue,
+                Iv = false
+            };
+
+            _repository.AddComputerInfo(eInfo, Cypher.Encrypt(new JavaScriptSerializer().Serialize(model)));
+
+            return Cypher.Encrypt(new JavaScriptSerializer().Serialize(new ConnectionInfoResponse
+            {
+                //NxWn = SharedConstants.Client.
+            }));
+
+
         }
     }
 }

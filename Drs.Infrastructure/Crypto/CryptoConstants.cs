@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace Drs.Infrastructure.Crypto
+﻿namespace Drs.Infrastructure.Crypto
 {
     public class CryptoConstants
     {

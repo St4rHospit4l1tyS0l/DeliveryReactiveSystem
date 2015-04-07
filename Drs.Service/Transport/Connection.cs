@@ -4,7 +4,9 @@ using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using Drs.Infrastructure.Crypto;
 using Drs.Infrastructure.Extensions.Enumerables;
+using Drs.Infrastructure.Hinfo;
 using Drs.Infrastructure.Logging;
 using Drs.Model.Constants;
 using Drs.Model.Transport;
@@ -31,6 +33,8 @@ namespace Drs.Service.Transport
             Address = address;
             _hubConnection = new HubConnection(address);
             _hubConnection.Headers.Add(SharedConstants.Server.USERNAME_HEADER, username);
+            _hubConnection.Headers.Add(SharedConstants.Server.CONNECTION_ID_HEADER, Cypher.Encrypt(ManagemenExt.GetKey()));
+
             CreateStatus().Subscribe(
                 s => _statusStream.OnNext(new ConnectionInfo(s, address)),
                 _statusStream.OnError,

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Autofac;
+using Drs.Infrastructure.Crypto;
 using Drs.Infrastructure.Logging;
 using Drs.Model.Constants;
 using Drs.Model.Settings;
@@ -72,7 +73,7 @@ namespace Drs.Ui
                         SharedConstants.Server.TRACK_HUB
                 };
 
-                reactiveDeliveryClient.Initialize(Environment.MachineName, container.Resolve<IConfigurationProvider>().Servers, lstHubProxies, container.Resolve<ILoggerFactory>());
+                reactiveDeliveryClient.Initialize(Cypher.Encrypt(Environment.MachineName), container.Resolve<IConfigurationProvider>().Servers, lstHubProxies, container.Resolve<ILoggerFactory>());
                 SettingsData.Client.Container = container;
                 await SettingConfigureWs.Initialize(reactiveDeliveryClient);
                 var mainWindow = container.Resolve<MainWindow>();
@@ -84,8 +85,7 @@ namespace Drs.Ui
                 vm.Initialize();
                 mainWindow.DataContext = vm;
 
-                splash.Close();
-                mainWindow.Show();
+                ShowNextWindow(reactiveDeliveryClient, splash, mainWindow);
 
             }
             catch (Exception ex)
@@ -93,6 +93,13 @@ namespace Drs.Ui
                 MessageBox.Show("Error al iniciar", String.Format("Se presentó el siguiente error: {0} - {1}", ex.Message, ex.InnerException == null ? String.Empty : ex.InnerException.Message));
                 Shutdown();
             }
+        }
+
+        private void ShowNextWindow(IReactiveDeliveryClient reactiveDeliveryClient, SplashWnd splash, MainWindow mainWindow)
+        {
+            //var response = reactiveDeliveryClient.ExecutionProxy.ExecuteRequest<>()
+            splash.Close();
+            mainWindow.Show();
         }
 
         private void InitializeSignalRPosConnection()

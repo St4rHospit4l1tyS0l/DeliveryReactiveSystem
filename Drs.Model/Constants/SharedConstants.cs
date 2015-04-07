@@ -13,6 +13,7 @@ namespace Drs.Model.Constants
             //Module Account
             public const string ACCOUNT_HUB = "ModAccount";
             public const string MENU_INFO_ACCOUNT_HUB_METHOD = "MenuInfo-Account";
+            public const string ACCOUNT_INFO_ACCOUNT_HUB_METHOD = "AccountInfo-Account";
 
             //Module Client
             public const string CLIENT_HUB = "ModClient";
@@ -44,6 +45,7 @@ namespace Drs.Model.Constants
 
             //
             public const string USERNAME_HEADER = "UsrHdr";
+            public const string CONNECTION_ID_HEADER = "CONNECTION_ID";
 
             //Module Store
             public const string STORE_HUB = "ModStore";

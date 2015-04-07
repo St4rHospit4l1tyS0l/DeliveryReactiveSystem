@@ -31,9 +31,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<CallCenterInfo> CallCenterInfo { get; set; }
         public virtual DbSet<Client> Client { get; set; }
-        public virtual DbSet<ClientInfo> ClientInfo { get; set; }
         public virtual DbSet<ClientPhone> ClientPhone { get; set; }
         public virtual DbSet<ClientPhoneStatistics> ClientPhoneStatistics { get; set; }
         public virtual DbSet<ClientStatistics> ClientStatistics { get; set; }
@@ -58,12 +56,14 @@ namespace Drs.Repository.Entities
         public virtual DbSet<RegionB> RegionB { get; set; }
         public virtual DbSet<RegionC> RegionC { get; set; }
         public virtual DbSet<RegionD> RegionD { get; set; }
-        public virtual DbSet<ServerInfo> ServerInfo { get; set; }
         public virtual DbSet<Setting> Setting { get; set; }
         public virtual DbSet<StoreAddressDistribution> StoreAddressDistribution { get; set; }
         public virtual DbSet<StoreStatus> StoreStatus { get; set; }
         public virtual DbSet<ZipCode> ZipCode { get; set; }
         public virtual DbSet<ViewUserInfo> ViewUserInfo { get; set; }
         public virtual DbSet<UserDetail> UserDetail { get; set; }
+        public virtual DbSet<CallCenterInfo> CallCenterInfo { get; set; }
+        public virtual DbSet<ServerInfo> ServerInfo { get; set; }
+        public virtual DbSet<ClientInfo> ClientInfo { get; set; }
     }
 }

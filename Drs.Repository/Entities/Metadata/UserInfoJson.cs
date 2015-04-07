@@ -1,23 +1,23 @@
 ﻿using System;
 using Drs.Infrastructure.Extensions;
-using Drs.Model.Constants;
+using Drs.Model.Annotations;
 
 namespace Drs.Repository.Entities.Metadata
 {
     public static class UserInfoJson
     {
-        private static ViewUserInfo ModelEnt;
-        public static readonly string Key = ModelEnt.PropertyName(e => e.Id);
+        [UsedImplicitly] private static ViewUserInfo _modelEnt = null;
+        public static readonly string Key = _modelEnt.PropertyName(e => e.Id);
 
         public static readonly string Columns = String.Join(",", new[]
         {
-            ModelEnt.PropertyName(e => e.Id),
-            ModelEnt.PropertyName(e => e.UserName),
-            ModelEnt.PropertyName(e => e.FirstName),
-            ModelEnt.PropertyName(e => e.LastName),
-            ModelEnt.PropertyName(e => e.Role),
-            ModelEnt.PropertyName(e => e.Email),
-            ModelEnt.PropertyName(e => e.IsObsolete),
+            _modelEnt.PropertyName(e => e.Id),
+            _modelEnt.PropertyName(e => e.UserName),
+            _modelEnt.PropertyName(e => e.FirstName),
+            _modelEnt.PropertyName(e => e.LastName),
+            _modelEnt.PropertyName(e => e.Role),
+            _modelEnt.PropertyName(e => e.Email),
+            _modelEnt.PropertyName(e => e.IsObsolete),
         });
 
         public static UserInfoDto DynamicToDto(dynamic data)
