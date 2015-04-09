@@ -3,7 +3,7 @@ using System.Management;
 
 namespace Drs.Infrastructure.Hinfo
 {
-    public static class ManagemenExt
+    public static class ManagementExt
     {
         public static string GetKey()
         {

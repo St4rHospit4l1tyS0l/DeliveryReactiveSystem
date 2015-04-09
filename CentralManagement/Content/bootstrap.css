@@ -5101,7 +5101,7 @@ a.thumbnail.active {
   zoom: 1;
 }
 .media-body {
-  width: 10000px;
+  width: 100%;
 }
 .media-object {
   display: block;

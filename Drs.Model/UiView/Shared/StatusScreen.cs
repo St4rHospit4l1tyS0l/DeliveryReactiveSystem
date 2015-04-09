@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Drs.Model.Constants;
 
 namespace Drs.Model.UiView.Shared
 {
@@ -9,7 +10,8 @@ namespace Drs.Model.UiView.Shared
         UmOrd = 3000,
         UmTrc = 4000,
         UmMss = 5000,
-        UmStt = 6000
+        UmStt = 6000,
+        UmMsg = SharedConstants.Client.STATUS_SCREEN_MESSAGE
     }
 
     public static class StatusScreenName

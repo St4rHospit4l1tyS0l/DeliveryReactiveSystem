@@ -12,6 +12,8 @@
         xmlns:vmOrder="clr-namespace:Drs.ViewModel.Order;assembly=Drs.ViewModel"
         xmlns:vmTrack="clr-namespace:Drs.ViewModel.Track;assembly=Drs.ViewModel"
         xmlns:viewTrack="clr-namespace:Drs.Ui.Ui.Track"
+        xmlns:vmShared="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
+        xmlns:shared="clr-namespace:Drs.Ui.Ui.Shared"
         mc:Ignorable="d"  d:DesignHeight="1024" d:DesignWidth="1280" WindowStyle="None" ResizeMode="NoResize"  Topmost="False"
         WindowStartupLocation="CenterScreen" WindowState="Maximized" UseNoneWindowStyle="True" ShowCloseButton="False" ShowIconOnTitleBar="False" 
                       ShowMinButton="False" ShowTitleBar="False" IgnoreTaskbarOnMaximize="True" Deactivated="MainWindow_OnDeactivated" LostFocus="MainWindow_OnLostFocus">
@@ -33,6 +35,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vmOrder:UpsertAddressFoVm}">
             <viewOrder:UpsertAddressFo/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmShared:MsgWndVm}">
+            <shared:MsgWndUc/>
         </DataTemplate>
     </Window.Resources>
     <controls:MetroWindow.TaskbarItemInfo>

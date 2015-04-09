@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Security.Principal;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Drs.Model.Constants;
 using Drs.Repository.Account;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace CentralManagement.Controllers
 {

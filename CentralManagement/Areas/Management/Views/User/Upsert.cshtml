@@ -195,13 +195,13 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <span class="btn btn-white" ng-click="cancel()">
+                <button class="btn btn-white" ng-click="cancel()">
                     Cancelar
-                </span>
-                <span class="btn btn-primary " ng-disabled="WaitFor==true"
+                </button>
+                <button class="btn btn-primary " ng-disabled="WaitFor==true"
                       ng-click="submit('#FormCatId', '@Url.Action("DoUpsert", "User", new{area = "Management"})')">
                     Guardar
-                </span>
+                </button>
             </div>
         </div>
     </div>

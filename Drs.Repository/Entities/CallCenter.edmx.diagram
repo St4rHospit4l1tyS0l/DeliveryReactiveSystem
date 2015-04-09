@@ -101,10 +101,10 @@
         <EntityTypeShape EntityType="CallCenterModel.UserDetail" Width="1.5" PointX="5.25" PointY="25" />
         <AssociationConnector Association="CallCenterModel.FK_UserDetail_AspNetUsers" />
         <EntityTypeShape EntityType="CallCenterModel.CallCenterInfo" Width="1.5" PointX="10.375" PointY="2.5" />
-        <EntityTypeShape EntityType="CallCenterModel.ServerInfo" Width="1.5" PointX="12.625" PointY="1" />
-        <AssociationConnector Association="CallCenterModel.FK_ServerInfo_CallCenterInfo" />
-        <EntityTypeShape EntityType="CallCenterModel.ClientInfo" Width="1.5" PointX="12.625" PointY="4.375" />
+        <EntityTypeShape EntityType="CallCenterModel.ClientInfo" Width="1.5" PointX="12.625" PointY="1" />
+        <EntityTypeShape EntityType="CallCenterModel.ServerInfo" Width="1.5" PointX="12.625" PointY="3.75" />
         <AssociationConnector Association="CallCenterModel.FK_ClientInfo_CallCenterInfo" />
+        <AssociationConnector Association="CallCenterModel.FK_ServerInfo_CallCenterInfo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

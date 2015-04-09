@@ -34,15 +34,8 @@ namespace Drs.Service.ReactiveDelivery
                 //_controlRepository = new ControlRepository(controlServiceClient);
             }
 
-            //PriceLatencyRecorder = new PriceLatencyRecorder();
             _concurrencyService = new ConcurrencyService();
             _executionProxy = new ExecutionProxy(executeServiceClient, _concurrencyService);
-
-            //var priceFactory = new PriceFactory(executionRepository, PriceLatencyRecorder);
-            //var priceRepository = new PriceRepository(pricingServiceClient, priceFactory, _loggerFactory);
-            //var currencyPairUpdateFactory = new CurrencyPairUpdateFactory(priceRepository);
-            //TradeRepository = new TradeRepository(blotterServiceClient, tradeFactory);
-            //ReferenceData = new ReferenceDataRepository(referenceDataServiceClient, currencyPairUpdateFactory);
         }
 
         public HubListeners HubListeners { get; set; }

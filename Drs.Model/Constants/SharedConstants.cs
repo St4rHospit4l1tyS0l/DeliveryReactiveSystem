@@ -64,6 +64,9 @@ namespace Drs.Model.Constants
             public const int RECORD_ONPROGRESS_TO_SAVED = 1001;
             public const int RECORD_SAVED = 1002;
             public const int RECORD_ERROR_SAVED = 1003;
+
+            public const int STATUS_SCREEN_MESSAGE = 7000;
+            public const int STATUS_SCREEN_LOGIN = 1000;
             
             public const string IS_TRUE = "TRUE";
             public const string IS_FALSE = "FALSE";

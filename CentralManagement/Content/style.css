@@ -1268,6 +1268,7 @@ button.dim:active:before {
 }
 .media-body {
   display: block;
+    width: auto !important;
 }
 .chat-element > .pull-left {
   margin-right: 10px;
@@ -4012,6 +4013,7 @@ a.compose-mail {
 .media-body {
   overflow: hidden;
 }
+
 .feed-element > .pull-left {
   margin-right: 10px;
 }

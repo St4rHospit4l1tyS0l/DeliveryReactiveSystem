@@ -109,7 +109,7 @@ namespace Drs.ViewModel.Main
             Flyouts.Add(BootStrapper.CreateFlyoutControl(flyout));
         }
 
-        public ShellContainerVm(ILoginVm loginVm, IMenuVm menuVm, IMainOrderVm orderVm, ITrackOrderVm trackOrderVm)
+        public ShellContainerVm(ILoginVm loginVm, IMenuVm menuVm, IMainOrderVm orderVm, ITrackOrderVm trackOrderVm, IMsgWndVm msgWndVm)
         {
             HeaderVisibility = Visibility.Collapsed;
 
@@ -120,10 +120,11 @@ namespace Drs.ViewModel.Main
                 {StatusScreen.Login, loginVm},
                 {StatusScreen.ShMenu, menuVm},
                 {StatusScreen.UmOrd, orderVm},
-                {StatusScreen.UmTrc, trackOrderVm}
+                {StatusScreen.UmTrc, trackOrderVm},
+                {StatusScreen.UmMsg, msgWndVm}
             });
 
-            CurrentView = DictionaryViews[StatusScreen.Login];
+            CurrentView = DictionaryViews[StatusScreen.UmMsg];
             SetIdleWindow();
         }
 

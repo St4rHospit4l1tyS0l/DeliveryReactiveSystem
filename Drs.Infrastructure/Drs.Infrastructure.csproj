@@ -106,7 +106,7 @@
     <Compile Include="Extensions\Enumerables\Stale.cs" />
     <Compile Include="Extensions\Io\UriExtension.cs" />
     <Compile Include="Extensions\Io\DirExt.cs" />
-    <Compile Include="Hinfo\ManagemenExt.cs" />
+    <Compile Include="Hinfo\ManagementExt.cs" />
     <Compile Include="JqGrid\JqGridClause.cs" />
     <Compile Include="JqGrid\JqGridQueryWhere.cs" />
     <Compile Include="JqGrid\Model\JqGridFilterModel.cs" />
@@ -118,6 +118,7 @@
     <Compile Include="Logging\DebugLoggerFactory.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Logging\ILog.cs" />
+    <Compile Include="Model\ConnectionFullModel.cs" />
     <Compile Include="Model\ConnectionInfoModel.cs" />
     <Compile Include="Model\ConnectionInfoResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

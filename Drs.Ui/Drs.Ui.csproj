@@ -113,6 +113,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -216,6 +217,9 @@
       <DependentUpon>BackPreviousUc.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\Shared\IAutoCompleteTextUc.cs" />
+    <Compile Include="Ui\Shared\MsgWndUc.xaml.cs">
+      <DependentUpon>MsgWndUc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ui\Splash\SplashWnd.xaml.cs">
       <DependentUpon>SplashWnd.xaml</DependentUpon>
     </Compile>
@@ -319,6 +323,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Ui\Shared\MsgWndUc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Ui\Splash\SplashWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -386,6 +394,10 @@
     <ProjectReference Include="..\Drs.Model\Drs.Model.csproj">
       <Project>{3FFC893E-2E6F-44C5-A3D1-0BEF4DA3F271}</Project>
       <Name>Drs.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Drs.Resources\Drs.Resources.csproj">
+      <Project>{2CC9F539-A4C4-4F80-98BF-FC00D6F540D3}</Project>
+      <Name>Drs.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Drs.Service\Drs.Service.csproj">
       <Project>{9CF99951-CA77-427A-8C13-F979FA45F585}</Project>

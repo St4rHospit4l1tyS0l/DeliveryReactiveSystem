@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Drs.Infrastructure.JqGrid.Model;
 using Drs.Infrastructure.Resources;
+using Drs.Model.Constants;
 using Drs.Repository.Account;
 using Drs.Repository.Entities;
 using Drs.Repository.Entities.Metadata;
@@ -18,7 +19,7 @@ using ResShared = CentralManagement.Resources.ResShared;
 
 namespace CentralManagement.Areas.Management.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = RoleConstants.MANAGER + ", " + RoleConstants.INSTALLER)]
     public class UserController : Controller
     {
         // GET: Default

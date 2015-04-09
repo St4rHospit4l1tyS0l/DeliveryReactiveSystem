@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using Drs.Service.Account;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(CentralManagement.Startup))]
@@ -9,6 +10,7 @@ namespace CentralManagement
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            new AccountService().ValidateMainAccount();
         }
     }
 }

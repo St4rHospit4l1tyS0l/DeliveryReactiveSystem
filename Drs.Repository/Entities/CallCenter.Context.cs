@@ -63,7 +63,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<ViewUserInfo> ViewUserInfo { get; set; }
         public virtual DbSet<UserDetail> UserDetail { get; set; }
         public virtual DbSet<CallCenterInfo> CallCenterInfo { get; set; }
-        public virtual DbSet<ServerInfo> ServerInfo { get; set; }
         public virtual DbSet<ClientInfo> ClientInfo { get; set; }
+        public virtual DbSet<ServerInfo> ServerInfo { get; set; }
     }
 }

@@ -130,6 +130,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\LicProxySvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\QueryFunction\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -192,6 +197,13 @@
     <None Include="Service References\CustomerOrder\item43.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\LicProxySvc\LicProxy.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LicProxySvc\LicProxy1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LicProxySvc\LicProxySvc.wsdl" />
     <None Include="Service References\QueryFunction\Drs.Service.QueryFunction.ResponseRd.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -201,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\CustomerOrder\" />
+    <WCFMetadataStorage Include="Service References\LicProxySvc\" />
     <WCFMetadataStorage Include="Service References\QueryFunction\" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +258,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\QueryFunction\item1.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LicProxySvc\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LicProxySvc\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LicProxySvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

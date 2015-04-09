@@ -106,6 +106,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\CurrentUserSettings.cs" />
+    <Compile Include="Account\DeviceConnModel.cs" />
+    <Compile Include="Account\DeviceInfoModel.cs" />
     <Compile Include="Account\ICurrentUserSettings.cs" />
     <Compile Include="Account\LoginModel.cs" />
     <Compile Include="Account\UserInfoModel.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="Order\PosCheck.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Settings\ControlTitleModel.cs" />
+    <Compile Include="Shared\AccountConstants.cs" />
     <Compile Include="Shared\OptionModel.cs" />
     <Compile Include="Shared\ResponseMsg.cs" />
     <Compile Include="Shared\ControlInfoModel.cs" />

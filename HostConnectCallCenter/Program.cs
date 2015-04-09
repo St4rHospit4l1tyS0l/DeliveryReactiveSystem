@@ -10,13 +10,13 @@ namespace HostConnectCallCenter
         {
             try
             {
-                Console.WriteLine("Server try to init at http://localhost:8080/");
+                Console.WriteLine("Server try to init at http://localhost:8123/");
 
                 AppInit.Start();
 
-                using (WebApp.Start<Startup>("http://localhost:8080/"))
+                using (WebApp.Start<Startup>("http://localhost:8123/"))
                 {
-                    Console.WriteLine("Server running at http://localhost:8080/");
+                    Console.WriteLine("Server running at http://localhost:8123/");
                     Console.ReadLine();
                 }
 

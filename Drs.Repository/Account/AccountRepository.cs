@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Drs.Infrastructure.Model;
 using Drs.Model.Account;
 using Drs.Model.Menu;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
+using ReactiveUI;
 
 namespace Drs.Repository.Account
 {
@@ -65,9 +67,94 @@ namespace Drs.Repository.Account
             return DbEntities.ClientInfo.Where(e => e.ClientHost == eInfo).Select(e => e.ClientCode).FirstOrDefault();
         }
 
-        public void AddComputerInfo(string eInfo, string encrypt)
+        public void AddComputerInfo(string clientHost, string clientCode)
         {
-            throw new System.NotImplementedException();
+            DbEntities.ClientInfo.Add(new ClientInfo
+            {
+                ClientHost = clientHost,
+                ClientCode = clientCode
+            });
+
+            DbEntities.SaveChanges();
+        }
+
+        public void AddServerInfo(string eInfo, string serverCode)
+        {
+            DbEntities.ServerInfo.Add(new ServerInfo
+            {
+                ServerName = eInfo,
+                ServerCode = serverCode
+            });
+
+            DbEntities.SaveChanges();            
+        }
+
+        public ServerInfo GetServerInfo(string eInfo)
+        {
+            return DbEntities.ServerInfo.FirstOrDefault(e => e.ServerName == eInfo);
+        }
+
+        public void SaveChanges()
+        {
+            DbEntities.SaveChanges();
+        }
+
+        public IEnumerable<ConnectionFullModel> GetLstClients()
+        {
+            return DbEntities.ClientInfo.Select(e => new ConnectionFullModel
+            {
+                DeviceId = e.ClientInfoId,
+                Code = e.ClientCode,
+                IsSelected = e.CallCenterInfoId.HasValue
+            }).ToList();
+        }
+
+        public IEnumerable<ConnectionFullModel> GetLstServers()
+        {
+            return DbEntities.ServerInfo.Select(e => new ConnectionFullModel
+            {
+                DeviceId = e.ServerInfoId,
+                Code = e.ServerCode,
+                IsSelected = e.CallCenterInfoId.HasValue
+            }).ToList();
+        }
+
+        public bool ExistsServer(int id)
+        {
+            return DbEntities.ServerInfo.Any(e => e.ServerInfoId == id);
+        }
+
+        public int GetCallCenterId()
+        {
+            return DbEntities.CallCenterInfo.Select(e => e.CallCenterInfoId).FirstOrDefault();
+        }
+
+        public int AddCallCenterId()
+        {
+            var callCenter = new CallCenterInfo();
+            DbEntities.CallCenterInfo.Add(callCenter);
+            DbEntities.SaveChanges();
+            return callCenter.CallCenterInfoId;
+        }
+
+        public ServerInfo GetServerInfo(int id)
+        {
+           return DbEntities.ServerInfo.SingleOrDefault(e => e.ServerInfoId == id);
+        }
+
+        public ClientInfo GetClientInfo(int id)
+        {
+            return DbEntities.ClientInfo.SingleOrDefault(e => e.ClientInfoId == id);
+        }
+
+        public List<string> GetLstClientsCodes()
+        {
+            return DbEntities.ClientInfo.Where(e => e.CallCenterInfoId != null).Select(e => e.ClientCode).ToList();
+        }
+
+        public List<string> GetLstServersCodes()
+        {
+            return DbEntities.ServerInfo.Where(e => e.CallCenterInfoId != null).Select(e => e.ServerCode).ToList();
         }
 
         public bool IsValidUser(string id)

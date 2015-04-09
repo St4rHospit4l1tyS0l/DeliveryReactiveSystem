@@ -120,6 +120,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Setting\SettingConfigureWs.cs" />
+    <Compile Include="Shared\IMsgWndVm.cs" />
     <Compile Include="Shared\IWizItem.cs" />
     <Compile Include="Order\OrderSummaryVm.cs" />
     <Compile Include="Order\IOrderSummaryVm.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Order\FranchiseContainerVm.cs" />
     <Compile Include="Order\IFranchiseVm.cs" />
     <Compile Include="Order\FranchiseVm.cs" />
+    <Compile Include="Shared\MsgWndVm.cs" />
     <Compile Include="Shared\NotifyingBase.cs" />
     <Compile Include="Shared\UcViewModelBase.cs" />
     <Compile Include="Shared\IUcViewModel.cs" />

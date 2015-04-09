@@ -33,7 +33,7 @@ namespace Drs.Service.Transport
             Address = address;
             _hubConnection = new HubConnection(address);
             _hubConnection.Headers.Add(SharedConstants.Server.USERNAME_HEADER, username);
-            _hubConnection.Headers.Add(SharedConstants.Server.CONNECTION_ID_HEADER, Cypher.Encrypt(ManagemenExt.GetKey()));
+            _hubConnection.Headers.Add(SharedConstants.Server.CONNECTION_ID_HEADER, Cypher.Encrypt(ManagementExt.GetKey()));
 
             CreateStatus().Subscribe(
                 s => _statusStream.OnNext(new ConnectionInfo(s, address)),

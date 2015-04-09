@@ -57,11 +57,11 @@
                         <li>
                             <a href="@Url.Action("Index", "User",new {area = "Management"})"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span> </a>
                         </li>
-                        <li>
+                        @*<li>
                             <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Tableros de control</span> </a>
-                        </li>
+                        </li>*@
                         <li>
-                            <a href="@Url.Action("Index", "License", new { area = "" })"><i class="fa fa-lock"></i> <span class="nav-label">Licenciamiento</span> </a>
+                            <a href="@Url.Action("Index", "License", new { area = "Management" })"><i class="fa fa-lock"></i> <span class="nav-label">Licenciamiento</span> </a>
                         </li>
                     }
                     
@@ -69,9 +69,6 @@
                     {
                         <li>
                             <a href="@Url.Action("Index", "User",new {area = "Management"})"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span> </a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "License", new { area = "" })"><i class="fa fa-lock"></i> <span class="nav-label">Licenciamiento</span> </a>
                         </li>
                     }
                 </ul>

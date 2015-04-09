@@ -17,7 +17,7 @@ namespace Drs.Repository.Entities
         public int ClientInfoId { get; set; }
         public string ClientHost { get; set; }
         public string ClientCode { get; set; }
-        public int CallCenterInfoId { get; set; }
+        public Nullable<int> CallCenterInfoId { get; set; }
     
         public virtual CallCenterInfo CallCenterInfo { get; set; }
     }

@@ -90,3 +90,24 @@ div.blocker img {
 .blue-light {
     color: #00a7ff;
 }
+.black {
+    color: #000;
+}
+
+.orange-bg {
+    background-color: orange;
+}
+.yellowgreen-bg {
+    background-color: yellowgreen;
+}
+.red-bg {
+    background-color: red;
+}
+.blue-light-bg {
+    background-color: #00a7ff;
+}
+
+
+.normal-cursor {
+    cursor: default;
+}

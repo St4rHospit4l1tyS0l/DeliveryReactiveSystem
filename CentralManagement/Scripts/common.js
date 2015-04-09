@@ -53,7 +53,23 @@ window.goToUrlMvcUrl = function (url, params) {
     }
 };
 
-window.sendPostAction = function (id, divScope, urlToGo, innerScp, showSuccess) {
+window.sendPostAction = function(id, divScope, urlToGo, innerScp, showSuccess) {
     var scope = angular.element($(divScope)).scope();
     scope.sendPostAction({ id: id }, urlToGo, innerScp, showSuccess);
-}
+};
+
+window.goToUrlMvcUrl = function (url, params) {
+    if (params !== undefined) {
+        for (var key in params) {
+            var param = params[key] || '';
+            url = url.replace(key, param);
+        }
+    }
+
+    try {
+        window.location.replace(url);
+    } catch (e) {
+        window.location = url;
+    }
+};
+

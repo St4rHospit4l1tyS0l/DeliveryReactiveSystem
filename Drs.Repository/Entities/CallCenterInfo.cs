@@ -16,14 +16,14 @@ namespace Drs.Repository.Entities
     {
         public CallCenterInfo()
         {
-            this.ServerInfo = new HashSet<ServerInfo>();
             this.ClientInfo = new HashSet<ClientInfo>();
+            this.ServerInfo = new HashSet<ServerInfo>();
         }
     
         public int CallCenterInfoId { get; set; }
         public string ActivationCode { get; set; }
     
-        public virtual ICollection<ServerInfo> ServerInfo { get; set; }
         public virtual ICollection<ClientInfo> ClientInfo { get; set; }
+        public virtual ICollection<ServerInfo> ServerInfo { get; set; }
     }
 }

@@ -1,15 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows;
 using Autofac;
 using Drs.Infrastructure.Crypto;
+using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Infrastructure.Logging;
+using Drs.Infrastructure.Model;
 using Drs.Model.Constants;
 using Drs.Model.Settings;
+using Drs.Model.Shared;
+using Drs.Model.UiView.Shared;
+using Drs.Resources.Network;
 using Drs.Service.Configuration;
 using Drs.Service.ReactiveDelivery;
+using Drs.Service.TransferDto;
 using Drs.Ui.Ui;
 using Drs.Ui.Ui.Splash;
 using Drs.ViewModel.Main;
@@ -19,6 +28,7 @@ using Drs.ViewModel.SignalR;
 using log4net;
 using Microsoft.Owin;
 using Microsoft.Owin.Hosting;
+using ReactiveUI;
 using ILog = log4net.ILog;
 
 [assembly: OwinStartup(typeof(Startup))]
@@ -85,7 +95,11 @@ namespace Drs.Ui
                 vm.Initialize();
                 mainWindow.DataContext = vm;
 
-                ShowNextWindow(reactiveDeliveryClient, splash, mainWindow);
+                ShowNextWindow(reactiveDeliveryClient, () =>
+                {
+                    splash.Close();
+                    mainWindow.Show();                    
+                }, vm);
 
             }
             catch (Exception ex)
@@ -95,11 +109,70 @@ namespace Drs.Ui
             }
         }
 
-        private void ShowNextWindow(IReactiveDeliveryClient reactiveDeliveryClient, SplashWnd splash, MainWindow mainWindow)
+        private void ShowNextWindow(IReactiveDeliveryClient reactiveDeliveryClient, Action showWnd, IShellContainerVm vm)
         {
-            //var response = reactiveDeliveryClient.ExecutionProxy.ExecuteRequest<>()
-            splash.Close();
-            mainWindow.Show();
+            var showWndSec = showWnd;
+            reactiveDeliveryClient.ExecutionProxy.ExecuteRequest<ResponseMessageData<string>, ResponseMessageData<string>>
+                (SharedConstants.Server.ACCOUNT_HUB, SharedConstants.Server.ACCOUNT_INFO_ACCOUNT_HUB_METHOD, TransferDto.SameType)
+                .ObserveOn(reactiveDeliveryClient.ConcurrencyService.Dispatcher)
+                .SubscribeOn(reactiveDeliveryClient.ConcurrencyService.TaskPool)
+                .Subscribe(e => OnInfoAccountOk(e, showWnd, vm), i => OnInfoAccountError(i, showWndSec));
+        }
+
+        private void OnInfoAccountError(Exception ex, Action showWnd)
+        {
+            OnInfoAccountError(ex.Message, showWnd);
+        }
+
+
+        private void OnInfoAccountError(string msgError, Action showWnd)
+        {
+            MessageBus.Current.SendMessage(msgError, SharedMessageConstants.ACCOUNT_ERROR_CHECK);
+            showWnd();
+        }
+
+        private void OnInfoAccountOk(IStale<ResponseMessageData<string>> obj, Action showWnd, IShellContainerVm vm)
+        {
+            if (obj.IsStale)
+            {
+                OnInfoAccountError(ResNetwork.ERROR_NETWORK_DOWN, showWnd);
+                return;
+            }
+
+            if (obj.Data.IsSuccess == false)
+            {
+                OnInfoAccountError(obj.Data.Message, showWnd);
+                return;
+            }
+
+            ConnectionInfoResponse response;
+            try
+            {
+                response = new JavaScriptSerializer().Deserialize<ConnectionInfoResponse>(Cypher.Decrypt(obj.Data.Data));
+            }
+            catch (Exception)
+            {
+                OnInfoAccountError("No fue posible obtener la respuesta del servidor. Revise que tenga la versión correcta en el cliente o en el servidor"
+                    , showWnd);
+                return;
+            }
+
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                try
+                {
+                    vm.ChangeCurrentView((StatusScreen)response.NxWn, false);
+                    MessageBus.Current.SendMessage(response.Msg, SharedMessageConstants.ACCOUNT_ERROR_CHECK);
+                    showWnd();
+                }
+                catch (Exception)
+                {
+                    OnInfoAccountError("La respuesta del servidor es incorrecta. Revise que tenga la versión correcta en el cliente o en el servidor"
+                        , showWnd);
+                } 
+            });
+
+
         }
 
         private void InitializeSignalRPosConnection()
@@ -112,7 +185,7 @@ namespace Drs.Ui
             {
                 Log.Error("An error occurred while starting SignalR", exception);
                 throw;
-            }    
+            }
         }
 
         private void InitializeLogging()

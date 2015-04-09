@@ -1,8 +1,9 @@
 ﻿using System.Web.Mvc;
+using Drs.Model.Constants;
 
 namespace CentralManagement.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = RoleConstants.MANAGER)]
     public class ManageController : Controller
     {
 //        private ApplicationSignInManager _signInManager;

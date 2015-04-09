@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="69fc029b-5144-4808-8097-dc44e6c9ded2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:3051/Proxy/LicProxy.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="LicProxySvc.wsdl" MetadataType="Wsdl" ID="44ae3605-11af-405d-af71-227e3fcbc3c3" SourceId="1" SourceUrl="http://localhost:3051/Proxy/LicProxy.svc?wsdl" />
+    <MetadataFile FileName="LicProxy.xsd" MetadataType="Schema" ID="6754574a-adcb-4ed1-b934-9bf7c94eb27a" SourceId="1" SourceUrl="http://localhost:3051/Proxy/LicProxy.svc?xsd=xsd0" />
+    <MetadataFile FileName="LicProxy1.xsd" MetadataType="Schema" ID="023cd7a5-9ac9-4fdc-b747-3fbbe89cc2c8" SourceId="1" SourceUrl="http://localhost:3051/Proxy/LicProxy.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

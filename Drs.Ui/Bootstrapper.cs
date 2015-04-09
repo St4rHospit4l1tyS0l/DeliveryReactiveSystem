@@ -32,6 +32,7 @@ namespace Drs.Ui
             builder.RegisterType<AutoCompleteTextVm>().As<IAutoCompleteTextVm>().ExternallyOwned();
             builder.RegisterType<AutoCompletePhoneVm>().As<IAutoCompletePhoneVm>().ExternallyOwned();
             builder.RegisterType<BackPreviousVm>().As<IBackPreviousVm>().ExternallyOwned();
+            builder.RegisterType<MsgWndVm>().As<IMsgWndVm>().ExternallyOwned();
 
             builder.RegisterType<ButtonItemModel>().As<IButtonItemModel>().ExternallyOwned();
             builder.RegisterType<MenuItemVm>().As<IMenuItemVm>().ExternallyOwned();

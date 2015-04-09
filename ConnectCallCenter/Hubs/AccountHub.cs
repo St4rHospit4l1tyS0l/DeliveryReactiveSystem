@@ -35,13 +35,11 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.MENU_INFO_ACCOUNT_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.ACCOUNT_INFO_ACCOUNT_HUB_METHOD)]
         public ResponseMessageData<string> GetAccountInfo()
         {
             try
             {
-
-
                 return new ResponseMessageData<string>
                 {
                     IsSuccess = true,
