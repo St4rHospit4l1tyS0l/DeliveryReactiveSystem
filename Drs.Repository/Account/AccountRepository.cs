@@ -157,9 +157,35 @@ namespace Drs.Repository.Account
             return DbEntities.ServerInfo.Where(e => e.CallCenterInfoId != null).Select(e => e.ServerCode).ToList();
         }
 
+        public void AddActivationCode(string code)
+        {
+            var callCenter = new CallCenterInfo { ActivationCode = code };
+            DbEntities.CallCenterInfo.Add(callCenter);
+            DbEntities.SaveChanges();            
+        }
+
+        public void UpdateActivationCode(string code)
+        {
+            var callCenter = DbEntities.CallCenterInfo.FirstOrDefault();
+
+            if (callCenter == null){
+                AddActivationCode(code);
+                return;
+            }
+
+            callCenter.ActivationCode = code;
+            DbEntities.SaveChanges();            
+        }
+
+        public string GetActivationCode()
+        {
+            return DbEntities.CallCenterInfo.Select(e => e.ActivationCode).FirstOrDefault();
+        }
+
         public bool IsValidUser(string id)
         {
             return DbEntities.UserDetail.Any(e => e.Id == id && e.IsObsolete == false);
         }
+
     }
 }

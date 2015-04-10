@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Drs.Infrastructure.Resources;
-using Drs.Model.Account;
 using Drs.Model.Constants;
 using Drs.Repository.Account;
 using Drs.Repository.Entities.Metadata;
@@ -23,6 +22,8 @@ namespace CentralManagement.Areas.Management.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.ActivationCode = _service.GetActivationCodeToShow();
+
             var devices = _service.GetLstDevices();
             var jsSer = new JavaScriptSerializer();
             ViewBag.LstClients = jsSer.Serialize(devices.LstClients);
@@ -133,12 +134,50 @@ namespace CentralManagement.Areas.Management.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        public ActionResult DoActivateCode(string actCode)
+        {
+            try
+            {
+                if (String.IsNullOrWhiteSpace(actCode))
+                {
+                    return Json(new ResponseMessageModel
+                    {
+                        HasError = true,
+                        Title = ResShared.TITLE_REGISTER_FAILED,
+                        Message = "El código de activación no es válido"
+                    });                  
+                }
+
+                var service = new AccountService();
+                service.AddActivationCode(actCode.Trim());
+
+                return Json(new ResponseMessageModel
+                {
+                    HasError = false,
+                    Message = "El código de activación fue almacenado de forma correcta"
+                });
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+                return Json(new ResponseMessageModel
+                {
+                    HasError = true,
+                    Title = ResShared.TITLE_REGISTER_FAILED,
+                    Message = ResShared.ERROR_UNKOWN
+                });
+            }
+        }
+
+
         [HttpPost]
         public async Task<ActionResult> AskForLicense()
         {
             try
             {
-                ResponseMessageModel response = await _service.AskForLicense();
+                var response = await _service.AskForLicense();
                 return Json(response);
             }
             catch (Exception ex)

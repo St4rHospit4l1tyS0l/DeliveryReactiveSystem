@@ -184,8 +184,8 @@
                                                     <div class="pull-right text-navy">
                                                         <div>
                                                             <small>
-                                                                <a class="btn btn-xs btn-primary"
-                                                                   ng-click="activateLicense('@Url.Action("DoSelectClient", "License", new{area="Management"})', true)">
+                                                                <a class="btn btn-xs btn-primary" ng-show ="ActivationCode"
+                                                                   ng-click="activateLicense('@Url.Action("DoActivateCode", "License", new{area="Management"})')">
                                                                     <i class="fa fa-upload"></i> &nbsp;{{ActivationCodeOld === '' ? 'Agregar código' : 'Actualizar código'}}
                                                                 </a>
                                                             </small>
@@ -193,6 +193,13 @@
                                                     </div>
                                                     <div>
                                                         <form id="FormCatId" name="FormCatId" class="form-horizontal" role="form">
+                                                            <div class="row" ng-show="ActivationCodeOld">
+                                                                <div class="col-xs-6 col-xs-offset-3">
+                                                                    <label class="form-control-static">
+                                                                        Código de activación actual: {{ActivationCodeOld}}
+                                                                    </label>
+                                                                </div>
+                                                            </div>
                                                             <div class="row">
                                                                 <div class="col-xs-6 col-xs-offset-3">
                                                                     <input type="text" ng-model="ActivationCode" ng-init="ActivationCodeOld = '@ViewBag.ActivationCode'"

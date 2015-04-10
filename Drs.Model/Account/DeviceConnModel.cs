@@ -6,6 +6,7 @@ namespace Drs.Model.Account
     {
         public List<string> LstClients { get; set; }
         public List<string> LstServers { get; set; }
+        public string ActivationCode { get; set; }
 
         public DeviceConnModel()
         {

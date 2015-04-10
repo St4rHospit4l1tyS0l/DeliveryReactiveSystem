@@ -105,6 +105,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\ActivationCodeModel.cs" />
     <Compile Include="Account\CurrentUserSettings.cs" />
     <Compile Include="Account\DeviceConnModel.cs" />
     <Compile Include="Account\DeviceInfoModel.cs" />

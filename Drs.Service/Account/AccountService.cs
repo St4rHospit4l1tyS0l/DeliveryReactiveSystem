@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using Drs.Infrastructure.Crypto;
+using Drs.Infrastructure.Extensions;
+using Drs.Infrastructure.Extensions.Json;
 using Drs.Infrastructure.Hinfo;
 using Drs.Infrastructure.Model;
 using Drs.Infrastructure.Resources;
@@ -12,6 +14,7 @@ using Drs.Model.Menu;
 using Drs.Model.Shared;
 using Drs.Repository.Account;
 using Drs.Repository.Entities;
+using Drs.Repository.Log;
 using Drs.Service.LicProxySvc;
 
 namespace Drs.Service.Account
@@ -87,7 +90,7 @@ namespace Drs.Service.Account
             if (decCompInfo.Code != AccountConstants.CODE_VALID)
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[decCompInfo.Code]);
 
-            if (now < decCompInfo.St)
+            if (now < decCompInfo.St.AddDays(-2))
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE_ST]);
 
 
@@ -266,7 +269,7 @@ namespace Drs.Service.Account
                 {
                     LstClients = _repository.GetLstClientsCodes(),
                     LstServers = _repository.GetLstServersCodes(),
-                    //
+                    ActivationCode = _repository.GetActivationCode()
                 };
 
                 if (deviceConn.LstClients.Count == 0 || deviceConn.LstServers.Count == 0){
@@ -277,7 +280,7 @@ namespace Drs.Service.Account
                     };
                 }
 
-                var deviceConnTx = new JavaScriptSerializer().Serialize(deviceConn);
+                var deviceConnTx = deviceConn.SerializeAndEncrypt();
                 var responseConn = String.Empty;
 
                 using (var proxy = new LicProxySvcClient())
@@ -285,10 +288,43 @@ namespace Drs.Service.Account
                     responseConn = await proxy.RequestActivationAsync(deviceConnTx);
                 }
 
+                try
+                {
+
+                }
+                catch (Exception ex)
+                {
+                    SharedLogger.LogError(ex, responseConn);
+                    return new ResponseMessageModel
+                    {
+                        HasError = true,
+                        Message = "Respuesta no válida"
+                    };
+                }
+
                 return new ResponseMessageModel{
                     HasError = false
                 };
             }
+        }
+
+        public string GetActivationCodeToShow()
+        {
+            var actCode = _repository.GetActivationCode();
+
+            if (string.IsNullOrWhiteSpace(actCode))
+                return String.Empty;
+
+            try
+            {
+                var actCodeModel = actCode.DeserializeAndDecrypt<ActivationCodeModel>();
+                return actCodeModel.ActivationCode.SubstringMax(10) + "***********************************";
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+
         }
 
         private int VerifyHasCallCenter()
@@ -323,6 +359,27 @@ namespace Drs.Service.Account
                     continue;
                 }
                 lstInfo.Add(client);
+            }
+        }
+
+        public void AddActivationCode(string actCode)
+        {
+            using (_repository)
+            {
+                var code = new ActivationCodeModel{
+                    ActivationCode = actCode,
+                    ActivationCodeId = Guid.NewGuid().ToString()
+                }.SerializeAndEncrypt();
+
+
+                if (_repository.GetCallCenterId() <= 0)
+                {
+                    _repository.AddActivationCode(code);
+                }
+                else
+                {
+                    _repository.UpdateActivationCode(code);
+                }
             }
         }
     }

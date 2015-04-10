@@ -27,5 +27,8 @@ namespace Drs.Repository.Account
         ClientInfo GetClientInfo(int id);
         List<string> GetLstClientsCodes();
         List<string> GetLstServersCodes();
+        void AddActivationCode(string code);
+        void UpdateActivationCode(string code);
+        string GetActivationCode();
     }
 }

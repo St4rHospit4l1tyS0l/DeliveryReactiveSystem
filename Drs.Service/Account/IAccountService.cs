@@ -18,5 +18,6 @@ namespace Drs.Service.Account
         bool DoSelectServer(int id, bool enable);
         bool DoSelectClient(int id, bool enable);
         Task<ResponseMessageModel> AskForLicense();
+        string GetActivationCodeToShow();
     }
 }

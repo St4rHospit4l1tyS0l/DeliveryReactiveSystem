@@ -100,6 +100,30 @@
         }, 8000);
     };
 
+    $scope.activateLicense = function(url) {
+        $scope.working = true;
+        $scope.MsgError = "";
+
+        $http.post(url, {actCode: $scope.ActivationCode})
+            .success(function (data) {
+                try {
+                    if (data.HasError === false) {
+                        $scope.ActivationCodeOld = $scope.ActivationCode.substring(0, 10) + "***********************************";
+                        $scope.ActivationCode = "";
+                    } else {
+                        $scope.showMsgError($scope, data.Message);
+                    }
+                } catch (e) {
+                    $scope.showMsgError($scope, "Error del sistema, reinicie e intente de nuevo");
+                }
+                $scope.working = false;
+            })
+            .error(function () {
+                $scope.showMsgError($scope, "Error de red");
+                $scope.working = false;
+            });
+    };
+
     $scope.askForLicense = function (url) {
         $scope.working = true;
         $scope.MsgError = "";
