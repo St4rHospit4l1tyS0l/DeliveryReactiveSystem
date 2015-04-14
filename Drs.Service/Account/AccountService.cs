@@ -74,7 +74,7 @@ namespace Drs.Service.Account
                 ConnectionInfoModel decCompInfo;
                 if (IsUpdatedComputerInfo(mConnInfo, computerInfo, out decCompInfo) == false)
                 {
-                    var response = UpdateComputerInfo(eInfo, sConnInfo);
+                    var response = UpdateComputerInfo(eInfo, mConnInfo, decCompInfo);
                     if (string.IsNullOrWhiteSpace(response) == false)
                         return response;
                 }
@@ -93,21 +93,21 @@ namespace Drs.Service.Account
             if (now < decCompInfo.St.AddDays(-2))
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE_ST]);
 
-
             if (now > decCompInfo.Et.AddDays(10))
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE_ET]);
-        
-        
+                
             if(decCompInfo.Iv == false)
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE]);
 
-        
             return  BuildResponse(SharedConstants.Client.STATUS_SCREEN_LOGIN, AccountConstants.LstCodes[AccountConstants.CODE_VALID]);
         }
 
-        private string UpdateComputerInfo(string eInfo, string sConnInfo)
+        private string UpdateComputerInfo(string eInfo, string mConnInfo, ConnectionInfoModel decCompInfo)
         {
-            return String.Empty;
+            decCompInfo.Code = AccountConstants.CODE_NOT_ACTIVE_BY_UPDATE;
+            decCompInfo.Hk = mConnInfo;
+            _repository.UpdateComputerInfo(eInfo, decCompInfo.SerializeAndEncrypt());
+            return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[decCompInfo.Code]);
         }
 
         private bool IsUpdatedComputerInfo(string mConnInfo, string computerInfo, out ConnectionInfoModel decCompInfo)
@@ -115,10 +115,7 @@ namespace Drs.Service.Account
             var connInfo = mConnInfo;
             decCompInfo = new JavaScriptSerializer().Deserialize<ConnectionInfoModel>(Cypher.Decrypt(computerInfo));
 
-            if (connInfo == decCompInfo.Hk)
-                return true;
-            
-            return false;
+            return connInfo == decCompInfo.Hk;
         }
 
         private string CreateComputerInfo(string eInfo, string sConnInfo)
@@ -164,22 +161,20 @@ namespace Drs.Service.Account
                 ConnectionInfoModel decServInfo;
                 if (IsUpdatedServerInfo(mConnInfo, serverInfo, out decServInfo) == false)
                 {
-                    UpdateServerInfo(eInfo, mConnInfo, decServInfo, serverInfo);
+                    UpdateServerInfo(mConnInfo, decServInfo, serverInfo);
                 }
             }
         }
 
 
-        private void UpdateServerInfo(string eInfo, string mConnInfo, ConnectionInfoModel decServInfo, ServerInfo serverInfo)
+        private void UpdateServerInfo(string mConnInfo, ConnectionInfoModel decServInfo, ServerInfo serverInfo)
         {
             decServInfo.Hk = mConnInfo;
             serverInfo.ServerCode = Cypher.Encrypt(new JavaScriptSerializer().Serialize(decServInfo));
             _repository.SaveChanges();
 
-            if (serverInfo.CallCenterInfoId.HasValue == false)
-                return;
-
-            return;
+            //if (serverInfo.CallCenterInfoId.HasValue == false)
+            //    return;
         }
 
         private bool IsUpdatedServerInfo(string mConnInfo, ServerInfo serverInfo, out ConnectionInfoModel decCompInfo)
@@ -276,12 +271,12 @@ namespace Drs.Service.Account
                     return new ResponseMessageModel{
                         HasError = true,
                         Title = "Error licencia",
-                        Message = ""
+                        Message = "Al menos debes tener una terminal y un servidor para activar la licencia"
                     };
                 }
 
                 var deviceConnTx = deviceConn.SerializeAndEncrypt();
-                var responseConn = String.Empty;
+                string responseConn;
 
                 using (var proxy = new LicProxySvcClient())
                 {
@@ -290,7 +285,7 @@ namespace Drs.Service.Account
 
                 try
                 {
-
+                    return ProcessActivationResponse(responseConn);
                 }
                 catch (Exception ex)
                 {
@@ -301,10 +296,76 @@ namespace Drs.Service.Account
                         Message = "Respuesta no válida"
                     };
                 }
+            }
+        }
 
-                return new ResponseMessageModel{
-                    HasError = false
+        private ResponseMessageModel ProcessActivationResponse(string responseConn)
+        {
+            var response = responseConn.DeserializeAndDecrypt<ResponseConnection>();
+
+            if (response.IsSuccess == false)
+            {
+                return new ResponseMessageModel
+                {
+                    HasError = true,
+                    Message = response.Message
                 };
+            }
+
+            var devices = response.Data.DeserializeAndDecrypt<DeviceConnModel>();
+
+            foreach (var device in devices.LstClients)
+            {
+                UpdateClientDevice(device);
+            }
+
+            foreach (var device in devices.LstServers)
+            {
+                UpdateServerDevice(device);
+            }
+
+            return new ResponseMessageModel
+            {
+                HasError = false
+            };
+
+        }
+
+        private void UpdateServerDevice(string device)
+        {
+            try
+            {
+                var connInfo = device.DeserializeAndDecrypt<ConnectionInfoModel>();
+                var deviceModel = _repository.GetServerByHostName(Cypher.Encrypt(Cypher.Encrypt(connInfo.Hn)));
+
+                if (deviceModel == null)
+                    return;
+
+                deviceModel.ServerCode = device;
+                _repository.SaveChanges();
+            }
+            catch(Exception ex) 
+            {
+                SharedLogger.LogError(ex, device);
+            }
+        }
+
+        private void UpdateClientDevice(string device)
+        {
+            try
+            {
+                var connInfo = device.DeserializeAndDecrypt<ConnectionInfoModel>();
+                var deviceModel = _repository.GetClientByHostName(Cypher.Encrypt(Cypher.Encrypt(connInfo.Hn)));
+                
+                if(deviceModel == null)
+                    return;
+
+                deviceModel.ClientCode = device;
+                _repository.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex, device);
             }
         }
 

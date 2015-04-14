@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Script.Serialization;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Constants;
@@ -178,6 +179,10 @@ namespace CentralManagement.Areas.Management.Controllers
             try
             {
                 var response = await _service.AskForLicense();
+
+                if (response.HasError == false)
+                    response.Message = Url.Action("Index", "License", new { area = "Management" });
+
                 return Json(response);
             }
             catch (Exception ex)

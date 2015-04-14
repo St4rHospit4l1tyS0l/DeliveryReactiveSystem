@@ -30,5 +30,8 @@ namespace Drs.Repository.Account
         void AddActivationCode(string code);
         void UpdateActivationCode(string code);
         string GetActivationCode();
+        ClientInfo GetClientByHostName(string hn);
+        ServerInfo GetServerByHostName(string hn);
+        void UpdateComputerInfo(string eInfo, string decCompInfo);
     }
 }

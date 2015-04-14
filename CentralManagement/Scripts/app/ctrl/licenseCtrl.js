@@ -5,7 +5,8 @@
     $scope.initDevices = function () {
         $scope.devicesSel = {
             lstServers: [], lstClients: [], isReady: function () {
-                return $scope.devicesSel.lstServers.length > 0 && $scope.devicesSel.lstClients.length > 0 && $scope.ActivationCodeOld !== '';
+                return $scope.devicesSel.lstServers.length > 0 && $scope.devicesSel.lstClients.length > 0 
+                    && $scope.ActivationCodeOld !== undefined && $scope.ActivationCodeOld !== "";
             }
         };
         var device;
@@ -110,6 +111,7 @@
                     if (data.HasError === false) {
                         $scope.ActivationCodeOld = $scope.ActivationCode.substring(0, 10) + "***********************************";
                         $scope.ActivationCode = "";
+                        $scope.BtnReady = $scope.devicesSel.isReady();
                     } else {
                         $scope.showMsgError($scope, data.Message);
                     }
@@ -134,6 +136,7 @@
                     if (data.HasError === false) {
                         window.goToUrlMvcUrl(data.Message);
                     } else {
+                        $scope.showMsgError($scope, data.Message);
                     }
                 } catch (e) {
                     $scope.showMsgError($scope, "Error del sistema, reinicie e intente de nuevo");

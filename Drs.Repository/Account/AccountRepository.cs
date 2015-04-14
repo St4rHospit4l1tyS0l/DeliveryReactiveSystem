@@ -5,7 +5,6 @@ using Drs.Model.Account;
 using Drs.Model.Menu;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
-using ReactiveUI;
 
 namespace Drs.Repository.Account
 {
@@ -180,6 +179,27 @@ namespace Drs.Repository.Account
         public string GetActivationCode()
         {
             return DbEntities.CallCenterInfo.Select(e => e.ActivationCode).FirstOrDefault();
+        }
+
+        public ClientInfo GetClientByHostName(string hn)
+        {
+            return DbEntities.ClientInfo.FirstOrDefault(e => e.ClientHost == hn);
+        }
+
+        public ServerInfo GetServerByHostName(string hn)
+        {
+            return DbEntities.ServerInfo.FirstOrDefault(e => e.ServerName == hn);
+        }
+
+        public void UpdateComputerInfo(string hn, string sCode)
+        {
+            var computerInfo = DbEntities.ClientInfo.FirstOrDefault(e => e.ClientHost == hn);
+            
+            if (computerInfo == null)
+                return;
+
+            computerInfo.ClientCode = sCode;
+            DbEntities.SaveChanges();
         }
 
         public bool IsValidUser(string id)

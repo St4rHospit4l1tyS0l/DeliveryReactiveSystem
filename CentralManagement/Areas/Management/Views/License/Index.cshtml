@@ -19,7 +19,7 @@
             Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />
         </div>
     </div>
-    <div class="row animated fadeInRight" ng-init="lstServers = @ViewBag.LstServers; lstClients = @ViewBag.LstClients; initDevices();">
+    <div class="row animated fadeInRight" ng-init="lstServers = @ViewBag.LstServers; lstClients = @ViewBag.LstClients; ActivationCodeOld = '@ViewBag.ActivationCode'; initDevices();">
         <div class="col-xs-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -184,7 +184,7 @@
                                                     <div class="pull-right text-navy">
                                                         <div>
                                                             <small>
-                                                                <a class="btn btn-xs btn-primary" ng-show ="ActivationCode"
+                                                                <a class="btn btn-xs btn-primary" ng-show="ActivationCode"
                                                                    ng-click="activateLicense('@Url.Action("DoActivateCode", "License", new{area="Management"})')">
                                                                     <i class="fa fa-upload"></i> &nbsp;{{ActivationCodeOld === '' ? 'Agregar código' : 'Actualizar código'}}
                                                                 </a>
@@ -202,7 +202,7 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-xs-6 col-xs-offset-3">
-                                                                    <input type="text" ng-model="ActivationCode" ng-init="ActivationCodeOld = '@ViewBag.ActivationCode'"
+                                                                    <input type="text" ng-model="ActivationCode"
                                                                            placeholder="Ingresa el código de activación"
                                                                            required="required" ng-maxlength="50" class="form-control">
                                                                     <span class="error" ng-show="FormCatId.ActivationCode.$error.required">*Campo requerido</span>
@@ -234,8 +234,13 @@
                         </div>
                     </div>
                     <div class="row" ng-show="MsgError">
-                        <div class="col-xs-12 element-center">
-                            <h5 class="red">{{MsgError}}</h5>
+                        <br/>
+                        <div class="col-xs-8 col-xs-offset-2 element-center">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5 class="red">{{MsgError}}</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
