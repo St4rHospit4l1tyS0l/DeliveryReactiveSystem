@@ -79,11 +79,11 @@ namespace Drs.Service.Account
                         return response;
                 }
 
-                return IsValidComputerInfo(decCompInfo);
+                return IsValidDeviceInfo(decCompInfo);
             }
         }
 
-        private string IsValidComputerInfo(ConnectionInfoModel decCompInfo)
+        private string IsValidDeviceInfo(ConnectionInfoModel decCompInfo)
         {
             var now = DateTime.Now;
 
@@ -143,7 +143,7 @@ namespace Drs.Service.Account
             }));
         }
 
-        public void ValidateMainAccount()
+        public ConnectionInfoModel ValidateMainAccount()
         {
             var eInfo = Cypher.Encrypt(Environment.MachineName);
             var mConnInfo = ManagementExt.GetKey();
@@ -155,17 +155,29 @@ namespace Drs.Service.Account
                 if (serverInfo == null)
                 {
                     CreateServerInfo(eInfo, mConnInfo);
-                    return;
+                    return null;
                 }
 
                 ConnectionInfoModel decServInfo;
                 if (IsUpdatedServerInfo(mConnInfo, serverInfo, out decServInfo) == false)
                 {
                     UpdateServerInfo(mConnInfo, decServInfo, serverInfo);
+                    return null;
                 }
+
+                return decServInfo;
             }
         }
 
+        public string IsValidServerInfo()
+        {
+            var decSerInfo = ValidateMainAccount();
+
+            if(decSerInfo == null)
+                return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE]);
+
+            return IsValidDeviceInfo(decSerInfo);
+        }
 
         private void UpdateServerInfo(string mConnInfo, ConnectionInfoModel decServInfo, ServerInfo serverInfo)
         {

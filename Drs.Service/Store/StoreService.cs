@@ -3,6 +3,8 @@ using System.Globalization;
 using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Drs.Infrastructure.Extensions.Json;
+using Drs.Infrastructure.Model;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Settings;
@@ -10,6 +12,7 @@ using Drs.Model.Shared;
 using Drs.Repository.Account;
 using Drs.Repository.Client;
 using Drs.Repository.Store;
+using Drs.Service.Account;
 using Drs.Service.CustomerOrder;
 using Drs.Service.Factory;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -30,13 +33,26 @@ namespace Drs.Service.Store
 
         public ResponseMessageData<OrderModelDto> SendOrderToStore(OrderModelDto model, IHubCallerConnectionContext<dynamic> clients)
         {
+            var responseCod = new AccountService().IsValidServerInfo();
+            var response = responseCod.DeserializeAndDecrypt<ConnectionInfoResponse>();
             var resMsg = new ResponseMessageData<OrderModelDto>();
+
+            if (response.NxWn != SharedConstants.Client.STATUS_SCREEN_LOGIN)
+            {
+                resMsg.IsSuccess = false;
+                resMsg.Message = response.Msg;
+                return resMsg;
+            }
+
+
             using (_repositoryStore)
             {
                 int franchiseId;
                 var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model, out franchiseId);
 
                 //TODO Falta vewrificar si tiene la capacidad para albergar una orden más
+
+
 
                 if (store == null)
                 {
