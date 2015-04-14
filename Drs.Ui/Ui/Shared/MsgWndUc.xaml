@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Shared.MsgWndUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1200" Height="500" HorizontalAlignment="Stretch">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{StaticResource WhiteColor}"  />
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource WhiteColor}"  />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="#FF9B9B2D">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="450" >
+            <Rectangle Width="120" Margin="10"
+                           Height="120" Fill="#FFF3F3F3">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill"
+                                     Visual="{DynamicResource appbar_warning}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <Border BorderBrush="{x:Null}" Height="250">
+                <TextBlock Text="{Binding MsgInfo}" VerticalAlignment="Center"
+                    Foreground="White"  FontSize="24" FontFamily="helvetica" FontWeight="Light" TextWrapping="Wrap"
+                    HorizontalAlignment="Center" TextAlignment="Center"/>
+            </Border>
+        </StackPanel>
+        <StackPanel  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,0">
+            <Label  Content="Advanced Delivery Management" HorizontalContentAlignment="Right"
+				Foreground="#FFF7F7F7" FontSize="12" FontFamily="helvetica neue" FontWeight="Thin" />
+        </StackPanel>
+    </Grid>
+</UserControl>
