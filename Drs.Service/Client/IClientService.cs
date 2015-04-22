@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Drs.Model.Client.Recurrence;
 using Drs.Model.Order;
 using Drs.Model.Shared;
 
@@ -10,5 +11,6 @@ namespace Drs.Service.Client
         IEnumerable<ListItemModel> SearchByCompany(string company);
         IEnumerable<ClientInfoModel> SearchClientsByPhone(string phone);
         IEnumerable<ListItemModel> SearchClientsByClientName(string clientName);
+        ResponseMessageData<RecurrenceResponseModel> CalculateRecurrence(List<int> lstClientId);
     }
 }

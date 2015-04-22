@@ -120,6 +120,9 @@
     <Compile Include="Address\AddressInfoGrid.cs" />
     <Compile Include="Address\AddressPhoneModel.cs" />
     <Compile Include="Client\ClientPhoneModel.cs" />
+    <Compile Include="Client\Recurrence\RecurrenceClientModel.cs" />
+    <Compile Include="Client\Recurrence\RecurrenceClientView.cs" />
+    <Compile Include="Client\Recurrence\RecurrenceResponseModel.cs" />
     <Compile Include="Constants\AddressConstants.cs" />
     <Compile Include="Constants\ClientFlags.cs" />
     <Compile Include="Constants\OrderStatus.cs" />
@@ -137,6 +140,8 @@
     <Compile Include="Order\PosCheck.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Settings\ControlTitleModel.cs" />
+    <Compile Include="Settings\RecurrenceLevel.cs" />
+    <Compile Include="Settings\RecurrenceType.cs" />
     <Compile Include="Shared\AccountConstants.cs" />
     <Compile Include="Shared\OptionModel.cs" />
     <Compile Include="Shared\ResponseMsg.cs" />

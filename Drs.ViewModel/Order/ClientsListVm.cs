@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
@@ -8,9 +9,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Model.Client;
+using Drs.Model.Client.Recurrence;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;
+using Drs.Repository.Shared;
 using Drs.Service.ReactiveDelivery;
 using Drs.Service.TransferDto;
 using Drs.ViewModel.Main;
@@ -81,11 +84,6 @@ namespace Drs.ViewModel.Order
         {
             _orderModel = orderModel;
         }
-        //public void SetLstClient(IReactiveList<ClientInfoGrid> lstClientInfo)
-        //{
-        //    LstClients = lstClientInfo;
-        //}
-
 
 
         public void OnClientChanged(ClientInfoGrid obj)
@@ -156,6 +154,7 @@ namespace Drs.ViewModel.Order
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
+                var lstRecurrence = new List<int>(obj.Data.LstData.Count());
                 LstClients.Clear();
                 var bIsFirst = true;
                 foreach (var clientInfo in obj.Data.LstData)
@@ -167,13 +166,55 @@ namespace Drs.ViewModel.Order
                         IsSelected = bIsFirst
                     };
 
+                    lstRecurrence.Add(clientInfo.ClientId ?? EntityConstants.NULL_VALUE);
+
                     OnClientChanged(clientGrid, bIsFirst);
                     LstClients.Add(clientGrid);
                     bIsFirst = false;
                 }
 
+
+                if (lstRecurrence.Count != 0)
+                {
+                    _client.ExecutionProxy.ExecuteRequest<IList<int>, IList<int>, ResponseMessageData<RecurrenceResponseModel>, ResponseMessageData<RecurrenceResponseModel>>
+                        (lstRecurrence, TransferDto.SameType, SharedConstants.Server.CLIENT_HUB,
+                        SharedConstants.Server.CALCULATE_RECURRENCE_CLIENT_HUB_METHOD, TransferDto.SameType)
+                        .Subscribe(OnRecurrenceClientsOk, OnRecurrenceClientsError);
+                }
+
                 if(bIsFirst)
                     OnClientChanged(null, true);
+
+            });
+        }
+
+        private void OnRecurrenceClientsError(Exception obj)
+        {
+        }
+
+        private void OnRecurrenceClientsOk(IStale<ResponseMessageData<RecurrenceResponseModel>> obj)
+        {
+            if (obj.IsStale)
+                return;
+
+            if (obj.Data.IsSuccess == false || obj.Data.Data == null || obj.Data.Data.LstRecurrence.Count == 0)
+                return;
+
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                
+                var lstClientRecurrence = obj.Data.Data.LstRecurrence;
+
+                foreach (var clientRecurrence in lstClientRecurrence)
+                {
+                    var client = LstClients.FirstOrDefault(e => e.ClientInfo.ClientId == clientRecurrence.ClientId);
+
+                    if(client == null)
+                        continue;
+
+                    client.ClientInfo.LstRecurrence = clientRecurrence.ToListRecurrence();
+
+                }
 
             });
         }

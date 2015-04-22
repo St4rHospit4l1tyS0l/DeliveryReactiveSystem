@@ -12,6 +12,7 @@ namespace Drs.Model.Settings
         {
             public const string EXTENSION_EXE = ".exe";
             public const string SETTING_SEPARATOR = "|";
+            public const char SETTING_SEPARATOR_C = '|';
             
             public static AddressControlSetting AddressUpsertSetting { get; set; }
             public static AddressControlSetting AddressGridSetting { get; set; }
@@ -30,6 +31,7 @@ namespace Drs.Model.Settings
                 public const string CLIENT = "CLIENT";
                 public const string STORE = "STORE";
                 public const string TRACK = "TRACK";
+                public const string RECURRENCE = "RECURRENCE";
             }
 
             public static class SystemConst
@@ -161,6 +163,18 @@ namespace Drs.Model.Settings
                 }; 
 
             }
+
+            public class RecurrenceConst
+            {
+                public const string TYPE_TIME = "TYPE_TIME_";
+                public const string TYPE_TOTAL = "TYPE_TOTAL_";
+                public const string LEVEL_TIME = "LEVEL_TIME_";
+                public const string LEVEL_TOTAL = "LEVEL_TOTAL_";
+
+                public const string LEVEL_UNRANKED = "Unranked";
+                public const string LEVEL_BRONZE = "Bronze";
+            
+            }
         }
 
         public static class Server
@@ -198,6 +212,13 @@ namespace Drs.Model.Settings
             public static bool ByZipCode { get; set; }
         }
 
-    }
+        public static class Recurrence
+        {
+            public static IDictionary<string, RecurrenceType> LstRecurrenceTypeTime { get; set; }
+            public static IDictionary<string, RecurrenceType> LstRecurrenceTypeTotal { get; set; }
+            public static IDictionary<string, RecurrenceLevel> LstRecurrenceLevelTime { get; set; }
+            public static IDictionary<string, RecurrenceLevel> LstRecurrenceLevelTotal { get; set; } 
+        }
 
+    }
 }

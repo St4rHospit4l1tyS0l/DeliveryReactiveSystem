@@ -259,6 +259,9 @@
     <Compile Include="Entities\PosOrderItem.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Recurrence.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\RegionA.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>

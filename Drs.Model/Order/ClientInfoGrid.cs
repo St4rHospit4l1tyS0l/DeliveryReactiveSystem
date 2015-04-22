@@ -6,6 +6,7 @@ using System.Windows;
 using Drs.Infrastructure.Entity;
 using Drs.Infrastructure.Extensions;
 using Drs.Model.Annotations;
+using Drs.Model.Client.Recurrence;
 using Drs.Model.Constants;
 using Drs.Model.Shared;
 using Drs.Model.Validation;
@@ -24,7 +25,13 @@ namespace Drs.Model.Order
         public PhoneModel PrimaryPhone { get; set; }
         public PhoneModel SecondPhone { get; set; }
         public DateTime? BirthDate { get; set; }
-        
+        public List<RecurrenceClientView> LstRecurrence { get; set; }
+
+        public ClientInfoModel()
+        {
+            LstRecurrence = new List<RecurrenceClientView> { new RecurrenceClientView(), new RecurrenceClientView(), new RecurrenceClientView(), new RecurrenceClientView()};            
+        }
+
     }
 
     public class ClientInfoGrid : RecordModel, INotifyPropertyChanged

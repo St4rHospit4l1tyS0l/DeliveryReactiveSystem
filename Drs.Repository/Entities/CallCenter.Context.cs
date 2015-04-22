@@ -65,5 +65,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<CallCenterInfo> CallCenterInfo { get; set; }
         public virtual DbSet<ClientInfo> ClientInfo { get; set; }
         public virtual DbSet<ServerInfo> ServerInfo { get; set; }
+        public virtual DbSet<Recurrence> Recurrence { get; set; }
     }
 }

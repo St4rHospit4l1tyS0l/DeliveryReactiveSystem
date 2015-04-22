@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Drs.Infrastructure.Extensions.Classes;
+using Drs.Model.Client.Recurrence;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Settings;
@@ -28,6 +31,66 @@ namespace Drs.Service.Client
             using (_repository)
             {
                 return _repository.SearchClientsByClientName(clientName, SettingsData.Server.MaxResultsOnQuery);
+            }
+        }
+
+        public ResponseMessageData<RecurrenceResponseModel> CalculateRecurrence(List<int> lstClientId)
+        {
+            var dtEnd = DateTime.Today;
+            var dtEndShort = dtEnd.ToDateShort();
+
+            var recurrenceResponse = new RecurrenceResponseModel();
+
+            using (_repository)
+            {
+                //Calcular recurrencia en tiempo
+                GetRecurrenceByType(lstClientId, dtEnd, recurrenceResponse, SettingsData.Recurrence.LstRecurrenceTypeTime,
+                    (dtStart, clientId) => _repository.CountRecurrenceByTime(dtStart, dtEndShort, clientId));
+
+                //Calcular recurrencia en total
+                GetRecurrenceByType(lstClientId, dtEnd, recurrenceResponse, SettingsData.Recurrence.LstRecurrenceTypeTotal,
+                    (dtStart, clientId) => _repository.TotalRecurrenceByTotal(dtStart, dtEndShort, clientId));
+            
+            }
+
+            return new ResponseMessageData<RecurrenceResponseModel>
+            {
+                IsSuccess = true,
+                Data = recurrenceResponse
+            };
+        }
+
+        private void GetRecurrenceByType(List<int> lstClientId, DateTime dtEnd, RecurrenceResponseModel recurrenceResponse, 
+            IEnumerable<KeyValuePair<string, RecurrenceType>> lstRecurrenceType, Func<long, int, decimal?> funcGetRecurrenceValue )
+        {
+            foreach (var typeTime in lstRecurrenceType)
+            {
+                var dtStart = dtEnd.RecurrenceType(typeTime.Value.Value).ToDateShort();
+                foreach (var clientId in lstClientId)
+                {
+                    var bIsNew = false;
+                    var recurrenceClient = recurrenceResponse.LstRecurrence.FirstOrDefault(e => e.ClientId == clientId);
+
+                    if (recurrenceClient == null)
+                    {
+                        bIsNew = true;
+                        recurrenceClient = new RecurrenceClientModel();
+                    }
+
+                    var value = funcGetRecurrenceValue(dtStart, clientId);
+
+                    if (value.HasValue == false)
+                        value = 0;
+
+                    recurrenceClient.LstName.Add(typeTime.Value.Name);
+                    recurrenceClient.LstValue.Add(value.Value);
+
+                    if (!bIsNew)
+                        continue;
+
+                    recurrenceClient.ClientId = clientId;
+                    recurrenceResponse.LstRecurrence.Add(recurrenceClient);
+                }
             }
         }
 

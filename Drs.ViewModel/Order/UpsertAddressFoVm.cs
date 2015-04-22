@@ -46,6 +46,7 @@ namespace Drs.ViewModel.Order
         private string _mainAddress;
         private string _reference;
         private string _numExt;
+        private List<IReactiveList<ListItemModel>> _lstRegions;
 
         public UpsertAddressFoVm(IAutoCompleteTextVm zipCodeSearchVm, IReactiveDeliveryClient client)
         {
@@ -67,6 +68,8 @@ namespace Drs.ViewModel.Order
             RegionsB = new ReactiveList<ListItemModel>();
             RegionsC = new ReactiveList<ListItemModel>();
             RegionsD = new ReactiveList<ListItemModel>();
+
+            _lstRegions = new List<IReactiveList<ListItemModel>> { Countries, RegionsA, RegionsB, RegionsC, RegionsD };
 
             UpsertCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => Save());
 
@@ -557,12 +560,12 @@ namespace Drs.ViewModel.Order
         {
             IsSearchByWaterfall = false;
             IsSearchByCode = true;
-            
+
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
                 PreId = clInfo.PreId;
                 Id = clInfo.AddressInfo.AddressId;
-                
+
                 ZipCode = clInfo.AddressInfo.ZipCode.Value;
                 ZipCodeId = clInfo.AddressInfo.ZipCode.IdKey;
                 ZipCodeSearchVm.Search = ZipCodeId != null ? ZipCode : String.Empty;
@@ -628,41 +631,56 @@ namespace Drs.ViewModel.Order
         private void ProcessWaterfallResponse(string sControl, IEnumerable<ListItemModel> lstData)
         {
             var listItemModels = lstData as IList<ListItemModel> ?? lstData.ToList();
-            if (lstData == null || listItemModels.Any() == false)
-                return;
 
             switch (sControl)
             {
                 case SettingsData.Constants.Control.CONTROL_COUNTRY:
                     {
-                        Countries.Clear();
-                        Countries.AddRange(listItemModels);
+                        ClearCascadeAddress(Countries);
+                        Countries.ClearAndAddRange(listItemModels);
                         return;
                     }
                 case SettingsData.Constants.Control.CONTROL_REGION_A:
                     {
-                        RegionsA.Clear();
-                        RegionsA.AddRange(listItemModels);
+                        ClearCascadeAddress(RegionsA);
+                        RegionsA.ClearAndAddRange(listItemModels);
                         return;
                     }
                 case SettingsData.Constants.Control.CONTROL_REGION_B:
                     {
-                        RegionsB.Clear();
-                        RegionsB.AddRange(listItemModels);
+                        ClearCascadeAddress(RegionsB);
+                        RegionsB.ClearAndAddRange(listItemModels);
                         return;
                     }
                 case SettingsData.Constants.Control.CONTROL_REGION_C:
                     {
-                        RegionsC.Clear();
-                        RegionsC.AddRange(listItemModels);
+                        ClearCascadeAddress(RegionsC);
+                        RegionsC.ClearAndAddRange(listItemModels);
                         return;
                     }
                 case SettingsData.Constants.Control.CONTROL_REGION_D:
                     {
-                        RegionsD.Clear();
-                        RegionsD.AddRange(listItemModels);
+                        ClearCascadeAddress(RegionsD);
+                        RegionsD.ClearAndAddRange(listItemModels);
                         return;
                     }
+            }
+        }
+
+        private void ClearCascadeAddress(IReactiveList<ListItemModel> regionIn)
+        {
+            var bIsFound = false;
+
+            foreach (var region in _lstRegions)
+            {
+                if (bIsFound == false)
+                {
+                    if (region == regionIn)
+                        bIsFound = true;
+
+                    continue;
+                }
+                region.Clear();
             }
         }
 

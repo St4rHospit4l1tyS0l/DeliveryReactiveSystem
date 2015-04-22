@@ -18,6 +18,7 @@ namespace Drs.Repository.Entities
         {
             this.OrderToStoreLog = new HashSet<OrderToStoreLog>();
             this.StoreStatus = new HashSet<StoreStatus>();
+            this.Recurrence = new HashSet<Recurrence>();
         }
     
         public long OrderToStoreId { get; set; }
@@ -46,5 +47,6 @@ namespace Drs.Repository.Entities
         public virtual PosOrder PosOrder { get; set; }
         public virtual ICollection<OrderToStoreLog> OrderToStoreLog { get; set; }
         public virtual ICollection<StoreStatus> StoreStatus { get; set; }
+        public virtual ICollection<Recurrence> Recurrence { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace Drs.Model.Constants
             public const string REMOVE_REL_PHONECLIENT_CLIENT_HUB_METHOD = "RemoveRelPhoneClient-Client";
             public const string REMOVE_REL_PHONECLIENT_ADDRESS_HUB_METHOD = "RemoveRelPhoneAddress-Client";
             public const string SEARCH_BY_CLIENTNAME_CLIENT_HUB_METHOD = "SearchByClientName-Client";
+            public const string CALCULATE_RECURRENCE_CLIENT_HUB_METHOD = "CalculateRecurrence-Client";
 
             //Module Order
             public const string ORDER_HUB = "ModOrder";

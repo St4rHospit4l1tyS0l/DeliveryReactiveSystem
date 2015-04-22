@@ -3,6 +3,7 @@ using System.Globalization;
 using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Drs.Infrastructure.Extensions.Classes;
 using Drs.Infrastructure.Extensions.Json;
 using Drs.Infrastructure.Model;
 using Drs.Model.Constants;
@@ -11,6 +12,9 @@ using Drs.Model.Settings;
 using Drs.Model.Shared;
 using Drs.Repository.Account;
 using Drs.Repository.Client;
+using Drs.Repository.Entities;
+using Drs.Repository.Log;
+using Drs.Repository.Shared;
 using Drs.Repository.Store;
 using Drs.Service.Account;
 using Drs.Service.CustomerOrder;
@@ -51,8 +55,6 @@ namespace Drs.Service.Store
                 var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model, out franchiseId);
 
                 //TODO Falta vewrificar si tiene la capacidad para albergar una orden más
-
-
 
                 if (store == null)
                 {
@@ -129,6 +131,7 @@ namespace Drs.Service.Store
                     Message = String.Format("El pedido se ha enviado a la tienda de forma exitosa. Fecha y tiempo estimado de llegada {0}", promiseTime)
                 });
 
+                SaveRecurrence(model);
                 SaveOrderStatus(model, response);
 
             }
@@ -143,20 +146,44 @@ namespace Drs.Service.Store
             }
         }
 
+        private void SaveRecurrence(OrderModelDto model)
+        {
+            try
+            {
+                using (var repository = new StoreRepository())
+                {
+                    var now = DateTime.Now;
+                    repository.SaveRecurrence(new Recurrence
+                    {
+                        ClientId = model.ClientId ?? EntityConstants.NULL_VALUE,
+                        OrderToStoreId = model.OrderToStoreId,
+                        Timestamp = now,
+                        Total = (decimal) model.PosOrder.Total,
+                        TimestampShort = now.ToDateShort()
+                    });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+            }
+        }
+
         private void SaveOrderStatus(OrderModelDto model, ResponseRd response)
         {
             try
             {
                 using (var repository = new StoreRepository())
                 {
-                    repository.UpdateOrderMode(model.OrderToStoreId, response.Order.orderIdField, response.Order.statusField, 
+                    repository.UpdateOrderMode(model.OrderToStoreId, response.Order.orderIdField, response.Order.statusField,
                         response.Order.modeField, response.Order.modeChargeField, response.Order.promiseTimeField);
                 }
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                SharedLogger.LogError(ex);
             }
         }
 

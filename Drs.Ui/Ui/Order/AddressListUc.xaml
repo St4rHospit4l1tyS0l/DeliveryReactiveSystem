@@ -43,6 +43,20 @@
                 <Label Content="Agregar      " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
                 <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=DtGrid}" 
+                        Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding Edit}" 
+            		    Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
+                    <Rectangle Width="12"
+            			Height="12"
+            			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+            					Visual="{DynamicResource appbar_edit}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+                <Label Content="Modificar      " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                               Foreground="#FFF" />
+                <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=DtGrid}" 
                         Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding Remove}" 
             		    Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
                     <Rectangle Width="12"

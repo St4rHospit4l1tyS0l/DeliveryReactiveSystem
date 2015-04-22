@@ -27,6 +27,17 @@ namespace Drs.Repository.Client
                 .ToList();
         }
 
+        public int CountRecurrenceByTime(long dtStart, long dtEnd, int clientId)
+        {
+            return DbEntities.Recurrence.Count(e => e.ClientId == clientId && e.TimestampShort >= dtStart && e.TimestampShort <= dtEnd);
+        }
+
+        public decimal TotalRecurrenceByTotal(long dtStart, long dtEnd, int clientId)
+        {
+            return DbEntities.Recurrence.Where(e => e.ClientId == clientId && e.TimestampShort >= dtStart && e.TimestampShort <= dtEnd)
+                .Sum(e => (decimal?) e.Total) ?? 0;
+        }
+
         public IEnumerable<ListItemModel> SearchByCompany(string company, int maxResults)
         {
 

@@ -150,6 +150,9 @@ namespace Drs.ViewModel.Order
 
             MinDateTime = DateTime.Now;
 
+            EventsMsg = String.Empty;
+            ErrorMsg = String.Empty;
+            SuccessMsg = String.Empty;
         }
 
         public override bool Initialize(bool bForceToInit = false)

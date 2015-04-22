@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:ui="clr-namespace:Drs.Infrastructure.Ui;assembly=Drs.Infrastructure"
+             xmlns:converter="clr-namespace:Drs.Ui.Converter"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="1024" HorizontalAlignment="Stretch" Margin="30,0,30,0">
+             d:DesignHeight="200" d:DesignWidth="1100" HorizontalAlignment="Stretch" Margin="30,0,30,0">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,6 +21,15 @@
                     <componentModel:SortDescription PropertyName="FirstName"/>
                 </CollectionViewSource.SortDescriptions>
             </CollectionViewSource>
+            <converter:EnumToVisualConverter x:Key="IconConverter"
+                    AppbarMono ="{StaticResource appbar_mono}"
+                    AppbarWebcam ="{StaticResource appbar_webcam}"
+                    AppbarMarvelIronman ="{StaticResource appbar_marvel_ironman}"
+                    AppbarMarvelCaptainamerica ="{StaticResource appbar_marvel_captainamerica}"
+                    AppbarMarvelAvengers ="{StaticResource appbar_marvel_avengers}"
+                    AppbarStarwarsRebel ="{StaticResource appbar_starwars_rebel}"
+                    AppbarStarwarsJedi ="{StaticResource appbar_starwars_jedi}"
+                    AppbarStarwarsSith ="{StaticResource appbar_starwars_sith}"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
@@ -39,6 +49,20 @@
                     </Rectangle>
                 </Button>
                 <Label Content="Agregar      " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                               Foreground="#FFF" />
+                <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=ClientDtGrid}" 
+                        Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding EditClient}" 
+            		    x:Name="EditClient" Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
+                    <Rectangle Width="12"
+            			Height="12"
+            			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+            					Visual="{DynamicResource appbar_edit}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+                <Label Content="Modificar      " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
                 <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=ClientDtGrid}" 
                         Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding RemoveClient}" 
@@ -75,10 +99,10 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>-->
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="  Acción" MinWidth="140"  MaxWidth="200">
+                    <DataGridTemplateColumn Header="  Acción" MinWidth="100"  MaxWidth="110">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical" Margin="10,0,10,0" MinWidth="120">
+                                <StackPanel Orientation="Vertical" Margin="10,0,10,0" MinWidth="100">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                         <Rectangle Width="17" Height="17" Visibility="{Binding IsClientOk}" HorizontalAlignment="Center" Fill="LimeGreen" >
                                             <Rectangle.OpacityMask >
@@ -106,7 +130,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Nombre"  MinWidth="160" 
+                    <DataGridTextColumn Header="Nombre"  MinWidth="130" 
                                     Binding="{Binding ClientInfo.FirstName}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
@@ -114,7 +138,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Apellidos" MinWidth="190"
+                    <DataGridTextColumn Header="Apellidos" MinWidth="140"
                                     Binding="{Binding ClientInfo.LastName}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
@@ -138,14 +162,52 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Categoría" MinWidth="80"
-                                    Binding="{Binding ClientInfo.Category}" >
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Tiempo (Mes | Semestre)" MinWidth="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="2,0,2,0" MinWidth="120">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Rectangle Width="15" Height="15" HorizontalAlignment="Center" Fill="{Binding ClientInfo.LstRecurrence[0].Color}" >
+                                            <Rectangle.OpacityMask>
+                                                <VisualBrush Stretch="Uniform" Visual="{Binding ClientInfo.LstRecurrence[0].Icon, Converter={StaticResource IconConverter}}" />
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                        <TextBlock TextWrapping="Wrap" Margin="5 0 5 0" Text="{Binding ClientInfo.LstRecurrence[0].Value}" TextAlignment="Center"></TextBlock>
+                                        <TextBlock TextWrapping="Wrap" Margin="5 0 5 0" Text="|" TextAlignment="Center"></TextBlock>
+                                        <Rectangle Width="15" Height="15" HorizontalAlignment="Center" Fill="{Binding ClientInfo.LstRecurrence[1].Color}" >
+                                            <Rectangle.OpacityMask>
+                                                <VisualBrush Stretch="Uniform" Visual="{Binding ClientInfo.LstRecurrence[1].Icon, Converter={StaticResource IconConverter}}" />
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                        <TextBlock TextWrapping="Wrap" Margin="5 0 5 0" Text="{Binding ClientInfo.LstRecurrence[1].Value}" TextAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Total (Mes | Semestre)" MinWidth="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="2,0,2,0" MinWidth="120">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Rectangle Width="15" Height="15" HorizontalAlignment="Center" Fill="{Binding ClientInfo.LstRecurrence[2].Color}" >
+                                            <Rectangle.OpacityMask>
+                                                <VisualBrush Stretch="Uniform" Visual="{Binding ClientInfo.LstRecurrence[2].Icon, Converter={StaticResource IconConverter}}" />
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                        <TextBlock TextWrapping="Wrap" Margin="5 0 5 0" Text="{Binding ClientInfo.LstRecurrence[2].Value}" TextAlignment="Center"></TextBlock>
+                                        <TextBlock TextWrapping="Wrap" Margin="5 0 5 0" Text="|" TextAlignment="Center"></TextBlock>
+                                        <Rectangle Width="15" Height="15" HorizontalAlignment="Center" Fill="{Binding ClientInfo.LstRecurrence[3].Color}" >
+                                            <Rectangle.OpacityMask>
+                                                <VisualBrush Stretch="Uniform" Visual="{Binding ClientInfo.LstRecurrence[3].Icon, Converter={StaticResource IconConverter}}" />
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                        <TextBlock TextWrapping="Wrap" Margin="5 0 5 0" Text="{Binding ClientInfo.LstRecurrence[3].Value}" TextAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

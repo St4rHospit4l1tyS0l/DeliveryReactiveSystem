@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autofac;
 using Drs.Model.Client;
+using Drs.Model.Client.Recurrence;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;
@@ -98,7 +100,7 @@ namespace ConnectCallCenter.Hubs
                     Message = ex.Message + ex.StackTrace
                 };
             }
-        } 
+        }
 
 
         [HubMethodName(SharedConstants.Server.REMOVE_REL_PHONECLIENT_CLIENT_HUB_METHOD)]
@@ -111,6 +113,23 @@ namespace ConnectCallCenter.Hubs
             catch (Exception ex)
             {
                 return new ResponseMessageData<bool>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message// + ex.StackTrace
+                };
+            }
+        }
+
+        [HubMethodName(SharedConstants.Server.CALCULATE_RECURRENCE_CLIENT_HUB_METHOD)]
+        public ResponseMessageData<RecurrenceResponseModel> CalculateRecurrence(List<int> lstClientId)
+        {
+            try
+            {
+                return AppInit.Container.Resolve<IClientService>().CalculateRecurrence(lstClientId);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<RecurrenceResponseModel>
                 {
                     IsSuccess = false,
                     Message = ex.Message// + ex.StackTrace

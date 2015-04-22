@@ -325,6 +325,17 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="4" Nullable="false" />
         </EntityType>
+        <EntityType Name="Recurrence">
+          <Key>
+            <PropertyRef Name="RecurrenceId" />
+          </Key>
+          <Property Name="RecurrenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="OrderToStoreId" Type="bigint" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="TimestampShort" Type="bigint" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+        </EntityType>
         <EntityType Name="RegionA">
           <Key>
             <PropertyRef Name="RegionId" />
@@ -959,6 +970,30 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Recurrence_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Recurrence" Type="Self.Recurrence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Recurrence">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurrence_OrderToStore">
+          <End Role="OrderToStore" Type="Self.OrderToStore" Multiplicity="1" />
+          <End Role="Recurrence" Type="Self.Recurrence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderToStore">
+              <PropertyRef Name="OrderToStoreId" />
+            </Principal>
+            <Dependent Role="Recurrence">
+              <PropertyRef Name="OrderToStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RegionA_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="RegionA" Type="Self.RegionA" Multiplicity="*" />
@@ -1290,6 +1325,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosOrder" EntityType="Self.PosOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosOrderItem" EntityType="Self.PosOrderItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recurrence" EntityType="Self.Recurrence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegionA" EntityType="Self.RegionA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegionB" EntityType="Self.RegionB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegionC" EntityType="Self.RegionC" Schema="dbo" store:Type="Tables" />
@@ -1469,6 +1505,14 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <AssociationSet Name="FK_PosOrderItem_PosOrder" Association="Self.FK_PosOrderItem_PosOrder">
             <End Role="PosOrder" EntitySet="PosOrder" />
             <End Role="PosOrderItem" EntitySet="PosOrderItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurrence_Client" Association="Self.FK_Recurrence_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Recurrence" EntitySet="Recurrence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurrence_OrderToStore" Association="Self.FK_Recurrence_OrderToStore">
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+            <End Role="Recurrence" EntitySet="Recurrence" />
           </AssociationSet>
           <AssociationSet Name="FK_RegionA_Country" Association="Self.FK_RegionA_Country">
             <End Role="Country" EntitySet="Country" />
@@ -1856,6 +1900,15 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="CallCenterInfo" EntitySet="CallCenterInfo" />
             <End Role="ServerInfo" EntitySet="ServerInfo" />
           </AssociationSet>
+          <EntitySet Name="Recurrence" EntityType="CallCenterModel.Recurrence" />
+          <AssociationSet Name="FK_Recurrence_Client" Association="CallCenterModel.FK_Recurrence_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Recurrence" EntitySet="Recurrence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurrence_OrderToStore" Association="CallCenterModel.FK_Recurrence_OrderToStore">
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+            <End Role="Recurrence" EntitySet="Recurrence" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -1967,6 +2020,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="ClientStatistics" Relationship="CallCenterModel.FK_ClientStatistics_Client" FromRole="Client" ToRole="ClientStatistics" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="Client" ToRole="OrderToStore" />
           <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneClient" FromRole="Client" ToRole="ClientPhone" />
+          <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_Client" FromRole="Client" ToRole="Recurrence" />
         </EntityType>
         <EntityType Name="ClientPhone">
           <Key>
@@ -2186,6 +2240,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="OrderToStore" ToRole="PosOrder" />
           <NavigationProperty Name="OrderToStoreLog" Relationship="CallCenterModel.FK_OrderToStoreLog_OrderToStore" FromRole="OrderToStore" ToRole="OrderToStoreLog" />
           <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_OrderToStore" FromRole="OrderToStore" ToRole="StoreStatus" />
+          <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="OrderToStore" ToRole="Recurrence" />
         </EntityType>
         <EntityType Name="OrderToStoreLog">
           <Key>
@@ -3113,6 +3168,43 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Recurrence">
+          <Key>
+            <PropertyRef Name="RecurrenceId" />
+          </Key>
+          <Property Name="RecurrenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="OrderToStoreId" Type="Int64" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimestampShort" Type="Int64" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_Recurrence_Client" FromRole="Recurrence" ToRole="Client" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="Recurrence" ToRole="OrderToStore" />
+        </EntityType>
+        <Association Name="FK_Recurrence_Client">
+          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="CallCenterModel.Recurrence" Role="Recurrence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Recurrence">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurrence_OrderToStore">
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="1" />
+          <End Type="CallCenterModel.Recurrence" Role="Recurrence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderToStore">
+              <PropertyRef Name="OrderToStoreId" />
+            </Principal>
+            <Dependent Role="Recurrence">
+              <PropertyRef Name="OrderToStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3626,6 +3718,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="ServerCode" ColumnName="ServerCode" />
                 <ScalarProperty Name="ServerName" ColumnName="ServerName" />
                 <ScalarProperty Name="ServerInfoId" ColumnName="ServerInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recurrence">
+            <EntityTypeMapping TypeName="CallCenterModel.Recurrence">
+              <MappingFragment StoreEntitySet="Recurrence">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="TimestampShort" ColumnName="TimestampShort" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="OrderToStoreId" ColumnName="OrderToStoreId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="RecurrenceId" ColumnName="RecurrenceId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

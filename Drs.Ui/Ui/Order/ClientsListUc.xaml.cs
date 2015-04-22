@@ -1,8 +1,4 @@
-﻿using System.Windows.Controls;
-using System.Windows.Input;
-using Drs.ViewModel.Order;
-
-namespace Drs.Ui.Ui.Order
+﻿namespace Drs.Ui.Ui.Order
 {
     /// <summary>
     /// Interaction logic for ClientsListUc.xaml

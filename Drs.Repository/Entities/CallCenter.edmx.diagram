@@ -105,6 +105,9 @@
         <EntityTypeShape EntityType="CallCenterModel.ServerInfo" Width="1.5" PointX="12.625" PointY="3.75" />
         <AssociationConnector Association="CallCenterModel.FK_ClientInfo_CallCenterInfo" />
         <AssociationConnector Association="CallCenterModel.FK_ServerInfo_CallCenterInfo" />
+        <EntityTypeShape EntityType="CallCenterModel.Recurrence" Width="1.5" PointX="18" PointY="18.125" />
+        <AssociationConnector Association="CallCenterModel.FK_Recurrence_Client" />
+        <AssociationConnector Association="CallCenterModel.FK_Recurrence_OrderToStore" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

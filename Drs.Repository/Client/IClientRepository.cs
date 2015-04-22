@@ -14,5 +14,7 @@ namespace Drs.Repository.Client
         ClientInfoModel GetClientById(int clientId);
         string GetPhoneById(int phoneId);
         IEnumerable<ListItemModel> SearchClientsByClientName(string clientName, int maxResultsOnQuery);
+        int CountRecurrenceByTime(long dtStart, long dtEnd, int clientId);
+        decimal TotalRecurrenceByTotal(long dtStart, long dtEndShort, int clientId);
     }
 }

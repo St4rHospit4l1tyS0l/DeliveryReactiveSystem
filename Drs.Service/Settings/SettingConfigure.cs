@@ -34,6 +34,83 @@ namespace Drs.Service.Settings
             SettingsData.Store.ByRegionC = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.BY_REGIONC, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.ByRegionD = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.BY_REGIOND, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.ByZipCode = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.BY_ZIPCODE, SettingsData.Constants.SystemConst.FALSE);
+
+            ResolveRecurrence(dicSettings);
+
+        }
+
+        private static void ResolveRecurrence(IDictionary<string, string> dicSettings)
+        {
+            var lstRecurrenceTypeTime = new Dictionary<string, RecurrenceType>();
+            var lstRecurrenceTypeTotal = new Dictionary<string, RecurrenceType>();
+            Dictionary<string, RecurrenceLevel> lstRecurrenceLevelTotal;
+            Dictionary<string, RecurrenceLevel> lstRecurrenceLevelTime;
+
+            var dicRecurrence = dicSettings.Where(e => e.Key.StartsWith(SettingsData.Constants.Group.RECURRENCE)).ToDictionary(e => e.Key, e=> e.Value);
+
+            //Obtener el tipo de recurrencia (tiempo)
+            GetRecurrenceType(dicRecurrence, SettingsData.Constants.Group.RECURRENCE + SettingsData.Constants.SETTING_SEPARATOR + SettingsData.Constants.RecurrenceConst.TYPE_TIME, lstRecurrenceTypeTime);
+            GetRecurrenceType(dicRecurrence, SettingsData.Constants.Group.RECURRENCE + SettingsData.Constants.SETTING_SEPARATOR + SettingsData.Constants.RecurrenceConst.TYPE_TOTAL, lstRecurrenceTypeTotal);
+
+            GetRecurrenceLevel(dicRecurrence, SettingsData.Constants.Group.RECURRENCE + SettingsData.Constants.SETTING_SEPARATOR + SettingsData.Constants.RecurrenceConst.LEVEL_TIME, out lstRecurrenceLevelTime);
+            GetRecurrenceLevel(dicRecurrence, SettingsData.Constants.Group.RECURRENCE + SettingsData.Constants.SETTING_SEPARATOR + SettingsData.Constants.RecurrenceConst.LEVEL_TOTAL, out lstRecurrenceLevelTotal);
+
+            SettingsData.Recurrence.LstRecurrenceTypeTime = lstRecurrenceTypeTime;
+            SettingsData.Recurrence.LstRecurrenceTypeTotal = lstRecurrenceTypeTotal;
+            SettingsData.Recurrence.LstRecurrenceLevelTotal = lstRecurrenceLevelTotal;
+            SettingsData.Recurrence.LstRecurrenceLevelTime = lstRecurrenceLevelTime;
+
+        }
+
+        private static void GetRecurrenceLevel(Dictionary<string, string> dicRecurrence, string keyToGet, out Dictionary<string, RecurrenceLevel> lstRecurrenceLevel)
+        {
+            lstRecurrenceLevel = new Dictionary<string, RecurrenceLevel>();
+
+            foreach (var dicSetting in dicRecurrence.Where(e => e.Key.StartsWith(keyToGet)))
+            {
+                int level;
+                if (int.TryParse(dicSetting.Key.Replace(keyToGet, String.Empty), out level) == false)
+                    continue;
+
+                float levelValue;
+                var sValue = dicSetting.Value.Split(SettingsData.Constants.SETTING_SEPARATOR_C);
+
+                if (sValue.Length != 4)
+                    continue;
+
+                if (float.TryParse(sValue[0], out levelValue) == false)
+                    continue;
+
+                lstRecurrenceLevel.Add(dicSetting.Key, new RecurrenceLevel
+                {
+                    Level = level,
+                    LevelValue = levelValue,
+                    Name = sValue[1],
+                    Icon = sValue[2],
+                    Color = sValue[3],
+                });
+            }
+
+            lstRecurrenceLevel = lstRecurrenceLevel.OrderBy(e => e.Value.Level).ToDictionary(e => e.Key, e => e.Value);
+        }
+
+
+        private static void GetRecurrenceType(Dictionary<string, string> dicRecurrence, string keyToGet, Dictionary<string, RecurrenceType> lstRecurrenceType)
+        {
+            foreach (var dicSetting in dicRecurrence.Where(e => e.Key.StartsWith(keyToGet)))
+            {
+                var sValue = dicSetting.Value.Split(SettingsData.Constants.SETTING_SEPARATOR_C);
+
+                if (sValue.Length != 2)
+                    continue;
+
+                lstRecurrenceType.Add(dicSetting.Key, new RecurrenceType
+                {
+                    Value = sValue[0],
+                    Name = sValue[1],
+                    Type = dicSetting.Key,
+                });
+            }
         }
 
         private static bool GetBooleanSettingValue(IDictionary<string, string> dicSettings, string group, string key, bool bDefault)
@@ -62,7 +139,7 @@ namespace Drs.Service.Settings
             try
             {
                 string sValue;
-                return dicSettings.TryGetValue(@group + SettingsData.Constants.SETTING_SEPARATOR + key, out sValue) ? sValue : sDefault;
+                return dicSettings.TryGetValue(group + SettingsData.Constants.SETTING_SEPARATOR + key, out sValue) ? sValue : sDefault;
             }
             catch (Exception)
             {

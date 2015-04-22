@@ -152,6 +152,7 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
+    <Compile Include="Converter\EnumToVisualConverter.cs" />
     <Compile Include="Resources\Localization\Shared.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

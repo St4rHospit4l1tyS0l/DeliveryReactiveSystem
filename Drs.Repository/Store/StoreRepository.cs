@@ -104,5 +104,11 @@ namespace Drs.Repository.Store
 
             return orderToStoreLog;
         }
+
+        public void SaveRecurrence(Recurrence recurrence)
+        {
+            DbEntities.Recurrence.Add(recurrence);
+            DbEntities.SaveChanges();
+        }
     }
 }
