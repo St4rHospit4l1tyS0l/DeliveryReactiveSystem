@@ -140,6 +140,23 @@ namespace Drs.Service.Order
             }            
         }
 
+        public ResponseMessageData<PosCheck> LastOrderByPhone(string phone)
+        {
+            using (_repository)
+            {
+                var clientPhoneId = _repository.GetPhoneIdByPhone(phone);
+                var posOrderId = _repository.GetLastPosOrderIdByPhone(clientPhoneId);
+                var posCheck = _repository.GetPosCheckByOrderId(posOrderId);
+
+                return new ResponseMessageData<PosCheck>
+                {
+                    Data = posCheck,
+                    IsSuccess = true,
+                    Message = String.Empty
+                };
+            } 
+        }
+
         private int SaveCompany(string companyName)
         {
             companyName = companyName.Trim().ToUpper();

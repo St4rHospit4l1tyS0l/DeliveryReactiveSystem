@@ -31,6 +31,7 @@ namespace Drs.Model.Constants
             public const string SAVE_PHONE_ORDER_HUB_METHOD = "SavePhone-Order";
             public const string SAVE_CLIENT_ORDER_HUB_METHOD = "SaveClient-Order";
             public const string SAVE_POS_CHECK_ORDER_HUB_METHOD = "SavePosCheck-Order";
+            public const string LAST_ORDER_ORDER_HUB_METHOD = "LastOrder-Order";
 
             //Module Address
             public const string ADDRESS_HUB = "ModAddress";

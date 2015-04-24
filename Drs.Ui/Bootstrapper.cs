@@ -53,6 +53,7 @@ namespace Drs.Ui
             builder.RegisterType<SearchNewPhoneVm>().As<ISearchNewPhoneVm>().ExternallyOwned();
             builder.RegisterType<OrderPosVm>().As<IOrderPosVm>().ExternallyOwned();
             builder.RegisterType<SendOrderVm>().As<ISendOrderVm>().ExternallyOwned();
+            builder.RegisterType<LastOrderFoVm>().As<ILastOrderFoVm>().ExternallyOwned();
 
             builder.RegisterType<TrackOrderVm>().As<ITrackOrderVm>().ExternallyOwned();
             builder.RegisterType<SearchTrackOrderVm>().As<ISearchTrackOrderVm>().ExternallyOwned();

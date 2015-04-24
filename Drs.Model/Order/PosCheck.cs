@@ -39,5 +39,6 @@ namespace Drs.Model.Order
         public int? Id { get; set; }
 
         public string FranchiseCode { get; set; }
+        public DateTime OrderDateTime { get; set; }
     }
 }

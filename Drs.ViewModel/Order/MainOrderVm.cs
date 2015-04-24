@@ -8,6 +8,7 @@ using Drs.Model.Shared;
 using Drs.Model.UiView.Shared;
 using Drs.Service.Client;
 using Drs.Service.Franchise;
+using Drs.ViewModel.Main;
 using Drs.ViewModel.Shared;
 using ReactiveUI;
 
@@ -26,12 +27,13 @@ namespace Drs.ViewModel.Order
 
         private readonly IMainOrderService _orderService;
         private readonly IPosService _posService;
+        private readonly ILastOrderFoVm _lastOrderFo;
         private int _selectedTab;
         private readonly IDictionary<int, IUcViewModel> _dicTabItems;
 
         public MainOrderVm(IBackPreviousVm backPreviousVm, ISearchNewPhoneVm searchNewPhone, IFranchiseContainerVm franchiseContainer,
             IClientsListVm clientsList, IAddressListVm addressList, IOrderSummaryVm orderSummary, IOrderPosVm orderPosVm, ISendOrderVm sendOrder,
-            IMainOrderService orderService, IPosService posService)
+            IMainOrderService orderService, IPosService posService, ILastOrderFoVm lastOrderFo)
         {
 
             BackPrevious = backPreviousVm;
@@ -49,6 +51,7 @@ namespace Drs.ViewModel.Order
 
             _orderService = orderService;
             _posService = posService;
+            _lastOrderFo = lastOrderFo;
             orderSummary.OrderService = orderService;
             OrderSummary = orderSummary;
             sendOrder.OrderService = orderService;
@@ -102,6 +105,7 @@ namespace Drs.ViewModel.Order
 
             MessageBus.Current.Listen<ListItemModel>(SharedMessageConstants.ORDER_CLIENTPHONE).Subscribe(clientsList.ProcessPhone);
             MessageBus.Current.Listen<ListItemModel>(SharedMessageConstants.ORDER_CLIENTPHONE).Subscribe(addressList.ProcessPhone);
+            MessageBus.Current.Listen<ListItemModel>(SharedMessageConstants.ORDER_CLIENTPHONE).Subscribe(LastOrderFo.ProcessPhone);
 
             var sendOrder = ((ISendOrderVm)SendOrder);
             _orderService.PosOrderChanged += sendOrder.OnPosOrderChanged;  //Informa a la ventana para mostrar los valores obtenidos del POS
@@ -117,6 +121,7 @@ namespace Drs.ViewModel.Order
 
         }
 
+
         private void OnEndOrder()
         {
             ShellContainerVm.ChangeCurrentView(StatusScreen.ShMenu, true);
@@ -125,6 +130,12 @@ namespace Drs.ViewModel.Order
         private void GoNextStep(int iNextItem)
         {
             SelectedTab = iNextItem;
+        }
+
+        protected override void OnShellContainerVmChange(IShellContainerVm value)
+        {
+            base.OnShellContainerVmChange(value);
+            ShellContainerVm.AddOrUpdateFlyouts(LastOrderFo);
         }
 
         public override bool Initialize(bool bForceToInit = false)
@@ -229,6 +240,11 @@ namespace Drs.ViewModel.Order
                 }, SharedMessageConstants.MSG_SHOW_ERRQST);
                 RxApp.MainThreadScheduler.Schedule(_ => { SelectedTab = response.View; });
             }
+        }
+
+        public ILastOrderFoVm LastOrderFo
+        {
+            get { return _lastOrderFo; }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
@@ -71,7 +72,8 @@ namespace Drs.Repository.Client
                 DbEntities.ClientPhone.Attach(phoneSecToAdd);
             }
 
-            for (var i = client.ClientPhone.Count - 1; i >= 0; i--){
+            for (var i = client.ClientPhone.Count - 1; i >= 0; i--)
+            {
                 var phone = client.ClientPhone.ElementAt(i);
                 client.ClientPhone.Remove(phone);
             }
@@ -102,8 +104,8 @@ namespace Drs.Repository.Client
 
         public void RemoveRelPhoneClient(ClientPhoneModel model)
         {
-            var client = new Entities.Client {ClientId = model.ClientId};
-            var phone = new ClientPhone {ClientPhoneId = model.ClientPhoneId};
+            var client = new Entities.Client { ClientId = model.ClientId };
+            var phone = new ClientPhone { ClientPhoneId = model.ClientPhoneId };
             client.ClientPhone.Add(phone);
             DbEntities.Client.Attach(client);
             client.ClientPhone.Remove(phone);
@@ -159,5 +161,32 @@ namespace Drs.Repository.Client
             return model.Id;
         }
 
+        public int GetPhoneIdByPhone(string phone)
+        {
+            return DbEntities.ClientPhone.Where(e => e.Phone == phone).Select(e => e.ClientPhoneId).FirstOrDefault();
+        }
+
+        public int GetLastPosOrderIdByPhone(int clientPhoneId)
+        {
+            return DbEntities.OrderToStore.Where(e => e.ClientPhoneId == clientPhoneId)
+                        .OrderByDescending(e => e.OrderToStoreId).Select(e => e.PosOrderId)
+                        .FirstOrDefault();
+        }
+
+        public PosCheck GetPosCheckByOrderId(int posOrderId)
+        {
+            return DbEntities.PosOrder.Where(e => e.PosOrderId == posOrderId)
+                .Select(e => new PosCheck
+                {
+                    FranchiseCode = e.FranchiseCode,
+                    GuidId = e.GuidId,
+                    OrderDateTime = e.OrderDatetime,
+                    LstItems = e.PosOrderItem.Select(i => new ItemModel
+                    {
+                        ItemId = i.ItemId,
+                        Name = i.Name
+                    }).ToList(),
+                }).FirstOrDefault();
+        }
     }
 }

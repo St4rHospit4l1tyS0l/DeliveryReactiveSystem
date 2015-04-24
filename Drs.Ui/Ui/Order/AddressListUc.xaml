@@ -84,10 +84,10 @@
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="  Acción" MinWidth="140"  MaxWidth="200">
+                    <DataGridTemplateColumn Header="  Acción" MinWidth="100"  MaxWidth="110">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical" Margin="10,0,10,0" MinWidth="120">
+                                <StackPanel Orientation="Vertical" Margin="10,0,10,0" MinWidth="100">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                         <Rectangle Width="17" Height="17" Visibility="{Binding IsOk}" HorizontalAlignment="Center" Fill="LimeGreen" >
                                             <Rectangle.OpacityMask >

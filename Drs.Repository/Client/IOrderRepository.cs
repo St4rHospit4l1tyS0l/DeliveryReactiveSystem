@@ -17,5 +17,8 @@ namespace Drs.Repository.Client
         bool RelPhoneAddressExists(AddressPhoneModel model);
         void RemoveRelPhoneAddress(AddressPhoneModel model);
         int? SavePosCheck(PosCheck model);
+        int GetPhoneIdByPhone(string phone);
+        int GetLastPosOrderIdByPhone(int clientPhoneId);
+        PosCheck GetPosCheckByOrderId(int posOrderId);
     }
 }

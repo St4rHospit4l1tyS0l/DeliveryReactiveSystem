@@ -95,5 +95,23 @@ namespace ConnectCallCenter.Hubs
                 };
             }
         }
+
+
+        [HubMethodName(SharedConstants.Server.LAST_ORDER_ORDER_HUB_METHOD)]
+        public ResponseMessageData<PosCheck> LastOrderByPhone(String phone)
+        {
+            try
+            {
+                return AppInit.Container.Resolve<IOrderService>().LastOrderByPhone(phone);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<PosCheck>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message// + ex.StackTrace
+                };
+            }
+        }
     }
 }

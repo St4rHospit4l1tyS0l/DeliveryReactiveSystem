@@ -110,10 +110,12 @@
     <Compile Include="Order\IAddressListVm.cs" />
     <Compile Include="Order\ISendOrderVm.cs" />
     <Compile Include="Order\IOrderPosVm.cs" />
+    <Compile Include="Order\ILastOrderFoVm.cs" />
     <Compile Include="Order\IUpsertAddressFoVm.cs" />
     <Compile Include="Order\SendOrderVm.cs" />
     <Compile Include="Order\OrderPosVm.cs" />
     <Compile Include="Order\UpsertAddressFoVm.cs" />
+    <Compile Include="Order\LastOrderFoVm.cs" />
     <Compile Include="Service References\SettingSvc\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
