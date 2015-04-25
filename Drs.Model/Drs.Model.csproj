@@ -138,6 +138,7 @@
     <Compile Include="Order\OrderSummaryItem.cs" />
     <Compile Include="Order\PhoneModel.cs" />
     <Compile Include="Order\PosCheck.cs" />
+    <Compile Include="Order\QtItemModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Settings\ControlTitleModel.cs" />
     <Compile Include="Settings\RecurrenceLevel.cs" />

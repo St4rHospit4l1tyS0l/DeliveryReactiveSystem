@@ -310,6 +310,7 @@
     <Compile Include="Shared\BaseRepository.cs" />
     <Compile Include="Shared\EntityConstants.cs" />
     <Compile Include="Shared\GenericRepository.cs" />
+    <Compile Include="Shared\IBaseOneRepository.cs" />
     <Compile Include="Store\StoreRepository.cs" />
     <Compile Include="Store\IStoreRepository.cs" />
     <Compile Include="Track\TrackRepository.cs" />

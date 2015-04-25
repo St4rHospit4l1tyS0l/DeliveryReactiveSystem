@@ -5,6 +5,7 @@ using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;
 using Drs.Repository.Client;
+using Drs.Repository.Order;
 
 namespace Drs.Service.Order
 {
@@ -147,6 +148,12 @@ namespace Drs.Service.Order
                 var clientPhoneId = _repository.GetPhoneIdByPhone(phone);
                 var posOrderId = _repository.GetLastPosOrderIdByPhone(clientPhoneId);
                 var posCheck = _repository.GetPosCheckByOrderId(posOrderId);
+
+                if (posCheck != null)
+                {
+                    var repositoryFranchise = new FranchiseRepository(_repository.Db);
+                    posCheck.Franchise = repositoryFranchise.GetFranchiseByCode(posCheck.FranchiseCode);
+                }
 
                 return new ResponseMessageData<PosCheck>
                 {

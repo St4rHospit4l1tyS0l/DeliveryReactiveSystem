@@ -4,11 +4,11 @@ using Drs.ViewModel.Shared;
 namespace Drs.Ui.Ui.Order
 {
     /// <summary>
-    /// Interaction logic for UpsertAddressFo.xaml
+    /// Interaction logic for LastOrderFo.xaml
     /// </summary>
-    public partial class UpsertAddressFo 
+    public partial class LastOrderFo 
     {
-        public UpsertAddressFo()
+        public LastOrderFo()
         {
             InitializeComponent();
             IsOpenChanged += OnIsOpenChanged;

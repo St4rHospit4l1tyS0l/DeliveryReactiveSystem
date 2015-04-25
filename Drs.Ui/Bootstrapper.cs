@@ -71,10 +71,16 @@ namespace Drs.Ui
                 var view = new UpsertClientFo { DataContext = baseVm };
                 return view;
             }
-            
+
             if (name == typeof(UpsertAddressFoVm).Name)
             {
-                var view = new UpsertAddressFo{ DataContext = baseVm };
+                var view = new UpsertAddressFo { DataContext = baseVm };
+                return view;
+            }
+
+            if (name == typeof(LastOrderFoVm).Name)
+            {
+                var view = new LastOrderFo{ DataContext = baseVm };
                 return view;
             }
             

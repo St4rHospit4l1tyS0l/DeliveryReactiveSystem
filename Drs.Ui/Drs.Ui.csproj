@@ -198,8 +198,8 @@
     <Compile Include="Ui\Order\SearchNewPhoneUc.xaml.cs">
       <DependentUpon>SearchNewPhoneUc.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\Order\LastOrderFoVm.xaml.cs">
-      <DependentUpon>LastOrderFoVm.xaml</DependentUpon>
+    <Compile Include="Ui\Order\LastOrderFo.xaml.cs">
+      <DependentUpon>LastOrderFo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\Order\UpsertAddressFo.xaml.cs">
       <DependentUpon>UpsertAddressFo.xaml</DependentUpon>
@@ -303,7 +303,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ui\Order\LastOrderFoVm.xaml">
+    <Page Include="Ui\Order\LastOrderFo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

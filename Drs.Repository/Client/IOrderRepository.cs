@@ -2,10 +2,11 @@
 using Drs.Model.Address;
 using Drs.Model.Client;
 using Drs.Model.Order;
+using Drs.Repository.Shared;
 
 namespace Drs.Repository.Client
 {
-    public interface IOrderRepository : IDisposable
+    public interface IOrderRepository : IBaseOneRepository, IDisposable
     {
         PhoneModel GetPhoneByPhone(string phone);
         PhoneModel SavePhone(PhoneModel model);

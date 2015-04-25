@@ -59,10 +59,19 @@ namespace Drs.ViewModel.Main
                 case StatusScreen.Login:
                 case StatusScreen.ShMenu:
                     HeaderVisibility = Visibility.Collapsed;
+                    CloseFlyouts();
                     return;
             }
 
             HeaderVisibility = Visibility.Visible;
+        }
+
+        private void CloseFlyouts()
+        {
+            foreach (var flyout in Flyouts)
+            {
+                flyout.IsOpen = false;
+            }
         }
 
         private Visibility _headerVisibility;

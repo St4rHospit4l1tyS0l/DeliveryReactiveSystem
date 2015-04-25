@@ -14,8 +14,8 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Border BorderThickness="2" BorderBrush="#FF69FD02">
-        <StackPanel Orientation="Vertical" Background="{DynamicResource HighlightBrush}"  >
+    <Border BorderThickness="2" BorderBrush="#FF535353">
+        <StackPanel Orientation="Vertical" Background="#FF363B42"  >
             <Border BorderThickness="0, 0, 0, 2" BorderBrush="White">
                 <Label Content="Resumen del pedido" Foreground="White"  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" FontSize="16"></Label>
             </Border>

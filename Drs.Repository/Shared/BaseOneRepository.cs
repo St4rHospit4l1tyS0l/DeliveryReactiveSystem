@@ -7,9 +7,20 @@ namespace Drs.Repository.Shared
     {
         protected readonly CallCenterEntities DbEntities;
 
+        public CallCenterEntities Db {
+            get
+            {
+                return DbEntities;
+            }
+        }
+
         protected BaseOneRepository()
         {
             DbEntities = new CallCenterEntities();
+        }
+        protected BaseOneRepository(CallCenterEntities dbEntities)
+        {
+            DbEntities = dbEntities;
         }
 
         public void Dispose()
@@ -26,6 +37,5 @@ namespace Drs.Repository.Shared
                     DbEntities.Dispose();
             }
         }
-
     }
 }
