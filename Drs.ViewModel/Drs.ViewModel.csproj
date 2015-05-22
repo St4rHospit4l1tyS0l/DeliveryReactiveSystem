@@ -102,6 +102,7 @@
     <Compile Include="Account\LoginVm.cs" />
     <Compile Include="Account\ILoginVm.cs" />
     <Compile Include="BootstrapperBase.cs" />
+    <Compile Include="Catalog\CatalogsClientConfigure.cs" />
     <Compile Include="Main\IShellContainerVm.cs" />
     <Compile Include="Main\ShellContainerVm.cs" />
     <Compile Include="Menu\IMenuItemVm.cs" />
@@ -267,7 +268,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

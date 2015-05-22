@@ -89,7 +89,7 @@ namespace Drs.ViewModel.Order
             MessageBus.Current.Listen<FranchiseInfoModel>(SharedMessageConstants.ORDER_FRANCHISE).Subscribe(_orderService.ProcessFranchise);
             MessageBus.Current.Listen<ClientInfoGrid>(SharedMessageConstants.ORDER_CLIENTINFO).Subscribe(_orderService.ProcessClient);
             MessageBus.Current.Listen<AddressInfoGrid>(SharedMessageConstants.ORDER_ADDRESSINFO).Subscribe(_orderService.ProcessAddress);
-           
+
             var orderSummary = ((IOrderSummaryVm) OrderSummary);
             _orderService.PhoneChanged += orderSummary.OnPhoneChanged;
             _orderService.FranchiseChanged += orderSummary.OnFranchiseChanged;

@@ -28,11 +28,25 @@ namespace Drs.ViewModel.Order
             _factoryFranchise = factoryFranchise;
             _client = client;
             Items = new ReactiveList<IFranchiseVm>();
+
+            MessageBus.Current.Listen<PropagateOrderModel>(SharedMessageConstants.PROPAGATE_LASTORDER_FRANCHISE).Subscribe(OnPropagate);
+        }
+
+        private void OnPropagate(PropagateOrderModel model)
+        {
+            var item = Items.FirstOrDefault(e => e.Code == model.PosCheck.FranchiseCode);
+            if (item == null)
+                return;
+            
+            SetNotCheckedButtons(new FranchiseInfoModel { Code = item.Code, Title = item.Title, DataInfo = item.DataInfo });
+
+            if(model.Order != null)
+                MessageBus.Current.SendMessage(model, SharedMessageConstants.PROPAGATE_LASTORDER_CLIENT);
         }
 
         //*
         public override bool Initialize(bool bForceToInit = false)
-        {
+        {   
             if (base.Initialize(bForceToInit) == false)
                 return false;
 
@@ -88,6 +102,7 @@ namespace Drs.ViewModel.Order
             get { return _chosenFranchise; }
             set { this.RaiseAndSetIfChanged(ref _chosenFranchise, value); }
         }
+
 
     }
 }

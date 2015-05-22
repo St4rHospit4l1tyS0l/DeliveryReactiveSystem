@@ -91,6 +91,8 @@
     <Compile Include="Account\ILoginSvc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Account\LoginSvc.cs" />
+    <Compile Include="Catalogs\ICatalogsSvc.cs" />
+    <Compile Include="Catalogs\CatalogsSvc.cs" />
     <Compile Include="Setting\ISettingSvc.cs" />
     <Compile Include="Setting\SettingSvc.cs" />
   </ItemGroup>

@@ -79,6 +79,14 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
+        <StackPanel Margin="30 15 30 0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label Content="Tipo de pago: "></Label>
+            <ComboBox Width="180" ItemsSource="{Binding Path=LstPayments}"
+                      DisplayMemberPath="Name" 
+                      SelectedValuePath="Name" 
+                      SelectedValue="{Binding Path=Payment}">
+            </ComboBox>
+        </StackPanel>
         <StackPanel Margin="30 15 30 0">
             <Label Content="Nota adicional al pedido (campo no requerido): "></Label>
             <TextBox MaxLines="3" MaxLength="500" Text="{Binding ExtraNotes}" TextWrapping="Wrap" Height="80"></TextBox>

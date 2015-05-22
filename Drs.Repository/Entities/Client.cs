@@ -17,9 +17,9 @@ namespace Drs.Repository.Entities
         public Client()
         {
             this.ClientStatistics = new HashSet<ClientStatistics>();
-            this.OrderToStore = new HashSet<OrderToStore>();
             this.ClientPhone = new HashSet<ClientPhone>();
             this.Recurrence = new HashSet<Recurrence>();
+            this.OrderToStore = new HashSet<OrderToStore>();
         }
     
         public int ClientId { get; set; }
@@ -31,8 +31,8 @@ namespace Drs.Repository.Entities
     
         public virtual Company Company { get; set; }
         public virtual ICollection<ClientStatistics> ClientStatistics { get; set; }
-        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<ClientPhone> ClientPhone { get; set; }
         public virtual ICollection<Recurrence> Recurrence { get; set; }
+        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
     }
 }

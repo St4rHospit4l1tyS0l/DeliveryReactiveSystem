@@ -123,7 +123,7 @@ namespace Drs.Service.Order
                     Data = true,
                     IsSuccess = true
                 };
-            }    
+            }
         }
 
         public ResponseMessageData<PosCheck> SavePosCheck(PosCheck model)
@@ -138,30 +138,58 @@ namespace Drs.Service.Order
                     IsSuccess = true,
                     Message = String.Empty
                 };
-            }            
+            }
         }
 
-        public ResponseMessageData<PosCheck> LastOrderByPhone(string phone)
+        public ResponseMessageData<PropagateOrderModel> LastOrderByPhone(string phone)
         {
             using (_repository)
             {
                 var clientPhoneId = _repository.GetPhoneIdByPhone(phone);
-                var posOrderId = _repository.GetLastPosOrderIdByPhone(clientPhoneId);
-                var posCheck = _repository.GetPosCheckByOrderId(posOrderId);
+                var order = _repository.GetLastPosOrderIdByPhone(clientPhoneId);
 
-                if (posCheck != null)
+                if (order == null)
                 {
-                    var repositoryFranchise = new FranchiseRepository(_repository.Db);
-                    posCheck.Franchise = repositoryFranchise.GetFranchiseByCode(posCheck.FranchiseCode);
+                    return new ResponseMessageData<PropagateOrderModel>
+                    {
+                        IsSuccess = false,
+                        Message = "No existe información de la orden"
+                    };
                 }
 
-                return new ResponseMessageData<PosCheck>
+                var posCheck = _repository.GetPosCheckByOrderId(order.PosOrderId);
+
+                if (posCheck == null)
                 {
-                    Data = posCheck,
+                    return new ResponseMessageData<PropagateOrderModel>
+                    {
+                        IsSuccess = false,
+                        Message = "No existe información del tiquete"
+                    };
+                }
+
+
+                var repositoryFranchise = new FranchiseRepository(_repository.Db);
+
+                var model = new PropagateOrderModel
+                {
+                    Order = order,
+                    PosCheck = posCheck,
+                    Franchise = repositoryFranchise.GetFranchiseByCode(posCheck.FranchiseCode)
+                };
+
+                return new ResponseMessageData<PropagateOrderModel>
+                {
+                    Data = model,
                     IsSuccess = true,
                     Message = String.Empty
                 };
-            } 
+            }
+        }
+
+        public ResponseMessageData<PosCheck> CalculatePrices(string phone)
+        {
+            return null;
         }
 
         private int SaveCompany(string companyName)

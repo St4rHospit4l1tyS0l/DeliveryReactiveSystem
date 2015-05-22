@@ -143,6 +143,8 @@
     <Compile Include="ServiceClient\ExecuteServiceClient.cs" />
     <Compile Include="ServiceClient\IExecuteServiceClient.cs" />
     <Compile Include="ServiceClient\ServiceClientBase.cs" />
+    <Compile Include="Catalogs\ICatalogService.cs" />
+    <Compile Include="Catalogs\CatalogService.cs" />
     <Compile Include="Settings\SettingConfigure.cs" />
     <Compile Include="Settings\SettingService.cs" />
     <Compile Include="Settings\ISettingService.cs" />

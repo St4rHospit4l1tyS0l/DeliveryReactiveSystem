@@ -83,7 +83,17 @@ namespace Drs.ViewModel.Order
                 return new Unit();
             });
 
+            MessageBus.Current.Listen<PropagateOrderModel>(SharedMessageConstants.PROPAGATE_LASTORDER_POSCHECK).Subscribe(OnPropagate);
         }
+
+        private void OnPropagate(PropagateOrderModel model)
+        {
+            model.PosCheck.GuidId = Guid.NewGuid();
+            model.PosCheck.OrderDateTime = DateTime.Now;
+
+            MessageBus.Current.SendMessage(model.PosCheck, SharedMessageConstants.ORDER_SEND_POSORDER);
+        }
+
 
         private ResponseMessage ValidateOrderDelivery()
         {

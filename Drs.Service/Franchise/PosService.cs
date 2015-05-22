@@ -21,6 +21,7 @@ namespace Drs.Service.Franchise
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
 
+
         public void OnFranchiseChanged(FranchiseInfoModel model)
         {
             Task.Run(() =>
@@ -85,6 +86,13 @@ namespace Drs.Service.Franchise
 
             });
         }
+
+        //public bool ValidatePrices(PosCheck posCheck)
+        //{
+        //    var newDataFolderFranchise = posCheck.Franchise.Name;
+        //    var pathNewData = Path.Combine(SettingsData.AlohaPath, newDataFolderFranchise, SettingsData.);
+        //    if(File.Exists(pathNewData) == false)
+        //}
 
         /*private void WaitForTopMostToDisable(Process process)
         {

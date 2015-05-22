@@ -39,6 +39,21 @@ namespace Drs.ViewModel.Order
             EditClient = ReactiveCommand.CreateAsyncTask(Observable.Return(true), OnEditClient);
             RemoveClient = ReactiveCommand.CreateAsyncTask(Observable.Return(true), OnRemoveClient);
             RetrySaveClient = ReactiveCommand.CreateAsyncTask(Observable.Return(true), OnRetrySaveClient);
+
+            MessageBus.Current.Listen<PropagateOrderModel>(SharedMessageConstants.PROPAGATE_LASTORDER_CLIENT).Subscribe(OnPropagate);
+        }
+
+        private void OnPropagate(PropagateOrderModel model)
+        {
+            var client = LstClients.FirstOrDefault(e => e.ClientInfo.ClientId == model.Order.ClientId);
+
+            if (client == null)
+                return;
+
+            RxApp.MainThreadScheduler.Schedule(_ => { ClientSelection = client; });
+
+            if (model.Order != null)
+                MessageBus.Current.SendMessage(model, SharedMessageConstants.PROPAGATE_LASTORDER_ADDRESS);
         }
 
         protected override void OnShellContainerVmChange(IShellContainerVm value)

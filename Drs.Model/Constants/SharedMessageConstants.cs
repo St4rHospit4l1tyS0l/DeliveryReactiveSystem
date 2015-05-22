@@ -14,5 +14,11 @@
         public const string ORDER_SEND_POSORDER = "Order-SendPosOrder";
 
         public const string ACCOUNT_ERROR_CHECK = "Account-ErrorCheck";
+
+        public const string PROPAGATE_LASTORDER_FRANCHISE = "Propagate-LastOrder-Franchise";
+        public const string PROPAGATE_LASTORDER_CLIENT = "Propagate-LastOrder-Client";
+        public const string PROPAGATE_LASTORDER_ADDRESS = "Propagate-LastOrder-Address";
+        public const string PROPAGATE_LASTORDER_POSCHECK = "Propagate-LastOrder-PosCheck";
+    
     }
 }

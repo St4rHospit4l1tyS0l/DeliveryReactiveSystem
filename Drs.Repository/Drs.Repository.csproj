@@ -131,6 +131,8 @@
     <Compile Include="Account\UserRepository.cs" />
     <Compile Include="Address\AddressRepository.cs" />
     <Compile Include="Address\IAddressRepository.cs" />
+    <Compile Include="Catalog\CatalogRepository.cs" />
+    <Compile Include="Catalog\ICatalogRepository.cs" />
     <Compile Include="Client\ClientRepository.cs" />
     <Compile Include="Client\OrderRepository.cs" />
     <Compile Include="Client\IOrderRepository.cs" />
@@ -169,6 +171,9 @@
       <DependentUpon>CallCenter.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entities\CallCenterInfo.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CatPayment.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Client.cs">
@@ -373,9 +378,7 @@
       <LastGenOutput>ResShared.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Catalog\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

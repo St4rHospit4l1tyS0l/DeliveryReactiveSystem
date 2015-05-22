@@ -19,7 +19,7 @@ namespace Drs.Repository.Client
         void RemoveRelPhoneAddress(AddressPhoneModel model);
         int? SavePosCheck(PosCheck model);
         int GetPhoneIdByPhone(string phone);
-        int GetLastPosOrderIdByPhone(int clientPhoneId);
+        OrderInfoModel GetLastPosOrderIdByPhone(int clientPhoneId);
         PosCheck GetPosCheckByOrderId(int posOrderId);
     }
 }

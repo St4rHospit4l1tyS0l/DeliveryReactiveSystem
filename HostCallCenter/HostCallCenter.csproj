@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Login.svc" />
+    <Content Include="Catalog\CatalogsClient.svc" />
     <Content Include="Global.asax" />
     <Content Include="Setting\Setting.svc" />
     <Content Include="Web.config">

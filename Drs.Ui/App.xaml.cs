@@ -21,6 +21,7 @@ using Drs.Service.ReactiveDelivery;
 using Drs.Service.TransferDto;
 using Drs.Ui.Ui;
 using Drs.Ui.Ui.Splash;
+using Drs.ViewModel.Catalog;
 using Drs.ViewModel.Main;
 using Drs.ViewModel.Setting;
 using Drs.ViewModel.Shared;
@@ -86,6 +87,7 @@ namespace Drs.Ui
                 reactiveDeliveryClient.Initialize(Cypher.Encrypt(Environment.MachineName), container.Resolve<IConfigurationProvider>().Servers, lstHubProxies, container.Resolve<ILoggerFactory>());
                 SettingsData.Client.Container = container;
                 await SettingConfigureWs.Initialize(reactiveDeliveryClient);
+                await CatalogsClientConfigure.Initialize();
                 var mainWindow = container.Resolve<MainWindow>();
                 var vm = container.Resolve<IShellContainerVm>();
                 vm.BootStrapper = bootstrapper;

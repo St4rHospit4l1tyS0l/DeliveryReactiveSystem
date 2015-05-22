@@ -40,6 +40,5 @@ namespace Drs.Model.Order
 
         public string FranchiseCode { get; set; }
         public DateTime OrderDateTime { get; set; }
-        public OptionModel Franchise { get; set; }
     }
 }

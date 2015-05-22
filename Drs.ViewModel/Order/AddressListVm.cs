@@ -17,7 +17,6 @@ using Drs.Service.TransferDto;
 using Drs.ViewModel.Main;
 using Drs.ViewModel.Shared;
 using MahApps.Metro.Controls.Dialogs;
-using Microsoft.Owin.Security.Provider;
 using ReactiveUI;
 
 namespace Drs.ViewModel.Order
@@ -39,8 +38,22 @@ namespace Drs.ViewModel.Order
             Remove = ReactiveCommand.CreateAsyncTask(Observable.Return(true), OnRemove);
             RetrySaveItem = ReactiveCommand.CreateAsyncTask(Observable.Return(true), OnRetrySave);
             Setting = SettingsData.Constants.AddressGridSetting;
+
+            MessageBus.Current.Listen<PropagateOrderModel>(SharedMessageConstants.PROPAGATE_LASTORDER_ADDRESS).Subscribe(OnPropagate);
         }
 
+        private void OnPropagate(PropagateOrderModel model)
+        {
+            var address = LstAddresses.FirstOrDefault(e => e.AddressInfo.AddressId == model.Order.AddressId);
+
+            if (address == null)
+                return;
+
+            RxApp.MainThreadScheduler.Schedule(_ => { AddressSelection = address; });
+
+            if (model.PosCheck != null)
+                MessageBus.Current.SendMessage(model, SharedMessageConstants.PROPAGATE_LASTORDER_POSCHECK);
+        }
         protected override void OnShellContainerVmChange(IShellContainerVm value)
         {
             base.OnShellContainerVmChange(value);

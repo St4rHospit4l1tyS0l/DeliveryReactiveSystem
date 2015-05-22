@@ -17,8 +17,8 @@ namespace Drs.Repository.Entities
         public OrderToStore()
         {
             this.OrderToStoreLog = new HashSet<OrderToStoreLog>();
-            this.StoreStatus = new HashSet<StoreStatus>();
             this.Recurrence = new HashSet<Recurrence>();
+            this.StoreStatus = new HashSet<StoreStatus>();
         }
     
         public long OrderToStoreId { get; set; }
@@ -37,16 +37,18 @@ namespace Drs.Repository.Entities
         public string OrderMode { get; set; }
         public string OrderModeCharge { get; set; }
         public string PromiseTime { get; set; }
+        public int PaymentId { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual CatPayment CatPayment { get; set; }
         public virtual Client Client { get; set; }
         public virtual ClientPhone ClientPhone { get; set; }
         public virtual Franchise Franchise { get; set; }
         public virtual FranchiseStore FranchiseStore { get; set; }
         public virtual PosOrder PosOrder { get; set; }
         public virtual ICollection<OrderToStoreLog> OrderToStoreLog { get; set; }
-        public virtual ICollection<StoreStatus> StoreStatus { get; set; }
         public virtual ICollection<Recurrence> Recurrence { get; set; }
+        public virtual ICollection<StoreStatus> StoreStatus { get; set; }
     }
 }

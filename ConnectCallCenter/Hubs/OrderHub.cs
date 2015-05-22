@@ -98,11 +98,29 @@ namespace ConnectCallCenter.Hubs
 
 
         [HubMethodName(SharedConstants.Server.LAST_ORDER_ORDER_HUB_METHOD)]
-        public ResponseMessageData<PosCheck> LastOrderByPhone(String phone)
+        public ResponseMessageData<PropagateOrderModel> LastOrderByPhone(String phone)
         {
             try
             {
                 return AppInit.Container.Resolve<IOrderService>().LastOrderByPhone(phone);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<PropagateOrderModel>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message// + ex.StackTrace
+                };
+            }
+        }
+
+
+        [HubMethodName(SharedConstants.Server.CALCULATE_PRICES_ORDER_HUB_METHOD)]
+        public ResponseMessageData<PosCheck> CalculatePrices(String phone)
+        {
+            try
+            {
+                return AppInit.Container.Resolve<IOrderService>().CalculatePrices(phone);
             }
             catch (Exception ex)
             {
@@ -113,5 +131,6 @@ namespace ConnectCallCenter.Hubs
                 };
             }
         }
+
     }
 }

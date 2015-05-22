@@ -1,12 +1,16 @@
-﻿using Drs.Model.Order;
+﻿using System.Reactive;
+using Drs.Model.Order;
 using Drs.Model.Shared;
 using Drs.ViewModel.Shared;
+using ReactiveUI;
 
 namespace Drs.ViewModel.Order
 {
     public interface ILastOrderFoVm : IFlyoutBaseVm
     {
         void ProcessPhone(ListItemModel model);
-        PosCheck PosCheck { get; set; }
+        PropagateOrderModel PropagateOrder { get; set; }
+        IReactiveCommand<Unit> DoLastOrderCommand { get; set; }
+
     }
 }
