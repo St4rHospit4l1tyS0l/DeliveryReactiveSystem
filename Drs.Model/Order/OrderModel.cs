@@ -20,9 +20,7 @@ namespace Drs.Model.Order
         public IReactiveList<AddressInfoGrid> LstAddressInfo { get; set; }
         public PosCheck PosCheck { get; set; }
         public string Username { get; set; }
-        public int OrderMode { get; set; }
-        public string ExtraNotes { get; set; }
-        public DateTime PromiseTime { get; set; }
+        public OrderDetails OrderDetails { get; set; }
 
         public OrderModelDto ToDto()
         {
@@ -34,9 +32,7 @@ namespace Drs.Model.Order
                 AddressInfo = LstAddressInfo.Where(e => e.IsSelected).Select(e => e.AddressInfo).Single(),
                 PosOrder = PosCheck,
                 Username = Username,
-                OrderMode = OrderMode,
-                ExtraNotes = ExtraNotes,
-                PromiseTime = PromiseTime
+                OrderDetails = OrderDetails,
             };
         }
     }

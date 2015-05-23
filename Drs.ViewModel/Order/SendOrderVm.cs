@@ -4,7 +4,9 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Infrastructure.Extensions.Proc;
+using Drs.Model.Catalog;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Settings;
@@ -34,12 +36,16 @@ namespace Drs.ViewModel.Order
         private string _promiseTimeTx;
         private DateTime _promiseTime;
         private DateTime _minDateTime;
+        private ItemCatalog _payment;
 
         public SendOrderVm(IReactiveDeliveryClient client)
         {
             client.HubListeners.SendToStoreEventChanged += OnSendOrderToStoreEventChanged;
             EventsMsg = "Enviando el pedido al servidor. \nEspere por favor...";
             CultureSystem = SettingsData.CultureSystem;
+
+            LstPayments = new ReactiveList<ItemCatalog>();
+            LstPayments.ClearAndAddRange(CatalogsClientModel.CatPayments);
 
             ResetValues();
 
@@ -79,12 +85,22 @@ namespace Drs.ViewModel.Order
 
                 var orderMode = ExtractOrderMode();
 
-                await Task.Run(() => OrderService.SendOrderToStore(orderMode, ExtraNotes, _promiseTime));
+                var orderDetails = new OrderDetails
+                {
+                    OrderMode = orderMode,
+                    ExtraNotes = ExtraNotes,
+                    PromiseTime = _promiseTime,
+                    Payment = Payment
+                };
+
+                await Task.Run(() => OrderService.SendOrderToStore(orderDetails));
                 return new Unit();
             });
 
             MessageBus.Current.Listen<PropagateOrderModel>(SharedMessageConstants.PROPAGATE_LASTORDER_POSCHECK).Subscribe(OnPropagate);
         }
+
+        public IReactiveList<ItemCatalog> LstPayments { get; set; }
 
         private void OnPropagate(PropagateOrderModel model)
         {
@@ -163,6 +179,9 @@ namespace Drs.ViewModel.Order
             EventsMsg = String.Empty;
             ErrorMsg = String.Empty;
             SuccessMsg = String.Empty;
+
+            if (LstPayments.Count > 0)
+                Payment = LstPayments[0];
         }
 
         public override bool Initialize(bool bForceToInit = false)
@@ -225,6 +244,12 @@ namespace Drs.ViewModel.Order
         public Func<ClientFlags.ValidateOrder, ResponseMessage> ValidateModel { get; set; }
         public IReactiveCommand<Unit> SendOrderToStore { get; set; }
         public IMainOrderService OrderService { get; set; }
+
+        public ItemCatalog Payment
+        {
+            get { return _payment; }
+            set {  this.RaiseAndSetIfChanged(ref _payment, value); }
+        }
 
         public string SendOrderTitleBtn
         {

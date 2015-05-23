@@ -1,5 +1,6 @@
 ﻿using System;
-using Drs.Model.Settings;
+using Drs.Model.Catalog;
+using Drs.Model.Shared;
 
 namespace Drs.Model.Track
 {
@@ -51,11 +52,28 @@ namespace Drs.Model.Track
             }
         }
         public string LastStatus { get; set; }
-        public string LastStatusEx {
+        public string LastStatusEx
+        {
             get
             {
-                string status;
-                return SettingsData.Constants.TrackConst.LstOrderStatus.TryGetValue(LastStatus, out status) ? status : LastStatus;
+                if (CatalogsClientModel.DicOrderStatus == null)
+                    return String.Empty;
+
+                ItemCatalog catalog;
+                return CatalogsClientModel.DicOrderStatus.TryGetValue(LastStatus, out catalog) ? catalog.Name : LastStatus;
+
+            }
+        }
+        public string LastStatusColor
+        {
+            get
+            {
+                if (CatalogsClientModel.DicOrderStatus == null)
+                    return String.Empty;
+
+                ItemCatalog catalog;
+                return CatalogsClientModel.DicOrderStatus.TryGetValue(LastStatus, out catalog) ? catalog.Value : "#000000";
+
             }
         }
         public long OrderToStoreId { get; set; }

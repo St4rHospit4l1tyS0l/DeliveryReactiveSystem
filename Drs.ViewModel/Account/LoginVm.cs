@@ -59,7 +59,6 @@ namespace Drs.ViewModel.Account
         {
             InitializeProperties();
             InitializeCommands();
-            //MessageBus.Current.SendMessage("Prueba", "MsgView");
             //canSignIn.Subscribe(x =)
         }
 

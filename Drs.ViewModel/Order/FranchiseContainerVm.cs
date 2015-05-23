@@ -94,6 +94,7 @@ namespace Drs.ViewModel.Order
             ChosenFranchise = franchiseInfo.Title;
 
             MessageBus.Current.SendMessage(franchiseInfo, SharedMessageConstants.ORDER_FRANCHISE);
+            MessageBus.Current.SendMessage(String.Empty, SharedMessageConstants.FLYOUT_LASTORDER_CLOSE);
             GoToNextStep(SharedConstants.Client.ORDER_TAB_CLIENTS);
         }
 

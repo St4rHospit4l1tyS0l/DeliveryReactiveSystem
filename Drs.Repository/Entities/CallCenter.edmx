@@ -89,6 +89,16 @@
           <Property Name="CallCenterInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ActivationCode" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="CatDeliveryStatus">
+          <Key>
+            <PropertyRef Name="CatDeliveryStatusId" />
+          </Key>
+          <Property Name="CatDeliveryStatusId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Color" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsObsolete" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="CatPayment">
           <Key>
             <PropertyRef Name="CatPaymentId" />
@@ -1325,6 +1335,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CallCenterInfo" EntityType="Self.CallCenterInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CatDeliveryStatus" EntityType="Self.CatDeliveryStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CatPayment" EntityType="Self.CatPayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientInfo" EntityType="Self.ClientInfo" Schema="dbo" store:Type="Tables" />
@@ -1941,6 +1952,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="OrderToStore" EntitySet="OrderToStore" />
             <End Role="StoreStatus" EntitySet="StoreStatus" />
           </AssociationSet>
+          <EntitySet Name="CatDeliveryStatus" EntityType="CallCenterModel.CatDeliveryStatus" />
           </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -3261,6 +3273,16 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CatDeliveryStatus">
+          <Key>
+            <PropertyRef Name="CatDeliveryStatusId" />
+          </Key>
+          <Property Name="CatDeliveryStatusId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3797,6 +3819,17 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="LastStatus" ColumnName="LastStatus" />
                 <ScalarProperty Name="OrderToStoreId" ColumnName="OrderToStoreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatDeliveryStatus">
+            <EntityTypeMapping TypeName="CallCenterModel.CatDeliveryStatus">
+              <MappingFragment StoreEntitySet="CatDeliveryStatus">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CatDeliveryStatusId" ColumnName="CatDeliveryStatusId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -261,12 +261,10 @@ namespace Drs.Service.Client
                 .Subscribe(OnPosCheckSavedOk, OnPosCheckSavedError);
         }
 
-        public void SendOrderToStore(int orderMode, string extraNotes, DateTime promiseTime)
+        public void SendOrderToStore(OrderDetails orderDetails)
         {
             _model.Username = CurrentUserSettings.UserInfo.Username;
-            _model.OrderMode = orderMode;
-            _model.ExtraNotes = extraNotes;
-            _model.PromiseTime = promiseTime;
+            _model.OrderDetails = orderDetails;
 
             var modelDto = _model.ToDto();
             _client.ExecutionProxy

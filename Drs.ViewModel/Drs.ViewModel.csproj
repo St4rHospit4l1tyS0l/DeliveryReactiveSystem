@@ -117,6 +117,11 @@
     <Compile Include="Order\OrderPosVm.cs" />
     <Compile Include="Order\UpsertAddressFoVm.cs" />
     <Compile Include="Order\LastOrderFoVm.cs" />
+    <Compile Include="Service References\CatalogsSvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SettingSvc\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -175,6 +180,22 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Drs.Model.Settings.ResponseMessageSetting.datasource" />
     <None Include="Properties\DataSources\Drs.Model.Shared.ResponseMessage.datasource" />
+    <None Include="Service References\CatalogsSvc\Catalogs.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CatalogsSvc\Catalogs1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CatalogsSvc\Catalogs2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CatalogsSvc\Catalogs3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CatalogsSvc\CatalogsSvc.wsdl" />
+    <None Include="Service References\CatalogsSvc\Drs.ViewModel.CatalogsSvc.ResponseCatalogs.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\LoginSvc\Login.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -235,6 +256,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CatalogsSvc\" />
     <WCFMetadataStorage Include="Service References\LoginSvc\" />
     <WCFMetadataStorage Include="Service References\SettingSvc\" />
   </ItemGroup>
@@ -264,6 +286,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\SettingSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CatalogsSvc\Catalogs.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CatalogsSvc\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CatalogsSvc\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CatalogsSvc\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

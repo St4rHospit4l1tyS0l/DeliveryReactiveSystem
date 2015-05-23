@@ -37,7 +37,7 @@
                   SelectedItem="{Binding ItemSelection}"
                   AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Detalle" MinWidth="60">
+                    <DataGridTemplateColumn Header="Detalles" MinWidth="60">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="10,0,10,0" Width="60">
@@ -46,12 +46,17 @@
                                                 CommandParameter="{Binding SelectedItems, ElementName=ItemDtGrid}"
                                                 HorizontalAlignment="Center" 
                                                 BorderBrush="Transparent" Style="{DynamicResource MetroCircleButtonStyle}">
-                                            <Rectangle Width="15" Height="15" ToolTip="Mostrar detalle del pedido" Fill="{DynamicResource AccentColorBrush}">
+                                            <Rectangle Width="18" Height="18" ToolTip="Mostrar detalle del pedido" Fill="{DynamicResource AccentColorBrush}">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_cloud_download}" />
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </Button>
+                                        <Rectangle Width="17" Height="17" Margin="0 0 10 0" ToolTip="{Binding LastStatusEx}" Fill="{Binding LastStatusColor}">
+                                            <Rectangle.OpacityMask>
+                                                <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_tiles_nine}" />
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>

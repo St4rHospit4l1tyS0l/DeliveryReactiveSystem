@@ -63,6 +63,17 @@ namespace Drs.ViewModel.Order
             _client = client;
             LstItems = new ReactiveList<QtItemModel>();
             DoLastOrderCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => OnDoLastOrder());
+            MessageBus.Current.Listen<String>(SharedMessageConstants.FLYOUT_LASTORDER_CLOSE).Subscribe(OnClose);
+        }
+
+        private void OnClose(string msg)
+        {
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                if (IsOpen)
+                    IsOpen = false;
+            });
+
         }
 
         private async Task<Unit> OnDoLastOrder()

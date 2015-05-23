@@ -34,5 +34,7 @@ namespace Drs.ViewModel.Order
         String PromiseTimeTx { get; set; }
         DateTime MinDateTime { get; set; }
         String CultureSystem { get; set; }
+        ItemCatalog Payment { get; set; }
+
     }
 }

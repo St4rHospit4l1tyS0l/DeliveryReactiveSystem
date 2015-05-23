@@ -28,6 +28,6 @@ namespace Drs.Service.Client
         OrderModel OrderModel { get; }
         void ProcessPosOrder(PosCheck posCheck);
         void SavePosOrder();
-        void SendOrderToStore(int orderMode, string extraNotes, DateTime promiseTime);
+        void SendOrderToStore(OrderDetails orderDetails);
     }
 }

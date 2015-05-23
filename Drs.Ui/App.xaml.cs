@@ -74,6 +74,7 @@ namespace Drs.Ui
                 var bootstrapper = new Bootstrapper();
                 var container = bootstrapper.Build();
                 Log.Info("Iniciando Delivery Reactive System...");
+                await CatalogsClientConfigure.Initialize();
                 var reactiveDeliveryClient = container.Resolve<IReactiveDeliveryClient>();
                 var lstHubProxies = new List<string> {
                         SharedConstants.Server.ACCOUNT_HUB,
@@ -87,7 +88,6 @@ namespace Drs.Ui
                 reactiveDeliveryClient.Initialize(Cypher.Encrypt(Environment.MachineName), container.Resolve<IConfigurationProvider>().Servers, lstHubProxies, container.Resolve<ILoggerFactory>());
                 SettingsData.Client.Container = container;
                 await SettingConfigureWs.Initialize(reactiveDeliveryClient);
-                await CatalogsClientConfigure.Initialize();
                 var mainWindow = container.Resolve<MainWindow>();
                 var vm = container.Resolve<IShellContainerVm>();
                 vm.BootStrapper = bootstrapper;

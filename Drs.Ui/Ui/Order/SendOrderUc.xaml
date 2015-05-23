@@ -83,7 +83,6 @@
             <Label Content="Tipo de pago: "></Label>
             <ComboBox Width="180" ItemsSource="{Binding Path=LstPayments}"
                       DisplayMemberPath="Name" 
-                      SelectedValuePath="Name" 
                       SelectedValue="{Binding Path=Payment}">
             </ComboBox>
         </StackPanel>

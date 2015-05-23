@@ -1,5 +1,7 @@
 ﻿using System;
+using Drs.Model.Catalog;
 using Drs.Model.Settings;
+using Drs.Model.Shared;
 
 namespace Drs.Model.Order
 {
@@ -19,8 +21,8 @@ namespace Drs.Model.Order
         public string StatusEx {
             get
             {
-                string status;
-                return SettingsData.Constants.TrackConst.LstOrderStatus.TryGetValue(Status, out status) ? status : Status;
+                ItemCatalog catalog;
+                return CatalogsClientModel.DicOrderStatus.TryGetValue(Status, out catalog) ? catalog.Name : Status;
             }
         }
     }

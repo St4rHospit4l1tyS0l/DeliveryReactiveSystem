@@ -24,7 +24,6 @@ namespace Drs.ViewModel.Setting
 
                 SettingConfigure.InitConstants(dicSettings);
 
-
                 var resControls = await settingSvc.FindAllControlTitlesByLanguageAsync(SettingsData.Language);
 
                 if (resControls.IsSuccess == false)

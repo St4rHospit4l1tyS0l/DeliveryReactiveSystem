@@ -67,5 +67,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<PosOrder> PosOrder { get; set; }
         public virtual DbSet<CatPayment> CatPayment { get; set; }
         public virtual DbSet<OrderToStore> OrderToStore { get; set; }
+        public virtual DbSet<CatDeliveryStatus> CatDeliveryStatus { get; set; }
     }
 }

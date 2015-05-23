@@ -22,8 +22,6 @@ namespace Drs.Model.Order
         public bool IsAlreadyOnStore { get; set; }
         public ClientInfoModel ClientInfo { get; set; }
         public string Phone { get; set; }
-        public int OrderMode { get; set; }
-        public string ExtraNotes { get; set; }
-        public DateTime PromiseTime { get; set; }
+        public OrderDetails OrderDetails { get; set; }
     }
 }

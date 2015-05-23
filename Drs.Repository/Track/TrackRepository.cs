@@ -10,7 +10,7 @@ namespace Drs.Repository.Track
     {
         public IList<TrackOrderDto> SearchByPhone(string phone)
         {
-            return DbEntities.OrderToStore.Where(e => e.ClientPhone.Phone.Contains(phone))
+            return DbEntities.OrderToStore.Where(e => e.OrderAtoId != null && e.ClientPhone.Phone.Contains(phone))
                 .OrderByDescending(e => e.OrderToStoreId).Take(1500)
                 .Select(e => new TrackOrderDto
                 {
@@ -28,7 +28,8 @@ namespace Drs.Repository.Track
 
         public IList<TrackOrderDto> SearchByClientName(string clientName)
         {
-            return DbEntities.OrderToStore.Where(e => e.Client.FirstName.Contains(clientName) || e.Client.LastName.Contains(clientName) || e.Client.FirstName + " " + e.Client.LastName == clientName)
+            return DbEntities.OrderToStore.Where(e => e.OrderAtoId != null &&
+                (e.Client.FirstName.Contains(clientName) || e.Client.LastName.Contains(clientName) || e.Client.FirstName + " " + e.Client.LastName == clientName))
                 .OrderByDescending(e => e.OrderToStoreId).Take(1500)
                 .Select(e => new TrackOrderDto
                 {

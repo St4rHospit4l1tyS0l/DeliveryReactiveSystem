@@ -134,6 +134,7 @@
     <Compile Include="Order\ItemLogOrder.cs" />
     <Compile Include="Order\ItemModel.cs" />
     <Compile Include="Order\ItemPosOrder.cs" />
+    <Compile Include="Order\OrderDetails.cs" />
     <Compile Include="Order\OrderInfoModel.cs" />
     <Compile Include="Order\OrderModel.cs" />
     <Compile Include="Order\OrderModelDto.cs" />

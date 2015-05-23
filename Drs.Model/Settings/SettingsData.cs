@@ -148,20 +148,6 @@ namespace Drs.Model.Settings
                 public const string FULFILLED = "Fulfilled";
                 public const string CLOSED = "Closed";
 
-                public static Dictionary<string, string> LstOrderStatus = new Dictionary<string, string>
-                {
-                    { OrderStatus.NEW_READY_TO_SEND, "Orden para enviar a la tienda" },
-                    { NONE, "Nueva orden" },
-                    { PRE_DELAY, "Nueva orden orden futura" },
-                    { IN_DELAY, "Orden retrasada (orden futura)" },
-                    { KITCHEN_DELAY, "Orden retrasada en cocina" },
-                    { COOKING, "Preparando orden en cocina" },
-                    { PREPARED, "Preparando la orden" },
-                    { IN_TRANSIT, "Orden en camino al cliente" },
-                    { FULFILLED, "Orden entregada al cliente" },
-                    { CLOSED, "Orden cerrada" }
-                }; 
-
             }
 
             public class RecurrenceConst

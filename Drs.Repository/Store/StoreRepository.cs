@@ -31,7 +31,8 @@ namespace Drs.Repository.Store
                 FranchiseStoreId = model.Store.IdKey ?? SettingsData.Constants.Entities.NULL_ID_INT,
                 PosOrderId = model.PosOrder.Id ?? SettingsData.Constants.Entities.NULL_ID_INT,
                 StartDatetime = now,
-                UserInsId = model.UserId
+                UserInsId = model.UserId,
+                PaymentId = model.OrderDetails.Payment.Id
             };
 
             DbEntities.OrderToStore.Add(orderToStore);

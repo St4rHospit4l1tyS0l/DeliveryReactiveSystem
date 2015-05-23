@@ -301,17 +301,19 @@ namespace Drs.Service.Store
                 }
             };
 
-            if (model.OrderMode == SettingsData.Constants.StoreConst.MODE_DELIVERY_FUTURE)
+            if (model.OrderDetails.OrderMode == SettingsData.Constants.StoreConst.MODE_DELIVERY_FUTURE)
             {
                 order.statusField = SettingsData.Constants.TrackConst.IN_DELAY;
-                order.promiseTimeField = model.PromiseTime.ToString("o");
+                order.promiseTimeField = model.OrderDetails.PromiseTime.ToString("o");
             }
 
-            if (String.IsNullOrWhiteSpace(model.ExtraNotes) == false)
+            order.orderNotesField = String.Empty;
+            if (String.IsNullOrWhiteSpace(model.OrderDetails.ExtraNotes) == false)
             {
-                order.orderNotesField = model.ExtraNotes;
+                order.orderNotesField = model.OrderDetails.ExtraNotes;
             }
 
+            order.orderNotesField = String.Format("{0} | Método de pago: {1} |", order.orderNotesField, model.OrderDetails.Payment.Name);
             return order;
         }
     }

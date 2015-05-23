@@ -1,13 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Drs.Model.Catalog;
+using Drs.ViewModel.CatalogsSvc;
+using ItemCatalog = Drs.Model.Shared.ItemCatalog;
 
 namespace Drs.ViewModel.Catalog
 {
     public static class CatalogsClientConfigure
     {
-        public static Task Initialize()
+        public static async Task Initialize()
         {
-            return null;
+            using (var catalogsSvc = new CatalogsSvcClient())
+            {
+                var catalogs = await catalogsSvc.FindAllCatalogsAsync();
+
+                if (catalogs.IsSuccess == false)
+                    throw new Exception("Se sucitó el siguiente error: " + catalogs.Message);
+
+                CatalogsClientModel.CatPayments = FillCategory(catalogs.LstPayments);
+                CatalogsClientModel.DicOrderStatus = FillDicCategory(catalogs.LstDeliveryStatus);
+
+            }
+        }
+
+        private static Dictionary<string, ItemCatalog> FillDicCategory(IEnumerable<CatalogsSvc.ItemCatalog> lstCatalogs)
+        {
+            return lstCatalogs.ToDictionary(item => item.Code, item => new ItemCatalog
+            {
+                Id = item.Id, Code = item.Code, Name = item.Name, Value = item.Value
+            });
+        }
+
+        private static List<ItemCatalog> FillCategory(IEnumerable<CatalogsSvc.ItemCatalog> lstCatalog)
+        {
+            return lstCatalog.Select(item => new ItemCatalog {Id = item.Id, Name = item.Name}).ToList();
         }
     }
 }

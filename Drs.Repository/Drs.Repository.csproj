@@ -173,6 +173,9 @@
     <Compile Include="Entities\CallCenterInfo.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\CatDeliveryStatus.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\CatPayment.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>

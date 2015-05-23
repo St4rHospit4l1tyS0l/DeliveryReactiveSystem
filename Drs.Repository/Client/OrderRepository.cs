@@ -151,7 +151,7 @@ namespace Drs.Repository.Client
                 Taxes = (Decimal)model.Tax,
                 Total = (Decimal)model.Total,
                 UserId = AccountRepository.GetIdByUsername(model.Username, DbEntities),
-                PosOrderItem = new Collection<PosOrderItem>()
+                PosOrderItem = new Collection<PosOrderItem>(),
             };
 
             foreach (var itemModel in model.LstItems)
