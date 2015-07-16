@@ -13,7 +13,7 @@ namespace Drs.ViewModel.Menu
 {
     public class MenuItemVm : UcViewModelBase, IMenuItemVm
     {
-        private const string UriResource = "pack://application:,,,/Resources/Images/";
+        private const string URI_RESOURCE = "pack://application:,,,/Resources/Images/";
 
         public MenuItemVm(IButtonItemModel model, IShellContainerVm shellContainerVm)
             : base(shellContainerVm)
@@ -21,7 +21,7 @@ namespace Drs.ViewModel.Menu
             MenuItemBackgroundColor = new SolidColorBrush(model.Color.ToRgbColor());
             MenuItemBackgroundOverColor = new SolidColorBrush(model.Color.ToRgbLightColor(20));
             MenuItemBackgroundPressedColor = new SolidColorBrush(model.Color.ToRgbLightColor(-20));
-            MenuItemLogo = new BitmapImage(new Uri(UriResource + model.Image));
+            MenuItemLogo = new BitmapImage(new Uri(URI_RESOURCE + model.Image));
             Title = model.Title;
             ExecuteCommand = ReactiveCommand.Create(Observable.Return(true));
             ExecuteCommand.Subscribe(_ => ShellContainerVm.ChangeCurrentView(model.Code.ToEnum(), true));

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8264ec43-f207-4093-8620-5d9bd56dcdd9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Microsoft.Owin.Security" />
+      <ReferencedAssembly AssemblyName="Splat" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2898/Catalogs/Catalogs.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Catalogs.disco" MetadataType="Disco" ID="75ab8d1e-5554-4284-bf82-d565f2944db0" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?disco" />
+    <MetadataFile FileName="Catalogs.xsd" MetadataType="Schema" ID="9c8349e0-92b9-4592-8771-a557db24b4ef" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?xsd=xsd2" />
+    <MetadataFile FileName="Catalogs1.xsd" MetadataType="Schema" ID="86182232-1f84-4acd-87a4-7b5b8682bb15" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?xsd=xsd1" />
+    <MetadataFile FileName="Catalogs2.xsd" MetadataType="Schema" ID="86f1ef9f-3be9-4019-b2ef-215a5d32522b" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?xsd=xsd0" />
+    <MetadataFile FileName="CatalogsSvc.wsdl" MetadataType="Wsdl" ID="32f24bd7-facb-4609-a085-811fa2f44ded" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?wsdl" />
+    <MetadataFile FileName="Catalogs3.xsd" MetadataType="Schema" ID="ca4c06b4-8717-444e-b0cb-8c9f3e7dc5e4" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
