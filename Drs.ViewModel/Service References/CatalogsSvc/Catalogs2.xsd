@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:2898/Catalogs/Catalogs.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Drs.Model.Settings" />
+  <xs:element name="FindAllCatalogs">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllCatalogsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Drs.Model.Settings" minOccurs="0" name="FindAllCatalogsResult" nillable="true" type="q1:ResponseCatalogs" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

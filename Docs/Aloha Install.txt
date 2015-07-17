@@ -1,0 +1,2 @@
+C:\BootDrv\Aloha TakeOut\Bin>
+c:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe "LASA CallCenter Service Ws.exe"

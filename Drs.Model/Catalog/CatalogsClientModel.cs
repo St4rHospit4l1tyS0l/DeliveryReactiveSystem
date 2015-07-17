@@ -24,7 +24,6 @@ namespace Drs.Model.Catalog
 
             LstStatusCannotCancel =  new List<string>
             {
-                //SettingsData.Constants.TrackConst.NONE,
                 //SettingsData.Constants.TrackConst.PRE_DELAY,
                 //SettingsData.Constants.TrackConst.IN_DELAY,
                 //SettingsData.Constants.TrackConst.KITCHEN_DELAY,
