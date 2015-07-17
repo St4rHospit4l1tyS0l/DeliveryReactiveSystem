@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Drs.Model.Catalog;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
+using Drs.Repository.Catalog;
 using Drs.Repository.Setting;
 
 namespace Drs.Service.Settings
@@ -221,5 +223,6 @@ namespace Drs.Service.Settings
             var lstAddressSetting = repository.FindAllControlTitlesByLanguage(SettingsData.Language);
             InitControls(lstAddressSetting);
         }
+
     }
 }

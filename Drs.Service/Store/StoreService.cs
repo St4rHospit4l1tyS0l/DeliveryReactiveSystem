@@ -7,6 +7,7 @@ using Drs.Infrastructure.Extensions.Classes;
 using Drs.Infrastructure.Extensions.Json;
 using Drs.Infrastructure.Model;
 using Drs.Model.Constants;
+using Drs.Model.Franchise;
 using Drs.Model.Order;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
@@ -19,7 +20,9 @@ using Drs.Repository.Store;
 using Drs.Service.Account;
 using Drs.Service.CustomerOrder;
 using Drs.Service.Factory;
+using Drs.Service.Track;
 using Microsoft.AspNet.SignalR.Hubs;
+using QueryFunctionClient = Drs.Service.QueryFunction.QueryFunctionClient;
 using ResponseMessage = Drs.Model.Shared.ResponseMessage;
 
 namespace Drs.Service.Store
@@ -104,7 +107,8 @@ namespace Drs.Service.Store
                 var order = GenerateCustomerOrder(model);
                 var response = SendOrderToStore(model, clients, order);
 
-                if (response == null){
+                if (response == null)
+                {
                     clients.Caller.OnSendToStoreEventChange(new ResponseMessage
                     {
                         Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_FAILURE,
@@ -158,7 +162,7 @@ namespace Drs.Service.Store
                         ClientId = model.ClientId ?? EntityConstants.NULL_VALUE,
                         OrderToStoreId = model.OrderToStoreId,
                         Timestamp = now,
-                        Total = (decimal) model.PosOrder.Total,
+                        Total = (decimal)model.PosOrder.Total,
                         TimestampShort = now.ToDateShort()
                     });
                 }
@@ -192,7 +196,7 @@ namespace Drs.Service.Store
             var iTries = 2;
             using (var client = new CustomerOrderClient(new BasicHttpBinding(), new EndpointAddress(model.Store.WsAddress + SettingsData.Constants.StoreOrder.WsCustomerOrder)))
             {
-                while (iTries>0)
+                while (iTries > 0)
                 {
                     try
                     {
@@ -315,6 +319,120 @@ namespace Drs.Service.Store
 
             order.orderNotesField = String.Format("{0} | Método de pago: {1} |", order.orderNotesField, model.OrderDetails.Payment.Name);
             return order;
+        }
+
+
+        public ResponseMessage CancelOrder(long orderToStoreId)
+        {
+            using (_repositoryStore)
+            {
+                if (_repositoryStore.IsValidToCancel(orderToStoreId) == false)
+                {
+                    return new ResponseMessage
+                    {
+                        IsSuccess = false,
+                        Message = "La orden no existe, está en un estado en la cual no puede ser cancelada o ya fue cancelada, por favor revise el historial"
+                    };
+                }
+
+                var fsInfo = _repositoryStore.GetWsAddresInfoByOrderToStoreId(orderToStoreId);
+
+                if (fsInfo == null)
+                {
+                    return new ResponseMessage
+                    {
+                        IsSuccess = false,
+                        Message = "No existe configuración para realizar peticiones a la tienda"
+                    };
+                }
+
+                if (String.IsNullOrWhiteSpace(fsInfo.AtoOrderId))
+                {
+                    return new ResponseMessage
+                    {
+                        IsSuccess = false,
+                        Message = "El pedido nunca se envió a la tienda. No hay orden que cancelar."
+                    };
+                }
+
+                long atoOrderId;
+
+                if (long.TryParse(fsInfo.AtoOrderId, out atoOrderId) == false)
+                {
+                    return new ResponseMessage
+                    {
+                        IsSuccess = false,
+                        Message = String.Format("El identificador del pedido ({0}) no es válido.", fsInfo.AtoOrderId)
+                    };
+                }
+
+                //var respQuery = TrackService.GetOrderFromStore(fsInfo.AtoOrderId, fsInfo.WsAddress);
+                //if (respQuery != null && respQuery.Order != null)
+                //{
+                //}
+
+                var response = DoCancelOrder(atoOrderId, fsInfo);
+
+                if (response.IsSuccess)
+                {
+                    try
+                    {
+                        _repositoryStore.SetCancelOrderToStore(orderToStoreId);
+                    }
+                    catch (Exception ex)
+                    {
+                        SharedLogger.LogError(ex);
+                    } 
+                }
+
+                return response;
+            }
+        }
+
+        private ResponseMessage DoCancelOrder(long atoOrderId, FranchiseStoreWsInfo fsInfo)
+        {
+            using (var client = new QueryFunctionClient(new BasicHttpBinding(), new EndpointAddress(fsInfo.WsAddress + SettingsData.Constants.StoreOrder.WsQueryFunction)))
+            {
+                var iTries = 0;
+                while (iTries < 3)
+                {
+                    try
+                    {
+
+                        var result = client.CancelOrder(atoOrderId, false);
+                        if (result.IsSuccess)
+                        {
+                            return new ResponseMessage
+                            {
+                                IsSuccess = true,
+                                Message = "Orden cancelada de forma exitosa"
+                            };
+                        }
+
+                        client.Close();
+                        return new ResponseMessage
+                        {
+                            IsSuccess = false,
+                            Message = "No es posible cancelar la orden debido a: " + result.ResultData
+                        };
+                    }
+                    catch (Exception ex)
+                    {
+                        SharedLogger.LogError(ex);
+                    }
+                    Thread.Sleep(new Random().Next(200, 800));
+                    iTries++;
+                }
+
+                client.Close();
+
+                return new ResponseMessage
+                {
+                    IsSuccess = false,
+                    Message = "No fue posible comunicarse a la tienda para realizar la cancelación. " +
+                              "Por favor reporte a soporte técnico para revisar la conexión con la tienda " + fsInfo.Name
+                };
+            }
         }
     }
 }

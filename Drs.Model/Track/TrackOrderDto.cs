@@ -1,11 +1,17 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using Drs.Model.Annotations;
 using Drs.Model.Catalog;
 using Drs.Model.Shared;
 
 namespace Drs.Model.Track
 {
-    public class TrackOrderDto
+    public class TrackOrderDto : INotifyPropertyChanged
     {
+        private bool _changeCancel;
         public string Phone { get; set; }
         public DateTime StartDatetime { get; set; }
 
@@ -76,6 +82,48 @@ namespace Drs.Model.Track
 
             }
         }
+
+        public Visibility IsCancelVisible
+        {
+            get
+            {
+                if (IsCanceled.HasValue && IsCanceled.Value)
+                    return Visibility.Hidden;
+
+
+                if (CatalogsClientModel.DicOrderStatus == null)
+                    return Visibility.Visible;
+
+                ItemCatalog catalog;
+                if(CatalogsClientModel.DicOrderStatus.TryGetValue(LastStatus, out catalog) == false)
+                    return Visibility.Visible;
+
+                return CatalogsClientModel.LstStatusCannotCancel.Any(e => e == LastStatus) ? Visibility.Hidden : Visibility.Visible;
+
+
+            }
+        }
+
         public long OrderToStoreId { get; set; }
+        public bool? IsCanceled { get; set; }
+
+        public bool ChangeCancel
+        {
+            get { return _changeCancel; }
+            set
+            {
+                _changeCancel = value;
+                OnPropertyChanged("IsCancelVisible");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

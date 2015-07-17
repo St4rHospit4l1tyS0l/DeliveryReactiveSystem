@@ -37,10 +37,10 @@
                   SelectedItem="{Binding ItemSelection}"
                   AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Detalles" MinWidth="60">
+                    <DataGridTemplateColumn Header="Detalles" MinWidth="70">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical" Margin="10,0,10,0" Width="60">
+                                <StackPanel Orientation="Vertical" Margin="10,0,10,0" Width="70">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                         <Button Width="28" Height="28"  Cursor="Hand" Command="{Binding DataContext.CmdShowDetail, ElementName=ItemDtGrid}"
                                                 CommandParameter="{Binding SelectedItems, ElementName=ItemDtGrid}"
@@ -52,11 +52,21 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </Button>
-                                        <Rectangle Width="17" Height="17" Margin="0 0 10 0" ToolTip="{Binding LastStatusEx}" Fill="{Binding LastStatusColor}">
+                                        <Rectangle Width="17" Height="17" Margin="0 0 0 0" ToolTip="{Binding LastStatusEx}" Fill="{Binding LastStatusColor}">
                                             <Rectangle.OpacityMask>
                                                 <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_tiles_nine}" />
                                             </Rectangle.OpacityMask>
                                         </Rectangle>
+                                        <Button Width="28" Height="28" Visibility="{Binding IsCancelVisible}" Cursor="Hand" Command="{Binding DataContext.CmdCancelOrder, ElementName=ItemDtGrid}"
+                                                CommandParameter="{Binding SelectedItems, ElementName=ItemDtGrid}"
+                                                HorizontalAlignment="Center" 
+                                                BorderBrush="Transparent" Style="{DynamicResource MetroCircleButtonStyle}">
+                                            <Rectangle Width="18" Height="18" ToolTip="Cancelar el pedido" Fill="Red">
+                                                <Rectangle.OpacityMask>
+                                                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_cancel}" />
+                                                </Rectangle.OpacityMask>
+                                            </Rectangle>
+                                        </Button> 
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>

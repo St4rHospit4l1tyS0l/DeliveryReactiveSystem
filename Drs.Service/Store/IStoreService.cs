@@ -7,5 +7,6 @@ namespace Drs.Service.Store
     public interface IStoreService
     {
         ResponseMessageData<OrderModelDto> SendOrderToStore(OrderModelDto model, IHubCallerConnectionContext<dynamic> clients);
+        ResponseMessage CancelOrder(long orderToStoreId);
     }
 }

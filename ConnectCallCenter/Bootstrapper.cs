@@ -2,6 +2,7 @@
 using ConnectCallCenter.Hubs;
 using Drs.Repository.Account;
 using Drs.Repository.Address;
+using Drs.Repository.Catalog;
 using Drs.Repository.Client;
 using Drs.Repository.Order;
 using Drs.Repository.Setting;
@@ -36,7 +37,8 @@ namespace ConnectCallCenter
             builder.RegisterType<SettingRepository>().As<ISettingRepository>();
             builder.RegisterType<StoreService>().As<IStoreService>();
             builder.RegisterType<StoreRepository>().As<IStoreRepository>();
-
+            builder.RegisterType<CatalogRepository>().As<ICatalogRepository>();
+            
             builder.RegisterType<TrackService>().As<ITrackService>();
             builder.RegisterType<TrackRepository>().As<ITrackRepository>();
 

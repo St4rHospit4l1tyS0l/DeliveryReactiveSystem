@@ -302,6 +302,8 @@
           <Property Name="OrderModeCharge" Type="nvarchar" MaxLength="100" />
           <Property Name="PromiseTime" Type="nvarchar" MaxLength="50" />
           <Property Name="PaymentId" Type="int" Nullable="false" />
+          <Property Name="IsCanceled" Type="bit" />
+          <Property Name="DateTimeCanceled" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="OrderToStoreLog">
           <Key>
@@ -3140,6 +3142,8 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="OrderToStoreLog" Relationship="CallCenterModel.FK_OrderToStoreLog_OrderToStore" FromRole="OrderToStore" ToRole="OrderToStoreLog" />
           <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="OrderToStore" ToRole="Recurrence" />
           <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_OrderToStore" FromRole="OrderToStore" ToRole="StoreStatus" />
+          <Property Name="IsCanceled" Type="Boolean" />
+          <Property Name="DateTimeCanceled" Type="DateTime" Precision="7" />
         </EntityType>
         <Association Name="FK_OrderToStore_Address">
           <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
@@ -3802,6 +3806,8 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySetMapping Name="OrderToStore">
             <EntityTypeMapping TypeName="CallCenterModel.OrderToStore">
               <MappingFragment StoreEntitySet="OrderToStore">
+                <ScalarProperty Name="DateTimeCanceled" ColumnName="DateTimeCanceled" />
+                <ScalarProperty Name="IsCanceled" ColumnName="IsCanceled" />
                 <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
                 <ScalarProperty Name="PromiseTime" ColumnName="PromiseTime" />
                 <ScalarProperty Name="OrderModeCharge" ColumnName="OrderModeCharge" />

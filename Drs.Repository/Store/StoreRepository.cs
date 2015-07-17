@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Dynamic;
+using Drs.Model.Catalog;
 using Drs.Model.Constants;
+using Drs.Model.Franchise;
 using Drs.Model.Order;
 using Drs.Model.Settings;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
+using Microsoft.Owin.Security.Provider;
 
 namespace Drs.Repository.Store
 {
@@ -104,6 +109,47 @@ namespace Drs.Repository.Store
             DbEntities.SaveChanges(); 
 
             return orderToStoreLog;
+        }
+
+        public FranchiseStoreWsInfo GetWsAddresInfoByOrderToStoreId(long orderToStoreId)
+        {
+            return DbEntities.OrderToStore.Where(e => e.OrderToStoreId == orderToStoreId)
+                    .Select(e => new FranchiseStoreWsInfo{
+                            AtoOrderId = e.OrderAtoId,
+                            WsAddress = e.FranchiseStore.WsAddress,
+                            Name = e.FranchiseStore.Name
+                    }).FirstOrDefault();
+        }
+
+        public void SetCancelOrderToStore(long orderToStoreId)
+        {
+            var now = DateTime.Now;
+            var orderToStore = new OrderToStore
+            {
+                OrderToStoreId = orderToStoreId,
+                IsCanceled = true,
+                DateTimeCanceled = now
+            };
+
+            DbEntities.OrderToStore.Attach(orderToStore);
+            DbEntities.Entry(orderToStore).Property(e => e.IsCanceled).IsModified = true;
+            DbEntities.Entry(orderToStore).Property(e => e.DateTimeCanceled).IsModified = true;
+            DbEntities.SaveChanges();
+
+            SaveLogOrderToStore(orderToStoreId, "Cancelado por el cliente", SettingsData.Constants.TrackConst.CANCELED, now, true);
+        }
+
+        public bool IsValidToCancel(long orderToStoreId)
+        {
+            var lastStatus = DbEntities.OrderToStore.Where(e => e.OrderToStoreId == orderToStoreId).Select(e => e.LastStatus).FirstOrDefault();
+
+            if (String.IsNullOrWhiteSpace(lastStatus))
+                return false;
+
+            if (CatalogsClientModel.LstStatusCannotCancel.Any(e => e == lastStatus))
+                return false;
+
+            return true;
         }
 
         public void SaveRecurrence(Recurrence recurrence)

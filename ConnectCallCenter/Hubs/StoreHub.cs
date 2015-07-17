@@ -32,6 +32,28 @@ namespace ConnectCallCenter.Hubs
                 };
             }
         }
+
+
+        [HubMethodName(SharedConstants.Server.CANCEL_ORDER_STORE_HUB_METHOD)]
+        public ResponseMessageData<ResponseMessage> CancelOrder(long orderToStoreId)
+        {
+            try
+            {
+                return new ResponseMessageData<ResponseMessage>
+                {
+                    IsSuccess = true,
+                    Data = AppInit.Container.Resolve<IStoreService>().CancelOrder(orderToStoreId),
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<ResponseMessage>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message + ex.StackTrace
+                };
+            }
+        }
     }
 }
 

@@ -1,8 +1,11 @@
 ﻿using Autofac;
+using Drs.Model.Catalog;
 using Drs.Repository.Address;
+using Drs.Repository.Catalog;
 using Drs.Repository.Setting;
 using Drs.Service.Configuration;
 using Drs.Service.Settings;
+using Drs.ViewModel.Catalog;
 
 namespace ConnectCallCenter
 {
@@ -15,7 +18,7 @@ namespace ConnectCallCenter
             Container = bootstrapper.Build();
             SettingAddress.Initialize(Container.Resolve<IAddressRepository>());
             SettingConfigure.Initialize(Container.Resolve<ISettingRepository>());
-
+            CatalogsClientConfigure.Initialize(Container.Resolve<ICatalogRepository>());
         }
     }
 }

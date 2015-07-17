@@ -81,7 +81,7 @@ namespace Drs.Service.Track
             }
         }
 
-        private ResponseRd GetOrderFromStore(string orderAtoId, string wsAddress)
+        public static ResponseRd GetOrderFromStore(string orderAtoId, string wsAddress)
         {
             using (var client = new QueryFunctionClient(new BasicHttpBinding(), new EndpointAddress(wsAddress + SettingsData.Constants.StoreOrder.WsQueryFunction)))
             {

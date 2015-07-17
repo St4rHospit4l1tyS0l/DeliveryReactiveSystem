@@ -147,6 +147,7 @@ namespace Drs.Model.Settings
                 public const string IN_TRANSIT = "InTransit";
                 public const string FULFILLED = "Fulfilled";
                 public const string CLOSED = "Closed";
+                public const string CANCELED = "Canceled";
 
             }
 

@@ -38,6 +38,8 @@ namespace Drs.Repository.Entities
         public string OrderModeCharge { get; set; }
         public string PromiseTime { get; set; }
         public int PaymentId { get; set; }
+        public Nullable<bool> IsCanceled { get; set; }
+        public Nullable<System.DateTime> DateTimeCanceled { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }

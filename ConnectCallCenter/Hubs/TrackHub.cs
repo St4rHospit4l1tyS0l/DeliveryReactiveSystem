@@ -18,10 +18,11 @@ namespace ConnectCallCenter.Hubs
         {
             try
             {
+                var lstData = AppInit.Container.Resolve<ITrackService>().SearchByPhone(phone);
                 return new ResponseMessageData<TrackOrderDto>
                 {
                     IsSuccess = true,
-                    LstData = AppInit.Container.Resolve<ITrackService>().SearchByPhone(phone)
+                    LstData = lstData
                 };
             }
             catch (Exception ex)

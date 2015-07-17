@@ -4,6 +4,7 @@ using Drs.Model.Order;
 
 namespace Drs.Model.Track
 {
+
     public class TrackOrderDetailDto : TrackOrderDto
     {
         public DateTime? EndDatetime { get; set; }

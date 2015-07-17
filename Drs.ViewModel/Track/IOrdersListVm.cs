@@ -16,5 +16,7 @@ namespace Drs.ViewModel.Track
         void OnClientNameChanged(string obj);
         IReactiveList<TrackOrderDto> LstItems { get; set; }
         IReactiveCommand<Unit> CmdShowDetail { get; set; }
+        IReactiveCommand<Unit> CmdCancelOrder { get; set; }
+        
     }
 }

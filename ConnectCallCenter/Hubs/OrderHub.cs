@@ -131,6 +131,5 @@ namespace ConnectCallCenter.Hubs
                 };
             }
         }
-
     }
 }

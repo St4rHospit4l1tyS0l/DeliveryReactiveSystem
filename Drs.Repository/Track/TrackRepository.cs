@@ -22,7 +22,8 @@ namespace Drs.Repository.Track
                     OrderAtoId = e.OrderAtoId,
                     StoreName = e.FranchiseStore.Name,
                     OrderTotal = e.PosOrder.Total,
-                    LastStatus = e.LastStatus
+                    LastStatus = e.LastStatus,
+                    IsCanceled = e.IsCanceled
                 }).ToList();
         }
 
@@ -41,7 +42,8 @@ namespace Drs.Repository.Track
                     OrderAtoId = e.OrderAtoId,
                     StoreName = e.FranchiseStore.Name,
                     OrderTotal = e.PosOrder.Total,
-                    LastStatus = e.LastStatus
+                    LastStatus = e.LastStatus,
+                    IsCanceled = e.IsCanceled
                 }).ToList();
         }
 
