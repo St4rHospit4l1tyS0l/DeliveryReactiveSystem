@@ -10,6 +10,7 @@ using Drs.Model.Franchise;
 using Drs.Model.Order;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
+using Drs.Repository.Log;
 using ReactiveUI;
 
 namespace Drs.Service.Franchise
@@ -35,12 +36,15 @@ namespace Drs.Service.Franchise
                 {
                     
                     //Delete STOP file if exists
-                    var stopFile = Path.Combine(Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.TMP_FOLDER), SettingsData.Constants.Franchise.STOP_FILE);
+                    var tmpFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.TMP_FOLDER);
+                    var stopFile = Path.Combine(tmpFolder, SettingsData.Constants.Franchise.STOP_FILE);
                     if (File.Exists(stopFile))
                         FileExt.ForceDeleteFile(stopFile);
 
+                    var isUpdated = IsUpdatedUpToDay(dataFolder);
+
                     //Check if DATA y NEWDATA has already franchise selected
-                    if (!File.Exists(Path.Combine(dataFolder, model.Code)))
+                    if (isUpdated == false || !File.Exists(Path.Combine(dataFolder, model.Code)))
                     {
                         //Kill Iber process if exists
                         ProcessExt.ForceKillProcess(SettingsData.AlohaIber.Replace(
@@ -53,6 +57,13 @@ namespace Drs.Service.Franchise
                             dataFolder);
                         //WaitForTopMostToDisable(process);
 
+                    }
+
+                    if (isUpdated == false)
+                    {
+                        ChangeAlohaIniDate(dataFolder);
+                        DeleteTransLog(dataFolder);
+                        DeleteTmpFiles(tmpFolder);
                     }
 
                     //Start Iber
@@ -72,9 +83,6 @@ namespace Drs.Service.Franchise
                         }, SharedMessageConstants.MSG_SHOW_ERRQST);
                     }
 
-
-
-
                     if (File.Exists(Path.Combine(newDataFolder, model.Code))) 
                         return;
                     
@@ -85,6 +93,38 @@ namespace Drs.Service.Franchise
                 }
 
             });
+        }
+
+        private void DeleteTmpFiles(String tmpFolder)
+        {
+            DirExt.ForceDeleteFolder(tmpFolder);
+        }
+
+        private void DeleteTransLog(String dataFolder)
+        {
+            DirExt.ForceDeleteFile(Path.Combine(dataFolder, SettingsData.Constants.SystemConst.TRANS_LOG));
+        }
+
+        private void ChangeAlohaIniDate(string dataFolder)
+        {
+            try
+            {
+                var alohaIniFile = Path.Combine(dataFolder, SettingsData.Constants.SystemConst.ALOHA_INI);
+                FileHelperExt.ReplaceDataInFile(alohaIniFile, "DOB=", String.Format("DOB={0}", DateTime.Today.ToString("MM dd yyyy")));
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+            }
+        }
+
+        private bool IsUpdatedUpToDay(string dataFolder)
+        {
+            var alohaIniFile = Path.Combine(dataFolder, SettingsData.Constants.SystemConst.ALOHA_INI);
+            var today = DateTime.Today;
+            var fileInfo = new FileInfo(alohaIniFile);
+
+            return fileInfo.LastWriteTime > today;
         }
 
         //public bool ValidatePrices(PosCheck posCheck)

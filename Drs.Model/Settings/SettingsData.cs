@@ -48,6 +48,10 @@ namespace Drs.Model.Settings
                 public const string FORMAT_DATETIME_V1 = "dddd, dd/MMMM/yyyy HH:mm";
                 public const bool FALSE = false;
                 public const bool TRUE = true;
+
+                public const string ALOHA_INI = "Aloha.ini";
+                public const string TRANS_LOG = "TRANS.LOG";
+                
             }
             
             public static class ServerConst

@@ -44,5 +44,24 @@ namespace Drs.Infrastructure.Extensions.Io
                 iTries--;
             }
         }
+
+        public static void ForceDeleteFile(string fileName, int iTries = 3)
+        {
+            var isDone = false;
+            while (iTries >= 0 && isDone == false)
+            {
+                try
+                {
+                    File.Delete(fileName);
+                    isDone = true;
+                }
+                catch (Exception)
+                {
+                    isDone = false;
+                    Thread.Sleep(250);
+                }
+                iTries--;
+            }
+        }
     }
 }
