@@ -346,6 +346,8 @@
           <Property Name="ItemId" Type="bigint" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="LevelItem" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="bigint" />
         </EntityType>
         <EntityType Name="Recurrence">
           <Key>
@@ -2288,6 +2290,8 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrderItem" ToRole="PosOrder" />
+          <Property Name="LevelItem" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int64" />
         </EntityType>
         <EntityType Name="RegionA">
           <Key>
@@ -3569,6 +3573,8 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySetMapping Name="PosOrderItem">
             <EntityTypeMapping TypeName="CallCenterModel.PosOrderItem">
               <MappingFragment StoreEntitySet="PosOrderItem">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="LevelItem" ColumnName="LevelItem" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />

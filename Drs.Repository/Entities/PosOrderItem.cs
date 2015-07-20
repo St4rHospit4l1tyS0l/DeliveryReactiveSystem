@@ -19,6 +19,8 @@ namespace Drs.Repository.Entities
         public long ItemId { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public int LevelItem { get; set; }
+        public Nullable<long> ParentId { get; set; }
     
         public virtual PosOrder PosOrder { get; set; }
     }

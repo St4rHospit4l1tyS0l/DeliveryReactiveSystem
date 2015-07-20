@@ -270,7 +270,8 @@ namespace Drs.Service.Store
                 {
                     menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
                     quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
-                    priceField = item.Price.ToString(CultureInfo.InvariantCulture)
+                    priceField = item.Price.ToString(CultureInfo.InvariantCulture),
+                    levelField = item.Level.ToString(CultureInfo.InvariantCulture)
                 };
             }
 

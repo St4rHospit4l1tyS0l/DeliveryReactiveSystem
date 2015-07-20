@@ -67,7 +67,7 @@ namespace Drs.Repository.Track
                     Mode = e.OrderMode,
                     PromiseTime = e.PromiseTime,
                     UserTakeOrder = e.AspNetUsers.UserName,
-                    LstOrderPos = e.PosOrder.PosOrderItem.Select(i => new ItemPosOrder{Name = i.Name, Price = i.Price}).ToList(),
+                    LstOrderPos = e.PosOrder.PosOrderItem.Select(i => new ItemPosOrder{Name = i.Name, Price = i.Price, Level = i.LevelItem}).ToList(),
                     LstOrderLog = e.OrderToStoreLog.Select(i => new ItemLogOrder{Id = i.OrderToStoreLogId, Status = i.Status, Timestamp = i.Timestamp}).ToList()
                 }).FirstOrDefault(e => e.OrderToStoreId == orderId);
         }

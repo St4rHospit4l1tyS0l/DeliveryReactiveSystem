@@ -151,7 +151,7 @@ namespace Drs.Repository.Client
                 Taxes = (Decimal)model.Tax,
                 Total = (Decimal)model.Total,
                 UserId = AccountRepository.GetIdByUsername(model.Username, DbEntities),
-                PosOrderItem = new Collection<PosOrderItem>(),
+                PosOrderItem = new Collection<PosOrderItem>()
             };
 
             foreach (var itemModel in model.LstItems)
@@ -160,7 +160,9 @@ namespace Drs.Repository.Client
                 {
                     ItemId = itemModel.ItemId,
                     Name = itemModel.Name,
-                    Price = (Decimal)itemModel.Price
+                    Price = (Decimal)itemModel.Price,
+                    LevelItem = (int)itemModel.Level,
+                    ParentId = itemModel.Parent != null ? itemModel.Parent.ItemId : (long?)null
                 });
             }
 
@@ -203,7 +205,9 @@ namespace Drs.Repository.Client
                     {
                         ItemId = i.ItemId,
                         Name = i.Name,
-                        Price = (double)i.Price
+                        Price = (double)i.Price,
+                        Level = i.LevelItem,
+                        ParentId = i.ParentId
                     }).ToList(),
                 }).FirstOrDefault();
         }
