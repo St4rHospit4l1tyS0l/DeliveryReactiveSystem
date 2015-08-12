@@ -45,11 +45,12 @@ namespace Drs.PosService.BsLogic
                     {
                         //foreach (IIberObject objItem in entryObject.GetEnum(INTERNAL_ENTRIES_ITEM_DATA))
                         //{
-                        var idItem = objItem.GetLongVal("ID");
+                        var idCheckItem = objItem.GetLongVal("ID");
+                        var idItem = objItem.GetLongVal("DATA");
                         var itemName = objItem.GetStringVal("DISP_NAME");
                         var price = objItem.GetDoubleVal("PRICE");
                         var level = objItem.GetLongVal("LEVEL");
-                        var item = new ItemModel { ItemId = idItem, Name = itemName, IsIdSpecified = true, Price = price, Level = level };
+                        var item = new ItemModel { ItemId = idItem, CheckItemId = idCheckItem, Name = itemName, IsIdSpecified = true, Price = price, Level = level };
                         switch (level)
                         {
                             case 0:
@@ -84,7 +85,7 @@ namespace Drs.PosService.BsLogic
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + " - " + ex.StackTrace);
+                //MessageBox.Show(ex.Message + " - " + ex.StackTrace);
             }
         }
 

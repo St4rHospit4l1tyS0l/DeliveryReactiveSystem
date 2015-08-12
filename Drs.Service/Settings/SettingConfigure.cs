@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Drs.Model.Catalog;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
-using Drs.Repository.Catalog;
 using Drs.Repository.Setting;
 
 namespace Drs.Service.Settings
@@ -17,6 +15,7 @@ namespace Drs.Service.Settings
             
             SettingsData.Client.TotalSecondsToLogOut = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.TOTAL_SECONDS_TO_LOGOUT, 600);
             SettingsData.Client.MinLengthPhone = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.MIN_LENGTH_PHONE, 5);
+            SettingsData.Client.UserAlohaPosId = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.USER_ALOHA_POS_ID, 999);
             
             SettingsData.Language = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.SYSTEM, SettingsData.Constants.SystemConst.LANGUAGE, 1);
             SettingsData.FirstRegion = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.SYSTEM, SettingsData.Constants.Control.CONTROL_FIRST_ADDRESS, SettingsData.Constants.Control.CONTROL_COUNTRY);

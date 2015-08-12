@@ -44,6 +44,8 @@ namespace Drs.ViewModel.Order
 
         public IReactiveCommand<Unit> DoLastOrderCommand { get; set; }
 
+        public IReactiveCommand<Unit> DoEditLastOrderCommand { get; set; }
+
 
         public string TitleLastOrder
         {
@@ -62,7 +64,8 @@ namespace Drs.ViewModel.Order
         {
             _client = client;
             LstItems = new ReactiveList<QtItemModel>();
-            DoLastOrderCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => OnDoLastOrder());
+            DoLastOrderCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => OnDoLastOrder(false));
+            DoEditLastOrderCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => OnDoLastOrder(true));
             MessageBus.Current.Listen<String>(SharedMessageConstants.FLYOUT_LASTORDER_CLOSE).Subscribe(OnClose);
         }
 
@@ -76,12 +79,14 @@ namespace Drs.ViewModel.Order
 
         }
 
-        private async Task<Unit> OnDoLastOrder()
+        private async Task<Unit> OnDoLastOrder(bool hasEdit)
         {
+            PropagateOrder.HasEdit = hasEdit;
             await Task.Run(() => MessageBus.Current.SendMessage(PropagateOrder, SharedMessageConstants.PROPAGATE_LASTORDER_FRANCHISE));
-            RxApp.MainThreadScheduler.Schedule(_ => {IsOpen = false;});
+            RxApp.MainThreadScheduler.Schedule(_ => { IsOpen = false; });
             return new Unit();
         }
+
 
         public void ProcessPhone(ListItemModel model)
         {
@@ -184,10 +189,10 @@ namespace Drs.ViewModel.Order
             {
                 LstItems.Clear();
 
-                var lstNewItems = PropagateOrder.PosCheck.LstItems.GroupBy(e => new { e.ItemId, e.Name }).Select(e => new QtItemModel
+                var lstNewItems = PropagateOrder.PosCheck.LstItems.GroupBy(e => new { e.ItemId, e.RealName }).Select(e => new QtItemModel
                 {
                     ItemId = e.Key.ItemId,
-                    Name = e.Key.Name,
+                    Name = e.Key.RealName,
                     Quantity = e.Count()
                 }).ToList();
 

@@ -330,13 +330,13 @@ namespace Drs.Service.Client
         {
             if (obj.IsStale)
             {
-                OnPhoneSavedError(Resources.Network.ResNetwork.ERROR_NETWORK_DOWN);
+                OnPosCheckSavedError(Resources.Network.ResNetwork.ERROR_NETWORK_DOWN);
                 return;
             }
 
             if (obj.Data.IsSuccess == false)
             {
-                OnPhoneSavedError(obj.Data.Message);
+                OnPosCheckSavedError(obj.Data.Message);
                 return;
             }
 

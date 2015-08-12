@@ -8,5 +8,6 @@ namespace Drs.Model.Order
         public String Code { get; set; }
         public String Title { get; set; }
         public dynamic DataInfo { get; set; }
+        public PropagateOrderModel PropagateOrder { get; set; }
     }
 }

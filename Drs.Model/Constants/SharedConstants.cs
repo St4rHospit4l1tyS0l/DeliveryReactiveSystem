@@ -80,6 +80,9 @@ namespace Drs.Model.Constants
             public const int ORDER_TAB_CLIENTS = 2;
             public const int ORDER_TAB_ORDER = 3;
             public const int ORDER_TAB_DELIVERY = 4;
+
+            public const int TRIES_INJECT_POS_DATA = 30;
+        
         }
     }
 }

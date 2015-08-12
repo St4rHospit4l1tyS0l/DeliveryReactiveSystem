@@ -11,6 +11,7 @@ namespace Drs.ViewModel.Order
         void ProcessPhone(ListItemModel model);
         PropagateOrderModel PropagateOrder { get; set; }
         IReactiveCommand<Unit> DoLastOrderCommand { get; set; }
+        IReactiveCommand<Unit> DoEditLastOrderCommand { get; set; }
 
     }
 }

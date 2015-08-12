@@ -151,23 +151,28 @@ namespace Drs.Repository.Client
                 Taxes = (Decimal)model.Tax,
                 Total = (Decimal)model.Total,
                 UserId = AccountRepository.GetIdByUsername(model.Username, DbEntities),
-                PosOrderItem = new Collection<PosOrderItem>()
             };
-
-            foreach (var itemModel in model.LstItems)
-            {
-                entity.PosOrderItem.Add(new PosOrderItem
-                {
-                    ItemId = itemModel.ItemId,
-                    Name = itemModel.Name,
-                    Price = (Decimal)itemModel.Price,
-                    LevelItem = (int)itemModel.Level,
-                    ParentId = itemModel.Parent != null ? itemModel.Parent.ItemId : (long?)null
-                });
-            }
 
             DbEntities.PosOrder.Add(entity);
             DbEntities.SaveChanges();
+
+            foreach (var itemModel in model.LstItems)
+            {
+                var item = new PosOrderItem
+                {
+                    ItemId = itemModel.ItemId,
+                    Name = itemModel.RealName,
+                    Price = (Decimal) itemModel.Price,
+                    LevelItem = (int) itemModel.Level,
+                    ParentId = itemModel.Parent != null ? itemModel.Parent.CheckItemId : (long?) null,
+                    PosOrderId = entity.PosOrderId
+                };
+
+                DbEntities.PosOrderItem.Add(item);
+                DbEntities.SaveChanges();
+                itemModel.CheckItemId = item.PosOrderItemId;
+            }
+
             model.Id = entity.PosOrderId;
             DbEntities.Entry(entity).State = EntityState.Detached;
             return model.Id;

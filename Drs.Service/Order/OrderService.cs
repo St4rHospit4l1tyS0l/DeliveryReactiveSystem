@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Drs.Model.Address;
 using Drs.Model.Client;
 using Drs.Model.Constants;
@@ -128,9 +129,14 @@ namespace Drs.Service.Order
 
         public ResponseMessageData<PosCheck> SavePosCheck(PosCheck model)
         {
+            
             using (_repository)
             {
-                model.Id = _repository.SavePosCheck(model);
+                using (var transaction = _repository.Db.Database.BeginTransaction(IsolationLevel.Snapshot))
+                {
+                    model.Id = _repository.SavePosCheck(model);
+                    transaction.Commit();
+                }
 
                 return new ResponseMessageData<PosCheck>
                 {

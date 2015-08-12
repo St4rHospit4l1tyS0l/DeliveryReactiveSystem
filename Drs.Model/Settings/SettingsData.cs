@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Autofac;
-using Drs.Model.Constants;
 using Drs.Model.Shared;
 
 namespace Drs.Model.Settings
@@ -61,6 +60,7 @@ namespace Drs.Model.Settings
             
             public static class ClientConst
             {
+                public const string USER_ALOHA_POS_ID = "USER_ALOHA_POS_ID";
                 public const string TOTAL_SECONDS_TO_LOGOUT = "TOTAL_SECONDS_TO_LOGOUT";
                 public const string MIN_LENGTH_PHONE = "MIN_LENGTH_PHONE";
             }
@@ -181,6 +181,7 @@ namespace Drs.Model.Settings
             public static IContainer Container;
             public static double SencondsToWaitForResponse = 90;
             public static double SencondsToDetectStale = 70;
+            public static int UserAlohaPosId = 999;
         }
 
         public static int Language = 1;

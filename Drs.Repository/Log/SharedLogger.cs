@@ -33,6 +33,28 @@ namespace Drs.Repository.Log
             }
         }
 
+        public static void LogErrorToFile(Exception ex, params object[] arrVal)
+        {
+            try
+            {
+                dynamic username = GetUser();
+                dynamic modelExcep = new ExceptionLog();
+
+                modelExcep.MsgException = ex.Message;
+                modelExcep.ExceptionLogUid = Guid.NewGuid();
+                modelExcep.InnerException = GetInnerExceptions(ex);
+                modelExcep.ParamsValues = GetSerializedValues(arrVal);
+                modelExcep.StackTrace = ex.StackTrace;
+                modelExcep.Timestamp = DateTime.Now;
+                modelExcep.Username = username;
+                SaveLogToFile(modelExcep);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
         private static void SaveLogToDb(ExceptionLog modelExcep)
         {
             try

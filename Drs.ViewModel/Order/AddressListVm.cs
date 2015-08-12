@@ -51,6 +51,9 @@ namespace Drs.ViewModel.Order
 
             RxApp.MainThreadScheduler.Schedule(_ => { AddressSelection = address; });
 
+            if (model.HasEdit)
+                return;
+
             if (model.PosCheck != null)
                 MessageBus.Current.SendMessage(model, SharedMessageConstants.PROPAGATE_LASTORDER_POSCHECK);
         }

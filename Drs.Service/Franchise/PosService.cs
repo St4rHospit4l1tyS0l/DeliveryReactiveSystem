@@ -1,16 +1,22 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Drs.Infrastructure.Extensions;
 using Drs.Infrastructure.Extensions.Io;
 using Drs.Infrastructure.Extensions.Proc;
+using Drs.Infrastructure.Logging;
 using Drs.Model.Constants;
 using Drs.Model.Franchise;
 using Drs.Model.Order;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
 using Drs.Repository.Log;
+using Drs.Repository.Shared;
 using ReactiveUI;
 
 namespace Drs.Service.Franchise
@@ -72,7 +78,6 @@ namespace Drs.Service.Franchise
                             SettingsData.AlohaIberToInit,
                             SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty));
 
-
                     if (process == null)
                     {
                         MessageBus.Current.SendMessage(new MessageBoxSettings
@@ -92,7 +97,100 @@ namespace Drs.Service.Franchise
                     DirExt.ForceCopyFolder(Path.Combine(SettingsData.AlohaPath, newDataFolderFranchise.ToString()), newDataFolder);
                 }
 
+            }).ContinueWith(_ =>
+            {
+                if (model.PropagateOrder == null)
+                    return;
+
+                bool isExecuteOk;
+                var iCount = 0;
+                do
+                {
+                    Thread.Sleep(1000);
+                    isExecuteOk = StartInjectPosData(model.PropagateOrder);
+
+                    if(Process.GetProcessesByName(SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty)).Any() == false)
+                        break;
+
+                } while (!isExecuteOk && iCount++ < SharedConstants.Client.TRIES_INJECT_POS_DATA);
+
             });
+        }
+
+        private bool StartInjectPosData(PropagateOrderModel propagateOrder)
+        {
+            LasaFOHLib67.IberFuncs funcs;
+            int termId, checkId;
+            try
+            {
+                LasaFOHLib67.IberDepot depot = new LasaFOHLib67.IberDepotClass();
+                LasaFOHLib67.IIberObject localState = depot.GetEnum(720).First();
+                termId = localState.GetLongVal("TERMINAL_NUM");
+                funcs = new LasaFOHLib67.IberFuncsClass();
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogErrorToFile(ex, ex.AlohaError());
+                return false;
+            }
+
+            
+            try
+            {
+                funcs.LogOut(termId);
+            }
+            catch (Exception)
+            {
+            }
+
+            funcs.LogIn(termId, SettingsData.Client.UserAlohaPosId, String.Empty, String.Empty);
+            funcs.RefreshCheckDisplay();
+            var isTableService = funcs.IsTableService();
+            try
+            {
+                var tableId = funcs.AddTable(termId, (isTableService ? 0 : 1), 0, "TbCc", 1);
+                checkId = funcs.AddCheck(termId, tableId);
+                funcs.RefreshCheckDisplay();
+                //funcs.DisplayMessage(resp.ToString(CultureInfo.InvariantCulture));
+                //Console.WriteLine(resp);
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogErrorToFile(ex, ex.AlohaError());
+                return false;
+            }
+
+            return InjectPosData(propagateOrder, termId, checkId);
+        }
+
+        private bool InjectPosData(PropagateOrderModel propagateOrder, int termId, int checkId)
+        {
+            try
+            {
+                LasaFOHLib67.IberFuncs funcs = new LasaFOHLib67.IberFuncsClass();
+                int lastParentEntry = EntityConstants.NULL_VALUE;
+
+                foreach (var itemModel in propagateOrder.PosCheck.LstItems)
+                {
+                    if (itemModel.ParentId == null)
+                    {
+                        if (lastParentEntry != EntityConstants.NULL_VALUE)
+                            funcs.EndItem(termId);
+
+                        lastParentEntry = funcs.BeginItem(termId, checkId, (int)itemModel.ItemId, "", -999999999);
+                        continue;
+                    }
+
+                    funcs.ModItem(termId, lastParentEntry, (int)itemModel.ItemId, "", -999999999, 0);
+                }
+                funcs.RefreshCheckDisplay();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogErrorToFile(ex, ex.AlohaError());
+                return false;
+            }
         }
 
         private void DeleteTmpFiles(String tmpFolder)

@@ -14,7 +14,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <DataGrid x:Name="MetroDataGrid" MaxHeight="400"
+            <DataGrid x:Name="MetroDataGrid" MaxHeight="300"
                   Grid.Row="0"
                   RenderOptions.ClearTypeHint="Enabled"
                   TextOptions.TextFormattingMode="Display"

@@ -37,14 +37,14 @@ namespace Drs.ViewModel.Order
             var item = Items.FirstOrDefault(e => e.Code == model.PosCheck.FranchiseCode);
             if (item == null)
                 return;
-            
-            SetNotCheckedButtons(new FranchiseInfoModel { Code = item.Code, Title = item.Title, DataInfo = item.DataInfo });
 
-            if(model.Order != null)
+            SetNotCheckedButtons(new FranchiseInfoModel { Code = item.Code, Title = item.Title, DataInfo = item.DataInfo, PropagateOrder = model });
+
+            if (model.Order != null)
                 MessageBus.Current.SendMessage(model, SharedMessageConstants.PROPAGATE_LASTORDER_CLIENT);
         }
 
-        //*
+
         public override bool Initialize(bool bForceToInit = false)
         {   
             if (base.Initialize(bForceToInit) == false)
@@ -103,7 +103,5 @@ namespace Drs.ViewModel.Order
             get { return _chosenFranchise; }
             set { this.RaiseAndSetIfChanged(ref _chosenFranchise, value); }
         }
-
-
     }
 }

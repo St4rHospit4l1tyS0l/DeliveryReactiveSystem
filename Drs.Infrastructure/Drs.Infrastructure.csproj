@@ -33,6 +33,10 @@
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="LasaFOHLib67">
+      <HintPath>..\Lib\LasaFOHLib67.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -132,6 +136,7 @@
     <Compile Include="JqGrid\Model\JqGridResultModel.cs" />
     <Compile Include="JqGrid\Model\JqGridRowsModel.cs" />
     <Compile Include="JqGrid\Model\JqGridRulesModel.cs" />
+    <Compile Include="Logging\AlohaExt.cs" />
     <Compile Include="Logging\DebugLogger.cs" />
     <Compile Include="Logging\DebugLoggerFactory.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
