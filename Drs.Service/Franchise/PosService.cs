@@ -143,9 +143,19 @@ namespace Drs.Service.Franchise
             {
             }
 
-            funcs.LogIn(termId, SettingsData.Client.UserAlohaPosId, String.Empty, String.Empty);
-            funcs.RefreshCheckDisplay();
-            var isTableService = funcs.IsTableService();
+            bool isTableService;
+            try
+            {
+                funcs.LogIn(termId, SettingsData.Client.UserAlohaPosId, String.Empty, String.Empty);
+                funcs.RefreshCheckDisplay();
+                isTableService = funcs.IsTableService();
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogErrorToFile(ex, ex.AlohaError());
+                return false;
+            }
+
             try
             {
                 var tableId = funcs.AddTable(termId, (isTableService ? 0 : 1), 0, "TbCc", 1);

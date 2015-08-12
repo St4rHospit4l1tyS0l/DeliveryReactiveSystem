@@ -192,23 +192,23 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Service References\CustomerOrder\CustomerOrder1.wsdl" />
+    <None Include="Service References\CustomerOrder\CustomerOrder.wsdl" />
     <None Include="Service References\CustomerOrder\Drs.Service.CustomerOrder.ResponseRd.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\CustomerOrder\Drs.Service.CustomerOrder.ResponseTor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\CustomerOrder\item4.xsd">
+    <None Include="Service References\CustomerOrder\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\CustomerOrder\item41.xsd">
+    <None Include="Service References\CustomerOrder\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\CustomerOrder\item42.xsd">
+    <None Include="Service References\CustomerOrder\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\CustomerOrder\item43.xsd">
+    <None Include="Service References\CustomerOrder\item3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\LicProxySvc\LicProxy.xsd">
@@ -256,21 +256,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\CustomerOrder\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\CustomerOrder\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\CustomerOrder\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\CustomerOrder\item1.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\QueryFunction\item1.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +266,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\LicProxySvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CustomerOrder\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CustomerOrder\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CustomerOrder\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CustomerOrder\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
