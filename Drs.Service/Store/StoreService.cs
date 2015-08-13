@@ -241,6 +241,7 @@ namespace Drs.Service.Store
                     }
                     catch (Exception ex)
                     {
+                        SharedLogger.LogError(ex);
                         clients.Caller.OnSendToStoreEventChange(new ResponseMessage
                         {
                             Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_CALL_WS_ERROR,
@@ -330,6 +331,14 @@ namespace Drs.Service.Store
                         lstSubLevel1.Clear();
                         break;
                 }
+            }
+
+            if (itemLevel0 != null && lstSubLevel0.Any())
+            {
+                if (lstSubLevel1.Any())
+                    lstSubLevel0[lstSubLevel1.Count - 1].subItemsField = lstSubLevel1.ToArray();
+
+                itemLevel0.subItemsField = lstSubLevel0.ToArray();
             }
 
 

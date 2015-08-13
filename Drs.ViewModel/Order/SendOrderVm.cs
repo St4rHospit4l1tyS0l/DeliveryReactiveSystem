@@ -51,6 +51,7 @@ namespace Drs.ViewModel.Order
 
             SendOrderToStore = ReactiveCommand.CreateAsyncTask(Observable.Return(true), async _ =>
             {
+                EventsMsg = "Enviando el pedido al servidor. \nEspere por favor...";
                 HasError = Visibility.Collapsed;
                 ErrorMsg = SuccessMsg = String.Empty;
                 HasSuccess = Visibility.Collapsed;
@@ -67,8 +68,8 @@ namespace Drs.ViewModel.Order
                 }
 
                 response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise | ClientFlags.ValidateOrder.Client
-                | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.Order |  ClientFlags.ValidateOrder.OrderSaved);
-                
+                | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.Order | ClientFlags.ValidateOrder.OrderSaved);
+
                 if (response.IsSuccess == false)
                 {
                     MessageBus.Current.SendMessage(new MessageBoxSettings
@@ -114,7 +115,8 @@ namespace Drs.ViewModel.Order
         private ResponseMessage ValidateOrderDelivery()
         {
             var response = new ResponseMessage();
-            if (ImmediateDelivery){
+            if (ImmediateDelivery)
+            {
                 response.IsSuccess = true;
                 return response;
             }
@@ -128,7 +130,7 @@ namespace Drs.ViewModel.Order
 
             try
             {
-                _promiseTime = DateTime.ParseExact(PromiseTimeTx, 
+                _promiseTime = DateTime.ParseExact(PromiseTimeTx,
                     SettingsData.Constants.SystemConst.FORMAT_DATETIME_V1, CultureInfo.CreateSpecificCulture(SettingsData.CultureSystem));
             }
             catch (Exception)
@@ -153,10 +155,10 @@ namespace Drs.ViewModel.Order
         {
             if (ImmediateDelivery)
                 return SettingsData.Constants.StoreConst.MODE_DELIVERY_IMMEDIATE;
-            
-            if(FutureDelivery)
+
+            if (FutureDelivery)
                 return SettingsData.Constants.StoreConst.MODE_DELIVERY_FUTURE;
-            
+
             return SettingsData.Constants.StoreConst.MODE_DELIVERY_IMMEDIATE;
         }
 
@@ -194,15 +196,24 @@ namespace Drs.ViewModel.Order
         {
             if (resMsg.IsSuccess)
             {
-                if (resMsg.Code == SettingsData.Constants.StoreConst.STORE_RESPONSE_ORDER_OK)
+                switch (resMsg.Code)
                 {
-                    MessageBus.Current.SendMessage(new MessageBoxSettings
-                    {
-                        Message = resMsg.Message,
-                        Title = "Estado de la orden",
-                        Callback = (_ => EndOrder())
-                    }, SharedMessageConstants.MSG_SHOW_SUCCESS);
-                    return;
+                    case SettingsData.Constants.StoreConst.STORE_RESPONSE_ORDER_OK:
+                        MessageBus.Current.SendMessage(new MessageBoxSettings
+                        {
+                            Message = resMsg.Message,
+                            Title = "Estado de la orden",
+                            Callback = (_ => EndOrder())
+                        }, SharedMessageConstants.MSG_SHOW_SUCCESS);
+                        return;
+                    case SettingsData.Constants.StoreConst.STORE_RESPONSE_FAILURE:
+                        MessageBus.Current.SendMessage(new MessageBoxSettings
+                        {
+                            Message = resMsg.Message,
+                            Title = "Estado de la orden",
+                        }, SharedMessageConstants.MSG_SHOW_ERRQST);
+                        OnSendOrderToStoreStatusChanged(new OrderModelDto { HasError = true });
+                        return;
                 }
                 EventsMsg = resMsg.Message;
             }
@@ -248,25 +259,25 @@ namespace Drs.ViewModel.Order
         public ItemCatalog Payment
         {
             get { return _payment; }
-            set {  this.RaiseAndSetIfChanged(ref _payment, value); }
+            set { this.RaiseAndSetIfChanged(ref _payment, value); }
         }
 
         public string SendOrderTitleBtn
         {
             get { return _sendOrderTitleBtn; }
-            set {  this.RaiseAndSetIfChanged(ref _sendOrderTitleBtn, value); }
+            set { this.RaiseAndSetIfChanged(ref _sendOrderTitleBtn, value); }
         }
 
         public Visibility IsSending
         {
             get { return _isSending; }
-            set { this.RaiseAndSetIfChanged(ref _isSending,  value); }
+            set { this.RaiseAndSetIfChanged(ref _isSending, value); }
         }
 
         public Visibility IsReadyToSend
         {
             get { return _isReadyToSend; }
-            set { this.RaiseAndSetIfChanged(ref _isReadyToSend,  value); }
+            set { this.RaiseAndSetIfChanged(ref _isReadyToSend, value); }
         }
 
         public string EventsMsg
@@ -323,7 +334,7 @@ namespace Drs.ViewModel.Order
                 {
                     HasSuccess = Visibility.Visible;
                     SuccessMsg = model.Message;
-                    IsSending = Visibility.Collapsed;                
+                    IsSending = Visibility.Collapsed;
                 }
                 else
                 {

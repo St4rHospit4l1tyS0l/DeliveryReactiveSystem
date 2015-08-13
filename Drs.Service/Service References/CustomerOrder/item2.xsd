@@ -283,6 +283,7 @@
       <xs:element name="posEntryIdField" nillable="true" type="xs:string" />
       <xs:element name="priceField" nillable="true" type="xs:string" />
       <xs:element name="quantityField" nillable="true" type="xs:string" />
+      <xs:element name="referenceIdField" nillable="true" type="xs:string" />
       <xs:element name="resultCodeField" nillable="true" type="xs:string" />
       <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
     </xs:sequence>

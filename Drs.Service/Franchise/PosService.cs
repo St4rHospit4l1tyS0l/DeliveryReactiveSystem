@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -134,19 +133,37 @@ namespace Drs.Service.Franchise
                 return false;
             }
 
-            
+
             try
             {
                 funcs.LogOut(termId);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+            }
+
+            try
+            {
+                funcs.LogIn(termId, SettingsData.Client.UserAlohaPosId, String.Empty, String.Empty);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+            try
+            {
+                funcs.ClockIn(termId, 4);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
 
             bool isTableService;
             try
             {
-                funcs.LogIn(termId, SettingsData.Client.UserAlohaPosId, String.Empty, String.Empty);
                 funcs.RefreshCheckDisplay();
                 isTableService = funcs.IsTableService();
             }
@@ -193,6 +210,10 @@ namespace Drs.Service.Franchise
 
                     funcs.ModItem(termId, lastParentEntry, (int)itemModel.ItemId, "", -999999999, 0);
                 }
+
+                if (lastParentEntry != EntityConstants.NULL_VALUE)
+                    funcs.EndItem(termId);
+
                 funcs.RefreshCheckDisplay();
                 return true;
             }

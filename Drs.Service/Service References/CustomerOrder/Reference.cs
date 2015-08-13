@@ -2751,6 +2751,8 @@ namespace Drs.Service.CustomerOrder {
         
         private string quantityFieldField;
         
+        private string referenceIdFieldField;
+        
         private string resultCodeFieldField;
         
         private string useTakeOutPriceFieldField;
@@ -2891,6 +2893,19 @@ namespace Drs.Service.CustomerOrder {
                 if ((object.ReferenceEquals(this.quantityFieldField, value) != true)) {
                     this.quantityFieldField = value;
                     this.RaisePropertyChanged("quantityField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string referenceIdField {
+            get {
+                return this.referenceIdFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.referenceIdFieldField, value) != true)) {
+                    this.referenceIdFieldField = value;
+                    this.RaisePropertyChanged("referenceIdField");
                 }
             }
         }
