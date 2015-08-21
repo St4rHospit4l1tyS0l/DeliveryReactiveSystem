@@ -154,7 +154,7 @@ namespace Drs.Service.Franchise
             
             try
             {
-                funcs.ClockIn(termId, 4);
+                funcs.ClockIn(termId, SettingsData.Client.JobAlohaPosId);
             }
             catch (Exception ex)
             {

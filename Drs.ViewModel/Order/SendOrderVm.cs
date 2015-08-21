@@ -241,7 +241,7 @@ namespace Drs.ViewModel.Order
             IsReadyToSend = Visibility.Collapsed;
 
             var response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise | ClientFlags.ValidateOrder.Client
-                | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.Order);
+                | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.StoreAvailable | ClientFlags.ValidateOrder.Order);
 
             if (response.IsSuccess)
             {

@@ -33,9 +33,9 @@ namespace Drs.Repository.Entities.Metadata
         [MaxLength(250)]
         [EmailAddress]
         public string Email { get; set; }
-        
+
         public bool IsObsolete { get; set; }
-        
+
         [Required]
         public string RoleId { get; set; }
 
@@ -43,7 +43,8 @@ namespace Drs.Repository.Entities.Metadata
         public string PhoneNumber { get; set; }
 
         public DateTime? BirthDate { get; set; }
-        public DateTime BirthDateIn {
+        public DateTime BirthDateIn
+        {
             get
             {
                 if (String.IsNullOrWhiteSpace(BirthDateTxIn))
@@ -65,7 +66,7 @@ namespace Drs.Repository.Entities.Metadata
             }
         }
 
-        public string BirthDateTxIn  { get; set; }
+        public string BirthDateTxIn { get; set; }
 
         public string IsObsoleteTx
         {
@@ -76,7 +77,8 @@ namespace Drs.Repository.Entities.Metadata
         }
 
         public string IsObsoleteTxIn { get; set; }
-        public bool IsObsoleteIn {
+        public bool IsObsoleteIn
+        {
             get
             {
                 return !String.IsNullOrWhiteSpace(IsObsoleteTxIn) && IsObsoleteTxIn.Trim().ToLower() == "on";

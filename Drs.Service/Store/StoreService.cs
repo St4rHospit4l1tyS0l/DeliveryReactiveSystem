@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using Drs.Infrastructure.Extensions.Classes;
 using Drs.Infrastructure.Extensions.Json;
 using Drs.Infrastructure.Model;
+using Drs.Model.Address;
 using Drs.Model.Constants;
 using Drs.Model.Franchise;
 using Drs.Model.Order;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
+using Drs.Model.Store;
 using Drs.Repository.Account;
 using Drs.Repository.Client;
 using Drs.Repository.Entities;
@@ -56,7 +58,7 @@ namespace Drs.Service.Store
             using (_repositoryStore)
             {
                 int franchiseId;
-                var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model, out franchiseId);
+                var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model.FranchiseCode, model.AddressInfo, out franchiseId);
 
                 //TODO Falta vewrificar si tiene la capacidad para albergar una orden más
 
@@ -455,6 +457,22 @@ namespace Drs.Service.Store
 
                 return response;
             }
+        }
+
+        public StoreModel StoreAvailableForAddress(StoreAvailableModel model)
+        {
+            using (_repositoryStore)
+            {
+                int franchiseId;
+                var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model.FranchiseCode,
+                    model.AddressInfo, out franchiseId);
+                return store;
+            }
+        }
+
+        public void StoreHasOnlineAndCapacity(StoreModel model)
+        {
+            throw new NotImplementedException();
         }
 
         private ResponseMessage DoCancelOrder(long atoOrderId, FranchiseStoreWsInfo fsInfo)

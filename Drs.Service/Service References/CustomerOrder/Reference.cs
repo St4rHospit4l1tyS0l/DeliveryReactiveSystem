@@ -404,6 +404,7 @@ namespace Drs.Service.CustomerOrder {
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseMessage", Namespace="http://schemas.datacontract.org/2004/07/LASA_CallCenter_Interface_Ws.Model")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Drs.Service.CustomerOrder.ResponseRd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Drs.Service.CustomerOrder.ResponseGen))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Drs.Service.CustomerOrder.ResponseTor))]
     public partial class ResponseMessage : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -608,6 +609,45 @@ namespace Drs.Service.CustomerOrder {
                 if ((object.ReferenceEquals(this.OrdersField, value) != true)) {
                     this.OrdersField = value;
                     this.RaisePropertyChanged("Orders");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResponseGen", Namespace="http://schemas.datacontract.org/2004/07/LASA_CallCenter_Interface_Ws.Model")]
+    [System.SerializableAttribute()]
+    public partial class ResponseGen : Drs.Service.CustomerOrder.ResponseMessage {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PrepTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string XmlResultField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PrepTime {
+            get {
+                return this.PrepTimeField;
+            }
+            set {
+                if ((this.PrepTimeField.Equals(value) != true)) {
+                    this.PrepTimeField = value;
+                    this.RaisePropertyChanged("PrepTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string XmlResult {
+            get {
+                return this.XmlResultField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.XmlResultField, value) != true)) {
+                    this.XmlResultField = value;
+                    this.RaisePropertyChanged("XmlResult");
                 }
             }
         }
@@ -5077,6 +5117,18 @@ namespace Drs.Service.CustomerOrder {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerOrder/Ping", ReplyAction="http://tempuri.org/ICustomerOrder/PingResponse")]
         System.Threading.Tasks.Task<int> PingAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerOrder/GetTimeSlotAvailability", ReplyAction="http://tempuri.org/ICustomerOrder/GetTimeSlotAvailabilityResponse")]
+        Drs.Service.CustomerOrder.ResponseGen GetTimeSlotAvailability(System.DateTime dateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerOrder/GetTimeSlotAvailability", ReplyAction="http://tempuri.org/ICustomerOrder/GetTimeSlotAvailabilityResponse")]
+        System.Threading.Tasks.Task<Drs.Service.CustomerOrder.ResponseGen> GetTimeSlotAvailabilityAsync(System.DateTime dateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerOrder/GetPreparationTime", ReplyAction="http://tempuri.org/ICustomerOrder/GetPreparationTimeResponse")]
+        Drs.Service.CustomerOrder.ResponseGen GetPreparationTime();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerOrder/GetPreparationTime", ReplyAction="http://tempuri.org/ICustomerOrder/GetPreparationTimeResponse")]
+        System.Threading.Tasks.Task<Drs.Service.CustomerOrder.ResponseGen> GetPreparationTimeAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -5152,6 +5204,22 @@ namespace Drs.Service.CustomerOrder {
         
         public System.Threading.Tasks.Task<int> PingAsync() {
             return base.Channel.PingAsync();
+        }
+        
+        public Drs.Service.CustomerOrder.ResponseGen GetTimeSlotAvailability(System.DateTime dateTime) {
+            return base.Channel.GetTimeSlotAvailability(dateTime);
+        }
+        
+        public System.Threading.Tasks.Task<Drs.Service.CustomerOrder.ResponseGen> GetTimeSlotAvailabilityAsync(System.DateTime dateTime) {
+            return base.Channel.GetTimeSlotAvailabilityAsync(dateTime);
+        }
+        
+        public Drs.Service.CustomerOrder.ResponseGen GetPreparationTime() {
+            return base.Channel.GetPreparationTime();
+        }
+        
+        public System.Threading.Tasks.Task<Drs.Service.CustomerOrder.ResponseGen> GetPreparationTimeAsync() {
+            return base.Channel.GetPreparationTimeAsync();
         }
     }
 }

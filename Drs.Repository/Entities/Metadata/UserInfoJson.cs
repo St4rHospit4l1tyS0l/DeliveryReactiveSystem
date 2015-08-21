@@ -6,7 +6,8 @@ namespace Drs.Repository.Entities.Metadata
 {
     public static class UserInfoJson
     {
-        [UsedImplicitly] private static ViewUserInfo _modelEnt = null;
+        [UsedImplicitly]
+        private static ViewUserInfo _modelEnt = null;
         public static readonly string Key = _modelEnt.PropertyName(e => e.Id);
 
         public static readonly string Columns = String.Join(",", new[]

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Drs.Model.Address;
+using Drs.Model.Store;
 using ReactiveUI;
 
 namespace Drs.Model.Order
@@ -19,6 +19,7 @@ namespace Drs.Model.Order
         public IReactiveList<ClientInfoGrid> LstClientInfo { get; set; }
         public IReactiveList<AddressInfoGrid> LstAddressInfo { get; set; }
         public PosCheck PosCheck { get; set; }
+        public StoreModel StoreModel { get; set; }
         public string Username { get; set; }
         public OrderDetails OrderDetails { get; set; }
 
@@ -32,6 +33,7 @@ namespace Drs.Model.Order
                 AddressInfo = LstAddressInfo.Where(e => e.IsSelected).Select(e => e.AddressInfo).Single(),
                 PosOrder = PosCheck,
                 Username = Username,
+                StoreModel = StoreModel,
                 OrderDetails = OrderDetails,
             };
         }

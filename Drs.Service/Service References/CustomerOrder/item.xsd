@@ -84,4 +84,30 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetTimeSlotAvailability">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dateTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTimeSlotAvailabilityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/LASA_CallCenter_Interface_Ws.Model" minOccurs="0" name="GetTimeSlotAvailabilityResult" nillable="true" type="q10:ResponseGen" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPreparationTime">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPreparationTimeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/LASA_CallCenter_Interface_Ws.Model" minOccurs="0" name="GetPreparationTimeResult" nillable="true" type="q11:ResponseGen" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

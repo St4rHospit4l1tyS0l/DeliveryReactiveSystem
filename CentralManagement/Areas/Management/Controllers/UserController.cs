@@ -72,7 +72,7 @@ namespace CentralManagement.Areas.Management.Controllers
         {
             using (var repository = new GenericRepository<ViewUserInfo>())
             {
-                var result = repository.JqGridFindBy(opts, UserInfoJson.Key, UserInfoJson.Columns, null
+                var result = repository.JqGridFindBy(opts, UserInfoJson.Key, UserInfoJson.Columns, (e => e.IsObsolete == false)
                     , UserInfoJson.DynamicToDto);
                 return Json(result);
             }

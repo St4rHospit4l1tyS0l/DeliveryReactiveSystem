@@ -2,7 +2,6 @@
 using System.Linq;
 using Drs.Model.Address;
 using Drs.Model.Constants;
-using Drs.Model.Order;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
 using Drs.Model.Store;
@@ -11,7 +10,7 @@ using Drs.Service.Configuration;
 
 namespace Drs.Service.Factory
 {
-    public class FactoryAddress
+    public static class FactoryAddress
     {
         public static IQueryable<AddressResponseSearch> GetQueryToExecByZipCode(CallCenterEntities dbEntities, String zipCode)
         {
@@ -103,36 +102,36 @@ namespace Drs.Service.Factory
             throw new ArgumentNullException(String.Empty + "No está configurada la información de la jerarquía de direcciones para los códigos");
         }
 
-        public static StoreModel GetQueryToSearchStore(CallCenterEntities dbEntities, OrderModelDto model, out int franchiseId)
+        public static StoreModel GetQueryToSearchStore(CallCenterEntities dbEntities, string franchiseCode, AddressInfoModel model, out int franchiseId)
         {
-            franchiseId = dbEntities.Franchise.Where(e => e.IsObsolete == false && e.Code == model.FranchiseCode).Select(e => e.FranchiseId).Single();
+            franchiseId = dbEntities.Franchise.Where(e => e.IsObsolete == false && e.Code == franchiseCode).Select(e => e.FranchiseId).Single();
 
-            int id = franchiseId;
+            var id = franchiseId;
             var query = dbEntities.StoreAddressDistribution.Where(e => e.FranchiseStore.FranchiseId == id);
 
             if (SettingsData.Store.ByCountry)
             {
-                query = query.Where(e => e.CountryId == model.AddressInfo.Country.IdKey);
+                query = query.Where(e => e.CountryId == model.Country.IdKey);
             }
             if (SettingsData.Store.ByRegionA)
             {
-                query = query.Where(e => e.RegionArId == model.AddressInfo.RegionA.IdKey);
+                query = query.Where(e => e.RegionArId == model.RegionA.IdKey);
             }
             if (SettingsData.Store.ByRegionB)
             {
-                query = query.Where(e => e.RegionBrId == model.AddressInfo.RegionB.IdKey);
+                query = query.Where(e => e.RegionBrId == model.RegionB.IdKey);
             }
             if (SettingsData.Store.ByRegionC)
             {
-                query = query.Where(e => e.RegionCrId == model.AddressInfo.RegionC.IdKey);
+                query = query.Where(e => e.RegionCrId == model.RegionC.IdKey);
             }
             if (SettingsData.Store.ByRegionD)
             {
-                query = query.Where(e => e.RegionDrId == model.AddressInfo.RegionD.IdKey);
+                query = query.Where(e => e.RegionDrId == model.RegionD.IdKey);
             }
             if (SettingsData.Store.ByZipCode)
             {
-                query = query.Where(e => e.ZipCodeId == model.AddressInfo.ZipCode.IdKey);
+                query = query.Where(e => e.ZipCodeId == model.ZipCode.IdKey);
             }
 
             return query.OrderByDescending(e => e.Importance).Select(e => 

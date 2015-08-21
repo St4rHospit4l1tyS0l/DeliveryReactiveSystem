@@ -69,6 +69,14 @@ namespace Drs.Service.Client
                     }
                 }
 
+                if ((validate & ClientFlags.ValidateOrder.StoreAvailable) == ClientFlags.ValidateOrder.StoreAvailable)
+                {
+                    var item = _model.StoreModel;
+                    if (item == null || String.IsNullOrEmpty(item.Key))
+                    {
+                        return new ResponseMessage { IsSuccess = false, Message = "No hay tienda disponible para esta dirección", View = SharedConstants.Client.ORDER_TAB_CLIENTS };
+                    }
+                }
 
                 if ((validate & ClientFlags.ValidateOrder.Order) == ClientFlags.ValidateOrder.Order)
                 {

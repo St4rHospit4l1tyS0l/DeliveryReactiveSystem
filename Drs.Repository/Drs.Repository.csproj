@@ -245,9 +245,12 @@
     <Compile Include="Entities\MenuModule.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Metadata\StoreInfoDto.cs" />
+    <Compile Include="Entities\Metadata\StoreInfoJson.cs" />
     <Compile Include="Entities\Metadata\UserInfoDto.cs" />
     <Compile Include="Entities\Metadata\UserInfoJson.cs" />
     <Compile Include="Entities\Metadata\UserChangePassword.cs" />
+    <Compile Include="Entities\Metadata\ViewStoreInfoModel.cs" />
     <Compile Include="Entities\Metadata\ViewUserInfoModel.cs" />
     <Compile Include="Entities\Module.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
@@ -295,6 +298,9 @@
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\UserDetail.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ViewStoreInfo.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ViewUserInfo.cs">

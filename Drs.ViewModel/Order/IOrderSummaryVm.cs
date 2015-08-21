@@ -1,5 +1,6 @@
 ﻿using Drs.Model.Address;
 using Drs.Model.Order;
+using Drs.Model.Store;
 using Drs.Service.Client;
 using Drs.ViewModel.Shared;
 
@@ -13,10 +14,6 @@ namespace Drs.ViewModel.Order
         void OnClientSelected(ClientInfoGrid clientInfo);
         void OnAddressSelected(AddressInfoGrid info);
         void OnPosOrderChanged(PosCheck obj);
-
-        //string FullName { get; set; }
-        //string CheckInfo { get; set; }
-        //string CheckTotal { get; set; }
-        //string PosCheckMsgErr { get; set; }
+        void OnStoreSelected(StoreModel obj, string sMsg);
     }
 }

@@ -7,7 +7,8 @@ namespace Drs.Repository.Entities.Metadata
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string FullName {
+        public string FullName
+        {
             get
             {
                 return String.Format("{0} {1}", FirstName, LastName);

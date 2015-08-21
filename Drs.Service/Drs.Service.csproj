@@ -116,7 +116,9 @@
     <Compile Include="Account\AccountService.cs" />
     <Compile Include="Address\AddressService.cs" />
     <Compile Include="Address\IAddressService.cs" />
+    <Compile Include="Client\StoreAddressService.cs" />
     <Compile Include="Client\ClientService.cs" />
+    <Compile Include="Client\IStoreAddressService.cs" />
     <Compile Include="Client\IClientService.cs" />
     <Compile Include="Client\IMainOrderService.cs" />
     <Compile Include="Client\MainOrderService.cs" />
@@ -193,6 +195,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Service References\CustomerOrder\CustomerOrder.wsdl" />
+    <None Include="Service References\CustomerOrder\Drs.Service.CustomerOrder.ResponseGen.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\CustomerOrder\Drs.Service.CustomerOrder.ResponseRd.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

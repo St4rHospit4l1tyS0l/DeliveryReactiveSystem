@@ -40,8 +40,9 @@ namespace Drs.Ui
 
             builder.RegisterType<FranchiseService>().As<IFranchiseService>();
             builder.RegisterType<PosService>().As<IPosService>().SingleInstance();
-
             builder.RegisterType<MainOrderService>().As<IMainOrderService>().ExternallyOwned();
+            builder.RegisterType<StoreAddressService>().As<IStoreAddressService>().ExternallyOwned();
+            
             builder.RegisterType<FranchiseVm>().As<IFranchiseVm>().ExternallyOwned();
             builder.RegisterType<OrderSummaryVm>().As<IOrderSummaryVm>().ExternallyOwned();
             builder.RegisterType<UpsertClientFoVm>().As<IUpsertClientFoVm>().ExternallyOwned();

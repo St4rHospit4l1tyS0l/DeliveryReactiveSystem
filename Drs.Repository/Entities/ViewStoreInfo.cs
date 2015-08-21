@@ -12,15 +12,14 @@ namespace Drs.Repository.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class StoreStatus
+    public partial class ViewStoreInfo
     {
         public int FranchiseStoreId { get; set; }
-        public string Status { get; set; }
-        public Nullable<System.DateTime> LastDatetime { get; set; }
-        public Nullable<long> LastOrderToStoreId { get; set; }
-        public int MaxCapacity { get; set; }
-    
-        public virtual OrderToStore OrderToStore { get; set; }
-        public virtual FranchiseStore FranchiseStore { get; set; }
+        public string Name { get; set; }
+        public string FranchiseName { get; set; }
+        public string Address { get; set; }
+        public string WsAddress { get; set; }
+        public string UserNameIns { get; set; }
+        public bool IsObsolete { get; set; }
     }
 }

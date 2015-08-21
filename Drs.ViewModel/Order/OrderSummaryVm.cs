@@ -7,6 +7,7 @@ using System.Windows;
 using Drs.Model.Address;
 using Drs.Model.Constants;
 using Drs.Model.Order;
+using Drs.Model.Store;
 using Drs.Service.Client;
 using Drs.ViewModel.Shared;
 using ReactiveUI;
@@ -21,6 +22,7 @@ namespace Drs.ViewModel.Order
         private readonly OrderSummaryItem _clientView;
         private readonly OrderSummaryItem _addressView;
         private readonly OrderSummaryItem _posCheckView;
+        private readonly OrderSummaryItem _storeView;
         private readonly List<OrderSummaryItem> _lstOrderSum;
 
         public OrderSummaryVm()
@@ -29,8 +31,9 @@ namespace Drs.ViewModel.Order
             _franchiseView = new OrderSummaryItem();
             _clientView = new OrderSummaryItem();
             _addressView = new OrderSummaryItem();
+            _storeView = new OrderSummaryItem();
             _posCheckView = new OrderSummaryItem();
-            _lstOrderSum = new List<OrderSummaryItem>{_phoneView, _franchiseView, _clientView, _addressView, _posCheckView};
+            _lstOrderSum = new List<OrderSummaryItem>{_phoneView, _franchiseView, _clientView, _addressView, _storeView, _posCheckView};
 
             _phoneView.RetrySave = ReactiveCommand.CreateAsyncTask(Observable.Return(true), async _ =>
             {
@@ -98,6 +101,18 @@ namespace Drs.ViewModel.Order
             OnItemChanged(PosCheckView, posCheck.Status, checkInfo, posCheck.Message, checkTotal);
         }
 
+        public void OnStoreSelected(StoreModel obj, string sMsg)
+        {
+            if (obj == null)
+            {
+                OnItemChanged(StoreView, SharedConstants.Client.RECORD_ERROR_SAVED, String.Empty, sMsg);
+            }
+            else
+            {
+                OnItemChanged(StoreView, SharedConstants.Client.RECORD_SAVED, String.Format("{0} - {1}", obj.Value, obj.MainAddress));
+            }
+        }
+
 
         private void OnItemChanged(OrderSummaryItem sumItem, int status, string value, string message = "", string secValue = "")
         {
@@ -150,6 +165,11 @@ namespace Drs.ViewModel.Order
         public OrderSummaryItem PosCheckView
         {
             get { return _posCheckView; }
+        }
+
+        public OrderSummaryItem StoreView
+        {
+            get { return _storeView; }
         }
     }
 }

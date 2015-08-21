@@ -65,6 +65,16 @@
                         </li>
                     }
                     
+                    @if (Roles.IsUserInRole(RoleConstants.MANAGER) || Roles.IsUserInRole(RoleConstants.STORE_MANAGER))
+                    {
+                        <li>
+                            <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Tiendas</span> </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Index", "Setting",new {area = "Store"})"><i class="fa fa-cogs"></i>Configuración</a></li>
+                            </ul>
+                        </li>
+                    }
+
                     @if (Roles.IsUserInRole(RoleConstants.INSTALLER))
                     {
                         <li>

@@ -3,6 +3,7 @@ using System.Linq;
 using Drs.Repository.Entities;
 using Drs.Repository.Entities.Metadata;
 using Drs.Repository.Shared;
+using Drs.Infrastructure.Extensions;
 
 namespace Drs.Repository.Account
 {
@@ -105,6 +106,9 @@ namespace Drs.Repository.Account
 
             if (userOld == null)
                 return;
+
+            if (bEnabled == false)
+                userOld.AspNetUsers.UserName = (Guid.NewGuid() + userOld.AspNetUsers.UserName).SubstringMax(250);
 
             userOld.IsObsolete = !bEnabled;
             DbConn.SaveChanges();

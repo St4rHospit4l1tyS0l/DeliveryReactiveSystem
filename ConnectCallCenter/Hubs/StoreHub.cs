@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Threading;
 using Autofac;
+using Drs.Model.Address;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;
+using Drs.Model.Store;
 using Drs.Service.Store;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -48,6 +49,42 @@ namespace ConnectCallCenter.Hubs
             catch (Exception ex)
             {
                 return new ResponseMessageData<ResponseMessage>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message + ex.StackTrace
+                };
+            }
+        }
+
+
+        [HubMethodName(SharedConstants.Server.AVAILABLE_FOR_ADDRESS_STORE_HUB_METHOD)]
+        public ResponseMessageData<StoreModel> StoreAvailableForAddress(StoreAvailableModel model)
+        {
+            try
+            {
+                var store = AppInit.Container.Resolve<IStoreService>().StoreAvailableForAddress(model);
+
+                if (store == null)
+                {
+                    return new ResponseMessageData<StoreModel>
+                    {
+                        IsSuccess = false,
+                        Message = "No hay una tienda disponible en la dirección que seleccionó"
+                    };
+                }
+
+                //TODO
+                //AppInit.Container.Resolve<IStoreService>().StoreHasOnlineAndCapacity(store);
+
+                return new ResponseMessageData<StoreModel>
+                {
+                    IsSuccess = true,
+                    Data = store,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<StoreModel>
                 {
                     IsSuccess = false,
                     Message = ex.Message + ex.StackTrace

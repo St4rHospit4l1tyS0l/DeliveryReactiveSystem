@@ -65,83 +65,86 @@
     <script src="~/Scripts/js/plugins/iCheck/icheck.min.js"></script>
 
     <script type="text/javascript" language="javascript">
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            window.upsert = function (id) {
-                window.showUpsert(id, "#angJsjqGridId", "@Url.Action("Upsert", "User", new {area = "Management"})", "#GridId");
-            };
+        window.upsert = function (id) {
+            window.showUpsert(id, "#angJsjqGridId", "@Url.Action("Upsert", "User", new {area = "Management"})", "#GridId");
+        };
 
+        window.changePass = function (id) {
+            window.showUpsert(id, "#angJsjqGridId", "@Url.Action("ChangePass", "User", new {area = "Management"})", "#GridId");
+        };
 
-            window.changePass = function (id) {
-                window.showUpsert(id, "#angJsjqGridId", "@Url.Action("ChangePass", "User", new {area = "Management"})", "#GridId");
-            };
+        window.obsolete = function (id) {
+            window.showObsolete(id, "#angJsjqGridId", "@Url.Action("DoObsolete", "User", new {area = "Management"})", "#GridId");
+        };
 
-            jQuery("#GridId").jqGrid({
-                url: '@Url.Action("List", "User", new {area = "Management"})',
-                datatype: "json",
-                mtype: 'POST',
-                colNames: ['ID', 'Usuario', 'Nombre completo', 'Correo electrónico', 'Role', '¿Inactivo?', 'Acci&oacute;n'],
-                colModel: [
-                    { name: 'Id', index: 'Id', hidden: true },
-                    { name: 'UserName', index: 'UserName', width: 180, align: "center", sorttype: 'string', searchoptions: { sopt: ['bw'] } },
-                    { name: 'FullName', index: 'FullName', width: 250, align: "center", sorttype: 'string', search: false },
-                    { name: 'Email', index: 'Email', width: 250, align: "center", sorttype: 'string', search: false },
-                    { name: 'Role', index: 'Role', width: 150, align: "center", sorttype: 'string', search: false },
-                    { name: 'IsObsoleteTx', index: 'IsObsoleteTx', width: 90, align: "center", sorttype: 'string', search: false },
-                    { name: 'Action', width: 110, align: "center", sortable: false, search: false, formatter: window.actionFormatter }
-                ],
-                rowNum: 10,
-                rowList: [10, 30, 60],
-                pager: '#GridPager',
-                sortname: 'Id',
-                height: 450,
-                viewrecords: true,
-                autowidth: true,
-                shrinkToFit: true,
-                sortorder: "desc",
-                caption: "",
-                add: true,
-                edit: true,
-                addtext: 'Agregar',
-                edittext: 'Editar',
-                altRows: true,
-                hidegrid: false,
-                gridComplete: function () {
-                    var ids = $(this).jqGrid('getDataIDs');
-                    for (var i = 0; i < ids.length; i++) {
-                        var cl = ids[i];
-                        var be = "";
+        jQuery("#GridId").jqGrid({
+            url: '@Url.Action("List", "User", new {area = "Management"})',
+            datatype: "json",
+            mtype: 'POST',
+            colNames: ['ID', 'Usuario', 'Nombre completo', 'Correo electrónico', 'Role', 'Acci&oacute;n'],
+            colModel: [
+                { name: 'Id', index: 'Id', hidden: true },
+                { name: 'UserName', index: 'UserName', width: 180, align: "center", sorttype: 'string', searchoptions: { sopt: ['bw'] } },
+                { name: 'FullName', index: 'FullName', width: 250, align: "center", sorttype: 'string', search: false },
+                { name: 'Email', index: 'Email', width: 250, align: "center", sorttype: 'string', search: false },
+                { name: 'Role', index: 'Role', width: 150, align: "center", sorttype: 'string', search: false },
+                { name: 'Action', width: 110, align: "center", sortable: false, search: false, formatter: window.actionFormatter }
+            ],
+            rowNum: 10,
+            rowList: [10, 30, 60],
+            pager: '#GridPager',
+            sortname: 'Id',
+            height: 450,
+            viewrecords: true,
+            autowidth: true,
+            shrinkToFit: true,
+            sortorder: "desc",
+            caption: "",
+            add: true,
+            edit: true,
+            addtext: 'Agregar',
+            edittext: 'Editar',
+            altRows: true,
+            hidegrid: false,
+            gridComplete: function () {
+                var ids = $(this).jqGrid('getDataIDs');
+                for (var i = 0; i < ids.length; i++) {
+                    var cl = ids[i];
+                    var be = "";
 
-                        be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Editar usuario\" onclick=\"window.upsert('" + cl + "');\"><i class=\"fa fa-pencil icon-grid-st blue-light\"></i></a>&nbsp;&nbsp;";
-                        be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Cambiar contraseña\" onclick=\"window.changePass('" + cl + "');\"><i class=\"fa fa-key icon-grid-st orange\"></i></a>  ";
+                    be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Editar usuario\" onclick=\"window.upsert('" + cl + "');\"><i class=\"fa fa-pencil icon-grid-st blue-light\"></i></a>&nbsp;&nbsp;";
+                    be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Cambiar contraseña\" onclick=\"window.changePass('" + cl + "');\"><i class=\"fa fa-key icon-grid-st orange\"></i></a>  ";
+                    be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Eliminar usuario\" onclick=\"window.obsolete('" + cl + "');\"><i class=\"fa fa-times icon-grid-st red\"></i></a>  ";
 
-                        $(this).jqGrid('setRowData', ids[i], { Action: be });
-                    }
+                    $(this).jqGrid('setRowData', ids[i], { Action: be });
                 }
-            });
-
-            jQuery("#GridId").jqGrid('navGrid', '#GridPager', {
-                edit: false,
-                add: true,
-                addfunc: window.upsert,
-                refresh: true,
-                del: true,
-                search: false
-            });
-
-            jQuery("#GridId").jqGrid('filterToolbar', {
-                stringResult: true,
-                searchOperators: true,
-                searchOnEnter: true,
-                multipleSearch: true,
-                ignoreCase: true
-            });
-
-            $(window).bind('resize', function () {
-                var width = $('.jqGrid_wrapper').width();
-                $('#GridId').setGridWidth(width);
-            });
+            }
         });
+
+        jQuery("#GridId").jqGrid('navGrid', '#GridPager', {
+            edit: false,
+            add: true,
+            addfunc: window.upsert,
+            refresh: true,
+            del: true,
+            search: false
+        });
+
+        jQuery("#GridId").jqGrid('filterToolbar', {
+            stringResult: true,
+            searchOperators: true,
+            searchOnEnter: true,
+            multipleSearch: true,
+            ignoreCase: true
+        });
+
+        $(window).bind('resize', function () {
+            var width = $('.jqGrid_wrapper').width();
+            $('#GridId').setGridWidth(width);
+        });
+    });
     </script>
 }
 

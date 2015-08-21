@@ -43,7 +43,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<FranchiseButton> FranchiseButton { get; set; }
         public virtual DbSet<FranchiseData> FranchiseData { get; set; }
         public virtual DbSet<FranchisePhone> FranchisePhone { get; set; }
-        public virtual DbSet<FranchiseStore> FranchiseStore { get; set; }
         public virtual DbSet<Language> Language { get; set; }
         public virtual DbSet<MenuModule> MenuModule { get; set; }
         public virtual DbSet<Module> Module { get; set; }
@@ -68,5 +67,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<CatPayment> CatPayment { get; set; }
         public virtual DbSet<OrderToStore> OrderToStore { get; set; }
         public virtual DbSet<CatDeliveryStatus> CatDeliveryStatus { get; set; }
+        public virtual DbSet<FranchiseStore> FranchiseStore { get; set; }
+        public virtual DbSet<ViewStoreInfo> ViewStoreInfo { get; set; }
     }
 }

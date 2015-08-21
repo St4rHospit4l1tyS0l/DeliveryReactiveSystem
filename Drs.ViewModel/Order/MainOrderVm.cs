@@ -27,13 +27,14 @@ namespace Drs.ViewModel.Order
 
         private readonly IMainOrderService _orderService;
         private readonly IPosService _posService;
+        private readonly IStoreAddressService _storeAddressService;
         private readonly ILastOrderFoVm _lastOrderFo;
         private int _selectedTab;
         private readonly IDictionary<int, IUcViewModel> _dicTabItems;
 
         public MainOrderVm(IBackPreviousVm backPreviousVm, ISearchNewPhoneVm searchNewPhone, IFranchiseContainerVm franchiseContainer,
             IClientsListVm clientsList, IAddressListVm addressList, IOrderSummaryVm orderSummary, IOrderPosVm orderPosVm, ISendOrderVm sendOrder,
-            IMainOrderService orderService, IPosService posService, ILastOrderFoVm lastOrderFo)
+            IMainOrderService orderService, IPosService posService, IStoreAddressService storeAddressService, ILastOrderFoVm lastOrderFo)
         {
 
             BackPrevious = backPreviousVm;
@@ -51,6 +52,9 @@ namespace Drs.ViewModel.Order
 
             _orderService = orderService;
             _posService = posService;
+            _storeAddressService = storeAddressService;
+            _storeAddressService.OrderService = orderService;
+
             _lastOrderFo = lastOrderFo;
             orderSummary.OrderService = orderService;
             OrderSummary = orderSummary;
@@ -94,6 +98,7 @@ namespace Drs.ViewModel.Order
             _orderService.PhoneChanged += orderSummary.OnPhoneChanged;
             _orderService.FranchiseChanged += orderSummary.OnFranchiseChanged;
             _orderService.FranchiseChanged += _posService.OnFranchiseChanged;
+            _orderService.FranchiseChanged += _storeAddressService.OnFranchiseChanged;
 
             var clientsList = ((IClientsListVm)ClientsList);
             _orderService.ClientChanged += clientsList.OnClientChanged;
@@ -102,6 +107,8 @@ namespace Drs.ViewModel.Order
             var addressList = ((IAddressListVm)AddressList);
             _orderService.AddressChanged += addressList.OnAddressChanged;
             addressList.ItemSelected += orderSummary.OnAddressSelected;
+            addressList.ItemSelected += _storeAddressService.OnAddressSelected;
+            _storeAddressService.StoreSelected += orderSummary.OnStoreSelected;
 
             MessageBus.Current.Listen<ListItemModel>(SharedMessageConstants.ORDER_CLIENTPHONE).Subscribe(clientsList.ProcessPhone);
             MessageBus.Current.Listen<ListItemModel>(SharedMessageConstants.ORDER_CLIENTPHONE).Subscribe(addressList.ProcessPhone);

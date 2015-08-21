@@ -36,4 +36,15 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ResponseRd" nillable="true" type="tns:ResponseRd" />
+  <xs:complexType name="ResponseGen">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="PrepTime" type="xs:int" />
+          <xs:element minOccurs="0" name="XmlResult" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ResponseGen" nillable="true" type="tns:ResponseGen" />
 </xs:schema>

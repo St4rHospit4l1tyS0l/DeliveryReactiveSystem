@@ -11,8 +11,9 @@ namespace Drs.Model.Constants
             Franchise = 0x02,
             Client = 0x04,
             Address = 0x08,
-            Order = 0x10,
-            OrderSaved = 0x20
+            StoreAvailable = 0x10,
+            Order = 0x20,
+            OrderSaved = 0x40
         }
     }
 }

@@ -159,6 +159,7 @@
     <Compile Include="Shared\ListItemModel.cs" />
     <Compile Include="Shared\MessageBoxSettings.cs" />
     <Compile Include="Settings\ResponseMessageSetting.cs" />
+    <Compile Include="Store\StoreAvailableModel.cs" />
     <Compile Include="Store\StoreModel.cs" />
     <Compile Include="Track\TrackOrderDetailDto.cs" />
     <Compile Include="Track\TrackOrderDto.cs" />
