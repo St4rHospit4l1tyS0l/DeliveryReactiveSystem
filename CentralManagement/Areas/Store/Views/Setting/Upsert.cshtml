@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+
+
+<script>
+
+    $(document).ready(function () {
+        window.showModalFormDlg("#dlgUpModalId", "#FormCatId");
+
+        //$('#BirthDateTxIn .input-group.date').datepicker({
+        //    startView: 1,
+        //    todayBtn: "linked",
+        //    keyboardNavigation: false,
+        //    forceParse: true,
+        //    autoclose: true
+        //});
+        
+        $("#chosen-select").chosen({});
+
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+
+</script>
+
+<div class="modal inmodal" id="dlgUpModalId" tabindex="-1" ng-controller="upsertController" role="dialog" aria-hidden="true" ng-cloak>
+    <div class="modal-dialog" style="width:920px" ng-controller="storeController">
+        <div class="modal-content animated flipInY">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <i class="fa fa-shopping-cart modal-icon"></i>
+                <h4 class="modal-title">Tienda</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ibox">
+                            <div class="ibox-title navy-bg">
+                                <h5>Información de la tienda</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form id="FormCatId" name="FormCatId" ng-submit="submit('#FormCatId')" class="form-horizontal" role="form"
+                              ng-init="m = @(ViewBag.Model ?? "{}"); lstFranchises = @ViewBag.LstFranchises; init();">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="FranchiseStoreId" name="FranchiseStoreId" ng-model="m.FranchiseStoreId" ng-update-hidden />
+                            <input type="hidden" id="FranchiseId" name="FranchiseId" ng-model="m.FranchiseId" ng-update-hidden />
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label class="col-xs-3 control-label font-noraml">Tienda:</label>
+                                    <div class="col-xs-9">
+                                        <input type="text" name="Name" ng-model="m.Name"
+                                               placeholder="Ingrese el nombre de la tienda"
+                                               required="required" ng-maxlength="300" class="form-control">
+                                        <span class="error" ng-show="FormCatId.Name.$error.required">*Campo requerido</span>
+                                        <span class="error" ng-show="FormCatId.Name.$error.maxlength">*Longitud máxima de 300 caracteres</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="col-xs-3 control-label font-noraml">Franquicia:</label>
+                                    <div class="col-xs-9">
+                                        <select class="col-xs-12" data-placeholder="Elige una franquicia..." id="chosen-select"
+                                                ng-change="m.FranchiseId = m.franchise.StKey;"
+                                                ng-options="c.Name for c in lstFranchises" ng-model="m.franchise"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-15"></div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label class="col-xs-3 control-label font-noraml">URL de los servicios Web:</label>
+                                    <div class="col-xs-9">
+                                        <input type="text" name="WsAddress" ng-model="m.WsAddress"
+                                               placeholder="Ingrese la URL de los servicios Web"
+                                               required="required" ng-minlength="10" ng-maxlength="600" class="form-control">
+                                        <span class="error" ng-show="FormCatId.WsAddress.$error.required">*Campo requerido</span>
+                                        <span class="error" ng-show="FormCatId.WsAddress.$error.minlength">*Longitud mínima es de 10 caracteres</span>
+                                        <span class="error" ng-show="FormCatId.WsAddress.$error.maxlength">*Longitud máxima de 600 caracteres</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-15"></div>
+                            @Html.Partial("~/Views/Shared/_Address.cshtml", "Address")
+                        </form>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div ng-show="MsgError" class="alert alert-danger element-center">
+                                    {{MsgError}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-white" ng-click="cancel()">
+                    Cancelar
+                </button>
+                <button class="btn btn-primary " ng-disabled="WaitFor==true"
+                        ng-click="submit('#FormCatId', '@Url.Action("DoUpsert", "Setting", new{area = "Store"})')">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

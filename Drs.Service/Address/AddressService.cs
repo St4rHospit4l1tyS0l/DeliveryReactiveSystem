@@ -8,7 +8,6 @@ using Drs.Model.Shared;
 using Drs.Repository.Address;
 using Drs.Repository.Client;
 using Drs.Service.Factory;
-using Microsoft.Win32;
 
 namespace Drs.Service.Address
 {

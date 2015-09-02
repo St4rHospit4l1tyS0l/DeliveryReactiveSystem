@@ -129,6 +129,7 @@
     <Compile Include="Constants\OrderStatus.cs" />
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Franchise\FranchiseDataModel.cs" />
+    <Compile Include="Franchise\FranchiseStoreWsInfo.cs" />
     <Compile Include="Order\ClientInfoGrid.cs" />
     <Compile Include="Order\FranchiseInfoModel.cs" />
     <Compile Include="Order\ItemLogOrder.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Settings\ResponseMessageSetting.cs" />
     <Compile Include="Store\StoreAvailableModel.cs" />
     <Compile Include="Store\StoreModel.cs" />
+    <Compile Include="Store\StoreUpModel.cs" />
     <Compile Include="Track\TrackOrderDetailDto.cs" />
     <Compile Include="Track\TrackOrderDto.cs" />
     <Compile Include="UiView\Shared\StatusScreen.cs" />

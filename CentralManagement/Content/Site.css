@@ -107,7 +107,15 @@ div.blocker img {
     background-color: #00a7ff;
 }
 
-
 .normal-cursor {
     cursor: default;
+}
+
+.zip-code {
+    -moz-min-width: 170px;
+    -ms-min-width: 170px;
+    -o-min-width: 170px;
+    -webkit-min-width: 170px;
+    min-width: 170px;
+    max-width: 280px;
 }

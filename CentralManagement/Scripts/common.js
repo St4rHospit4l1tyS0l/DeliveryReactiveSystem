@@ -73,3 +73,20 @@ window.goToUrlMvcUrl = function (url, params) {
     }
 };
 
+window.initCatalog = function (lstCatalog, catalogId) {
+    if (lstCatalog === undefined || lstCatalog === null || lstCatalog.length === 0)
+        return undefined;
+
+    if (catalogId === undefined) {
+        return lstCatalog[0];
+    }
+
+    var catalog;
+    for (var i = 0, len = lstCatalog.length; i < len; i++) {
+        catalog = lstCatalog[i];
+        if (catalog.StKey == catalogId)
+            return catalog;
+    }
+
+    return lstCatalog[0];
+};

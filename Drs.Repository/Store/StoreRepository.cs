@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
 using Drs.Model.Catalog;
@@ -6,6 +7,8 @@ using Drs.Model.Constants;
 using Drs.Model.Franchise;
 using Drs.Model.Order;
 using Drs.Model.Settings;
+using Drs.Model.Shared;
+using Drs.Model.Store;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
 using Microsoft.Owin.Security.Provider;
@@ -156,6 +159,30 @@ namespace Drs.Repository.Store
         {
             DbEntities.Recurrence.Add(recurrence);
             DbEntities.SaveChanges();
+        }
+
+
+        public StoreUpModel FindModelById(int franchiseStoreId)
+        {
+            return DbEntities.FranchiseStore.Where(e => e.FranchiseStoreId == franchiseStoreId)
+                .Select(e => new StoreUpModel
+                {
+                    FranchiseStoreId = e.FranchiseStoreId,
+                    Name = e.Name,
+                    FranchiseId = e.FranchiseId,
+                    AddressId = e.AddressId,
+                    WsAddress = e.WsAddress
+                }).FirstOrDefault();
+        }
+
+        public List<OptionModel> GetFranchises()
+        {
+            return DbEntities.Franchise.Where(e => e.IsObsolete == false)
+                .Select(e => new OptionModel
+                {
+                    Name = e.Name,
+                    StKey = e.FranchiseId.ToString()
+                }).ToList();
         }
     }
 }
