@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using Drs.Infrastructure.Extensions;
 using Drs.Model.Annotations;
 
@@ -8,7 +7,7 @@ namespace Drs.Repository.Entities.Metadata
     public static class StoreInfoJson
     {
         [UsedImplicitly]
-        private static ViewStoreInfo _modelEnt = null;
+        private static ViewStoreInfo _modelEnt = new ViewStoreInfo();
         public static readonly string Key = _modelEnt.PropertyName(e => e.FranchiseStoreId);
 
         public static readonly string Columns = String.Join(",", new[]
@@ -18,7 +17,7 @@ namespace Drs.Repository.Entities.Metadata
             _modelEnt.PropertyName(e => e.FranchiseName),
             _modelEnt.PropertyName(e => e.Address),
             _modelEnt.PropertyName(e => e.WsAddress),
-            _modelEnt.PropertyName(e => e.UserNameIns),
+            _modelEnt.PropertyName(e => e.ManagerUser),
             _modelEnt.PropertyName(e => e.IsObsolete)
         });
 
@@ -31,7 +30,7 @@ namespace Drs.Repository.Entities.Metadata
                 FranchiseName = data.FranchiseName,
                 Address = data.Address,
                 WsAddress = data.WsAddress,
-                UserNameIns = data.UserNameIns
+                ManagerUser = data.ManagerUser
             };
 
             return model;

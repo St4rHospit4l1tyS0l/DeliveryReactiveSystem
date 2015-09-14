@@ -8,15 +8,7 @@
     $(document).ready(function () {
         window.showModalFormDlg("#dlgUpModalId", "#FormCatId");
 
-        //$('#BirthDateTxIn .input-group.date').datepicker({
-        //    startView: 1,
-        //    todayBtn: "linked",
-        //    keyboardNavigation: false,
-        //    forceParse: true,
-        //    autoclose: true
-        //});
-        
-        $("#chosen-select").chosen({});
+        $("#chosen-select, #chosen-selectA").chosen({});
 
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
@@ -46,11 +38,14 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <form id="FormCatId" name="FormCatId" ng-submit="submit('#FormCatId')" class="form-horizontal" role="form"
-                              ng-init="m = @(ViewBag.Model ?? "{}"); lstFranchises = @ViewBag.LstFranchises; init();">
+                        <form id="FormCatId" name="FormCatId" class="form-horizontal" role="form"
+                              ng-init="m = @(ViewBag.Model ?? "{}"); lstFranchises = @(ViewBag.LstFranchises ?? "{}"); lstManUsers = @(ViewBag.ManagerStoreUsers ?? "{}"); init();">
                             @Html.AntiForgeryToken()
                             <input type="hidden" id="FranchiseStoreId" name="FranchiseStoreId" ng-model="m.FranchiseStoreId" ng-update-hidden />
                             <input type="hidden" id="FranchiseId" name="FranchiseId" ng-model="m.FranchiseId" ng-update-hidden />
+                            <input type="hidden" id="AddressId" name="AddressId" ng-model="m.AddressId" ng-update-hidden />
+                            <input type="hidden" id="ManUserId" name="ManUserId" ng-model="m.ManUserId" ng-update-hidden />
+                            
                             <div class="row">
                                 <div class="col-xs-6">
                                     <label class="col-xs-3 control-label font-noraml">Tienda:</label>
@@ -87,10 +82,20 @@
                             </div>
                             <div class="space-15"></div>
                             @Html.Partial("~/Views/Shared/_Address.cshtml", "Address")
+                            <div class="space-15"></div>
+                            <div class="col-xs-12">
+                                <label class="col-xs-3 control-label font-noraml">Gerente de la tienda:</label>
+                                <div class="col-xs-4">
+                                    <select class="col-xs-12" data-placeholder="Elige un gerente de la tienda..." id="chosen-selectA"
+                                            ng-change="m.ManUserId = m.manUser.StKey;"
+                                            ng-options="c.Name for c in lstManUsers" ng-model="m.manUser"></select>
+                                </div>
+                            </div>
                         </form>
                         <br />
                         <div class="row">
                             <div class="col-xs-12">
+                                <br/>
                                 <div ng-show="MsgError" class="alert alert-danger element-center">
                                     {{MsgError}}
                                 </div>

@@ -77,6 +77,7 @@
       <HintPath>..\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -160,8 +161,10 @@
     <Compile Include="Shared\ListItemModel.cs" />
     <Compile Include="Shared\MessageBoxSettings.cs" />
     <Compile Include="Settings\ResponseMessageSetting.cs" />
+    <Compile Include="Store\AddressModel.cs" />
     <Compile Include="Store\StoreAvailableModel.cs" />
     <Compile Include="Store\StoreModel.cs" />
+    <Compile Include="Store\StoreOfflineModel.cs" />
     <Compile Include="Store\StoreUpModel.cs" />
     <Compile Include="Track\TrackOrderDetailDto.cs" />
     <Compile Include="Track\TrackOrderDto.cs" />

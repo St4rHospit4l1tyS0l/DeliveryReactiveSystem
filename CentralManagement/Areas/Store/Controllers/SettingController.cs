@@ -2,17 +2,24 @@
 using System.Web.Mvc;
 using Drs.Infrastructure.JqGrid.Model;
 using Drs.Infrastructure.Resources;
+using Drs.Model.Constants;
+using Drs.Model.Settings;
 using Drs.Model.Store;
+using Drs.Repository.Account;
 using Drs.Repository.Entities;
 using Drs.Repository.Entities.Metadata;
 using Drs.Repository.Log;
 using Drs.Repository.Shared;
 using Drs.Repository.Store;
+using Drs.Service.Factory;
+using Drs.Service.Store;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using ResShared = CentralManagement.Resources.ResShared;
 
 namespace CentralManagement.Areas.Store.Controllers
 {
+    [Authorize(Roles = RoleConstants.MANAGER + ", " + RoleConstants.INSTALLER)]
     public class SettingController : Controller
     {
         // GET: Store/Setting
@@ -53,7 +60,12 @@ namespace CentralManagement.Areas.Store.Controllers
                         };
                     }
                     ViewBag.LstFranchises = JsonConvert.SerializeObject(repository.GetFranchises());
-                    //ViewBag.DicLanguage = JsonConvert.SerializeObject();
+                    ViewBag.LastRegion = FactoryAddress.GetRegionChildByZipCode();
+                    ViewBag.RegionsEnabled = JsonConvert.SerializeObject(FactoryAddress.GetAddressHierarchyOrderById());
+                    ViewBag.RegionLang = JsonConvert.SerializeObject(SettingsData.Constants.AddressUpsertSetting);
+                    ViewBag.ManagerStoreUsers = JsonConvert.SerializeObject(new AccountRepository(repository.Db).GetManagerStoreUsers());
+                    ViewBag.Address = JsonConvert.SerializeObject(model.Address);
+                    model.Address = null;
                     ViewBag.Model = JsonConvert.SerializeObject(model);
                 }
             }
@@ -80,40 +92,29 @@ namespace CentralManagement.Areas.Store.Controllers
                     });
                 }
 
-                //using (var repository = new GenericRepository<Location>())
-                //{
-                //    if (model.Id == EntityConstants.NULL_VALUE)
-                //    {
-                //        var inModel = model.ToEntity();
-                //        inModel.IsObsolete = false;
-                //        repository.Add(inModel);
-                //    }
-                //    else
-                //    {
-                //        var oldModel = repository.FindById(model.Id);
+                using (var service = new StoreSettingService())
+                {
+                    var response = service.ValidateModel(model);
 
-                //        var inModel = model.UpdateModel(oldModel);
+                    if (response.HasError)
+                    {
+                        response.Title = ResShared.TITLE_REGISTER_FAILED;
+                        return Json(response);
+                    }
 
-                //        repository.Update(inModel);
+                    model.UserInsUpId = User.Identity.GetUserId();
+                    response = service.Save(model);
 
-
-                //    }
-
-                //    return Json(new ResponseMessageModel
-                //    {
-                //        HasError = false,
-                //        Title = ResShared.TITLE_REGISTER_SUCCESS,
-                //        Message = ResShared.INFO_REGISTER_SAVED
-                //    });
-                //}
-                return null;
-
+                    if (response.HasError)
+                        response.Title = ResShared.TITLE_REGISTER_FAILED;
+                    
+                    return Json(response);
+                }
             }
             catch (Exception ex)
             {
 
                 SharedLogger.LogError(ex);
-                //SharedLogger.LogError(ex, model.ClientId, model.FirstName, model.LastName);
                 return Json(new ResponseMessageModel
                 {
                     HasError = true,
@@ -123,6 +124,35 @@ namespace CentralManagement.Areas.Store.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult DoObsolete(int id)
+        {
+            try
+            {
+                var response = new ResponseMessageModel();
+
+                using (var service = new StoreSettingService())
+                {
+                    service.DoObsoleteStore(id, User.Identity.GetUserId(), response);
+                }
+
+                if (response.HasError)
+                    response.Title = ResShared.TITLE_OBSOLETE_FAILED;
+
+                return Json(response);
+                //}
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex, id);
+                return Json(new ResponseMessageModel
+                {
+                    HasError = true,
+                    Title = ResShared.TITLE_OBSOLETE_FAILED,
+                    Message = ResShared.ERROR_UNKOWN
+                });
+            }
+        }
 
     }
 }

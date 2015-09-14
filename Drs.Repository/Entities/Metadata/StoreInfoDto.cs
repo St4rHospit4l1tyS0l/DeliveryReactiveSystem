@@ -7,7 +7,7 @@
         public string FranchiseName { get; set; }
         public string Address { get; set; }
         public string WsAddress { get; set; }
-        public string UserNameIns { get; set; }
+        public string ManagerUser { get; set; }
 
         public static ViewStoreInfoModel ToDto(StoreInfoDto data)
         {

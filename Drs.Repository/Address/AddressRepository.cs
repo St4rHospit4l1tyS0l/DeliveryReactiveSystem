@@ -3,6 +3,7 @@ using System.Linq;
 using Drs.Model.Address;
 using Drs.Model.Order;
 using Drs.Model.Shared;
+using Drs.Model.Store;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
 
@@ -10,6 +11,14 @@ namespace Drs.Repository.Address
 {
     public class AddressRepository : BaseOneRepository, IAddressRepository
     {
+        public AddressRepository()
+        {
+        }
+
+        public AddressRepository(CallCenterEntities callCenter)
+            :base(callCenter)
+        {
+        }
 
         public IDictionary<string, AddressHierarchyInfo> GetAddressHierarchy()
         {
@@ -108,6 +117,41 @@ namespace Drs.Repository.Address
                 RegionD = new ListItemModel { IdKey = e.RegionDrId, Value = e.RegionDrName },
                 ZipCode = new ListItemModel { IdKey = e.ZipCodeId, Value = e.Code },
             }).ToList();
+        }
+
+        public int Add(AddressModel model)
+        {
+            var address = new Entities.Address
+            {
+                MainAddress = model.MainAddress,
+                ExtIntNumber = model.NumExt,
+                Reference = model.Reference,
+                RegionArId = model.RegionArId,
+                RegionBrId = model.RegionBrId,
+                RegionCrId = model.RegionCrId,
+                RegionDrId = model.RegionDrId,
+                ZipCodeId = model.ZipCodeId
+            };
+            if (model.CountryId != null) address.CountryId = model.CountryId.Value;
+
+            DbEntities.Address.Add(address);
+            DbEntities.SaveChanges();
+            return address.AddressId;
+        }
+
+        public void Update(int addressId, AddressModel model)
+        {
+            var address = DbEntities.Address.Single(e => e.AddressId == addressId);
+            address.MainAddress = model.MainAddress;
+            address.ExtIntNumber = model.NumExt;
+            address.Reference = model.Reference;
+            if (model.CountryId != null) address.CountryId = model.CountryId.Value;
+            address.RegionArId = model.RegionArId;
+            address.RegionBrId = model.RegionBrId;
+            address.RegionCrId = model.RegionCrId;
+            address.RegionDrId = model.RegionDrId;
+            address.ZipCodeId = model.ZipCodeId;
+            DbEntities.SaveChanges();
         }
     }
 }

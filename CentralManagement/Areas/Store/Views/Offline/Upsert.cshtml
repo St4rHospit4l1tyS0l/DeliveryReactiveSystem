@@ -1,0 +1,94 @@
+﻿@{
+    Layout = null;
+}
+
+<script>
+
+    $(document).ready(function () {
+        window.showModalFormDlg("#dlgUpModalId", "#FormCatId");
+    });
+
+</script>
+
+<div class="modal inmodal" id="dlgUpModalId" tabindex="-1" ng-controller="upsertController" role="dialog" aria-hidden="true" ng-cloak>
+    <div class="modal-dialog" style="width:960px" ng-controller="storeOfflineController">
+        <div class="modal-content animated flipInY">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <i class="fa fa-power-off modal-icon"></i>
+                <h4 class="modal-title">Tienda fuera de línea</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ibox">
+                            <div class="ibox-title navy-bg">
+                                <h5>Fuera de línea</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form id="FormCatId" name="FormCatId" class="form-horizontal" role="form" ng-init='m = @(ViewBag.Model ?? "{}"); dateTime = @("\"" + ViewBag.StartDateTime + "\""); init();'>
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="FranchiseStoreOffLineId" name="FranchiseStoreOffLineId" ng-model="m.FranchiseStoreOffLineId" ng-update-hidden />
+                            <input type="hidden" id="FranchiseStoreId" name="FranchiseStoreId" ng-model="m.FranchiseStoreId" ng-update-hidden />
+                            <input type="hidden" id="UtcStartDateTimeTx" name="UtcStartDateTimeTx" ng-model="utcStartDateTimeTx" ng-update-hidden />
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2">
+                                    <h3 class="element-center">{{m.StoreName}}</h3>
+                                </div>
+                            </div>
+                            <div class="space-15"></div>
+                            <div class="row">
+                                <div class="col-xs-4 element-center">
+                                    Fecha inicial: <b>{{startDateTime | date:'dd-MMMM-yyyy' }}</b><br /><br />
+                                    <div style="display:inline-block; min-height:290px;">
+                                        <datepicker ng-model="startDateTime" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></datepicker>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 element-center">
+                                    Hora inicial: <b>{{startDateTime | date:'shortTime' }}</b><br /><br />
+                                    <div class="element-center" style="padding-left: 60px;">
+                                        <timepicker ng-model="startDateTime" hour-step="1" minute-step="1" show-meridian="true"></timepicker>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 element-center">
+                                    Duración: <b>{{durationTx}}</b><br /><br />
+                                    <input class="col-xs-6 col-xs-offset-3 element-center" type="number" name="Duration" ng-change="durationChange()" ng-model="duration" min="1" max="525600" required><br />
+                                    <div role="alert" class="col-xs-8 col-xs-offset-2">
+                                        <span class="error" ng-show="FormCatId.duration.$error.required">
+                                            La duración es un campo requerido
+                                        </span>
+                                        <span class="error" ng-show="FormCatId.duration.$error.number">
+                                            Duración no válida
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <br/>
+                                <div ng-show="MsgError" class="alert alert-danger element-center">
+                                    {{MsgError}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-white" ng-click="cancel()">
+                    Cancelar
+                </button>
+                <button class="btn btn-primary " ng-disabled="WaitFor==true"
+                        ng-click="validateAndSubmit(submit, '#FormCatId', '@Url.Action("DoUpsert", "Offline", new{area = "Store"})');">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

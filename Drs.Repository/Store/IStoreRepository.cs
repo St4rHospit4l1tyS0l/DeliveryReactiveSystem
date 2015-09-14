@@ -1,6 +1,7 @@
 ﻿using System;
 using Drs.Model.Franchise;
 using Drs.Model.Order;
+using Drs.Model.Store;
 using Drs.Repository.Entities;
 
 namespace Drs.Repository.Store
@@ -15,5 +16,15 @@ namespace Drs.Repository.Store
         FranchiseStoreWsInfo GetWsAddresInfoByOrderToStoreId(long orderToStoreId);
         void SetCancelOrderToStore(long orderToStoreId);
         bool IsValidToCancel(long orderToStoreId);
+        bool IsFranchiseValidById(int franchiseId);
+        bool IsValidManagerStoreUserId(string manUserId);
+        AddressModel IsValidRegionA(int? regionArId);
+        AddressModel IsValidRegionB(int? regionBrId);
+        AddressModel IsValidRegionC(int? regionCrId);
+        AddressModel IsValidRegionD(int? regionDrId);
+        void Add(StoreUpModel model);
+        void Update(StoreUpModel model);
+        FranchiseStore FindById(int id);
+        void DoObsoleteStore(FranchiseStore store, string userId);
     }
 }

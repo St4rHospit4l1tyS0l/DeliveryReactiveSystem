@@ -3,8 +3,10 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Drs.Model.Settings;
+using Drs.Repository.Address;
 using Drs.Repository.Log;
 using Drs.Repository.Setting;
+using Drs.Service.Configuration;
 using Drs.Service.Settings;
 
 namespace CentralManagement
@@ -33,6 +35,7 @@ namespace CentralManagement
                 var resControls = service.FindAllControlTitlesByLanguage(SettingsData.Language);
                 var lstAddressSetting = resControls.LstControls;
                 SettingConfigure.InitControls(lstAddressSetting);
+                SettingAddress.Initialize(new AddressRepository());
             }
             catch (Exception ex)
             {

@@ -14,22 +14,31 @@ namespace CentralManagement.Controllers
         // GET: Shared
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+                throw;
+            }
+            
         }
 
-        // GET: Shared
+        [HttpPost]
         public ActionResult ZipCodes(string code)
         {
             try
             {
                 using (var repository = new CallCenterEntities())
                 {
-                    var data = FactoryAddress.GetQueryToExecByZipCode(repository, code).ToList();
+                    var data = FactoryAddress.GetQueryToExecByZipCode(repository, code, true).ToList();
                     return Json(new ResponseMessageModel
                     {
                         HasError = false,
                         Data = data,
-                    }, JsonRequestBehavior.AllowGet);
+                    });
                 }
             }
             catch (Exception ex)
@@ -39,7 +48,7 @@ namespace CentralManagement.Controllers
                 {
                     HasError = false,
                     Message = "Se presentó un problema al momento de consultar la información",
-                }, JsonRequestBehavior.AllowGet);
+                });
             }
         }
     }

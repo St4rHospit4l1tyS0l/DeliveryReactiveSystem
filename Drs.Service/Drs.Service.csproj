@@ -127,6 +127,7 @@
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Configuration\SettingAddress.cs" />
     <Compile Include="Factory\FactoryAddress.cs" />
+    <Compile Include="Factory\LangAddress.cs" />
     <Compile Include="Franchise\PosService.cs" />
     <Compile Include="Franchise\IPosService.cs" />
     <Compile Include="Order\FranchiseService.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Settings\ISettingService.cs" />
     <Compile Include="Store\StoreService.cs" />
     <Compile Include="Store\IStoreService.cs" />
+    <Compile Include="Store\StoreSettingService.cs" />
     <Compile Include="Track\ITrackService.cs" />
     <Compile Include="Track\TrackService.cs" />
     <Compile Include="TransferDto\TransferClientDto.cs" />

@@ -52,7 +52,7 @@
                             CM
                         </div>
                     </li>
-                    @if (Roles.IsUserInRole(RoleConstants.MANAGER))
+                    @if (Roles.IsUserInRole(RoleConstants.MANAGER) || Roles.IsUserInRole(RoleConstants.INSTALLER))
                     {
                         <li>
                             <a href="@Url.Action("Index", "User",new {area = "Management"})"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span> </a>
@@ -63,24 +63,27 @@
                         <li>
                             <a href="@Url.Action("Index", "License", new { area = "Management" })"><i class="fa fa-lock"></i> <span class="nav-label">Licenciamiento</span> </a>
                         </li>
-                    }
-                    
-                    @if (Roles.IsUserInRole(RoleConstants.MANAGER) || Roles.IsUserInRole(RoleConstants.STORE_MANAGER))
-                    {
                         <li>
                             <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Tiendas</span> </a>
                             <ul class="nav nav-second-level">
                                 <li><a href="@Url.Action("Index", "Setting",new {area = "Store"})"><i class="fa fa-cogs"></i>Configuración</a></li>
                             </ul>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Index", "OffLine", new { area = "Store" })"><i class="fa fa-power-off"></i>Fuera de línea</a></li>
+                            </ul>
+                        </li>
+                    }
+                    
+                    @if (Roles.IsUserInRole(RoleConstants.STORE_MANAGER))
+                    {
+                        <li>
+                            <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Tiendas</span> </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Index", "OffLine", new { area = "Store" })"><i class="fa fa-power-off"></i>Fuera de línea</a></li>
+                            </ul>
                         </li>
                     }
 
-                    @if (Roles.IsUserInRole(RoleConstants.INSTALLER))
-                    {
-                        <li>
-                            <a href="@Url.Action("Index", "User",new {area = "Management"})"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span> </a>
-                        </li>
-                    }
                 </ul>
             </div>
         </nav>

@@ -4,7 +4,8 @@ namespace Drs.Model.Constants
 {
     public static class SharedConstants
     {
-        public const String DATE_FORMAT = "MM/dd/yyyy";
+        public const string DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm";
+        public const string DATE_FORMAT = "MM/dd/yyyy";
         public const string NOT_APPLICABLE = "N/A";
         public const int NULL_ID_VALUE = 0;
 

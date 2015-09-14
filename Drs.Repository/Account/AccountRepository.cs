@@ -2,7 +2,9 @@
 using System.Linq;
 using Drs.Infrastructure.Model;
 using Drs.Model.Account;
+using Drs.Model.Constants;
 using Drs.Model.Menu;
+using Drs.Model.Shared;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
 
@@ -10,6 +12,16 @@ namespace Drs.Repository.Account
 {
     public class AccountRepository : BaseOneRepository, IAccountRepository
     {
+        public AccountRepository()
+        {
+            
+        }
+
+        public AccountRepository(CallCenterEntities db)
+            :base(db)
+        {
+            
+        }
 
         public UserSalt GetUserSalt(string username)
         {
@@ -207,5 +219,15 @@ namespace Drs.Repository.Account
             return DbEntities.UserDetail.Any(e => e.Id == id && e.IsObsolete == false);
         }
 
+        public IList<OptionModel> GetManagerStoreUsers()
+        {
+            return DbEntities.AspNetUsers.Where(e => e.UserDetail.IsObsolete == false &&
+                e.AspNetRoles.Any(i => i.Name == RoleConstants.STORE_MANAGER))
+                .Select(e => new OptionModel
+                {
+                    StKey = e.Id,
+                    Name = e.UserName
+                }).ToList();
+        }
     }
 }

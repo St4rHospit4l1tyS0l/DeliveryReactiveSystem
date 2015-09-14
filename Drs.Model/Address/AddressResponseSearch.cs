@@ -13,5 +13,7 @@ namespace Drs.Model.Address
         public ListItemModel RegionC { get; set; }
 
         public ListItemModel RegionD { get; set; }
+
+        public ListItemModel ZipCode { get; set; }
     }
 }

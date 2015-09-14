@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic;
+using Drs.Infrastructure.Resources;
 using Drs.Model.Catalog;
 using Drs.Model.Constants;
 using Drs.Model.Franchise;
@@ -11,12 +11,20 @@ using Drs.Model.Shared;
 using Drs.Model.Store;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
-using Microsoft.Owin.Security.Provider;
 
 namespace Drs.Repository.Store
 {
     public class StoreRepository : BaseOneRepository, IStoreRepository
     {
+        public StoreRepository()
+        {
+            
+        }
+        public StoreRepository(CallCenterEntities callCenter)
+            :base(callCenter)
+        {
+        }
+
         public CallCenterEntities InnerDbEntities {
             get
             {
@@ -155,6 +163,110 @@ namespace Drs.Repository.Store
             return true;
         }
 
+        public bool IsFranchiseValidById(int franchiseId)
+        {
+            return DbEntities.Franchise.Any(e => e.FranchiseId == franchiseId && e.IsObsolete == false);
+        }
+
+        public bool IsValidManagerStoreUserId(string manUserId)
+        {
+            return DbEntities.AspNetUsers.Any(e => e.Id == manUserId && e.UserDetail.IsObsolete == false && e.AspNetRoles.Any(i => i.Name == RoleConstants.STORE_MANAGER));
+        }
+
+        public AddressModel IsValidRegionA(int? regionArId)
+        {
+            return DbEntities.RegionA.Where(e => e.RegionId == regionArId).Select(
+                    e => new AddressModel{
+                        CountryId = e.CountryId,
+                        RegionArId = e.RegionId,
+                        ZipCodeId = e.ZipCodeId
+                    }).FirstOrDefault();
+        }
+
+        public AddressModel IsValidRegionB(int? regionBrId)
+        {
+            return DbEntities.RegionB.Where(e => e.RegionId == regionBrId).Select(
+                    e => new AddressModel
+                    {
+                        CountryId = e.CountryId,
+                        RegionArId = e.RegionArId,
+                        RegionBrId = e.RegionId,
+                        ZipCodeId = e.ZipCodeId
+                    }).FirstOrDefault();
+        }
+
+        public AddressModel IsValidRegionC(int? regionCrId)
+        {
+            return DbEntities.RegionC.Where(e => e.RegionId == regionCrId).Select(
+                    e => new AddressModel
+                    {
+                        CountryId = e.CountryId,
+                        RegionArId = e.RegionArId,
+                        RegionBrId = e.RegionBrId,
+                        RegionCrId = e.RegionId,
+                        ZipCodeId = e.ZipCodeId
+                    }).FirstOrDefault();
+        }
+
+        public AddressModel IsValidRegionD(int? regionDrId)
+        {
+            return DbEntities.RegionD.Where(e => e.RegionId == regionDrId).Select(
+                    e => new AddressModel
+                    {
+                        CountryId = e.CountryId,
+                        RegionArId = e.RegionArId,
+                        RegionBrId = e.RegionBrId,
+                        RegionCrId = e.RegionCrId,
+                        RegionDrId = e.RegionId,
+                        ZipCodeId = e.ZipCodeId
+                    }).FirstOrDefault();
+        }
+
+        public void Add(StoreUpModel model)
+        {
+            var franchiseStore = new FranchiseStore
+            {
+                AddressId = model.AddressId,
+                FranchiseId = model.FranchiseId,
+                Name = model.Name,
+                UserIdIns = model.UserInsUpId,
+                DatetimeIns = DateTime.Today,
+                IsObsolete = false,
+                WsAddress = model.WsAddress,
+                ManageUserId = model.ManUserId
+            };
+            DbEntities.FranchiseStore.Add(franchiseStore);
+            DbEntities.SaveChanges();
+        }
+
+        public void Update(StoreUpModel model)
+        {
+            var franchiseStore = DbEntities.FranchiseStore.Single(e => e.FranchiseStoreId == model.FranchiseStoreId);
+            franchiseStore.AddressId = model.AddressId;
+            franchiseStore.FranchiseId = model.FranchiseId;
+            franchiseStore.Name = model.Name;
+            franchiseStore.UserIdUpd = model.UserInsUpId;
+            franchiseStore.DatetimeUpd = DateTime.Today;
+            franchiseStore.IsObsolete = false;
+            franchiseStore.WsAddress = model.WsAddress;
+            franchiseStore.ManageUserId = model.ManUserId;
+            DbEntities.SaveChanges();
+        }
+
+        public FranchiseStore FindById(int id)
+        {
+            return DbEntities.FranchiseStore.FirstOrDefault(e => e.FranchiseStoreId == id);
+        }
+
+        public void DoObsoleteStore(FranchiseStore store, string userId)
+        {
+            store.IsObsolete = true;
+            store.UserIdUpd = userId;
+            store.DatetimeUpd = DateTime.Now;
+            DbEntities.SaveChanges();
+        }
+
+
         public void SaveRecurrence(Recurrence recurrence)
         {
             DbEntities.Recurrence.Add(recurrence);
@@ -171,7 +283,26 @@ namespace Drs.Repository.Store
                     Name = e.Name,
                     FranchiseId = e.FranchiseId,
                     AddressId = e.AddressId,
-                    WsAddress = e.WsAddress
+                    ManUserId = e.ManageUserId,
+                    WsAddress = e.WsAddress,
+                    Address = new AddressModel
+                    {
+                        CountryId = e.Address.CountryId,
+                        Country = e.Address.Country.Name,
+                        MainAddress = e.Address.MainAddress,
+                        NumExt = e.Address.ExtIntNumber,
+                        Reference = e.Address.Reference,
+                        RegionArId = e.Address.RegionArId,
+                        RegionA = e.Address.RegionA.Name,
+                        RegionBrId = e.Address.RegionBrId,
+                        RegionB = e.Address.RegionB.Name,
+                        RegionCrId = e.Address.RegionCrId,
+                        RegionC = e.Address.RegionC.Name,
+                        RegionDrId = e.Address.RegionDrId,
+                        RegionD = e.Address.RegionD.Name,
+                        ZipCodeId = e.Address.ZipCodeId,
+                        ZipCode = e.Address.ZipCode.Code
+                    }
                 }).FirstOrDefault();
         }
 
@@ -183,6 +314,85 @@ namespace Drs.Repository.Store
                     Name = e.Name,
                     StKey = e.FranchiseId.ToString()
                 }).ToList();
+        }
+
+        public StoreOfflineModel FindStoreOfflineModelById(int storeId, int? id)
+        {
+            if (id.HasValue)
+            {
+                return DbEntities.FranchiseStoreOffLine.Where(e => e.FranchiseStoreId == storeId && e.FranchiseStoreOffLineId == id.Value)
+                    .Select(e => new StoreOfflineModel
+                    {
+                        StoreName = e.FranchiseStore.Name,
+                        FranchiseStoreId = e.FranchiseStoreId,
+                        FranchiseStoreOffLineId = e.FranchiseStoreOffLineId,
+                        UtcStartDateTimeSaved = e.DateTimeStart,
+                        Duration = e.Duration
+                    }).FirstOrDefault();
+            }
+            
+            
+            return DbEntities.FranchiseStore.Where(e => e.FranchiseStoreId == storeId)
+                .Select(e => new StoreOfflineModel
+                {
+                    StoreName = e.Name,
+                    FranchiseStoreId = e.FranchiseStoreId
+                }).FirstOrDefault();
+        }
+
+        public void UpdateOffline(StoreOfflineModel model, ResponseMessageModel response, string userId)
+        {
+            var offline = DbEntities.FranchiseStoreOffLine.FirstOrDefault(
+                    e => e.FranchiseStoreOffLineId == model.FranchiseStoreOffLineId);
+
+            if (offline == null)
+            {
+                response.HasError = true;
+                response.Message = "No existe registro para actualizar";
+                return;
+            }
+
+            offline.DateTimeStart = model.UtcStartDateTime;
+            offline.Duration = model.Duration;
+            offline.DateTimeEnd = offline.DateTimeStart.AddMinutes(offline.Duration);
+            offline.UserUpdId = userId;
+            offline.IsObsolete = false;
+
+            DbEntities.SaveChanges();
+        }
+
+        public void AddOffline(StoreOfflineModel model, string userId)
+        {
+            var offline = new FranchiseStoreOffLine
+            {
+                DateTimeStart = model.UtcStartDateTime,
+                Duration = model.Duration,
+                UserInsId = userId,
+                IsObsolete = false,
+                FranchiseStoreId = model.FranchiseStoreId
+            };
+
+            offline.DateTimeEnd = offline.DateTimeStart.AddMinutes(offline.Duration);
+
+            DbEntities.FranchiseStoreOffLine.Add(offline);
+            DbEntities.SaveChanges();
+        }
+
+        public void DoObsoleteStoreOffline(int id, String userId, ResponseMessageModel response)
+        {
+            var offline = DbEntities.FranchiseStoreOffLine.FirstOrDefault(e => e.FranchiseStoreOffLineId == id);
+
+            if (offline == null)
+            {
+                response.HasError = true;
+                response.Message = "No existe registro para actualizar";
+                return;
+            }
+
+            offline.UserUpdId = userId;
+            offline.IsObsolete = true;
+
+            DbEntities.SaveChanges();
         }
     }
 }

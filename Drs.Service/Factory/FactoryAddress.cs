@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Drs.Model.Address;
 using Drs.Model.Constants;
@@ -12,53 +13,88 @@ namespace Drs.Service.Factory
 {
     public static class FactoryAddress
     {
-        public static IQueryable<AddressResponseSearch> GetQueryToExecByZipCode(CallCenterEntities dbEntities, String zipCode)
+        public static IQueryable<AddressResponseSearch> GetQueryToExecByZipCode(CallCenterEntities dbEntities, String zipCode, bool startWith = false)
         {
-            AddressHierarchyInfo addressHierarchy;
-            
-            if(SettingAddress.DicAddressHierarchy.TryGetValue(AddressConstants.ZIP_CODE, out addressHierarchy) == false)
-            {
-                throw new ArgumentNullException(String.Empty + "No se ha configurado la jerarquía de direcciones");
-            }
+
+            string regionChild = GetRegionChildByZipCode();
 
 
-            switch (addressHierarchy.RegionChild)
+            switch (regionChild)
             {
                 case AddressConstants.REGION_A:
-                    return dbEntities.RegionA.Where(e => e.ZipCode.Code == zipCode).Select(e => new AddressResponseSearch
-                    {
-                        Country = new ListItemModel { IdKey = e.CountryId, Value = e.Country.Name },
-                        RegionA = new ListItemModel { IdKey = e.RegionId, Value = e.Name }
-                    });
-                case AddressConstants.REGION_B:
-                    return dbEntities.RegionB.Where(e => e.ZipCode.Code == zipCode).Select(e => new AddressResponseSearch
-                    {
-                        Country = new ListItemModel { IdKey = e.CountryId, Value = e.Country.Name },
-                        RegionA = new ListItemModel { IdKey = e.RegionArId, Value = e.RegionA.Name },
-                        RegionB = new ListItemModel { IdKey = e.RegionId, Value = e.Name }
-                    });
+                {
+                    System.Linq.Expressions.Expression<Func<RegionA, bool>> linqExp;
+                    if (startWith) linqExp = e => e.ZipCode.Code.StartsWith(zipCode); else linqExp = e => e.ZipCode.Code == zipCode;
 
+                    return dbEntities.RegionA.Where(linqExp).Select(e => new AddressResponseSearch
+                    {
+                        Country = new ListItemModel { IdKey = e.CountryId, Value = e.Country.Name },
+                        RegionA = new ListItemModel { IdKey = e.RegionId, Value = e.Name },
+                        ZipCode = new ListItemModel { IdKey = e.ZipCodeId, Value = e.ZipCode.Code}
+                    }).Take(50);                    
+                }
+                case AddressConstants.REGION_B:
+                {
+                    System.Linq.Expressions.Expression<Func<RegionB, bool>> linqExp;
+                    if (startWith) linqExp = e => e.ZipCode.Code.StartsWith(zipCode); else linqExp = e => e.ZipCode.Code == zipCode;
+
+                    return dbEntities.RegionB.Where(linqExp).Select(e => new AddressResponseSearch
+                        {
+                            Country = new ListItemModel { IdKey = e.CountryId, Value = e.Country.Name },
+                            RegionA = new ListItemModel { IdKey = e.RegionArId, Value = e.RegionA.Name },
+                            RegionB = new ListItemModel { IdKey = e.RegionId, Value = e.Name },
+                            ZipCode = new ListItemModel { IdKey = e.ZipCodeId, Value = e.ZipCode.Code }
+                        }).Take(50);
+                }
                 case AddressConstants.REGION_C:
-                    return dbEntities.RegionC.Where(e => e.ZipCode.Code == zipCode).Select(e => new AddressResponseSearch
+                {
+                    System.Linq.Expressions.Expression<Func<RegionC, bool>> linqExp;
+                    if (startWith) linqExp = e => e.ZipCode.Code.StartsWith(zipCode); else linqExp = e => e.ZipCode.Code == zipCode;
+
+                    return dbEntities.RegionC.Where(linqExp).Select(e => new AddressResponseSearch
                     {
                         Country = new ListItemModel { IdKey = e.CountryId, Value = e.Country.Name },
                         RegionA = new ListItemModel { IdKey = e.RegionArId, Value = e.RegionA.Name },
                         RegionB = new ListItemModel { IdKey = e.RegionBrId, Value = e.RegionB.Name },
-                        RegionC = new ListItemModel { IdKey = e.RegionId, Value = e.Name }
-                    });
-
+                        RegionC = new ListItemModel { IdKey = e.RegionId, Value = e.Name },
+                        ZipCode = new ListItemModel { IdKey = e.ZipCodeId, Value = e.ZipCode.Code }
+                    }).Take(50);
+                }
                 case AddressConstants.REGION_D:
-                    return dbEntities.RegionD.Where(e => e.ZipCode.Code == zipCode).Select(e => new AddressResponseSearch
+                {
+                    System.Linq.Expressions.Expression<Func<RegionD, bool>> linqExp;
+                    if (startWith) linqExp = e => e.ZipCode.Code.StartsWith(zipCode); else linqExp = e => e.ZipCode.Code == zipCode;
+
+                    return dbEntities.RegionD.Where(linqExp).Select(e => new AddressResponseSearch
                     {
                         Country = new ListItemModel { IdKey = e.CountryId, Value = e.Country.Name },
                         RegionA = new ListItemModel { IdKey = e.RegionArId, Value = e.RegionA.Name },
                         RegionB = new ListItemModel { IdKey = e.RegionBrId, Value = e.RegionB.Name },
                         RegionC = new ListItemModel { IdKey = e.RegionCrId, Value = e.RegionC.Name },
-                        RegionD = new ListItemModel { IdKey = e.RegionId, Value = e.Name }
-                    });
+                        RegionD = new ListItemModel { IdKey = e.RegionId, Value = e.Name },
+                        ZipCode = new ListItemModel { IdKey = e.ZipCodeId, Value = e.ZipCode.Code }
+                    }).Take(50);
+                }
             }
 
             throw new ArgumentNullException(String.Empty + "No está correctamente configurada la jerarquía de direcciones");
+        }
+
+        public static String GetRegionChildByZipCode()
+        {
+            AddressHierarchyInfo addressHierarchy;
+            if (SettingAddress.DicAddressHierarchy.TryGetValue(AddressConstants.ZIP_CODE, out addressHierarchy) == false)
+            {
+                throw new ArgumentNullException(String.Empty + "No se ha configurado la jerarquía de direcciones");
+            }
+            return addressHierarchy.RegionChild;
+        }
+
+
+        public static List<String> GetAddressHierarchyOrderById()
+        {
+            return SettingAddress.DicAddressHierarchy.Select(e => e.Key).ToList();
+
         }
 
         public static IQueryable<ListItemModel> GetQueryToFillNextListByName(CallCenterEntities dbEntities, string sNextList, int iIdSelected)
@@ -145,5 +181,4 @@ namespace Drs.Service.Factory
                 }).FirstOrDefault();
         }
     }
-
 }

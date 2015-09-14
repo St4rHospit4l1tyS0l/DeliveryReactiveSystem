@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Drs.Model.Shared
 {
@@ -14,6 +15,7 @@ namespace Drs.Model.Shared
         public ControlInfoModel ZipCode { get; set; }
         public ControlInfoModel Reference { get; set; }
 
+        [JsonIgnore]
         public List<ControlInfoModel> LstAddressControls { get; private set; }
 
 

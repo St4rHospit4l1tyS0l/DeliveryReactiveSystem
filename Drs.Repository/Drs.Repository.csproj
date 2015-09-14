@@ -224,6 +224,9 @@
     <Compile Include="Entities\FranchiseStore.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\FranchiseStoreOffLine.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Language.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
@@ -247,6 +250,8 @@
     </Compile>
     <Compile Include="Entities\Metadata\StoreInfoDto.cs" />
     <Compile Include="Entities\Metadata\StoreInfoJson.cs" />
+    <Compile Include="Entities\Metadata\StoreOfflineInfoDto.cs" />
+    <Compile Include="Entities\Metadata\StoreOfflineInfoJson.cs" />
     <Compile Include="Entities\Metadata\UserInfoDto.cs" />
     <Compile Include="Entities\Metadata\UserInfoJson.cs" />
     <Compile Include="Entities\Metadata\UserChangePassword.cs" />

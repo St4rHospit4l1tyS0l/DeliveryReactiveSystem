@@ -1,6 +1,13 @@
-﻿window.showUpsert = function(id, divScope, urlToGo, jqGridToUse) {
+﻿window.showUpsert = function (id, divScope, urlToGo, jqGridToUse) {
     var scope = angular.element($(divScope)).scope();
     scope.show({ id: id }, urlToGo).
+        then(function () { $(jqGridToUse).trigger("reloadGrid"); });
+
+};
+
+window.showUpsertParams = function (params, divScope, urlToGo, jqGridToUse) {
+    var scope = angular.element($(divScope)).scope();
+    scope.show(params, urlToGo).
         then(function () { $(jqGridToUse).trigger("reloadGrid"); });
 
 };

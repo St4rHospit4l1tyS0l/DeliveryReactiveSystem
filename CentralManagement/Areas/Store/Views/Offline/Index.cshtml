@@ -1,0 +1,194 @@
+﻿@{
+    ViewBag.Title = "Fuera de línea de las tiendas";
+}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Administración de tiendas fuera de línea</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li>
+                Tiendas
+            </li>
+            <li>
+                Fuera de línea
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="modalDlgController">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Tiendas del Call Center</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="jqGrid_wrapper">
+                        <table id="GridId"></table>
+                        <div id="GridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blocker" ng-show="working">
+        <div>
+            Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />
+        </div>
+    </div>
+</div>
+
+@section css{
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
+    <link href="~/Content/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <link href="~/Content/plugins/chosen/chosen.css" rel="stylesheet" />
+    <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet">
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/js/plugins/jqGrid/i18n/grid.locale-es.js"></script>
+    <script src="~/Scripts/js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+
+    <script src="~/Scripts/app/shared/upsertCtrl.js"></script>
+    <script src="~/Scripts/app/shared/modalDlgCtrl.js"></script>
+    <script src="~/Scripts/app/shared/hiddenDrct.js"></script>
+    <script src="~/Scripts/app/ctrl/storeOfflineCtrl.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+
+            window.upsert = function(storeId, id, gridId) {
+                window.showUpsertParams({ storeId: storeId, id: id }, "#angJsjqGridId", "@Url.Action("Upsert", "Offline", new {area = "Store"})", gridId);
+            };
+
+            window.obsolete = function (id, gridId) {
+                window.showObsolete(id, "#angJsjqGridId", "@Url.Action("DoObsolete", "Offline", new {area = "Store"})", gridId);
+            };
+
+            jQuery("#GridId").jqGrid({
+                url: '@Url.Action("List", "Offline", new {area = "Store"})',
+                datatype: "json",
+                mtype: 'POST',
+                colNames: ['ID', 'Tienda', 'Franquicia', 'Dirección', 'UrlWs', 'Gerente'],
+                colModel: [
+                    { name: 'FranchiseStoreId', index: 'FranchiseStoreId', hidden: true },
+                    { name: 'Name', index: 'Name', width: 180, align: "center", sorttype: 'string', searchoptions: { sopt: ['bw'] } },
+                    { name: 'FranchiseName', index: 'FranchiseName', width: 110, align: "center", sorttype: 'string', search: false },
+                    { name: 'Address', index: 'Address', width: 200, align: "center", sorttype: 'string', search: false },
+                    { name: 'WsAddress', index: 'WsAddress', width: 200, align: "center", sorttype: 'string', search: false },
+                    { name: 'ManagerUser', index: 'ManagerUser', width: 90, align: "center", sorttype: 'string', search: false }
+                ],
+                rowNum: 10,
+                rowList: [10, 30, 60],
+                pager: '#GridPager',
+                sortname: 'FranchiseStoreId',
+                height: 450,
+                viewrecords: true,
+                autowidth: true,
+                shrinkToFit: true,
+                sortorder: "desc",
+                caption: "",
+                add: false,
+                edit: false,
+                altRows: true,
+                hidegrid: false,
+                subGridOptions: {
+                    plusicon: "glyphicon glyphicon-chevron-down position-relative",
+                    minusicon: "glyphicon glyphicon-chevron-right position-relative",
+                    reloadOnExpand: false,
+                    selectOnExpand: true
+                },
+                subGrid: true,
+                subGridRowExpanded: function(subgridId, rowId) {
+                    var subgridTableId, pagerId;
+                    subgridTableId = subgridId + "_t";
+                    pagerId = "p_" + subgridTableId;
+                    $("#" + subgridId).html("<table id='" + subgridTableId + "' class='scroll'></table><div id='" + pagerId + "' class='scroll'></div>");
+                    $("#" + subgridTableId).jqGrid({
+                        url: '@Url.Action("OffLineList", "Offline", new {area = "Store"})?id=' + rowId,
+                        datatype: "json",
+                        mtype: 'POST',
+                        colNames: ['ID', 'Fecha y hora inicial', 'Duración (minutos)', 'Fecha y hora final', 'Estado actual', 'Acción'],
+                        colModel: [
+                            { name: 'FranchiseStoreOffLineId', index: 'FranchiseStoreOffLineId', hidden: true },
+                            { name: 'DateTimeStart', index: 'DateTimeStart', width: 300, align: "center", sorttype: 'string', search: false },
+                            { name: 'Duration', index: 'Duration', width: 200, align: "center", sorttype: 'string', search: false },
+                            { name: 'DateTimeEnd', index: 'DateTimeEnd', width: 300, align: "center", sorttype: 'string', search: false },
+                            { name: 'State', index: 'State', width: 200, align: "left", sorttype: 'string', search: false },
+                            { name: 'Action', width: 100, align: "center", sortable: false, search: false }
+                        ],
+                        rowNum: 10,
+                        pager: pagerId,
+                        sortname: 'DateTimeStart',
+                        sortorder: "asc",
+                        height: 150,
+                        gridComplete: function() {
+                            var ids = $(this).jqGrid('getDataIDs');
+                            for (var i = 0; i < ids.length; i++) {
+                                var cl = ids[i];
+                                var be = "";
+
+                                be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Editar fuera de línea\" onclick=\"window.upsert('" + rowId + "', '" + cl + "', '#" + subgridTableId + "');\"><i class=\"fa fa-pencil icon-grid-st blue-light\"></i></a>&nbsp;&nbsp;";
+                                be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Eliminar fuera de línea\" onclick=\"window.obsolete('" + cl + "', '#" + subgridTableId + "');\"><i class=\"fa fa-times icon-grid-st red\"></i></a>  ";
+
+                                $(this).jqGrid('setRowData', ids[i], { Action: be });
+                                
+                                var row = $(this).getRowData(cl);
+
+                                if (row.State === "ONL")
+                                    be = "<i class=\"fa fa-circle icon-grid-st greenyellow\"></i>&nbsp;&nbsp;Desactivado (en línea)";
+                                else
+                                    be = "<i class=\"fa fa-circle icon-grid-st red\"></i>&nbsp;&nbsp;Activado (fuera de línea)";
+
+                                row.DateTimeStart = moment(moment.utc(row.DateTimeStart, 'YYYY-MM-DD HH:mm').toDate()).format('YYYY-MM-DD HH:mm:ss');
+                                row.DateTimeEnd = moment(moment.utc(row.DateTimeEnd, 'YYYY-MM-DD HH:mm').toDate()).format('YYYY-MM-DD HH:mm:ss');
+
+                                $(this).jqGrid('setRowData', ids[i], { State: be, DateTimeStart: row.DateTimeStart, DateTimeEnd: row.DateTimeEnd });
+                            }
+                        }
+                    });
+                    $("#" + subgridTableId).jqGrid('navGrid', "#" + pagerId, { edit: false, add: true, addfunc: function () { window.upsert(rowId, undefined, "#" + subgridTableId); }, del: false, search: false, });
+                }
+            });
+
+            jQuery("#GridId").jqGrid('navGrid', '#GridPager', {
+                edit: false,
+                add: false,
+                refresh: true,
+                del: false,
+                search: false
+            });
+
+            jQuery("#GridId").jqGrid('filterToolbar', {
+                stringResult: true,
+                searchOperators: true,
+                searchOnEnter: true,
+                multipleSearch: true,
+                ignoreCase: true
+            });
+
+            $(window).bind('resize', function() {
+                var width = $('.jqGrid_wrapper').width();
+                $('#GridId').setGridWidth(width);
+            });
+        });
+    </script>
+}
+
+

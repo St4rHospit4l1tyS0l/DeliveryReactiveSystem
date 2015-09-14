@@ -1,87 +1,95 @@
 ﻿@model string
 
-
-<div class="row" ng-controller="addressController as ad" ng-init="ad.m = @(ViewData[Model] ?? "{}" );">
+<div class="row" ng-controller="addressController" ng-init="ini = @(ViewBag.Address ?? "{}"); region='@(ViewBag.LastRegion ?? "RegionC")' ; l=@(ViewBag.RegionLang ?? "{}"); init();">
     <div class="col-xs-12">
         <div class="row">
             <div class="col-xs-2">
             </div>
             <div class="col-xs-8">
-                <label class="col-xs-5 control-label font-noraml">Ingrese el código postal:</label>
+                <label class="col-xs-5 control-label font-noraml">Ingrese el {{l.ZipCode.Title}}:</label>
                 <div class="col-xs-4">
                     <input type="text" class="form-control zip-code"
-                           ng-model="ad.zipcode"
-                           typeahead="zipcode as zipcode.ViewName for zipcode in ad.zipCodes($viewValue, '@Url.Action("ZipCodes", "Shared", new {area = ""})')"
-                           placeholder='Ingresa el código postal'
-                           typeahead-on-select="ad.onSelect('MainAddress')"
+                           ng-model="zipcodeSel"
+                           typeahead="zipcode as zipcode.ViewName for zipcode in zipCodes($viewValue, '@Url.Action("ZipCodes", "Shared", new {area = ""})')"
+                           placeholder='Ingresa el {{l.ZipCode.Title}}'
+                           typeahead-on-select="onSelect('MainAddress')"
                            typeahead-editable="false"
                            typeahead-loading="loadingData"
                            typeahead-wait-ms="500" />
                     <i ng-show="loadingData" class="glyphicon glyphicon-refresh"></i>
-                    <input type="hidden" name="@(Model + ".LocationId")" ng-model="ad.zipcode.LocationId" ng-update-hidden />
                 </div>
             </div>
         </div>
         <div class="space-30"></div>
         <div class="row">
             <div class="col-xs-6">
-                <span class="col-xs-2"></span>
-                <label class="col-xs-3 control-label font-noraml">Código postal:</label>
-                <div class="col-xs-6">
-                    <input type="text" name="RoZipCode" ng-model="ad.m.ZipCode" ng-disabled="true" class="form-control" />
-                    <input type="hidden" name="@(Model + ".ZipCode")" ng-model="ad.m.ZipCode" ng-update-hidden />
-
+                <br />
+                <label class="col-xs-5 control-label font-noraml">{{l.ZipCode.Title}}:</label>
+                <div class="col-xs-7">
+                    <input type="text" name="@(Model + ".RoZipCode")" ng-model="m.ZipCode.Value" ng-disabled="true" class="form-control" ng-required="true" />
+                    <input type="hidden" name="@(Model + ".ZipCodeId")" ng-model="m.ZipCode.IdKey" ng-update-hidden />
+                    <span class="error" ng-show="FormCatId['@(Model + ".RoZipCode")'].$error.required">*Campo requerido</span>
+                    <input type="hidden" name="@(Model + ".CountryId")" ng-model="m.Country.IdKey" ng-update-hidden />
                 </div>
             </div>
-            @*<div class="col-xs-6">
-                <label class="col-xs-2 control-label font-noraml">Estado:</label>
-                <div class="col-xs-6">
-                    <input type="text" name="@(Model + ".State")" ng-model="ad.m.State" ng-disabled="true"
+            <div class="col-xs-6" ng-show="l.RegionA.IsEnabled">
+                <br />
+                <label class="col-xs-5 control-label font-noraml">{{l.RegionA.Title}}:</label>
+                <div class="col-xs-7">
+                    <input type="text" name="@(Model + ".RegionA")" ng-model="m.RegionA.Value" ng-disabled="true"
                            ng-maxlength="100" class="form-control">
-                    <span class="error" ng-show="FormUpId.@(Model + ".State").$error.maxlength">*Longitud máxima de 100 caracteres</span>
-                </div>
-            </div>*@
-        </div>
-        @*<div class="space-15"></div>
-        <div class="row">
-            <div class="col-xs-6">
-                <span class="col-xs-2"></span>
-                <label class="col-xs-3 control-label font-noraml">Delegación o municipio:</label>
-                <div class="col-xs-6">
-                    <input type="text" name="@(Model + ".Municipality")" ng-model="ad.m.Municipality" ng-disabled="true"
-                           ng-maxlength="100" class="form-control">
-                    <span class="error" ng-show="FormUpId.@(Model + ".Municipality").$error.maxlength">*Longitud máxima de 100 caracteres</span>
+                    <input type="hidden" name="@(Model + ".RegionArId")" ng-model="m.RegionA.IdKey" ng-update-hidden />
                 </div>
             </div>
-            <div class="col-xs-6">
-                <label class="col-xs-2 control-label font-noraml">Colonia:</label>
-                <div class="col-xs-6">
-                    <input type="text" name="@(Model + ".Location")" ng-model="ad.m.Location"
-                           ng-maxlength="200" class="form-control">
-                    <span class="error" ng-show="FormUpId.@(Model + ".Location").$error.maxlength">*Longitud máxima de 200 caracteres</span>
+            <div class="col-xs-6" ng-show="l.RegionB.IsEnabled">
+                <br />
+                <label class="col-xs-5 control-label font-noraml">{{l.RegionB.Title}}:</label>
+                <div class="col-xs-7">
+                    <input type="text" name="@(Model + ".RegionB")" ng-model="m.RegionB.Value" ng-disabled="true"
+                           ng-maxlength="100" class="form-control">
+                    <input type="hidden" name="@(Model + ".RegionBrId")" ng-model="m.RegionB.IdKey" ng-update-hidden />
+                </div>
+            </div>
+            <div class="col-xs-6" ng-show="l.RegionC.IsEnabled">
+                <br />
+                <label class="col-xs-5 control-label font-noraml">{{l.RegionC.Title}}:</label>
+                <div class="col-xs-7">
+                    <input type="text" name="@(Model + ".RegionC")" ng-model="m.RegionC.Value" ng-disabled="true"
+                           ng-maxlength="100" class="form-control">
+                    <input type="hidden" name="@(Model + ".RegionCrId")" ng-model="m.RegionC.IdKey" ng-update-hidden />
+                </div>
+            </div>
+            <div class="col-xs-6" ng-show="l.RegionD.IsEnabled">
+                <br />
+                <label class="col-xs-5 control-label font-noraml">{{l.RegionD.Title}}:</label>
+                <div class="col-xs-7">
+                    <input type="text" name="@(Model + ".RegionD")" ng-model="m.RegionD.Value" ng-disabled="true"
+                           ng-maxlength="100" class="form-control">
+                    <input type="hidden" name="@(Model + ".RegionDrId")" ng-model="m.RegionD.IdKey" ng-update-hidden />
                 </div>
             </div>
         </div>
         <div class="space-15"></div>
         <div class="row">
             <div class="col-xs-6">
-                <span class="col-xs-2"></span>
-                <label class="col-xs-3 control-label font-noraml">Calle:</label>
-                <div class="col-xs-6">
-                    <input type="text" id="MainAddress" name="@(Model + ".MainAddress")" ng-model="ad.m.MainAddress"
+                <label class="col-xs-5 control-label font-noraml">{{l.MainAddress.Title}}:</label>
+                <div class="col-xs-7">
+                    <input type="text" id="MainAddress" name="@(Model + ".MainAddress")" ng-model="m.MainAddress" ng-required="true"
                            ng-maxlength="200" class="form-control">
-                    <span class="error" ng-show="FormUpId.@(Model + ".MainAddress").$error.maxlength">*Longitud máxima de 200 caracteres</span>
+                    <span class="error" ng-show="FormCatId['@(Model + ".MainAddress")'].$error.required">*Campo requerido</span>
+                    <span class="error" ng-show="FormCatId['@(Model + ".MainAddress")'].$error.maxlength">*Longitud máxima de 200 caracteres</span>
                 </div>
             </div>
             <div class="col-xs-6">
-                <label class="col-xs-2 control-label font-noraml">Núm ext/int:</label>
-                <div class="col-xs-6">
-                    <input type="text" name="@(Model + ".InOutNumber")" ng-model="ad.m.InOutNumber"
+                <label class="col-xs-5 control-label font-noraml">{{l.NumExt.Title}}:</label>
+                <div class="col-xs-7">
+                    <input type="text" name="@(Model + ".NumExt")" ng-model="m.NumExt" ng-required="true"
                            ng-maxlength="20" class="form-control">
-                    <span class="error" ng-show="FormUpId.@(Model + ".InOutNumber").$error.maxlength">*Longitud máxima de 20 caracteres</span>
+                    <span class="error" ng-show="FormCatId['@(Model + ".NumExt")'].$error.required">*Campo requerido</span>
+                    <span class="error" ng-show="FormCatId['@(Model + ".NumExt")'].$error.maxlength">*Longitud máxima de 20 caracteres</span>
                 </div>
             </div>
-        </div>*@
+        </div>
     </div>
 </div>
 
