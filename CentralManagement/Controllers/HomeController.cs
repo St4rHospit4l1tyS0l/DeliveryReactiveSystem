@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity;
 
 namespace CentralManagement.Controllers
 {
-    [Authorize(Roles = RoleConstants.MANAGER + ", " + RoleConstants.INSTALLER)]
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

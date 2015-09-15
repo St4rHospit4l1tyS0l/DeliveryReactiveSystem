@@ -124,12 +124,13 @@
                         url: '@Url.Action("OffLineList", "Offline", new {area = "Store"})?id=' + rowId,
                         datatype: "json",
                         mtype: 'POST',
-                        colNames: ['ID', 'Fecha y hora inicial', 'Duración (minutos)', 'Fecha y hora final', 'Estado actual', 'Acción'],
+                        colNames: ['ID', 'Fecha y hora inicial', 'Duración (minutos)', 'Fecha y hora final', 'Usuario', 'Estado actual', 'Acción'],
                         colModel: [
                             { name: 'FranchiseStoreOffLineId', index: 'FranchiseStoreOffLineId', hidden: true },
                             { name: 'DateTimeStart', index: 'DateTimeStart', width: 300, align: "center", sorttype: 'string', search: false },
                             { name: 'Duration', index: 'Duration', width: 200, align: "center", sorttype: 'string', search: false },
                             { name: 'DateTimeEnd', index: 'DateTimeEnd', width: 300, align: "center", sorttype: 'string', search: false },
+                            { name: 'UserNameIns', index: 'UserNameIns', width: 300, align: "center", sorttype: 'string', search: false },
                             { name: 'State', index: 'State', width: 200, align: "left", sorttype: 'string', search: false },
                             { name: 'Action', width: 100, align: "center", sortable: false, search: false }
                         ],

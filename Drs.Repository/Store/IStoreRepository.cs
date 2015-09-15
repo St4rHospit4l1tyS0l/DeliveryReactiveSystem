@@ -26,5 +26,6 @@ namespace Drs.Repository.Store
         void Update(StoreUpModel model);
         FranchiseStore FindById(int id);
         void DoObsoleteStore(FranchiseStore store, string userId);
+        StoreOfflineDto IsStoreOnline(int idKey, DateTime utcDateTime);
     }
 }

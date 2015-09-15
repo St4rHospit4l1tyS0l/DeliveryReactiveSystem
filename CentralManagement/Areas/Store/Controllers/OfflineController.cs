@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using Drs.Infrastructure.JqGrid.Model;
 using Drs.Infrastructure.Resources;
@@ -25,9 +26,18 @@ namespace CentralManagement.Areas.Store.Controllers
 
         public ActionResult List(JqGridFilterModel opts)
         {
+            Expression<Func<ViewStoreInfo, bool>> extraFilter;
+            var userId = User.Identity.GetUserId();
+
+            if (User.IsInRole(RoleConstants.STORE_MANAGER))
+                extraFilter = (e => e.IsObsolete == false && e.ManagerUserId == userId);
+            else
+                extraFilter = (e => e.IsObsolete == false);
+
+
             using (var repository = new GenericRepository<ViewStoreInfo>())
             {
-                var result = repository.JqGridFindBy(opts, StoreInfoJson.Key, StoreInfoJson.Columns, (e => e.IsObsolete == false)
+                var result = repository.JqGridFindBy(opts, StoreInfoJson.Key, StoreInfoJson.Columns, extraFilter
                     , StoreInfoJson.DynamicToDto);
                 return Json(result);
             }
@@ -35,10 +45,19 @@ namespace CentralManagement.Areas.Store.Controllers
 
         public ActionResult OffLineList(JqGridFilterModel opts, int id)
         {
+            Expression<Func<FranchiseStoreOffLine, bool>> extraFilter;
+            var userId = User.Identity.GetUserId();
+
+            if (User.IsInRole(RoleConstants.STORE_MANAGER))
+                extraFilter = (e => e.FranchiseStoreId == id && e.IsObsolete == false && e.FranchiseStore.ManageUserId == userId);
+            else
+                extraFilter = (e => e.FranchiseStoreId == id && e.IsObsolete == false);
+
+            
             StoreOfflineInfoDto.UtcTime = DateTime.UtcNow;
             using (var repository = new GenericRepository<FranchiseStoreOffLine>())
             {
-                var result = repository.JqGridFindBy(opts, StoreOfflineInfoJson.Key, StoreOfflineInfoJson.Columns, (e => e.FranchiseStoreId == id && e.IsObsolete == false)
+                var result = repository.JqGridFindBy(opts, StoreOfflineInfoJson.Key, StoreOfflineInfoJson.Columns, extraFilter
                     , StoreOfflineInfoJson.DynamicToDto);
                 return Json(result);
             }

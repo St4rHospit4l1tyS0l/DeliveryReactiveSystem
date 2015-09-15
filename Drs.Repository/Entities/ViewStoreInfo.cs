@@ -20,6 +20,7 @@ namespace Drs.Repository.Entities
         public string Address { get; set; }
         public string WsAddress { get; set; }
         public string ManagerUser { get; set; }
+        public string ManagerUserId { get; set; }
         public bool IsObsolete { get; set; }
     }
 }

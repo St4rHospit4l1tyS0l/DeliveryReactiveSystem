@@ -523,6 +523,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewStoreInfo' does not have a prim
             <PropertyRef Name="FranchiseName" />
             <PropertyRef Name="WsAddress" />
             <PropertyRef Name="ManagerUser" />
+            <PropertyRef Name="ManagerUserId" />
             <PropertyRef Name="IsObsolete" />
           </Key>
           <Property Name="FranchiseStoreId" Type="int" Nullable="false" />
@@ -531,6 +532,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewStoreInfo' does not have a prim
           <Property Name="Address" Type="nvarchar" MaxLength="806" />
           <Property Name="WsAddress" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="ManagerUser" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ManagerUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="IsObsolete" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -1467,6 +1469,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
     [ViewStoreInfo].[Address] AS [Address], 
     [ViewStoreInfo].[WsAddress] AS [WsAddress], 
     [ViewStoreInfo].[ManagerUser] AS [ManagerUser], 
+    [ViewStoreInfo].[ManagerUserId] AS [ManagerUserId], 
     [ViewStoreInfo].[IsObsolete] AS [IsObsolete]
     FROM [dbo].[ViewStoreInfo] AS [ViewStoreInfo]</DefiningQuery>
           </EntitySet>
@@ -2070,7 +2073,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
           </AssociationSet>
-          <EntitySet Name="ViewStoreInfo" EntityType="CallCenterModel.ViewStoreInfo" />
           <EntitySet Name="FranchiseStoreOffLine" EntityType="CallCenterModel.FranchiseStoreOffLine" />
           <AssociationSet Name="FK_FranchiseStoreOffLine_AspNetUsers" Association="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2084,6 +2086,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
             <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
           </AssociationSet>
+          <EntitySet Name="ViewStoreInfo" EntityType="CallCenterModel.ViewStoreInfo" />
           </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -3436,23 +3439,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ViewStoreInfo">
-          <Key>
-            <PropertyRef Name="FranchiseStoreId" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="FranchiseName" />
-            <PropertyRef Name="WsAddress" />
-            <PropertyRef Name="ManagerUser" />
-            <PropertyRef Name="IsObsolete" />
-          </Key>
-          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="FranchiseName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="806" FixedLength="false" Unicode="true" />
-          <Property Name="WsAddress" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="ManagerUser" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="FranchiseStoreOffLine">
           <Key>
             <PropertyRef Name="FranchiseStoreOffLineId" />
@@ -3505,6 +3491,25 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ViewStoreInfo">
+          <Key>
+            <PropertyRef Name="FranchiseStoreId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="FranchiseName" />
+            <PropertyRef Name="WsAddress" />
+            <PropertyRef Name="ManagerUser" />
+            <PropertyRef Name="ManagerUserId" />
+            <PropertyRef Name="IsObsolete" />
+          </Key>
+          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FranchiseName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="806" FixedLength="false" Unicode="true" />
+          <Property Name="WsAddress" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerUser" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4060,19 +4065,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               <ScalarProperty Name="FranchisePhoneId" ColumnName="FranchisePhoneId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="ViewStoreInfo">
-            <EntityTypeMapping TypeName="CallCenterModel.ViewStoreInfo">
-              <MappingFragment StoreEntitySet="ViewStoreInfo">
-                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
-                <ScalarProperty Name="ManagerUser" ColumnName="ManagerUser" />
-                <ScalarProperty Name="WsAddress" ColumnName="WsAddress" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="FranchiseName" ColumnName="FranchiseName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FranchiseStoreOffLine">
             <EntityTypeMapping TypeName="CallCenterModel.FranchiseStoreOffLine">
               <MappingFragment StoreEntitySet="FranchiseStoreOffLine">
@@ -4084,6 +4076,20 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="DateTimeStart" ColumnName="DateTimeStart" />
                 <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
                 <ScalarProperty Name="FranchiseStoreOffLineId" ColumnName="FranchiseStoreOffLineId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewStoreInfo">
+            <EntityTypeMapping TypeName="CallCenterModel.ViewStoreInfo">
+              <MappingFragment StoreEntitySet="ViewStoreInfo">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+                <ScalarProperty Name="ManagerUser" ColumnName="ManagerUser" />
+                <ScalarProperty Name="WsAddress" ColumnName="WsAddress" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FranchiseName" ColumnName="FranchiseName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

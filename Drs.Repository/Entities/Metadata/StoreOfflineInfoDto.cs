@@ -36,5 +36,7 @@ namespace Drs.Repository.Entities.Metadata
                 return "ONL";
             }
         }
+
+        public string UserNameIns { get; set; }
     }
 }

@@ -80,7 +80,7 @@ namespace CentralManagement.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return Json(new ResponseMsg { IsSuccess = true, Message = ViewBag.errorMessage, UrlToGo = Url.Action("Index", "Home") });
+                    return Json(new ResponseMsg { IsSuccess = true, Message = ViewBag.errorMessage, UrlToGo = Url.Action("Index", "Home", new{ area = ""}) });
                     //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return Json(new ResponseMsg { IsSuccess = false, Message = "Cuenta desactivada" });
@@ -246,8 +246,11 @@ namespace CentralManagement.Controllers
         [HttpGet]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            //AuthenticationManager.SignOut();
+            //return RedirectToAction("Index", "Home");
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie, DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
+            Session.Abandon();
+            return RedirectToAction("Login", "Account", new { area = "" });
         }
         protected override void Dispose(bool disposing)
         {

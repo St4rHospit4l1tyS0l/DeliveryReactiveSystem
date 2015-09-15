@@ -62,25 +62,17 @@ namespace ConnectCallCenter.Hubs
         {
             try
             {
-                var store = AppInit.Container.Resolve<IStoreService>().StoreAvailableForAddress(model);
+                var response = new ResponseMessageData<StoreModel>();
 
-                if (store == null)
-                {
-                    return new ResponseMessageData<StoreModel>
-                    {
-                        IsSuccess = false,
-                        Message = "No hay una tienda disponible en la dirección que seleccionó"
-                    };
-                }
 
-                //TODO
-                //AppInit.Container.Resolve<IStoreService>().StoreHasOnlineAndCapacity(store);
+                AppInit.Container.Resolve<IStoreService>().StoreAvailableForAddress(model, response);
 
-                return new ResponseMessageData<StoreModel>
-                {
-                    IsSuccess = true,
-                    Data = store,
-                };
+                
+
+                ////TODO
+                ////AppInit.Container.Resolve<IStoreService>().IsStoreOnline(store);
+
+                return response;
             }
             catch (Exception ex)
             {

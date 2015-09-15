@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Drs.Infrastructure.Extensions.Classes;
 using Drs.Infrastructure.Extensions.Json;
 using Drs.Infrastructure.Model;
-using Drs.Model.Address;
 using Drs.Model.Constants;
 using Drs.Model.Franchise;
 using Drs.Model.Order;
@@ -459,20 +458,37 @@ namespace Drs.Service.Store
             }
         }
 
-        public StoreModel StoreAvailableForAddress(StoreAvailableModel model)
+        public void StoreAvailableForAddress(StoreAvailableModel model, ResponseMessageData<StoreModel> response)
         {
             using (_repositoryStore)
             {
                 int franchiseId;
                 var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model.FranchiseCode,
                     model.AddressInfo, out franchiseId);
-                return store;
-            }
-        }
 
-        public void StoreHasOnlineAndCapacity(StoreModel model)
-        {
-            throw new NotImplementedException();
+                if (store == null || store.IdKey.HasValue == false)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "No hay una tienda disponible en la dirección que seleccionó";
+                    return;
+                }
+
+                var utcDateTime = DateTime.UtcNow;
+
+                var offline = _repositoryStore.IsStoreOnline(store.IdKey.Value, utcDateTime);
+                if (offline == null)
+                {
+                    response.IsSuccess = true;
+                    response.Data = store;
+                    return;
+                }
+
+                response.IsSuccess = false;
+                response.Message = String.Format("La tienda {0} no está en línea en estos momentos. Fuera de línea hasta {1}", store.Value, 
+                    offline.DateTimeEnd.ToLocalTime().ToString(SharedConstants.DATE_TIME_FORMAT));
+
+
+            }
         }
 
         private ResponseMessage DoCancelOrder(long atoOrderId, FranchiseStoreWsInfo fsInfo)

@@ -7,8 +7,16 @@ namespace Drs.Infrastructure.Extensions
     {
         public static string PropertyName<TModel, TProperty>(this TModel model, Expression<Func<TModel, TProperty>> expression)
         {
-            var body = expression.Body as MemberExpression;
-            return body == null ? string.Empty : body.Member.Name;
+            var member = expression.Body as MemberExpression;
+            var name = String.Empty;
+            while (member != null)
+            {
+                name = (name == String.Empty) ? member.Member.Name : member.Member.Name + "." + name;
+
+                member = member.Expression as MemberExpression;
+            }
+
+            return name;
         }
         
         public static string GetMemberName<T>(

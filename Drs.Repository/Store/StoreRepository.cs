@@ -266,6 +266,15 @@ namespace Drs.Repository.Store
             DbEntities.SaveChanges();
         }
 
+        public StoreOfflineDto IsStoreOnline(int idKey, DateTime utcDateTime)
+        {
+            return DbEntities.FranchiseStoreOffLine.Where(e => e.FranchiseStoreId == idKey &&  utcDateTime >= e.DateTimeStart && utcDateTime <= e.DateTimeEnd)
+                .Select(e => new StoreOfflineDto
+                {
+                    DateTimeEnd = e.DateTimeEnd
+                }).FirstOrDefault();
+        }
+
 
         public void SaveRecurrence(Recurrence recurrence)
         {

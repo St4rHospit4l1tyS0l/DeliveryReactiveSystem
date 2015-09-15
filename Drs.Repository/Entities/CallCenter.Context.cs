@@ -68,7 +68,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<OrderToStore> OrderToStore { get; set; }
         public virtual DbSet<CatDeliveryStatus> CatDeliveryStatus { get; set; }
         public virtual DbSet<FranchiseStore> FranchiseStore { get; set; }
-        public virtual DbSet<ViewStoreInfo> ViewStoreInfo { get; set; }
         public virtual DbSet<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
+        public virtual DbSet<ViewStoreInfo> ViewStoreInfo { get; set; }
     }
 }

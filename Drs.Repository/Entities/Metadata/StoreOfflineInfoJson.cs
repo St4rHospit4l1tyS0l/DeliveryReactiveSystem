@@ -16,6 +16,7 @@ namespace Drs.Repository.Entities.Metadata
             _modelEnt.PropertyName(e => e.DateTimeStart),
             _modelEnt.PropertyName(e => e.Duration),
             _modelEnt.PropertyName(e => e.DateTimeEnd),
+            _modelEnt.PropertyName(e => e.AspNetUsers.UserName)
         });
 
         public static StoreOfflineInfoDto DynamicToDto(dynamic data)
@@ -26,6 +27,7 @@ namespace Drs.Repository.Entities.Metadata
                 DateTimeStartInfo = data.DateTimeStart,
                 Duration = data.Duration,
                 DateTimeEndInfo = data.DateTimeEnd,
+                UserNameIns = data.UserName,
             };
 
             return model;
