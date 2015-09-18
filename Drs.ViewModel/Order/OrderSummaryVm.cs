@@ -109,7 +109,7 @@ namespace Drs.ViewModel.Order
             }
             else
             {
-                OnItemChanged(StoreView, SharedConstants.Client.RECORD_SAVED, String.Format("{0} - {1}", obj.Value, obj.MainAddress));
+                OnItemChanged(StoreView, SharedConstants.Client.RECORD_SAVED, String.Format("{0} - {1}{2}{3}", obj.Value, obj.MainAddress, Environment.NewLine, obj.ExtraMsg));
             }
         }
 

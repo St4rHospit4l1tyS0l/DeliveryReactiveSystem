@@ -14,7 +14,7 @@ namespace ConnectCallCenter.Hubs
     public class TrackHub : Hub
     {
         [HubMethodName(SharedConstants.Server.SEARCH_BY_PHONE_TRACK_HUB_METHOD)]
-        public ResponseMessageData<TrackOrderDto> SearchByPhone(String phone)
+        public ResponseMessageData<TrackOrderDto> SearchByPhone(PagerDto<String> phone)
         {
             try
             {
@@ -22,7 +22,8 @@ namespace ConnectCallCenter.Hubs
                 return new ResponseMessageData<TrackOrderDto>
                 {
                     IsSuccess = true,
-                    LstData = lstData
+                    LstData = lstData,
+                    Pager = phone.Pager
                 };
             }
             catch (Exception ex)
@@ -36,14 +37,15 @@ namespace ConnectCallCenter.Hubs
         }
 
         [HubMethodName(SharedConstants.Server.SEARCH_BY_CLIENTNAME_TRACK_HUB_METHOD)]
-        public ResponseMessageData<TrackOrderDto> SearchByClientName(String clientName)
+        public ResponseMessageData<TrackOrderDto> SearchByClientName(PagerDto<String> clientName)
         {
             try
             {
                 return new ResponseMessageData<TrackOrderDto>
                 {
                     IsSuccess = true,
-                    LstData = AppInit.Container.Resolve<ITrackService>().SearchByClientName(clientName)
+                    LstData = AppInit.Container.Resolve<ITrackService>().SearchByClientName(clientName),
+                    Pager = clientName.Pager
                 };
             }
             catch (Exception ex)

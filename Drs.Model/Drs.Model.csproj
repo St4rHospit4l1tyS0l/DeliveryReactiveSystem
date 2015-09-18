@@ -153,6 +153,8 @@
     <Compile Include="Shared\AccountConstants.cs" />
     <Compile Include="Shared\ItemCatalog.cs" />
     <Compile Include="Shared\OptionModel.cs" />
+    <Compile Include="Shared\PagerDto.cs" />
+    <Compile Include="Shared\PagerModel.cs" />
     <Compile Include="Shared\ResponseMsg.cs" />
     <Compile Include="Shared\ControlInfoModel.cs" />
     <Compile Include="Shared\AddressControlSetting.cs" />
@@ -167,6 +169,7 @@
     <Compile Include="Store\StoreOfflineDto.cs" />
     <Compile Include="Store\StoreOfflineModel.cs" />
     <Compile Include="Store\StoreUpModel.cs" />
+    <Compile Include="Track\PagerCacheInfo.cs" />
     <Compile Include="Track\TrackOrderDetailDto.cs" />
     <Compile Include="Track\TrackOrderDto.cs" />
     <Compile Include="UiView\Shared\StatusScreen.cs" />

@@ -5,6 +5,7 @@ using System.ServiceModel;
 using System.Threading;
 using Drs.Model.Order;
 using Drs.Model.Settings;
+using Drs.Model.Shared;
 using Drs.Model.Track;
 using Drs.Repository.Store;
 using Drs.Repository.Track;
@@ -21,7 +22,7 @@ namespace Drs.Service.Track
             _trackRepository = trackRepository;
         }
 
-        public IList<TrackOrderDto> SearchByPhone(string phone)
+        public IList<TrackOrderDto> SearchByPhone(PagerDto<String> phone)
         {
             using (_trackRepository)
             {
@@ -29,7 +30,7 @@ namespace Drs.Service.Track
             }
         }
 
-        public IEnumerable<TrackOrderDto> SearchByClientName(string clientName)
+        public IEnumerable<TrackOrderDto> SearchByClientName(PagerDto<string> clientName)
         {
             using (_trackRepository)
             {

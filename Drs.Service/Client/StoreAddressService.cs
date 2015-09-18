@@ -100,6 +100,8 @@ namespace Drs.Service.Client
             }
 
             OrderService.OrderModel.StoreModel = dataResp;
+            OrderService.OrderModel.StoreModel.ExtraMsg = obj.Data.Message;
+
 
             OnStoreSelected(dataResp, null);
         }

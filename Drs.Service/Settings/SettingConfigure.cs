@@ -17,7 +17,9 @@ namespace Drs.Service.Settings
             SettingsData.Client.MinLengthPhone = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.MIN_LENGTH_PHONE, 5);
             SettingsData.Client.UserAlohaPosId = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.USER_ALOHA_POS_ID, 999);
             SettingsData.Client.JobAlohaPosId = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.JOB_ALOHA_POS_ID, 4);
+            SettingsData.Client.RowsSizeGrids = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.ROWS_SIZE_GRIDS, 10);
             
+
             SettingsData.Language = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.SYSTEM, SettingsData.Constants.SystemConst.LANGUAGE, 1);
             SettingsData.FirstRegion = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.SYSTEM, SettingsData.Constants.Control.CONTROL_FIRST_ADDRESS, SettingsData.Constants.Control.CONTROL_COUNTRY);
             SettingsData.LastRegion = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.SYSTEM, SettingsData.Constants.Control.CONTROL_LAST_ADDRESS, SettingsData.Constants.Control.CONTROL_REGION_C);

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:view="clr-namespace:Drs.Ui.Ui.Shared"
+             xmlns:vm="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="1024" HorizontalAlignment="Stretch" Margin="20,0,20,10">
     <UserControl.Resources>
@@ -16,12 +17,12 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource WhiteColor}"  />
             <CollectionViewSource x:Key="LstItemsKey" Source="{Binding LstItems}">
             </CollectionViewSource>
+            <DataTemplate DataType="{x:Type vm:PagerVm}">
+                <view:PagerUc/>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
-        <StackPanel Margin="10 0 10 5" Orientation="Vertical">
-            <Label Content="{Binding TotalFound}" FontSize="11" HorizontalAlignment="Right" Foreground="{DynamicResource AccentColorBrush}" HorizontalContentAlignment="Right" FontWeight="Bold"/>
-        </StackPanel>
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource AccentColorBrush}">
             <Rectangle Width="25" Margin="10,0,10,0" Height="25" HorizontalAlignment="Center" Fill="#FFF" >
                 <Rectangle.OpacityMask >
@@ -34,7 +35,7 @@
         <Grid HorizontalAlignment="Stretch">
             <DataGrid x:Name="ItemDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="250"
                   ItemsSource="{Binding Source={StaticResource LstItemsKey}}" SelectionMode="Single"
-                  SelectedItem="{Binding ItemSelection}"
+                  SelectedItem="{Binding ItemSelection}" MinHeight="320"
                   AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Detalles" MinWidth="70">
@@ -66,7 +67,7 @@
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_cancel}" />
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
-                                        </Button> 
+                                        </Button>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
@@ -139,5 +140,8 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#9B9B9B" Margin="0,10,0,5"></Rectangle>
+        <ContentControl  Content="{Binding Pager}" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                    HorizontalAlignment="Left" Margin="0, 0, 0, 0" ></ContentControl>
     </StackPanel>
 </UserControl>

@@ -458,7 +458,7 @@ namespace Drs.Service.Store
             }
         }
 
-        public void StoreAvailableForAddress(StoreAvailableModel model, ResponseMessageData<StoreModel> response)
+        public StoreModel StoreAvailableForAddress(StoreAvailableModel model, ResponseMessageData<StoreModel> response)
         {
             using (_repositoryStore)
             {
@@ -470,7 +470,7 @@ namespace Drs.Service.Store
                 {
                     response.IsSuccess = false;
                     response.Message = "No hay una tienda disponible en la dirección que seleccionó";
-                    return;
+                    return null;
                 }
 
                 var utcDateTime = DateTime.UtcNow;
@@ -480,14 +480,50 @@ namespace Drs.Service.Store
                 {
                     response.IsSuccess = true;
                     response.Data = store;
-                    return;
+                    return store;
                 }
 
                 response.IsSuccess = false;
                 response.Message = String.Format("La tienda {0} no está en línea en estos momentos. Fuera de línea hasta {1}", store.Value, 
                     offline.DateTimeEnd.ToLocalTime().ToString(SharedConstants.DATE_TIME_FORMAT));
 
+                return null;
+            }
+        }
 
+        public void GetPreparationTime(string wsAddress, ResponseMessageData<StoreModel> response)
+        {
+            using (var client = new CustomerOrderClient(new BasicHttpBinding(), new EndpointAddress(wsAddress + SettingsData.Constants.StoreOrder.WsQueryFunction)))
+            {
+                var iTries = 0;
+                while (iTries < 3)
+                {
+                    try
+                    {
+                        var result = client.GetPreparationTime();
+                        if (response.IsSuccess)
+                        {
+                            response.IsSuccess = true;
+                            response.Message = String.Format("Entrega {0} mins", result.PrepTime);
+                            return;
+                        }
+
+                        response.IsSuccess = false;
+                        response.Message = result.ExcMsg;
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        SharedLogger.LogError(ex);
+                    }
+                    Thread.Sleep(new Random().Next(50, 300));
+                    iTries++;
+                }
+
+                client.Close();
+
+                response.IsSuccess = false;
+                response.Message = "No fue posible comunicarse a la tienda para obtener el tiempo de preparación ";
             }
         }
 

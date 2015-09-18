@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
@@ -21,15 +20,20 @@ namespace Drs.ViewModel.Track
     public class OrdersListVm : UcViewModelBase, IOrdersListVm
     {
         private readonly IReactiveDeliveryClient _client;
-        private string _totalFound;
 
-        public OrdersListVm(IReactiveDeliveryClient client)
+        private IPagerVm _pager;
+        private readonly PagerCacheInfo _pagerCache = new PagerCacheInfo();
+        
+        public OrdersListVm(IReactiveDeliveryClient client, IPagerVm pager)
         {
             _client = client;
             LstItems = new ReactiveList<TrackOrderDto>();
+            Pager = pager;
+            Pager.PagerChanged += PagerOnPagerChanged;
             CmdShowDetail = ReactiveCommand.CreateAsyncTask(Observable.Return(true), DoShowDetail);
             CmdCancelOrder = ReactiveCommand.CreateAsyncTask(Observable.Return(true), DoCancelOrder);
         }
+
 
         private async Task<Unit> DoCancelOrder(object o)
         {
@@ -144,25 +148,53 @@ namespace Drs.ViewModel.Track
 
         public void OnPhoneChanged(String phone)
         {
+            _pagerCache.SearchValue = phone;
+            _pagerCache.SearchType = SettingsData.Constants.TrackConst.SEARCH_BY_PHONE;
+            Pager.Reset();
+            GetResultByPhone();
+        }
+
+        private void GetResultByPhone()
+        {
             OnStatusChanged(SettingsData.Constants.TrackConst.SEARCH_ORDERLIST_ON_PROGRESS, "Buscando pedidos...");
 
-            _client.ExecutionProxy.ExecuteRequest<String, String, ResponseMessageData<TrackOrderDto>, ResponseMessageData<TrackOrderDto>>
-                            (phone, TransferDto.SameType, SharedConstants.Server.TRACK_HUB,
-                                SharedConstants.Server.SEARCH_BY_PHONE_TRACK_HUB_METHOD, TransferDto.SameType)
-                                .Subscribe(OnResultSearchOk, OnResultSearchError);
+            var pagerDto = new PagerDto<string>
+            {
+                Data = _pagerCache.SearchValue,
+                Pager = Pager.PagerModel,
+            };
 
+            _client.ExecutionProxy.ExecuteRequest<PagerDto<String>, PagerDto<String>, ResponseMessageData<TrackOrderDto>, ResponseMessageData<TrackOrderDto>>
+                (pagerDto, TransferDto.SameType, SharedConstants.Server.TRACK_HUB,
+                    SharedConstants.Server.SEARCH_BY_PHONE_TRACK_HUB_METHOD, TransferDto.SameType)
+                .Subscribe(OnResultSearchOk, OnResultSearchError);
         }
 
 
         public void OnClientNameChanged(string clientName)
         {
+            _pagerCache.SearchValue = clientName;
+            _pagerCache.SearchType = SettingsData.Constants.TrackConst.SEARCH_BY_CLIENTNAME;
+            Pager.Reset();
+            GetResultByClientName();
+
+
+        }
+
+        private void GetResultByClientName()
+        {
             OnStatusChanged(SettingsData.Constants.TrackConst.SEARCH_ORDERLIST_ON_PROGRESS, "Buscando pedidos...");
 
-            _client.ExecutionProxy.ExecuteRequest<String, String, ResponseMessageData<TrackOrderDto>, ResponseMessageData<TrackOrderDto>>
-                            (clientName, TransferDto.SameType, SharedConstants.Server.TRACK_HUB,
-                                SharedConstants.Server.SEARCH_BY_CLIENTNAME_TRACK_HUB_METHOD, TransferDto.SameType)
-                                .Subscribe(OnResultSearchOk, OnResultSearchError);
+            var pagerDto = new PagerDto<string>
+            {
+                Data = _pagerCache.SearchValue,
+                Pager = Pager.PagerModel,
+            };
 
+            _client.ExecutionProxy.ExecuteRequest<PagerDto<string>, PagerDto<string>, ResponseMessageData<TrackOrderDto>, ResponseMessageData<TrackOrderDto>>
+                    (pagerDto, TransferDto.SameType, SharedConstants.Server.TRACK_HUB,
+                        SharedConstants.Server.SEARCH_BY_CLIENTNAME_TRACK_HUB_METHOD, TransferDto.SameType)
+                        .Subscribe(OnResultSearchOk, OnResultSearchError);
         }
 
         private void OnResultSearchError(Exception ex)
@@ -177,27 +209,30 @@ namespace Drs.ViewModel.Track
 
         private void OnResultSearchOk(IStale<ResponseMessageData<TrackOrderDto>> obj)
         {
-            if (obj.IsStale)
+            if (obj.IsStale || obj.Data == null)
             {
                 OnResultSearchError(Resources.Network.ResNetwork.ERROR_NETWORK_DOWN);
                 return;
             }
 
-            if (obj.Data.IsSuccess == false)
+            var data = obj.Data;
+
+            if (data.IsSuccess == false)
             {
-                OnResultSearchError(obj.Data.Message);
+                OnResultSearchError(data.Message);
                 return;
             }
+
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
                 LstItems.Clear();
-                TotalFound = String.Format("Se ha(n) encontrado {0} registro(s)", obj.Data.LstData.Count());
-
-                foreach (var dto in obj.Data.LstData)
+                foreach (var dto in data.LstData)
                 {
                     LstItems.Add(dto);
                 }
+
+                Pager.SetPager(data.Pager);
             });
 
             OnStatusChanged(SettingsData.Constants.TrackConst.SEARCH_ORDERLIST_OK, String.Empty);
@@ -209,13 +244,13 @@ namespace Drs.ViewModel.Track
 
         public IReactiveCommand<Unit> CmdShowDetail { get; set; }
         public IReactiveCommand<Unit> CmdCancelOrder { get; set; }
-
-        public string TotalFound
+         
+        public IPagerVm Pager
         {
-            get { return _totalFound; }
+            get { return _pager; }
             set
             {
-                this.RaiseAndSetIfChanged(ref _totalFound, value);
+                this.RaiseAndSetIfChanged(ref _pager, value);
             }
         }
 
@@ -223,6 +258,24 @@ namespace Drs.ViewModel.Track
         {
             var handler = StatusChanged;
             if (handler != null) handler(iStatus, sMsg);
+        }
+
+        private void PagerOnPagerChanged()
+        {
+            switch (_pagerCache.SearchType)
+            {
+                case SettingsData.Constants.TrackConst.SEARCH_BY_PHONE:
+                    GetResultByPhone();
+                    break;
+
+                case SettingsData.Constants.TrackConst.SEARCH_BY_CLIENTNAME:
+                    GetResultByClientName();
+                    break;
+
+                default:
+                    return;
+
+            }
         }
     }
 }

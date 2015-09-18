@@ -224,6 +224,9 @@
     <Compile Include="Ui\Shared\MsgWndUc.xaml.cs">
       <DependentUpon>MsgWndUc.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ui\Shared\PagerUc.xaml.cs">
+      <DependentUpon>PagerUc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ui\Splash\SplashWnd.xaml.cs">
       <DependentUpon>SplashWnd.xaml</DependentUpon>
     </Compile>
@@ -332,6 +335,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\Shared\MsgWndUc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ui\Shared\PagerUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -129,6 +129,8 @@
     </Compile>
     <Compile Include="Setting\SettingConfigureWs.cs" />
     <Compile Include="Shared\IMsgWndVm.cs" />
+    <Compile Include="Shared\PagerVm.cs" />
+    <Compile Include="Track\IOrderDetailVm.cs" />
     <Compile Include="Shared\IWizItem.cs" />
     <Compile Include="Order\OrderSummaryVm.cs" />
     <Compile Include="Order\IOrderSummaryVm.cs" />
@@ -166,7 +168,7 @@
     <Compile Include="Shared\SplashVm.cs" />
     <Compile Include="SignalR\Hubs\PosReceiverHub.cs" />
     <Compile Include="SignalR\Startup.cs" />
-    <Compile Include="Track\IOrderDetailVm.cs" />
+    <Compile Include="Shared\IPagerVm.cs" />
     <Compile Include="Track\OrderDetailVm.cs" />
     <Compile Include="Track\OrdersListVm.cs" />
     <Compile Include="Track\IOrdersListVm.cs" />

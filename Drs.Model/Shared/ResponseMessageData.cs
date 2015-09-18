@@ -14,5 +14,6 @@ namespace Drs.Model.Shared
         public IEnumerable<TModel> LstData { get; set; }
         public TModel Data { get; set; }
         public string Message { get; set; }
+        public PagerModel Pager { get; set; }
     }
 }

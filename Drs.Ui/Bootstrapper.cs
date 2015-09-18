@@ -59,7 +59,8 @@ namespace Drs.Ui
             builder.RegisterType<TrackOrderVm>().As<ITrackOrderVm>().ExternallyOwned();
             builder.RegisterType<SearchTrackOrderVm>().As<ISearchTrackOrderVm>().ExternallyOwned();
             builder.RegisterType<OrdersListVm>().As<IOrdersListVm>().ExternallyOwned();
-            builder.RegisterType<OrderDetailVm>().As<IOrderDetailVm>().ExternallyOwned();            
+            builder.RegisterType<OrderDetailVm>().As<IOrderDetailVm>().ExternallyOwned();
+            builder.RegisterType<PagerVm>().As<IPagerVm>().ExternallyOwned();
 
             builder.RegisterType<ShellContainerVm>().As<IShellContainerVm>().ExternallyOwned();
         }

@@ -9,6 +9,7 @@ namespace Drs.Service.Store
     {
         ResponseMessageData<OrderModelDto> SendOrderToStore(OrderModelDto model, IHubCallerConnectionContext<dynamic> clients);
         ResponseMessage CancelOrder(long orderToStoreId);
-        void StoreAvailableForAddress(StoreAvailableModel model, ResponseMessageData<StoreModel> response);
+        StoreModel StoreAvailableForAddress(StoreAvailableModel model, ResponseMessageData<StoreModel> response);
+        void GetPreparationTime(string wsAddress, ResponseMessageData<StoreModel> response);
     }
 }

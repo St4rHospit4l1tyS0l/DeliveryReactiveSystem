@@ -54,24 +54,23 @@ namespace Drs.ViewModel.Track
 
         private bool ValidateModel(ListItemModel model)
         {
-            var valur = model.Value;
-            if (String.IsNullOrWhiteSpace(valur))
+            if (String.IsNullOrWhiteSpace(model.Value))
                 return false;
+            //if(valur.Trim().Length >= SettingsData.Client.MinLengthPhone)
+            //    return true;
 
-            if(valur.Trim().Length >= SettingsData.Client.MinLengthPhone)
-                return true;
-
-            MessageBus.Current.SendMessage(new MessageBoxSettings
-            {
-                Message = String.Format("Debe ingresar al menos {0} caracteres", SettingsData.Client.MinLengthPhone),
-                Title = "Rastreo de pedidos",
-            }, SharedMessageConstants.MSG_SHOW_ERRQST);
-            return false;
+            //MessageBus.Current.SendMessage(new MessageBoxSettings
+            //{
+            //    Message = String.Format("Debe ingresar al menos {0} caracteres", SettingsData.Client.MinLengthPhone),
+            //    Title = "Rastreo de pedidos",
+            //}, SharedMessageConstants.MSG_SHOW_ERRQST);
+            return true;
 
         }
 
         private void ExecuteSearchPhone(string phoneSearch)
         {
+            NameSearchVm.Search = String.Empty;
             _client.ExecutionProxy
                 .ExecuteRequest
                 <String, String, ResponseMessageData<ListItemModel>, ResponseMessageData<ListItemModel>>
@@ -83,6 +82,7 @@ namespace Drs.ViewModel.Track
 
         private void ExecuteSearchClientName(string clientNameSearch)
         {
+            PhoneSearchVm.Search = String.Empty;
             _client.ExecutionProxy
                 .ExecuteRequest
                 <String, String, ResponseMessageData<ListItemModel>, ResponseMessageData<ListItemModel>>

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Drs.Model.Order;
+using Drs.Model.Shared;
 using Drs.Model.Track;
 using Drs.Repository.Shared;
 
@@ -8,10 +10,9 @@ namespace Drs.Repository.Track
 {
     public class TrackRepository : BaseOneRepository, ITrackRepository
     {
-        public IList<TrackOrderDto> SearchByPhone(string phone)
+        public IList<TrackOrderDto> SearchByPhone(PagerDto<String> phone)
         {
-            return DbEntities.OrderToStore.Where(e => e.OrderAtoId != null && e.ClientPhone.Phone.Contains(phone))
-                .OrderByDescending(e => e.OrderToStoreId).Take(1500)
+            var query = DbEntities.OrderToStore.Where(e => e.OrderAtoId != null && e.ClientPhone.Phone.Contains(phone.Data))
                 .Select(e => new TrackOrderDto
                 {
                     OrderToStoreId = e.OrderToStoreId,
@@ -24,14 +25,17 @@ namespace Drs.Repository.Track
                     OrderTotal = e.PosOrder.Total,
                     LastStatus = e.LastStatus,
                     IsCanceled = e.IsCanceled
-                }).ToList();
+                });
+
+            phone.Pager.Total = query.Count();
+            return query.OrderByDescending(e => e.OrderToStoreId).Skip(phone.Pager.SkipRow).Take(phone.Pager.Size).ToList();
         }
 
-        public IList<TrackOrderDto> SearchByClientName(string clientName)
+        public IList<TrackOrderDto> SearchByClientName(PagerDto<string> clientName)
         {
-            return DbEntities.OrderToStore.Where(e => e.OrderAtoId != null &&
-                (e.Client.FirstName.Contains(clientName) || e.Client.LastName.Contains(clientName) || e.Client.FirstName + " " + e.Client.LastName == clientName))
-                .OrderByDescending(e => e.OrderToStoreId).Take(1500)
+            var data = clientName.Data;
+            var query = DbEntities.OrderToStore.Where(e => e.OrderAtoId != null &&
+                (e.Client.FirstName.Contains(data) || e.Client.LastName.Contains(data) || (e.Client.FirstName + " " + e.Client.LastName).Contains(data)))
                 .Select(e => new TrackOrderDto
                 {
                     OrderToStoreId = e.OrderToStoreId,
@@ -44,7 +48,11 @@ namespace Drs.Repository.Track
                     OrderTotal = e.PosOrder.Total,
                     LastStatus = e.LastStatus,
                     IsCanceled = e.IsCanceled
-                }).ToList();
+                });
+            
+            clientName.Pager.Total = query.Count();
+            
+            return query.OrderByDescending(e => e.OrderToStoreId).Skip(clientName.Pager.SkipRow).Take(clientName.Pager.Size).ToList();
         }
 
         public TrackOrderDetailDto ShowDetailByOrderId(long orderId)

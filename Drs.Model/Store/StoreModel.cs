@@ -8,5 +8,6 @@ namespace Drs.Model.Store
         public string MainAddress { get; set; }
         public List<string> LstPhones { get; set; }
         public string WsAddress { get; set; }
+        public string ExtraMsg { get; set; }
     }
 }

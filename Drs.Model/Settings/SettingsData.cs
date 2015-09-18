@@ -64,6 +64,7 @@ namespace Drs.Model.Settings
                 public const string USER_ALOHA_POS_ID = "USER_ALOHA_POS_ID";
                 public const string TOTAL_SECONDS_TO_LOGOUT = "TOTAL_SECONDS_TO_LOGOUT";
                 public const string MIN_LENGTH_PHONE = "MIN_LENGTH_PHONE";
+                public const string ROWS_SIZE_GRIDS = "ROWS_SIZE_GRIDS";
             }
 
             public static class Control
@@ -134,6 +135,8 @@ namespace Drs.Model.Settings
 
             public class TrackConst
             {
+                public const int SEARCH_BY_CLIENTNAME = 2100;
+                public const int SEARCH_BY_PHONE = 3100;
                 public const int SECONDS_TO_ASK_FOR_STATUS_ORDER = 180;
                 public const int SEARCH_ORDERLIST_ON_PROGRESS = 3100;
                 public const int SEARCH_ORDERLIST_READY = 3101;
@@ -184,6 +187,7 @@ namespace Drs.Model.Settings
             public static double SencondsToDetectStale = 70;
             public static int UserAlohaPosId = 999;
             public static int JobAlohaPosId = 4;
+            public static int RowsSizeGrids = 10;
         }
 
         public static int Language = 1;

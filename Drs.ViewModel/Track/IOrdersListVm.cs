@@ -11,12 +11,12 @@ namespace Drs.ViewModel.Track
         event Action<int, string> StatusChanged;
 
         event Action<long> ShowDetail;
-        void OnPhoneChanged(string phone);
-        string TotalFound { get; set; }
+        void OnPhoneChanged(string phone);        
         void OnClientNameChanged(string obj);
         IReactiveList<TrackOrderDto> LstItems { get; set; }
         IReactiveCommand<Unit> CmdShowDetail { get; set; }
         IReactiveCommand<Unit> CmdCancelOrder { get; set; }
-        
+        IPagerVm Pager { get; set; }
+
     }
 }
