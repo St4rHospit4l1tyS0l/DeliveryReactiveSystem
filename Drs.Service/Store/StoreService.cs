@@ -493,7 +493,7 @@ namespace Drs.Service.Store
 
         public void GetPreparationTime(string wsAddress, ResponseMessageData<StoreModel> response)
         {
-            using (var client = new CustomerOrderClient(new BasicHttpBinding(), new EndpointAddress(wsAddress + SettingsData.Constants.StoreOrder.WsQueryFunction)))
+            using (var client = new CustomerOrderClient(new BasicHttpBinding(), new EndpointAddress(wsAddress + SettingsData.Constants.StoreOrder.WsCustomerOrder)))
             {
                 var iTries = 0;
                 while (iTries < 3)

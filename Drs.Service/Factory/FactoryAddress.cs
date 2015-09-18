@@ -173,6 +173,7 @@ namespace Drs.Service.Factory
             return query.OrderByDescending(e => e.Importance).Select(e => 
                 new StoreModel
                 {
+                    Key = e.FranchiseStoreId.ToString(),
                     IdKey = e.FranchiseStoreId, 
                     Value = e.FranchiseStore.Name, 
                     MainAddress = e.FranchiseStore.Address.MainAddress,
