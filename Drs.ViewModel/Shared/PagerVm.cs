@@ -29,18 +29,10 @@ namespace Drs.ViewModel.Shared
         public PagerVm()
         {
             Size = SettingsData.Client.RowsSizeGrids;
-            var canExec = this.WhenAnyValue(vm => vm.Page, p =>
-            {
-                Console.WriteLine("Page: " + p); 
-                return p > 0;
-            });
+            var canExec = this.WhenAnyValue(vm => vm.Page, p => p > 0);
             CmdBackAll = ReactiveCommand.CreateAsyncTask(canExec, _ => Task.Run(() => DoBackAll()));
             CmdBack = ReactiveCommand.CreateAsyncTask(canExec, _ => Task.Run(() => DoBack()));
-            canExec = this.WhenAnyValue(vm => vm.Pages, vm => vm.Page, (ps, p) =>
-            {
-                Console.WriteLine("Pages: " + ps + " -- " + p);
-                return p < (ps - 1);
-            });
+            canExec = this.WhenAnyValue(vm => vm.Pages, vm => vm.Page, (ps, p) => p < (ps - 1));
             CmdForward = ReactiveCommand.CreateAsyncTask(canExec, _ => Task.Run(() => DoForward()));
             CmdForwardAll = ReactiveCommand.CreateAsyncTask(canExec, _ => Task.Run(() => DoForwardAll()));
         }

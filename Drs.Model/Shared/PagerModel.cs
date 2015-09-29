@@ -25,7 +25,7 @@ namespace Drs.Model.Shared
             if (Total == 0)
                 return 0;
 
-            return (Total/Size) + 1;
+            return (Total / Size) + (Total % Size == 0 ? 0 : 1);
         }
     }
 }
