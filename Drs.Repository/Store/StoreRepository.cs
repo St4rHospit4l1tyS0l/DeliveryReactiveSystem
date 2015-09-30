@@ -60,8 +60,15 @@ namespace Drs.Repository.Store
 
         public void UpdateOrderMode(long orderToStoreId, string sOrderId, string sStatus, string sMode, string sModeCharge, string sPromiseTime)
         {
-            var orderToStore = new OrderToStore {OrderToStoreId = orderToStoreId, OrderAtoId = sOrderId, LastStatus = sStatus, OrderMode = sMode, 
-                OrderModeCharge = sModeCharge, PromiseTime = sPromiseTime};
+            var orderToStore = new OrderToStore
+            {
+                OrderToStoreId = orderToStoreId,
+                OrderAtoId = sOrderId,
+                LastStatus = sStatus,
+                OrderMode = sMode,
+                OrderModeCharge = sModeCharge,
+                PromiseTime = sPromiseTime
+            };
             DbEntities.OrderToStore.Attach(orderToStore);
 
             var entry = DbEntities.Entry(orderToStore);
@@ -71,10 +78,41 @@ namespace Drs.Repository.Store
             entry.Property(e => e.PromiseTime).IsModified = true;
             entry.Property(e => e.OrderModeCharge).IsModified = true;
 
-            DbEntities.SaveChanges(); 
+            DbEntities.SaveChanges();
+            SaveLogOrderToStore(orderToStore, "Se consulta el histórico de la orden", sStatus, DateTime.Now, true);
+        }
 
-            SaveLogOrderToStore(orderToStore, String.Empty, sStatus, DateTime.Now, bHasToSave: true);
+        public void UpdateOrderStatusFailedRetrieve(long orderToStoreId, int failedStatusCounter)
+        {
+            var orderToStore = new OrderToStore
+            {
+                OrderToStoreId = orderToStoreId,
+                FailedStatusCounter = failedStatusCounter + 1
+            };
+            
+            DbEntities.OrderToStore.Attach(orderToStore);
+            var entry = DbEntities.Entry(orderToStore);
+            entry.Property(e => e.FailedStatusCounter).IsModified = true;
+            DbEntities.SaveChanges();
+        }
 
+        public void UpdateOrderStatus(long orderToStoreId, string sStatus, string sPromiseTime)
+        {
+            var orderToStore = new OrderToStore
+            {
+                OrderToStoreId = orderToStoreId,
+                LastStatus = sStatus,
+                PromiseTime = sPromiseTime,
+                FailedStatusCounter = 0
+            };
+            DbEntities.OrderToStore.Attach(orderToStore);
+
+            var entry = DbEntities.Entry(orderToStore);
+            entry.Property(e => e.LastStatus).IsModified = true;
+            entry.Property(e => e.PromiseTime).IsModified = true;
+
+            DbEntities.SaveChanges();
+            SaveLogOrderToStore(orderToStore, String.Empty, sStatus, DateTime.Now, true);
         }
 
         public OrderToStoreLog SaveLogOrderToStore(OrderToStore orderToStore, string comments, string status, DateTime timestamp, bool bHasToSave = false)
@@ -103,6 +141,7 @@ namespace Drs.Repository.Store
                 Status = status,
                 Timestamp = timestamp
             };
+
             DbEntities.OrderToStoreLog.Add(orderToStoreLog);
             if (bHasToSave)
                 DbEntities.SaveChanges();
@@ -268,7 +307,8 @@ namespace Drs.Repository.Store
 
         public StoreOfflineDto IsStoreOnline(int idKey, DateTime utcDateTime)
         {
-            return DbEntities.FranchiseStoreOffLine.Where(e => e.FranchiseStoreId == idKey &&  utcDateTime >= e.DateTimeStart && utcDateTime <= e.DateTimeEnd)
+            return DbEntities.FranchiseStoreOffLine.Where(e => e.FranchiseStoreId == idKey && e.IsObsolete == false 
+                && utcDateTime >= e.DateTimeStart && utcDateTime <= e.DateTimeEnd)
                 .Select(e => new StoreOfflineDto
                 {
                     DateTimeEnd = e.DateTimeEnd
@@ -403,5 +443,31 @@ namespace Drs.Repository.Store
 
             DbEntities.SaveChanges();
         }
+
+        public List<StoreConnection> GetStoreConnection()
+        {
+            return DbEntities.FranchiseStore.Where(e => e.IsObsolete == false)
+                .Select(e => new StoreConnection
+                {
+                    StoreId = e.FranchiseStoreId,
+                    StoreName = e.Name,
+                    WsAddress = e.WsAddress
+                }).ToList();
+        }
+
+        public IQueryable<TrackOrderModel> GetCommentsQry()
+        {
+            return DbEntities.OrderToStore.Where(e => e.OrderAtoId != null && e.FailedStatusCounter < SettingsData.Store.MaxFailedStatusCounter 
+                && SettingsData.Constants.TrackConst.OrderStatusEnd.Contains(e.LastStatus) == false).Select(e => new TrackOrderModel
+                {
+                    OrderToStoreId = e.OrderToStoreId,
+                    AtoOrderId = e.OrderAtoId,
+                    LastStatus = e.LastStatus,
+                    PromiseTime = e.PromiseTime,
+                    StoreId = e.FranchiseStoreId,
+                    FailedStatusCounter = e.FailedStatusCounter
+                });
+        }
+
     }
 }

@@ -38,6 +38,8 @@ namespace Drs.Service.Settings
             SettingsData.Store.ByRegionC = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.BY_REGIONC, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.ByRegionD = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.BY_REGIOND, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.ByZipCode = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.BY_ZIPCODE, SettingsData.Constants.SystemConst.FALSE);
+            SettingsData.Store.TimeUpdateStoreOrder = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.TIME_UPDATE_STORE_ORDER, 30);
+            SettingsData.Store.MaxFailedStatusCounter = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.MAX_FAILED_STATUS_COUNTER, 864000);
 
             ResolveRecurrence(dicSettings);
 

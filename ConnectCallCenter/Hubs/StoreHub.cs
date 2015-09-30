@@ -1,6 +1,5 @@
 ﻿using System;
 using Autofac;
-using Drs.Model.Address;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;

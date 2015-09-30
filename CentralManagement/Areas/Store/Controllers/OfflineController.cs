@@ -72,7 +72,6 @@ namespace CentralManagement.Areas.Store.Controllers
                 using (var repository = new StoreRepository())
                 {
                     model = repository.FindStoreOfflineModelById(storeId, id);
-
                     ViewBag.StartDateTime = id.HasValue ? model.UtcStartDateTimeSaved.ToString(SharedConstants.DATE_TIME_FORMAT) : DateTime.UtcNow.ToString(SharedConstants.DATE_TIME_FORMAT);
                     ViewBag.Model = JsonConvert.SerializeObject(model);
                 }

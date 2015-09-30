@@ -65,10 +65,10 @@ namespace Drs.Repository.Entities
         public virtual DbSet<Recurrence> Recurrence { get; set; }
         public virtual DbSet<PosOrder> PosOrder { get; set; }
         public virtual DbSet<CatPayment> CatPayment { get; set; }
-        public virtual DbSet<OrderToStore> OrderToStore { get; set; }
         public virtual DbSet<CatDeliveryStatus> CatDeliveryStatus { get; set; }
         public virtual DbSet<FranchiseStore> FranchiseStore { get; set; }
         public virtual DbSet<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual DbSet<ViewStoreInfo> ViewStoreInfo { get; set; }
+        public virtual DbSet<OrderToStore> OrderToStore { get; set; }
     }
 }

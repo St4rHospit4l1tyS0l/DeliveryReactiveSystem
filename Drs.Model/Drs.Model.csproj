@@ -165,10 +165,12 @@
     <Compile Include="Settings\ResponseMessageSetting.cs" />
     <Compile Include="Store\AddressModel.cs" />
     <Compile Include="Store\StoreAvailableModel.cs" />
+    <Compile Include="Store\StoreConnection.cs" />
     <Compile Include="Store\StoreModel.cs" />
     <Compile Include="Store\StoreOfflineDto.cs" />
     <Compile Include="Store\StoreOfflineModel.cs" />
     <Compile Include="Store\StoreUpModel.cs" />
+    <Compile Include="Store\TrackOrderModel.cs" />
     <Compile Include="Track\PagerCacheInfo.cs" />
     <Compile Include="Track\TrackOrderDetailDto.cs" />
     <Compile Include="Track\TrackOrderDto.cs" />

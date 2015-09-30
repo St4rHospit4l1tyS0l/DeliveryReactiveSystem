@@ -16,10 +16,10 @@ namespace Drs.Repository.Entities
     {
         public FranchiseStore()
         {
-            this.OrderToStore = new HashSet<OrderToStore>();
             this.StoreAddressDistribution = new HashSet<StoreAddressDistribution>();
             this.FranchisePhone = new HashSet<FranchisePhone>();
             this.FranchiseStoreOffLine = new HashSet<FranchiseStoreOffLine>();
+            this.OrderToStore = new HashSet<OrderToStore>();
         }
     
         public int FranchiseStoreId { get; set; }
@@ -38,11 +38,11 @@ namespace Drs.Repository.Entities
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual AspNetUsers AspNetUsers1 { get; set; }
         public virtual Franchise Franchise { get; set; }
-        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<StoreAddressDistribution> StoreAddressDistribution { get; set; }
         public virtual StoreStatus StoreStatus { get; set; }
         public virtual ICollection<FranchisePhone> FranchisePhone { get; set; }
         public virtual AspNetUsers AspNetUsers2 { get; set; }
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
+        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
     }
 }

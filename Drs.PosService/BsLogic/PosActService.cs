@@ -83,7 +83,7 @@ namespace Drs.PosService.BsLogic
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //MessageBox.Show(ex.Message + " - " + ex.StackTrace);
             }

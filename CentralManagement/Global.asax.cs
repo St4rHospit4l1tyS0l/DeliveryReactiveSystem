@@ -27,15 +27,7 @@ namespace CentralManagement
         {
             try
             {
-                var service = new SettingService(new SettingRepository());
-                var resConstants = service.FindAllSettings();
-                var dicSettings = resConstants.DicSettings;
-                SettingConfigure.InitConstants(dicSettings);
-                service = new SettingService(new SettingRepository());
-                var resControls = service.FindAllControlTitlesByLanguage(SettingsData.Language);
-                var lstAddressSetting = resControls.LstControls;
-                SettingConfigure.InitControls(lstAddressSetting);
-                SettingAddress.Initialize(new AddressRepository());
+                InitializeSettingsService.FullInitialize();
             }
             catch (Exception ex)
             {

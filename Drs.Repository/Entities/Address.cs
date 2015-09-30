@@ -17,8 +17,8 @@ namespace Drs.Repository.Entities
         public Address()
         {
             this.ClientPhone = new HashSet<ClientPhone>();
-            this.OrderToStore = new HashSet<OrderToStore>();
             this.FranchiseStore = new HashSet<FranchiseStore>();
+            this.OrderToStore = new HashSet<OrderToStore>();
         }
     
         public int AddressId { get; set; }
@@ -39,7 +39,7 @@ namespace Drs.Repository.Entities
         public virtual RegionD RegionD { get; set; }
         public virtual ZipCode ZipCode { get; set; }
         public virtual ICollection<ClientPhone> ClientPhone { get; set; }
-        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<FranchiseStore> FranchiseStore { get; set; }
+        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Autofac;
 using Drs.Model.Shared;
 
@@ -112,6 +113,8 @@ namespace Drs.Model.Settings
                 public const string BY_REGIONC = "BY_REGIONC";
                 public const string BY_REGIOND = "BY_REGIOND";
                 public const string BY_ZIPCODE = "BY_ZIPCODE";
+                public const string TIME_UPDATE_STORE_ORDER = "TIME_UPDATE_STORE_ORDER";
+                public const string MAX_FAILED_STATUS_COUNTER = "MAX_FAILED_STATUS_COUNTER"; 
 
                 public const int STORE_RESPONSE_ORDER_ERROR = 1100;
                 
@@ -156,6 +159,12 @@ namespace Drs.Model.Settings
                 public const string FULFILLED = "Fulfilled";
                 public const string CLOSED = "Closed";
                 public const string CANCELED = "Canceled";
+
+                public static readonly List<String> OrderStatusEnd = new List<string>
+                {
+                    CLOSED,
+                    CANCELED
+                }; 
 
             }
 
@@ -202,12 +211,14 @@ namespace Drs.Model.Settings
 
         public class Store
         {
+            public static int TimeUpdateStoreOrder { get; set; }
             public static bool ByCountry { get; set; }
             public static bool ByRegionA { get; set; }
             public static bool ByRegionB { get; set; }
             public static bool ByRegionC { get; set; }
             public static bool ByRegionD { get; set; }
             public static bool ByZipCode { get; set; }
+            public static int MaxFailedStatusCounter { get; set; }
         }
 
         public static class Recurrence
