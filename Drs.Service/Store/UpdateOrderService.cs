@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Drs.Infrastructure.Extensions;
 using Drs.Model.Settings;
 using Drs.Model.Store;
 using Drs.Repository.Store;
@@ -90,11 +91,12 @@ namespace Drs.Service.Store
                 using (var repository = new StoreRepository())
                 {
                     repository.Db.Configuration.ValidateOnSaveEnabled = false;
-                    if (response != null && response.IsSuccess && response.Order != null && String.IsNullOrWhiteSpace(response.Order.statusField))
+                    if (response != null && response.IsSuccess && response.Order != null && String.IsNullOrWhiteSpace(response.Order.statusField) == false)
                     {
                         if (order.LastStatus == response.Order.statusField)
                             return;
-                        repository.UpdateOrderStatus(order.OrderToStoreId, response.Order.statusField, response.Order.promiseTimeField);
+                        
+                        repository.UpdateOrderStatus(order.OrderToStoreId, response.Order.statusField, response.Order.promiseTimeField.ToDateTimeSafe());
                         return;
                     }
 

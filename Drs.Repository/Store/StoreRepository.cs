@@ -58,7 +58,7 @@ namespace Drs.Repository.Store
             model.Status = orderToStore.LastStatus;
         }
 
-        public void UpdateOrderMode(long orderToStoreId, string sOrderId, string sStatus, string sMode, string sModeCharge, string sPromiseTime)
+        public void UpdateOrderMode(long orderToStoreId, string sOrderId, string sStatus, string sMode, string sModeCharge, DateTime sPromiseTime)
         {
             var orderToStore = new OrderToStore
             {
@@ -96,7 +96,7 @@ namespace Drs.Repository.Store
             DbEntities.SaveChanges();
         }
 
-        public void UpdateOrderStatus(long orderToStoreId, string sStatus, string sPromiseTime)
+        public void UpdateOrderStatus(long orderToStoreId, string sStatus, DateTime sPromiseTime)
         {
             var orderToStore = new OrderToStore
             {
@@ -110,9 +110,10 @@ namespace Drs.Repository.Store
             var entry = DbEntities.Entry(orderToStore);
             entry.Property(e => e.LastStatus).IsModified = true;
             entry.Property(e => e.PromiseTime).IsModified = true;
+            entry.Property(e => e.FailedStatusCounter).IsModified = true;
 
             DbEntities.SaveChanges();
-            SaveLogOrderToStore(orderToStore, String.Empty, sStatus, DateTime.Now, true);
+            SaveLogOrderToStore(orderToStore, "Se consulta el histórico de la orden", sStatus, DateTime.Now, true);
         }
 
         public OrderToStoreLog SaveLogOrderToStore(OrderToStore orderToStore, string comments, string status, DateTime timestamp, bool bHasToSave = false)
@@ -457,7 +458,11 @@ namespace Drs.Repository.Store
 
         public IQueryable<TrackOrderModel> GetCommentsQry()
         {
-            return DbEntities.OrderToStore.Where(e => e.OrderAtoId != null && e.FailedStatusCounter < SettingsData.Store.MaxFailedStatusCounter 
+            var afterOnDay = DateTime.Today.AddDays(2);
+
+            return DbEntities.OrderToStore.Where(e => e.OrderAtoId != null 
+                && e.PromiseTime != null &&  e.PromiseTime < afterOnDay 
+                && e.FailedStatusCounter < SettingsData.Store.MaxFailedStatusCounter 
                 && SettingsData.Constants.TrackConst.OrderStatusEnd.Contains(e.LastStatus) == false).Select(e => new TrackOrderModel
                 {
                     OrderToStoreId = e.OrderToStoreId,

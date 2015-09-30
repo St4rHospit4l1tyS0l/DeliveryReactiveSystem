@@ -20,7 +20,7 @@ namespace Drs.Model.Track
         public string Mode { get; set; }
         public string UserTakeOrder { get; set; }
         public IList<ItemPosOrder> LstOrderPos { get; set; }
-        public string PromiseTime { get; set; }
+        public DateTime? PromiseTime { get; set; }
         public List<ItemLogOrder> LstOrderLog { get; set; }
         public string WsAddress { get; set; }
         public string StoreErrMsg { get; set; }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Drs.Infrastructure.Extensions;
 using Drs.Infrastructure.Extensions.Classes;
 using Drs.Infrastructure.Extensions.Json;
 using Drs.Infrastructure.Model;
@@ -61,10 +62,20 @@ namespace Drs.Service.Store
 
                 //TODO Falta vewrificar si tiene la capacidad para albergar una orden más
 
-                if (store == null)
+                if (store == null || store.IdKey.HasValue == false)
                 {
                     resMsg.IsSuccess = false;
                     resMsg.Message = "No se encontró una tienda cercana a este domicilio, por favor reporte a soporte técnico";
+                    return resMsg;
+                }
+
+                var offline = _repositoryStore.IsStoreOnline(store.IdKey.Value, DateTime.UtcNow);
+                
+                if(offline != null)
+                {
+                    resMsg.IsSuccess = false;
+                    resMsg.Message = String.Format("La tienda {0} no está en línea en estos momentos. Fuera de línea hasta {1}", store.Value,
+                        offline.DateTimeEnd.ToLocalTime().ToString(SharedConstants.DATE_TIME_FORMAT));
                     return resMsg;
                 }
 
@@ -120,21 +131,13 @@ namespace Drs.Service.Store
                     return;
                 }
 
-                String promiseTime;
-                try
-                {
-                    promiseTime = response.Order.promiseTimeField;
-                }
-                catch (Exception)
-                {
-                    promiseTime = SharedConstants.NOT_APPLICABLE;
-                }
 
                 clients.Caller.OnSendToStoreEventChange(new ResponseMessage
                 {
                     Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_ORDER_OK,
                     IsSuccess = true,
-                    Message = String.Format("El pedido se ha enviado a la tienda de forma exitosa. Fecha y tiempo estimado de llegada {0}", promiseTime)
+                    Message = String.Format("El pedido se ha enviado a la tienda de forma exitosa. Fecha y tiempo estimado de llegada {0:F}", 
+                        response.Order.promiseTimeField.ToDateTimeSafe())
                 });
 
                 SaveRecurrence(model);
@@ -183,7 +186,7 @@ namespace Drs.Service.Store
                 using (var repository = new StoreRepository())
                 {
                     repository.UpdateOrderMode(model.OrderToStoreId, response.Order.orderIdField, response.Order.statusField,
-                        response.Order.modeField, response.Order.modeChargeField, response.Order.promiseTimeField);
+                        response.Order.modeField, response.Order.modeChargeField, response.Order.promiseTimeField.ToDateTimeSafe());
                 }
 
             }

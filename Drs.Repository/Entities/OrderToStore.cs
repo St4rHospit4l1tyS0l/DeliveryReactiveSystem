@@ -36,7 +36,7 @@ namespace Drs.Repository.Entities
         public string OrderAtoId { get; set; }
         public string OrderMode { get; set; }
         public string OrderModeCharge { get; set; }
-        public string PromiseTime { get; set; }
+        public Nullable<System.DateTime> PromiseTime { get; set; }
         public int PaymentId { get; set; }
         public Nullable<bool> IsCanceled { get; set; }
         public Nullable<System.DateTime> DateTimeCanceled { get; set; }
