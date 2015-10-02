@@ -12,14 +12,14 @@ namespace Drs.Repository.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class FranchiseData
+    public partial class FranchiseDataFile
     {
-        public int FranchiseId { get; set; }
-        public string DataFolder { get; set; }
-        public string NewDataFolder { get; set; }
-        public string WsAddress { get; set; }
-        public Nullable<long> LastVersion { get; set; }
+        public int FranchiseDataFileId { get; set; }
+        public int FranchiseDataVersionId { get; set; }
+        public string FileName { get; set; }
+        public int CheckSum { get; set; }
+        public bool IsSync { get; set; }
     
-        public virtual Franchise Franchise { get; set; }
+        public virtual FranchiseDataVersion FranchiseDataVersion { get; set; }
     }
 }

@@ -218,6 +218,12 @@
     <Compile Include="Entities\FranchiseData.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\FranchiseDataFile.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\FranchiseDataVersion.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\FranchisePhone.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
@@ -248,6 +254,8 @@
     <Compile Include="Entities\MenuModule.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Metadata\FranchiseInfoDto.cs" />
+    <Compile Include="Entities\Metadata\FranchiseInfoJson.cs" />
     <Compile Include="Entities\Metadata\StoreInfoDto.cs" />
     <Compile Include="Entities\Metadata\StoreInfoJson.cs" />
     <Compile Include="Entities\Metadata\StoreOfflineInfoDto.cs" />

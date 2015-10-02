@@ -47,11 +47,11 @@ namespace Drs.Repository.Entities
         public virtual CatPayment CatPayment { get; set; }
         public virtual Client Client { get; set; }
         public virtual ClientPhone ClientPhone { get; set; }
-        public virtual Franchise Franchise { get; set; }
         public virtual FranchiseStore FranchiseStore { get; set; }
         public virtual PosOrder PosOrder { get; set; }
         public virtual ICollection<OrderToStoreLog> OrderToStoreLog { get; set; }
         public virtual ICollection<Recurrence> Recurrence { get; set; }
         public virtual ICollection<StoreStatus> StoreStatus { get; set; }
+        public virtual Franchise Franchise { get; set; }
     }
 }

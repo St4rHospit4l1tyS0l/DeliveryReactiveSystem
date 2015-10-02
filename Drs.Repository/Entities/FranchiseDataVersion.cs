@@ -12,14 +12,22 @@ namespace Drs.Repository.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class FranchiseData
+    public partial class FranchiseDataVersion
     {
+        public FranchiseDataVersion()
+        {
+            this.FranchiseDataFile = new HashSet<FranchiseDataFile>();
+        }
+    
+        public int FranchiseDataVersionId { get; set; }
         public int FranchiseId { get; set; }
-        public string DataFolder { get; set; }
-        public string NewDataFolder { get; set; }
-        public string WsAddress { get; set; }
-        public Nullable<long> LastVersion { get; set; }
+        public long Version { get; set; }
+        public System.DateTime Timestamp { get; set; }
+        public int TotalNumberOfFiles { get; set; }
+        public int NumberOfFilesDownloaded { get; set; }
+        public bool IsCompleted { get; set; }
     
         public virtual Franchise Franchise { get; set; }
+        public virtual ICollection<FranchiseDataFile> FranchiseDataFile { get; set; }
     }
 }

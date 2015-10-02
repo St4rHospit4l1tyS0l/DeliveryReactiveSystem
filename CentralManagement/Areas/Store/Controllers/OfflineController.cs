@@ -45,14 +45,8 @@ namespace CentralManagement.Areas.Store.Controllers
 
         public ActionResult OffLineList(JqGridFilterModel opts, int id)
         {
-            Expression<Func<FranchiseStoreOffLine, bool>> extraFilter;
             var userId = User.Identity.GetUserId();
-
-            if (User.IsInRole(RoleConstants.STORE_MANAGER))
-                extraFilter = (e => e.FranchiseStoreId == id && e.IsObsolete == false && e.FranchiseStore.ManageUserId == userId);
-            else
-                extraFilter = (e => e.FranchiseStoreId == id && e.IsObsolete == false);
-
+            var extraFilter = User.IsInRole(RoleConstants.STORE_MANAGER) ? ExtraFilterOffline(id, userId) : ExtraFilterOffline(id);
             
             StoreOfflineInfoDto.UtcTime = DateTime.UtcNow;
             using (var repository = new GenericRepository<FranchiseStoreOffLine>())
@@ -63,6 +57,15 @@ namespace CentralManagement.Areas.Store.Controllers
             }
         }
 
+        private static Expression<Func<FranchiseStoreOffLine, bool>> ExtraFilterOffline(int id)
+        {
+            return (e => e.FranchiseStoreId == id && e.IsObsolete == false);
+        }
+
+        private static Expression<Func<FranchiseStoreOffLine, bool>> ExtraFilterOffline(int id, string userId)
+        {
+            return (e => e.FranchiseStoreId == id && e.IsObsolete == false && e.FranchiseStore.ManageUserId == userId);
+        }
 
         public ActionResult Upsert(int storeId, int? id)
         {

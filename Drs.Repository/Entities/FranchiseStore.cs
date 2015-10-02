@@ -37,12 +37,12 @@ namespace Drs.Repository.Entities
         public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual AspNetUsers AspNetUsers1 { get; set; }
-        public virtual Franchise Franchise { get; set; }
         public virtual ICollection<StoreAddressDistribution> StoreAddressDistribution { get; set; }
         public virtual StoreStatus StoreStatus { get; set; }
         public virtual ICollection<FranchisePhone> FranchisePhone { get; set; }
         public virtual AspNetUsers AspNetUsers2 { get; set; }
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual ICollection<OrderToStore> OrderToStore { get; set; }
+        public virtual Franchise Franchise { get; set; }
     }
 }

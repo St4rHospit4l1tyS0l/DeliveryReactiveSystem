@@ -39,19 +39,28 @@ namespace Drs.Service.Store
             }
         }
 
+
         public void Dispose()
         {
-            if (_client != null)
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposing) 
+                return;
+            if (_client == null) 
+                return;
+            
+            try
             {
-                try
-                {
-                    _client.Close();
-                    _client = null;
-                }
-                catch (Exception)
-                {
-                    _client = null;
-                }
+                _client.Close();
+                _client = null;
+            }
+            catch (Exception)
+            {
+                _client = null;
             }
         }
     }

@@ -76,7 +76,17 @@ namespace Drs.Service.ReactiveDelivery
 
         public void Dispose()
         {
-            _connectionProvider.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposing)
+                return;
+
+            if (_connectionProvider != null)
+                _connectionProvider.Dispose();
         }
     }
 }

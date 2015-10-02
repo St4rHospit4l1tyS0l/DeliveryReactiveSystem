@@ -26,7 +26,7 @@
     <script src="~/Scripts/js/plugins/pace/pace.min.js"></script>
 
 </head>
-<body ng-app="licenseDr">
+<body ng-app="licenseDr" class="pace-done skin-1">
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
@@ -34,7 +34,7 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element">
                             <span>
-                                <img alt="image" width="50" height="50" style="margin-left: 35px;" class="img-circle" src="~/Content/img/Logo.png" />
+                                <img alt="image" width="50" height="50" class="img-circle" src="~/Content/img/Logo.png" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
@@ -58,10 +58,19 @@
                             <a href="@Url.Action("Index", "User",new {area = "Management"})"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span> </a>
                         </li>
                         @*<li>
-                            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Tableros de control</span> </a>
-                        </li>*@
+                                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Tableros de control</span> </a>
+                            </li>*@
                         <li>
                             <a href="@Url.Action("Index", "License", new { area = "Management" })"><i class="fa fa-lock"></i> <span class="nav-label">Licenciamiento</span> </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-puzzle-piece"></i> <span class="nav-label">Franquicias</span> </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Index", "Setting",new {area = "Franchise"})"><i class="fa fa-cogs"></i>Configuración</a></li>
+                            </ul>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Index", "UpdateClients", new { area = "Franchise" })"><i class="fa fa-laptop"></i>Actualización clientes</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Tiendas</span> </a>
@@ -73,7 +82,7 @@
                             </ul>
                         </li>
                     }
-                    
+
                     @if (Roles.IsUserInRole(RoleConstants.STORE_MANAGER))
                     {
                         <li>

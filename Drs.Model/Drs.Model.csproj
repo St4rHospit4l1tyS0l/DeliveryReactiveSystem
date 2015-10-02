@@ -131,6 +131,7 @@
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Franchise\FranchiseDataModel.cs" />
     <Compile Include="Franchise\FranchiseStoreWsInfo.cs" />
+    <Compile Include="Franchise\FranchiseUpModel.cs" />
     <Compile Include="Order\ClientInfoGrid.cs" />
     <Compile Include="Order\FranchiseInfoModel.cs" />
     <Compile Include="Order\ItemLogOrder.cs" />
