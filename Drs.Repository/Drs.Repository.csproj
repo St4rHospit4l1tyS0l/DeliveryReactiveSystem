@@ -254,6 +254,8 @@
     <Compile Include="Entities\MenuModule.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Metadata\FranchiseDataVersionInfoDto.cs" />
+    <Compile Include="Entities\Metadata\FranchiseDataVersionInfoJson.cs" />
     <Compile Include="Entities\Metadata\FranchiseInfoDto.cs" />
     <Compile Include="Entities\Metadata\FranchiseInfoJson.cs" />
     <Compile Include="Entities\Metadata\StoreInfoDto.cs" />

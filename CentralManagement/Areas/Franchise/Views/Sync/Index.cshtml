@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = "Sincronización de archivos de las franquicias";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Sincronización de archivos de Franquicias</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li>
+                Franquicias
+            </li>
+            <li>
+                Sincronización
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="modalDlgController">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Franquicias del Call Center</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="jqGrid_wrapper">
+                        <table id="GridId"></table>
+                        <div id="GridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blocker" ng-show="working">
+        <div>
+            Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />
+        </div>
+    </div>
+</div>
+
+@section css{
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
+    <link href="~/Content/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Content/plugins/chosen/chosen.css" rel="stylesheet" />
+    <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet">
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/js/plugins/jqGrid/i18n/grid.locale-es.js"></script>
+    <script src="~/Scripts/js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/app/shared/upsertCtrl.js"></script>
+    <script src="~/Scripts/app/shared/modalDlgCtrl.js"></script>
+    <script src="~/Scripts/app/shared/hiddenDrct.js"></script>
+    <script src="~/Scripts/app/ctrl/franchiseCtrl.js"></script>
+    <script src="~/Scripts/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="~/Scripts/js/plugins/iCheck/icheck.min.js"></script>
+
+    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/Scripts/app/svc/focusFactSvc.js"></script>
+    <script src="~/Scripts/app/shared/addressCtrl.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+
+            window.upsert = function(franchiseId, gridId) {
+                window.showConfirmServiceWithMsg({ franchiseId: franchiseId },
+                    { Title: 'Sincronizar archivos', Message: "¿Desea crear una nueva versión de los archivos para esta franquicia?", Type: 'info' }, "#angJsjqGridId",
+                    "@Url.Action("DoVersion", "Sync", new { area = "Franchise" })", gridId);
+            };
+
+            window.obsolete = function(id, gridId) {
+                window.showObsolete(id, "#angJsjqGridId", "@Url.Action("DoObsolete", "Sync", new {area = "Franchise"})", gridId);
+            };
+
+
+            jQuery("#GridId").jqGrid({
+                url: '@Url.Action("List", "Setting", new {area = "Franchise"})',
+                datatype: "json",
+                mtype: 'POST',
+                colNames: ['ID', 'Franquicia', 'Código', 'Posición', 'Usuario'],
+                colModel: [
+                    { name: 'FranchiseId', index: 'FranchiseId', hidden: true },
+                    { name: 'Name', index: 'Name', width: 220, align: "center", sorttype: 'string', searchoptions: { sopt: ['bw'] } },
+                    { name: 'Code', index: 'Code', width: 110, align: "center", sorttype: 'string', search: false },
+                    { name: 'Position', index: 'Position', width: 80, align: "center", sorttype: 'string', search: false },
+                    { name: 'UserNameIns', index: 'UserNameIns', width: 160, align: "center", sorttype: 'string', sortable: false, search: false }
+                ],
+                rowNum: 10,
+                rowList: [10, 30, 60],
+                pager: '#GridPager',
+                sortname: 'FranchiseId',
+                height: 450,
+                viewrecords: true,
+                autowidth: true,
+                shrinkToFit: true,
+                sortorder: "desc",
+                caption: "",
+                add: true,
+                edit: false,
+                addtext: 'Agregar',
+                altRows: true,
+                hidegrid: false,
+                subGridOptions: {
+                    plusicon: "glyphicon glyphicon-chevron-down position-relative",
+                    minusicon: "glyphicon glyphicon-chevron-right position-relative",
+                    reloadOnExpand: false,
+                    selectOnExpand: true
+                },
+                subGrid: true,
+                subGridRowExpanded: function(subgridId, rowId) {
+                    var subgridTableId, pagerId;
+                    subgridTableId = subgridId + "_t";
+                    pagerId = "p_" + subgridTableId;
+                    $("#" + subgridId).html("<table id='" + subgridTableId + "' class='scroll'></table><div id='" + pagerId + "' class='scroll'></div>");
+                    $("#" + subgridTableId).jqGrid({
+                        url: '@Url.Action("VersionList", "Sync", new {area = "Franchise"})?id=' + rowId,
+                        datatype: "json",
+                        mtype: 'POST',
+                        colNames: ['ID', 'Versión', 'Creación (Fecha/Hora)', 'Usuario', 'Número total archivos', 'Total archivos descargados', '¿Completado?', 'Completado (Fecha/Hora)', 'Acción'],
+                        colModel: [
+                            { name: 'FranchiseDataVersionId', index: 'FranchiseDataVersionId', hidden: true },
+                            { name: 'Version', index: 'Version', width: 170, align: "center", sorttype: 'string', search: false },
+                            { name: 'Timestamp', index: 'Timestamp', width: 200, align: "center", sorttype: 'string', search: false },
+                            { name: 'UserName', index: 'UserName', width: 160, align: "center", sorttype: 'string', sortable: false, search: false },
+                            { name: 'TotalNumberOfFiles', index: 'TotalNumberOfFiles', width: 200, align: "center", sorttype: 'string', search: false },
+                            { name: 'NumberOfFilesDownloaded', index: 'NumberOfFilesDownloaded', width: 200, align: "center", sorttype: 'string', search: false },
+                            { name: 'IsCompleted', index: 'IsCompleted', width: 120, align: "center", sorttype: 'string', search: false },
+                            { name: 'TimestampComplete', index: 'TimestampComplete', width: 200, align: "center", sorttype: 'string', search: false },
+                            { name: 'Action', width: 100, align: "center", sortable: false, search: false }
+                        ],
+                        rowNum: 10,
+                        pager: pagerId,
+                        sortname: 'FranchiseDataVersionId',
+                        sortorder: "asc",
+                        height: 150,
+                        gridComplete: function() {
+                            var ids = $(this).jqGrid('getDataIDs');
+                            for (var i = 0; i < ids.length; i++) {
+                                var cl = ids[i];
+                                var be = "";
+
+                                be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Eliminar sincronización\" onclick=\"window.obsolete('" + cl + "', '#" + subgridTableId + "');\"><i class=\"fa fa-times icon-grid-st red\"></i></a>  ";
+
+                                $(this).jqGrid('setRowData', ids[i], { Action: be });
+
+                            }
+                        }
+                    });
+                    $("#" + subgridTableId).jqGrid('navGrid', "#" + pagerId, { edit: false, add: true, addfunc: function() { window.upsert(rowId, "#" + subgridTableId); }, del: false, search: false, });
+                }
+            });
+
+            jQuery("#GridId").jqGrid('navGrid', '#GridPager', {
+                edit: false,
+                add: true,
+                addfunc: window.upsert,
+                refresh: true,
+                del: false,
+                search: false
+            });
+
+            jQuery("#GridId").jqGrid('filterToolbar', {
+                stringResult: true,
+                searchOperators: true,
+                searchOnEnter: true,
+                multipleSearch: true,
+                ignoreCase: true
+            });
+
+            $(window).bind('resize', function() {
+                var width = $('.jqGrid_wrapper').width();
+                $('#GridId').setGridWidth(width);
+            });
+        });
+    </script>
+}
+
+

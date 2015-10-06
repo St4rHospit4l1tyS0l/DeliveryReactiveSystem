@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Globalization;
+using System.ServiceModel;
+using Drs.Infrastructure.Extensions;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Franchise;
+using Drs.Model.Settings;
+using Drs.Repository.Entities;
 using Drs.Repository.Order;
 using Drs.Repository.Shared;
+using Drs.Service.SyncService;
 
 namespace Drs.Service.Franchise
 {
@@ -87,6 +93,52 @@ namespace Drs.Service.Franchise
 
             _repository.DoObsolete(model, userId);
 
+        }
+
+        public void CreateNewVersion(int franchiseId, ResponseMessageModel response, string userId)
+        {
+            var now = DateTime.Now;
+            var model = new FranchiseDataVersion
+            {
+                FranchiseId = franchiseId,
+                FranchiseDataVersionUid = Guid.NewGuid(),
+                Version = now.Ticks.ToString(CultureInfo.InvariantCulture).ToVersion(4, 3, '.'),
+                Timestamp = now,
+                TotalNumberOfFiles = 0,
+                NumberOfFilesDownloaded = 0,
+                IsCompleted = false,
+                TimestampComplete = null,
+                UserInsId = userId,
+                IsObsolete = false
+            };
+
+            var wsUrl = _repository.GetUrlSyncWsByFranchiseId(franchiseId);
+
+            FranchiseQueryForFiles(model, response, wsUrl);
+
+            if (response.HasError)
+                return;
+
+            _repository.SaveFranchiseDataVersion(model);
+
+            response.HasError = false;
+        }
+
+        private void FranchiseQueryForFiles(FranchiseDataVersion model, ResponseMessageModel response, string wsUrl)
+        {
+            using (var client = new SyncServiceClient(new BasicHttpBinding(), new EndpointAddress(wsUrl + SettingsData.Constants.Franchise.WS_SYNC_FILES)))
+            {
+                var res = client.QueryForFiles(model.FranchiseDataVersionUid);
+
+                if (res.HasError == false)
+                {
+                    response.HasError = false;
+                    return;
+                }
+
+                response.Message = res.Message;
+                response.HasError = true;
+            }
         }
     }
 }

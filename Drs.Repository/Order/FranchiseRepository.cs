@@ -115,6 +115,17 @@ namespace Drs.Repository.Order
             return DbEntities.Franchise.Any(e => e.IsObsolete == false && e.Code == code && e.FranchiseId != franchiseId);
         }
 
+        public void SaveFranchiseDataVersion(FranchiseDataVersion model)
+        {
+            DbEntities.FranchiseDataVersion.Add(model);
+            DbEntities.SaveChanges();
+        }
+
+        public string GetUrlSyncWsByFranchiseId(int franchiseId)
+        {
+            return DbEntities.Franchise.Where(e => e.FranchiseId == franchiseId).Select(e => e.FranchiseData.WsAddress).Single();
+        }
+
         public OptionModel GetFranchiseByCode(string franchiseCode)
         {
             return DbEntities.Franchise.Where(e => e.Code == franchiseCode).Select(e => new OptionModel

@@ -16,5 +16,7 @@ namespace Drs.Repository.Order
         Franchise FindById(int id);
         void DoObsolete(Franchise model, string userId);
         bool IsCodeAlreadyUsed(string code, int franchiseId);
+        void SaveFranchiseDataVersion(FranchiseDataVersion model);
+        string GetUrlSyncWsByFranchiseId(int franchiseId);
     }
 }

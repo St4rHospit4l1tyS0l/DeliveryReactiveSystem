@@ -201,7 +201,7 @@
           <Property Name="FranchiseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ShortName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="UserIdIns" Type="nvarchar" MaxLength="128" />
+          <Property Name="UserIdIns" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="UserIdUpd" Type="nvarchar" MaxLength="128" />
           <Property Name="DatetimeIns" Type="datetime" Nullable="false" />
           <Property Name="DatetimeUpd" Type="datetime" />
@@ -243,12 +243,16 @@
             <PropertyRef Name="FranchiseDataVersionId" />
           </Key>
           <Property Name="FranchiseDataVersionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FranchiseDataVersionUid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FranchiseId" Type="int" Nullable="false" />
-          <Property Name="Version" Type="bigint" Nullable="false" />
+          <Property Name="Version" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Timestamp" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="TotalNumberOfFiles" Type="int" Nullable="false" />
           <Property Name="NumberOfFilesDownloaded" Type="int" Nullable="false" />
           <Property Name="IsCompleted" Type="bit" Nullable="false" />
+          <Property Name="TimestampComplete" Type="datetime2" Precision="7" />
+          <Property Name="UserInsId" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsObsolete" Type="bit" />
         </EntityType>
         <EntityType Name="FranchisePhone">
           <Key>
@@ -779,7 +783,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Franchise_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Franchise" Type="Self.Franchise" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -835,6 +839,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Principal>
             <Dependent Role="FranchiseDataFile">
               <PropertyRef Name="FranchiseDataVersionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseDataVersion_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="FranchiseDataVersion" Type="Self.FranchiseDataVersion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FranchiseDataVersion">
+              <PropertyRef Name="UserInsId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1619,6 +1635,10 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="FranchiseDataVersion" EntitySet="FranchiseDataVersion" />
             <End Role="FranchiseDataFile" EntitySet="FranchiseDataFile" />
           </AssociationSet>
+          <AssociationSet Name="FK_FranchiseDataVersion_AspNetUsers" Association="Self.FK_FranchiseDataVersion_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FranchiseDataVersion" EntitySet="FranchiseDataVersion" />
+          </AssociationSet>
           <AssociationSet Name="FK_FranchiseDataVersion_Franchise" Association="Self.FK_FranchiseDataVersion_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
             <End Role="FranchiseDataVersion" EntitySet="FranchiseDataVersion" />
@@ -1839,7 +1859,11 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="AspNetUserClaims" EntityType="CallCenterModel.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="CallCenterModel.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="CallCenterModel.AspNetUsers" />
+          <EntitySet Name="CallCenterInfo" EntityType="CallCenterModel.CallCenterInfo" />
+          <EntitySet Name="CatDeliveryStatus" EntityType="CallCenterModel.CatDeliveryStatus" />
+          <EntitySet Name="CatPayment" EntityType="CallCenterModel.CatPayment" />
           <EntitySet Name="Client" EntityType="CallCenterModel.Client" />
+          <EntitySet Name="ClientInfo" EntityType="CallCenterModel.ClientInfo" />
           <EntitySet Name="ClientPhone" EntityType="CallCenterModel.ClientPhone" />
           <EntitySet Name="ClientPhoneStatistics" EntityType="CallCenterModel.ClientPhoneStatistics" />
           <EntitySet Name="ClientStatistics" EntityType="CallCenterModel.ClientStatistics" />
@@ -1847,21 +1871,31 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="Control" EntityType="CallCenterModel.Control" />
           <EntitySet Name="ControlTitle" EntityType="CallCenterModel.ControlTitle" />
           <EntitySet Name="Country" EntityType="CallCenterModel.Country" />
+          <EntitySet Name="Franchise" EntityType="CallCenterModel.Franchise" />
           <EntitySet Name="FranchiseButton" EntityType="CallCenterModel.FranchiseButton" />
+          <EntitySet Name="FranchiseData" EntityType="CallCenterModel.FranchiseData" />
+          <EntitySet Name="FranchiseDataFile" EntityType="CallCenterModel.FranchiseDataFile" />
           <EntitySet Name="FranchisePhone" EntityType="CallCenterModel.FranchisePhone" />
+          <EntitySet Name="FranchiseStore" EntityType="CallCenterModel.FranchiseStore" />
+          <EntitySet Name="FranchiseStoreOffLine" EntityType="CallCenterModel.FranchiseStoreOffLine" />
           <EntitySet Name="Language" EntityType="CallCenterModel.Language" />
           <EntitySet Name="MenuModule" EntityType="CallCenterModel.MenuModule" />
           <EntitySet Name="Module" EntityType="CallCenterModel.Module" />
+          <EntitySet Name="OrderToStore" EntityType="CallCenterModel.OrderToStore" />
           <EntitySet Name="OrderToStoreLog" EntityType="CallCenterModel.OrderToStoreLog" />
           <EntitySet Name="Permission" EntityType="CallCenterModel.Permission" />
+          <EntitySet Name="PosOrder" EntityType="CallCenterModel.PosOrder" />
           <EntitySet Name="PosOrderItem" EntityType="CallCenterModel.PosOrderItem" />
+          <EntitySet Name="Recurrence" EntityType="CallCenterModel.Recurrence" />
           <EntitySet Name="RegionA" EntityType="CallCenterModel.RegionA" />
           <EntitySet Name="RegionB" EntityType="CallCenterModel.RegionB" />
           <EntitySet Name="RegionC" EntityType="CallCenterModel.RegionC" />
           <EntitySet Name="RegionD" EntityType="CallCenterModel.RegionD" />
+          <EntitySet Name="ServerInfo" EntityType="CallCenterModel.ServerInfo" />
           <EntitySet Name="Setting" EntityType="CallCenterModel.Setting" />
           <EntitySet Name="StoreAddressDistribution" EntityType="CallCenterModel.StoreAddressDistribution" />
           <EntitySet Name="StoreStatus" EntityType="CallCenterModel.StoreStatus" />
+          <EntitySet Name="UserDetail" EntityType="CallCenterModel.UserDetail" />
           <EntitySet Name="ZipCode" EntityType="CallCenterModel.ZipCode" />
           <AssociationSet Name="FK_Address_Country" Association="CallCenterModel.FK_Address_Country">
             <End Role="Country" EntitySet="Country" />
@@ -1887,6 +1921,14 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="ZipCode" EntitySet="ZipCode" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStore_Address" Association="CallCenterModel.FK_FranchiseStore_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_Address" Association="CallCenterModel.FK_OrderToStore_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+          </AssociationSet>
           <AssociationSet Name="FK_Permission_AspNetRoles" Association="CallCenterModel.FK_Permission_AspNetRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="Permission" EntitySet="Permission" />
@@ -1907,6 +1949,14 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="ClientPhone" EntitySet="ClientPhone" />
           </AssociationSet>
+          <AssociationSet Name="FK_Franchise_AspNetUsers" Association="CallCenterModel.FK_Franchise_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Franchise" EntitySet="Franchise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Franchise_AspNetUsers1" Association="CallCenterModel.FK_Franchise_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Franchise" EntitySet="Franchise" />
+          </AssociationSet>
           <AssociationSet Name="FK_FranchisePhone_AspNetUsers" Association="CallCenterModel.FK_FranchisePhone_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="FranchisePhone" EntitySet="FranchisePhone" />
@@ -1914,6 +1964,50 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <AssociationSet Name="FK_FranchisePhone_AspNetUsers1" Association="CallCenterModel.FK_FranchisePhone_AspNetUsers1">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="FranchisePhone" EntitySet="FranchisePhone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStore_AspNetUsers" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStore_AspNetUsers1" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStore_AspNetUsers2" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers2">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStoreOffLine_AspNetUsers" Association="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStoreOffLine_AspNetUsers1" Association="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_AspNetUsers" Association="CallCenterModel.FK_OrderToStore_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosOrder_AspNetUsers" Association="CallCenterModel.FK_PosOrder_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PosOrder" EntitySet="PosOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetail_AspNetUsers" Association="CallCenterModel.FK_UserDetail_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserDetail" EntitySet="UserDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientInfo_CallCenterInfo" Association="CallCenterModel.FK_ClientInfo_CallCenterInfo">
+            <End Role="CallCenterInfo" EntitySet="CallCenterInfo" />
+            <End Role="ClientInfo" EntitySet="ClientInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServerInfo_CallCenterInfo" Association="CallCenterModel.FK_ServerInfo_CallCenterInfo">
+            <End Role="CallCenterInfo" EntitySet="CallCenterInfo" />
+            <End Role="ServerInfo" EntitySet="ServerInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_CatPayment" Association="CallCenterModel.FK_OrderToStore_CatPayment">
+            <End Role="CatPayment" EntitySet="CatPayment" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
           </AssociationSet>
           <AssociationSet Name="FK_Client_Company" Association="CallCenterModel.FK_Client_Company">
             <End Role="Company" EntitySet="Company" />
@@ -1923,9 +2017,21 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="Client" EntitySet="Client" />
             <End Role="ClientStatistics" EntitySet="ClientStatistics" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_Client" Association="CallCenterModel.FK_OrderToStore_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurrence_Client" Association="CallCenterModel.FK_Recurrence_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Recurrence" EntitySet="Recurrence" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClientPhoneStatistics_ClientPhone" Association="CallCenterModel.FK_ClientPhoneStatistics_ClientPhone">
             <End Role="ClientPhone" EntitySet="ClientPhone" />
             <End Role="ClientPhoneStatistics" EntitySet="ClientPhoneStatistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_ClientPhone" Association="CallCenterModel.FK_OrderToStore_ClientPhone">
+            <End Role="ClientPhone" EntitySet="ClientPhone" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
           </AssociationSet>
           <AssociationSet Name="FK_RegionA_Country" Association="CallCenterModel.FK_RegionA_Country">
             <End Role="Country" EntitySet="Country" />
@@ -1943,6 +2049,38 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="Country" EntitySet="Country" />
             <End Role="RegionD" EntitySet="RegionD" />
           </AssociationSet>
+          <AssociationSet Name="FK_FranchiseButton_Franchise" Association="CallCenterModel.FK_FranchiseButton_Franchise">
+            <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="FranchiseButton" EntitySet="FranchiseButton" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseData_Franchise" Association="CallCenterModel.FK_FranchiseData_Franchise">
+            <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="FranchiseData" EntitySet="FranchiseData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStore_Franchise" Association="CallCenterModel.FK_FranchiseStore_Franchise">
+            <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_Franchise" Association="CallCenterModel.FK_OrderToStore_Franchise">
+            <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStoreOffLine_FranchiseStore" Association="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_FranchiseStore" Association="CallCenterModel.FK_OrderToStore_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreAddressDistribution_FranchiseStore" Association="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="StoreAddressDistribution" EntitySet="StoreAddressDistribution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreStatus_FranchiseStore" Association="CallCenterModel.FK_StoreStatus_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="StoreStatus" EntitySet="StoreStatus" />
+          </AssociationSet>
           <AssociationSet Name="FK_MenuModule_Module" Association="CallCenterModel.FK_MenuModule_Module">
             <End Role="Module" EntitySet="Module" />
             <End Role="MenuModule" EntitySet="MenuModule" />
@@ -1950,6 +2088,26 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <AssociationSet Name="FK_Permission_Module" Association="CallCenterModel.FK_Permission_Module">
             <End Role="Module" EntitySet="Module" />
             <End Role="Permission" EntitySet="Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_PosOrder" Association="CallCenterModel.FK_OrderToStore_PosOrder">
+            <End Role="PosOrder" EntitySet="PosOrder" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStoreLog_OrderToStore" Association="CallCenterModel.FK_OrderToStoreLog_OrderToStore">
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+            <End Role="OrderToStoreLog" EntitySet="OrderToStoreLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurrence_OrderToStore" Association="CallCenterModel.FK_Recurrence_OrderToStore">
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+            <End Role="Recurrence" EntitySet="Recurrence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreStatus_OrderToStore" Association="CallCenterModel.FK_StoreStatus_OrderToStore">
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+            <End Role="StoreStatus" EntitySet="StoreStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosOrderItem_PosOrder" Association="CallCenterModel.FK_PosOrderItem_PosOrder">
+            <End Role="PosOrder" EntitySet="PosOrder" />
+            <End Role="PosOrderItem" EntitySet="PosOrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_RegionA_ZipCode" Association="CallCenterModel.FK_RegionA_ZipCode">
             <End Role="ZipCode" EntitySet="ZipCode" />
@@ -2003,160 +2161,26 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="Client" EntitySet="Client" />
             <End Role="ClientPhone" EntitySet="ClientPhone" />
           </AssociationSet>
-          <EntitySet Name="ViewUserInfo" EntityType="CallCenterModel.ViewUserInfo" />
-          <EntitySet Name="UserDetail" EntityType="CallCenterModel.UserDetail" />
-          <AssociationSet Name="FK_UserDetail_AspNetUsers" Association="CallCenterModel.FK_UserDetail_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="UserDetail" EntitySet="UserDetail" />
-          </AssociationSet>
-          <EntitySet Name="CallCenterInfo" EntityType="CallCenterModel.CallCenterInfo" />
-          <EntitySet Name="ClientInfo" EntityType="CallCenterModel.ClientInfo" />
-          <EntitySet Name="ServerInfo" EntityType="CallCenterModel.ServerInfo" />
-          <AssociationSet Name="FK_ClientInfo_CallCenterInfo" Association="CallCenterModel.FK_ClientInfo_CallCenterInfo">
-            <End Role="CallCenterInfo" EntitySet="CallCenterInfo" />
-            <End Role="ClientInfo" EntitySet="ClientInfo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServerInfo_CallCenterInfo" Association="CallCenterModel.FK_ServerInfo_CallCenterInfo">
-            <End Role="CallCenterInfo" EntitySet="CallCenterInfo" />
-            <End Role="ServerInfo" EntitySet="ServerInfo" />
-          </AssociationSet>
-          <EntitySet Name="Recurrence" EntityType="CallCenterModel.Recurrence" />
-          <AssociationSet Name="FK_Recurrence_Client" Association="CallCenterModel.FK_Recurrence_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Recurrence" EntitySet="Recurrence" />
-          </AssociationSet>
-          <EntitySet Name="PosOrder" EntityType="CallCenterModel.PosOrder" />
-          <AssociationSet Name="FK_PosOrder_AspNetUsers" Association="CallCenterModel.FK_PosOrder_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="PosOrder" EntitySet="PosOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PosOrderItem_PosOrder" Association="CallCenterModel.FK_PosOrderItem_PosOrder">
-            <End Role="PosOrder" EntitySet="PosOrder" />
-            <End Role="PosOrderItem" EntitySet="PosOrderItem" />
-          </AssociationSet>
-          <EntitySet Name="CatPayment" EntityType="CallCenterModel.CatPayment" />
-          <EntitySet Name="CatDeliveryStatus" EntityType="CallCenterModel.CatDeliveryStatus" />
-          <EntitySet Name="FranchiseStore" EntityType="CallCenterModel.FranchiseStore" />
-          <AssociationSet Name="FK_FranchiseStore_Address" Association="CallCenterModel.FK_FranchiseStore_Address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStore_AspNetUsers" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStore_AspNetUsers1" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers1">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StoreAddressDistribution_FranchiseStore" Association="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore">
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-            <End Role="StoreAddressDistribution" EntitySet="StoreAddressDistribution" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StoreStatus_FranchiseStore" Association="CallCenterModel.FK_StoreStatus_FranchiseStore">
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-            <End Role="StoreStatus" EntitySet="StoreStatus" />
-          </AssociationSet>
           <AssociationSet Name="RelFranchisePhoneStore" Association="CallCenterModel.RelFranchisePhoneStore">
             <End Role="FranchisePhone" EntitySet="FranchisePhone" />
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
           </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStore_AspNetUsers2" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers2">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
-          <EntitySet Name="FranchiseStoreOffLine" EntityType="CallCenterModel.FranchiseStoreOffLine" />
-          <AssociationSet Name="FK_FranchiseStoreOffLine_AspNetUsers" Association="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStoreOffLine_AspNetUsers1" Association="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers1">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStoreOffLine_FranchiseStore" Association="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore">
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-            <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
-          </AssociationSet>
           <EntitySet Name="ViewStoreInfo" EntityType="CallCenterModel.ViewStoreInfo" />
-          <EntitySet Name="OrderToStore" EntityType="CallCenterModel.OrderToStore" />
-          <AssociationSet Name="FK_OrderToStore_Address" Association="CallCenterModel.FK_OrderToStore_Address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderToStore_AspNetUsers" Association="CallCenterModel.FK_OrderToStore_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderToStore_CatPayment" Association="CallCenterModel.FK_OrderToStore_CatPayment">
-            <End Role="CatPayment" EntitySet="CatPayment" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderToStore_Client" Association="CallCenterModel.FK_OrderToStore_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderToStore_ClientPhone" Association="CallCenterModel.FK_OrderToStore_ClientPhone">
-            <End Role="ClientPhone" EntitySet="ClientPhone" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderToStore_FranchiseStore" Association="CallCenterModel.FK_OrderToStore_FranchiseStore">
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderToStore_PosOrder" Association="CallCenterModel.FK_OrderToStore_PosOrder">
-            <End Role="PosOrder" EntitySet="PosOrder" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderToStoreLog_OrderToStore" Association="CallCenterModel.FK_OrderToStoreLog_OrderToStore">
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-            <End Role="OrderToStoreLog" EntitySet="OrderToStoreLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Recurrence_OrderToStore" Association="CallCenterModel.FK_Recurrence_OrderToStore">
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-            <End Role="Recurrence" EntitySet="Recurrence" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StoreStatus_OrderToStore" Association="CallCenterModel.FK_StoreStatus_OrderToStore">
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-            <End Role="StoreStatus" EntitySet="StoreStatus" />
-          </AssociationSet>
-          <EntitySet Name="Franchise" EntityType="CallCenterModel.Franchise" />
-          <EntitySet Name="FranchiseData" EntityType="CallCenterModel.FranchiseData" />
-          <EntitySet Name="FranchiseDataFile" EntityType="CallCenterModel.FranchiseDataFile" />
+          <EntitySet Name="ViewUserInfo" EntityType="CallCenterModel.ViewUserInfo" />
           <EntitySet Name="FranchiseDataVersion" EntityType="CallCenterModel.FranchiseDataVersion" />
-          <AssociationSet Name="FK_Franchise_AspNetUsers" Association="CallCenterModel.FK_Franchise_AspNetUsers">
+          <AssociationSet Name="FK_FranchiseDataVersion_AspNetUsers" Association="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Franchise" EntitySet="Franchise" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Franchise_AspNetUsers1" Association="CallCenterModel.FK_Franchise_AspNetUsers1">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Franchise" EntitySet="Franchise" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FranchiseButton_Franchise" Association="CallCenterModel.FK_FranchiseButton_Franchise">
-            <End Role="Franchise" EntitySet="Franchise" />
-            <End Role="FranchiseButton" EntitySet="FranchiseButton" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FranchiseData_Franchise" Association="CallCenterModel.FK_FranchiseData_Franchise">
-            <End Role="Franchise" EntitySet="Franchise" />
-            <End Role="FranchiseData" EntitySet="FranchiseData" />
+            <End Role="FranchiseDataVersion" EntitySet="FranchiseDataVersion" />
           </AssociationSet>
           <AssociationSet Name="FK_FranchiseDataVersion_Franchise" Association="CallCenterModel.FK_FranchiseDataVersion_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
             <End Role="FranchiseDataVersion" EntitySet="FranchiseDataVersion" />
           </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStore_Franchise" Association="CallCenterModel.FK_FranchiseStore_Franchise">
-            <End Role="Franchise" EntitySet="Franchise" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderToStore_Franchise" Association="CallCenterModel.FK_OrderToStore_Franchise">
-            <End Role="Franchise" EntitySet="Franchise" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
           <AssociationSet Name="FK_FranchiseDataFile_FranchiseDataVersion" Association="CallCenterModel.FK_FranchiseDataFile_FranchiseDataVersion">
             <End Role="FranchiseDataVersion" EntitySet="FranchiseDataVersion" />
             <End Role="FranchiseDataFile" EntitySet="FranchiseDataFile" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressId" />
@@ -2177,9 +2201,9 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_Address_RegionC1" FromRole="Address" ToRole="RegionC" />
           <NavigationProperty Name="RegionD" Relationship="CallCenterModel.FK_Address_RegionD" FromRole="Address" ToRole="RegionD" />
           <NavigationProperty Name="ZipCode" Relationship="CallCenterModel.FK_Address_ZipCode" FromRole="Address" ToRole="ZipCode" />
-          <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneAddress" FromRole="Address" ToRole="ClientPhone" />
           <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="Address" ToRole="FranchiseStore" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Address" FromRole="Address" ToRole="OrderToStore" />
+          <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneAddress" FromRole="Address" ToRole="ClientPhone" />
         </EntityType>
         <EntityType Name="AddressHierarchy">
           <Key>
@@ -2242,20 +2266,50 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="AspNetUserLogins" Relationship="CallCenterModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.FK_ClientPhone_AspNetUsers" FromRole="AspNetUsers" ToRole="ClientPhone" />
           <NavigationProperty Name="ClientPhone1" Relationship="CallCenterModel.FK_ClientPhone_AspNetUsers1" FromRole="AspNetUsers" ToRole="ClientPhone" />
+          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_Franchise_AspNetUsers" FromRole="AspNetUsers" ToRole="Franchise" />
+          <NavigationProperty Name="Franchise1" Relationship="CallCenterModel.FK_Franchise_AspNetUsers1" FromRole="AspNetUsers" ToRole="Franchise" />
           <NavigationProperty Name="FranchisePhone" Relationship="CallCenterModel.FK_FranchisePhone_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchisePhone" />
           <NavigationProperty Name="FranchisePhone1" Relationship="CallCenterModel.FK_FranchisePhone_AspNetUsers1" FromRole="AspNetUsers" ToRole="FranchisePhone" />
-          <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <NavigationProperty Name="UserDetail" Relationship="CallCenterModel.FK_UserDetail_AspNetUsers" FromRole="AspNetUsers" ToRole="UserDetail" />
-          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrder_AspNetUsers" FromRole="AspNetUsers" ToRole="PosOrder" />
           <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchiseStore" />
           <NavigationProperty Name="FranchiseStore1" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers1" FromRole="AspNetUsers" ToRole="FranchiseStore" />
           <NavigationProperty Name="FranchiseStore2" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers2" FromRole="AspNetUsers" ToRole="FranchiseStore" />
           <NavigationProperty Name="FranchiseStoreOffLine" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchiseStoreOffLine" />
           <NavigationProperty Name="FranchiseStoreOffLine1" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers1" FromRole="AspNetUsers" ToRole="FranchiseStoreOffLine" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_AspNetUsers" FromRole="AspNetUsers" ToRole="OrderToStore" />
-          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_Franchise_AspNetUsers" FromRole="AspNetUsers" ToRole="Franchise" />
-          <NavigationProperty Name="Franchise1" Relationship="CallCenterModel.FK_Franchise_AspNetUsers1" FromRole="AspNetUsers" ToRole="Franchise" />
-          </EntityType>
+          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrder_AspNetUsers" FromRole="AspNetUsers" ToRole="PosOrder" />
+          <NavigationProperty Name="UserDetail" Relationship="CallCenterModel.FK_UserDetail_AspNetUsers" FromRole="AspNetUsers" ToRole="UserDetail" />
+          <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchiseDataVersion" />
+        </EntityType>
+        <EntityType Name="CallCenterInfo">
+          <Key>
+            <PropertyRef Name="CallCenterInfoId" />
+          </Key>
+          <Property Name="CallCenterInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientInfo" Relationship="CallCenterModel.FK_ClientInfo_CallCenterInfo" FromRole="CallCenterInfo" ToRole="ClientInfo" />
+          <NavigationProperty Name="ServerInfo" Relationship="CallCenterModel.FK_ServerInfo_CallCenterInfo" FromRole="CallCenterInfo" ToRole="ServerInfo" />
+        </EntityType>
+        <EntityType Name="CatDeliveryStatus">
+          <Key>
+            <PropertyRef Name="CatDeliveryStatusId" />
+          </Key>
+          <Property Name="CatDeliveryStatusId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatPayment">
+          <Key>
+            <PropertyRef Name="CatPaymentId" />
+          </Key>
+          <Property Name="CatPaymentId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_CatPayment" FromRole="CatPayment" ToRole="OrderToStore" />
+        </EntityType>
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ClientId" />
@@ -2268,9 +2322,19 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Company" Relationship="CallCenterModel.FK_Client_Company" FromRole="Client" ToRole="Company" />
           <NavigationProperty Name="ClientStatistics" Relationship="CallCenterModel.FK_ClientStatistics_Client" FromRole="Client" ToRole="ClientStatistics" />
-          <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneClient" FromRole="Client" ToRole="ClientPhone" />
-          <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_Client" FromRole="Client" ToRole="Recurrence" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="Client" ToRole="OrderToStore" />
+          <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_Client" FromRole="Client" ToRole="Recurrence" />
+          <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneClient" FromRole="Client" ToRole="ClientPhone" />
+        </EntityType>
+        <EntityType Name="ClientInfo">
+          <Key>
+            <PropertyRef Name="ClientInfoId" />
+          </Key>
+          <Property Name="ClientInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientHost" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CallCenterInfoId" Type="Int32" />
+          <NavigationProperty Name="CallCenterInfo" Relationship="CallCenterModel.FK_ClientInfo_CallCenterInfo" FromRole="ClientInfo" ToRole="CallCenterInfo" />
         </EntityType>
         <EntityType Name="ClientPhone">
           <Key>
@@ -2285,9 +2349,9 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_ClientPhone_AspNetUsers" FromRole="ClientPhone" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_ClientPhone_AspNetUsers1" FromRole="ClientPhone" ToRole="AspNetUsers" />
           <NavigationProperty Name="ClientPhoneStatistics" Relationship="CallCenterModel.FK_ClientPhoneStatistics_ClientPhone" FromRole="ClientPhone" ToRole="ClientPhoneStatistics" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_ClientPhone" FromRole="ClientPhone" ToRole="OrderToStore" />
           <NavigationProperty Name="Address" Relationship="CallCenterModel.RelClientPhoneAddress" FromRole="ClientPhone" ToRole="Address" />
           <NavigationProperty Name="Client" Relationship="CallCenterModel.RelClientPhoneClient" FromRole="ClientPhone" ToRole="Client" />
-          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_ClientPhone" FromRole="ClientPhone" ToRole="OrderToStore" />
         </EntityType>
         <EntityType Name="ClientPhoneStatistics">
           <Key>
@@ -2352,6 +2416,27 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_RegionC_Country" FromRole="Country" ToRole="RegionC" />
           <NavigationProperty Name="RegionD" Relationship="CallCenterModel.FK_RegionD_Country" FromRole="Country" ToRole="RegionD" />
         </EntityType>
+        <EntityType Name="Franchise">
+          <Key>
+            <PropertyRef Name="FranchiseId" />
+          </Key>
+          <Property Name="FranchiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="UserIdIns" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserIdUpd" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DatetimeIns" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DatetimeUpd" Type="DateTime" Precision="3" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_Franchise_AspNetUsers" FromRole="Franchise" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_Franchise_AspNetUsers1" FromRole="Franchise" ToRole="AspNetUsers" />
+          <NavigationProperty Name="FranchiseButton" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="Franchise" ToRole="FranchiseButton" />
+          <NavigationProperty Name="FranchiseData" Relationship="CallCenterModel.FK_FranchiseData_Franchise" FromRole="Franchise" ToRole="FranchiseData" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_Franchise" FromRole="Franchise" ToRole="FranchiseStore" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="Franchise" ToRole="OrderToStore" />
+          <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataVersion_Franchise" FromRole="Franchise" ToRole="FranchiseDataVersion" />
+        </EntityType>
         <EntityType Name="FranchiseButton">
           <Key>
             <PropertyRef Name="FranchiseId" />
@@ -2362,6 +2447,28 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="Image" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Products" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="FranchiseButton" ToRole="Franchise" />
+        </EntityType>
+        <EntityType Name="FranchiseData">
+          <Key>
+            <PropertyRef Name="FranchiseId" />
+          </Key>
+          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
+          <Property Name="DataFolder" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NewDataFolder" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="WsAddress" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="LastVersion" Type="Int64" />
+          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseData_Franchise" FromRole="FranchiseData" ToRole="Franchise" />
+        </EntityType>
+        <EntityType Name="FranchiseDataFile">
+          <Key>
+            <PropertyRef Name="FranchiseDataFileId" />
+          </Key>
+          <Property Name="FranchiseDataFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FranchiseDataVersionId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CheckSum" Type="Int32" Nullable="false" />
+          <Property Name="IsSync" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataFile_FranchiseDataVersion" FromRole="FranchiseDataFile" ToRole="FranchiseDataVersion" />
         </EntityType>
         <EntityType Name="FranchisePhone">
           <Key>
@@ -2376,6 +2483,48 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_FranchisePhone_AspNetUsers" FromRole="FranchisePhone" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_FranchisePhone_AspNetUsers1" FromRole="FranchisePhone" ToRole="AspNetUsers" />
           <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.RelFranchisePhoneStore" FromRole="FranchisePhone" ToRole="FranchiseStore" />
+        </EntityType>
+        <EntityType Name="FranchiseStore">
+          <Key>
+            <PropertyRef Name="FranchiseStoreId" />
+          </Key>
+          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="UserIdIns" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserIdUpd" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DatetimeIns" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DatetimeUpd" Type="DateTime" Precision="3" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+          <Property Name="WsAddress" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ManageUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="FranchiseStore" ToRole="Address" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers" FromRole="FranchiseStore" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers1" FromRole="FranchiseStore" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers2" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers2" FromRole="FranchiseStore" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseStore_Franchise" FromRole="FranchiseStore" ToRole="Franchise" />
+          <NavigationProperty Name="FranchiseStoreOffLine" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore" FromRole="FranchiseStore" ToRole="FranchiseStoreOffLine" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="FranchiseStore" ToRole="OrderToStore" />
+          <NavigationProperty Name="StoreAddressDistribution" Relationship="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreAddressDistribution" />
+          <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreStatus" />
+          <NavigationProperty Name="FranchisePhone" Relationship="CallCenterModel.RelFranchisePhoneStore" FromRole="FranchiseStore" ToRole="FranchisePhone" />
+        </EntityType>
+        <EntityType Name="FranchiseStoreOffLine">
+          <Key>
+            <PropertyRef Name="FranchiseStoreOffLineId" />
+          </Key>
+          <Property Name="FranchiseStoreOffLineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
+          <Property Name="DateTimeStart" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="DateTimeEnd" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserInsId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserUpdId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers" FromRole="FranchiseStoreOffLine" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers1" FromRole="FranchiseStoreOffLine" ToRole="AspNetUsers" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore" FromRole="FranchiseStoreOffLine" ToRole="FranchiseStore" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -2409,6 +2558,42 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="MenuModule" Relationship="CallCenterModel.FK_MenuModule_Module" FromRole="Module" ToRole="MenuModule" />
           <NavigationProperty Name="Permission" Relationship="CallCenterModel.FK_Permission_Module" FromRole="Module" ToRole="Permission" />
         </EntityType>
+        <EntityType Name="OrderToStore">
+          <Key>
+            <PropertyRef Name="OrderToStoreId" />
+          </Key>
+          <Property Name="OrderToStoreId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClientPhoneId" Type="Int32" Nullable="false" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
+          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
+          <Property Name="PosOrderId" Type="Int32" Nullable="false" />
+          <Property Name="UserInsId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StartDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDatetime" Type="DateTime" Precision="3" />
+          <Property Name="OrderAtoId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderMode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OrderModeCharge" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PromiseTime" Type="DateTime" Precision="3" />
+          <Property Name="PaymentId" Type="Int32" Nullable="false" />
+          <Property Name="IsCanceled" Type="Boolean" />
+          <Property Name="DateTimeCanceled" Type="DateTime" Precision="7" />
+          <Property Name="FailedStatusCounter" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_OrderToStore_Address" FromRole="OrderToStore" ToRole="Address" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_OrderToStore_AspNetUsers" FromRole="OrderToStore" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CatPayment" Relationship="CallCenterModel.FK_OrderToStore_CatPayment" FromRole="OrderToStore" ToRole="CatPayment" />
+          <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="OrderToStore" ToRole="Client" />
+          <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.FK_OrderToStore_ClientPhone" FromRole="OrderToStore" ToRole="ClientPhone" />
+          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="OrderToStore" ToRole="Franchise" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="OrderToStore" ToRole="FranchiseStore" />
+          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="OrderToStore" ToRole="PosOrder" />
+          <NavigationProperty Name="OrderToStoreLog" Relationship="CallCenterModel.FK_OrderToStoreLog_OrderToStore" FromRole="OrderToStore" ToRole="OrderToStoreLog" />
+          <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="OrderToStore" ToRole="Recurrence" />
+          <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_OrderToStore" FromRole="OrderToStore" ToRole="StoreStatus" />
+        </EntityType>
         <EntityType Name="OrderToStoreLog">
           <Key>
             <PropertyRef Name="OrderToStoreLogId" />
@@ -2430,6 +2615,23 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.FK_Permission_AspNetRoles" FromRole="Permission" ToRole="AspNetRoles" />
           <NavigationProperty Name="Module" Relationship="CallCenterModel.FK_Permission_Module" FromRole="Permission" ToRole="Module" />
         </EntityType>
+        <EntityType Name="PosOrder">
+          <Key>
+            <PropertyRef Name="PosOrderId" />
+          </Key>
+          <Property Name="PosOrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FranchiseCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CheckId" Type="Int32" Nullable="false" />
+          <Property Name="GuidId" Type="Guid" Nullable="false" />
+          <Property Name="OrderDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Taxes" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_PosOrder_AspNetUsers" FromRole="PosOrder" ToRole="AspNetUsers" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="PosOrder" ToRole="OrderToStore" />
+          <NavigationProperty Name="PosOrderItem" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrder" ToRole="PosOrderItem" />
+        </EntityType>
         <EntityType Name="PosOrderItem">
           <Key>
             <PropertyRef Name="PosOrderItemId" />
@@ -2439,9 +2641,22 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="ItemId" Type="Int64" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrderItem" ToRole="PosOrder" />
           <Property Name="LevelItem" Type="Int32" Nullable="false" />
           <Property Name="ParentId" Type="Int64" />
+          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrderItem" ToRole="PosOrder" />
+        </EntityType>
+        <EntityType Name="Recurrence">
+          <Key>
+            <PropertyRef Name="RecurrenceId" />
+          </Key>
+          <Property Name="RecurrenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="OrderToStoreId" Type="Int64" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimestampShort" Type="Int64" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_Recurrence_Client" FromRole="Recurrence" ToRole="Client" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="Recurrence" ToRole="OrderToStore" />
         </EntityType>
         <EntityType Name="RegionA">
           <Key>
@@ -2521,6 +2736,16 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_RegionD_RegionC" FromRole="RegionD" ToRole="RegionC" />
           <NavigationProperty Name="ZipCode" Relationship="CallCenterModel.FK_RegionD_ZipCode" FromRole="RegionD" ToRole="ZipCode" />
         </EntityType>
+        <EntityType Name="ServerInfo">
+          <Key>
+            <PropertyRef Name="ServerInfoId" />
+          </Key>
+          <Property Name="ServerInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ServerCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CallCenterInfoId" Type="Int32" />
+          <NavigationProperty Name="CallCenterInfo" Relationship="CallCenterModel.FK_ServerInfo_CallCenterInfo" FromRole="ServerInfo" ToRole="CallCenterInfo" />
+        </EntityType>
         <EntityType Name="Setting">
           <Key>
             <PropertyRef Name="SettingId" />
@@ -2557,6 +2782,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="MaxCapacity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_StoreStatus_FranchiseStore" FromRole="StoreStatus" ToRole="FranchiseStore" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_StoreStatus_OrderToStore" FromRole="StoreStatus" ToRole="OrderToStore" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="InsDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_UserDetail_AspNetUsers" FromRole="UserDetail" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="ZipCode">
           <Key>
@@ -2643,6 +2880,30 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FranchiseStore_Address">
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_Address">
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Permission_AspNetRoles">
           <End Type="CallCenterModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
           <End Type="CallCenterModel.Permission" Role="Permission" Multiplicity="*" />
@@ -2707,6 +2968,30 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Franchise_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Franchise">
+              <PropertyRef Name="UserIdIns" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Franchise_AspNetUsers1">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Franchise">
+              <PropertyRef Name="UserIdUpd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FranchisePhone_AspNetUsers">
           <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
           <End Type="CallCenterModel.FranchisePhone" Role="FranchisePhone" Multiplicity="*" />
@@ -2728,6 +3013,138 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Principal>
             <Dependent Role="FranchisePhone">
               <PropertyRef Name="UserIdUpd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStore_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="UserIdIns" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStore_AspNetUsers1">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="UserIdUpd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStore_AspNetUsers2">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="ManageUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStoreOffLine_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStoreOffLine" Role="FranchiseStoreOffLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FranchiseStoreOffLine">
+              <PropertyRef Name="UserInsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStoreOffLine_AspNetUsers1">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="CallCenterModel.FranchiseStoreOffLine" Role="FranchiseStoreOffLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FranchiseStoreOffLine">
+              <PropertyRef Name="UserUpdId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="UserInsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosOrder_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosOrder">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDetail_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetail">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientInfo_CallCenterInfo">
+          <End Type="CallCenterModel.CallCenterInfo" Role="CallCenterInfo" Multiplicity="0..1" />
+          <End Type="CallCenterModel.ClientInfo" Role="ClientInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CallCenterInfo">
+              <PropertyRef Name="CallCenterInfoId" />
+            </Principal>
+            <Dependent Role="ClientInfo">
+              <PropertyRef Name="CallCenterInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServerInfo_CallCenterInfo">
+          <End Type="CallCenterModel.CallCenterInfo" Role="CallCenterInfo" Multiplicity="0..1" />
+          <End Type="CallCenterModel.ServerInfo" Role="ServerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CallCenterInfo">
+              <PropertyRef Name="CallCenterInfoId" />
+            </Principal>
+            <Dependent Role="ServerInfo">
+              <PropertyRef Name="CallCenterInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_CatPayment">
+          <End Type="CallCenterModel.CatPayment" Role="CatPayment" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatPayment">
+              <PropertyRef Name="CatPaymentId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="PaymentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2755,6 +3172,30 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderToStore_Client">
+          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurrence_Client">
+          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="CallCenterModel.Recurrence" Role="Recurrence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Recurrence">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClientPhoneStatistics_ClientPhone">
           <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="1" />
           <End Type="CallCenterModel.ClientPhoneStatistics" Role="ClientPhoneStatistics" Multiplicity="*" />
@@ -2763,6 +3204,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               <PropertyRef Name="ClientPhoneId" />
             </Principal>
             <Dependent Role="ClientPhoneStatistics">
+              <PropertyRef Name="ClientPhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_ClientPhone">
+          <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientPhone">
+              <PropertyRef Name="ClientPhoneId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
               <PropertyRef Name="ClientPhoneId" />
             </Dependent>
           </ReferentialConstraint>
@@ -2815,6 +3268,102 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FranchiseButton_Franchise">
+          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseButton" Role="FranchiseButton" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Franchise">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="FranchiseButton">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseData_Franchise">
+          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseData" Role="FranchiseData" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Franchise">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="FranchiseData">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStore_Franchise">
+          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Franchise">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_Franchise">
+          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Franchise">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStoreOffLine_FranchiseStore">
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStoreOffLine" Role="FranchiseStoreOffLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="FranchiseStoreOffLine">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_FranchiseStore">
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreAddressDistribution_FranchiseStore">
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
+          <End Type="CallCenterModel.StoreAddressDistribution" Role="StoreAddressDistribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="StoreAddressDistribution">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreStatus_FranchiseStore">
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
+          <End Type="CallCenterModel.StoreStatus" Role="StoreStatus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="StoreStatus">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MenuModule_Module">
           <End Type="CallCenterModel.Module" Role="Module" Multiplicity="1" />
           <End Type="CallCenterModel.MenuModule" Role="MenuModule" Multiplicity="0..1" />
@@ -2836,6 +3385,66 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Principal>
             <Dependent Role="Permission">
               <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_PosOrder">
+          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosOrder">
+              <PropertyRef Name="PosOrderId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="PosOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStoreLog_OrderToStore">
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStoreLog" Role="OrderToStoreLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderToStore">
+              <PropertyRef Name="OrderToStoreId" />
+            </Principal>
+            <Dependent Role="OrderToStoreLog">
+              <PropertyRef Name="OrderToStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurrence_OrderToStore">
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="1" />
+          <End Type="CallCenterModel.Recurrence" Role="Recurrence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderToStore">
+              <PropertyRef Name="OrderToStoreId" />
+            </Principal>
+            <Dependent Role="Recurrence">
+              <PropertyRef Name="OrderToStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreStatus_OrderToStore">
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="0..1" />
+          <End Type="CallCenterModel.StoreStatus" Role="StoreStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderToStore">
+              <PropertyRef Name="OrderToStoreId" />
+            </Principal>
+            <Dependent Role="StoreStatus">
+              <PropertyRef Name="LastOrderToStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosOrderItem_PosOrder">
+          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
+          <End Type="CallCenterModel.PosOrderItem" Role="PosOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosOrder">
+              <PropertyRef Name="PosOrderId" />
+            </Principal>
+            <Dependent Role="PosOrderItem">
+              <PropertyRef Name="PosOrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2971,338 +3580,9 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <End Type="CallCenterModel.Client" Role="Client" Multiplicity="*" />
           <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="*" />
         </Association>
-        <EntityType Name="ViewUserInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="FirstName" />
-            <PropertyRef Name="LastName" />
-            <PropertyRef Name="UserName" />
-            <PropertyRef Name="IsObsolete" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
-          <Property Name="Role" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="UserDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BirthDate" Type="DateTime" Precision="0" />
-          <Property Name="InsDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_UserDetail_AspNetUsers" FromRole="UserDetail" ToRole="AspNetUsers" />
-        </EntityType>
-        <Association Name="FK_UserDetail_AspNetUsers">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CallCenterModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserDetail">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="CallCenterInfo">
-          <Key>
-            <PropertyRef Name="CallCenterInfoId" />
-          </Key>
-          <Property Name="CallCenterInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ActivationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ClientInfo" Relationship="CallCenterModel.FK_ClientInfo_CallCenterInfo" FromRole="CallCenterInfo" ToRole="ClientInfo" />
-          <NavigationProperty Name="ServerInfo" Relationship="CallCenterModel.FK_ServerInfo_CallCenterInfo" FromRole="CallCenterInfo" ToRole="ServerInfo" />
-        </EntityType>
-        <EntityType Name="ClientInfo">
-          <Key>
-            <PropertyRef Name="ClientInfoId" />
-          </Key>
-          <Property Name="ClientInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientHost" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClientCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CallCenterInfoId" Type="Int32" />
-          <NavigationProperty Name="CallCenterInfo" Relationship="CallCenterModel.FK_ClientInfo_CallCenterInfo" FromRole="ClientInfo" ToRole="CallCenterInfo" />
-        </EntityType>
-        <EntityType Name="ServerInfo">
-          <Key>
-            <PropertyRef Name="ServerInfoId" />
-          </Key>
-          <Property Name="ServerInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ServerName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ServerCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CallCenterInfoId" Type="Int32" />
-          <NavigationProperty Name="CallCenterInfo" Relationship="CallCenterModel.FK_ServerInfo_CallCenterInfo" FromRole="ServerInfo" ToRole="CallCenterInfo" />
-        </EntityType>
-        <Association Name="FK_ClientInfo_CallCenterInfo">
-          <End Type="CallCenterModel.CallCenterInfo" Role="CallCenterInfo" Multiplicity="0..1" />
-          <End Type="CallCenterModel.ClientInfo" Role="ClientInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CallCenterInfo">
-              <PropertyRef Name="CallCenterInfoId" />
-            </Principal>
-            <Dependent Role="ClientInfo">
-              <PropertyRef Name="CallCenterInfoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServerInfo_CallCenterInfo">
-          <End Type="CallCenterModel.CallCenterInfo" Role="CallCenterInfo" Multiplicity="0..1" />
-          <End Type="CallCenterModel.ServerInfo" Role="ServerInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CallCenterInfo">
-              <PropertyRef Name="CallCenterInfoId" />
-            </Principal>
-            <Dependent Role="ServerInfo">
-              <PropertyRef Name="CallCenterInfoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Recurrence">
-          <Key>
-            <PropertyRef Name="RecurrenceId" />
-          </Key>
-          <Property Name="RecurrenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="OrderToStoreId" Type="Int64" Nullable="false" />
-          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TimestampShort" Type="Int64" Nullable="false" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_Recurrence_Client" FromRole="Recurrence" ToRole="Client" />
-          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="Recurrence" ToRole="OrderToStore" />
-        </EntityType>
-        <Association Name="FK_Recurrence_Client">
-          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="CallCenterModel.Recurrence" Role="Recurrence" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="ClientId" />
-            </Principal>
-            <Dependent Role="Recurrence">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PosOrder">
-          <Key>
-            <PropertyRef Name="PosOrderId" />
-          </Key>
-          <Property Name="PosOrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FranchiseCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CheckId" Type="Int32" Nullable="false" />
-          <Property Name="GuidId" Type="Guid" Nullable="false" />
-          <Property Name="OrderDatetime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <Property Name="Taxes" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_PosOrder_AspNetUsers" FromRole="PosOrder" ToRole="AspNetUsers" />
-          <NavigationProperty Name="PosOrderItem" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrder" ToRole="PosOrderItem" />
-          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="PosOrder" ToRole="OrderToStore" />
-        </EntityType>
-        <Association Name="FK_PosOrder_AspNetUsers">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PosOrder">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PosOrderItem_PosOrder">
-          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
-          <End Type="CallCenterModel.PosOrderItem" Role="PosOrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PosOrder">
-              <PropertyRef Name="PosOrderId" />
-            </Principal>
-            <Dependent Role="PosOrderItem">
-              <PropertyRef Name="PosOrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="CatPayment">
-          <Key>
-            <PropertyRef Name="CatPaymentId" />
-          </Key>
-          <Property Name="CatPaymentId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_CatPayment" FromRole="CatPayment" ToRole="OrderToStore" />
-        </EntityType>
-        <EntityType Name="CatDeliveryStatus">
-          <Key>
-            <PropertyRef Name="CatDeliveryStatusId" />
-          </Key>
-          <Property Name="CatDeliveryStatusId" Type="Int32" Nullable="false" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Color" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FranchiseStore">
-          <Key>
-            <PropertyRef Name="FranchiseStoreId" />
-          </Key>
-          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="UserIdIns" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserIdUpd" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="DatetimeIns" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DatetimeUpd" Type="DateTime" Precision="3" />
-          <Property Name="AddressId" Type="Int32" Nullable="false" />
-          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
-          <Property Name="WsAddress" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="FranchiseStore" ToRole="Address" />
-          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers" FromRole="FranchiseStore" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers1" FromRole="FranchiseStore" ToRole="AspNetUsers" />
-          <NavigationProperty Name="StoreAddressDistribution" Relationship="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreAddressDistribution" />
-          <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreStatus" />
-          <NavigationProperty Name="FranchisePhone" Relationship="CallCenterModel.RelFranchisePhoneStore" FromRole="FranchiseStore" ToRole="FranchisePhone" />
-          <Property Name="ManageUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers2" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers2" FromRole="FranchiseStore" ToRole="AspNetUsers" />
-          <NavigationProperty Name="FranchiseStoreOffLine" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore" FromRole="FranchiseStore" ToRole="FranchiseStoreOffLine" />
-          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="FranchiseStore" ToRole="OrderToStore" />
-          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseStore_Franchise" FromRole="FranchiseStore" ToRole="Franchise" />
-        </EntityType>
-        <Association Name="FK_FranchiseStore_Address">
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="AddressId" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseStore_AspNetUsers">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="UserIdIns" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseStore_AspNetUsers1">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="UserIdUpd" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StoreAddressDistribution_FranchiseStore">
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
-          <End Type="CallCenterModel.StoreAddressDistribution" Role="StoreAddressDistribution" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FranchiseStore">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Principal>
-            <Dependent Role="StoreAddressDistribution">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StoreStatus_FranchiseStore">
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
-          <End Type="CallCenterModel.StoreStatus" Role="StoreStatus" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="FranchiseStore">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Principal>
-            <Dependent Role="StoreStatus">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="RelFranchisePhoneStore">
           <End Type="CallCenterModel.FranchisePhone" Role="FranchisePhone" Multiplicity="*" />
           <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_FranchiseStore_AspNetUsers2">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="ManageUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="FranchiseStoreOffLine">
-          <Key>
-            <PropertyRef Name="FranchiseStoreOffLineId" />
-          </Key>
-          <Property Name="FranchiseStoreOffLineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
-          <Property Name="DateTimeStart" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="Duration" Type="Int32" Nullable="false" />
-          <Property Name="DateTimeEnd" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="UserInsId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserUpdId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers" FromRole="FranchiseStoreOffLine" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers1" FromRole="FranchiseStoreOffLine" ToRole="AspNetUsers" />
-          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore" FromRole="FranchiseStoreOffLine" ToRole="FranchiseStore" />
-        </EntityType>
-        <Association Name="FK_FranchiseStoreOffLine_AspNetUsers">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStoreOffLine" Role="FranchiseStoreOffLine" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FranchiseStoreOffLine">
-              <PropertyRef Name="UserInsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseStoreOffLine_AspNetUsers1">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
-          <End Type="CallCenterModel.FranchiseStoreOffLine" Role="FranchiseStoreOffLine" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FranchiseStoreOffLine">
-              <PropertyRef Name="UserUpdId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseStoreOffLine_FranchiseStore">
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStoreOffLine" Role="FranchiseStoreOffLine" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FranchiseStore">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Principal>
-            <Dependent Role="FranchiseStoreOffLine">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         <EntityType Name="ViewStoreInfo">
           <Key>
@@ -3323,264 +3603,50 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="ManagerUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="OrderToStore">
+        <EntityType Name="ViewUserInfo">
           <Key>
-            <PropertyRef Name="OrderToStoreId" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="IsObsolete" />
           </Key>
-          <Property Name="OrderToStoreId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LastStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ClientPhoneId" Type="Int32" Nullable="false" />
-          <Property Name="AddressId" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
-          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
-          <Property Name="PosOrderId" Type="Int32" Nullable="false" />
-          <Property Name="UserInsId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="StartDatetime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDatetime" Type="DateTime" Precision="3" />
-          <Property Name="OrderAtoId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OrderMode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="OrderModeCharge" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PromiseTime" Type="DateTime" Precision="3" />
-          <Property Name="PaymentId" Type="Int32" Nullable="false" />
-          <Property Name="IsCanceled" Type="Boolean" />
-          <Property Name="DateTimeCanceled" Type="DateTime" Precision="7" />
-          <Property Name="FailedStatusCounter" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_OrderToStore_Address" FromRole="OrderToStore" ToRole="Address" />
-          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_OrderToStore_AspNetUsers" FromRole="OrderToStore" ToRole="AspNetUsers" />
-          <NavigationProperty Name="CatPayment" Relationship="CallCenterModel.FK_OrderToStore_CatPayment" FromRole="OrderToStore" ToRole="CatPayment" />
-          <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="OrderToStore" ToRole="Client" />
-          <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.FK_OrderToStore_ClientPhone" FromRole="OrderToStore" ToRole="ClientPhone" />
-          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="OrderToStore" ToRole="FranchiseStore" />
-          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="OrderToStore" ToRole="PosOrder" />
-          <NavigationProperty Name="OrderToStoreLog" Relationship="CallCenterModel.FK_OrderToStoreLog_OrderToStore" FromRole="OrderToStore" ToRole="OrderToStoreLog" />
-          <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="OrderToStore" ToRole="Recurrence" />
-          <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_OrderToStore" FromRole="OrderToStore" ToRole="StoreStatus" />
-          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="OrderToStore" ToRole="Franchise" />
-        </EntityType>
-        <Association Name="FK_OrderToStore_Address">
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="AddressId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderToStore_AspNetUsers">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="UserInsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderToStore_CatPayment">
-          <End Type="CallCenterModel.CatPayment" Role="CatPayment" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CatPayment">
-              <PropertyRef Name="CatPaymentId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="PaymentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderToStore_Client">
-          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="ClientId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderToStore_ClientPhone">
-          <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClientPhone">
-              <PropertyRef Name="ClientPhoneId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="ClientPhoneId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderToStore_FranchiseStore">
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FranchiseStore">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderToStore_PosOrder">
-          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PosOrder">
-              <PropertyRef Name="PosOrderId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="PosOrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderToStoreLog_OrderToStore">
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStoreLog" Role="OrderToStoreLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderToStore">
-              <PropertyRef Name="OrderToStoreId" />
-            </Principal>
-            <Dependent Role="OrderToStoreLog">
-              <PropertyRef Name="OrderToStoreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Recurrence_OrderToStore">
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="1" />
-          <End Type="CallCenterModel.Recurrence" Role="Recurrence" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderToStore">
-              <PropertyRef Name="OrderToStoreId" />
-            </Principal>
-            <Dependent Role="Recurrence">
-              <PropertyRef Name="OrderToStoreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StoreStatus_OrderToStore">
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="0..1" />
-          <End Type="CallCenterModel.StoreStatus" Role="StoreStatus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderToStore">
-              <PropertyRef Name="OrderToStoreId" />
-            </Principal>
-            <Dependent Role="StoreStatus">
-              <PropertyRef Name="LastOrderToStoreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Franchise">
-          <Key>
-            <PropertyRef Name="FranchiseId" />
-          </Key>
-          <Property Name="FranchiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="UserIdIns" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserIdUpd" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="DatetimeIns" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DatetimeUpd" Type="DateTime" Precision="3" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_Franchise_AspNetUsers" FromRole="Franchise" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_Franchise_AspNetUsers1" FromRole="Franchise" ToRole="AspNetUsers" />
-          <NavigationProperty Name="FranchiseButton" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="Franchise" ToRole="FranchiseButton" />
-          <NavigationProperty Name="FranchiseData" Relationship="CallCenterModel.FK_FranchiseData_Franchise" FromRole="Franchise" ToRole="FranchiseData" />
-          <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataVersion_Franchise" FromRole="Franchise" ToRole="FranchiseDataVersion" />
-          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_Franchise" FromRole="Franchise" ToRole="FranchiseStore" />
-          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="Franchise" ToRole="OrderToStore" />
-        </EntityType>
-        <EntityType Name="FranchiseData">
-          <Key>
-            <PropertyRef Name="FranchiseId" />
-          </Key>
-          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
-          <Property Name="DataFolder" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="NewDataFolder" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="WsAddress" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="LastVersion" Type="Int64" />
-          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseData_Franchise" FromRole="FranchiseData" ToRole="Franchise" />
-        </EntityType>
-        <EntityType Name="FranchiseDataFile">
-          <Key>
-            <PropertyRef Name="FranchiseDataFileId" />
-          </Key>
-          <Property Name="FranchiseDataFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FranchiseDataVersionId" Type="Int32" Nullable="false" />
-          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CheckSum" Type="Int32" Nullable="false" />
-          <Property Name="IsSync" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataFile_FranchiseDataVersion" FromRole="FranchiseDataFile" ToRole="FranchiseDataVersion" />
+          <Property Name="Role" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FranchiseDataVersion">
           <Key>
             <PropertyRef Name="FranchiseDataVersionId" />
           </Key>
           <Property Name="FranchiseDataVersionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FranchiseDataVersionUid" Type="Guid" Nullable="false" />
           <Property Name="FranchiseId" Type="Int32" Nullable="false" />
-          <Property Name="Version" Type="Int64" Nullable="false" />
+          <Property Name="Version" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="TotalNumberOfFiles" Type="Int32" Nullable="false" />
           <Property Name="NumberOfFilesDownloaded" Type="Int32" Nullable="false" />
           <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="TimestampComplete" Type="DateTime" Precision="7" />
+          <Property Name="UserInsId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsObsolete" Type="Boolean" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers" FromRole="FranchiseDataVersion" ToRole="AspNetUsers" />
           <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseDataVersion_Franchise" FromRole="FranchiseDataVersion" ToRole="Franchise" />
           <NavigationProperty Name="FranchiseDataFile" Relationship="CallCenterModel.FK_FranchiseDataFile_FranchiseDataVersion" FromRole="FranchiseDataVersion" ToRole="FranchiseDataFile" />
         </EntityType>
-        <Association Name="FK_Franchise_AspNetUsers">
+        <Association Name="FK_FranchiseDataVersion_AspNetUsers">
           <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
-          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="*" />
+          <End Type="CallCenterModel.FranchiseDataVersion" Role="FranchiseDataVersion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Franchise">
-              <PropertyRef Name="UserIdIns" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Franchise_AspNetUsers1">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
-          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Franchise">
-              <PropertyRef Name="UserIdUpd" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseButton_Franchise">
-          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseButton" Role="FranchiseButton" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Franchise">
-              <PropertyRef Name="FranchiseId" />
-            </Principal>
-            <Dependent Role="FranchiseButton">
-              <PropertyRef Name="FranchiseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseData_Franchise">
-          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseData" Role="FranchiseData" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Franchise">
-              <PropertyRef Name="FranchiseId" />
-            </Principal>
-            <Dependent Role="FranchiseData">
-              <PropertyRef Name="FranchiseId" />
+            <Dependent Role="FranchiseDataVersion">
+              <PropertyRef Name="UserInsId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3592,30 +3658,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               <PropertyRef Name="FranchiseId" />
             </Principal>
             <Dependent Role="FranchiseDataVersion">
-              <PropertyRef Name="FranchiseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseStore_Franchise">
-          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Franchise">
-              <PropertyRef Name="FranchiseId" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="FranchiseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderToStore_Franchise">
-          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Franchise">
-              <PropertyRef Name="FranchiseId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
               <PropertyRef Name="FranchiseId" />
             </Dependent>
           </ReferentialConstraint>
@@ -3711,6 +3753,35 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CallCenterInfo">
+            <EntityTypeMapping TypeName="CallCenterModel.CallCenterInfo">
+              <MappingFragment StoreEntitySet="CallCenterInfo">
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatDeliveryStatus">
+            <EntityTypeMapping TypeName="CallCenterModel.CatDeliveryStatus">
+              <MappingFragment StoreEntitySet="CatDeliveryStatus">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CatDeliveryStatusId" ColumnName="CatDeliveryStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatPayment">
+            <EntityTypeMapping TypeName="CallCenterModel.CatPayment">
+              <MappingFragment StoreEntitySet="CatPayment">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatPaymentId" ColumnName="CatPaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="CallCenterModel.Client">
               <MappingFragment StoreEntitySet="Client">
@@ -3720,6 +3791,16 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientInfo">
+            <EntityTypeMapping TypeName="CallCenterModel.ClientInfo">
+              <MappingFragment StoreEntitySet="ClientInfo">
+                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="ClientHost" ColumnName="ClientHost" />
+                <ScalarProperty Name="ClientInfoId" ColumnName="ClientInfoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3796,6 +3877,21 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Franchise">
+            <EntityTypeMapping TypeName="CallCenterModel.Franchise">
+              <MappingFragment StoreEntitySet="Franchise">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="DatetimeUpd" ColumnName="DatetimeUpd" />
+                <ScalarProperty Name="DatetimeIns" ColumnName="DatetimeIns" />
+                <ScalarProperty Name="UserIdUpd" ColumnName="UserIdUpd" />
+                <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="FranchiseButton">
             <EntityTypeMapping TypeName="CallCenterModel.FranchiseButton">
               <MappingFragment StoreEntitySet="FranchiseButton">
@@ -3804,6 +3900,28 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FranchiseData">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseData">
+              <MappingFragment StoreEntitySet="FranchiseData">
+                <ScalarProperty Name="LastVersion" ColumnName="LastVersion" />
+                <ScalarProperty Name="WsAddress" ColumnName="WsAddress" />
+                <ScalarProperty Name="NewDataFolder" ColumnName="NewDataFolder" />
+                <ScalarProperty Name="DataFolder" ColumnName="DataFolder" />
+                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FranchiseDataFile">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseDataFile">
+              <MappingFragment StoreEntitySet="FranchiseDataFile">
+                <ScalarProperty Name="IsSync" ColumnName="IsSync" />
+                <ScalarProperty Name="CheckSum" ColumnName="CheckSum" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FranchiseDataVersionId" ColumnName="FranchiseDataVersionId" />
+                <ScalarProperty Name="FranchiseDataFileId" ColumnName="FranchiseDataFileId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3816,6 +3934,37 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="FranchisePhoneId" ColumnName="FranchisePhoneId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FranchiseStore">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseStore">
+              <MappingFragment StoreEntitySet="FranchiseStore">
+                <ScalarProperty Name="ManageUserId" ColumnName="ManageUserId" />
+                <ScalarProperty Name="WsAddress" ColumnName="WsAddress" />
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="DatetimeUpd" ColumnName="DatetimeUpd" />
+                <ScalarProperty Name="DatetimeIns" ColumnName="DatetimeIns" />
+                <ScalarProperty Name="UserIdUpd" ColumnName="UserIdUpd" />
+                <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FranchiseStoreOffLine">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseStoreOffLine">
+              <MappingFragment StoreEntitySet="FranchiseStoreOffLine">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="UserUpdId" ColumnName="UserUpdId" />
+                <ScalarProperty Name="UserInsId" ColumnName="UserInsId" />
+                <ScalarProperty Name="DateTimeEnd" ColumnName="DateTimeEnd" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="DateTimeStart" ColumnName="DateTimeStart" />
+                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
+                <ScalarProperty Name="FranchiseStoreOffLineId" ColumnName="FranchiseStoreOffLineId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3851,6 +4000,32 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OrderToStore">
+            <EntityTypeMapping TypeName="CallCenterModel.OrderToStore">
+              <MappingFragment StoreEntitySet="OrderToStore">
+                <ScalarProperty Name="FailedStatusCounter" ColumnName="FailedStatusCounter" />
+                <ScalarProperty Name="DateTimeCanceled" ColumnName="DateTimeCanceled" />
+                <ScalarProperty Name="IsCanceled" ColumnName="IsCanceled" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="PromiseTime" ColumnName="PromiseTime" />
+                <ScalarProperty Name="OrderModeCharge" ColumnName="OrderModeCharge" />
+                <ScalarProperty Name="OrderMode" ColumnName="OrderMode" />
+                <ScalarProperty Name="OrderAtoId" ColumnName="OrderAtoId" />
+                <ScalarProperty Name="EndDatetime" ColumnName="EndDatetime" />
+                <ScalarProperty Name="StartDatetime" ColumnName="StartDatetime" />
+                <ScalarProperty Name="UserInsId" ColumnName="UserInsId" />
+                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
+                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
+                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="ClientPhoneId" ColumnName="ClientPhoneId" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="LastStatus" ColumnName="LastStatus" />
+                <ScalarProperty Name="OrderToStoreId" ColumnName="OrderToStoreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="OrderToStoreLog">
             <EntityTypeMapping TypeName="CallCenterModel.OrderToStoreLog">
               <MappingFragment StoreEntitySet="OrderToStoreLog">
@@ -3871,6 +4046,21 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PosOrder">
+            <EntityTypeMapping TypeName="CallCenterModel.PosOrder">
+              <MappingFragment StoreEntitySet="PosOrder">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderDatetime" ColumnName="OrderDatetime" />
+                <ScalarProperty Name="GuidId" ColumnName="GuidId" />
+                <ScalarProperty Name="CheckId" ColumnName="CheckId" />
+                <ScalarProperty Name="FranchiseCode" ColumnName="FranchiseCode" />
+                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PosOrderItem">
             <EntityTypeMapping TypeName="CallCenterModel.PosOrderItem">
               <MappingFragment StoreEntitySet="PosOrderItem">
@@ -3881,6 +4071,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
                 <ScalarProperty Name="PosOrderItemId" ColumnName="PosOrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recurrence">
+            <EntityTypeMapping TypeName="CallCenterModel.Recurrence">
+              <MappingFragment StoreEntitySet="Recurrence">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="TimestampShort" ColumnName="TimestampShort" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="OrderToStoreId" ColumnName="OrderToStoreId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="RecurrenceId" ColumnName="RecurrenceId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3942,6 +4144,16 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ServerInfo">
+            <EntityTypeMapping TypeName="CallCenterModel.ServerInfo">
+              <MappingFragment StoreEntitySet="ServerInfo">
+                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
+                <ScalarProperty Name="ServerCode" ColumnName="ServerCode" />
+                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+                <ScalarProperty Name="ServerInfoId" ColumnName="ServerInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Setting">
             <EntityTypeMapping TypeName="CallCenterModel.Setting">
               <MappingFragment StoreEntitySet="Setting">
@@ -3979,6 +4191,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserDetail">
+            <EntityTypeMapping TypeName="CallCenterModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetail">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="InsDateTime" ColumnName="InsDateTime" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ZipCode">
             <EntityTypeMapping TypeName="CallCenterModel.ZipCode">
               <MappingFragment StoreEntitySet="ZipCode">
@@ -4012,124 +4236,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               <ScalarProperty Name="ClientId" ColumnName="ClientId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="ViewUserInfo">
-            <EntityTypeMapping TypeName="CallCenterModel.ViewUserInfo">
-              <MappingFragment StoreEntitySet="ViewUserInfo">
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserDetail">
-            <EntityTypeMapping TypeName="CallCenterModel.UserDetail">
-              <MappingFragment StoreEntitySet="UserDetail">
-                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
-                <ScalarProperty Name="InsDateTime" ColumnName="InsDateTime" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CallCenterInfo">
-            <EntityTypeMapping TypeName="CallCenterModel.CallCenterInfo">
-              <MappingFragment StoreEntitySet="CallCenterInfo">
-                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
-                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClientInfo">
-            <EntityTypeMapping TypeName="CallCenterModel.ClientInfo">
-              <MappingFragment StoreEntitySet="ClientInfo">
-                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
-                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
-                <ScalarProperty Name="ClientHost" ColumnName="ClientHost" />
-                <ScalarProperty Name="ClientInfoId" ColumnName="ClientInfoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ServerInfo">
-            <EntityTypeMapping TypeName="CallCenterModel.ServerInfo">
-              <MappingFragment StoreEntitySet="ServerInfo">
-                <ScalarProperty Name="CallCenterInfoId" ColumnName="CallCenterInfoId" />
-                <ScalarProperty Name="ServerCode" ColumnName="ServerCode" />
-                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
-                <ScalarProperty Name="ServerInfoId" ColumnName="ServerInfoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Recurrence">
-            <EntityTypeMapping TypeName="CallCenterModel.Recurrence">
-              <MappingFragment StoreEntitySet="Recurrence">
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="TimestampShort" ColumnName="TimestampShort" />
-                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-                <ScalarProperty Name="OrderToStoreId" ColumnName="OrderToStoreId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="RecurrenceId" ColumnName="RecurrenceId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PosOrder">
-            <EntityTypeMapping TypeName="CallCenterModel.PosOrder">
-              <MappingFragment StoreEntitySet="PosOrder">
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="OrderDatetime" ColumnName="OrderDatetime" />
-                <ScalarProperty Name="GuidId" ColumnName="GuidId" />
-                <ScalarProperty Name="CheckId" ColumnName="CheckId" />
-                <ScalarProperty Name="FranchiseCode" ColumnName="FranchiseCode" />
-                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatPayment">
-            <EntityTypeMapping TypeName="CallCenterModel.CatPayment">
-              <MappingFragment StoreEntitySet="CatPayment">
-                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CatPaymentId" ColumnName="CatPaymentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CatDeliveryStatus">
-            <EntityTypeMapping TypeName="CallCenterModel.CatDeliveryStatus">
-              <MappingFragment StoreEntitySet="CatDeliveryStatus">
-                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="CatDeliveryStatusId" ColumnName="CatDeliveryStatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FranchiseStore">
-            <EntityTypeMapping TypeName="CallCenterModel.FranchiseStore">
-              <MappingFragment StoreEntitySet="FranchiseStore">
-                <ScalarProperty Name="ManageUserId" ColumnName="ManageUserId" />
-                <ScalarProperty Name="WsAddress" ColumnName="WsAddress" />
-                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="DatetimeUpd" ColumnName="DatetimeUpd" />
-                <ScalarProperty Name="DatetimeIns" ColumnName="DatetimeIns" />
-                <ScalarProperty Name="UserIdUpd" ColumnName="UserIdUpd" />
-                <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
-                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="RelFranchisePhoneStore" TypeName="CallCenterModel.RelFranchisePhoneStore" StoreEntitySet="RelFranchisePhoneStore">
             <EndProperty Name="FranchiseStore">
               <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
@@ -4138,20 +4244,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               <ScalarProperty Name="FranchisePhoneId" ColumnName="FranchisePhoneId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="FranchiseStoreOffLine">
-            <EntityTypeMapping TypeName="CallCenterModel.FranchiseStoreOffLine">
-              <MappingFragment StoreEntitySet="FranchiseStoreOffLine">
-                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
-                <ScalarProperty Name="UserUpdId" ColumnName="UserUpdId" />
-                <ScalarProperty Name="UserInsId" ColumnName="UserInsId" />
-                <ScalarProperty Name="DateTimeEnd" ColumnName="DateTimeEnd" />
-                <ScalarProperty Name="Duration" ColumnName="Duration" />
-                <ScalarProperty Name="DateTimeStart" ColumnName="DateTimeStart" />
-                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
-                <ScalarProperty Name="FranchiseStoreOffLineId" ColumnName="FranchiseStoreOffLineId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ViewStoreInfo">
             <EntityTypeMapping TypeName="CallCenterModel.ViewStoreInfo">
               <MappingFragment StoreEntitySet="ViewStoreInfo">
@@ -4166,83 +4258,37 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderToStore">
-            <EntityTypeMapping TypeName="CallCenterModel.OrderToStore">
-              <MappingFragment StoreEntitySet="OrderToStore">
-                <ScalarProperty Name="FailedStatusCounter" ColumnName="FailedStatusCounter" />
-                <ScalarProperty Name="DateTimeCanceled" ColumnName="DateTimeCanceled" />
-                <ScalarProperty Name="IsCanceled" ColumnName="IsCanceled" />
-                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
-                <ScalarProperty Name="PromiseTime" ColumnName="PromiseTime" />
-                <ScalarProperty Name="OrderModeCharge" ColumnName="OrderModeCharge" />
-                <ScalarProperty Name="OrderMode" ColumnName="OrderMode" />
-                <ScalarProperty Name="OrderAtoId" ColumnName="OrderAtoId" />
-                <ScalarProperty Name="EndDatetime" ColumnName="EndDatetime" />
-                <ScalarProperty Name="StartDatetime" ColumnName="StartDatetime" />
-                <ScalarProperty Name="UserInsId" ColumnName="UserInsId" />
-                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
-                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
-                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="ClientPhoneId" ColumnName="ClientPhoneId" />
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="LastStatus" ColumnName="LastStatus" />
-                <ScalarProperty Name="OrderToStoreId" ColumnName="OrderToStoreId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Franchise">
-            <EntityTypeMapping TypeName="CallCenterModel.Franchise">
-              <MappingFragment StoreEntitySet="Franchise">
+          <EntitySetMapping Name="ViewUserInfo">
+            <EntityTypeMapping TypeName="CallCenterModel.ViewUserInfo">
+              <MappingFragment StoreEntitySet="ViewUserInfo">
+                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="DatetimeUpd" ColumnName="DatetimeUpd" />
-                <ScalarProperty Name="DatetimeIns" ColumnName="DatetimeIns" />
-                <ScalarProperty Name="UserIdUpd" ColumnName="UserIdUpd" />
-                <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
-                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FranchiseData">
-            <EntityTypeMapping TypeName="CallCenterModel.FranchiseData">
-              <MappingFragment StoreEntitySet="FranchiseData">
-                <ScalarProperty Name="LastVersion" ColumnName="LastVersion" />
-                <ScalarProperty Name="WsAddress" ColumnName="WsAddress" />
-                <ScalarProperty Name="NewDataFolder" ColumnName="NewDataFolder" />
-                <ScalarProperty Name="DataFolder" ColumnName="DataFolder" />
-                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FranchiseDataFile">
-            <EntityTypeMapping TypeName="CallCenterModel.FranchiseDataFile">
-              <MappingFragment StoreEntitySet="FranchiseDataFile">
-                <ScalarProperty Name="IsSync" ColumnName="IsSync" />
-                <ScalarProperty Name="CheckSum" ColumnName="CheckSum" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="FranchiseDataVersionId" ColumnName="FranchiseDataVersionId" />
-                <ScalarProperty Name="FranchiseDataFileId" ColumnName="FranchiseDataFileId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FranchiseDataVersion">
             <EntityTypeMapping TypeName="CallCenterModel.FranchiseDataVersion">
               <MappingFragment StoreEntitySet="FranchiseDataVersion">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="UserInsId" ColumnName="UserInsId" />
+                <ScalarProperty Name="TimestampComplete" ColumnName="TimestampComplete" />
                 <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
                 <ScalarProperty Name="NumberOfFilesDownloaded" ColumnName="NumberOfFilesDownloaded" />
                 <ScalarProperty Name="TotalNumberOfFiles" ColumnName="TotalNumberOfFiles" />
                 <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+                <ScalarProperty Name="FranchiseDataVersionUid" ColumnName="FranchiseDataVersionUid" />
                 <ScalarProperty Name="FranchiseDataVersionId" ColumnName="FranchiseDataVersionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

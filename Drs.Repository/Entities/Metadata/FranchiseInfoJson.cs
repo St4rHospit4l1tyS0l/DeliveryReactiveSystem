@@ -6,7 +6,8 @@ namespace Drs.Repository.Entities.Metadata
 {
     public static class FranchiseInfoJson
     {
-        [CanBeNull, UsedImplicitly] private static Franchise _modelEnt = null;
+        [CanBeNull, UsedImplicitly]
+        private static Franchise _modelEnt = null;
 
         public static readonly string Key = _modelEnt.PropertyName(e => e.FranchiseId);
 
@@ -32,6 +33,5 @@ namespace Drs.Repository.Entities.Metadata
 
             return model;
         }
-
     }
 }

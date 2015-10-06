@@ -46,6 +46,16 @@
         return def.promise;
     };
     
+
+    $scope.doConfirmMsg = function (params, msg, urlToGo, innerScp) {
+        var def = $q.defer();
+        sharedSvc.showConf({ Title: msg.Title, Message: msg.Message, Type: msg.Type }).
+            then(function () {
+                $scope.doPost(params, urlToGo, def, innerScp);
+            }, def.reject);
+        return def.promise;
+    };
+    
     $scope.doCancelDocument = function (data, urlToGo, folio) {
         var def = $q.defer();
         sharedSvc.showConf({ Title: "Confirmación de cancelación de documento", Message: "¿Está seguro que desea cancelar el documento con folio "+folio+"?", Type: "warning" }).

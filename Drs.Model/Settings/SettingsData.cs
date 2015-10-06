@@ -97,6 +97,7 @@ namespace Drs.Model.Settings
                 public const string TMP_FOLDER = "TMP";
                 public const string STOP_FILE = "STOP";
                 public const string BIN_FOLDER = "BIN";
+                public const string WS_SYNC_FILES = "Sync/SyncService.svc";
             }
 
             public class StoreConst

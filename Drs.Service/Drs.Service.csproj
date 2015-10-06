@@ -156,6 +156,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\SyncService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ServiceClient\ExecuteServiceClient.cs" />
     <Compile Include="ServiceClient\IExecuteServiceClient.cs" />
     <Compile Include="ServiceClient\ServiceClientBase.cs" />
@@ -235,6 +240,19 @@
     <None Include="Service References\QueryFunction\Drs.Service.QueryFunction.ResponseRd.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SyncService\Drs.Service.SyncService.ResponseMessageFc.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SyncService\SyncService.wsdl" />
+    <None Include="Service References\SyncService\SyncService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncService\SyncService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncService\SyncService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -243,6 +261,7 @@
     <WCFMetadataStorage Include="Service References\CustomerOrder\" />
     <WCFMetadataStorage Include="Service References\LicProxySvc\" />
     <WCFMetadataStorage Include="Service References\QueryFunction\" />
+    <WCFMetadataStorage Include="Service References\SyncService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\QueryFunction\configuration91.svcinfo" />
@@ -295,6 +314,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\CustomerOrder\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncService\SyncService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

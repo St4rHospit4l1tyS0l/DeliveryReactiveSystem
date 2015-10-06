@@ -12,6 +12,12 @@ window.showUpsertParams = function (params, divScope, urlToGo, jqGridToUse) {
 
 };
 
+window.showConfirmServiceWithMsg = function (params, msg, divScope, urlToGo, jqGridToUse) {
+    var scope = angular.element($(divScope)).scope();
+    scope.doConfirmMsg(params, msg, urlToGo).
+        then(function () { $(jqGridToUse).trigger("reloadGrid"); });
+};
+
 window.showConfirmService = function (id, divScope, urlToGo, jqGridToUse) {
     var scope = angular.element($(divScope)).scope();
     scope.doConfirm({ id: id }, urlToGo).
