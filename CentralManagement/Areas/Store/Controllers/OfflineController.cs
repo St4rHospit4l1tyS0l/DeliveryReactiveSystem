@@ -125,7 +125,7 @@ namespace CentralManagement.Areas.Store.Controllers
                 return Json(new ResponseMessageModel
                 {
                     HasError = true,
-                    Title = Resources.ResShared.TITLE_REGISTER_FAILED,
+                    Title = ResShared.TITLE_REGISTER_FAILED,
                     Message = ResShared.ERROR_UNKOWN
                 });
             }

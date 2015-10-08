@@ -33,6 +33,7 @@ namespace Drs.Repository.Entities
             this.PosOrder = new HashSet<PosOrder>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
             this.FranchiseDataVersion = new HashSet<FranchiseDataVersion>();
+            this.FranchiseDataVersion1 = new HashSet<FranchiseDataVersion>();
         }
     
         public string Id { get; set; }
@@ -66,5 +67,6 @@ namespace Drs.Repository.Entities
         public virtual UserDetail UserDetail { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
         public virtual ICollection<FranchiseDataVersion> FranchiseDataVersion { get; set; }
+        public virtual ICollection<FranchiseDataVersion> FranchiseDataVersion1 { get; set; }
     }
 }

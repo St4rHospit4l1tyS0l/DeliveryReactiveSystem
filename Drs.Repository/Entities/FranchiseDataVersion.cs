@@ -27,11 +27,13 @@ namespace Drs.Repository.Entities
         public int TotalNumberOfFiles { get; set; }
         public int NumberOfFilesDownloaded { get; set; }
         public bool IsCompleted { get; set; }
-        public Nullable<System.DateTime> TimestampComplete { get; set; }
         public string UserInsId { get; set; }
+        public Nullable<System.DateTime> TimestampComplete { get; set; }
         public Nullable<bool> IsObsolete { get; set; }
+        public string UserUpdId { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual AspNetUsers AspNetUsers1 { get; set; }
         public virtual Franchise Franchise { get; set; }
         public virtual ICollection<FranchiseDataFile> FranchiseDataFile { get; set; }
     }

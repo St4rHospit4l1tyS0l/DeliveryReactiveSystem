@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using FranchiseChannel.Service.Model;
 using Microsoft.VisualBasic.FileIO;
+using SearchOption = System.IO.SearchOption;
 
 namespace FranchiseChannel.Service.Sync
 {
@@ -14,7 +16,7 @@ namespace FranchiseChannel.Service.Sync
             var msg = new ResponseMessageFc();
             try
             {
-                SnapshotPathsAndFiles(uidVersion.ToString());
+                msg.TotalFiles = SnapshotPathsAndFiles(uidVersion.ToString());
                 msg.HasError = false;
             }
             catch (Exception ex)
@@ -26,11 +28,15 @@ namespace FranchiseChannel.Service.Sync
             return msg;
         }
 
-        private static void SnapshotPathsAndFiles(string newPath)
+        private static int SnapshotPathsAndFiles(string newPath)
         {
             var paths = CreatePaths(newPath);
             FileSystem.CopyDirectory(Settings.DataPath, paths.Data);
             FileSystem.CopyDirectory(Settings.NewDataPath, paths.NewData);
+
+            var totFiles = Directory.GetFiles(Settings.DataPath, "*", SearchOption.TopDirectoryOnly).Length;
+            totFiles += Directory.GetFiles(Settings.NewDataPath, "*", SearchOption.TopDirectoryOnly).Length;
+            return totFiles;
         }
 
         private static DataPaths CreatePaths(string newPath)

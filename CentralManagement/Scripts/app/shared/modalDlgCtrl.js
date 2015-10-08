@@ -48,11 +48,15 @@
     
 
     $scope.doConfirmMsg = function (params, msg, urlToGo, innerScp) {
+        if (innerScp === true) { $scope.working = true; } else { $scope.$apply(function () { $scope.working = true; }); }
         var def = $q.defer();
         sharedSvc.showConf({ Title: msg.Title, Message: msg.Message, Type: msg.Type }).
             then(function () {
-                $scope.doPost(params, urlToGo, def, innerScp);
-            }, def.reject);
+                $scope.doPost(params, urlToGo, def, true);
+            }, function() {                
+                $scope.working = false;
+                def.reject();
+            });
         return def.promise;
     };
     
@@ -75,7 +79,7 @@
         var def = $q.defer();
         sharedSvc.showConf({ Title: "Eliminar registro", Message: "¿Está seguro de que desea eliminar el registro?", Type: "danger" }).
             then(function() {
-                $scope.doPost(data, urlToGo, def);
+                $scope.doPost(data, urlToGo, def, true);
             }, def.reject);
         return def.promise;
     };

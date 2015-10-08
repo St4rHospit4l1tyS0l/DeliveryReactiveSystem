@@ -104,7 +104,6 @@ namespace Drs.Service.Franchise
                 FranchiseDataVersionUid = Guid.NewGuid(),
                 Version = now.Ticks.ToString(CultureInfo.InvariantCulture).ToVersion(4, 3, '.'),
                 Timestamp = now,
-                TotalNumberOfFiles = 0,
                 NumberOfFilesDownloaded = 0,
                 IsCompleted = false,
                 TimestampComplete = null,
@@ -114,17 +113,16 @@ namespace Drs.Service.Franchise
 
             var wsUrl = _repository.GetUrlSyncWsByFranchiseId(franchiseId);
 
-            FranchiseQueryForFiles(model, response, wsUrl);
+            model.TotalNumberOfFiles = FranchiseQueryForFiles(model, response, wsUrl);
 
             if (response.HasError)
                 return;
 
             _repository.SaveFranchiseDataVersion(model);
-
             response.HasError = false;
         }
 
-        private void FranchiseQueryForFiles(FranchiseDataVersion model, ResponseMessageModel response, string wsUrl)
+        private int FranchiseQueryForFiles(FranchiseDataVersion model, ResponseMessageModel response, string wsUrl)
         {
             using (var client = new SyncServiceClient(new BasicHttpBinding(), new EndpointAddress(wsUrl + SettingsData.Constants.Franchise.WS_SYNC_FILES)))
             {
@@ -133,12 +131,18 @@ namespace Drs.Service.Franchise
                 if (res.HasError == false)
                 {
                     response.HasError = false;
-                    return;
+                    return res.TotalFiles;
                 }
 
                 response.Message = res.Message;
                 response.HasError = true;
+                return EntityConstants.NO_VALUE;
             }
+        }
+
+        public void DoObsoleteVersion(int id, string userId, ResponseMessageModel response)
+        {
+            _repository.DoObsoleteVersion(id, userId, response);
         }
     }
 }

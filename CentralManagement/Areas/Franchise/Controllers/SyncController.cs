@@ -1,16 +1,14 @@
 ﻿using System;
+using System.Threading;
 using System.Web.Mvc;
 using Drs.Infrastructure.JqGrid.Model;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Constants;
-using Drs.Model.Franchise;
 using Drs.Repository.Entities.Metadata;
 using Drs.Repository.Log;
-using Drs.Repository.Order;
 using Drs.Repository.Shared;
 using Drs.Service.Franchise;
 using Microsoft.AspNet.Identity;
-using Newtonsoft.Json;
 using ResShared = CentralManagement.Resources.ResShared;
 
 namespace CentralManagement.Areas.Franchise.Controllers
@@ -67,6 +65,35 @@ namespace CentralManagement.Areas.Franchise.Controllers
                 {
                     HasError = true,
                     Title = ResShared.TITLE_REGISTER_FAILED,
+                    Message = ResShared.ERROR_UNKOWN
+                });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DoObsolete(int id)
+        {
+            try
+            {
+                var response = new ResponseMessageModel();
+
+                using (var service = new FranchiseSettingService())
+                {
+                    service.DoObsoleteVersion(id, User.Identity.GetUserId(), response);
+                }
+
+                if (response.HasError)
+                    response.Title = ResShared.TITLE_OBSOLETE_FAILED;
+
+                return Json(response);
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex, id);
+                return Json(new ResponseMessageModel
+                {
+                    HasError = true,
+                    Title = ResShared.TITLE_OBSOLETE_FAILED,
                     Message = ResShared.ERROR_UNKOWN
                 });
             }

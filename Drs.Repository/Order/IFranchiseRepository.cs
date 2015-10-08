@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Drs.Infrastructure.Resources;
 using Drs.Model.Franchise;
 using Drs.Model.Menu;
 using Drs.Repository.Entities;
@@ -18,5 +19,6 @@ namespace Drs.Repository.Order
         bool IsCodeAlreadyUsed(string code, int franchiseId);
         void SaveFranchiseDataVersion(FranchiseDataVersion model);
         string GetUrlSyncWsByFranchiseId(int franchiseId);
+        void DoObsoleteVersion(int id, string userId, ResponseMessageModel response);
     }
 }

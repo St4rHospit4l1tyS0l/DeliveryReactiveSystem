@@ -120,6 +120,7 @@
         <EntityTypeShape EntityType="CallCenterModel.ViewUserInfo" Width="1.5" PointX="3.375" PointY="4.75" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseDataVersion" Width="1.5" PointX="24.875" PointY="32.25" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers" />
+        <AssociationConnector Association="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers1" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseDataVersion_Franchise" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseDataFile_FranchiseDataVersion" />
       </Diagram>

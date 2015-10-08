@@ -28,6 +28,9 @@ namespace Drs.Service.SyncService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MessageField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TotalFilesField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -60,6 +63,19 @@ namespace Drs.Service.SyncService {
                 if ((object.ReferenceEquals(this.MessageField, value) != true)) {
                     this.MessageField = value;
                     this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TotalFiles {
+            get {
+                return this.TotalFilesField;
+            }
+            set {
+                if ((this.TotalFilesField.Equals(value) != true)) {
+                    this.TotalFilesField = value;
+                    this.RaisePropertyChanged("TotalFiles");
                 }
             }
         }

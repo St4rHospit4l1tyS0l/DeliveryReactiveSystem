@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Drs.Infrastructure.Resources;
 using Drs.Model.Franchise;
 using Drs.Model.Menu;
 using Drs.Model.Shared;
@@ -124,6 +125,23 @@ namespace Drs.Repository.Order
         public string GetUrlSyncWsByFranchiseId(int franchiseId)
         {
             return DbEntities.Franchise.Where(e => e.FranchiseId == franchiseId).Select(e => e.FranchiseData.WsAddress).Single();
+        }
+
+        public void DoObsoleteVersion(int id, string userId, ResponseMessageModel response)
+        {
+            var model = DbEntities.FranchiseDataVersion.FirstOrDefault(e => e.FranchiseDataVersionId == id);
+
+            if (model == null)
+            {
+                response.HasError = true;
+                response.Message = "No existe registro para actualizar";
+                return;
+            }
+
+            model.UserUpdId = userId;
+            model.IsObsolete = true;
+
+            DbEntities.SaveChanges();
         }
 
         public OptionModel GetFranchiseByCode(string franchiseCode)

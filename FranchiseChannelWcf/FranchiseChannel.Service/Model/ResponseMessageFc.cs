@@ -10,5 +10,8 @@ namespace FranchiseChannel.Service.Model
 
         [DataMember]
         public bool HasError { get; set; }
+
+        [DataMember]
+        public int TotalFiles { get; set; }
     }
 }
