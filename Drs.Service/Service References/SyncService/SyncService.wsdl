@@ -13,16 +13,35 @@
   <wsdl:message name="ISyncService_QueryForFiles_OutputMessage">
     <wsdl:part name="parameters" element="tns:QueryForFilesResponse" />
   </wsdl:message>
+  <wsdl:message name="ISyncService_GetUnSyncListOfFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUnSyncListOfFiles" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetUnSyncListOfFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUnSyncListOfFilesResponse" />
+  </wsdl:message>
   <wsdl:portType name="ISyncService">
     <wsdl:operation name="QueryForFiles">
       <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/QueryForFiles" message="tns:ISyncService_QueryForFiles_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/QueryForFilesResponse" message="tns:ISyncService_QueryForFiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnSyncListOfFiles">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/GetUnSyncListOfFiles" message="tns:ISyncService_GetUnSyncListOfFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/GetUnSyncListOfFilesResponse" message="tns:ISyncService_GetUnSyncListOfFiles_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISyncService" type="tns:ISyncService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="QueryForFiles">
       <soap:operation soapAction="http://tempuri.org/ISyncService/QueryForFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnSyncListOfFiles">
+      <soap:operation soapAction="http://tempuri.org/ISyncService/GetUnSyncListOfFiles" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

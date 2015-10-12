@@ -17,6 +17,7 @@ namespace Drs.Service.SyncService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseMessageFc", Namespace="http://schemas.datacontract.org/2004/07/FranchiseChannel.Service.Model")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Drs.Service.SyncService.ResponseMessageFcUnSync))]
     public partial class ResponseMessageFc : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -90,6 +91,90 @@ namespace Drs.Service.SyncService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResponseMessageFcUnSync", Namespace="http://schemas.datacontract.org/2004/07/FranchiseChannel.Service.Model")]
+    [System.SerializableAttribute()]
+    public partial class ResponseMessageFcUnSync : Drs.Service.SyncService.ResponseMessageFc {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Drs.Service.SyncService.UnSyncFilesModel[] LstFilesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Drs.Service.SyncService.UnSyncFilesModel[] LstFiles {
+            get {
+                return this.LstFilesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LstFilesField, value) != true)) {
+                    this.LstFilesField = value;
+                    this.RaisePropertyChanged("LstFiles");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UnSyncFilesModel", Namespace="http://schemas.datacontract.org/2004/07/FranchiseChannel.Service.Model")]
+    [System.SerializableAttribute()]
+    public partial class UnSyncFilesModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CheckSumField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FileNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CheckSum {
+            get {
+                return this.CheckSumField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CheckSumField, value) != true)) {
+                    this.CheckSumField = value;
+                    this.RaisePropertyChanged("CheckSum");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FileName {
+            get {
+                return this.FileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SyncService.ISyncService")]
     public interface ISyncService {
@@ -99,6 +184,12 @@ namespace Drs.Service.SyncService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/QueryForFiles", ReplyAction="http://tempuri.org/ISyncService/QueryForFilesResponse")]
         System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFc> QueryForFilesAsync(System.Guid uidVersion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetUnSyncListOfFiles", ReplyAction="http://tempuri.org/ISyncService/GetUnSyncListOfFilesResponse")]
+        Drs.Service.SyncService.ResponseMessageFcUnSync GetUnSyncListOfFiles(System.Guid uidVersion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetUnSyncListOfFiles", ReplyAction="http://tempuri.org/ISyncService/GetUnSyncListOfFilesResponse")]
+        System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFcUnSync> GetUnSyncListOfFilesAsync(System.Guid uidVersion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -134,6 +225,14 @@ namespace Drs.Service.SyncService {
         
         public System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFc> QueryForFilesAsync(System.Guid uidVersion) {
             return base.Channel.QueryForFilesAsync(uidVersion);
+        }
+        
+        public Drs.Service.SyncService.ResponseMessageFcUnSync GetUnSyncListOfFiles(System.Guid uidVersion) {
+            return base.Channel.GetUnSyncListOfFiles(uidVersion);
+        }
+        
+        public System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFcUnSync> GetUnSyncListOfFilesAsync(System.Guid uidVersion) {
+            return base.Channel.GetUnSyncListOfFilesAsync(uidVersion);
         }
     }
 }

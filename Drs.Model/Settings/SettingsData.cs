@@ -115,6 +115,7 @@ namespace Drs.Model.Settings
                 public const string BY_REGIOND = "BY_REGIOND";
                 public const string BY_ZIPCODE = "BY_ZIPCODE";
                 public const string TIME_UPDATE_STORE_ORDER = "TIME_UPDATE_STORE_ORDER";
+                public const string TIME_SYNC_SERVER_FILES = "TIME_SYNC_SERVER_FILES";
                 public const string MAX_FAILED_STATUS_COUNTER = "MAX_FAILED_STATUS_COUNTER"; 
 
                 public const int STORE_RESPONSE_ORDER_ERROR = 1100;
@@ -212,6 +213,7 @@ namespace Drs.Model.Settings
 
         public class Store
         {
+            public static int TimeSyncServerFilesOrder { get; set; }
             public static int TimeUpdateStoreOrder { get; set; }
             public static bool ByCountry { get; set; }
             public static bool ByRegionA { get; set; }

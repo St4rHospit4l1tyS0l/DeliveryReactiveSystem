@@ -17,7 +17,7 @@ namespace Drs.Repository.Entities
         public int FranchiseDataFileId { get; set; }
         public int FranchiseDataVersionId { get; set; }
         public string FileName { get; set; }
-        public int CheckSum { get; set; }
+        public string CheckSum { get; set; }
         public bool IsSync { get; set; }
     
         public virtual FranchiseDataVersion FranchiseDataVersion { get; set; }

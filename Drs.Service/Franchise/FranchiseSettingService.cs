@@ -106,6 +106,7 @@ namespace Drs.Service.Franchise
                 Timestamp = now,
                 NumberOfFilesDownloaded = 0,
                 IsCompleted = false,
+                IsListOfFilesReceived = false,
                 TimestampComplete = null,
                 UserInsId = userId,
                 IsObsolete = false

@@ -15,7 +15,8 @@ namespace Drs.ConnectService
         {
             var servicesToRun = new ServiceBase[] 
                 { 
-                    new UpdateOrderStatus()  
+                    //new UpdateOrderStatus(),
+                    new SyncServerFiles() 
                 };
 
             if (Environment.UserInteractive)

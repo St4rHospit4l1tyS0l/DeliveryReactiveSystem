@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Franchise;
@@ -170,6 +171,42 @@ namespace Drs.Repository.Order
                     Image = e.FranchiseButton.Image,
                     Products = e.FranchiseButton.Products
                 }).FirstOrDefault();
+        }
+
+        public IQueryable<UnSyncListModel> GetUnSyncListOfFiles()
+        {
+            return DbEntities.FranchiseDataVersion.Where(e => e.Franchise.IsObsolete == false 
+                && e.IsObsolete == false && e.IsListOfFilesReceived == false)
+                .Select(e => new UnSyncListModel
+                {
+                    FranchiseId = e.FranchiseId,
+                    FranchiseDataVersionId = e.FranchiseDataVersionId,
+                    WsAddress = e.Franchise.FranchiseData.WsAddress,
+                    FranchiseDataVersionUid = e.FranchiseDataVersionUid
+                });
+        }
+
+
+        public void SaveListOfFranchiseDataFile(UnSyncListModel syncListModel, IEnumerable<FranchiseDataFile> lstFiles)
+        {
+            DbEntities.Configuration.ValidateOnSaveEnabled = false;
+            using (var dbTrans = DbEntities.Database.BeginTransaction(IsolationLevel.Snapshot))
+            {
+                DbEntities.FranchiseDataFile.AddRange(lstFiles);
+                DbEntities.SaveChanges();
+
+                var franchiseDataVersion = new FranchiseDataVersion
+                {
+                    FranchiseDataVersionId = syncListModel.FranchiseDataVersionId,
+                    IsListOfFilesReceived = true
+                };
+
+                DbEntities.FranchiseDataVersion.Attach(franchiseDataVersion);
+                DbEntities.Entry(franchiseDataVersion).Property(e => e.IsListOfFilesReceived).IsModified = true;
+                DbEntities.SaveChanges();
+
+                dbTrans.Commit();
+            }
         }
     }
 }

@@ -8,4 +8,27 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ResponseMessageFc" nillable="true" type="tns:ResponseMessageFc" />
+  <xs:complexType name="ResponseMessageFcUnSync">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseMessageFc">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="LstFiles" nillable="true" type="tns:ArrayOfUnSyncFilesModel" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ResponseMessageFcUnSync" nillable="true" type="tns:ResponseMessageFcUnSync" />
+  <xs:complexType name="ArrayOfUnSyncFilesModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UnSyncFilesModel" nillable="true" type="tns:UnSyncFilesModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUnSyncFilesModel" nillable="true" type="tns:ArrayOfUnSyncFilesModel" />
+  <xs:complexType name="UnSyncFilesModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CheckSum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnSyncFilesModel" nillable="true" type="tns:UnSyncFilesModel" />
 </xs:schema>

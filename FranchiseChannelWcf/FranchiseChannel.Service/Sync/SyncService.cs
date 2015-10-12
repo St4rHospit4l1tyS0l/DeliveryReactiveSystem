@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Threading;
+using System.Linq;
+using FranchiseChannel.Service.Infrastructure.Io;
 using FranchiseChannel.Service.Model;
 using Microsoft.VisualBasic.FileIO;
 using SearchOption = System.IO.SearchOption;
@@ -26,6 +28,39 @@ namespace FranchiseChannel.Service.Sync
             }
 
             return msg;
+        }
+
+        public ResponseMessageFcUnSync GetUnSyncListOfFiles(Guid uidVersion)
+        {
+            var msg = new ResponseMessageFcUnSync();
+            try
+            {
+                var lst = GetListOfFilesByGuid(uidVersion, Settings.DATA);
+                lst.AddRange(GetListOfFilesByGuid(uidVersion, Settings.NEWDATA));
+                msg.HasError = false;
+                msg.LstFiles = lst;
+            }
+            catch (Exception ex)
+            {
+                msg.Message = ex.Message + " - " + ex.StackTrace;
+                msg.HasError = true;
+            }
+
+            return msg;
+        }
+
+        private List<UnSyncFilesModel> GetListOfFilesByGuid(Guid pathUid, string pathAlohaDataDir)
+        {
+           var path = Path.Combine(Settings.ContainerPath, pathUid.ToString(), pathAlohaDataDir);
+
+            var lstFiles = Directory.GetFiles(path, "*", SearchOption.TopDirectoryOnly);
+            var lstUnSyncFiles = lstFiles.Select(file => new UnSyncFilesModel
+            {
+                FileName = Path.GetFileName(file), 
+                CheckSum = file.GetChecksum()
+            }).ToList();
+
+            return lstUnSyncFiles;
         }
 
         private static int SnapshotPathsAndFiles(string newPath)

@@ -129,8 +129,10 @@
     <Compile Include="Factory\FactoryAddress.cs" />
     <Compile Include="Factory\LangAddress.cs" />
     <Compile Include="Franchise\FranchiseSettingService.cs" />
+    <Compile Include="Franchise\ISyncServerFilesService.cs" />
     <Compile Include="Franchise\PosService.cs" />
     <Compile Include="Franchise\IPosService.cs" />
+    <Compile Include="Franchise\SyncServerFilesService.cs" />
     <Compile Include="Order\FranchiseService.cs" />
     <Compile Include="Order\OrderService.cs" />
     <Compile Include="Order\IFranchiseService.cs" />
@@ -241,6 +243,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SyncService\Drs.Service.SyncService.ResponseMessageFc.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SyncService\Drs.Service.SyncService.ResponseMessageFcUnSync.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SyncService\SyncService.wsdl" />

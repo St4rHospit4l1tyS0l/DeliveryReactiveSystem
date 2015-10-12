@@ -26,7 +26,6 @@
         <EntityTypeShape EntityType="CallCenterModel.Franchise" Width="1.5" PointX="17.625" PointY="23.375" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseButton" Width="1.5" PointX="19.875" PointY="26.75" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseData" Width="1.5" PointX="19.875" PointY="33.625" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseDataFile" Width="1.5" PointX="22.125" PointY="30.125" />
         <EntityTypeShape EntityType="CallCenterModel.FranchisePhone" Width="1.5" PointX="17.625" PointY="30.75" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseStore" Width="1.5" PointX="19.875" PointY="14.625" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseStoreOffLine" Width="1.5" PointX="25.125" PointY="22" />
@@ -118,10 +117,11 @@
         <AssociationConnector Association="CallCenterModel.RelFranchisePhoneStore" />
         <EntityTypeShape EntityType="CallCenterModel.ViewStoreInfo" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="CallCenterModel.ViewUserInfo" Width="1.5" PointX="3.375" PointY="4.75" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseDataVersion" Width="1.5" PointX="24.875" PointY="32.25" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseDataVersion" Width="1.5" PointX="24.875" PointY="32.125" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers1" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseDataVersion_Franchise" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseDataFile" Width="1.875" PointX="27.125" PointY="33.125" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseDataFile_FranchiseDataVersion" />
       </Diagram>
     </edmx:Diagrams>

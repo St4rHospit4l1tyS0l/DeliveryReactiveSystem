@@ -235,7 +235,7 @@
           <Property Name="FranchiseDataFileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FranchiseDataVersionId" Type="int" Nullable="false" />
           <Property Name="FileName" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="CheckSum" Type="int" Nullable="false" />
+          <Property Name="CheckSum" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="IsSync" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="FranchiseDataVersion">
@@ -250,6 +250,7 @@
           <Property Name="TotalNumberOfFiles" Type="int" Nullable="false" />
           <Property Name="NumberOfFilesDownloaded" Type="int" Nullable="false" />
           <Property Name="IsCompleted" Type="bit" Nullable="false" />
+          <Property Name="IsListOfFilesReceived" Type="bit" Nullable="false" />
           <Property Name="UserInsId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="TimestampComplete" Type="datetime2" Precision="7" />
           <Property Name="IsObsolete" Type="bit" />
@@ -1891,7 +1892,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="Franchise" EntityType="CallCenterModel.Franchise" />
           <EntitySet Name="FranchiseButton" EntityType="CallCenterModel.FranchiseButton" />
           <EntitySet Name="FranchiseData" EntityType="CallCenterModel.FranchiseData" />
-          <EntitySet Name="FranchiseDataFile" EntityType="CallCenterModel.FranchiseDataFile" />
           <EntitySet Name="FranchisePhone" EntityType="CallCenterModel.FranchisePhone" />
           <EntitySet Name="FranchiseStore" EntityType="CallCenterModel.FranchiseStore" />
           <EntitySet Name="FranchiseStoreOffLine" EntityType="CallCenterModel.FranchiseStoreOffLine" />
@@ -2003,8 +2003,8 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderToStore_AspNetUsers" Association="CallCenterModel.FK_OrderToStore_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
+            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
+            <End EntitySet="OrderToStore" Role="OrderToStore" />
           </AssociationSet>
           <AssociationSet Name="FK_PosOrder_AspNetUsers" Association="CallCenterModel.FK_PosOrder_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2197,6 +2197,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="Franchise" EntitySet="Franchise" />
             <End Role="FranchiseDataVersion" EntitySet="FranchiseDataVersion" />
           </AssociationSet>
+          <EntitySet Name="FranchiseDataFile" EntityType="CallCenterModel.FranchiseDataFile" />
           <AssociationSet Name="FK_FranchiseDataFile_FranchiseDataVersion" Association="CallCenterModel.FK_FranchiseDataFile_FranchiseDataVersion">
             <End Role="FranchiseDataVersion" EntitySet="FranchiseDataVersion" />
             <End Role="FranchiseDataFile" EntitySet="FranchiseDataFile" />
@@ -2302,7 +2303,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchiseDataVersion" />
           <NavigationProperty Name="FranchiseDataVersion1" Relationship="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers1" FromRole="AspNetUsers" ToRole="FranchiseDataVersion" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="CallCenterInfo">
           <Key>
             <PropertyRef Name="CallCenterInfoId" />
@@ -2480,17 +2481,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="WsAddress" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="LastVersion" Type="Int64" />
           <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseData_Franchise" FromRole="FranchiseData" ToRole="Franchise" />
-        </EntityType>
-        <EntityType Name="FranchiseDataFile">
-          <Key>
-            <PropertyRef Name="FranchiseDataFileId" />
-          </Key>
-          <Property Name="FranchiseDataFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FranchiseDataVersionId" Type="Int32" Nullable="false" />
-          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CheckSum" Type="Int32" Nullable="false" />
-          <Property Name="IsSync" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataFile_FranchiseDataVersion" FromRole="FranchiseDataFile" ToRole="FranchiseDataVersion" />
         </EntityType>
         <EntityType Name="FranchisePhone">
           <Key>
@@ -3099,8 +3089,8 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderToStore_AspNetUsers">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <End Type="CallCenterModel.AspNetUsers" Multiplicity="1" Role="AspNetUsers" />
+          <End Type="CallCenterModel.OrderToStore" Multiplicity="*" Role="OrderToStore" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -3653,6 +3643,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="TotalNumberOfFiles" Type="Int32" Nullable="false" />
           <Property Name="NumberOfFilesDownloaded" Type="Int32" Nullable="false" />
           <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsListOfFilesReceived" Type="Boolean" Nullable="false" />
           <Property Name="UserInsId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="TimestampComplete" Type="DateTime" Precision="7" />
           <Property Name="IsObsolete" Type="Boolean" />
@@ -3698,6 +3689,17 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FranchiseDataFile">
+          <Key>
+            <PropertyRef Name="FranchiseDataFileId" />
+          </Key>
+          <Property Name="FranchiseDataFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FranchiseDataVersionId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CheckSum" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="IsSync" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataFile_FranchiseDataVersion" FromRole="FranchiseDataFile" ToRole="FranchiseDataVersion" />
+        </EntityType>
         <Association Name="FK_FranchiseDataFile_FranchiseDataVersion">
           <End Type="CallCenterModel.FranchiseDataVersion" Role="FranchiseDataVersion" Multiplicity="1" />
           <End Type="CallCenterModel.FranchiseDataFile" Role="FranchiseDataFile" Multiplicity="*" />
@@ -3947,17 +3949,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="NewDataFolder" ColumnName="NewDataFolder" />
                 <ScalarProperty Name="DataFolder" ColumnName="DataFolder" />
                 <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FranchiseDataFile">
-            <EntityTypeMapping TypeName="CallCenterModel.FranchiseDataFile">
-              <MappingFragment StoreEntitySet="FranchiseDataFile">
-                <ScalarProperty Name="IsSync" ColumnName="IsSync" />
-                <ScalarProperty Name="CheckSum" ColumnName="CheckSum" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="FranchiseDataVersionId" ColumnName="FranchiseDataVersionId" />
-                <ScalarProperty Name="FranchiseDataFileId" ColumnName="FranchiseDataFileId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4314,6 +4305,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
                 <ScalarProperty Name="TimestampComplete" ColumnName="TimestampComplete" />
                 <ScalarProperty Name="UserInsId" ColumnName="UserInsId" />
+                <ScalarProperty Name="IsListOfFilesReceived" ColumnName="IsListOfFilesReceived" />
                 <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
                 <ScalarProperty Name="NumberOfFilesDownloaded" ColumnName="NumberOfFilesDownloaded" />
                 <ScalarProperty Name="TotalNumberOfFiles" ColumnName="TotalNumberOfFiles" />
@@ -4322,6 +4314,17 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
                 <ScalarProperty Name="FranchiseDataVersionUid" ColumnName="FranchiseDataVersionUid" />
                 <ScalarProperty Name="FranchiseDataVersionId" ColumnName="FranchiseDataVersionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FranchiseDataFile">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseDataFile">
+              <MappingFragment StoreEntitySet="FranchiseDataFile">
+                <ScalarProperty Name="IsSync" ColumnName="IsSync" />
+                <ScalarProperty Name="CheckSum" ColumnName="CheckSum" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FranchiseDataVersionId" ColumnName="FranchiseDataVersionId" />
+                <ScalarProperty Name="FranchiseDataFileId" ColumnName="FranchiseDataFileId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
