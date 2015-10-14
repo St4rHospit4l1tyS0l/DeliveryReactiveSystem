@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\Io\FileEx.cs" />
+    <Compile Include="Model\RequestMessageFileSync.cs" />
     <Compile Include="Model\ResponseMessageFcUnSync.cs" />
+    <Compile Include="Model\ResponseMessageFileSync.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\UnSyncFilesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

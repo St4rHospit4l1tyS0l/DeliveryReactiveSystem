@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Drs.Service.Franchise;
 using Drs.Service.Settings;
-using Drs.Service.Store;
 
 namespace Drs.ConnectService.Services
 {

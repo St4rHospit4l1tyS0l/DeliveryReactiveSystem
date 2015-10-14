@@ -190,6 +190,59 @@ namespace Drs.Service.SyncService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetUnSyncListOfFiles", ReplyAction="http://tempuri.org/ISyncService/GetUnSyncListOfFilesResponse")]
         System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFcUnSync> GetUnSyncListOfFilesAsync(System.Guid uidVersion);
+        
+        // CODEGEN: Generating message contract since the wrapper name (RequestMessageFileSync) of message RequestMessageFileSync does not match the default value (GetFileByName)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetFileByName", ReplyAction="http://tempuri.org/ISyncService/GetFileByNameResponse")]
+        Drs.Service.SyncService.ResponseMessageFileSync GetFileByName(Drs.Service.SyncService.RequestMessageFileSync request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetFileByName", ReplyAction="http://tempuri.org/ISyncService/GetFileByNameResponse")]
+        System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFileSync> GetFileByNameAsync(Drs.Service.SyncService.RequestMessageFileSync request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="RequestMessageFileSync", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class RequestMessageFileSync {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string FileName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public System.Guid UidVersion;
+        
+        public RequestMessageFileSync() {
+        }
+        
+        public RequestMessageFileSync(string FileName, System.Guid UidVersion) {
+            this.FileName = FileName;
+            this.UidVersion = UidVersion;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ResponseMessageFileSync", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class ResponseMessageFileSync {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public bool HasError;
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public string Message;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream File;
+        
+        public ResponseMessageFileSync() {
+        }
+        
+        public ResponseMessageFileSync(bool HasError, string Message, System.IO.Stream File) {
+            this.HasError = HasError;
+            this.Message = Message;
+            this.File = File;
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -233,6 +286,33 @@ namespace Drs.Service.SyncService {
         
         public System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFcUnSync> GetUnSyncListOfFilesAsync(System.Guid uidVersion) {
             return base.Channel.GetUnSyncListOfFilesAsync(uidVersion);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Drs.Service.SyncService.ResponseMessageFileSync Drs.Service.SyncService.ISyncService.GetFileByName(Drs.Service.SyncService.RequestMessageFileSync request) {
+            return base.Channel.GetFileByName(request);
+        }
+        
+        public bool GetFileByName(string FileName, System.Guid UidVersion, out string Message, out System.IO.Stream File) {
+            Drs.Service.SyncService.RequestMessageFileSync inValue = new Drs.Service.SyncService.RequestMessageFileSync();
+            inValue.FileName = FileName;
+            inValue.UidVersion = UidVersion;
+            Drs.Service.SyncService.ResponseMessageFileSync retVal = ((Drs.Service.SyncService.ISyncService)(this)).GetFileByName(inValue);
+            Message = retVal.Message;
+            File = retVal.File;
+            return retVal.HasError;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFileSync> Drs.Service.SyncService.ISyncService.GetFileByNameAsync(Drs.Service.SyncService.RequestMessageFileSync request) {
+            return base.Channel.GetFileByNameAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFileSync> GetFileByNameAsync(string FileName, System.Guid UidVersion) {
+            Drs.Service.SyncService.RequestMessageFileSync inValue = new Drs.Service.SyncService.RequestMessageFileSync();
+            inValue.FileName = FileName;
+            inValue.UidVersion = UidVersion;
+            return ((Drs.Service.SyncService.ISyncService)(this)).GetFileByNameAsync(inValue);
         }
     }
 }

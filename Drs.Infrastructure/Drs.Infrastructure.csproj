@@ -117,6 +117,7 @@
     <Compile Include="Extensions\Enumerables\ListExt.cs" />
     <Compile Include="Extensions\Io\FileExt.cs" />
     <Compile Include="Extensions\Io\FileHelperExt.cs" />
+    <Compile Include="Extensions\Io\StreamExt.cs" />
     <Compile Include="Extensions\Json\JavaScriptSerializerExt.cs" />
     <Compile Include="Extensions\Proc\ProcessExt.cs" />
     <Compile Include="Extensions\StaticReflection.cs" />

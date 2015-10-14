@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography;
 using System.Threading;
 
 namespace Drs.Infrastructure.Extensions.Io
@@ -23,7 +24,16 @@ namespace Drs.Infrastructure.Extensions.Io
                 }
                 iTries--;
             }
+        }
 
+        public static string GetChecksum(this string filePath)
+        {
+            HashAlgorithm algorithm = new MD5CryptoServiceProvider();
+            using (var stream = new BufferedStream(File.OpenRead(filePath), 131072))
+            {
+                var hash = algorithm.ComputeHash(stream);
+                return BitConverter.ToString(hash).Replace("-", String.Empty);
+            }
         }
     }
 }

@@ -63,5 +63,11 @@ namespace Drs.Infrastructure.Extensions.Io
                 iTries--;
             }
         }
+
+        public static void CreateDirectoryIfNotExist(this string path)
+        {
+            if (Directory.Exists(path) == false)
+                Directory.CreateDirectory(path);
+        }
     }
 }

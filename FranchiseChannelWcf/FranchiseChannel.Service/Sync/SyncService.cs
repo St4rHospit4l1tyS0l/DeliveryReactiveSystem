@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using FranchiseChannel.Service.Infrastructure.Io;
 using FranchiseChannel.Service.Model;
 using Microsoft.VisualBasic.FileIO;
@@ -49,15 +50,57 @@ namespace FranchiseChannel.Service.Sync
             return msg;
         }
 
+        public ResponseMessageFileSync GetFileByName(RequestMessageFileSync request)
+        {
+            var response = new ResponseMessageFileSync();
+            try
+            {
+                var pathFileName = Path.Combine(Settings.ContainerPath, request.UidVersion.ToString(), request.FileName);
+
+                if (File.Exists(pathFileName) == false)
+                {
+                    response.HasError = true;
+                    response.Message = String.Format("El archivo {0} no se encuentra. Por favor revise de nuevo", request.FileName);
+                    return response;
+                }
+
+                response.File = File.OpenRead(pathFileName);
+
+
+                var clientContext = OperationContext.Current;
+                clientContext.OperationCompleted += delegate
+                {
+                    if (response.File != null)
+                        response.File.Dispose();
+                };
+
+                response.HasError = false;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.HasError = true;
+                response.Message = ex.Message + " - " + ex.StackTrace;
+                return response;
+            }
+        }
+
         private List<UnSyncFilesModel> GetListOfFilesByGuid(Guid pathUid, string pathAlohaDataDir)
         {
-           var path = Path.Combine(Settings.ContainerPath, pathUid.ToString(), pathAlohaDataDir);
+            var path = Path.Combine(Settings.ContainerPath, pathUid.ToString(), pathAlohaDataDir);
 
             var lstFiles = Directory.GetFiles(path, "*", SearchOption.TopDirectoryOnly);
-            var lstUnSyncFiles = lstFiles.Select(file => new UnSyncFilesModel
+            var lstUnSyncFiles = lstFiles.Select(file =>
             {
-                FileName = Path.GetFileName(file), 
-                CheckSum = file.GetChecksum()
+                var fileName = Path.GetFileName(file);
+                if (fileName == null)
+                    return null;
+
+                return new UnSyncFilesModel
+                {
+                    FileName = Path.Combine(pathAlohaDataDir, fileName),
+                    CheckSum = file.GetChecksum()
+                };
             }).ToList();
 
             return lstUnSyncFiles;

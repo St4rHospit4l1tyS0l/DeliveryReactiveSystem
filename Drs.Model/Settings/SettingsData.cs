@@ -57,6 +57,7 @@ namespace Drs.Model.Settings
             public static class ServerConst
             {
                 public const string MAX_RESULTS_ON_QUERY = "MAX_RESULTS_ON_QUERY";
+                public const string PATH_TO_SAVE_SYNC_FILES = "PATH_TO_SAVE_SYNC_FILES";
             }
             
             public static class ClientConst
@@ -186,6 +187,7 @@ namespace Drs.Model.Settings
         public static class Server
         {
             public static int MaxResultsOnQuery = 50;
+            public static string PathToSaveSyncFiles = "/SyncFiles";
         }
 
 

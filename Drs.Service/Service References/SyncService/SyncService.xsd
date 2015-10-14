@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:4209/Sync/SyncService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import schemaLocation="http://localhost:4209/Sync/SyncService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FranchiseChannel.Service.Model" />
+  <xs:import schemaLocation="http://localhost:4209/Sync/SyncService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
   <xs:element name="QueryForFiles">
     <xs:complexType>
       <xs:sequence>
@@ -30,4 +31,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RequestMessageFileSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="UidVersion" type="q5:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResponseMessageFileSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.microsoft.com/Message" name="File" type="q6:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HasError" type="xs:boolean" />
+  <xs:element name="Message" nillable="true" type="xs:string" />
 </xs:schema>

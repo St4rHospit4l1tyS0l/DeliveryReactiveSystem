@@ -248,6 +248,9 @@
     <None Include="Service References\SyncService\Drs.Service.SyncService.ResponseMessageFcUnSync.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SyncService\Drs.Service.SyncService.ResponseMessageFileSync.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SyncService\SyncService.wsdl" />
     <None Include="Service References\SyncService\SyncService.xsd">
       <SubType>Designer</SubType>
@@ -256,6 +259,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SyncService\SyncService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncService\SyncService4.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

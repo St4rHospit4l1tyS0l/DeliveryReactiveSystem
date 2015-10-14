@@ -208,5 +208,53 @@ namespace Drs.Repository.Order
                 dbTrans.Commit();
             }
         }
+
+        public IQueryable<SyncFileModel> GetFilesToSyncByVersionId(int franchiseDataVersionId)
+        {
+            return DbEntities.FranchiseDataFile.Where(
+                e => e.IsSync == false && e.FranchiseDataVersion.IsObsolete == false
+                     && e.FranchiseDataVersion.Franchise.IsObsolete == false).Select(e => new SyncFileModel
+                     {
+                         CheckSum = e.CheckSum,
+                         FileName = e.FileName,
+                         FranchiseDataFileId = e.FranchiseDataFileId
+                     });
+        }
+
+        public void UpdateSyncOkFile(int franchiseDataFileId)
+        {
+            DbEntities.Configuration.ValidateOnSaveEnabled = false;
+            var model = new FranchiseDataFile {FranchiseDataFileId = franchiseDataFileId, IsSync = true};
+            DbEntities.FranchiseDataFile.Attach(model);
+            DbEntities.Entry(model).Property(e => e.IsSync).IsModified = true;
+            DbEntities.SaveChanges();
+        }
+
+        public List<UnSyncListModel> GetDataVersionsIdsReadyToDownload()
+        {
+            return DbEntities.FranchiseDataVersion.Where(e => e.IsObsolete == false && e.IsCompleted == false 
+                && e.IsListOfFilesReceived && e.Franchise.IsObsolete == false)
+                .Select(e => new UnSyncListModel
+                {
+                    FranchiseDataVersionId = e.FranchiseDataVersionId,
+                    FranchiseDataVersionUid = e.FranchiseDataVersionUid,
+                    FranchiseId = e.FranchiseId,
+                    WsAddress = e.Franchise.FranchiseData.WsAddress
+                }).ToList();
+        }
+
+        public void TrySetFranchiseSyncFilesCompleted(int franchiseDataVersionId)
+        {
+
+            //Si existe al menos un archivo no sincronizado, no es posible completar la sincronización
+            if (DbEntities.FranchiseDataFile.Any(e => e.FranchiseDataVersionId == franchiseDataVersionId && e.IsSync == false))
+                return;
+
+            DbEntities.Configuration.ValidateOnSaveEnabled = false;
+            var model = new FranchiseDataVersion { FranchiseDataVersionId = franchiseDataVersionId, IsCompleted = true };
+            DbEntities.FranchiseDataVersion.Attach(model);
+            DbEntities.Entry(model).Property(e => e.IsCompleted).IsModified = true;
+            DbEntities.SaveChanges(); 
+        }
     }
 }

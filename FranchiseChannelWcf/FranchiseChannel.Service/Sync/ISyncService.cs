@@ -13,5 +13,8 @@ namespace FranchiseChannel.Service.Sync
 
         [OperationContract]
         ResponseMessageFcUnSync GetUnSyncListOfFiles(Guid uidVersion);
+
+        [OperationContract]
+        ResponseMessageFileSync GetFileByName(RequestMessageFileSync request);
     }
 }
