@@ -125,6 +125,7 @@ namespace Drs.Service.Franchise
         {
             List<UnSyncListModel> lstDataVersions;
 
+            _eventLog.WriteEntry("Se inicia la descarga de los archivos", EventLogEntryType.Information);
 
             using (var repository = new FranchiseRepository())
             {
@@ -132,10 +133,16 @@ namespace Drs.Service.Franchise
             }
 
             if (lstDataVersions == null || lstDataVersions.Any() == false)
+            {
+                _eventLog.WriteEntry("No existen archivos para descargar", EventLogEntryType.Information);
                 return;
+            }
+
 
             foreach (var syncListModel in lstDataVersions)
             {
+                _eventLog.WriteEntry("Descargando version con UID: " + syncListModel.FranchiseDataVersionUid, EventLogEntryType.Information);
+
                 try
                 {
                     var syncListModelCs = syncListModel;
@@ -160,7 +167,9 @@ namespace Drs.Service.Franchise
                             repository.TrySetFranchiseSyncFilesCompleted(syncListModelCs.FranchiseDataVersionId);
 
                         }
-                    }    
+                    }
+
+                    _eventLog.WriteEntry("Se terminó la descarga de la version con UID: " + syncListModel.FranchiseDataVersionUid, EventLogEntryType.Information);
                 }
                 catch (Exception ex)
                 {
