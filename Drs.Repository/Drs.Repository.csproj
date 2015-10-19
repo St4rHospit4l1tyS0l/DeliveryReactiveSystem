@@ -170,9 +170,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CallCenter.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Entities\CallCenterInfo.cs">
-      <DependentUpon>CallCenter.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\CatDeliveryStatus.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
@@ -180,9 +177,6 @@
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Client.cs">
-      <DependentUpon>CallCenter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\ClientInfo.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ClientPhone.cs">
@@ -231,6 +225,18 @@
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\FranchiseStoreOffLine.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\InfoCallCenter.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\InfoClientTerminal.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\InfoClientTerminalVersion.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\InfoServer.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Language.cs">
@@ -298,9 +304,6 @@
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\RegionD.cs">
-      <DependentUpon>CallCenter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\ServerInfo.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Setting.cs">

@@ -11,6 +11,7 @@ using Drs.Service.Settings;
 using ManagementCallCenter.Account;
 using ManagementCallCenter.Catalogs;
 using ManagementCallCenter.Setting;
+using ManagementCallCenter.Sync;
 
 namespace HostCallCenter
 {
@@ -22,6 +23,7 @@ namespace HostCallCenter
             builder.RegisterType<LoginSvc>().As<ILoginSvc>();
             builder.RegisterType<SettingSvc>().As<ISettingSvc>();
             builder.RegisterType<CatalogsSvc>().As<ICatalogsSvc>();
+            builder.RegisterType<SyncServerSvc>().As<ISyncServerSvc>();
             builder.RegisterType<DebugLoggerFactory>().As<ILoggerFactory>().SingleInstance();
             builder.RegisterType<AccountService>().As<IAccountService>();
             builder.RegisterType<AccountRepository>().As<IAccountRepository>();

@@ -15,23 +15,23 @@ namespace Drs.Repository.Account
         IEnumerable<ButtonItemModel> GetMenuByRole(string roleId);
         string GetComputerInfo(string eInfo);
         void AddComputerInfo(string eInfo, string clientCode);
-        void AddServerInfo(string eInfo, string serverCode);
-        ServerInfo GetServerInfo(string eInfo);
+        void AddInfoServer(string eInfo, string serverCode);
+        InfoServer GetInfoServer(string eInfo);
         void SaveChanges();
         IEnumerable<ConnectionFullModel> GetLstClients();
         IEnumerable<ConnectionFullModel> GetLstServers();
         bool ExistsServer(int id);
         int GetCallCenterId();
         int AddCallCenterId();
-        ServerInfo GetServerInfo(int id);
-        ClientInfo GetClientInfo(int id);
+        InfoServer GetInfoServer(int id);
+        InfoClientTerminal GetInfoClientTerminal(int id);
         List<string> GetLstClientsCodes();
         List<string> GetLstServersCodes();
         void AddActivationCode(string code);
         void UpdateActivationCode(string code);
         string GetActivationCode();
-        ClientInfo GetClientByHostName(string hn);
-        ServerInfo GetServerByHostName(string hn);
+        InfoClientTerminal GetClientTerminalByHost(string hn);
+        InfoServer GetServerByHost(string hn);
         void UpdateComputerInfo(string eInfo, string decCompInfo);
     }
 }

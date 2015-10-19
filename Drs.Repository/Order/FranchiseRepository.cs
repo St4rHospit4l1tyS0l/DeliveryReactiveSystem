@@ -5,6 +5,7 @@ using System.Linq;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Franchise;
 using Drs.Model.Menu;
+using Drs.Model.Settings;
 using Drs.Model.Shared;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
@@ -145,6 +146,63 @@ namespace Drs.Repository.Order
             DbEntities.SaveChanges();
         }
 
+        public IEnumerable<SyncFranchiseModel> GetListSyncFiles(string eInfo)
+        {
+            var lstFranchiseVersionList = DbEntities.Franchise.Where(e => e.IsObsolete == false 
+                && e.FranchiseDataVersion.Any(i => i.IsObsolete == false && i.IsCompleted))
+                .Select(e => new
+                {
+                    e.FranchiseId,
+                    e.Code,
+                    LastVersion = e.FranchiseDataVersion.Where(i => i.IsObsolete == false && i.IsCompleted).OrderByDescending(i => i.FranchiseDataVersionId)
+                        .Select(i => new
+                        {
+                            i.Version,
+                            i.FranchiseDataVersionId,
+                            i.FranchiseDataVersionUid
+                        }).FirstOrDefault()
+                }).ToList();
+
+
+            var lstFranchiseByTerminal = DbEntities.InfoClientTerminalVersion.Where(e => e.InfoClientTerminal.Host == eInfo).
+                Select(e => new
+                {
+                    e.FranchiseId,
+                    e.Version
+                }).ToList();
+
+
+            var lstSyncFranchise = new List<SyncFranchiseModel>();
+            foreach (var franchise in lstFranchiseVersionList)
+            {
+                if (lstFranchiseByTerminal.Any(e => e.FranchiseId == franchise.FranchiseId && e.Version == franchise.LastVersion.Version))
+                    continue;
+
+                lstSyncFranchise.Add(new SyncFranchiseModel
+                {
+                    FranchiseId = franchise.FranchiseId,
+                    Code = franchise.Code,
+                    Version = franchise.LastVersion.Version,
+                    FranchiseDataVersionId = franchise.LastVersion.FranchiseDataVersionId,
+                    FranchiseDataVersionUid = franchise.LastVersion.FranchiseDataVersionUid
+                });
+            }
+
+            foreach (var syncFranchise in lstSyncFranchise)
+            {
+                syncFranchise.LstFiles = DbEntities.FranchiseDataFile.Where(e => e.FranchiseDataVersionId == syncFranchise.FranchiseDataVersionId)
+                    .Select(e => new SyncFileModel
+                    {
+                        CheckSum = e.CheckSum,
+                        FileName = e.FileName,
+                        FranchiseDataFileId = e.FranchiseDataFileId,
+                        FileType = SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_DATA
+                    }).ToList();
+            }
+
+            return lstSyncFranchise;
+        }
+
         public OptionModel GetFranchiseByCode(string franchiseCode)
         {
             return DbEntities.Franchise.Where(e => e.Code == franchiseCode).Select(e => new OptionModel
@@ -255,6 +313,21 @@ namespace Drs.Repository.Order
             DbEntities.FranchiseDataVersion.Attach(model);
             DbEntities.Entry(model).Property(e => e.IsCompleted).IsModified = true;
             DbEntities.SaveChanges(); 
+        }
+
+        public void SetFranchiseVersionTerminalOk(int franchiseId, string sVersion, string eHost)
+        {
+            var infoClientTerminalId = DbEntities.InfoClientTerminal.Where(e => e.Host == eHost).Select(e => e.InfoClientTerminalId).Single();
+
+            var model = new InfoClientTerminalVersion
+            {
+                FranchiseId = franchiseId,
+                InfoClientTerminalId = infoClientTerminalId,
+                Version = sVersion                
+            };
+
+            DbEntities.InfoClientTerminalVersion.Add(model);
+            DbEntities.SaveChanges();
         }
     }
 }

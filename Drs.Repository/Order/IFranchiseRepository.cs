@@ -20,5 +20,6 @@ namespace Drs.Repository.Order
         void SaveFranchiseDataVersion(FranchiseDataVersion model);
         string GetUrlSyncWsByFranchiseId(int franchiseId);
         void DoObsoleteVersion(int id, string userId, ResponseMessageModel response);
+        IEnumerable<SyncFranchiseModel> GetListSyncFiles(string eInfo);
     }
 }

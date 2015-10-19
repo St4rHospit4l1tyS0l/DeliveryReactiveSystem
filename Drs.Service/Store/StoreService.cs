@@ -43,7 +43,7 @@ namespace Drs.Service.Store
 
         public ResponseMessageData<OrderModelDto> SendOrderToStore(OrderModelDto model, IHubCallerConnectionContext<dynamic> clients)
         {
-            var responseCod = new AccountService().IsValidServerInfo();
+            var responseCod = new AccountService().IsValidInfoServer();
             var response = responseCod.DeserializeAndDecrypt<ConnectionInfoResponse>();
             var resMsg = new ResponseMessageData<OrderModelDto>();
 

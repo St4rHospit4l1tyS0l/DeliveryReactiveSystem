@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Reactive;
 using System.Threading.Tasks;
-using Drs.Infrastructure.Model;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Account;
+using Drs.Model.Franchise;
 using Drs.Model.Menu;
 using Drs.Model.Shared;
 

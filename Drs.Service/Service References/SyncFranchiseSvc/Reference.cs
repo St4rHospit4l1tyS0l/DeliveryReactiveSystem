@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Drs.Service.SyncService {
+namespace Drs.Service.SyncFranchiseSvc {
     using System.Runtime.Serialization;
     using System;
     
@@ -17,7 +17,7 @@ namespace Drs.Service.SyncService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseMessageFc", Namespace="http://schemas.datacontract.org/2004/07/FranchiseChannel.Service.Model")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Drs.Service.SyncService.ResponseMessageFcUnSync))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Drs.Service.SyncFranchiseSvc.ResponseMessageFcUnSync))]
     public partial class ResponseMessageFc : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -95,13 +95,13 @@ namespace Drs.Service.SyncService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseMessageFcUnSync", Namespace="http://schemas.datacontract.org/2004/07/FranchiseChannel.Service.Model")]
     [System.SerializableAttribute()]
-    public partial class ResponseMessageFcUnSync : Drs.Service.SyncService.ResponseMessageFc {
+    public partial class ResponseMessageFcUnSync : Drs.Service.SyncFranchiseSvc.ResponseMessageFc {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Drs.Service.SyncService.UnSyncFilesModel[] LstFilesField;
+        private Drs.Service.SyncFranchiseSvc.UnSyncFilesModel[] LstFilesField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Drs.Service.SyncService.UnSyncFilesModel[] LstFiles {
+        public Drs.Service.SyncFranchiseSvc.UnSyncFilesModel[] LstFiles {
             get {
                 return this.LstFilesField;
             }
@@ -176,27 +176,27 @@ namespace Drs.Service.SyncService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SyncService.ISyncService")]
-    public interface ISyncService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SyncFranchiseSvc.ISyncFranchise")]
+    public interface ISyncFranchise {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/QueryForFiles", ReplyAction="http://tempuri.org/ISyncService/QueryForFilesResponse")]
-        Drs.Service.SyncService.ResponseMessageFc QueryForFiles(System.Guid uidVersion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncFranchise/QueryForFiles", ReplyAction="http://tempuri.org/ISyncFranchise/QueryForFilesResponse")]
+        Drs.Service.SyncFranchiseSvc.ResponseMessageFc QueryForFiles(System.Guid uidVersion);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/QueryForFiles", ReplyAction="http://tempuri.org/ISyncService/QueryForFilesResponse")]
-        System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFc> QueryForFilesAsync(System.Guid uidVersion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncFranchise/QueryForFiles", ReplyAction="http://tempuri.org/ISyncFranchise/QueryForFilesResponse")]
+        System.Threading.Tasks.Task<Drs.Service.SyncFranchiseSvc.ResponseMessageFc> QueryForFilesAsync(System.Guid uidVersion);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetUnSyncListOfFiles", ReplyAction="http://tempuri.org/ISyncService/GetUnSyncListOfFilesResponse")]
-        Drs.Service.SyncService.ResponseMessageFcUnSync GetUnSyncListOfFiles(System.Guid uidVersion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncFranchise/GetUnSyncListOfFiles", ReplyAction="http://tempuri.org/ISyncFranchise/GetUnSyncListOfFilesResponse")]
+        Drs.Service.SyncFranchiseSvc.ResponseMessageFcUnSync GetUnSyncListOfFiles(System.Guid uidVersion);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetUnSyncListOfFiles", ReplyAction="http://tempuri.org/ISyncService/GetUnSyncListOfFilesResponse")]
-        System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFcUnSync> GetUnSyncListOfFilesAsync(System.Guid uidVersion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncFranchise/GetUnSyncListOfFiles", ReplyAction="http://tempuri.org/ISyncFranchise/GetUnSyncListOfFilesResponse")]
+        System.Threading.Tasks.Task<Drs.Service.SyncFranchiseSvc.ResponseMessageFcUnSync> GetUnSyncListOfFilesAsync(System.Guid uidVersion);
         
         // CODEGEN: Generating message contract since the wrapper name (RequestMessageFileSync) of message RequestMessageFileSync does not match the default value (GetFileByName)
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetFileByName", ReplyAction="http://tempuri.org/ISyncService/GetFileByNameResponse")]
-        Drs.Service.SyncService.ResponseMessageFileSync GetFileByName(Drs.Service.SyncService.RequestMessageFileSync request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncFranchise/GetFileByName", ReplyAction="http://tempuri.org/ISyncFranchise/GetFileByNameResponse")]
+        Drs.Service.SyncFranchiseSvc.ResponseMessageFileSync GetFileByName(Drs.Service.SyncFranchiseSvc.RequestMessageFileSync request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetFileByName", ReplyAction="http://tempuri.org/ISyncService/GetFileByNameResponse")]
-        System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFileSync> GetFileByNameAsync(Drs.Service.SyncService.RequestMessageFileSync request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncFranchise/GetFileByName", ReplyAction="http://tempuri.org/ISyncFranchise/GetFileByNameResponse")]
+        System.Threading.Tasks.Task<Drs.Service.SyncFranchiseSvc.ResponseMessageFileSync> GetFileByNameAsync(Drs.Service.SyncFranchiseSvc.RequestMessageFileSync request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -246,73 +246,73 @@ namespace Drs.Service.SyncService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISyncServiceChannel : Drs.Service.SyncService.ISyncService, System.ServiceModel.IClientChannel {
+    public interface ISyncFranchiseChannel : Drs.Service.SyncFranchiseSvc.ISyncFranchise, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SyncServiceClient : System.ServiceModel.ClientBase<Drs.Service.SyncService.ISyncService>, Drs.Service.SyncService.ISyncService {
+    public partial class SyncFranchiseClient : System.ServiceModel.ClientBase<Drs.Service.SyncFranchiseSvc.ISyncFranchise>, Drs.Service.SyncFranchiseSvc.ISyncFranchise {
         
-        public SyncServiceClient() {
+        public SyncFranchiseClient() {
         }
         
-        public SyncServiceClient(string endpointConfigurationName) : 
+        public SyncFranchiseClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public SyncServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public SyncFranchiseClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SyncServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public SyncFranchiseClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SyncServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public SyncFranchiseClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public Drs.Service.SyncService.ResponseMessageFc QueryForFiles(System.Guid uidVersion) {
+        public Drs.Service.SyncFranchiseSvc.ResponseMessageFc QueryForFiles(System.Guid uidVersion) {
             return base.Channel.QueryForFiles(uidVersion);
         }
         
-        public System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFc> QueryForFilesAsync(System.Guid uidVersion) {
+        public System.Threading.Tasks.Task<Drs.Service.SyncFranchiseSvc.ResponseMessageFc> QueryForFilesAsync(System.Guid uidVersion) {
             return base.Channel.QueryForFilesAsync(uidVersion);
         }
         
-        public Drs.Service.SyncService.ResponseMessageFcUnSync GetUnSyncListOfFiles(System.Guid uidVersion) {
+        public Drs.Service.SyncFranchiseSvc.ResponseMessageFcUnSync GetUnSyncListOfFiles(System.Guid uidVersion) {
             return base.Channel.GetUnSyncListOfFiles(uidVersion);
         }
         
-        public System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFcUnSync> GetUnSyncListOfFilesAsync(System.Guid uidVersion) {
+        public System.Threading.Tasks.Task<Drs.Service.SyncFranchiseSvc.ResponseMessageFcUnSync> GetUnSyncListOfFilesAsync(System.Guid uidVersion) {
             return base.Channel.GetUnSyncListOfFilesAsync(uidVersion);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Drs.Service.SyncService.ResponseMessageFileSync Drs.Service.SyncService.ISyncService.GetFileByName(Drs.Service.SyncService.RequestMessageFileSync request) {
+        Drs.Service.SyncFranchiseSvc.ResponseMessageFileSync Drs.Service.SyncFranchiseSvc.ISyncFranchise.GetFileByName(Drs.Service.SyncFranchiseSvc.RequestMessageFileSync request) {
             return base.Channel.GetFileByName(request);
         }
         
         public bool GetFileByName(string FileName, System.Guid UidVersion, out string Message, out System.IO.Stream File) {
-            Drs.Service.SyncService.RequestMessageFileSync inValue = new Drs.Service.SyncService.RequestMessageFileSync();
+            Drs.Service.SyncFranchiseSvc.RequestMessageFileSync inValue = new Drs.Service.SyncFranchiseSvc.RequestMessageFileSync();
             inValue.FileName = FileName;
             inValue.UidVersion = UidVersion;
-            Drs.Service.SyncService.ResponseMessageFileSync retVal = ((Drs.Service.SyncService.ISyncService)(this)).GetFileByName(inValue);
+            Drs.Service.SyncFranchiseSvc.ResponseMessageFileSync retVal = ((Drs.Service.SyncFranchiseSvc.ISyncFranchise)(this)).GetFileByName(inValue);
             Message = retVal.Message;
             File = retVal.File;
             return retVal.HasError;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFileSync> Drs.Service.SyncService.ISyncService.GetFileByNameAsync(Drs.Service.SyncService.RequestMessageFileSync request) {
+        System.Threading.Tasks.Task<Drs.Service.SyncFranchiseSvc.ResponseMessageFileSync> Drs.Service.SyncFranchiseSvc.ISyncFranchise.GetFileByNameAsync(Drs.Service.SyncFranchiseSvc.RequestMessageFileSync request) {
             return base.Channel.GetFileByNameAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Drs.Service.SyncService.ResponseMessageFileSync> GetFileByNameAsync(string FileName, System.Guid UidVersion) {
-            Drs.Service.SyncService.RequestMessageFileSync inValue = new Drs.Service.SyncService.RequestMessageFileSync();
+        public System.Threading.Tasks.Task<Drs.Service.SyncFranchiseSvc.ResponseMessageFileSync> GetFileByNameAsync(string FileName, System.Guid UidVersion) {
+            Drs.Service.SyncFranchiseSvc.RequestMessageFileSync inValue = new Drs.Service.SyncFranchiseSvc.RequestMessageFileSync();
             inValue.FileName = FileName;
             inValue.UidVersion = UidVersion;
-            return ((Drs.Service.SyncService.ISyncService)(this)).GetFileByNameAsync(inValue);
+            return ((Drs.Service.SyncFranchiseSvc.ISyncFranchise)(this)).GetFileByNameAsync(inValue);
         }
     }
 }

@@ -12,7 +12,7 @@ using Drs.Model.Franchise;
 using Drs.Model.Settings;
 using Drs.Repository.Entities;
 using Drs.Repository.Order;
-using Drs.Service.SyncService;
+using Drs.Service.SyncFranchiseSvc;
 
 namespace Drs.Service.Franchise
 {
@@ -111,7 +111,7 @@ namespace Drs.Service.Franchise
 
         private ResponseMessageFcUnSync GetListOfFilesFromFranchiseServer(UnSyncListModel syncListModel)
         {
-            using (var client = new SyncServiceClient(new BasicHttpBinding(), new EndpointAddress(syncListModel.WsAddress +
+            using (var client = new SyncFranchiseClient(new BasicHttpBinding(), new EndpointAddress(syncListModel.WsAddress +
                 SettingsData.Constants.Franchise.WS_SYNC_FILES)))
             {
                 ((BasicHttpBinding)client.Endpoint.Binding).MessageEncoding = WSMessageEncoding.Mtom;
@@ -146,7 +146,7 @@ namespace Drs.Service.Franchise
                 try
                 {
                     var syncListModelCs = syncListModel;
-                    using (var client = new SyncServiceClient(new BasicHttpBinding(), new EndpointAddress(syncListModel.WsAddress +
+                    using (var client = new SyncFranchiseClient(new BasicHttpBinding(), new EndpointAddress(syncListModel.WsAddress +
                         SettingsData.Constants.Franchise.WS_SYNC_FILES)))
                     {
                         var basicBinding = ((BasicHttpBinding)client.Endpoint.Binding);
@@ -159,10 +159,10 @@ namespace Drs.Service.Franchise
                             var inClient = client;
 
                             var query = repository.GetFilesToSyncByVersionId(syncListModel.FranchiseDataVersionId);
-                            var suscribe = query.ToObservable().Subscribe(fileModel => tasks.Add(DownloadFileAndVerifyCheckSum(syncListModelCs.FranchiseDataVersionUid,
+                            var subscribe = query.ToObservable().Subscribe(fileModel => tasks.Add(DownloadFileAndVerifyCheckSum(syncListModelCs.FranchiseDataVersionUid,
                                 fileModel, token, inClient)));
                             Task.WaitAll(tasks.ToArray(), token);
-                            suscribe.Dispose();
+                            subscribe.Dispose();
 
                             repository.TrySetFranchiseSyncFilesCompleted(syncListModelCs.FranchiseDataVersionId);
 
@@ -178,8 +178,9 @@ namespace Drs.Service.Franchise
             }
         }
 
-        private Task DownloadFileAndVerifyCheckSum(Guid franchiseDataVersionUid, SyncFileModel fileModel, CancellationToken token, SyncServiceClient client)
+        private Task DownloadFileAndVerifyCheckSum(Guid franchiseDataVersionUid, SyncFileModel fileModel, CancellationToken token, SyncFranchiseClient client)
         {
+            var sfranchiseDataVersionUid = franchiseDataVersionUid.ToString();
             return Task.Run(() =>
             {
                 try
@@ -193,7 +194,7 @@ namespace Drs.Service.Franchise
                         _eventLog.WriteEntry("Se sucitó el siguiente error: " + sMsg, EventLogEntryType.Error);
                         return;
                     }
-                    SaveSyncFileAndVerifyCheckSum(fileModel, stream);
+                    SaveSyncFileAndVerifyCheckSum(sfranchiseDataVersionUid, fileModel, stream);
 
                 }
                 catch (Exception ex)
@@ -204,16 +205,17 @@ namespace Drs.Service.Franchise
             }, token);
         }
 
-        private void SaveSyncFileAndVerifyCheckSum(SyncFileModel fileModel, Stream stream)
+        private void SaveSyncFileAndVerifyCheckSum(string sfranchiseDataVersionUid, SyncFileModel fileModel, Stream stream)
         {
             var subPath = Path.GetDirectoryName(fileModel.FileName);
 
             if(subPath == null)
                 throw new Exception(String.Format("El archivo {0}, no tiene directorio", fileModel.FileName));
 
-            var path = Path.Combine(SettingsData.Server.PathToSaveSyncFiles, subPath);
+            var rootPath = Path.Combine(SettingsData.Server.PathToSaveSyncFiles, sfranchiseDataVersionUid);
+            var path = Path.Combine(rootPath, subPath);
             path.CreateDirectoryIfNotExist();
-            var fullFileName = Path.Combine(SettingsData.Server.PathToSaveSyncFiles, fileModel.FileName);
+            var fullFileName = Path.Combine(rootPath, fileModel.FileName);
             stream.SaveToFile(fullFileName);
 
             var checksumVerification = fullFileName.GetChecksum();

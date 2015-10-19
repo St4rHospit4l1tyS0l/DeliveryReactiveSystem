@@ -5,6 +5,7 @@ using Drs.Model.Constants;
 using Drs.Model.Menu;
 using Drs.Model.Order;
 using Drs.Model.Shared;
+using Drs.Service.Franchise;
 using Drs.Service.Order;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;

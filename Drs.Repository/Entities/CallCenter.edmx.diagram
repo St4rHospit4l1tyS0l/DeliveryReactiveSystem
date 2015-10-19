@@ -11,11 +11,9 @@
         <EntityTypeShape EntityType="CallCenterModel.AspNetUserClaims" Width="1.5" PointX="17.625" PointY="40.875" />
         <EntityTypeShape EntityType="CallCenterModel.AspNetUserLogins" Width="1.5" PointX="17.625" PointY="34.25" />
         <EntityTypeShape EntityType="CallCenterModel.AspNetUsers" Width="1.5" PointX="15.375" PointY="26.125" />
-        <EntityTypeShape EntityType="CallCenterModel.CallCenterInfo" Width="1.5" PointX="13.125" PointY="2.5" />
         <EntityTypeShape EntityType="CallCenterModel.CatDeliveryStatus" Width="1.5" PointX="12.125" PointY="6.75" />
         <EntityTypeShape EntityType="CallCenterModel.CatPayment" Width="1.5" PointX="19.875" PointY="20.375" />
         <EntityTypeShape EntityType="CallCenterModel.Client" Width="1.5" PointX="15.375" PointY="15.125" />
-        <EntityTypeShape EntityType="CallCenterModel.ClientInfo" Width="1.5" PointX="15.375" PointY="3.75" />
         <EntityTypeShape EntityType="CallCenterModel.ClientPhone" Width="1.5" PointX="17.625" PointY="15" />
         <EntityTypeShape EntityType="CallCenterModel.ClientPhoneStatistics" Width="1.5" PointX="19.875" PointY="23.625" />
         <EntityTypeShape EntityType="CallCenterModel.ClientStatistics" Width="1.5" PointX="17.625" PointY="19.875" />
@@ -42,7 +40,6 @@
         <EntityTypeShape EntityType="CallCenterModel.RegionB" Width="1.5" PointX="6" PointY="14.625" />
         <EntityTypeShape EntityType="CallCenterModel.RegionC" Width="1.5" PointX="8.25" PointY="9.5" />
         <EntityTypeShape EntityType="CallCenterModel.RegionD" Width="1.5" PointX="10.5" PointY="18.125" />
-        <EntityTypeShape EntityType="CallCenterModel.ServerInfo" Width="1.5" PointX="15.375" PointY="1" />
         <EntityTypeShape EntityType="CallCenterModel.Setting" Width="1.5" PointX="18.125" PointY="3.75" />
         <EntityTypeShape EntityType="CallCenterModel.StoreAddressDistribution" Width="1.5" PointX="22.125" PointY="15.625" />
         <EntityTypeShape EntityType="CallCenterModel.StoreStatus" Width="1.5" PointX="24.375" PointY="18.5" />
@@ -73,8 +70,6 @@
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_PosOrder_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_UserDetail_AspNetUsers" />
-        <AssociationConnector Association="CallCenterModel.FK_ClientInfo_CallCenterInfo" />
-        <AssociationConnector Association="CallCenterModel.FK_ServerInfo_CallCenterInfo" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_CatPayment" />
         <AssociationConnector Association="CallCenterModel.FK_Client_Company" />
         <AssociationConnector Association="CallCenterModel.FK_ClientStatistics_Client" />
@@ -123,6 +118,14 @@
         <AssociationConnector Association="CallCenterModel.FK_FranchiseDataVersion_Franchise" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseDataFile" Width="1.875" PointX="27.125" PointY="33.125" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseDataFile_FranchiseDataVersion" />
+        <EntityTypeShape EntityType="CallCenterModel.InfoCallCenter" Width="1.5" PointX="15.375" PointY="47.625" />
+        <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminal" Width="1.5" PointX="17.625" PointY="47.375" />
+        <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminalVersion" Width="1.5" PointX="19.875" PointY="30.375" />
+        <EntityTypeShape EntityType="CallCenterModel.InfoServer" Width="1.5" PointX="17.625" PointY="50.5" />
+        <AssociationConnector Association="CallCenterModel.FK_InfoClientTerminalVersion_Franchise" />
+        <AssociationConnector Association="CallCenterModel.FK_InfoClientTerminal_InfoCallCenter" />
+        <AssociationConnector Association="CallCenterModel.FK_InfoServer_InfoCallCenter" />
+        <AssociationConnector Association="CallCenterModel.FK_InfoClientTerminalVersion_InfoClientTerminal" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

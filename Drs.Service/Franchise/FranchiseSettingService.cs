@@ -8,7 +8,7 @@ using Drs.Model.Settings;
 using Drs.Repository.Entities;
 using Drs.Repository.Order;
 using Drs.Repository.Shared;
-using Drs.Service.SyncService;
+using Drs.Service.SyncFranchiseSvc;
 
 namespace Drs.Service.Franchise
 {
@@ -125,7 +125,7 @@ namespace Drs.Service.Franchise
 
         private int FranchiseQueryForFiles(FranchiseDataVersion model, ResponseMessageModel response, string wsUrl)
         {
-            using (var client = new SyncServiceClient(new BasicHttpBinding(), new EndpointAddress(wsUrl + SettingsData.Constants.Franchise.WS_SYNC_FILES)))
+            using (var client = new SyncFranchiseClient(new BasicHttpBinding(), new EndpointAddress(wsUrl + SettingsData.Constants.Franchise.WS_SYNC_FILES)))
             {
                 var res = client.QueryForFiles(model.FranchiseDataVersionUid);
 

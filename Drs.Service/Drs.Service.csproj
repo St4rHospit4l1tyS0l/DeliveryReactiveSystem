@@ -133,9 +133,9 @@
     <Compile Include="Franchise\PosService.cs" />
     <Compile Include="Franchise\IPosService.cs" />
     <Compile Include="Franchise\SyncServerFilesService.cs" />
-    <Compile Include="Order\FranchiseService.cs" />
+    <Compile Include="Franchise\FranchiseService.cs" />
     <Compile Include="Order\OrderService.cs" />
-    <Compile Include="Order\IFranchiseService.cs" />
+    <Compile Include="Franchise\IFranchiseService.cs" />
     <Compile Include="Order\IOrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy\ExecutionProxy.cs" />
@@ -158,7 +158,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\SyncService\Reference.cs">
+    <Compile Include="Service References\SyncFranchiseSvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SyncServerSvc\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -180,6 +185,7 @@
     <Compile Include="Store\StoreSettingService.cs" />
     <Compile Include="Store\UpdateOrderClient.cs" />
     <Compile Include="Store\UpdateOrderService.cs" />
+    <Compile Include="Sync\SyncFileService.cs" />
     <Compile Include="Track\ITrackService.cs" />
     <Compile Include="Track\TrackService.cs" />
     <Compile Include="TransferDto\TransferClientDto.cs" />
@@ -242,28 +248,41 @@
     <None Include="Service References\QueryFunction\Drs.Service.QueryFunction.ResponseRd.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SyncService\Drs.Service.SyncService.ResponseMessageFc.datasource">
+    <None Include="Service References\SyncFranchiseSvc\Drs.Service.SyncFranchiseSvc.ResponseMessageFc.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SyncService\Drs.Service.SyncService.ResponseMessageFcUnSync.datasource">
+    <None Include="Service References\SyncFranchiseSvc\Drs.Service.SyncFranchiseSvc.ResponseMessageFcUnSync.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SyncService\Drs.Service.SyncService.ResponseMessageFileSync.datasource">
+    <None Include="Service References\SyncFranchiseSvc\Drs.Service.SyncFranchiseSvc.ResponseMessageFileSync.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SyncService\SyncService.wsdl" />
-    <None Include="Service References\SyncService\SyncService.xsd">
+    <None Include="Service References\SyncFranchiseSvc\SyncFranchise.wsdl" />
+    <None Include="Service References\SyncFranchiseSvc\SyncFranchise.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\SyncService1.xsd">
+    <None Include="Service References\SyncFranchiseSvc\SyncFranchise1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\SyncService2.xsd">
+    <None Include="Service References\SyncFranchiseSvc\SyncFranchise2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\SyncService4.xsd">
+    <None Include="Service References\SyncFranchiseSvc\SyncFranchise3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\SyncServerSvc\Drs.Service.SyncServerSvc.ResponseMessageServerFileSync.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SyncServerSvc\SyncServer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncServerSvc\SyncServer1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncServerSvc\SyncServer2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncServerSvc\SyncServerSvc.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -272,7 +291,8 @@
     <WCFMetadataStorage Include="Service References\CustomerOrder\" />
     <WCFMetadataStorage Include="Service References\LicProxySvc\" />
     <WCFMetadataStorage Include="Service References\QueryFunction\" />
-    <WCFMetadataStorage Include="Service References\SyncService\" />
+    <WCFMetadataStorage Include="Service References\SyncFranchiseSvc\" />
+    <WCFMetadataStorage Include="Service References\SyncServerSvc\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\QueryFunction\configuration91.svcinfo" />
@@ -330,16 +350,31 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SyncService\SyncService.disco" />
+    <None Include="Service References\SyncFranchiseSvc\SyncFranchise.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SyncService\configuration91.svcinfo" />
+    <None Include="Service References\SyncFranchiseSvc\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SyncService\configuration.svcinfo" />
+    <None Include="Service References\SyncFranchiseSvc\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SyncService\Reference.svcmap">
+    <None Include="Service References\SyncFranchiseSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncServerSvc\SyncServer.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncServerSvc\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncServerSvc\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncServerSvc\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

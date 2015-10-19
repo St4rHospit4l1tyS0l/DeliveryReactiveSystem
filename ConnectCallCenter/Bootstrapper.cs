@@ -11,6 +11,7 @@ using Drs.Repository.Track;
 using Drs.Service.Account;
 using Drs.Service.Address;
 using Drs.Service.Client;
+using Drs.Service.Franchise;
 using Drs.Service.Order;
 using Drs.Service.Settings;
 using Drs.Service.Store;
@@ -48,6 +49,7 @@ namespace ConnectCallCenter
             builder.RegisterType<AddressHub>().SingleInstance();
             builder.RegisterType<StoreHub>().SingleInstance();
             builder.RegisterType<TrackHub>().SingleInstance();
+            builder.RegisterType<FranchiseHub>().SingleInstance();
             
         }
     }

@@ -4,9 +4,9 @@ using FranchiseChannel.Service.Model;
 
 namespace FranchiseChannel.Service.Sync
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ISyncService" in both code and config file together.
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ISyncFranchise" in both code and config file together.
     [ServiceContract]
-    public interface ISyncService
+    public interface ISyncFranchise
     {
         [OperationContract]
         ResponseMessageFc QueryForFiles(Guid uidVersion);

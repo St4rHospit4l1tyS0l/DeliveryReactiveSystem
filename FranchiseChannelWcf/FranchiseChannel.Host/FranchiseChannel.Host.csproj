@@ -59,7 +59,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Sync\SyncService.svc" />
+    <Content Include="Sync\SyncFranchise.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

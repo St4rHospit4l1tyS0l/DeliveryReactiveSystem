@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using Drs.Infrastructure.Crypto;
+using Drs.Model.Franchise;
 using Drs.Model.Menu;
 using Drs.Repository.Order;
 
-namespace Drs.Service.Order
+namespace Drs.Service.Franchise
 {
     public class FranchiseService : IFranchiseService
     {
@@ -16,6 +18,17 @@ namespace Drs.Service.Order
             using (_repository)
             {
                 return _repository.GetFranchiseButtons();
+            }
+        }
+
+        public IEnumerable<SyncFranchiseModel> GetListSyncFiles(string sHost)
+        {
+            var eInfo = Cypher.Encrypt(sHost);
+
+            using (_repository)
+            {
+                var lstFranchiseFiles = _repository.GetListSyncFiles(eInfo);
+               return lstFranchiseFiles;
             }
         }
     }

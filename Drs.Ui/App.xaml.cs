@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
@@ -12,12 +13,14 @@ using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Infrastructure.Logging;
 using Drs.Infrastructure.Model;
 using Drs.Model.Constants;
+using Drs.Model.Franchise;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
 using Drs.Model.UiView.Shared;
 using Drs.Resources.Network;
 using Drs.Service.Configuration;
 using Drs.Service.ReactiveDelivery;
+using Drs.Service.Sync;
 using Drs.Service.TransferDto;
 using Drs.Ui.Ui;
 using Drs.Ui.Ui.Splash;
@@ -41,9 +44,9 @@ namespace Drs.Ui
     /// </summary>
     public partial class App
     {
-        private const string SignalAddress = "http://localhost:41956";
+        private const string SIGNAL_ADDRESS = "http://localhost:41956";
         private static readonly ILog Log = LogManager.GetLogger(typeof(App));
-        private const int MiliSecondsToInit = 1000;
+        private const int MILI_SECONDS_TO_INIT = 1000;
         private IDisposable _signalr;
 
         protected override void OnStartup(StartupEventArgs e)
@@ -64,12 +67,12 @@ namespace Drs.Ui
         {
             try
             {
-                var splashVm = new SplashVm(MiliSecondsToInit);
+                var splashVm = new SplashVm(MILI_SECONDS_TO_INIT);
                 var splash = new SplashWnd { DataContext = splashVm };
                 splash.Show();
 
                 splashVm.ShowProgress.Execute(null);
-                await Task.Delay(TimeSpan.FromMilliseconds(MiliSecondsToInit));
+                await Task.Delay(TimeSpan.FromMilliseconds(MILI_SECONDS_TO_INIT));
 
                 var bootstrapper = new Bootstrapper();
                 var container = bootstrapper.Build();
@@ -79,6 +82,7 @@ namespace Drs.Ui
                 var lstHubProxies = new List<string> {
                         SharedConstants.Server.ACCOUNT_HUB,
                         SharedConstants.Server.CLIENT_HUB,
+                        SharedConstants.Server.FRANCHISE_HUB,
                         SharedConstants.Server.ORDER_HUB,
                         SharedConstants.Server.ADDRESS_HUB,
                         SharedConstants.Server.STORE_HUB,
@@ -118,7 +122,7 @@ namespace Drs.Ui
                 (SharedConstants.Server.ACCOUNT_HUB, SharedConstants.Server.ACCOUNT_INFO_ACCOUNT_HUB_METHOD, TransferDto.SameType)
                 .ObserveOn(reactiveDeliveryClient.ConcurrencyService.Dispatcher)
                 .SubscribeOn(reactiveDeliveryClient.ConcurrencyService.TaskPool)
-                .Subscribe(e => OnInfoAccountOk(e, showWnd, vm), i => OnInfoAccountError(i, showWndSec));
+                .Subscribe(e => OnInfoAccountOk(reactiveDeliveryClient, e, showWnd, vm), i => OnInfoAccountError(i, showWndSec));
         }
 
         private void OnInfoAccountError(Exception ex, Action showWnd)
@@ -133,7 +137,7 @@ namespace Drs.Ui
             showWnd();
         }
 
-        private void OnInfoAccountOk(IStale<ResponseMessageData<string>> obj, Action showWnd, IShellContainerVm vm)
+        private void OnInfoAccountOk(IReactiveDeliveryClient reactiveDeliveryClient, IStale<ResponseMessageData<string>> obj, Action showWnd, IShellContainerVm vm)
         {
             if (obj.IsStale)
             {
@@ -159,29 +163,63 @@ namespace Drs.Ui
                 return;
             }
 
+            GetUnsyncFiles(reactiveDeliveryClient, showWnd, vm, response);
+
+        }
+
+        private void GetUnsyncFiles(IReactiveDeliveryClient reactiveDeliveryClient, Action showWnd, IShellContainerVm vm, ConnectionInfoResponse response)
+        {
+            var showWndSec = showWnd;
+            reactiveDeliveryClient.ExecutionProxy.ExecuteRequest<ResponseMessageData<SyncFranchiseModel>, ResponseMessageData<SyncFranchiseModel>>
+                (SharedConstants.Server.FRANCHISE_HUB, SharedConstants.Server.LIST_SYNC_FILES_FRANCHISE_HUB_METHOD, TransferDto.SameType)
+                .ObserveOn(reactiveDeliveryClient.ConcurrencyService.Dispatcher)
+                .SubscribeOn(reactiveDeliveryClient.ConcurrencyService.TaskPool)
+                .Subscribe(e => OnGetUnsynFilesOk(e, showWnd, vm, response), i => OnInfoAccountError(i, showWndSec));
+        }
+
+        private void OnGetUnsynFilesOk(IStale<ResponseMessageData<SyncFranchiseModel>> obj, Action showWnd, IShellContainerVm vm, 
+            ConnectionInfoResponse responseAccount)
+        {
+            if (obj.IsStale)
+            {
+                OnInfoAccountError(ResNetwork.ERROR_NETWORK_DOWN, showWnd);
+                return;
+            }
+
+            if (obj.Data.IsSuccess == false)
+            {
+                OnInfoAccountError(obj.Data.Message, showWnd);
+                return;
+            }
+
+            var respMsg = SyncFileService.StartSyncFiles(obj.Data.LstData.ToList());
+
+            if (respMsg.IsSuccess == false)
+            {
+                OnInfoAccountError(respMsg.Message, showWnd);
+                return;
+            }
+
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
                 try
                 {
-                    vm.ChangeCurrentView((StatusScreen)response.NxWn, false);
-                    MessageBus.Current.SendMessage(response.Msg, SharedMessageConstants.ACCOUNT_ERROR_CHECK);
+                    vm.ChangeCurrentView((StatusScreen)responseAccount.NxWn, false);
+                    MessageBus.Current.SendMessage(responseAccount.Msg, SharedMessageConstants.ACCOUNT_ERROR_CHECK);
                     showWnd();
                 }
                 catch (Exception)
                 {
-                    OnInfoAccountError("La respuesta del servidor es incorrecta. Revise que tenga la versión correcta en el cliente o en el servidor"
-                        , showWnd);
-                } 
+                    OnInfoAccountError("La respuesta del servidor es incorrecta. Revise que tenga la versión correcta en el cliente o en el servidor", showWnd);
+                }
             });
-
-
         }
 
         private void InitializeSignalRPosConnection()
         {
             try
             {
-                _signalr = WebApp.Start(SignalAddress);
+                _signalr = WebApp.Start(SIGNAL_ADDRESS);
             }
             catch (Exception exception)
             {

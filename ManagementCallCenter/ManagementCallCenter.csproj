@@ -95,6 +95,8 @@
     <Compile Include="Catalogs\CatalogsSvc.cs" />
     <Compile Include="Setting\ISettingSvc.cs" />
     <Compile Include="Setting\SettingSvc.cs" />
+    <Compile Include="Sync\ISyncServerSvc.cs" />
+    <Compile Include="Sync\SyncServerSvc.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -55,9 +55,9 @@
     <Compile Include="Model\UnSyncFilesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\DataPaths.cs" />
-    <Compile Include="Sync\ISyncService.cs" />
+    <Compile Include="Sync\ISyncFranchise.cs" />
     <Compile Include="Model\ResponseMessageFc.cs" />
-    <Compile Include="Sync\SyncService.cs" />
+    <Compile Include="Sync\SyncFranchise.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

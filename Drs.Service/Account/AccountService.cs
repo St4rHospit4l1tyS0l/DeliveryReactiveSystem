@@ -150,18 +150,18 @@ namespace Drs.Service.Account
 
             using (_repository)
             {
-                var serverInfo = _repository.GetServerInfo(Cypher.Encrypt(eInfo));
+                var infoServer = _repository.GetInfoServer(Cypher.Encrypt(eInfo));
 
-                if (serverInfo == null)
+                if (infoServer == null)
                 {
-                    CreateServerInfo(eInfo, mConnInfo);
+                    CreateInfoServer(eInfo, mConnInfo);
                     return null;
                 }
 
                 ConnectionInfoModel decServInfo;
-                if (IsUpdatedServerInfo(mConnInfo, serverInfo, out decServInfo) == false)
+                if (IsUpdatedInfoServer(mConnInfo, infoServer, out decServInfo) == false)
                 {
-                    UpdateServerInfo(mConnInfo, decServInfo, serverInfo);
+                    UpdateInfoServer(mConnInfo, decServInfo, infoServer);
                     return null;
                 }
 
@@ -169,7 +169,7 @@ namespace Drs.Service.Account
             }
         }
 
-        public string IsValidServerInfo()
+        public string IsValidInfoServer()
         {
             var decSerInfo = ValidateMainAccount();
 
@@ -179,20 +179,20 @@ namespace Drs.Service.Account
             return IsValidDeviceInfo(decSerInfo);
         }
 
-        private void UpdateServerInfo(string mConnInfo, ConnectionInfoModel decServInfo, ServerInfo serverInfo)
+        private void UpdateInfoServer(string mConnInfo, ConnectionInfoModel decServInfo, InfoServer infoServer)
         {
             decServInfo.Hk = mConnInfo;
-            serverInfo.ServerCode = Cypher.Encrypt(new JavaScriptSerializer().Serialize(decServInfo));
+            infoServer.Code = Cypher.Encrypt(new JavaScriptSerializer().Serialize(decServInfo));
             _repository.SaveChanges();
 
-            //if (serverInfo.CallCenterInfoId.HasValue == false)
+            //if (infoServer.InfoCallCenterId.HasValue == false)
             //    return;
         }
 
-        private bool IsUpdatedServerInfo(string mConnInfo, ServerInfo serverInfo, out ConnectionInfoModel decCompInfo)
+        private bool IsUpdatedInfoServer(string mConnInfo, InfoServer infoServer, out ConnectionInfoModel decCompInfo)
         {
             var connInfo = mConnInfo;
-            decCompInfo = new JavaScriptSerializer().Deserialize<ConnectionInfoModel>(Cypher.Decrypt(serverInfo.ServerCode));
+            decCompInfo = new JavaScriptSerializer().Deserialize<ConnectionInfoModel>(Cypher.Decrypt(infoServer.Code));
 
             if (connInfo == decCompInfo.Hk)
                 return true;
@@ -200,7 +200,7 @@ namespace Drs.Service.Account
             return false;
         }
 
-        private void CreateServerInfo(string eInfo, string mConnInfo)
+        private void CreateInfoServer(string eInfo, string mConnInfo)
         {
             var model = new ConnectionInfoModel
             {
@@ -212,7 +212,7 @@ namespace Drs.Service.Account
                 Code = AccountConstants.CODE_NEW
             };
 
-            _repository.AddServerInfo(Cypher.Encrypt(eInfo), Cypher.Encrypt(new JavaScriptSerializer().Serialize(model)));
+            _repository.AddInfoServer(Cypher.Encrypt(eInfo), Cypher.Encrypt(new JavaScriptSerializer().Serialize(model)));
         
         }
 
@@ -232,16 +232,16 @@ namespace Drs.Service.Account
         {
             using (_repository)
             {
-                var serverInfo = _repository.GetServerInfo(id);
-                if (serverInfo == null)
+                var infoServer = _repository.GetInfoServer(id);
+                if (infoServer == null)
                     return false;
 
                 var callCenterId = VerifyHasCallCenter();
 
                 if (enable)
-                    serverInfo.CallCenterInfoId = callCenterId;
+                    infoServer.InfoCallCenterId = callCenterId;
                 else
-                    serverInfo.CallCenterInfoId = null;
+                    infoServer.InfoCallCenterId = null;
 
                 _repository.SaveChanges();
                 return true; 
@@ -252,16 +252,16 @@ namespace Drs.Service.Account
         {
             using (_repository)
             {
-                var clientInfo = _repository.GetClientInfo(id);
-                if (clientInfo == null)
+                var infoClient = _repository.GetInfoClientTerminal(id);
+                if (infoClient == null)
                     return false;
 
                 var callCenterId = VerifyHasCallCenter();
 
                 if (enable)
-                    clientInfo.CallCenterInfoId = callCenterId;
+                    infoClient.InfoCallCenterId = callCenterId;
                 else
-                    clientInfo.CallCenterInfoId = null;
+                    infoClient.InfoCallCenterId = null;
 
                 _repository.SaveChanges();
                 return true;
@@ -348,12 +348,12 @@ namespace Drs.Service.Account
             try
             {
                 var connInfo = device.DeserializeAndDecrypt<ConnectionInfoModel>();
-                var deviceModel = _repository.GetServerByHostName(Cypher.Encrypt(Cypher.Encrypt(connInfo.Hn)));
+                var deviceModel = _repository.GetServerByHost(Cypher.Encrypt(Cypher.Encrypt(connInfo.Hn)));
 
                 if (deviceModel == null)
                     return;
 
-                deviceModel.ServerCode = device;
+                deviceModel.Code = device;
                 _repository.SaveChanges();
             }
             catch(Exception ex) 
@@ -367,12 +367,12 @@ namespace Drs.Service.Account
             try
             {
                 var connInfo = device.DeserializeAndDecrypt<ConnectionInfoModel>();
-                var deviceModel = _repository.GetClientByHostName(Cypher.Encrypt(Cypher.Encrypt(connInfo.Hn)));
+                var deviceModel = _repository.GetClientTerminalByHost(Cypher.Encrypt(Cypher.Encrypt(connInfo.Hn)));
                 
                 if(deviceModel == null)
                     return;
 
-                deviceModel.ClientCode = device;
+                deviceModel.Code = device;
                 _repository.SaveChanges();
             }
             catch (Exception ex)

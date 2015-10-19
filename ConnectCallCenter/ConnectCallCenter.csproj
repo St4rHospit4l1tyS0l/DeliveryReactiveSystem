@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="AppInit.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Hubs\FranchiseHub.cs" />
     <Compile Include="Hubs\AddressHub.cs" />
     <Compile Include="Hubs\TrackHub.cs" />
     <Compile Include="Hubs\StoreHub.cs" />

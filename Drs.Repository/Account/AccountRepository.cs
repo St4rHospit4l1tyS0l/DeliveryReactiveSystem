@@ -75,34 +75,34 @@ namespace Drs.Repository.Account
 
         public string GetComputerInfo(string eInfo)
         {
-            return DbEntities.ClientInfo.Where(e => e.ClientHost == eInfo).Select(e => e.ClientCode).FirstOrDefault();
+            return DbEntities.InfoClientTerminal.Where(e => e.Host == eInfo).Select(e => e.Code).FirstOrDefault();
         }
 
         public void AddComputerInfo(string clientHost, string clientCode)
         {
-            DbEntities.ClientInfo.Add(new ClientInfo
+            DbEntities.InfoClientTerminal.Add(new InfoClientTerminal
             {
-                ClientHost = clientHost,
-                ClientCode = clientCode
+                Host = clientHost,
+                Code = clientCode
             });
 
             DbEntities.SaveChanges();
         }
 
-        public void AddServerInfo(string eInfo, string serverCode)
+        public void AddInfoServer(string eInfo, string serverCode)
         {
-            DbEntities.ServerInfo.Add(new ServerInfo
+            DbEntities.InfoServer.Add(new InfoServer
             {
-                ServerName = eInfo,
-                ServerCode = serverCode
+                Name = eInfo,
+                Code = serverCode
             });
 
             DbEntities.SaveChanges();            
         }
 
-        public ServerInfo GetServerInfo(string eInfo)
+        public InfoServer GetInfoServer(string eInfo)
         {
-            return DbEntities.ServerInfo.FirstOrDefault(e => e.ServerName == eInfo);
+            return DbEntities.InfoServer.FirstOrDefault(e => e.Name == eInfo);
         }
 
         public void SaveChanges()
@@ -112,72 +112,72 @@ namespace Drs.Repository.Account
 
         public IEnumerable<ConnectionFullModel> GetLstClients()
         {
-            return DbEntities.ClientInfo.Select(e => new ConnectionFullModel
+            return DbEntities.InfoClientTerminal.Select(e => new ConnectionFullModel
             {
-                DeviceId = e.ClientInfoId,
-                Code = e.ClientCode,
-                IsSelected = e.CallCenterInfoId.HasValue
+                DeviceId = e.InfoClientTerminalId,
+                Code = e.Code,
+                IsSelected = e.InfoCallCenterId.HasValue
             }).ToList();
         }
 
         public IEnumerable<ConnectionFullModel> GetLstServers()
         {
-            return DbEntities.ServerInfo.Select(e => new ConnectionFullModel
+            return DbEntities.InfoServer.Select(e => new ConnectionFullModel
             {
-                DeviceId = e.ServerInfoId,
-                Code = e.ServerCode,
-                IsSelected = e.CallCenterInfoId.HasValue
+                DeviceId = e.InfoServerId,
+                Code = e.Code,
+                IsSelected = e.InfoCallCenterId.HasValue
             }).ToList();
         }
 
         public bool ExistsServer(int id)
         {
-            return DbEntities.ServerInfo.Any(e => e.ServerInfoId == id);
+            return DbEntities.InfoServer.Any(e => e.InfoServerId == id);
         }
 
         public int GetCallCenterId()
         {
-            return DbEntities.CallCenterInfo.Select(e => e.CallCenterInfoId).FirstOrDefault();
+            return DbEntities.InfoCallCenter.Select(e => e.InfoCallCenterId).FirstOrDefault();
         }
 
         public int AddCallCenterId()
         {
-            var callCenter = new CallCenterInfo();
-            DbEntities.CallCenterInfo.Add(callCenter);
+            var callCenter = new InfoCallCenter();
+            DbEntities.InfoCallCenter.Add(callCenter);
             DbEntities.SaveChanges();
-            return callCenter.CallCenterInfoId;
+            return callCenter.InfoCallCenterId;
         }
 
-        public ServerInfo GetServerInfo(int id)
+        public InfoServer GetInfoServer(int id)
         {
-           return DbEntities.ServerInfo.SingleOrDefault(e => e.ServerInfoId == id);
+           return DbEntities.InfoServer.SingleOrDefault(e => e.InfoServerId == id);
         }
 
-        public ClientInfo GetClientInfo(int id)
+        public InfoClientTerminal GetInfoClientTerminal(int id)
         {
-            return DbEntities.ClientInfo.SingleOrDefault(e => e.ClientInfoId == id);
+            return DbEntities.InfoClientTerminal.SingleOrDefault(e => e.InfoClientTerminalId == id);
         }
 
         public List<string> GetLstClientsCodes()
         {
-            return DbEntities.ClientInfo.Where(e => e.CallCenterInfoId != null).Select(e => e.ClientCode).ToList();
+            return DbEntities.InfoClientTerminal.Where(e => e.InfoCallCenterId != null).Select(e => e.Code).ToList();
         }
 
         public List<string> GetLstServersCodes()
         {
-            return DbEntities.ServerInfo.Where(e => e.CallCenterInfoId != null).Select(e => e.ServerCode).ToList();
+            return DbEntities.InfoServer.Where(e => e.InfoCallCenterId != null).Select(e => e.Code).ToList();
         }
 
         public void AddActivationCode(string code)
         {
-            var callCenter = new CallCenterInfo { ActivationCode = code };
-            DbEntities.CallCenterInfo.Add(callCenter);
+            var callCenter = new InfoCallCenter { ActivationCode = code };
+            DbEntities.InfoCallCenter.Add(callCenter);
             DbEntities.SaveChanges();            
         }
 
         public void UpdateActivationCode(string code)
         {
-            var callCenter = DbEntities.CallCenterInfo.FirstOrDefault();
+            var callCenter = DbEntities.InfoCallCenter.FirstOrDefault();
 
             if (callCenter == null){
                 AddActivationCode(code);
@@ -190,27 +190,27 @@ namespace Drs.Repository.Account
 
         public string GetActivationCode()
         {
-            return DbEntities.CallCenterInfo.Select(e => e.ActivationCode).FirstOrDefault();
+            return DbEntities.InfoCallCenter.Select(e => e.ActivationCode).FirstOrDefault();
         }
 
-        public ClientInfo GetClientByHostName(string hn)
+        public InfoClientTerminal GetClientTerminalByHost(string hn)
         {
-            return DbEntities.ClientInfo.FirstOrDefault(e => e.ClientHost == hn);
+            return DbEntities.InfoClientTerminal.FirstOrDefault(e => e.Host == hn);
         }
 
-        public ServerInfo GetServerByHostName(string hn)
+        public InfoServer GetServerByHost(string hn)
         {
-            return DbEntities.ServerInfo.FirstOrDefault(e => e.ServerName == hn);
+            return DbEntities.InfoServer.FirstOrDefault(e => e.Name == hn);
         }
 
         public void UpdateComputerInfo(string hn, string sCode)
         {
-            var computerInfo = DbEntities.ClientInfo.FirstOrDefault(e => e.ClientHost == hn);
+            var computerInfo = DbEntities.InfoClientTerminal.FirstOrDefault(e => e.Host == hn);
             
             if (computerInfo == null)
                 return;
 
-            computerInfo.ClientCode = sCode;
+            computerInfo.Code = sCode;
             DbEntities.SaveChanges();
         }
 

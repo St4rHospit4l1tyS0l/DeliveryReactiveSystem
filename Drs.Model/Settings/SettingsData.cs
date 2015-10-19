@@ -88,6 +88,12 @@ namespace Drs.Model.Settings
 
             }
 
+            public static class FranchiseConst
+            {
+                public const int SYNC_FILE_TYPE_DATA = 3910;
+                public const int SYNC_FILE_TYPE_LOGO = 4721;
+            }
+
             public static class Franchise
             {
                 public const string ALOHA_IBER_TO_INIT = "Iber.exe";
@@ -98,7 +104,7 @@ namespace Drs.Model.Settings
                 public const string TMP_FOLDER = "TMP";
                 public const string STOP_FILE = "STOP";
                 public const string BIN_FOLDER = "BIN";
-                public const string WS_SYNC_FILES = "Sync/SyncService.svc";
+                public const string WS_SYNC_FILES = "Sync/SyncFranchise.svc";
             }
 
             public class StoreConst

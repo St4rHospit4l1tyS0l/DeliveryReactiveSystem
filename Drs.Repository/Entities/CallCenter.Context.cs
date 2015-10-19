@@ -31,11 +31,9 @@ namespace Drs.Repository.Entities
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<CallCenterInfo> CallCenterInfo { get; set; }
         public virtual DbSet<CatDeliveryStatus> CatDeliveryStatus { get; set; }
         public virtual DbSet<CatPayment> CatPayment { get; set; }
         public virtual DbSet<Client> Client { get; set; }
-        public virtual DbSet<ClientInfo> ClientInfo { get; set; }
         public virtual DbSet<ClientPhone> ClientPhone { get; set; }
         public virtual DbSet<ClientPhoneStatistics> ClientPhoneStatistics { get; set; }
         public virtual DbSet<ClientStatistics> ClientStatistics { get; set; }
@@ -62,7 +60,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<RegionB> RegionB { get; set; }
         public virtual DbSet<RegionC> RegionC { get; set; }
         public virtual DbSet<RegionD> RegionD { get; set; }
-        public virtual DbSet<ServerInfo> ServerInfo { get; set; }
         public virtual DbSet<Setting> Setting { get; set; }
         public virtual DbSet<StoreAddressDistribution> StoreAddressDistribution { get; set; }
         public virtual DbSet<StoreStatus> StoreStatus { get; set; }
@@ -72,5 +69,9 @@ namespace Drs.Repository.Entities
         public virtual DbSet<ViewUserInfo> ViewUserInfo { get; set; }
         public virtual DbSet<FranchiseDataVersion> FranchiseDataVersion { get; set; }
         public virtual DbSet<FranchiseDataFile> FranchiseDataFile { get; set; }
+        public virtual DbSet<InfoCallCenter> InfoCallCenter { get; set; }
+        public virtual DbSet<InfoClientTerminal> InfoClientTerminal { get; set; }
+        public virtual DbSet<InfoClientTerminalVersion> InfoClientTerminalVersion { get; set; }
+        public virtual DbSet<InfoServer> InfoServer { get; set; }
     }
 }

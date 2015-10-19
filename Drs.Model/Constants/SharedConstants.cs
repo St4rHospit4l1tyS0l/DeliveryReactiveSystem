@@ -64,6 +64,10 @@ namespace Drs.Model.Constants
             public const string SEARCH_BY_PHONE_TRACK_HUB_METHOD = "SearchByPhone-Track";
             public const string SEARCH_BY_CLIENTNAME_TRACK_HUB_METHOD = "SearchByClientName-Track";
             public const string SHOW_DETAIL_TRACK_HUB_METHOD = "ShowDetail-Track";
+
+            //Module Franchise
+            public const string FRANCHISE_HUB = "ModFranchise";
+            public const string LIST_SYNC_FILES_FRANCHISE_HUB_METHOD = "ListSyncFiles-Franchise";
         }
 
         public static class Client

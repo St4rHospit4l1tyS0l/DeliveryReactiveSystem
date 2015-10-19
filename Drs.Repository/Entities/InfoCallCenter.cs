@@ -12,13 +12,18 @@ namespace Drs.Repository.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class ServerInfo
+    public partial class InfoCallCenter
     {
-        public int ServerInfoId { get; set; }
-        public string ServerName { get; set; }
-        public string ServerCode { get; set; }
-        public Nullable<int> CallCenterInfoId { get; set; }
+        public InfoCallCenter()
+        {
+            this.InfoClientTerminal = new HashSet<InfoClientTerminal>();
+            this.InfoServer = new HashSet<InfoServer>();
+        }
     
-        public virtual CallCenterInfo CallCenterInfo { get; set; }
+        public int InfoCallCenterId { get; set; }
+        public string ActivationCode { get; set; }
+    
+        public virtual ICollection<InfoClientTerminal> InfoClientTerminal { get; set; }
+        public virtual ICollection<InfoServer> InfoServer { get; set; }
     }
 }

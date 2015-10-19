@@ -3,6 +3,7 @@ using Autofac;
 using Autofac.Integration.Wcf;
 using Drs.Repository.Address;
 using Drs.Service.Configuration;
+using Drs.Service.Settings;
 
 namespace HostCallCenter
 {
@@ -14,6 +15,7 @@ namespace HostCallCenter
             var container = new Bootstrapper().Build();
             AutofacHostFactory.Container = container;
             SettingAddress.Initialize(container.Resolve<IAddressRepository>());
+            InitializeSettingsService.InitializeConstants();
         }
 
         protected void Session_Start(object sender, EventArgs e)
