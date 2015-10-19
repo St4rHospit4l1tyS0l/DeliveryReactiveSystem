@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ce67aef4-d5b0-4761-ba4b-38f7ca56ff3a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Owin" />
+      <ReferencedAssembly AssemblyName="Splat" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:4209/Sync/SyncFranchise.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SyncFranchise.wsdl" MetadataType="Wsdl" ID="da9ddb8f-4ccb-4278-84df-bd3a8f4982df" SourceId="1" SourceUrl="http://localhost:4209/Sync/SyncFranchise.svc?wsdl" />
+    <MetadataFile FileName="SyncFranchise.xsd" MetadataType="Schema" ID="d14b483c-f597-4249-9258-d65c3f7b93d1" SourceId="1" SourceUrl="http://localhost:4209/Sync/SyncFranchise.svc?xsd=xsd0" />
+    <MetadataFile FileName="SyncFranchise1.xsd" MetadataType="Schema" ID="01cfd6b5-4d54-4ec5-af08-32ca13d1b253" SourceId="1" SourceUrl="http://localhost:4209/Sync/SyncFranchise.svc?xsd=xsd1" />
+    <MetadataFile FileName="SyncFranchise2.xsd" MetadataType="Schema" ID="4298ba72-574b-43c3-820e-a0e459569d5f" SourceId="1" SourceUrl="http://localhost:4209/Sync/SyncFranchise.svc?xsd=xsd2" />
+    <MetadataFile FileName="SyncFranchise3.xsd" MetadataType="Schema" ID="5b322d00-5e3b-4589-870e-6844f631256c" SourceId="1" SourceUrl="http://localhost:4209/Sync/SyncFranchise.svc?xsd=xsd3" />
+    <MetadataFile FileName="SyncFranchise.disco" MetadataType="Disco" ID="a196a084-dee2-4bd2-91c9-b5700556c267" SourceId="1" SourceUrl="http://localhost:4209/Sync/SyncFranchise.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
