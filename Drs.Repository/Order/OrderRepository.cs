@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using Drs.Model.Address;
@@ -9,7 +8,7 @@ using Drs.Repository.Account;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
 
-namespace Drs.Repository.Client
+namespace Drs.Repository.Order
 {
     public class OrderRepository : BaseOneRepository, IOrderRepository
     {

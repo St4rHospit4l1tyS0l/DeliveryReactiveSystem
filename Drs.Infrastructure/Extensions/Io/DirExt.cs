@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using Microsoft.VisualBasic.FileIO;
 
@@ -68,6 +69,14 @@ namespace Drs.Infrastructure.Extensions.Io
         {
             if (Directory.Exists(path) == false)
                 Directory.CreateDirectory(path);
+        }
+
+        public static string GetCurrentDirectory()
+        {
+            var codeBase = Assembly.GetCallingAssembly().CodeBase;
+            var uri = new UriBuilder(codeBase);
+            var path = Uri.UnescapeDataString(uri.Path);
+            return Path.GetDirectoryName(path);
         }
     }
 }

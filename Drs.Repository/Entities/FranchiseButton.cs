@@ -17,9 +17,10 @@ namespace Drs.Repository.Entities
         public int FranchiseId { get; set; }
         public int Position { get; set; }
         public string Color { get; set; }
-        public string Image { get; set; }
         public string Products { get; set; }
+        public int ResourceId { get; set; }
     
         public virtual Franchise Franchise { get; set; }
+        public virtual Resource Resource { get; set; }
     }
 }

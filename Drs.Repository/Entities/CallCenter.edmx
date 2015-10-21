@@ -199,8 +199,8 @@
           <Property Name="FranchiseId" Type="int" Nullable="false" />
           <Property Name="Position" Type="int" Nullable="false" />
           <Property Name="Color" Type="nvarchar" MaxLength="8" Nullable="false" />
-          <Property Name="Image" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Products" Type="nvarchar" MaxLength="200" />
+          <Property Name="ResourceId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FranchiseData">
           <Key>
@@ -500,6 +500,20 @@
           </Key>
           <Property Name="FranchisePhoneId" Type="int" Nullable="false" />
           <Property Name="FranchiseStoreId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ResourceId" />
+          </Key>
+          <Property Name="ResourceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OriginalName" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="CurrentPath" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="UidFileName" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="UploadDateTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsObsolete" Type="bit" Nullable="false" />
+          <Property Name="FileType" Type="int" Nullable="false" />
+          <Property Name="UploadUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CheckSum" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
@@ -814,6 +828,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Principal>
             <Dependent Role="FranchiseButton">
               <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseButton_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="FranchiseButton" Type="Self.FranchiseButton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ResourceId" />
+            </Principal>
+            <Dependent Role="FranchiseButton">
+              <PropertyRef Name="ResourceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1477,6 +1503,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Resource_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="UploadUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StoreAddressDistribution_FranchiseStore">
           <End Role="FranchiseStore" Type="Self.FranchiseStore" Multiplicity="1" />
           <End Role="StoreAddressDistribution" Type="Self.StoreAddressDistribution" Multiplicity="*" />
@@ -1571,6 +1609,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="RelClientPhoneAddress" EntityType="Self.RelClientPhoneAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RelClientPhoneClient" EntityType="Self.RelClientPhoneClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RelFranchisePhoneStore" EntityType="Self.RelFranchisePhoneStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreAddressDistribution" EntityType="Self.StoreAddressDistribution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreStatus" EntityType="Self.StoreStatus" Schema="dbo" store:Type="Tables" />
@@ -1669,6 +1708,10 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           </AssociationSet>
           <AssociationSet Name="FK_FranchiseButton_Franchise" Association="Self.FK_FranchiseButton_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="FranchiseButton" EntitySet="FranchiseButton" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseButton_Resource" Association="Self.FK_FranchiseButton_Resource">
+            <End Role="Resource" EntitySet="Resource" />
             <End Role="FranchiseButton" EntitySet="FranchiseButton" />
           </AssociationSet>
           <AssociationSet Name="FK_FranchiseData_Franchise" Association="Self.FK_FranchiseData_Franchise">
@@ -1891,6 +1934,10 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
             <End Role="RelFranchisePhoneStore" EntitySet="RelFranchisePhoneStore" />
           </AssociationSet>
+          <AssociationSet Name="FK_Resource_AspNetUsers" Association="Self.FK_Resource_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Resource" EntitySet="Resource" />
+          </AssociationSet>
           <AssociationSet Name="FK_StoreAddressDistribution_FranchiseStore" Association="Self.FK_StoreAddressDistribution_FranchiseStore">
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
             <End Role="StoreAddressDistribution" EntitySet="StoreAddressDistribution" />
@@ -1930,7 +1977,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="ControlTitle" EntityType="CallCenterModel.ControlTitle" />
           <EntitySet Name="Country" EntityType="CallCenterModel.Country" />
           <EntitySet Name="Franchise" EntityType="CallCenterModel.Franchise" />
-          <EntitySet Name="FranchiseButton" EntityType="CallCenterModel.FranchiseButton" />
           <EntitySet Name="FranchiseData" EntityType="CallCenterModel.FranchiseData" />
           <EntitySet Name="FranchisePhone" EntityType="CallCenterModel.FranchisePhone" />
           <EntitySet Name="FranchiseStore" EntityType="CallCenterModel.FranchiseStore" />
@@ -2097,10 +2143,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="Country" EntitySet="Country" />
             <End Role="RegionD" EntitySet="RegionD" />
           </AssociationSet>
-          <AssociationSet Name="FK_FranchiseButton_Franchise" Association="CallCenterModel.FK_FranchiseButton_Franchise">
-            <End Role="Franchise" EntitySet="Franchise" />
-            <End Role="FranchiseButton" EntitySet="FranchiseButton" />
-          </AssociationSet>
           <AssociationSet Name="FK_FranchiseData_Franchise" Association="CallCenterModel.FK_FranchiseData_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
             <End Role="FranchiseData" EntitySet="FranchiseData" />
@@ -2253,7 +2295,21 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="InfoClientTerminal" EntitySet="InfoClientTerminal" />
             <End Role="InfoClientTerminalVersion" EntitySet="InfoClientTerminalVersion" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="FranchiseButton" EntityType="CallCenterModel.FranchiseButton" />
+          <EntitySet Name="Resource" EntityType="CallCenterModel.Resource" />
+          <AssociationSet Name="FK_Resource_AspNetUsers" Association="CallCenterModel.FK_Resource_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Resource" EntitySet="Resource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseButton_Franchise" Association="CallCenterModel.FK_FranchiseButton_Franchise">
+            <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="FranchiseButton" EntitySet="FranchiseButton" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseButton_Resource" Association="CallCenterModel.FK_FranchiseButton_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="FranchiseButton" EntitySet="FranchiseButton" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressId" />
@@ -2354,6 +2410,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchiseDataVersion" />
           <NavigationProperty Name="FranchiseDataVersion1" Relationship="CallCenterModel.FK_FranchiseDataVersion_AspNetUsers1" FromRole="AspNetUsers" ToRole="FranchiseDataVersion" />
+          <NavigationProperty Name="Resource" Relationship="CallCenterModel.FK_Resource_AspNetUsers" FromRole="AspNetUsers" ToRole="Resource" />
           </EntityType>
         <EntityType Name="CatDeliveryStatus">
           <Key>
@@ -2486,23 +2543,12 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_Franchise_AspNetUsers" FromRole="Franchise" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_Franchise_AspNetUsers1" FromRole="Franchise" ToRole="AspNetUsers" />
-          <NavigationProperty Name="FranchiseButton" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="Franchise" ToRole="FranchiseButton" />
           <NavigationProperty Name="FranchiseData" Relationship="CallCenterModel.FK_FranchiseData_Franchise" FromRole="Franchise" ToRole="FranchiseData" />
           <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_Franchise" FromRole="Franchise" ToRole="FranchiseStore" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="Franchise" ToRole="OrderToStore" />
           <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataVersion_Franchise" FromRole="Franchise" ToRole="FranchiseDataVersion" />
           <NavigationProperty Name="InfoClientTerminalVersion" Relationship="CallCenterModel.FK_InfoClientTerminalVersion_Franchise" FromRole="Franchise" ToRole="InfoClientTerminalVersion" />
-        </EntityType>
-        <EntityType Name="FranchiseButton">
-          <Key>
-            <PropertyRef Name="FranchiseId" />
-          </Key>
-          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
-          <Property Name="Position" Type="Int32" Nullable="false" />
-          <Property Name="Color" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Products" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="FranchiseButton" ToRole="Franchise" />
+          <NavigationProperty Name="FranchiseButton" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="Franchise" ToRole="FranchiseButton" />
         </EntityType>
         <EntityType Name="FranchiseData">
           <Key>
@@ -3279,18 +3325,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FranchiseButton_Franchise">
-          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseButton" Role="FranchiseButton" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Franchise">
-              <PropertyRef Name="FranchiseId" />
-            </Principal>
-            <Dependent Role="FranchiseButton">
-              <PropertyRef Name="FranchiseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_FranchiseData_Franchise">
           <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
           <End Type="CallCenterModel.FranchiseData" Role="FranchiseData" Multiplicity="0..1" />
@@ -3800,6 +3834,70 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FranchiseButton">
+          <Key>
+            <PropertyRef Name="FranchiseId" />
+          </Key>
+          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Products" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="FranchiseButton" ToRole="Franchise" />
+          <NavigationProperty Name="Resource" Relationship="CallCenterModel.FK_FranchiseButton_Resource" FromRole="FranchiseButton" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ResourceId" />
+          </Key>
+          <Property Name="ResourceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OriginalName" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentPath" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="UidFileName" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="UploadDateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+          <Property Name="FileType" Type="Int32" Nullable="false" />
+          <Property Name="UploadUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CheckSum" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_Resource_AspNetUsers" FromRole="Resource" ToRole="AspNetUsers" />
+          <NavigationProperty Name="FranchiseButton" Relationship="CallCenterModel.FK_FranchiseButton_Resource" FromRole="Resource" ToRole="FranchiseButton" />
+        </EntityType>
+        <Association Name="FK_Resource_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.Resource" Role="Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="UploadUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseButton_Franchise">
+          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseButton" Role="FranchiseButton" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Franchise">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="FranchiseButton">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseButton_Resource">
+          <End Type="CallCenterModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseButton" Role="FranchiseButton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ResourceId" />
+            </Principal>
+            <Dependent Role="FranchiseButton">
+              <PropertyRef Name="ResourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3996,17 +4094,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ShortName" ColumnName="ShortName" />
-                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FranchiseButton">
-            <EntityTypeMapping TypeName="CallCenterModel.FranchiseButton">
-              <MappingFragment StoreEntitySet="FranchiseButton">
-                <ScalarProperty Name="Products" ColumnName="Products" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -4426,7 +4513,33 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="FranchiseButton">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseButton">
+              <MappingFragment StoreEntitySet="FranchiseButton">
+                <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
+                <ScalarProperty Name="Products" ColumnName="Products" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resource">
+            <EntityTypeMapping TypeName="CallCenterModel.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="CheckSum" ColumnName="CheckSum" />
+                <ScalarProperty Name="UploadUserId" ColumnName="UploadUserId" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="UploadDateTime" ColumnName="UploadDateTime" />
+                <ScalarProperty Name="UidFileName" ColumnName="UidFileName" />
+                <ScalarProperty Name="CurrentPath" ColumnName="CurrentPath" />
+                <ScalarProperty Name="OriginalName" ColumnName="OriginalName" />
+                <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -6,6 +6,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FileType" type="xs:int" />
         <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="UidVersion" type="q1:guid" />
       </xs:sequence>
     </xs:complexType>

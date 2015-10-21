@@ -1,0 +1,38 @@
+﻿<div class="row" id="uploadFileScopeId" ng-controller="uploadFileController as uf" ng-init='uf.m = @(ViewBag.Resource ?? "{}" );'>
+    <input type="hidden" id="UidFileName" name="@(ViewBag.PropertyFile + ".UidFileName")" ng-model="uf.m.UidFileName" ng-update-hidden />
+    <div class="space-15"></div>
+    <div class="row">
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-6 element-center">
+            <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Seleccionar mi logotipo</span>
+                <input id="fileupload" type="file" name="files[]">
+            </span>
+            <br />
+            <span><small>Nota: Se sugiere que el logotipo sea de tamaño 256 x 256 pixeles</small></span>
+            <hr />
+            <div class="row" ng-show="uf.m.UidFileName">
+                <div class="col-xs-12 element-center">
+                    <img ng-src="@Url.Action("Resource", "Shared", new { area = "" })?resource={{uf.m.UidFileName}}" width="256" height="256" />
+                </div>
+                <hr />
+            </div>
+            <br />
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="alert alert-danger element-center" ng-repeat="error in uf.lstErrors track by $index">
+                        <button aria-hidden="true" class="close" type="button" ng-click="uf.lstErrors.splice($index, 1)">×</button>
+                        {{error}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="space-15"></div>
+</div>
+

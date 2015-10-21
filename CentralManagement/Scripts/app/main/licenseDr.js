@@ -1,2 +1,3 @@
 ﻿window.angJsDependencies = [];
-var app = angular.module('licenseDr', window.angJsDependencies);
+window.constMainApp = 'licenseDr';
+var app = angular.module(window.constMainApp, window.angJsDependencies);

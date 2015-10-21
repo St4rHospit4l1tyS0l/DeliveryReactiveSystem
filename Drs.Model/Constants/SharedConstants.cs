@@ -72,6 +72,8 @@ namespace Drs.Model.Constants
 
         public static class Client
         {
+            public const string URI_RESOURCE = "Logos\\";
+
             public const int RECORD_NEW = 1000;
             public const int RECORD_ONPROGRESS_TO_SAVED = 1001;
             public const int RECORD_SAVED = 1002;

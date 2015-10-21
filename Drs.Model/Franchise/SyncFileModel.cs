@@ -1,6 +1,4 @@
-﻿using Drs.Model.Shared;
-
-namespace Drs.Model.Franchise
+﻿namespace Drs.Model.Franchise
 {
     public class SyncFileModel
     {

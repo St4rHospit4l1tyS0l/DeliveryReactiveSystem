@@ -13,6 +13,7 @@ namespace Drs.Service.Settings
         {
             SettingsData.Server.MaxResultsOnQuery = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.SERVER, SettingsData.Constants.ServerConst.MAX_RESULTS_ON_QUERY, 50);
             SettingsData.Server.PathToSaveSyncFiles = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.SERVER, SettingsData.Constants.ServerConst.PATH_TO_SAVE_SYNC_FILES, "/SyncPath/");
+            SettingsData.Server.PathToSaveResources = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.SERVER, SettingsData.Constants.ServerConst.PATH_TO_SAVE_RESOURCES, "/Resources/");
             
             SettingsData.Client.TotalSecondsToLogOut = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.TOTAL_SECONDS_TO_LOGOUT, 600);
             SettingsData.Client.MinLengthPhone = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.MIN_LENGTH_PHONE, 5);

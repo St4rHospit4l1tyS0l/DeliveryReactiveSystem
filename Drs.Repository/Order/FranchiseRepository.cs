@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Franchise;
@@ -27,12 +28,12 @@ namespace Drs.Repository.Order
 
         public IEnumerable<ButtonItemModel> GetFranchiseButtons()
         {
-            return DbEntities.Franchise.Where(e => e.IsObsolete == false).Select(e => new ButtonItemModel
+            return DbEntities.Franchise.Where(e => e.IsObsolete == false && e.FranchiseButton.Position > 0).Select(e => new ButtonItemModel
                     {
                         Color = e.FranchiseButton.Color,
                         Title = e.ShortName,
                         Position = e.FranchiseButton.Position,
-                        Image = e.FranchiseButton.Image,
+                        Image = e.FranchiseButton.Resource.UidFileName,
                         Code = e.Code,
                         Description = e.FranchiseButton.Products,
                         DataInfo = new FranchiseDataModel{DataFolder = e.FranchiseData.DataFolder, NewDataFolder = e.FranchiseData.NewDataFolder}
@@ -54,7 +55,7 @@ namespace Drs.Repository.Order
                 FranchiseButton = new FranchiseButton
                 {
                     Color = model.Color,
-                    Image = model.Image,
+                    Resource = DbEntities.Resource.Single(e => e.UidFileName == model.Resource.UidFileName),
                     Position = model.Position,
                     Products = model.Products
                 },
@@ -82,7 +83,10 @@ namespace Drs.Repository.Order
             modelOld.Code = model.Code;
             
             modelOld.FranchiseButton.Color = model.Color;
-            modelOld.FranchiseButton.Image = model.Image;
+            
+            var resource = DbEntities.Resource.Single(e => e.UidFileName == model.Resource.UidFileName);
+            modelOld.FranchiseButton.Resource = resource;
+
             modelOld.FranchiseButton.Position = model.Position;
             modelOld.FranchiseButton.Products = model.Products;
 
@@ -148,19 +152,49 @@ namespace Drs.Repository.Order
 
         public IEnumerable<SyncFranchiseModel> GetListSyncFiles(string eInfo)
         {
-            var lstFranchiseVersionList = DbEntities.Franchise.Where(e => e.IsObsolete == false 
-                && e.FranchiseDataVersion.Any(i => i.IsObsolete == false && i.IsCompleted))
+            var lstSyncFranchise = GetListSyncByFranchise(eInfo);
+            lstSyncFranchise.AddRange(GetListLogosByFranchise());
+            return lstSyncFranchise;
+        }
+
+        private IEnumerable<SyncFranchiseModel> GetListLogosByFranchise()
+        {
+            return DbEntities.Franchise.Where(e => e.IsObsolete == false && e.FranchiseButton.Position > 0)
+                .Select(e => new SyncFranchiseModel
+                {
+                    FranchiseId = e.FranchiseId,
+                    Code = e.Code,
+                    Version = "",
+                    LstFiles = new List<SyncFileModel>
+                    {
+                        new SyncFileModel
+                        {
+                            FileName = e.FranchiseButton.Resource.UidFileName,
+                            CheckSum = e.FranchiseButton.Resource.CheckSum,
+                            FileType = SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_DATA,
+                            FranchiseDataFileId = e.FranchiseButton.ResourceId
+                        }
+                    }
+                }).ToList();
+        }
+
+        private List<SyncFranchiseModel> GetListSyncByFranchise(string eInfo)
+        {
+            var lstFranchiseVersionList = DbEntities.Franchise.Where(e => e.IsObsolete == false &&
+                e.FranchiseDataVersion.Any(i => i.IsObsolete == false && i.IsCompleted))
                 .Select(e => new
                 {
                     e.FranchiseId,
                     e.Code,
-                    LastVersion = e.FranchiseDataVersion.Where(i => i.IsObsolete == false && i.IsCompleted).OrderByDescending(i => i.FranchiseDataVersionId)
-                        .Select(i => new
-                        {
-                            i.Version,
-                            i.FranchiseDataVersionId,
-                            i.FranchiseDataVersionUid
-                        }).FirstOrDefault()
+                    LastVersion =
+                        e.FranchiseDataVersion.Where(i => i.IsObsolete == false && i.IsCompleted)
+                            .OrderByDescending(i => i.FranchiseDataVersionId)
+                            .Select(i => new
+                            {
+                                i.Version,
+                                i.FranchiseDataVersionId,
+                                i.FranchiseDataVersionUid
+                            }).FirstOrDefault()
                 }).ToList();
 
 
@@ -190,14 +224,15 @@ namespace Drs.Repository.Order
 
             foreach (var syncFranchise in lstSyncFranchise)
             {
-                syncFranchise.LstFiles = DbEntities.FranchiseDataFile.Where(e => e.FranchiseDataVersionId == syncFranchise.FranchiseDataVersionId)
-                    .Select(e => new SyncFileModel
-                    {
-                        CheckSum = e.CheckSum,
-                        FileName = e.FileName,
-                        FranchiseDataFileId = e.FranchiseDataFileId,
-                        FileType = SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_DATA
-                    }).ToList();
+                syncFranchise.LstFiles =
+                    DbEntities.FranchiseDataFile.Where(e => e.FranchiseDataVersionId == syncFranchise.FranchiseDataVersionId)
+                        .Select(e => new SyncFileModel
+                        {
+                            CheckSum = e.CheckSum,
+                            FileName = e.FileName,
+                            FranchiseDataFileId = e.FranchiseDataFileId,
+                            FileType = SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_DATA
+                        }).ToList();
             }
 
             return lstSyncFranchise;
@@ -226,7 +261,10 @@ namespace Drs.Repository.Order
                     WsAddress = e.FranchiseData.WsAddress,
                     Position = e.FranchiseButton.Position,
                     Color = e.FranchiseButton.Color,
-                    Image = e.FranchiseButton.Image,
+                    Resource = new ResourceModel
+                    {
+                        UidFileName = e.FranchiseButton.Resource.UidFileName
+                    },
                     Products = e.FranchiseButton.Products
                 }).FirstOrDefault();
         }

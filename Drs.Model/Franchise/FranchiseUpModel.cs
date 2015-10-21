@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Drs.Model.Shared;
 
 namespace Drs.Model.Franchise
 {
@@ -37,9 +38,11 @@ namespace Drs.Model.Franchise
         [Required(AllowEmptyStrings = false)]
         public string Color { get; set; }
 
-        [Display(Name = @"Nombre de la imagen")]
-        [Required(AllowEmptyStrings = false)]
-        public string Image { get; set; }
+        //[Display(Name = @"Nombre de la imagen")]
+        //[Required(AllowEmptyStrings = false)]
+        //public string Image { get; set; }
+        [Required]
+        public ResourceModel Resource { get; set; }
 
         [Display(Name = @"Tipo de productos")]
         [Required(AllowEmptyStrings = false)]

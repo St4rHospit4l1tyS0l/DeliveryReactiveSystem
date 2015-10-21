@@ -1,9 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Drs.Infrastructure.Resources;
 using Drs.Repository.Entities;
 using Drs.Repository.Log;
+using Drs.Repository.Shared;
 using Drs.Service.Factory;
 
 namespace CentralManagement.Controllers
@@ -49,6 +52,32 @@ namespace CentralManagement.Controllers
                     HasError = false,
                     Message = "Se presentó un problema al momento de consultar la información",
                 });
+            }
+        }
+
+    
+     
+        public ActionResult Resource(Guid resource)
+        {
+            using (var repository = new ResourceRepository())
+            {
+                var originalFileName = repository.GetFileNameByStoreName(resource);
+                return String.IsNullOrEmpty(originalFileName) ? null : File(Path.Combine(FileUploadController.UploadFolder, resource.ToString()), MimeMapping.GetMimeMapping(originalFileName));
+            }
+        }
+
+
+        public ActionResult Download(Guid resource)
+        {
+            using (var repository = new ResourceRepository())
+            {
+                var originalFileName = repository.GetFileNameByStoreName(resource);
+
+                if (String.IsNullOrEmpty(originalFileName))
+                    return null;
+
+                Response.AppendHeader("Content-Disposition", "attachment; filename=\"" + originalFileName + "\"");
+                return File(Path.Combine(FileUploadController.UploadFolder, resource.ToString()), "application/force-download;");
             }
         }
     }

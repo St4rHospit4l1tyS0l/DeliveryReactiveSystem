@@ -160,6 +160,7 @@
     <Compile Include="Shared\OptionModel.cs" />
     <Compile Include="Shared\PagerDto.cs" />
     <Compile Include="Shared\PagerModel.cs" />
+    <Compile Include="Shared\ResourceModel.cs" />
     <Compile Include="Shared\ResponseMsg.cs" />
     <Compile Include="Shared\ControlInfoModel.cs" />
     <Compile Include="Shared\AddressControlSetting.cs" />

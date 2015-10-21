@@ -4,7 +4,7 @@ using Drs.Model.Client;
 using Drs.Model.Order;
 using Drs.Repository.Shared;
 
-namespace Drs.Repository.Client
+namespace Drs.Repository.Order
 {
     public interface IOrderRepository : IBaseOneRepository, IDisposable
     {

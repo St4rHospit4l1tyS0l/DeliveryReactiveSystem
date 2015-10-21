@@ -134,8 +134,11 @@
     <Compile Include="Catalog\CatalogRepository.cs" />
     <Compile Include="Catalog\ICatalogRepository.cs" />
     <Compile Include="Client\ClientRepository.cs" />
-    <Compile Include="Client\OrderRepository.cs" />
-    <Compile Include="Client\IOrderRepository.cs" />
+    <Compile Include="Entities\Resource.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OrderRepository.cs" />
+    <Compile Include="Order\IOrderRepository.cs" />
     <Compile Include="Client\IClientRepository.cs" />
     <Compile Include="Entities\Address.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
@@ -343,6 +346,8 @@
     <Compile Include="Shared\EntityConstants.cs" />
     <Compile Include="Shared\GenericRepository.cs" />
     <Compile Include="Shared\IBaseOneRepository.cs" />
+    <Compile Include="Shared\IResourceRepository.cs" />
+    <Compile Include="Shared\ResourceRepository.cs" />
     <Compile Include="Store\StoreRepository.cs" />
     <Compile Include="Store\IStoreRepository.cs" />
     <Compile Include="Track\TrackRepository.cs" />

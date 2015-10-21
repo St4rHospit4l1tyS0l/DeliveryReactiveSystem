@@ -2,7 +2,6 @@
     Layout = null;
 }
 
-
 <script>
 
     $(document).ready(function () {
@@ -17,6 +16,8 @@
     });
 
 </script>
+<script src="~/Scripts/fileupload.js"></script>
+
 
 <div class="modal inmodal" id="dlgUpModalId" tabindex="-1" ng-controller="upsertController" role="dialog" aria-hidden="true" ng-cloak>
     <div class="modal-dialog" style="width:980px" ng-controller="franchiseController">
@@ -117,23 +118,24 @@
                             <div class="space-15"></div>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <label class="col-xs-4 control-label font-noraml">Image:</label>
-                                    <div class="col-xs-8">
-                                        <input type="text" name="Image" ng-model="m.Image"
-                                               placeholder="Ingrese el nombre de la imagen"
-                                               required="required" ng-maxlength="100" class="form-control">
-                                        <span class="error" ng-show="FormCatId.Image.$error.required">*Campo requerido</span>
-                                        <span class="error" ng-show="FormCatId.Image.$error.maxlength">*Longitud máxima de 100 caracteres</span>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <label class="col-xs-4 control-label font-noraml">Products:</label>
+                                    <label class="col-xs-4 control-label font-noraml">Productos:</label>
                                     <div class="col-xs-8">
                                         <input type="text" name="Products" ng-model="m.Products"
                                                placeholder="Ingrese el tipo de productos de la franquicia"
                                                required="required" ng-maxlength="200" class="form-control">
                                         <span class="error" ng-show="FormCatId.Products.$error.required">*Campo requerido</span>
                                         <span class="error" ng-show="FormCatId.Products.$error.maxlength">*Longitud máxima de 200 caracteres</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="col-xs-4 control-label font-noraml">URL servicios Web:</label>
+                                    <div class="col-xs-8">
+                                        <input type="text" name="WsAddress" ng-model="m.WsAddress"
+                                               placeholder="Ingrese la URL de los servicios Web"
+                                               required="required" ng-minlength="10" ng-maxlength="600" class="form-control">
+                                        <span class="error" ng-show="FormCatId.WsAddress.$error.required">*Campo requerido</span>
+                                        <span class="error" ng-show="FormCatId.WsAddress.$error.minlength">*Longitud mínima es de 10 caracteres</span>
+                                        <span class="error" ng-show="FormCatId.WsAddress.$error.maxlength">*Longitud máxima de 600 caracteres</span>
                                     </div>
                                 </div>
                             </div>
@@ -160,32 +162,30 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="space-15"></div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <label class="col-xs-3 control-label font-noraml">URL de los servicios Web:</label>
-                                    <div class="col-xs-9">
-                                        <input type="text" name="WsAddress" ng-model="m.WsAddress"
-                                               placeholder="Ingrese la URL de los servicios Web"
-                                               required="required" ng-minlength="10" ng-maxlength="600" class="form-control">
-                                        <span class="error" ng-show="FormCatId.WsAddress.$error.required">*Campo requerido</span>
-                                        <span class="error" ng-show="FormCatId.WsAddress.$error.minlength">*Longitud mínima es de 10 caracteres</span>
-                                        <span class="error" ng-show="FormCatId.WsAddress.$error.maxlength">*Longitud máxima de 600 caracteres</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space-15"></div>
-                            <br />
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <br />
-                                    <div ng-show="MsgError" class="alert alert-danger element-center">
-                                        {{MsgError}}
-                                    </div>
+                        </div>
+                    </div>
+                    <div class="space-15">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="ibox">
+                                <div class="ibox-title navy-bg">
+                                    <h5>Logotipo de la franquicia</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @Html.Partial("~/Views/Shared/_UploadFile.cshtml")
+                    <div class="space-15"></div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <br />
+                            <div ng-show="MsgError" class="alert alert-danger element-center">
+                                {{MsgError}}
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
             </div>
             <div class="modal-footer">

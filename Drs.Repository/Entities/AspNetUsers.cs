@@ -34,6 +34,7 @@ namespace Drs.Repository.Entities
             this.AspNetRoles = new HashSet<AspNetRoles>();
             this.FranchiseDataVersion = new HashSet<FranchiseDataVersion>();
             this.FranchiseDataVersion1 = new HashSet<FranchiseDataVersion>();
+            this.Resource = new HashSet<Resource>();
         }
     
         public string Id { get; set; }
@@ -68,5 +69,6 @@ namespace Drs.Repository.Entities
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
         public virtual ICollection<FranchiseDataVersion> FranchiseDataVersion { get; set; }
         public virtual ICollection<FranchiseDataVersion> FranchiseDataVersion1 { get; set; }
+        public virtual ICollection<Resource> Resource { get; set; }
     }
 }

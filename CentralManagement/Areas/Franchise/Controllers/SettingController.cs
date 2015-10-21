@@ -45,6 +45,7 @@ namespace CentralManagement.Areas.Franchise.Controllers
                     if (id.HasValue)
                     {
                         model = repository.FindModelById(id.Value);
+                        ViewBag.Resource = JsonConvert.SerializeObject(model.Resource);
                     }
                     else
                     {
@@ -55,7 +56,10 @@ namespace CentralManagement.Areas.Franchise.Controllers
                     }
 
                     ViewBag.Model = JsonConvert.SerializeObject(model);
+
                 }
+
+                ViewBag.PropertyFile = "Resource";
             }
             catch (Exception ex)
             {

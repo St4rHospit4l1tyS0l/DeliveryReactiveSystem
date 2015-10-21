@@ -39,13 +39,17 @@ namespace Drs.Service.SyncServerSvc {
         public string FileName;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public int FileType;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
         public System.Guid UidVersion;
         
         public RequestMessageServerFileSync() {
         }
         
-        public RequestMessageServerFileSync(string FileName, System.Guid UidVersion) {
+        public RequestMessageServerFileSync(string FileName, int FileType, System.Guid UidVersion) {
             this.FileName = FileName;
+            this.FileType = FileType;
             this.UidVersion = UidVersion;
         }
     }
@@ -107,9 +111,10 @@ namespace Drs.Service.SyncServerSvc {
             return base.Channel.GetFileByName(request);
         }
         
-        public bool GetFileByName(string FileName, System.Guid UidVersion, out string Message, out System.IO.Stream File) {
+        public bool GetFileByName(string FileName, int FileType, System.Guid UidVersion, out string Message, out System.IO.Stream File) {
             Drs.Service.SyncServerSvc.RequestMessageServerFileSync inValue = new Drs.Service.SyncServerSvc.RequestMessageServerFileSync();
             inValue.FileName = FileName;
+            inValue.FileType = FileType;
             inValue.UidVersion = UidVersion;
             Drs.Service.SyncServerSvc.ResponseMessageServerFileSync retVal = ((Drs.Service.SyncServerSvc.ISyncServerSvc)(this)).GetFileByName(inValue);
             Message = retVal.Message;
@@ -122,9 +127,10 @@ namespace Drs.Service.SyncServerSvc {
             return base.Channel.GetFileByNameAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Drs.Service.SyncServerSvc.ResponseMessageServerFileSync> GetFileByNameAsync(string FileName, System.Guid UidVersion) {
+        public System.Threading.Tasks.Task<Drs.Service.SyncServerSvc.ResponseMessageServerFileSync> GetFileByNameAsync(string FileName, int FileType, System.Guid UidVersion) {
             Drs.Service.SyncServerSvc.RequestMessageServerFileSync inValue = new Drs.Service.SyncServerSvc.RequestMessageServerFileSync();
             inValue.FileName = FileName;
+            inValue.FileType = FileType;
             inValue.UidVersion = UidVersion;
             return ((Drs.Service.SyncServerSvc.ISyncServerSvc)(this)).GetFileByNameAsync(inValue);
         }

@@ -3,6 +3,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Drs.Infrastructure.Extensions.Io;
 using Drs.Infrastructure.Ui;
+using Drs.Model.Constants;
 using Drs.Model.Menu;
 using Drs.Model.Order;
 using Drs.ViewModel.Main;
@@ -13,7 +14,6 @@ namespace Drs.ViewModel.Order
 {
     public class FranchiseVm : UcViewModelBase, IFranchiseVm
     {
-        private const string URI_RESOURCE = "Logos\\";
         private readonly Action<FranchiseInfoModel> _onToggleButton;
 
         public FranchiseVm(IButtonItemModel model, IShellContainerVm shellContainerVm, Action<FranchiseInfoModel> onToggleButton)
@@ -22,7 +22,7 @@ namespace Drs.ViewModel.Order
             ItemBackgroundColor = new SolidColorBrush(model.Color.ToRgbColor());
             ItemBackgroundOverColor = new SolidColorBrush(model.Color.ToRgbLightColor(30));
             ItemBackgroundPressedColor = new SolidColorBrush(model.Color.ToRgbLightColor(-30));
-            var uri = new Uri((URI_RESOURCE + model.Image).AbsolutePathRelativeToEntryPointLocation());
+            var uri = new Uri((SharedConstants.Client.URI_RESOURCE + model.Image).AbsolutePathRelativeToEntryPointLocation());
             ItemLogo = new BitmapImage(uri);
             Title = model.Title;
             Products = model.Description;

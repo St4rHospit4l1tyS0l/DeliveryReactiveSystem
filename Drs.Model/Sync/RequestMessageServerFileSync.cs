@@ -10,6 +10,9 @@ namespace Drs.Model.Sync
         public Guid UidVersion { get; set; }
 
         [MessageBodyMember]
+        public int FileType { get; set; }
+
+        [MessageBodyMember]
         public String FileName { get; set; }
     }
 }

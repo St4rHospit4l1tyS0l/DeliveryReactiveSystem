@@ -109,6 +109,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -118,6 +122,14 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -171,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -184,6 +197,7 @@
     <Compile Include="Areas\Store\Controllers\SettingController.cs" />
     <Compile Include="Areas\Store\StoreAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
@@ -201,6 +215,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\FilesApp\ajax_loader.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -413,6 +430,7 @@
     <Content Include="Scripts\app\shared\addressCtrl.js" />
     <Content Include="Scripts\app\shared\hiddenDrct.js" />
     <Content Include="Scripts\app\shared\modalDlgCtrl.js" />
+    <Content Include="Scripts\app\shared\uploadFileCtrl.js" />
     <Content Include="Scripts\app\shared\upsertCtrl.js" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.eot">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -549,6 +567,7 @@
     <Content Include="Areas\Franchise\Views\Setting\Upsert.cshtml" />
     <Content Include="Areas\Franchise\Views\Sync\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\fileupload.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
@@ -569,11 +588,15 @@
     <Content Include="Scripts\js\demo\peity-demo.js" />
     <Content Include="Scripts\js\demo\rickshaw-demo.js" />
     <Content Include="Scripts\js\demo\sparkline-demo.js" />
+    <Content Include="Scripts\js\fileupload.js" />
     <Content Include="Scripts\js\inspinia.js" />
     <Content Include="Scripts\js\jquery-2.1.1.js" />
     <Content Include="Scripts\js\jquery-ui-1.10.4.min.js" />
     <Content Include="Scripts\js\jquery-ui.custom.min.js" />
+    <Content Include="Scripts\js\logoupload.js" />
     <Content Include="Scripts\js\plugins\blueimp\jquery.blueimp-gallery.min.js" />
+    <Content Include="Scripts\js\plugins\blueimp\jquery.fileupload.js" />
+    <Content Include="Scripts\js\plugins\blueimp\jquery.iframe-transport.js" />
     <Content Include="Scripts\js\plugins\chartJs\Chart.min.js" />
     <Content Include="Scripts\js\plugins\chosen\chosen.jquery.js" />
     <Content Include="Scripts\js\plugins\codemirror\codemirror.js" />
@@ -1014,9 +1037,9 @@
     <Content Include="Views\Account\Info.cshtml" />
     <Content Include="Views\Shared\_SharedServices.cshtml" />
     <Content Include="Views\Shared\_Address.cshtml" />
+    <Content Include="Views\Shared\_UploadFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Franchise\Models\" />
     <Folder Include="Areas\Franchise\Views\Shared\" />
     <Folder Include="Areas\Management\Models\" />
@@ -1024,6 +1047,7 @@
     <Folder Include="Areas\Store\Models\" />
     <Folder Include="Areas\Store\Views\Shared\" />
     <Folder Include="Scripts\app\drct\" />
+    <Folder Include="Views\FileUpload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1055,6 +1079,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\app\svc\focusFactSvc.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -34,11 +34,11 @@ namespace Drs.Repository.Entities
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual AspNetUsers AspNetUsers1 { get; set; }
-        public virtual FranchiseButton FranchiseButton { get; set; }
         public virtual FranchiseData FranchiseData { get; set; }
         public virtual ICollection<FranchiseStore> FranchiseStore { get; set; }
         public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<FranchiseDataVersion> FranchiseDataVersion { get; set; }
         public virtual ICollection<InfoClientTerminalVersion> InfoClientTerminalVersion { get; set; }
+        public virtual FranchiseButton FranchiseButton { get; set; }
     }
 }

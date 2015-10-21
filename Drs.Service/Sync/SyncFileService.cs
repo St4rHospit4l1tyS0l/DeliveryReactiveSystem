@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Drs.Infrastructure.Crypto;
 using Drs.Infrastructure.Extensions.Io;
+using Drs.Model.Constants;
 using Drs.Model.Franchise;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
@@ -41,6 +42,11 @@ namespace Drs.Service.Sync
                                 {
                                     tasks.Add(CheckFilesAndSync(syncFile, syncFranchiseModelCopy.Code, clientIn,
                                         syncFranchiseModelCopy.FranchiseDataVersionUid));
+                                    break;
+                                }
+                            case SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_LOGO:
+                                {
+                                    tasks.Add(CheckLogosAndSync(syncFile, syncFranchiseModelCopy.Code, clientIn));
                                     break;
                                 }
                             default:
@@ -90,6 +96,56 @@ namespace Drs.Service.Sync
             return res;
         }
 
+        private static Task CheckLogosAndSync(SyncFileModel syncFile, string code, SyncServerSvcClient clientIn)
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    var path = Path.Combine(DirExt.GetCurrentDirectory(), SharedConstants.Client.URI_RESOURCE);
+                    var fileNamePath = Path.Combine(path, syncFile.FileName);
+
+                    if (CreateAndCheckFile(syncFile, path, fileNamePath)) 
+                        return;
+
+                    GetAndSaveStreamToDisk(syncFile, clientIn, fileNamePath, SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_LOGO);
+
+                }
+                catch (Exception ex)
+                {
+                    syncFile.HasError = true;
+                    syncFile.Message = String.Format("Se presentó el siguiente error en el archivo (logo) {0}: {1}", syncFile.FileName, ex.Message + " -ST- " + ex.StackTrace);
+                }
+            });
+        }
+
+        private static bool CreateAndCheckFile(SyncFileModel syncFile, string path, string fileNamePath)
+        {
+            if (Directory.Exists(path))
+            {
+                if (File.Exists(fileNamePath))
+                {
+                    if (fileNamePath.GetChecksum() == syncFile.CheckSum)
+                    {
+                        syncFile.HasError = false;
+                        return true;
+                    }
+                    FileExt.ForceDeleteFile(fileNamePath);
+                }
+            }
+            else
+            {
+                try
+                {
+                    Directory.CreateDirectory(path);
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return false;
+        }
+
         private static Task CheckFilesAndSync(SyncFileModel syncFile, string code, SyncServerSvcClient client, Guid franchiseDataVersionUid)
         {
             return Task.Run(() =>
@@ -109,45 +165,9 @@ namespace Drs.Service.Sync
                     subPath = Path.Combine(SettingsData.AlohaPath, subPath);
                     var fileNamePath = Path.Combine(subPath, Path.GetFileName(syncFile.FileName));
 
-                    if (Directory.Exists(subPath))
-                    {
-                        if (File.Exists(fileNamePath))
-                        {
-                            if (fileNamePath.GetChecksum() == syncFile.CheckSum)
-                            {
-                                syncFile.HasError = false;
-                                return;
-                            }
-                            FileExt.ForceDeleteFile(fileNamePath);
-                        }
-                    }
-                    else
-                    {
-                        try
-                        {
-                            Directory.CreateDirectory(subPath);
-                        }
-                        catch (Exception)
-                        {
-                        }
-                    }
+                    if (CreateAndCheckFile(syncFile, subPath, fileNamePath)) return;
 
-
-                    Stream stream;
-                    String sMsg;
-                    var hasError = client.GetFileByName(syncFile.FileName, franchiseDataVersionUid, out sMsg, out stream);
-
-                    if (hasError)
-                    {
-                        syncFile.HasError = true;
-                        syncFile.Message = sMsg;
-                        return;
-                    }
-
-                    stream.SaveToFile(fileNamePath);
-                    stream.Dispose();
-
-                    syncFile.HasError = false;
+                    GetAndSaveStreamToDisk(syncFile, client, fileNamePath, SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_DATA, franchiseDataVersionUid);
                 }
                 catch (Exception ex)
                 {
@@ -155,6 +175,27 @@ namespace Drs.Service.Sync
                     syncFile.Message = String.Format("Se presentó el siguiente error en el archivo {0}: {1}", syncFile.FileName, ex.Message + " -ST- " + ex.StackTrace);
                 }
             });
+        }
+
+        private static void GetAndSaveStreamToDisk(SyncFileModel syncFile, SyncServerSvcClient client, string fileNamePath, int fileType
+            , Guid franchiseDataVersionUid = default(Guid))
+        {
+            Stream stream;
+            String sMsg;
+
+            var hasError = client.GetFileByName(syncFile.FileName, fileType, franchiseDataVersionUid, out sMsg, out stream);
+
+            if (hasError)
+            {
+                syncFile.HasError = true;
+                syncFile.Message = sMsg;
+                return;
+            }
+
+            stream.SaveToFile(fileNamePath);
+            stream.Dispose();
+
+            syncFile.HasError = false;
         }
     }
 }
