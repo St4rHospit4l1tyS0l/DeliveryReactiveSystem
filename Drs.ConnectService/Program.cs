@@ -15,7 +15,7 @@ namespace Drs.ConnectService
         {
             var servicesToRun = new ServiceBase[] 
                 { 
-                    //new UpdateOrderStatus(),
+                    new UpdateOrderStatus(),
                     new SyncServerFiles() 
                 };
 
@@ -38,9 +38,9 @@ namespace Drs.ConnectService
                 BindingFlags.Instance | BindingFlags.NonPublic);
             foreach (var service in servicesToRun)
             {
-                Console.Write("Starting {0}...", service.ServiceName);
+                Console.WriteLine("Starting {0}...", service.ServiceName);
                 onStartMethod.Invoke(service, new object[] { new string[] { } });
-                Console.Write("Started");
+                Console.Write("Started\n");
             }
 
             Console.WriteLine();

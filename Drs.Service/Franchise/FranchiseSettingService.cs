@@ -9,6 +9,7 @@ using Drs.Repository.Entities;
 using Drs.Repository.Order;
 using Drs.Repository.Shared;
 using Drs.Service.SyncFranchiseSvc;
+using Drs.Service.Transport;
 
 namespace Drs.Service.Franchise
 {
@@ -127,6 +128,8 @@ namespace Drs.Service.Franchise
         {
             using (var client = new SyncFranchiseClient(new BasicHttpBinding(), new EndpointAddress(wsUrl + SettingsData.Constants.Franchise.WS_SYNC_FILES)))
             {
+                WcfExt.SetMtomEncodingAndSize(client.Endpoint);
+
                 var res = client.QueryForFiles(model.FranchiseDataVersionUid);
 
                 if (res.HasError == false)

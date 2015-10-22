@@ -171,7 +171,7 @@ namespace Drs.Repository.Order
                         {
                             FileName = e.FranchiseButton.Resource.UidFileName,
                             CheckSum = e.FranchiseButton.Resource.CheckSum,
-                            FileType = SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_DATA,
+                            FileType = SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_LOGO,
                             FranchiseDataFileId = e.FranchiseButton.ResourceId
                         }
                     }

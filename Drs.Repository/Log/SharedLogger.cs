@@ -65,8 +65,9 @@ namespace Drs.Repository.Log
                     dbConn.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                modelExcep.MsgException = String.Format("Error: {0} - Second Error: {1} -ST- {2}", modelExcep.MsgException, ex.Message, ex.StackTrace);
                 SaveLogToFile(modelExcep);
             }
         }

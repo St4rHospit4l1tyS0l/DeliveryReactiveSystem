@@ -194,6 +194,7 @@
     <Compile Include="Transport\ConnectionProvider.cs" />
     <Compile Include="Transport\IConnection.cs" />
     <Compile Include="Transport\IConnectionProvider.cs" />
+    <Compile Include="Transport\WcfExt.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Drs.Infrastructure\Drs.Infrastructure.csproj">

@@ -13,6 +13,7 @@ using Drs.Model.Settings;
 using Drs.Repository.Entities;
 using Drs.Repository.Order;
 using Drs.Service.SyncFranchiseSvc;
+using Drs.Service.Transport;
 
 namespace Drs.Service.Franchise
 {
@@ -114,11 +115,13 @@ namespace Drs.Service.Franchise
             using (var client = new SyncFranchiseClient(new BasicHttpBinding(), new EndpointAddress(syncListModel.WsAddress +
                 SettingsData.Constants.Franchise.WS_SYNC_FILES)))
             {
-                ((BasicHttpBinding)client.Endpoint.Binding).MessageEncoding = WSMessageEncoding.Mtom;
+                WcfExt.SetMtomEncodingAndSize(client.Endpoint);
+
                 var res = client.GetUnSyncListOfFiles(syncListModel.FranchiseDataVersionUid);
                 return res;
             }
         }
+
 
 
         private void DownloadFilesToSyncWithServer(CancellationToken token)
@@ -149,9 +152,7 @@ namespace Drs.Service.Franchise
                     using (var client = new SyncFranchiseClient(new BasicHttpBinding(), new EndpointAddress(syncListModel.WsAddress +
                         SettingsData.Constants.Franchise.WS_SYNC_FILES)))
                     {
-                        var basicBinding = ((BasicHttpBinding)client.Endpoint.Binding);
-                        basicBinding.MessageEncoding = WSMessageEncoding.Mtom;
-                        basicBinding.MaxReceivedMessageSize = 100000000;
+                        WcfExt.SetMtomEncodingAndSize(client.Endpoint);
                         
                         var tasks = new List<Task>();
                         using (var repository = new FranchiseRepository())
