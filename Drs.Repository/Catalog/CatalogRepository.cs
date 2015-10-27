@@ -28,5 +28,17 @@ namespace Drs.Repository.Catalog
                     Value = e.Color
                 }).ToList();
         }
+
+        public IList<ItemCatalog> GetStores()
+        {
+            return Db.FranchiseStore.Where(e => e.IsObsolete == false)
+                .Select(e => new ItemCatalog
+                {
+                    Id = e.FranchiseStoreId,
+                    Code = e.Franchise.Code,
+                    Name = e.Name,
+                    Value = e.Address.MainAddress
+                }).ToList();
+        }
     }
 }

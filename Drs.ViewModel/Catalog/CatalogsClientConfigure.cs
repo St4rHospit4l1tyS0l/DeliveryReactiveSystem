@@ -21,6 +21,7 @@ namespace Drs.ViewModel.Catalog
                     throw new Exception("Se sucitó el siguiente error: " + catalogs.Message);
 
                 CatalogsClientModel.CatPayments = FillCategory(catalogs.LstPayments);
+                CatalogsClientModel.DicFranchiseStore = FillDicLstCategory(catalogs.LstStores);
                 CatalogsClientModel.DicOrderStatus = FillDicCategory(catalogs.LstDeliveryStatus);
 
             }
@@ -52,9 +53,47 @@ namespace Drs.ViewModel.Catalog
         {
             return lstCatalogs.ToDictionary(item => item.Code, item => new ItemCatalog
             {
-                Id = item.Id, Code = item.Code, Name = item.Name, Value = item.Value
+                Id = item.Id,
+                Code = item.Code,
+                Name = item.Name,
+                Value = item.Value
             });
         }
+
+
+        private static Dictionary<string, List<ItemCatalog>> FillDicLstCategory(IList<CatalogsSvc.ItemCatalog> lstCatalogs)
+        {
+            var dictLstItemCatalog = new Dictionary<string, List<ItemCatalog>>();
+
+            foreach (var item in lstCatalogs)
+            {
+                List<ItemCatalog> lstCat;
+                if (dictLstItemCatalog.TryGetValue(item.Code, out lstCat))
+                {
+                    lstCat.Add(new ItemCatalog
+                    {
+                        Id = item.Id,
+                        Code = item.Code,
+                        Name = String.Format("{0} ({1})", item.Name, item.Value),
+                        Value = item.Value
+                    });
+                }
+                else
+                {
+                    dictLstItemCatalog.Add(item.Code, new List<ItemCatalog>{new ItemCatalog
+                    {
+                        Id = item.Id,
+                        Code = item.Code,
+                        Name = String.Format("{0} ({1})", item.Name, item.Value),
+                        Value = item.Value
+                    }});
+                }
+            }
+
+            return dictLstItemCatalog;
+        }
+
+
 
         private static List<ItemCatalog> FillCategory(IEnumerable<CatalogsSvc.ItemCatalog> lstCatalog)
         {

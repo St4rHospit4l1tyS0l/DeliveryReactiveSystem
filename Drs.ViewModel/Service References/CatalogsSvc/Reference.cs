@@ -103,6 +103,9 @@ namespace Drs.ViewModel.CatalogsSvc {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<Drs.ViewModel.CatalogsSvc.ItemCatalog> LstPaymentsField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Drs.ViewModel.CatalogsSvc.ItemCatalog> LstStoresField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Collections.Generic.List<Drs.ViewModel.CatalogsSvc.ItemCatalog> LstDeliveryStatus {
             get {
@@ -125,6 +128,19 @@ namespace Drs.ViewModel.CatalogsSvc {
                 if ((object.ReferenceEquals(this.LstPaymentsField, value) != true)) {
                     this.LstPaymentsField = value;
                     this.RaisePropertyChanged("LstPayments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Drs.ViewModel.CatalogsSvc.ItemCatalog> LstStores {
+            get {
+                return this.LstStoresField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LstStoresField, value) != true)) {
+                    this.LstStoresField = value;
+                    this.RaisePropertyChanged("LstStores");
                 }
             }
         }

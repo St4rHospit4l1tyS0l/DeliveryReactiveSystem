@@ -8,5 +8,6 @@ namespace Drs.Repository.Catalog
     {
         IList<ItemCatalog> GetPayments();
         IList<ItemCatalog> GetDeliveryStatus();
+        IList<ItemCatalog> GetStores();
     }
 }

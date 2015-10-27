@@ -16,6 +16,7 @@ namespace Drs.Repository.Entities.Metadata
             _modelEnt.PropertyName(e => e.DateTimeStart),
             _modelEnt.PropertyName(e => e.Duration),
             _modelEnt.PropertyName(e => e.DateTimeEnd),
+            _modelEnt.PropertyName(e => e.IsUndefinedOfflineTime),
             _modelEnt.PropertyName(e => e.AspNetUsers.UserName)
         });
 
@@ -28,6 +29,7 @@ namespace Drs.Repository.Entities.Metadata
                 Duration = data.Duration,
                 DateTimeEndInfo = data.DateTimeEnd,
                 UserNameIns = data.UserName,
+                IsUndefinedOfflineTime = data.IsUndefinedOfflineTime
             };
 
             return model;

@@ -36,9 +36,8 @@ namespace Drs.Model.Catalog
         }
 
         public static List<ItemCatalog> CatPayments { get; set; }
-
+        public static Dictionary<string, List<ItemCatalog>> DicFranchiseStore { get; set; }
         public static Dictionary<string, ItemCatalog> DicOrderStatus { get; set; }
-
-        public static List<string> LstStatusCannotCancel { get; set; } 
+        public static List<string> LstStatusCannotCancel { get; set; }
     }
 }

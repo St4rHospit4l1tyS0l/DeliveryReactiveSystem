@@ -31,5 +31,7 @@ namespace Drs.Model.Store
 
         public string StoreName { get; set; }
         public DateTime UtcStartDateTimeSaved { get; set; }
+
+        public bool IsUndefinedOfflineTime { get; set; }
     }
 }

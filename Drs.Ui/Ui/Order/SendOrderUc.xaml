@@ -34,39 +34,54 @@
             <Rectangle Grid.Row="1" HorizontalAlignment="Stretch" Height="2" Stroke="#9B9B9B" Margin="0,10,0,0"></Rectangle>
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="25" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="290" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Sub-total" Margin="0 0 10 0" FontSize="15" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Impuestos" Margin="0 0 10 0" FontSize="15" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Total" Margin="0 0 10 0" FontSize="15" FontWeight="SemiBold" />
+                <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Sub-total" Margin="0 0 10 0" FontSize="12" FontWeight="SemiBold" />
+                <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Impuestos" Margin="0 0 10 0" FontSize="12" FontWeight="SemiBold" />
+                <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Total" Margin="0 0 10 0" FontSize="12" FontWeight="SemiBold" />
 
-                <TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.SubTotalTx}" Margin="0 0 45 0" FontSize="15" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.TaxTx}" Margin="0 0 45 0" FontSize="15" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.TotalTx}" Margin="0 0 45 0" FontSize="15" FontWeight="SemiBold" />
+                <TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.SubTotalTx}" Margin="0 0 45 0" FontSize="12" FontWeight="SemiBold" />
+                <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.TaxTx}" Margin="0 0 45 0" FontSize="12" FontWeight="SemiBold" />
+                <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.TotalTx}" Margin="0 0 45 0" FontSize="12" FontWeight="SemiBold" />
 
             </Grid>
         </Grid>
         <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#9B9B9B" Margin="0,10,0,0"></Rectangle>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 10">
+            <Grid Width="444">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="6*" />
+                </Grid.ColumnDefinitions>
+
+                <CheckBox Content="Recoger en la tienda" Grid.Column="0" IsChecked="{Binding HasPickUpInStore}" ></CheckBox>
+                <ComboBox Grid.Column="1" ItemsSource="{Binding Path=LstStores}" IsEnabled="{Binding HasPickUpInStore}"
+                      DisplayMemberPath="Name" 
+                      SelectedValue="{Binding Path=PickUpStore}"></ComboBox>
+            </Grid>
+            
+        </StackPanel>
         <StackPanel Orientation="Vertical" Margin="0 5 0 0">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.02*" />
                     <ColumnDefinition Width="0.4*" />
-                    <ColumnDefinition Width="0.6*" />
+                    <ColumnDefinition Width="0.4*" />
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
+                <StackPanel Grid.Column="1">
                     <RadioButton Margin="30, 10, 0, 0"
                          Content="Entrega inmediata"
                          GroupName="Mode" 
                          IsChecked="{Binding ImmediateDelivery}" />
                 </StackPanel>
-                <StackPanel Grid.Column="1">
+                <StackPanel Grid.Column="2">
                     <RadioButton Margin="40, 10, 0, 0" 
                          Content="Entrega a futuro"
                          GroupName="Mode" IsChecked="{Binding FutureDelivery}"/>
@@ -86,9 +101,9 @@
                       SelectedValue="{Binding Path=Payment}">
             </ComboBox>
         </StackPanel>
-        <StackPanel Margin="30 15 30 0">
+        <StackPanel Margin="30 5 30 0">
             <Label Content="Nota adicional al pedido (campo no requerido): "></Label>
-            <TextBox MaxLines="3" MaxLength="500" Text="{Binding ExtraNotes}" TextWrapping="Wrap" Height="80"></TextBox>
+            <TextBox MaxLines="3" MaxLength="500" Text="{Binding ExtraNotes}" TextWrapping="Wrap" Height="60"></TextBox>
         </StackPanel>
         <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#9B9B9B" Margin="0,10,0,0"></Rectangle>
         <StackPanel Orientation="Vertical" Visibility="{Binding IsReadyToSend}">
@@ -97,11 +112,11 @@
                 Content="{Binding SendOrderTitleBtn}"
                     Width="200"
                     Height="35"
-                    Margin="0, 30, 0, 0"
+                    Margin="0, 10, 0, 0"
                     Style="{DynamicResource AccentedSquareButtonStyle}" mah:ButtonHelper.PreserveTextCase="True" >
             </Button>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Visibility="{Binding IsSending}" Margin="0 25">
+        <StackPanel Orientation="Vertical" Visibility="{Binding IsSending}" Margin="0 15">
             <TextBlock  Text="{Binding EventsMsg}"  TextWrapping="Wrap" FontSize="17" TextAlignment="Center" FontWeight="SemiBold" Foreground="{DynamicResource HighlightBrush}"></TextBlock>
             <mah:MetroProgressBar Height="25" Margin="40 20 40 0" Width="400" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
                               EllipseDiameter="10" EllipseOffset="10" IsIndeterminate="True" Foreground="#FF0179F0" />

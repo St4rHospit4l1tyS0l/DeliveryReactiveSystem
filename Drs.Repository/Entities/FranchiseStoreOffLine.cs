@@ -21,6 +21,7 @@ namespace Drs.Repository.Entities
         public System.DateTime DateTimeEnd { get; set; }
         public string UserInsId { get; set; }
         public string UserUpdId { get; set; }
+        public bool IsUndefinedOfflineTime { get; set; }
         public bool IsObsolete { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }

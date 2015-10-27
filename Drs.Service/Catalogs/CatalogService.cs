@@ -17,12 +17,14 @@ namespace Drs.Service.Catalogs
             {
                 var lstPayments = _repository.GetPayments();
                 var lstDeliveryStatus = _repository.GetDeliveryStatus();
+                var lstStores = _repository.GetStores();
 
                 return new ResponseCatalogs
                 {
                     IsSuccess = true,
                     LstPayments = lstPayments,
-                    LstDeliveryStatus = lstDeliveryStatus
+                    LstDeliveryStatus = lstDeliveryStatus,
+                    LstStores = lstStores
                 };
             }
         }

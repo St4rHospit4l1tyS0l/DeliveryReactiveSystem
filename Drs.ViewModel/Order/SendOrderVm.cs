@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -37,6 +39,9 @@ namespace Drs.ViewModel.Order
         private DateTime _promiseTime;
         private DateTime _minDateTime;
         private ItemCatalog _payment;
+        private ItemCatalog _pickUpStore;
+        private string _currentFranchiseCode;
+        private bool _hasPickUpInStore;
 
         public SendOrderVm(IReactiveDeliveryClient client)
         {
@@ -46,6 +51,8 @@ namespace Drs.ViewModel.Order
 
             LstPayments = new ReactiveList<ItemCatalog>();
             LstPayments.ClearAndAddRange(CatalogsClientModel.CatPayments);
+
+            LstStores = new ReactiveList<ItemCatalog>();
 
             ResetValues();
 
@@ -101,7 +108,6 @@ namespace Drs.ViewModel.Order
             MessageBus.Current.Listen<PropagateOrderModel>(SharedMessageConstants.PROPAGATE_LASTORDER_POSCHECK).Subscribe(OnPropagate);
         }
 
-        public IReactiveList<ItemCatalog> LstPayments { get; set; }
 
         private void OnPropagate(PropagateOrderModel model)
         {
@@ -184,6 +190,10 @@ namespace Drs.ViewModel.Order
 
             if (LstPayments.Count > 0)
                 Payment = LstPayments[0];
+
+            _currentFranchiseCode = String.Empty;
+
+            HasPickUpInStore = false;
         }
 
         public override bool Initialize(bool bForceToInit = false)
@@ -252,6 +262,61 @@ namespace Drs.ViewModel.Order
             return response;
         }
 
+        public event Action EndOrder;
+
+        protected virtual void OnEndOrder()
+        {
+            var handler = EndOrder;
+            if (handler != null) handler();
+        }
+
+        public void OnSendOrderToStoreStatusChanged(OrderModelDto model)
+        {
+            if (model.HasError)
+            {
+                ErrorMsg = model.Message;
+                HasSuccess = Visibility.Collapsed;
+                HasError = Visibility.Visible;
+                IsReadyToSend = Visibility.Visible;
+                IsSending = Visibility.Collapsed;
+            }
+            else
+            {
+                if (model.IsAlreadyOnStore)
+                {
+                    HasSuccess = Visibility.Visible;
+                    SuccessMsg = model.Message;
+                    IsSending = Visibility.Collapsed;
+                }
+                else
+                {
+                    HasSuccess = Visibility.Collapsed;
+                    EventsMsg = model.Message;
+                    IsSending = Visibility.Visible;
+                }
+
+                HasError = Visibility.Collapsed;
+                IsReadyToSend = Visibility.Collapsed;
+            }
+        }
+
+        public void OnPosOrderChanged(PosCheck posCheck)
+        {
+            PosCheck = posCheck;
+
+            if (_currentFranchiseCode == OrderService.OrderModel.Franchise.Code)
+                return;
+
+            _currentFranchiseCode = OrderService.OrderModel.Franchise.Code;
+
+            List<ItemCatalog> lstCatalogs;
+            CatalogsClientModel.DicFranchiseStore.TryGetValue(_currentFranchiseCode, out lstCatalogs);
+            LstStores.ClearAndAddRange(lstCatalogs);
+
+            PickUpStore = LstStores.FirstOrDefault(e => e.Id == OrderService.OrderModel.StoreModel.IdKey);
+        }
+
+
         public Func<ClientFlags.ValidateOrder, ResponseMessage> ValidateModel { get; set; }
         public IReactiveCommand<Unit> SendOrderToStore { get; set; }
         public IMainOrderService OrderService { get; set; }
@@ -308,44 +373,6 @@ namespace Drs.ViewModel.Order
         {
             get { return _successMsg; }
             set { this.RaiseAndSetIfChanged(ref _successMsg, value); }
-        }
-
-        public event Action EndOrder;
-
-        protected virtual void OnEndOrder()
-        {
-            var handler = EndOrder;
-            if (handler != null) handler();
-        }
-
-        public void OnSendOrderToStoreStatusChanged(OrderModelDto model)
-        {
-            if (model.HasError)
-            {
-                ErrorMsg = model.Message;
-                HasSuccess = Visibility.Collapsed;
-                HasError = Visibility.Visible;
-                IsReadyToSend = Visibility.Visible;
-                IsSending = Visibility.Collapsed;
-            }
-            else
-            {
-                if (model.IsAlreadyOnStore)
-                {
-                    HasSuccess = Visibility.Visible;
-                    SuccessMsg = model.Message;
-                    IsSending = Visibility.Collapsed;
-                }
-                else
-                {
-                    HasSuccess = Visibility.Collapsed;
-                    EventsMsg = model.Message;
-                    IsSending = Visibility.Visible;
-                }
-
-                HasError = Visibility.Collapsed;
-                IsReadyToSend = Visibility.Collapsed;
-            }
         }
 
         public bool ImmediateDelivery
@@ -408,11 +435,6 @@ namespace Drs.ViewModel.Order
 
         public string CultureSystem { get; set; }
 
-        public void OnPosOrderChanged(PosCheck posCheck)
-        {
-            PosCheck = posCheck;
-        }
-
         public PosCheck PosCheck
         {
             get { return _posCheck; }
@@ -421,5 +443,21 @@ namespace Drs.ViewModel.Order
                 this.RaiseAndSetIfChanged(ref _posCheck, value);
             }
         }
+        public IReactiveList<ItemCatalog> LstPayments { get; set; }
+
+        public IReactiveList<ItemCatalog> LstStores { get; set; }
+
+        public bool HasPickUpInStore
+        {
+            get { return _hasPickUpInStore; }
+            set { this.RaiseAndSetIfChanged(ref _hasPickUpInStore, value); }
+        }
+
+        public ItemCatalog PickUpStore
+        {
+            get { return _pickUpStore; }
+            set { this.RaiseAndSetIfChanged(ref _pickUpStore, value); }
+        }
+        
     }
 }

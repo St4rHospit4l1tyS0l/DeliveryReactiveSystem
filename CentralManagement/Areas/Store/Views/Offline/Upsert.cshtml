@@ -55,15 +55,26 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-4 element-center">
-                                    Duración: <b>{{durationTx}}</b><br /><br />
-                                    <input class="col-xs-6 col-xs-offset-3 element-center" type="number" name="Duration" ng-change="durationChange()" ng-model="duration" min="1" max="525600" required><br />
-                                    <div role="alert" class="col-xs-8 col-xs-offset-2">
-                                        <span class="error" ng-show="FormCatId.duration.$error.required">
-                                            La duración es un campo requerido
-                                        </span>
-                                        <span class="error" ng-show="FormCatId.duration.$error.number">
-                                            Duración no válida
-                                        </span>
+                                    <div class="row">
+                                        <div class="col-xs-12 element-center">
+                                            <input type="hidden" ng-model="m.IsUndefinedOfflineTime" name="IsUndefinedOfflineTime" ng-update-hidden>
+                                            <input type="checkbox" ng-model="m.IsUndefinedOfflineTime"> Por tiempo indefinido
+                                        </div>
+                                    </div>
+                                    <div class="space-15">&nbsp;</div>
+                                    <div class="row" ng-show="!m.IsUndefinedOfflineTime">
+                                        <div class="col-xs-12">
+                                            Duración: <b>{{durationTx}}</b><br /><br />
+                                            <input class="col-xs-6 col-xs-offset-3 element-center" type="number" name="Duration" ng-change="durationChange()" ng-model="duration" min="1" max="525600" required><br />
+                                            <div role="alert" class="col-xs-8 col-xs-offset-2">
+                                                <span class="error" ng-show="FormCatId.duration.$error.required">
+                                                    La duración es un campo requerido
+                                                </span>
+                                                <span class="error" ng-show="FormCatId.duration.$error.number">
+                                                    Duración no válida
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +82,7 @@
                         <br />
                         <div class="row">
                             <div class="col-xs-12">
-                                <br/>
+                                <br />
                                 <div ng-show="MsgError" class="alert alert-danger element-center">
                                     {{MsgError}}
                                 </div>

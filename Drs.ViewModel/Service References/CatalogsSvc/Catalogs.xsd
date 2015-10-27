@@ -7,6 +7,7 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="LstDeliveryStatus" nillable="true" type="q1:ArrayOfItemCatalog" />
           <xs:element minOccurs="0" name="LstPayments" nillable="true" type="q1:ArrayOfItemCatalog" />
+          <xs:element minOccurs="0" name="LstStores" nillable="true" type="q1:ArrayOfItemCatalog" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

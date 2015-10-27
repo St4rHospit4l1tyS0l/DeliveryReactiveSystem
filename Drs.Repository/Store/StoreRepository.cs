@@ -308,8 +308,8 @@ namespace Drs.Repository.Store
 
         public StoreOfflineDto IsStoreOnline(int idKey, DateTime utcDateTime)
         {
-            return DbEntities.FranchiseStoreOffLine.Where(e => e.FranchiseStoreId == idKey && e.IsObsolete == false 
-                && utcDateTime >= e.DateTimeStart && utcDateTime <= e.DateTimeEnd)
+            return DbEntities.FranchiseStoreOffLine.Where(e => e.FranchiseStoreId == idKey && e.IsObsolete == false
+                && (utcDateTime >= e.DateTimeStart && utcDateTime <= e.DateTimeEnd) || (utcDateTime >= e.DateTimeStart && e.IsUndefinedOfflineTime))
                 .Select(e => new StoreOfflineDto
                 {
                     DateTimeEnd = e.DateTimeEnd
@@ -377,7 +377,8 @@ namespace Drs.Repository.Store
                         FranchiseStoreId = e.FranchiseStoreId,
                         FranchiseStoreOffLineId = e.FranchiseStoreOffLineId,
                         UtcStartDateTimeSaved = e.DateTimeStart,
-                        Duration = e.Duration
+                        Duration = e.Duration,
+                        IsUndefinedOfflineTime = e.IsUndefinedOfflineTime
                     }).FirstOrDefault();
             }
             
@@ -406,6 +407,7 @@ namespace Drs.Repository.Store
             offline.Duration = model.Duration;
             offline.DateTimeEnd = offline.DateTimeStart.AddMinutes(offline.Duration);
             offline.UserUpdId = userId;
+            offline.IsUndefinedOfflineTime = model.IsUndefinedOfflineTime;
             offline.IsObsolete = false;
 
             DbEntities.SaveChanges();
@@ -419,7 +421,8 @@ namespace Drs.Repository.Store
                 Duration = model.Duration,
                 UserInsId = userId,
                 IsObsolete = false,
-                FranchiseStoreId = model.FranchiseStoreId
+                FranchiseStoreId = model.FranchiseStoreId,
+                IsUndefinedOfflineTime = model.IsUndefinedOfflineTime
             };
 
             offline.DateTimeEnd = offline.DateTimeStart.AddMinutes(offline.Duration);

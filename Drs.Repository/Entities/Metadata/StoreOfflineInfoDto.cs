@@ -30,7 +30,7 @@ namespace Drs.Repository.Entities.Metadata
         {
             get
             {
-                if (UtcTime >= DateTimeStartInfo && UtcTime <= DateTimeEndInfo)
+                if ((UtcTime >= DateTimeStartInfo && UtcTime <= DateTimeEndInfo) || (UtcTime >= DateTimeStartInfo && IsUndefinedOfflineTime))
                     return "OFFL";
 
                 return "ONL";
@@ -38,5 +38,6 @@ namespace Drs.Repository.Entities.Metadata
         }
 
         public string UserNameIns { get; set; }
+        public bool IsUndefinedOfflineTime { get; set; }
     }
 }

@@ -12,5 +12,8 @@ namespace Drs.Model.Settings
 
         [DataMember]
         public IList<ItemCatalog> LstDeliveryStatus { get; set; }
+
+        [DataMember]
+        public IList<ItemCatalog> LstStores { get; set; }
     }
 }
