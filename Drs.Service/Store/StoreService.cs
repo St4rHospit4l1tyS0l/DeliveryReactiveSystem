@@ -74,8 +74,7 @@ namespace Drs.Service.Store
                 if(offline != null)
                 {
                     resMsg.IsSuccess = false;
-                    resMsg.Message = String.Format("La tienda {0} no está en línea en estos momentos. Fuera de línea hasta {1}", store.Value,
-                        offline.DateTimeEnd.ToLocalTime().ToString(SharedConstants.DATE_TIME_FORMAT));
+                    resMsg.Message = GetMessageStoreOffline(offline, store);
                     return resMsg;
                 }
 
@@ -91,6 +90,18 @@ namespace Drs.Service.Store
             resMsg.IsSuccess = true;
 
             return resMsg;
+        }
+
+        private static string GetMessageStoreOffline(StoreOfflineDto offline, StoreModel store)
+        {
+            if (offline.IsUndefinedOfflineTime)
+            {
+                return String.Format("La tienda {0} no está en línea en estos momentos. Fuera de línea por tiempo indefinido.",
+                    store.Value);
+            }
+            
+            return String.Format("La tienda {0} no está en línea en estos momentos. Fuera de línea hasta {1}",
+                store.Value, offline.DateTimeEnd.ToLocalTime().ToString(SharedConstants.DATE_TIME_FORMAT));
         }
 
         private void SendOrderToStoreEvent(OrderModelDto model, IHubCallerConnectionContext<dynamic> clients)
@@ -461,6 +472,16 @@ namespace Drs.Service.Store
             }
         }
 
+
+        public StoreModel StoreAvailableByStore(ItemCatalog item, ResponseMessageData<StoreModel> response)
+        {
+            using (_repositoryStore)
+            {
+                var store = _repositoryStore.GetStoreById(item.Id);
+                return GetStoreAvailable(response, store);
+            }
+        }
+
         public StoreModel StoreAvailableForAddress(StoreAvailableModel model, ResponseMessageData<StoreModel> response)
         {
             using (_repositoryStore)
@@ -469,29 +490,34 @@ namespace Drs.Service.Store
                 var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model.FranchiseCode,
                     model.AddressInfo, out franchiseId);
 
-                if (store == null || store.IdKey.HasValue == false)
-                {
-                    response.IsSuccess = false;
-                    response.Message = "No hay una tienda disponible en la dirección que seleccionó";
-                    return null;
-                }
+                return GetStoreAvailable(response, store);
+            }
+        }
 
-                var utcDateTime = DateTime.UtcNow;
-
-                var offline = _repositoryStore.IsStoreOnline(store.IdKey.Value, utcDateTime);
-                if (offline == null)
-                {
-                    response.IsSuccess = true;
-                    response.Data = store;
-                    return store;
-                }
-
+        private StoreModel GetStoreAvailable(ResponseMessageData<StoreModel> response, StoreModel store)
+        {
+            if (store == null || store.IdKey.HasValue == false)
+            {
                 response.IsSuccess = false;
-                response.Message = String.Format("La tienda {0} no está en línea en estos momentos. Fuera de línea hasta {1}", store.Value, 
-                    offline.DateTimeEnd.ToLocalTime().ToString(SharedConstants.DATE_TIME_FORMAT));
-
+                response.Message = "No hay una tienda disponible en la dirección que seleccionó";
                 return null;
             }
+
+            var utcDateTime = DateTime.UtcNow;
+
+            var offline = _repositoryStore.IsStoreOnline(store.IdKey.Value, utcDateTime);
+            if (offline == null)
+            {
+                response.IsSuccess = true;
+                response.Data = store;
+                return store;
+            }
+
+            response.IsSuccess = false;
+
+            response.Message = GetMessageStoreOffline(offline, store);
+
+            return null;
         }
 
         public void GetPreparationTime(string wsAddress, ResponseMessageData<StoreModel> response)
@@ -529,6 +555,7 @@ namespace Drs.Service.Store
                 response.Message = "No fue posible comunicarse a la tienda para obtener el tiempo de preparación ";
             }
         }
+
 
         private ResponseMessage DoCancelOrder(long atoOrderId, FranchiseStoreWsInfo fsInfo)
         {

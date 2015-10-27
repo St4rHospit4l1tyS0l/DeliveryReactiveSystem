@@ -58,6 +58,7 @@ namespace Drs.Model.Constants
             public const string SEND_ORDER_TO_STORE_HUB_METHOD = "SendOrderToStore-Store";
             public const string CANCEL_ORDER_STORE_HUB_METHOD = "CancelOrder-Store";
             public const string AVAILABLE_FOR_ADDRESS_STORE_HUB_METHOD = "AvailableForAddress-Store";
+            public const string AVAILABLE_BY_STORE_STORE_HUB_METHOD = "AvailableByStore-Store";
 
             //Module Track
             public const string TRACK_HUB = "ModTrack";

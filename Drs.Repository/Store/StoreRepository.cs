@@ -309,10 +309,25 @@ namespace Drs.Repository.Store
         public StoreOfflineDto IsStoreOnline(int idKey, DateTime utcDateTime)
         {
             return DbEntities.FranchiseStoreOffLine.Where(e => e.FranchiseStoreId == idKey && e.IsObsolete == false
-                && (utcDateTime >= e.DateTimeStart && utcDateTime <= e.DateTimeEnd) || (utcDateTime >= e.DateTimeStart && e.IsUndefinedOfflineTime))
+                && ((utcDateTime >= e.DateTimeStart && utcDateTime <= e.DateTimeEnd) || (utcDateTime >= e.DateTimeStart && e.IsUndefinedOfflineTime)))
                 .Select(e => new StoreOfflineDto
                 {
-                    DateTimeEnd = e.DateTimeEnd
+                    DateTimeEnd = e.DateTimeEnd,
+                    IsUndefinedOfflineTime = e.IsUndefinedOfflineTime
+                }).FirstOrDefault();
+        }
+
+        public StoreModel GetStoreById(int id)
+        {
+            return DbEntities.FranchiseStore.Where(e => e.FranchiseStoreId == id && e.IsObsolete == false)
+                .Select(e => new StoreModel
+                {
+                    Key = e.FranchiseStoreId.ToString(),
+                    IdKey = e.FranchiseStoreId, 
+                    Value = e.Name, 
+                    MainAddress = e.Address.MainAddress,
+                    LstPhones = e.FranchisePhone.Select(i => i.Phone).ToList(),
+                    WsAddress = e.WsAddress
                 }).FirstOrDefault();
         }
 

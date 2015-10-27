@@ -1,6 +1,7 @@
 ﻿using System;
 using Drs.Model.Address;
 using Drs.Model.Order;
+using Drs.Model.Shared;
 using Drs.Model.Store;
 
 namespace Drs.Service.Client
@@ -13,5 +14,6 @@ namespace Drs.Service.Client
         event Action<StoreModel, string> StoreSelected;
 
         void OnFranchiseChanged(FranchiseInfoModel obj);
+        void OnChangeStore(ItemCatalog item);
     }
 }

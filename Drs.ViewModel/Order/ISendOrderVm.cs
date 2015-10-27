@@ -26,6 +26,9 @@ namespace Drs.ViewModel.Order
         string SuccessMsg { get; set; }
 
         event Action EndOrder;
+        
+        event Action<ItemCatalog> ChangeStore;
+
         void OnSendOrderToStoreStatusChanged(OrderModelDto model);
         bool ImmediateDelivery { get; set; }
         bool FutureDelivery { get; set; }

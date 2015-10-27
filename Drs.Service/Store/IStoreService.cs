@@ -11,5 +11,6 @@ namespace Drs.Service.Store
         ResponseMessage CancelOrder(long orderToStoreId);
         StoreModel StoreAvailableForAddress(StoreAvailableModel model, ResponseMessageData<StoreModel> response);
         void GetPreparationTime(string wsAddress, ResponseMessageData<StoreModel> response);
+        StoreModel StoreAvailableByStore(ItemCatalog item, ResponseMessageData<StoreModel> response);
     }
 }

@@ -119,6 +119,7 @@ namespace Drs.ViewModel.Order
             _orderService.PosOrderChanged += orderSummary.OnPosOrderChanged;  //Informa al resumen del pedido
             _orderService.SendOrderToStoreStatusChanged += sendOrder.OnSendOrderToStoreStatusChanged;
             sendOrder.EndOrder += OnEndOrder;
+            sendOrder.ChangeStore += _storeAddressService.OnChangeStore;
 
             MessageBus.Current.Listen<PosCheck>(SharedMessageConstants.ORDER_SEND_POSORDER).Subscribe(x =>
             {

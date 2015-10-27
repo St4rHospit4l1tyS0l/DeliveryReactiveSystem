@@ -82,6 +82,35 @@ namespace ConnectCallCenter.Hubs
                 };
             }
         }
+
+
+
+        [HubMethodName(SharedConstants.Server.AVAILABLE_BY_STORE_STORE_HUB_METHOD)]
+        public ResponseMessageData<StoreModel> StoreAvailableByStore(ItemCatalog item)
+        {
+            try
+            {
+                var response = new ResponseMessageData<StoreModel>();
+
+
+                var store = AppInit.Container.Resolve<IStoreService>().StoreAvailableByStore(item, response);
+
+                if (response.IsSuccess == false)
+                    return response;
+
+                AppInit.Container.Resolve<IStoreService>().GetPreparationTime(store.WsAddress, response);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return new ResponseMessageData<StoreModel>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message + ex.StackTrace
+                };
+            }
+        }
     }
 }
 

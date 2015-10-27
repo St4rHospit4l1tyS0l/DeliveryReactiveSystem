@@ -270,6 +270,15 @@ namespace Drs.ViewModel.Order
             if (handler != null) handler();
         }
 
+        public event Action<ItemCatalog> ChangeStore;
+
+        protected virtual void OnChangeStore(ItemCatalog item)
+        {
+            var handler = ChangeStore;
+            if (handler != null) handler(item);
+        }
+
+
         public void OnSendOrderToStoreStatusChanged(OrderModelDto model)
         {
             if (model.HasError)
@@ -455,9 +464,15 @@ namespace Drs.ViewModel.Order
 
         public ItemCatalog PickUpStore
         {
-            get { return _pickUpStore; }
-            set { this.RaiseAndSetIfChanged(ref _pickUpStore, value); }
+            get
+            {
+                return _pickUpStore;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _pickUpStore, value);
+                OnChangeStore(_pickUpStore);
+            }
         }
-        
     }
 }

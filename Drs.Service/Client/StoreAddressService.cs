@@ -38,6 +38,22 @@ namespace Drs.Service.Client
             ValidateStore();
         }
 
+        public void OnChangeStore(ItemCatalog item)
+        {
+            var orderModel = OrderService.OrderModel;
+
+            if (orderModel.StoreModel.IdKey == item.Id)
+                return;
+
+            OnStoreSelected(null, "Buscando disponiblidad...");
+
+            _client.ExecutionProxy.ExecuteRequest<ItemCatalog, ItemCatalog, ResponseMessageData<StoreModel>,
+                ResponseMessageData<StoreModel>>(item, TransferDto.TransferDto.SameType, SharedConstants.Server.STORE_HUB,
+                    SharedConstants.Server.AVAILABLE_BY_STORE_STORE_HUB_METHOD, TransferDto.TransferDto.SameType)
+                .Subscribe(OnResultStoreAvailableOk, OnResultStoreAvailableError);            
+        
+        }
+
         private void ValidateStore()
         {
             var orderModel = OrderService.OrderModel;
