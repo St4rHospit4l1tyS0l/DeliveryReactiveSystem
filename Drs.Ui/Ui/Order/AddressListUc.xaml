@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:ui="clr-namespace:Drs.Infrastructure.Ui;assembly=Drs.Infrastructure"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" x:Name="UsrCtrl"
-             d:DesignHeight="200" d:DesignWidth="1024" HorizontalAlignment="Stretch" Margin="30,0,30,0">
+             d:DesignHeight="250" d:DesignWidth="1024" HorizontalAlignment="Stretch" Margin="30,0,30,0">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -25,7 +24,13 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
-        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource AccentColorBrush}">
+        <StackPanel Orientation="Horizontal" Height="40" Visibility="{Binding HasAdditionalLstStore}">
+            <Label FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                   FontWeight="SemiBold">Existe una o más tiendas alternativas para la dirección elegida, puede cambiar de tienda: </Label>
+            <ComboBox ItemsSource="{Binding Path=LstStores}" DisplayMemberPath="Name" 
+                      SelectedValue="{Binding Path=PickUpStore}" Background="{DynamicResource AccentColorBrush}" Margin="10 5 0 5" Width="300"></ComboBox>
+        </StackPanel>
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource AccentColorBrush}" Margin="0 15 0 0">
             <Label Content="4) Agregue o elija la dirección:   " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                                VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">

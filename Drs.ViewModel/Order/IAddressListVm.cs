@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reactive;
 using Drs.Model.Address;
 using Drs.Model.Constants;
@@ -23,7 +24,13 @@ namespace Drs.ViewModel.Order
         void ProcessPhone(ListItemModel model);
 
         event Action<AddressInfoGrid> ItemSelected;
+
+        ReactiveList<ItemCatalog> LstStores { get; set; }
+
         AddressControlSetting Setting { get; set; }
         void SetOrderModel(Func<OrderModel> orderModel);
+        void OnStoresReceivedByAddress(List<ItemCatalog> obj);
+        
+        event Action<ItemCatalog, bool> ChangeStore;
     }
 }

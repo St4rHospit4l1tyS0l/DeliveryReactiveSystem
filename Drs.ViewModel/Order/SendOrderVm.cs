@@ -252,7 +252,7 @@ namespace Drs.ViewModel.Order
             IsReadyToSend = Visibility.Collapsed;
 
             var response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise | ClientFlags.ValidateOrder.Client
-                | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.StoreAvailable | ClientFlags.ValidateOrder.Order);
+                | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.Order);
 
             if (response.IsSuccess)
             {
@@ -271,12 +271,12 @@ namespace Drs.ViewModel.Order
             if (handler != null) handler();
         }
 
-        public event Action<ItemCatalog> ChangeStore;
+        public event Action<ItemCatalog, bool> ChangeStore;
 
-        protected virtual void OnChangeStore(ItemCatalog item)
+        protected virtual void OnChangeStore(ItemCatalog item, bool bIsLastStore)
         {
             var handler = ChangeStore;
-            if (handler != null) handler(item);
+            if (handler != null) handler(item, false);
         }
 
         public event Action UndoPickUpInStore;
@@ -496,7 +496,7 @@ namespace Drs.ViewModel.Order
             set
             {
                 this.RaiseAndSetIfChanged(ref _pickUpStore, value);
-                OnChangeStore(_pickUpStore);
+                OnChangeStore(_pickUpStore, false);
             }
         }
     }

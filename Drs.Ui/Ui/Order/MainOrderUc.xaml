@@ -99,11 +99,11 @@
                                                controls:ControlsHelper.HeaderFontSize="22"  >
                         <StackPanel Orientation="Vertical">
                             <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#FF51A0FF" Margin="0,0,0,0"></Rectangle>
-                            <StackPanel Orientation="Horizontal" Margin="0, 50, 0, 0" >
+                            <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0" >
                                 <ContentControl  Content="{Binding ClientsList}" Width="1100" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
                                 </ContentControl>
                             </StackPanel>
-                            <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#898989" Margin="0,100"></Rectangle>
+                            <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#898989" Margin="0,20,0,20"></Rectangle>
                             <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 0" >
                                 <ContentControl  Content="{Binding AddressList}" Width="1100" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
                                 </ContentControl>

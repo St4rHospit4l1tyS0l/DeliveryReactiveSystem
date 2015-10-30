@@ -492,5 +492,10 @@ namespace Drs.Repository.Store
                 });
         }
 
+        public int GetFranchiseIdByStoreId(int franchiseStoreId)
+        {
+            return DbEntities.FranchiseStore.Where(e => e.FranchiseStoreId == franchiseStoreId).Select(e => e.FranchiseId).Single();   
+        }
+
     }
 }

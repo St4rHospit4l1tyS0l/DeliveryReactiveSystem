@@ -34,7 +34,7 @@ namespace Drs.Model.Order
                 AddressInfo = LstAddressInfo.Where(e => e.IsSelected).Select(e => e.AddressInfo).Single(),
                 PosOrder = PosCheck,
                 Username = Username,
-                StoreModel = StoreModel,
+                Store = StoreModel,
                 OrderDetails = OrderDetails,
             };
         }

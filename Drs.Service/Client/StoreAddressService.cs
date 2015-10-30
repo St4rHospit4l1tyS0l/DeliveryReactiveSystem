@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Model.Constants;
@@ -22,7 +23,15 @@ namespace Drs.Service.Client
 
         public IMainOrderService OrderService { get; set; }
         public event Action<StoreModel, string> StoreSelected;
-        
+        public event Action<List<ItemCatalog>> StoresReceivedByAddress;
+
+        protected virtual void OnStoresReceivedByAddress(List<ItemCatalog> obj)
+        {            
+            var handler = StoresReceivedByAddress;
+            if (handler != null) handler(obj);
+        }
+
+
         protected virtual void OnStoreSelected(StoreModel obj, string sMsg)
         {
             var handler = StoreSelected;
@@ -39,7 +48,7 @@ namespace Drs.Service.Client
             ValidateStore();
         }
 
-        public void OnChangeStore(ItemCatalog item)
+        public void OnChangeStore(ItemCatalog item, bool bIsLastStore)
         {
             if(item == null)
                 return;
@@ -54,7 +63,8 @@ namespace Drs.Service.Client
 
             _subscription = _client.ExecutionProxy.ExecuteRequest<ItemCatalog, ItemCatalog, ResponseMessageData<StoreModel>,
                 ResponseMessageData<StoreModel>>(item, TransferDto.TransferDto.SameType, SharedConstants.Server.STORE_HUB,
-                    SharedConstants.Server.AVAILABLE_BY_STORE_STORE_HUB_METHOD, TransferDto.TransferDto.SameType).Subscribe(obj => OnResultStoreAvailableOk(obj), OnResultStoreAvailableError);            
+                    SharedConstants.Server.AVAILABLE_BY_STORE_STORE_HUB_METHOD, TransferDto.TransferDto.SameType)
+                    .Subscribe(obj => OnResultStoreAvailableOk(obj, false, bIsLastStore), OnResultStoreAvailableError);            
         }
 
         private void DisposeSubscription()
@@ -144,7 +154,7 @@ namespace Drs.Service.Client
             OnStoreSelected(null, sMsg);
         }
 
-        private void OnResultStoreAvailableOk(IStale<ResponseMessageData<StoreModel>> obj, bool bIsForAddress = false)
+        private void OnResultStoreAvailableOk(IStale<ResponseMessageData<StoreModel>> obj, bool bIsForAddress = false, bool bIsLastStore = false)
         {
             if (obj.IsStale)
             {
@@ -155,6 +165,8 @@ namespace Drs.Service.Client
             if (obj.Data.IsSuccess == false)
             {
                 OnResultStoreAvailableError(obj.Data.Message);
+                if (bIsLastStore == false)
+                    ExtractStores(obj.Data.LstData);
                 return;
             }
 
@@ -163,15 +175,45 @@ namespace Drs.Service.Client
             if (dataResp == null)
             {
                 OnResultStoreAvailableError("No hay una tienda disponible en la dirección que seleccionó");
+                if (bIsLastStore == false)
+                    ExtractStores(obj.Data.LstData);
                 return;
             }
 
             OrderService.OrderModel.StoreModel = dataResp;
-            if (bIsForAddress)
+            if (bIsForAddress || bIsLastStore)
+            {
                 OrderService.OrderModel.LastStoreModelByClientAddress = dataResp;
+
+                if (bIsLastStore == false)
+                    ExtractStores(obj.Data.LstData);
+            }
             OrderService.OrderModel.StoreModel.ExtraMsg = obj.Data.Message;
 
             OnStoreSelected(dataResp, null);
+        }
+
+        private void ExtractStores(IEnumerable<StoreModel> lstData)
+        {
+            if (lstData == null)
+            {
+                OnStoresReceivedByAddress(null);
+                return;
+            }
+
+            var storeModels = lstData.ToList();
+            if (storeModels.Any() == false)
+            {
+                OnStoresReceivedByAddress(null);
+                return;
+            }
+
+            OnStoresReceivedByAddress(storeModels.Select(e => new ItemCatalog
+            {
+                Id = e.IdKey.Value,
+                Name = String.Format("{0} ({1})", e.Value, e.MainAddress),
+                Value = e.MainAddress
+            }).ToList());
         }
     }
 }

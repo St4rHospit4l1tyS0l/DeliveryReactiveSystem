@@ -28,5 +28,6 @@ namespace Drs.Repository.Store
         void DoObsoleteStore(FranchiseStore store, string userId);
         StoreOfflineDto IsStoreOnline(int idKey, DateTime utcDateTime);
         StoreModel GetStoreById(int id);
+        int GetFranchiseIdByStoreId(int franchiseStoreId);
     }
 }

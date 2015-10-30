@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Drs.Model.Address;
 using Drs.Model.Order;
 using Drs.Model.Shared;
@@ -13,8 +14,10 @@ namespace Drs.Service.Client
 
         event Action<StoreModel, string> StoreSelected;
 
+        event Action<List<ItemCatalog>> StoresReceivedByAddress;
+
         void OnFranchiseChanged(FranchiseInfoModel obj);
-        void OnChangeStore(ItemCatalog item);
+        void OnChangeStore(ItemCatalog item, bool bIsLastStore);
         void OnUndoPickUpInStore();
     }
 }

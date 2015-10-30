@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
@@ -27,6 +28,8 @@ namespace Drs.ViewModel.Order
         private readonly IReactiveDeliveryClient _client;
         private AddressInfoGrid _addressSelection;
         private Func<OrderModel> _orderModel;
+        private Visibility _hasAdditionalLstStore;
+        private ItemCatalog _pickUpStore;
 
         public AddressListVm(IUpsertAddressFoVm upsertAddressFo, IReactiveDeliveryClient client)
         {
@@ -38,9 +41,12 @@ namespace Drs.ViewModel.Order
             Remove = ReactiveCommand.CreateAsyncTask(Observable.Return(true), OnRemove);
             RetrySaveItem = ReactiveCommand.CreateAsyncTask(Observable.Return(true), OnRetrySave);
             Setting = SettingsData.Constants.AddressGridSetting;
+            LstStores = new ReactiveList<ItemCatalog>();
+            HasAdditionalLstStore = Visibility.Collapsed;
 
             MessageBus.Current.Listen<PropagateOrderModel>(SharedMessageConstants.PROPAGATE_LASTORDER_ADDRESS).Subscribe(OnPropagate);
         }
+
 
         private void OnPropagate(PropagateOrderModel model)
         {
@@ -102,10 +108,22 @@ namespace Drs.ViewModel.Order
         {
             _orderModel = orderModel;
         }
-        //public void SetLstAddress(IReactiveList<AddressInfoGrid> lstDataInfo)
-        //{
-        //    LstAddresses = lstDataInfo;
-        //}
+
+        public void OnStoresReceivedByAddress(List<ItemCatalog> obj)
+        {
+            HasAdditionalLstStore = Visibility.Collapsed;
+            
+            if (obj == null || obj.Count < 2)
+                return;
+
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                LstStores.ClearAndAddRange(obj);
+                HasAdditionalLstStore = Visibility.Visible;
+                PickUpStore = LstStores[0];  //Always will be the first, because stores are ordering by importance
+            });
+        }
+
 
         public void OnAddressChanged(AddressInfoGrid obj)
         {
@@ -158,6 +176,15 @@ namespace Drs.ViewModel.Order
             Action<AddressInfoGrid> handler = ItemSelected;
             if (handler != null) handler(obj);
         }
+
+        public event Action<ItemCatalog, bool> ChangeStore;
+
+        protected virtual void OnChangeStore(ItemCatalog obj, bool bIsLastStore)
+        {
+            var handler = ChangeStore;
+            if (handler != null) handler(obj, bIsLastStore);
+        }
+
 
         private void OnAddressListReady(IStale<ResponseMessageData<AddressInfoModel>> obj)
         {
@@ -217,6 +244,29 @@ namespace Drs.ViewModel.Order
             {
                 var orderModel = _orderModel();
                 return orderModel == null ? null : orderModel.LstAddressInfo;
+            }
+        }
+
+        public ReactiveList<ItemCatalog> LstStores { get; set; }
+
+        public ItemCatalog PickUpStore
+        {
+            get { return _pickUpStore; }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _pickUpStore, value);
+                if (_pickUpStore != null)
+                    OnChangeStore(_pickUpStore, true);
+
+            }
+        }
+
+        public Visibility HasAdditionalLstStore
+        {
+            get { return _hasAdditionalLstStore; }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _hasAdditionalLstStore, value);
             }
         }
 

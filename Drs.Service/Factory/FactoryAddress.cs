@@ -138,7 +138,7 @@ namespace Drs.Service.Factory
             throw new ArgumentNullException(String.Empty + "No está configurada la información de la jerarquía de direcciones para los códigos");
         }
 
-        public static StoreModel GetQueryToSearchStore(CallCenterEntities dbEntities, string franchiseCode, AddressInfoModel model, out int franchiseId)
+        public static List<StoreModel> GetQueryToSearchStore(CallCenterEntities dbEntities, string franchiseCode, AddressInfoModel model, out int franchiseId)
         {
             franchiseId = dbEntities.Franchise.Where(e => e.IsObsolete == false && e.Code == franchiseCode).Select(e => e.FranchiseId).Single();
 
@@ -179,7 +179,7 @@ namespace Drs.Service.Factory
                     MainAddress = e.FranchiseStore.Address.MainAddress,
                     LstPhones = e.FranchiseStore.FranchisePhone.Select(i => i.Phone).ToList(),
                     WsAddress = e.FranchiseStore.WsAddress
-                }).FirstOrDefault();
+                }).ToList();
         }
     }
 }

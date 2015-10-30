@@ -19,8 +19,7 @@ namespace Drs.ViewModel.Order
 
         public override ResponseMessage OnViewSelected(int iSelectedTab)
         {
-            var response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise | ClientFlags.ValidateOrder.Client | ClientFlags.ValidateOrder.Address 
-                | ClientFlags.ValidateOrder.StoreAvailable);
+            var response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise | ClientFlags.ValidateOrder.Client | ClientFlags.ValidateOrder.Address );
 
             if (response.IsSuccess)
                 ShowPosApp();

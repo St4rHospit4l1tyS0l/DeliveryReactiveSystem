@@ -57,8 +57,9 @@ namespace Drs.Service.Store
 
             using (_repositoryStore)
             {
-                int franchiseId;
-                var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model.FranchiseCode, model.AddressInfo, out franchiseId);
+                var store = model.Store;
+
+                //var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model.FranchiseCode, model.AddressInfo, out franchiseId);
 
                 //TODO Falta vewrificar si tiene la capacidad para albergar una orden más
 
@@ -68,6 +69,8 @@ namespace Drs.Service.Store
                     resMsg.Message = "No se encontró una tienda cercana a este domicilio, por favor reporte a soporte técnico";
                     return resMsg;
                 }
+
+                int franchiseId = _repositoryStore.GetFranchiseIdByStoreId(store.IdKey.Value);
 
                 var offline = _repositoryStore.IsStoreOnline(store.IdKey.Value, DateTime.UtcNow);
                 
@@ -478,7 +481,7 @@ namespace Drs.Service.Store
             using (_repositoryStore)
             {
                 var store = _repositoryStore.GetStoreById(item.Id);
-                return GetStoreAvailable(response, store);
+                return GetStoreAvailable(response, new List<StoreModel>{store});
             }
         }
 
@@ -487,21 +490,32 @@ namespace Drs.Service.Store
             using (_repositoryStore)
             {
                 int franchiseId;
-                var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model.FranchiseCode,
+                var stores = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model.FranchiseCode,
                     model.AddressInfo, out franchiseId);
 
-                return GetStoreAvailable(response, store);
+                return GetStoreAvailable(response, stores);
             }
         }
 
-        private StoreModel GetStoreAvailable(ResponseMessageData<StoreModel> response, StoreModel store)
+        private StoreModel GetStoreAvailable(ResponseMessageData<StoreModel> response, List<StoreModel> stores)
         {
-            if (store == null || store.IdKey.HasValue == false)
+            if (stores.Any() == false)
             {
                 response.IsSuccess = false;
                 response.Message = "No hay una tienda disponible en la dirección que seleccionó";
                 return null;
             }
+
+            var store = stores[0];
+
+            if (store.IdKey.HasValue == false)
+            {
+                response.IsSuccess = false;
+                response.Message = "No hay una tienda disponible en la dirección que seleccionó";
+                return null;
+            }
+
+            response.LstData = stores;
 
             var utcDateTime = DateTime.UtcNow;
 

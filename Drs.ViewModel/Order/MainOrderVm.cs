@@ -108,6 +108,8 @@ namespace Drs.ViewModel.Order
             _orderService.AddressChanged += addressList.OnAddressChanged;
             addressList.ItemSelected += orderSummary.OnAddressSelected;
             addressList.ItemSelected += _storeAddressService.OnAddressSelected;
+            addressList.ChangeStore += _storeAddressService.OnChangeStore;
+            _storeAddressService.StoresReceivedByAddress += addressList.OnStoresReceivedByAddress;
             _storeAddressService.StoreSelected += orderSummary.OnStoreSelected;
 
             MessageBus.Current.Listen<ListItemModel>(SharedMessageConstants.ORDER_CLIENTPHONE).Subscribe(clientsList.ProcessPhone);

@@ -27,7 +27,7 @@ namespace Drs.ViewModel.Order
 
         event Action EndOrder;
         
-        event Action<ItemCatalog> ChangeStore;
+        event Action<ItemCatalog, bool> ChangeStore;
 
         event Action UndoPickUpInStore;
 

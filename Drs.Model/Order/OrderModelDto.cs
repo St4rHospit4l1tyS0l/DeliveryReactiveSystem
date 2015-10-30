@@ -22,6 +22,5 @@ namespace Drs.Model.Order
         public ClientInfoModel ClientInfo { get; set; }
         public string Phone { get; set; }
         public OrderDetails OrderDetails { get; set; }
-        public StoreModel StoreModel { get; set; }
     }
 }
