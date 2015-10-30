@@ -56,6 +56,12 @@ namespace Drs.ViewModel.Order
                 MessageBus.Current.SendMessage(model, SharedMessageConstants.PROPAGATE_LASTORDER_ADDRESS);
         }
 
+        public override ResponseMessage OnViewSelected(int iSelectedTab)
+        {
+            var response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise);
+            return response;
+        }
+
         protected override void OnShellContainerVmChange(IShellContainerVm value)
         {
             base.OnShellContainerVmChange(value);

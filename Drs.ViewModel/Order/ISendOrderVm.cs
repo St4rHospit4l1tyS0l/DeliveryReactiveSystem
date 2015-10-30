@@ -29,6 +29,9 @@ namespace Drs.ViewModel.Order
         
         event Action<ItemCatalog> ChangeStore;
 
+        event Action UndoPickUpInStore;
+
+
         void OnSendOrderToStoreStatusChanged(OrderModelDto model);
         bool ImmediateDelivery { get; set; }
         bool FutureDelivery { get; set; }

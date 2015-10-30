@@ -15,5 +15,6 @@ namespace Drs.Service.Client
 
         void OnFranchiseChanged(FranchiseInfoModel obj);
         void OnChangeStore(ItemCatalog item);
+        void OnUndoPickUpInStore();
     }
 }

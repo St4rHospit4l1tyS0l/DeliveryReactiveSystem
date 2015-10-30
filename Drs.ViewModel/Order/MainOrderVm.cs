@@ -120,6 +120,7 @@ namespace Drs.ViewModel.Order
             _orderService.SendOrderToStoreStatusChanged += sendOrder.OnSendOrderToStoreStatusChanged;
             sendOrder.EndOrder += OnEndOrder;
             sendOrder.ChangeStore += _storeAddressService.OnChangeStore;
+            sendOrder.UndoPickUpInStore += _storeAddressService.OnUndoPickUpInStore;
 
             MessageBus.Current.Listen<PosCheck>(SharedMessageConstants.ORDER_SEND_POSORDER).Subscribe(x =>
             {

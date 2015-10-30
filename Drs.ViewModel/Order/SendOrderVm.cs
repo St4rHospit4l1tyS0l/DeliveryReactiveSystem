@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -75,7 +76,7 @@ namespace Drs.ViewModel.Order
                 }
 
                 response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise | ClientFlags.ValidateOrder.Client
-                | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.Order | ClientFlags.ValidateOrder.OrderSaved);
+                | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.Order | ClientFlags.ValidateOrder.StoreAvailable | ClientFlags.ValidateOrder.OrderSaved);
 
                 if (response.IsSuccess == false)
                 {
@@ -278,6 +279,13 @@ namespace Drs.ViewModel.Order
             if (handler != null) handler(item);
         }
 
+        public event Action UndoPickUpInStore;
+
+        protected virtual void OnUndoPickUpInStore()
+        {
+            var handler = UndoPickUpInStore;
+            if (handler != null) handler();
+        }
 
         public void OnSendOrderToStoreStatusChanged(OrderModelDto model)
         {
@@ -320,11 +328,21 @@ namespace Drs.ViewModel.Order
 
             List<ItemCatalog> lstCatalogs;
             CatalogsClientModel.DicFranchiseStore.TryGetValue(_currentFranchiseCode, out lstCatalogs);
-            LstStores.ClearAndAddRange(lstCatalogs);
 
-            PickUpStore = LstStores.FirstOrDefault(e => e.Id == OrderService.OrderModel.StoreModel.IdKey);
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                LstStores.ClearAndAddRange(lstCatalogs);
+                PickUpStore = LstStores.FirstOrDefault(e => e.Id == OrderService.OrderModel.StoreModel.IdKey);
+            });
         }
 
+        private ItemCatalog SelectLastStoreByAddress()
+        {
+            if (OrderService == null || OrderService.OrderModel == null || OrderService.OrderModel.LastStoreModelByClientAddress == null)
+                return null;
+
+            return LstStores.FirstOrDefault(e => e.Id == OrderService.OrderModel.LastStoreModelByClientAddress.IdKey);
+        }
 
         public Func<ClientFlags.ValidateOrder, ResponseMessage> ValidateModel { get; set; }
         public IReactiveCommand<Unit> SendOrderToStore { get; set; }
@@ -459,8 +477,15 @@ namespace Drs.ViewModel.Order
         public bool HasPickUpInStore
         {
             get { return _hasPickUpInStore; }
-            set { this.RaiseAndSetIfChanged(ref _hasPickUpInStore, value); }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _hasPickUpInStore, value);
+
+                if (_hasPickUpInStore == false)
+                    PickUpStore = SelectLastStoreByAddress();
+            }
         }
+
 
         public ItemCatalog PickUpStore
         {

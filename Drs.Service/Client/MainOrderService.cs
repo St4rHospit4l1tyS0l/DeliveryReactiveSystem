@@ -74,7 +74,7 @@ namespace Drs.Service.Client
                     var item = _model.StoreModel;
                     if (item == null || String.IsNullOrEmpty(item.Key))
                     {
-                        return new ResponseMessage { IsSuccess = false, Message = "No hay tienda disponible para esta dirección", View = SharedConstants.Client.ORDER_TAB_CLIENTS };
+                        return new ResponseMessage { IsSuccess = false, Message = "No hay tienda disponible para brindar el servicio", View = SharedConstants.Client.ORDER_TAB_CLIENTS };
                     }
                 }
 

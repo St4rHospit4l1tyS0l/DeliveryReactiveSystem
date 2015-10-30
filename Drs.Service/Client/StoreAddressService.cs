@@ -13,6 +13,7 @@ namespace Drs.Service.Client
     public class StoreAddressService : IStoreAddressService
     {
         private readonly IReactiveDeliveryClient _client;
+        private IDisposable _subscription;
 
         public StoreAddressService(IReactiveDeliveryClient client)
         {
@@ -40,18 +41,65 @@ namespace Drs.Service.Client
 
         public void OnChangeStore(ItemCatalog item)
         {
-            var orderModel = OrderService.OrderModel;
-
-            if (orderModel.StoreModel.IdKey == item.Id)
+            if(item == null)
                 return;
 
+            var orderModel = OrderService.OrderModel;
+
+            if (orderModel.StoreModel != null && orderModel.StoreModel.IdKey == item.Id)
+                return;
+
+            LookingAvailability();
+            DisposeSubscription();
+
+            _subscription = _client.ExecutionProxy.ExecuteRequest<ItemCatalog, ItemCatalog, ResponseMessageData<StoreModel>,
+                ResponseMessageData<StoreModel>>(item, TransferDto.TransferDto.SameType, SharedConstants.Server.STORE_HUB,
+                    SharedConstants.Server.AVAILABLE_BY_STORE_STORE_HUB_METHOD, TransferDto.TransferDto.SameType).Subscribe(obj => OnResultStoreAvailableOk(obj), OnResultStoreAvailableError);            
+        }
+
+        private void DisposeSubscription()
+        {
+            if (_subscription != null)
+            {
+                try
+                {
+                    _subscription.Dispose();
+                    _subscription = null;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message + @" - ST - " + ex.StackTrace);
+                }
+            }
+        }
+
+        private void LookingAvailability()
+        {
+            OrderService.OrderModel.StoreModel = null;
             OnStoreSelected(null, "Buscando disponiblidad...");
+        }
+
+        public void OnUndoPickUpInStore()
+        {
+            var orderModel = OrderService.OrderModel;
+
+            if (orderModel == null || orderModel.LastStoreModelByClientAddress == null || orderModel.LastStoreModelByClientAddress.IdKey.HasValue == false ||
+                (orderModel.StoreModel != null && orderModel.LastStoreModelByClientAddress.IdKey == orderModel.StoreModel.IdKey))
+                return;
+
+            LookingAvailability();
+            DisposeSubscription();
+
+            var item = new ItemCatalog
+            {
+                Id = orderModel.LastStoreModelByClientAddress.IdKey.Value
+            };
 
             _client.ExecutionProxy.ExecuteRequest<ItemCatalog, ItemCatalog, ResponseMessageData<StoreModel>,
                 ResponseMessageData<StoreModel>>(item, TransferDto.TransferDto.SameType, SharedConstants.Server.STORE_HUB,
                     SharedConstants.Server.AVAILABLE_BY_STORE_STORE_HUB_METHOD, TransferDto.TransferDto.SameType)
-                .Subscribe(OnResultStoreAvailableOk, OnResultStoreAvailableError);            
-        
+                .Subscribe(obj => OnResultStoreAvailableOk(obj), OnResultStoreAvailableError);            
+
         }
 
         private void ValidateStore()
@@ -71,6 +119,8 @@ namespace Drs.Service.Client
             if (address == null)
                 return;
 
+            DisposeSubscription();
+
             var model = new StoreAvailableModel
             {
                 FranchiseCode = OrderService.OrderModel.Franchise.Code,
@@ -80,7 +130,7 @@ namespace Drs.Service.Client
             _client.ExecutionProxy.ExecuteRequest<StoreAvailableModel, StoreAvailableModel, ResponseMessageData<StoreModel>,
                 ResponseMessageData<StoreModel>>(model, TransferDto.TransferDto.SameType, SharedConstants.Server.STORE_HUB,
                     SharedConstants.Server.AVAILABLE_FOR_ADDRESS_STORE_HUB_METHOD, TransferDto.TransferDto.SameType)
-                .Subscribe(OnResultStoreAvailableOk, OnResultStoreAvailableError);
+                .Subscribe(e => OnResultStoreAvailableOk(e, true), OnResultStoreAvailableError);
         }
 
         private void OnResultStoreAvailableError(Exception ex)
@@ -90,10 +140,11 @@ namespace Drs.Service.Client
 
         private void OnResultStoreAvailableError(string sMsg)
         {
+            OrderService.OrderModel.StoreModel = null;
             OnStoreSelected(null, sMsg);
         }
 
-        private void OnResultStoreAvailableOk(IStale<ResponseMessageData<StoreModel>> obj)
+        private void OnResultStoreAvailableOk(IStale<ResponseMessageData<StoreModel>> obj, bool bIsForAddress = false)
         {
             if (obj.IsStale)
             {
@@ -116,8 +167,9 @@ namespace Drs.Service.Client
             }
 
             OrderService.OrderModel.StoreModel = dataResp;
+            if (bIsForAddress)
+                OrderService.OrderModel.LastStoreModelByClientAddress = dataResp;
             OrderService.OrderModel.StoreModel.ExtraMsg = obj.Data.Message;
-
 
             OnStoreSelected(dataResp, null);
         }

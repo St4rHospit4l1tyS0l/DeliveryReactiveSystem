@@ -22,6 +22,7 @@ namespace Drs.Model.Order
         public StoreModel StoreModel { get; set; }
         public string Username { get; set; }
         public OrderDetails OrderDetails { get; set; }
+        public StoreModel LastStoreModelByClientAddress { get; set; }
 
         public OrderModelDto ToDto()
         {
