@@ -111,7 +111,9 @@ namespace Drs.Model.Settings
             public class StoreConst
             {
                 public const string QUANTITY_ITEM = "1";
+
                 public const string SENDING_MODE_DELIVERY = "Delivery";
+                public const string SENDING_MODE_WALK_IN = "WalkIn";
 
                 public const int MODE_DELIVERY_IMMEDIATE = 500;
                 public const int MODE_DELIVERY_FUTURE = 501;

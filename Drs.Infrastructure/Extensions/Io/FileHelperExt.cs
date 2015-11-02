@@ -16,5 +16,27 @@ namespace Drs.Infrastructure.Extensions.Io
 
             File.WriteAllLines(alohaIniFile, outLines);
         }
+
+        public static string ReadFirstValue(string alohaIniFile, string sKey)
+        {
+            using (var file = new StreamReader(alohaIniFile))
+            {
+                string line;
+                while ((line = file.ReadLine()) != null)
+                {
+                    line = line.Trim();
+                    if(line.StartsWith(sKey) == false)
+                        continue;
+
+                    line = line.Replace(sKey, "").Trim();
+                    file.Close();
+                    return line;
+
+                }
+                file.Close();
+            }
+
+            return null;
+        }
     }
 }

@@ -27,7 +27,6 @@ namespace Drs.Repository.Entities
             this.FranchiseStore = new HashSet<FranchiseStore>();
             this.FranchiseStore1 = new HashSet<FranchiseStore>();
             this.FranchiseStore2 = new HashSet<FranchiseStore>();
-            this.OrderToStore = new HashSet<OrderToStore>();
             this.PosOrder = new HashSet<PosOrder>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
             this.FranchiseDataVersion = new HashSet<FranchiseDataVersion>();
@@ -35,6 +34,7 @@ namespace Drs.Repository.Entities
             this.Resource = new HashSet<Resource>();
             this.FranchiseStoreOffLine = new HashSet<FranchiseStoreOffLine>();
             this.FranchiseStoreOffLine1 = new HashSet<FranchiseStoreOffLine>();
+            this.OrderToStore = new HashSet<OrderToStore>();
         }
     
         public string Id { get; set; }
@@ -61,7 +61,6 @@ namespace Drs.Repository.Entities
         public virtual ICollection<FranchiseStore> FranchiseStore { get; set; }
         public virtual ICollection<FranchiseStore> FranchiseStore1 { get; set; }
         public virtual ICollection<FranchiseStore> FranchiseStore2 { get; set; }
-        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<PosOrder> PosOrder { get; set; }
         public virtual UserDetail UserDetail { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
@@ -70,5 +69,6 @@ namespace Drs.Repository.Entities
         public virtual ICollection<Resource> Resource { get; set; }
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine1 { get; set; }
+        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
     }
 }

@@ -41,6 +41,7 @@ namespace Drs.Repository.Entities
         public Nullable<bool> IsCanceled { get; set; }
         public Nullable<System.DateTime> DateTimeCanceled { get; set; }
         public int FailedStatusCounter { get; set; }
+        public int PosOrderStatus { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }

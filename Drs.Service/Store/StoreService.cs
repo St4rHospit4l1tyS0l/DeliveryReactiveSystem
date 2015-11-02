@@ -380,7 +380,7 @@ namespace Drs.Service.Store
                     }
                 },
                 referenceIdField = model.OrderToStoreId.ToString(CultureInfo.InvariantCulture),
-                modeField = SettingsData.Constants.StoreConst.SENDING_MODE_DELIVERY,
+                modeField = model.OrderDetails.PosOrderMode,//SettingsData.Constants.StoreConst.SENDING_MODE_DELIVERY,
                 //statusField = "InDelay",
                 itemsField = new[]
                 {
@@ -391,7 +391,7 @@ namespace Drs.Service.Store
                 }
             };
 
-            if (model.OrderDetails.OrderMode == SettingsData.Constants.StoreConst.MODE_DELIVERY_FUTURE)
+            if (model.OrderDetails.PosOrderStatus == SettingsData.Constants.StoreConst.MODE_DELIVERY_FUTURE)
             {
                 order.statusField = SettingsData.Constants.TrackConst.IN_DELAY;
                 order.promiseTimeField = model.OrderDetails.PromiseTime.ToString("o");

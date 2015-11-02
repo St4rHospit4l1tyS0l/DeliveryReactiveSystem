@@ -40,7 +40,7 @@
                     Margin="40, 0, 0, 0"
                     Style="{DynamicResource AccentedSquareButtonStyle}" Background="#CC37B911">
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="Modifcar pedido" Foreground="White" Margin="0 0 10 0">
+                        <Label Content="Modificar pedido" Foreground="White" Margin="0 0 10 0">
                         </Label>
                         <Rectangle Width="20"
                            Height="20"

@@ -28,7 +28,6 @@
         <EntityTypeShape EntityType="CallCenterModel.Language" Width="1.5" PointX="18.125" PointY="0.75" />
         <EntityTypeShape EntityType="CallCenterModel.MenuModule" Width="1.5" PointX="15.375" PointY="19.625" />
         <EntityTypeShape EntityType="CallCenterModel.Module" Width="1.5" PointX="13.125" PointY="21.375" />
-        <EntityTypeShape EntityType="CallCenterModel.OrderToStore" Width="1.5" PointX="22.125" PointY="19.875" />
         <EntityTypeShape EntityType="CallCenterModel.OrderToStoreLog" Width="1.5" PointX="24.375" PointY="28.75" />
         <EntityTypeShape EntityType="CallCenterModel.Permission" Width="1.5" PointX="15.375" PointY="22.625" />
         <EntityTypeShape EntityType="CallCenterModel.PosOrder" Width="1.5" PointX="17.625" PointY="36.75" />
@@ -50,7 +49,6 @@
         <AssociationConnector Association="CallCenterModel.FK_Address_RegionD" />
         <AssociationConnector Association="CallCenterModel.FK_Address_ZipCode" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStore_Address" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Address" />
         <AssociationConnector Association="CallCenterModel.FK_Permission_AspNetRoles" />
         <AssociationConnector Association="CallCenterModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="CallCenterModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
@@ -63,32 +61,22 @@
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStore_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStore_AspNetUsers1" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStore_AspNetUsers2" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_PosOrder_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_UserDetail_AspNetUsers" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_CatPayment" />
         <AssociationConnector Association="CallCenterModel.FK_Client_Company" />
         <AssociationConnector Association="CallCenterModel.FK_ClientStatistics_Client" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Client" />
         <AssociationConnector Association="CallCenterModel.FK_Recurrence_Client" />
         <AssociationConnector Association="CallCenterModel.FK_ClientPhoneStatistics_ClientPhone" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_ClientPhone" />
         <AssociationConnector Association="CallCenterModel.FK_RegionA_Country" />
         <AssociationConnector Association="CallCenterModel.FK_RegionB_Country" />
         <AssociationConnector Association="CallCenterModel.FK_RegionC_Country" />
         <AssociationConnector Association="CallCenterModel.FK_RegionD_Country" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseData_Franchise" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStore_Franchise" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Franchise" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_FranchiseStore" />
         <AssociationConnector Association="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore" />
         <AssociationConnector Association="CallCenterModel.FK_StoreStatus_FranchiseStore" />
         <AssociationConnector Association="CallCenterModel.FK_MenuModule_Module" />
         <AssociationConnector Association="CallCenterModel.FK_Permission_Module" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_PosOrder" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStoreLog_OrderToStore" />
-        <AssociationConnector Association="CallCenterModel.FK_Recurrence_OrderToStore" />
-        <AssociationConnector Association="CallCenterModel.FK_StoreStatus_OrderToStore" />
         <AssociationConnector Association="CallCenterModel.FK_PosOrderItem_PosOrder" />
         <AssociationConnector Association="CallCenterModel.FK_RegionA_ZipCode" />
         <AssociationConnector Association="CallCenterModel.FK_RegionB_RegionA" />
@@ -129,6 +117,18 @@
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers1" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore" />
+        <EntityTypeShape EntityType="CallCenterModel.OrderToStore" Width="1.5" PointX="22.125" PointY="19.875" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Address" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_AspNetUsers" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_CatPayment" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Client" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_ClientPhone" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Franchise" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_FranchiseStore" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_PosOrder" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStoreLog_OrderToStore" />
+        <AssociationConnector Association="CallCenterModel.FK_Recurrence_OrderToStore" />
+        <AssociationConnector Association="CallCenterModel.FK_StoreStatus_OrderToStore" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

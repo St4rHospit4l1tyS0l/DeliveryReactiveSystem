@@ -92,11 +92,13 @@ namespace Drs.ViewModel.Order
                 IsSending = Visibility.Visible;
                 SendOrderTitleBtn = "Reenviar pedido a la tienda";
 
-                var orderMode = ExtractOrderMode();
+                var posOrderStatus = ExtractPosOrderStatus();
+                var posOrderMode = ExtractPosOrderMode();
 
                 var orderDetails = new OrderDetails
                 {
-                    OrderMode = orderMode,
+                    PosOrderMode = posOrderMode, 
+                    PosOrderStatus = posOrderStatus,
                     ExtraNotes = ExtraNotes,
                     PromiseTime = _promiseTime,
                     Payment = Payment
@@ -107,6 +109,11 @@ namespace Drs.ViewModel.Order
             });
 
             MessageBus.Current.Listen<PropagateOrderModel>(SharedMessageConstants.PROPAGATE_LASTORDER_POSCHECK).Subscribe(OnPropagate);
+        }
+
+        private string ExtractPosOrderMode()
+        {
+            return HasPickUpInStore ? SettingsData.Constants.StoreConst.SENDING_MODE_WALK_IN : SettingsData.Constants.StoreConst.SENDING_MODE_DELIVERY;
         }
 
 
@@ -158,7 +165,7 @@ namespace Drs.ViewModel.Order
             return response;
         }
 
-        private int ExtractOrderMode()
+        private int ExtractPosOrderStatus()
         {
             if (ImmediateDelivery)
                 return SettingsData.Constants.StoreConst.MODE_DELIVERY_IMMEDIATE;
@@ -332,7 +339,8 @@ namespace Drs.ViewModel.Order
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
                 LstStores.ClearAndAddRange(lstCatalogs);
-                PickUpStore = LstStores.FirstOrDefault(e => e.Id == OrderService.OrderModel.StoreModel.IdKey);
+                if (OrderService.OrderModel.StoreModel != null && OrderService.OrderModel.StoreModel.IdKey.HasValue)
+                    PickUpStore = LstStores.FirstOrDefault(e => e.Id == OrderService.OrderModel.StoreModel.IdKey.Value);
             });
         }
 

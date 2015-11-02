@@ -48,7 +48,8 @@ namespace Drs.Repository.Store
                 PosOrderId = model.PosOrder.Id ?? SettingsData.Constants.Entities.NULL_ID_INT,
                 StartDatetime = now,
                 UserInsId = model.UserId,
-                PaymentId = model.OrderDetails.Payment.Id
+                PaymentId = model.OrderDetails.Payment.Id,
+                PosOrderStatus = model.OrderDetails.PosOrderStatus
             };
 
             DbEntities.OrderToStore.Add(orderToStore);

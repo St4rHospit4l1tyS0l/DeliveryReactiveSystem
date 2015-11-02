@@ -162,8 +162,7 @@ namespace Drs.ViewModel.Order
         public void ProcessPhone(ListItemModel model)
         {
             RxApp.MainThreadScheduler.Schedule(_ => LstAddresses.Clear());
-            _client.ExecutionProxy
-                .ExecuteRequest<String, String, ResponseMessageData<AddressInfoModel>, ResponseMessageData<AddressInfoModel>>
+            _client.ExecutionProxy.ExecuteRequest<String, String, ResponseMessageData<AddressInfoModel>, ResponseMessageData<AddressInfoModel>>
                 (model.Value, TransferDto.SameType, SharedConstants.Server.ADDRESS_HUB,
                     SharedConstants.Server.SEARCH_ADDRESS_BY_PHONE_ADDRESS_HUB_METHOD, TransferDto.SameType)
                 .Subscribe(OnAddressListReady, OnAddressListError);

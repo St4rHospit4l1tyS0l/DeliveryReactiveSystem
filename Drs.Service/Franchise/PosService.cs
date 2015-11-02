@@ -98,7 +98,7 @@ namespace Drs.Service.Franchise
 
             }).ContinueWith(_ =>
             {
-                if (model.PropagateOrder == null)
+                if (model.PropagateOrder == null || model.PropagateOrder.HasEdit == false)
                     return;
 
                 bool isExecuteOk;
@@ -249,11 +249,39 @@ namespace Drs.Service.Franchise
 
         private bool IsUpdatedUpToDay(string dataFolder)
         {
-            var alohaIniFile = Path.Combine(dataFolder, SettingsData.Constants.SystemConst.ALOHA_INI);
-            var today = DateTime.Today;
-            var fileInfo = new FileInfo(alohaIniFile);
+            try
+            {
+                var alohaIniFile = Path.Combine(dataFolder, SettingsData.Constants.SystemConst.ALOHA_INI);
 
-            return fileInfo.LastWriteTime > today;
+                if (File.Exists(alohaIniFile) == false)
+                    return false;
+
+                var today = DateTime.Today;
+                var fileInfo = new FileInfo(alohaIniFile);
+
+                if (fileInfo.LastWriteTime < today)
+                    return false;
+
+
+                var dob = FileHelperExt.ReadFirstValue(alohaIniFile, "DOB=");
+
+                if (dob == null)
+                    return false;
+
+                var splitDob = dob.Split(' ');
+
+                if (splitDob.Length != 3)
+                    return false;
+
+                var alohaDate = new DateTime(int.Parse(splitDob[2]), int.Parse(splitDob[0]), int.Parse(splitDob[1]));
+
+                return alohaDate >= today;
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+                return false;
+            }
         }
 
         //public bool ValidatePrices(PosCheck posCheck)

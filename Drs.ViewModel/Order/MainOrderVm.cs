@@ -81,7 +81,7 @@ namespace Drs.ViewModel.Order
             LstChildren.Add(_addressList);
             LstChildren.Add(_orderSummary);
 
-            SelectedTab = SharedConstants.Client.ORDER_TAB_PHONE;
+            RxApp.MainThreadScheduler.Schedule(_ => SelectedTab = SharedConstants.Client.ORDER_TAB_PHONE);
 
             InitializeServices();
         }
@@ -140,7 +140,7 @@ namespace Drs.ViewModel.Order
 
         private void GoNextStep(int iNextItem)
         {
-            SelectedTab = iNextItem;
+            RxApp.MainThreadScheduler.Schedule(_ => SelectedTab = iNextItem);
         }
 
         protected override void OnShellContainerVmChange(IShellContainerVm value)
