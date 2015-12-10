@@ -9,6 +9,7 @@ using Drs.Repository.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
 namespace CentralManagement.Controllers
@@ -275,6 +276,7 @@ namespace CentralManagement.Controllers
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
+
 
         private IAuthenticationManager AuthenticationManager
         {
