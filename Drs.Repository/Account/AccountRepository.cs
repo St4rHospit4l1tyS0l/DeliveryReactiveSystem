@@ -229,5 +229,12 @@ namespace Drs.Repository.Account
                     Name = e.UserName
                 }).ToList();
         }
+
+        public string GetRoleDescByUsername(string userName)
+        {
+            return DbEntities.AspNetUsers.Where(e => e.UserName == userName)
+                .Select(e => e.AspNetRoles.Select(i => i.Name).FirstOrDefault()).FirstOrDefault();
+        }
+
     }
 }
