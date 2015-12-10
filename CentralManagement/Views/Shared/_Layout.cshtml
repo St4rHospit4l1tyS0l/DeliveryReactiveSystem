@@ -92,6 +92,17 @@
                             </ul>
                         </li>
                     }
+                    
+                    
+                    @if (Roles.IsUserInRole(RoleConstants.MANAGER))
+                    {
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart"></i> <span class="nav-label">Reportes</span> </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="@Url.Action("Index", "Sale", new { area = "Report" })"><i class="fa fa-line-chart"></i>Ventas Diarias</a></li>
+                            </ul>
+                        </li>
+                    }
 
                 </ul>
             </div>
