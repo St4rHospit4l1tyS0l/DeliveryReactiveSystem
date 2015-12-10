@@ -1,4 +1,5 @@
 ﻿@using CentralManagement.Controllers
+@using CentralManagement.Helper
 @using Drs.Model.Constants
 <!DOCTYPE html>
 <html>
@@ -52,7 +53,7 @@
                             CM
                         </div>
                     </li>
-                    @if (Roles.IsUserInRole(RoleConstants.MANAGER) || Roles.IsUserInRole(RoleConstants.INSTALLER))
+                    @if (new List<string>() { RoleConstants.MANAGER, RoleConstants.INSTALLER }.Any(e => e == RoleHelper.RoleForUser(User.Identity.Name)))
                     {
                         <li>
                             <a href="@Url.Action("Index", "User",new {area = "Management"})"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span> </a>
@@ -83,7 +84,7 @@
                         </li>
                     }
 
-                    @if (Roles.IsUserInRole(RoleConstants.STORE_MANAGER))
+                    @if (RoleHelper.RoleForUser(User.Identity.Name) == RoleConstants.STORE_MANAGER)
                     {
                         <li>
                             <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Tiendas</span> </a>
