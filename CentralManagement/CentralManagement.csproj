@@ -190,6 +190,8 @@
     <Compile Include="Areas\Franchise\Controllers\SettingController.cs" />
     <Compile Include="Areas\Franchise\Controllers\SyncController.cs" />
     <Compile Include="Areas\Franchise\FranchiseAreaRegistration.cs" />
+    <Compile Include="Areas\Report\Controllers\SaleController.cs" />
+    <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
     <Compile Include="Areas\Store\Controllers\OfflineController.cs" />
     <Compile Include="Areas\Management\Controllers\LicenseController.cs" />
     <Compile Include="Areas\Management\Controllers\UserController.cs" />
@@ -568,6 +570,11 @@
     <Content Include="Areas\Franchise\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Franchise\Views\Setting\Upsert.cshtml" />
     <Content Include="Areas\Franchise\Views\Sync\Index.cshtml" />
+    <Content Include="Areas\Report\Views\web.config" />
+    <Content Include="Areas\Report\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Report\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Report\Views\Sale\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\CentralManagement.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\fileupload.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
@@ -1003,7 +1010,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1046,6 +1055,7 @@
     <Folder Include="Areas\Franchise\Views\Shared\" />
     <Folder Include="Areas\Management\Models\" />
     <Folder Include="Areas\Management\Views\Shared\" />
+    <Folder Include="Areas\Report\Models\" />
     <Folder Include="Areas\Store\Models\" />
     <Folder Include="Areas\Store\Views\Shared\" />
     <Folder Include="Scripts\app\drct\" />
