@@ -95,7 +95,7 @@
                     }
                     
                     
-                    @if (Roles.IsUserInRole(RoleConstants.MANAGER))
+                    @if (RoleHelper.RoleForUser(User.Identity.Name) == RoleConstants.MANAGER)
                     {
                         <li>
                             <a href="#"><i class="fa fa-bar-chart"></i> <span class="nav-label">Reportes</span> </a>
