@@ -1,7 +1,40 @@
 ﻿
 @{
-    ViewBag.Title = "Ventas";
+    ViewBag.Title = "Reporte Ventas";
 }
 
-<h2>Index</h2>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Reporte Ventas</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home", new {area=""})">Inicio</a>
+            </li>
+        </ol>
+    </div>
+</div>
 
+
+<div class="row animated fadeInRight" ng-init="lstSales = @ViewBag.LstSales; ">
+    <div class="feed-element" ng-repeat="sale in lstSales">
+        <div class="col-xs-4">
+            Fecha: <strong>{{sale.Date}}</strong> &nbsp;&nbsp;
+        </div>
+        <div class="col-xs-4">
+            <span ng-class="'label label-primary'">SubTotal: {{sale.SubTotal}}</span>
+        </div>
+        <div class="col-xs-4">
+            <span ng-class="'label label-primary'">SubTotal: {{sale.SubTotal}}</span>
+        </div>
+        <div class="col-xs-4">
+            <span ng-class="'label label-primary'">Tax: {{sale.Tax}}</span>
+        </div>
+        <div class="col-xs-4">
+            <span ng-class="'label label-primary'">Total: {{sale.Total}}</span>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/app/shared/hiddenDrct.js"></script>
+}

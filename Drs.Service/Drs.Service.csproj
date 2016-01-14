@@ -143,6 +143,8 @@
     <Compile Include="ReactiveDelivery\HubListeners.cs" />
     <Compile Include="ReactiveDelivery\IReactiveDeliveryClient.cs" />
     <Compile Include="ReactiveDelivery\ReactiveDeliveryClient.cs" />
+    <Compile Include="Report\IReportService.cs" />
+    <Compile Include="Report\ReportService.cs" />
     <Compile Include="Service References\CustomerOrder\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

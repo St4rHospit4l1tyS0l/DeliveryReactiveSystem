@@ -334,6 +334,8 @@
     <Compile Include="Order\FranchiseRepository.cs" />
     <Compile Include="Order\IFranchiseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ReportRepository.cs" />
+    <Compile Include="Report\IReportRepository.cs" />
     <Compile Include="Resources\ResShared.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
