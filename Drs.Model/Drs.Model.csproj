@@ -151,6 +151,7 @@
     <Compile Include="Order\PropagateOrderModel.cs" />
     <Compile Include="Order\QtItemModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Report\AgentSalesModel.cs" />
     <Compile Include="Report\DailySaleModel.cs" />
     <Compile Include="Settings\ControlTitleModel.cs" />
     <Compile Include="Settings\RecurrenceLevel.cs" />

@@ -12,6 +12,8 @@ namespace Drs.Repository.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class CallCenterEntities : DbContext
     {
@@ -74,5 +76,57 @@ namespace Drs.Repository.Entities
         public virtual DbSet<Resource> Resource { get; set; }
         public virtual DbSet<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual DbSet<OrderToStore> OrderToStore { get; set; }
+    
+        public virtual ObjectResult<User_Sales_group_by_date_Result> User_Sales_group_by_date(Nullable<System.DateTime> startdate, Nullable<System.DateTime> enddate)
+        {
+            var startdateParameter = startdate.HasValue ?
+                new ObjectParameter("startdate", startdate) :
+                new ObjectParameter("startdate", typeof(System.DateTime));
+    
+            var enddateParameter = enddate.HasValue ?
+                new ObjectParameter("enddate", enddate) :
+                new ObjectParameter("enddate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<User_Sales_group_by_date_Result>("User_Sales_group_by_date", startdateParameter, enddateParameter);
+        }
+    
+        public virtual ObjectResult<User_Sales_group_by_date1_Result> User_Sales_group_by_date1(Nullable<System.DateTime> startdate, Nullable<System.DateTime> enddate)
+        {
+            var startdateParameter = startdate.HasValue ?
+                new ObjectParameter("startdate", startdate) :
+                new ObjectParameter("startdate", typeof(System.DateTime));
+    
+            var enddateParameter = enddate.HasValue ?
+                new ObjectParameter("enddate", enddate) :
+                new ObjectParameter("enddate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<User_Sales_group_by_date1_Result>("User_Sales_group_by_date1", startdateParameter, enddateParameter);
+        }
+    
+        public virtual ObjectResult<Daily_Sales_group_by_date_Result> Daily_Sales_group_by_date(Nullable<System.DateTime> startdate, Nullable<System.DateTime> enddate)
+        {
+            var startdateParameter = startdate.HasValue ?
+                new ObjectParameter("startdate", startdate) :
+                new ObjectParameter("startdate", typeof(System.DateTime));
+    
+            var enddateParameter = enddate.HasValue ?
+                new ObjectParameter("enddate", enddate) :
+                new ObjectParameter("enddate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Daily_Sales_group_by_date_Result>("Daily_Sales_group_by_date", startdateParameter, enddateParameter);
+        }
+    
+        public virtual ObjectResult<User_Sales_group_by_date2_Result> User_Sales_group_by_date2(Nullable<System.DateTime> startdate, Nullable<System.DateTime> enddate)
+        {
+            var startdateParameter = startdate.HasValue ?
+                new ObjectParameter("startdate", startdate) :
+                new ObjectParameter("startdate", typeof(System.DateTime));
+    
+            var enddateParameter = enddate.HasValue ?
+                new ObjectParameter("enddate", enddate) :
+                new ObjectParameter("enddate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<User_Sales_group_by_date2_Result>("User_Sales_group_by_date2", startdateParameter, enddateParameter);
+        }
     }
 }

@@ -426,6 +426,8 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\ctrl\licenseCtrl.js" />
     <Content Include="Scripts\app\ctrl\franchiseCtrl.js" />
+    <Content Include="Scripts\app\ctrl\reportsCtrl.js" />
+    <Content Include="Scripts\app\ctrl\salesCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeOfflineCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeCtrl.js" />
     <Content Include="Scripts\app\ctrl\userCtrl.js" />

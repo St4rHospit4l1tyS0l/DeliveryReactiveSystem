@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Drs.Model.Report;
 using Drs.Repository.Report;
 
 namespace Drs.Service.Report  
@@ -16,11 +18,19 @@ namespace Drs.Service.Report
         {
             _repository = repository;
         }
-        public IEnumerable<Model.Report.DailySaleModel> GetDailySaleInfo()
+        public IEnumerable<DailySaleModel> GetDailySaleInfo(DateTime startDate, DateTime endDate)
         {
             using (_repository)
             {
-                return _repository.GetDailySaleInfo();
+                return _repository.GetDailySaleInfo(startDate, endDate);
+            }
+        }
+
+        public IEnumerable<AgentSalesModel> GetAgentSaleInfo(DateTime startDate, DateTime endDate)
+        {
+            using (_repository)
+            {
+                return _repository.GetAgentSaleInfo(startDate, endDate);
             }
         }
     }

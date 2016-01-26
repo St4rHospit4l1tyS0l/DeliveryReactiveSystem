@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace CentralManagement.Models
+﻿namespace CentralManagement.Models
 {
     public class DailySalesModel
     {

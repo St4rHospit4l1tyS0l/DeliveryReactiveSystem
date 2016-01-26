@@ -1,7 +1,30 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Reporte Ventas";
 }
+
+<script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+        $('#calendar').datepicker({
+            format: "dd/mm/yyyy"
+        });
+
+    });
+</script>
+
+
+<script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+        $('#calendar1').datepicker({
+            format: "dd/mm/yyyy"
+        });
+
+    });
+</script>
+
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -14,27 +37,78 @@
     </div>
 </div>
 
+<div ng-controller="reportController" ng-cloak>
+    <div class="row">
+        @*<div class="col-xs-3 col-xs-offset-1">
+                <h4 class="black"><i class="fa fa-calendar-o"></i> &nbsp;Fecha inicial</h4>
+                <div style="display:inline-block; min-height:290px;">
+                    <datepicker ng-model="startDateTime" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+                </div>
+            </div>*@
+        @*<div class="col-xs-3 col-xs-offset-1">
+                <h4 class="black"><i class="fa fa-calendar-o"></i> &nbsp;Fecha final</h4>
+                <div class="input-group date  col-xs-5">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" name="endDateTime" class="form-control" ng-model="endDateTime" >
+                </div>
+            </div>*@
+        {{startDate}}
+        <div class="container">
+            <div >
+                <input type="text" ng-model="startDateTime" placeholder="Fecha inicial" id="calendar">
+            </div>
+        </div>
+        
+        {{startDate}}
+        <div class="container">
+            <div >
+                <input type="text" ng-model="endDateTime" placeholder="Fecha final" id="calendar1">
+            </div>
+        </div>
+        
+    </div>
 
-<div class="row animated fadeInRight" ng-init="lstSales = @ViewBag.LstSales; ">
-    <div class="feed-element" ng-repeat="sale in lstSales">
-        <div class="col-xs-4">
-            Fecha: <strong>{{sale.Date}}</strong> &nbsp;&nbsp;
-        </div>
-        <div class="col-xs-4">
-            <span ng-class="'label label-primary'">SubTotal: {{sale.SubTotal}}</span>
-        </div>
-        <div class="col-xs-4">
-            <span ng-class="'label label-primary'">SubTotal: {{sale.SubTotal}}</span>
-        </div>
-        <div class="col-xs-4">
-            <span ng-class="'label label-primary'">Tax: {{sale.Tax}}</span>
-        </div>
-        <div class="col-xs-4">
-            <span ng-class="'label label-primary'">Total: {{sale.Total}}</span>
-        </div>
+    @*<div class="element-center" style="padding-left: 60px;">
+            <timepicker ng-model="startDateTime" hour-step="1" minute-step="1" show-meridian="true"></timepicker>
+        </div>*@
+
+
+
+    <div class="row">
+        @foreach (var sale in ViewBag.LstSales)
+        {
+            <div class="col-xs-3">
+                Fecha: <strong>@sale.SaleDate</strong> &nbsp;&nbsp;
+            </div>
+            <div class="col-xs-2">
+                <span>SubTotal: @sale.SubTotal</span>
+            </div>
+            <div class="col-xs-3">
+                <span>Tax: @sale.Tax </span>
+            </div>
+            <div class="col-xs-2">
+                <span>Total: @sale.Total</span>
+            </div>
+        }
     </div>
 </div>
 
+
+@section css{
+    <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+}
+
 @section scripts{
-    <script src="~/Scripts/app/shared/hiddenDrct.js"></script>
+    
+    <script src="~/Scripts/app/ctrl/reportsCtrl.js"></script>
+    @*<script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>*@
+    <script src="~/Scripts/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    
+
+
+
+}
 }
