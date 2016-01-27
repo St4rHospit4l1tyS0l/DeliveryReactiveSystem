@@ -134,7 +134,19 @@
     <Compile Include="Catalog\CatalogRepository.cs" />
     <Compile Include="Catalog\ICatalogRepository.cs" />
     <Compile Include="Client\ClientRepository.cs" />
+    <Compile Include="Entities\Daily_Sales_group_by_date_Result.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Resource.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\User_Sales_group_by_date1_Result.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\User_Sales_group_by_date2_Result.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\User_Sales_group_by_date_Result.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Order\OrderRepository.cs" />
@@ -334,6 +346,8 @@
     <Compile Include="Order\FranchiseRepository.cs" />
     <Compile Include="Order\IFranchiseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ReportRepository.cs" />
+    <Compile Include="Report\IReportRepository.cs" />
     <Compile Include="Resources\ResShared.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

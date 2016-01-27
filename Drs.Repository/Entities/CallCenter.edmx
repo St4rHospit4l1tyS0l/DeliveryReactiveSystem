@@ -1565,6 +1565,14 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Daily_Sales_group_by_date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startdate" Type="date" Mode="In" />
+          <Parameter Name="enddate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="User_Sales_group_by_date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startdate" Type="date" Mode="In" />
+          <Parameter Name="enddate" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="CallCenterModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AddressHierarchy" EntityType="Self.AddressHierarchy" Schema="dbo" store:Type="Tables" />
@@ -2311,6 +2319,22 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="OrderToStore" EntitySet="OrderToStore" />
             <End Role="StoreStatus" EntitySet="StoreStatus" />
           </AssociationSet>
+          <FunctionImport Name="User_Sales_group_by_date" ReturnType="Collection(CallCenterModel.User_Sales_group_by_date_Result)">
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="User_Sales_group_by_date1" ReturnType="Collection(CallCenterModel.User_Sales_group_by_date1_Result)">
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Daily_Sales_group_by_date" ReturnType="Collection(CallCenterModel.Daily_Sales_group_by_date_Result)">
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="User_Sales_group_by_date2" ReturnType="Collection(CallCenterModel.User_Sales_group_by_date2_Result)">
+            <Parameter Name="startdate" Mode="In" Type="DateTime" />
+            <Parameter Name="enddate" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -3902,6 +3926,33 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="User_Sales_group_by_date_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="DateTime" Name="Column1" Nullable="true" />
+          <Property Type="Decimal" Name="Subtotal" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="Taxes" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="User_Sales_group_by_date1_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="DateTime" Name="SaleDate" Nullable="true" />
+          <Property Type="Decimal" Name="Subtotal" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="Taxes" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="Daily_Sales_group_by_date_Result">
+          <Property Type="DateTime" Name="SaleDate" Nullable="true" />
+          <Property Type="Decimal" Name="Subtotal" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="Taxes" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="User_Sales_group_by_date2_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="DateTime" Name="SaleDate" Nullable="true" />
+          <Property Type="Decimal" Name="Subtotal" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="Taxes" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="4" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4545,6 +4596,27 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Daily_Sales_group_by_date" FunctionName="CallCenterModel.Store.Daily_Sales_group_by_date">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CallCenterModel.Daily_Sales_group_by_date_Result">
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="User_Sales_group_by_date2" FunctionName="CallCenterModel.Store.User_Sales_group_by_date">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CallCenterModel.User_Sales_group_by_date2_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
