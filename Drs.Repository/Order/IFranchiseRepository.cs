@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Franchise;
 using Drs.Model.Menu;
+using Drs.Model.Shared;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
 
@@ -21,5 +22,6 @@ namespace Drs.Repository.Order
         string GetUrlSyncWsByFranchiseId(int franchiseId);
         void DoObsoleteVersion(int id, string userId, ResponseMessageModel response);
         IEnumerable<SyncFranchiseModel> GetListSyncFiles(string eInfo);
+        List<OptionModel> LstFranchise();
     }
 }

@@ -2,6 +2,7 @@
 using Drs.Infrastructure.Crypto;
 using Drs.Model.Franchise;
 using Drs.Model.Menu;
+using Drs.Model.Shared;
 using Drs.Repository.Order;
 
 namespace Drs.Service.Franchise
@@ -28,8 +29,13 @@ namespace Drs.Service.Franchise
             using (_repository)
             {
                 var lstFranchiseFiles = _repository.GetListSyncFiles(eInfo);
-               return lstFranchiseFiles;
+                return lstFranchiseFiles;
             }
+        }
+
+        public IEnumerable<OptionModel> LstFranchise()
+        {
+            return _repository.LstFranchise();
         }
     }
 }

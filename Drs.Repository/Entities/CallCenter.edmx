@@ -297,6 +297,15 @@
           <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
           <Property Name="InfoCallCenterId" Type="int" />
         </EntityType>
+        <EntityType Name="InfoClientTerminalFranchise">
+          <Key>
+            <PropertyRef Name="InfoClientTerminalFranchiseId" />
+          </Key>
+          <Property Name="InfoClientTerminalFranchiseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InfoClientTerminalId" Type="int" Nullable="false" />
+          <Property Name="FranchiseId" Type="int" Nullable="false" />
+          <Property Name="PosIpAddress" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
         <EntityType Name="InfoClientTerminalVersion">
           <Key>
             <PropertyRef Name="InfoClientTerminalVersionId" />
@@ -1037,6 +1046,30 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_InfoClientTerminalFranchise_Franchise">
+          <End Role="Franchise" Type="Self.Franchise" Multiplicity="1" />
+          <End Role="InfoClientTerminalFranchise" Type="Self.InfoClientTerminalFranchise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Franchise">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="InfoClientTerminalFranchise">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoClientTerminalFranchise_InfoClientTerminal">
+          <End Role="InfoClientTerminal" Type="Self.InfoClientTerminal" Multiplicity="1" />
+          <End Role="InfoClientTerminalFranchise" Type="Self.InfoClientTerminalFranchise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfoClientTerminal">
+              <PropertyRef Name="InfoClientTerminalId" />
+            </Principal>
+            <Dependent Role="InfoClientTerminalFranchise">
+              <PropertyRef Name="InfoClientTerminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_InfoClientTerminalVersion_Franchise">
           <End Role="Franchise" Type="Self.Franchise" Multiplicity="1" />
           <End Role="InfoClientTerminalVersion" Type="Self.InfoClientTerminalVersion" Multiplicity="*" />
@@ -1565,14 +1598,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="Daily_Sales_group_by_date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="startdate" Type="date" Mode="In" />
-          <Parameter Name="enddate" Type="date" Mode="In" />
-        </Function>
-        <Function Name="User_Sales_group_by_date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="startdate" Type="date" Mode="In" />
-          <Parameter Name="enddate" Type="date" Mode="In" />
-        </Function>
         <EntityContainer Name="CallCenterModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AddressHierarchy" EntityType="Self.AddressHierarchy" Schema="dbo" store:Type="Tables" />
@@ -1601,6 +1626,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="FranchiseStoreOffLine" EntityType="Self.FranchiseStoreOffLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InfoCallCenter" EntityType="Self.InfoCallCenter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InfoClientTerminal" EntityType="Self.InfoClientTerminal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoClientTerminalFranchise" EntityType="Self.InfoClientTerminalFranchise" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InfoClientTerminalVersion" EntityType="Self.InfoClientTerminalVersion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InfoServer" EntityType="Self.InfoServer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
@@ -1787,6 +1813,14 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <AssociationSet Name="FK_InfoClientTerminal_InfoCallCenter" Association="Self.FK_InfoClientTerminal_InfoCallCenter">
             <End Role="InfoCallCenter" EntitySet="InfoCallCenter" />
             <End Role="InfoClientTerminal" EntitySet="InfoClientTerminal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoClientTerminalFranchise_Franchise" Association="Self.FK_InfoClientTerminalFranchise_Franchise">
+            <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="InfoClientTerminalFranchise" EntitySet="InfoClientTerminalFranchise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoClientTerminalFranchise_InfoClientTerminal" Association="Self.FK_InfoClientTerminalFranchise_InfoClientTerminal">
+            <End Role="InfoClientTerminal" EntitySet="InfoClientTerminal" />
+            <End Role="InfoClientTerminalFranchise" EntitySet="InfoClientTerminalFranchise" />
           </AssociationSet>
           <AssociationSet Name="FK_InfoClientTerminalVersion_Franchise" Association="Self.FK_InfoClientTerminalVersion_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
@@ -2335,6 +2369,15 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <Parameter Name="startdate" Mode="In" Type="DateTime" />
             <Parameter Name="enddate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="InfoClientTerminalFranchise" EntityType="CallCenterModel.InfoClientTerminalFranchise" />
+          <AssociationSet Name="FK_InfoClientTerminalFranchise_Franchise" Association="CallCenterModel.FK_InfoClientTerminalFranchise_Franchise">
+            <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="InfoClientTerminalFranchise" EntitySet="InfoClientTerminalFranchise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoClientTerminalFranchise_InfoClientTerminal" Association="CallCenterModel.FK_InfoClientTerminalFranchise_InfoClientTerminal">
+            <End Role="InfoClientTerminal" EntitySet="InfoClientTerminal" />
+            <End Role="InfoClientTerminalFranchise" EntitySet="InfoClientTerminalFranchise" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -2575,6 +2618,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <NavigationProperty Name="InfoClientTerminalVersion" Relationship="CallCenterModel.FK_InfoClientTerminalVersion_Franchise" FromRole="Franchise" ToRole="InfoClientTerminalVersion" />
           <NavigationProperty Name="FranchiseButton" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="Franchise" ToRole="FranchiseButton" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="Franchise" ToRole="OrderToStore" />
+          <NavigationProperty Name="InfoClientTerminalFranchise" Relationship="CallCenterModel.FK_InfoClientTerminalFranchise_Franchise" FromRole="Franchise" ToRole="InfoClientTerminalFranchise" />
         </EntityType>
         <EntityType Name="FranchiseData">
           <Key>
@@ -3570,6 +3614,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="InfoCallCenterId" Type="Int32" />
           <NavigationProperty Name="InfoCallCenter" Relationship="CallCenterModel.FK_InfoClientTerminal_InfoCallCenter" FromRole="InfoClientTerminal" ToRole="InfoCallCenter" />
           <NavigationProperty Name="InfoClientTerminalVersion" Relationship="CallCenterModel.FK_InfoClientTerminalVersion_InfoClientTerminal" FromRole="InfoClientTerminal" ToRole="InfoClientTerminalVersion" />
+          <NavigationProperty Name="InfoClientTerminalFranchise" Relationship="CallCenterModel.FK_InfoClientTerminalFranchise_InfoClientTerminal" FromRole="InfoClientTerminal" ToRole="InfoClientTerminalFranchise" />
         </EntityType>
         <EntityType Name="InfoClientTerminalVersion">
           <Key>
@@ -3953,6 +3998,41 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Type="Decimal" Name="Taxes" Nullable="true" Precision="38" Scale="4" />
           <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="4" />
         </ComplexType>
+        <EntityType Name="InfoClientTerminalFranchise">
+          <Key>
+            <PropertyRef Name="InfoClientTerminalFranchiseId" />
+          </Key>
+          <Property Name="InfoClientTerminalFranchiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InfoClientTerminalId" Type="Int32" Nullable="false" />
+          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
+          <Property Name="PosIpAddress" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_InfoClientTerminalFranchise_Franchise" FromRole="InfoClientTerminalFranchise" ToRole="Franchise" />
+          <NavigationProperty Name="InfoClientTerminal" Relationship="CallCenterModel.FK_InfoClientTerminalFranchise_InfoClientTerminal" FromRole="InfoClientTerminalFranchise" ToRole="InfoClientTerminal" />
+        </EntityType>
+        <Association Name="FK_InfoClientTerminalFranchise_Franchise">
+          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
+          <End Type="CallCenterModel.InfoClientTerminalFranchise" Role="InfoClientTerminalFranchise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Franchise">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="InfoClientTerminalFranchise">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoClientTerminalFranchise_InfoClientTerminal">
+          <End Type="CallCenterModel.InfoClientTerminal" Role="InfoClientTerminal" Multiplicity="1" />
+          <End Type="CallCenterModel.InfoClientTerminalFranchise" Role="InfoClientTerminalFranchise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfoClientTerminal">
+              <PropertyRef Name="InfoClientTerminalId" />
+            </Principal>
+            <Dependent Role="InfoClientTerminalFranchise">
+              <PropertyRef Name="InfoClientTerminalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4596,27 +4676,16 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Daily_Sales_group_by_date" FunctionName="CallCenterModel.Store.Daily_Sales_group_by_date">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CallCenterModel.Daily_Sales_group_by_date_Result">
-                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="User_Sales_group_by_date2" FunctionName="CallCenterModel.Store.User_Sales_group_by_date">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CallCenterModel.User_Sales_group_by_date2_Result">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <EntitySetMapping Name="InfoClientTerminalFranchise">
+            <EntityTypeMapping TypeName="CallCenterModel.InfoClientTerminalFranchise">
+              <MappingFragment StoreEntitySet="InfoClientTerminalFranchise">
+                <ScalarProperty Name="PosIpAddress" ColumnName="PosIpAddress" />
+                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+                <ScalarProperty Name="InfoClientTerminalId" ColumnName="InfoClientTerminalId" />
+                <ScalarProperty Name="InfoClientTerminalFranchiseId" ColumnName="InfoClientTerminalFranchiseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

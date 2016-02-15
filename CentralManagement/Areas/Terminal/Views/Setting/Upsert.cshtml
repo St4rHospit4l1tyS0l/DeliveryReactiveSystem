@@ -1,0 +1,144 @@
+﻿@{
+    Layout = null;
+}
+
+<script>
+    $(document).ready(function () {
+        window.showModalFormDlg("#dlgUpModalId", "#FormCatId");
+    });
+</script>
+
+<div class="modal inmodal" id="dlgUpModalId" tabindex="-1" ng-controller="upsertController" role="dialog" aria-hidden="true" ng-cloak>
+    <div class="modal-dialog" style="width:920px" ng-controller="terminalController"
+         ng-init='m = @(ViewBag.Model ?? "{}"); lstFranchises = @(ViewBag.LstFranchises ?? "[]"); lstTerminalFranchise = @(ViewBag.LstTerminalFranchise ?? "[]"); init();'>
+        <div class="modal-content animated flipInY">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <i class="fa fa-cogs modal-icon"></i>
+                <h4 class="modal-title">Terminal</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ibox">
+                            <div class="ibox-title navy-bg">
+                                <h5>Configuración de la terminal {{m.DeviceName}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        @*<form id="FormCatId" name="FormCatId" ng-submit="submit('#FormCatId')" class="form-horizontal" role="form">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" id="Id" name="Id" ng-model="m.Id" ng-init="m.Id = '@Model.Id';" ng-update-hidden />
+                                    <input type="hidden" id="RoleId" name="RoleId" ng-model="m.RoleId" ng-init="m.RoleId = '@Model.RoleId';" ng-update-hidden />
+                            </form>*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="row">
+                            <label class="control-label font-noraml">&nbsp;&nbsp;&nbsp;Elija la franquicia:</label>
+                        </div>
+                        <div class="row">
+                            <select class="form-control" ng-model="m.selFranchise" ng-options="e.Name for e in lstFranchises"></select>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-xs-offset-1">
+                        <div class="row">
+                            <label class="control-label font-noraml">&nbsp;&nbsp;&nbsp;IP del POS para la franquicia:</label>
+                        </div>
+                        <div class="row">
+                            <input type="text" name="PosIpAddress" ng-model="m.PosIpAddress"
+                                   placeholder="Ingrese la IP del POS"
+                                   required="required" ng-maxlength="200" class="form-control">
+                            <span class="error" ng-show="FormCatId.PosIpAddress.$error.required">*Campo requerido</span>
+                            <span class="error" ng-show="FormCatId.PosIpAddress.$error.maxlength">*Longitud máxima de 15 caracteres</span>
+                            <span class="error" ng-show="FormCatId.PosIpAddress.$error.minlength">*Longitud mínima de 7 caracteres</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-1  col-xs-offset-1">
+                        <div class="row">&nbsp;</div>
+                        <div class="row">
+                            <button class="btn btn-info"><i class="fa fa-plus-circle"></i> Agregar</button>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1 element-center">
+                        <hr />
+                        <div class="label label-primary" style="font-size: 14px;">
+                            <i class="fa fa-laptop"></i>&nbsp;&nbsp;Franquicias del POS virtual configuradas para el equipo {{m.DeviceName}}
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                        <td>
+                                            Franquicia
+                                        </td>
+                                        <td>
+                                            Código de la franquicia
+                                        </td>
+                                        <td>
+                                            IP
+                                        </td>
+                                        <td>
+                                            Acción
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="i in lstTerminalFranchise">
+                                        <td>
+                                            <span class="label label-warning"><i class="fa fa-terminal"></i></span>
+                                        </td>
+                                        <td>
+                                            {{i.FranchiseName}}
+                                        </td>
+                                        <td>
+                                            {{i.FranchiseCode}}
+                                        </td>
+                                        <td>
+                                            {{i.VirtualIp}}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-xs btn-info"><i class="fa fa-pencil"></i> Editar</button>
+                                            <button class="btn btn-xs btn-danger"><i class="fa fa-times-circle"></i>Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div ng-show="MsgError" class="alert alert-danger element-center">
+                            {{MsgError}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-white" ng-click="cancel()">
+                    Cancelar
+                </button>
+                <button class="btn btn-primary " ng-disabled="WaitFor==true"
+                        ng-click="submit('#FormCatId', '@Url.Action("DoUpsert", "Settings", new{area = "Terminal"})')">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

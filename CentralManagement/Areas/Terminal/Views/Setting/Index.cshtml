@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "Configuración de las terminales";
+    ViewBag.Menu = 3002;
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Administración de Terminales</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li>
+                Terminales
+            </li>
+            <li>
+                Configuración
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="modalDlgController">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Terminales del Call Center</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="jqGrid_wrapper">
+                        <table id="GridId"></table>
+                        <div id="GridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blocker" ng-show="working">
+        <div>
+            Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />
+        </div>
+    </div>
+</div>
+
+@section css{
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
+    <link href="~/Content/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Content/plugins/chosen/chosen.css" rel="stylesheet" />
+    <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet">
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/js/plugins/jqGrid/i18n/grid.locale-es.js"></script>
+    <script src="~/Scripts/js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/app/shared/upsertCtrl.js"></script>
+    <script src="~/Scripts/app/shared/modalDlgCtrl.js"></script>
+    <script src="~/Scripts/app/shared/hiddenDrct.js"></script>
+    <script src="~/Scripts/app/ctrl/terminalCtrl.js"></script>
+    <script src="~/Scripts/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="~/Scripts/js/plugins/iCheck/icheck.min.js"></script>
+
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+
+            window.upsert = function (id) {
+                window.showUpsert(id, "#angJsjqGridId", "@Url.Action("Upsert", "Setting", new {area = "Terminal"})", "#GridId");
+            };
+
+            window.obsolete = function (id) {
+                window.showObsolete(id, "#angJsjqGridId", "@Url.Action("DoObsolete", "Setting", new { area = "Terminal" })", "#GridId");
+            };
+
+            jQuery("#GridId").jqGrid({
+                url: '@Url.Action("List", "Setting", new { area = "Terminal" })',
+                datatype: "json",
+                mtype: 'POST',
+                colNames: ['ID', 'Terminal', 'Licencia inicial', 'Licencia final', 'Activo', 'Acci&oacute;n'],
+                colModel: [
+                    { name: 'TerminalId', index: 'TerminalId', hidden: true },
+                    { name: 'Name', index: 'Name', width: 180, align: "center", sortable: false, search: false },
+                    { name: 'StartDateTx', index: 'StartDateTx', width: 120, align: "center", sortable: false, search: false },
+                    { name: 'EndDateTx', index: 'EndDateTx', width: 120, align: "center", sortable: false, search: false },
+                    { name: 'Code', index: 'Code', width: 200, align: "center", sorttype: 'string', sortable: false, search: false },
+                    { name: 'Action', width: 100, align: "center", sortable: false, search: false, formatter: window.actionFormatter }
+                ],
+                rowNum: 1000,
+                rowList: [1000],
+                pager: '#GridPager',
+                sortname: 'TerminalId',
+                height: 450,
+                viewrecords: true,
+                autowidth: true,
+                shrinkToFit: true,
+                sortorder: "asc",
+                caption: "",
+                add: true,
+                edit: false,
+                altRows: true,
+                hidegrid: false,
+                gridComplete: function () {
+                    var ids = $(this).jqGrid('getDataIDs');
+                    for (var i = 0; i < ids.length; i++) {
+                        var cl = ids[i];
+                        var be = "";
+                        be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Configurar terminal\" onclick=\"window.upsert('" + cl + "');\"><i class=\"fa fa-pencil icon-grid-st blue-light\"></i></a>&nbsp;&nbsp;";
+                        $(this).jqGrid('setRowData', ids[i], { Action: be });
+                    }
+                }
+            });
+
+            jQuery("#GridId").jqGrid('navGrid', '#GridPager', {
+                edit: false,
+                add: false,
+                refresh: true,
+                del: false,
+                search: false
+            });
+
+            jQuery("#GridId").jqGrid('filterToolbar', {
+                stringResult: true,
+                searchOperators: true,
+                searchOnEnter: true,
+                multipleSearch: true,
+                ignoreCase: true
+            });
+
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#GridId').setGridWidth(width);
+            });
+        });
+    </script>
+}
+
+

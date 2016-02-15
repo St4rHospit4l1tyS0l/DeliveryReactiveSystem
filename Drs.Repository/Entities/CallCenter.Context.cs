@@ -76,6 +76,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<Resource> Resource { get; set; }
         public virtual DbSet<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual DbSet<OrderToStore> OrderToStore { get; set; }
+        public virtual DbSet<InfoClientTerminalFranchise> InfoClientTerminalFranchise { get; set; }
     
         public virtual ObjectResult<User_Sales_group_by_date_Result> User_Sales_group_by_date(Nullable<System.DateTime> startdate, Nullable<System.DateTime> enddate)
         {

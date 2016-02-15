@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,19 +11,17 @@ using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Infrastructure.Logging;
 using Drs.Infrastructure.Model;
 using Drs.Model.Constants;
-using Drs.Model.Franchise;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
-using Drs.Model.UiView.Shared;
 using Drs.Resources.Network;
 using Drs.Service.Configuration;
 using Drs.Service.ReactiveDelivery;
-using Drs.Service.Sync;
 using Drs.Service.TransferDto;
 using Drs.Ui.Ui;
 using Drs.Ui.Ui.Splash;
 using Drs.ViewModel.Catalog;
 using Drs.ViewModel.Main;
+using Drs.ViewModel.Pos;
 using Drs.ViewModel.Setting;
 using Drs.ViewModel.Shared;
 using Drs.ViewModel.SignalR;
@@ -133,7 +129,7 @@ namespace Drs.Ui
 
         private void OnInfoAccountError(string msgError, Action showWnd)
         {
-            MessageBus.Current.SendMessage(msgError, SharedMessageConstants.ACCOUNT_ERROR_CHECK);
+            MessageBus.Current.SendMessage(msgError, SharedMessageConstants.INITIALIZE_ERROR_CHECK);
             showWnd();
         }
 
@@ -163,57 +159,10 @@ namespace Drs.Ui
                 return;
             }
 
-            GetUnsyncFiles(reactiveDeliveryClient, showWnd, vm, response);
+            SyncPosFiles.GetUnsyncFiles(reactiveDeliveryClient, showWnd, vm, response);
 
         }
 
-        private void GetUnsyncFiles(IReactiveDeliveryClient reactiveDeliveryClient, Action showWnd, IShellContainerVm vm, ConnectionInfoResponse response)
-        {
-            var showWndSec = showWnd;
-            reactiveDeliveryClient.ExecutionProxy.ExecuteRequest<ResponseMessageData<SyncFranchiseModel>, ResponseMessageData<SyncFranchiseModel>>
-                (SharedConstants.Server.FRANCHISE_HUB, SharedConstants.Server.LIST_SYNC_FILES_FRANCHISE_HUB_METHOD, TransferDto.SameType)
-                .ObserveOn(reactiveDeliveryClient.ConcurrencyService.Dispatcher)
-                .SubscribeOn(reactiveDeliveryClient.ConcurrencyService.TaskPool)
-                .Subscribe(e => OnGetUnsynFilesOk(e, showWnd, vm, response), i => OnInfoAccountError(i, showWndSec));
-        }
-
-        private void OnGetUnsynFilesOk(IStale<ResponseMessageData<SyncFranchiseModel>> obj, Action showWnd, IShellContainerVm vm, 
-            ConnectionInfoResponse responseAccount)
-        {
-            if (obj.IsStale)
-            {
-                OnInfoAccountError(ResNetwork.ERROR_NETWORK_DOWN, showWnd);
-                return;
-            }
-
-            if (obj.Data.IsSuccess == false)
-            {
-                OnInfoAccountError(obj.Data.Message, showWnd);
-                return;
-            }
-
-            var respMsg = SyncFileService.StartSyncFiles(obj.Data.LstData.ToList());
-
-            if (respMsg.IsSuccess == false)
-            {
-                OnInfoAccountError(respMsg.Message, showWnd);
-                return;
-            }
-
-            RxApp.MainThreadScheduler.Schedule(_ =>
-            {
-                try
-                {
-                    vm.ChangeCurrentView((StatusScreen)responseAccount.NxWn, false);
-                    MessageBus.Current.SendMessage(responseAccount.Msg, SharedMessageConstants.ACCOUNT_ERROR_CHECK);
-                    showWnd();
-                }
-                catch (Exception)
-                {
-                    OnInfoAccountError("La respuesta del servidor es incorrecta. Revise que tenga la versión correcta en el cliente o en el servidor", showWnd);
-                }
-            });
-        }
 
         private void InitializeSignalRPosConnection()
         {
