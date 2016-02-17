@@ -3,6 +3,7 @@ using System.Linq;
 using Drs.Infrastructure.Model;
 using Drs.Model.Account;
 using Drs.Model.Constants;
+using Drs.Model.Franchise;
 using Drs.Model.Menu;
 using Drs.Model.Shared;
 using Drs.Repository.Entities;
@@ -120,6 +121,16 @@ namespace Drs.Repository.Account
             }).ToList();
         }
 
+        public ConnectionFullModel GetClient(int id)
+        {
+            return DbEntities.InfoClientTerminal.Where(e => e.InfoClientTerminalId == id).Select(e => new ConnectionFullModel
+            {
+                DeviceId = e.InfoClientTerminalId,
+                Code = e.Code,
+                IsSelected = e.InfoCallCenterId.HasValue
+            }).FirstOrDefault();
+        }
+
         public IEnumerable<ConnectionFullModel> GetLstServers()
         {
             return DbEntities.InfoServer.Select(e => new ConnectionFullModel
@@ -212,6 +223,26 @@ namespace Drs.Repository.Account
 
             computerInfo.Code = sCode;
             DbEntities.SaveChanges();
+        }
+
+        public List<TerminaFranchiseModel> GetLstTerminalFranchise(int id)
+        {
+            return DbEntities.InfoClientTerminalFranchise.Where(e => e.InfoClientTerminalId == id)
+                .Select(e => new TerminaFranchiseModel
+                {
+                    Id = e.InfoClientTerminalFranchiseId,
+                    InfoClientTerminalId = id,
+                    FranchiseId = e.FranchiseId,
+                    FranchiseCode = e.Franchise.Code,
+                    FranchiseName = e.Franchise.Name,
+                    Ip = e.PosIpAddress
+                }).ToList();
+        }
+
+        public int UpsertTerminalFranchise(TerminaFranchiseModel model)
+        {
+            //if(DbEntities.InfoClientTerminalFranchise.Any(e => e.))
+            return 0;
         }
 
         public bool IsValidUser(string id)

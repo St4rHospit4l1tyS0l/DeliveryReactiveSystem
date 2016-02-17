@@ -129,6 +129,9 @@
         <AssociationConnector Association="CallCenterModel.FK_OrderToStoreLog_OrderToStore" />
         <AssociationConnector Association="CallCenterModel.FK_Recurrence_OrderToStore" />
         <AssociationConnector Association="CallCenterModel.FK_StoreStatus_OrderToStore" />
+        <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminalFranchise" Width="1.5" PointX="22.875" PointY="37.5" />
+        <AssociationConnector Association="CallCenterModel.FK_InfoClientTerminalFranchise_Franchise" />
+        <AssociationConnector Association="CallCenterModel.FK_InfoClientTerminalFranchise_InfoClientTerminal" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

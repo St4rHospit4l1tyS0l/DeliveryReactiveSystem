@@ -367,5 +367,15 @@ namespace Drs.Repository.Order
             DbEntities.InfoClientTerminalVersion.Add(model);
             DbEntities.SaveChanges();
         }
+
+        public List<OptionModel> LstFranchise()
+        {
+            return DbEntities.Franchise.Where(e => e.IsObsolete == false)
+                .Select(e => new OptionModel
+                {
+                    StKey = e.FranchiseId.ToString(),
+                    Name = e.Name
+                }).ToList();
+        }
     }
 }

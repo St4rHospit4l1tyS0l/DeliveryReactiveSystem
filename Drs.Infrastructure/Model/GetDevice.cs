@@ -2,7 +2,7 @@
 
 namespace Drs.Infrastructure.Model
 {
-    public class ConnectionInfoModel
+    public class GetDevice
     {
         public string Hk { get; set; }
         public string Hn { get; set; }

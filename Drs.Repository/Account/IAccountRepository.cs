@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Drs.Infrastructure.Model;
 using Drs.Model.Account;
+using Drs.Model.Franchise;
 using Drs.Model.Menu;
 using Drs.Repository.Entities;
 
@@ -19,6 +20,7 @@ namespace Drs.Repository.Account
         InfoServer GetInfoServer(string eInfo);
         void SaveChanges();
         IEnumerable<ConnectionFullModel> GetLstClients();
+        ConnectionFullModel GetClient(int id);
         IEnumerable<ConnectionFullModel> GetLstServers();
         bool ExistsServer(int id);
         int GetCallCenterId();
@@ -33,5 +35,7 @@ namespace Drs.Repository.Account
         InfoClientTerminal GetClientTerminalByHost(string hn);
         InfoServer GetServerByHost(string hn);
         void UpdateComputerInfo(string eInfo, string decCompInfo);
+        List<TerminaFranchiseModel> GetLstTerminalFranchise(int id);
+        int UpsertTerminalFranchise(TerminaFranchiseModel model);
     }
 }

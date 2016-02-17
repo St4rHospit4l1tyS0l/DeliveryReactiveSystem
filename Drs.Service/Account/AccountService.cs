@@ -10,6 +10,7 @@ using Drs.Infrastructure.Model;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Account;
 using Drs.Model.Constants;
+using Drs.Model.Franchise;
 using Drs.Model.Menu;
 using Drs.Model.Shared;
 using Drs.Repository.Account;
@@ -71,7 +72,7 @@ namespace Drs.Service.Account
                     return CreateComputerInfo(eInfo, sConnInfo);
                 }
 
-                ConnectionInfoModel decCompInfo;
+                GetDevice decCompInfo;
                 if (IsUpdatedComputerInfo(mConnInfo, computerInfo, out decCompInfo) == false)
                 {
                     var response = UpdateComputerInfo(eInfo, mConnInfo, decCompInfo);
@@ -83,7 +84,7 @@ namespace Drs.Service.Account
             }
         }
 
-        private string IsValidDeviceInfo(ConnectionInfoModel decCompInfo)
+        private string IsValidDeviceInfo(GetDevice decCompInfo)
         {
             var now = DateTime.Now;
 
@@ -102,7 +103,7 @@ namespace Drs.Service.Account
             return  BuildResponse(SharedConstants.Client.STATUS_SCREEN_LOGIN, AccountConstants.LstCodes[AccountConstants.CODE_VALID]);
         }
 
-        private string UpdateComputerInfo(string eInfo, string mConnInfo, ConnectionInfoModel decCompInfo)
+        private string UpdateComputerInfo(string eInfo, string mConnInfo, GetDevice decCompInfo)
         {
             decCompInfo.Code = AccountConstants.CODE_NOT_ACTIVE_BY_UPDATE;
             decCompInfo.Hk = mConnInfo;
@@ -110,17 +111,17 @@ namespace Drs.Service.Account
             return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[decCompInfo.Code]);
         }
 
-        private bool IsUpdatedComputerInfo(string mConnInfo, string computerInfo, out ConnectionInfoModel decCompInfo)
+        private bool IsUpdatedComputerInfo(string mConnInfo, string computerInfo, out GetDevice decCompInfo)
         {
             var connInfo = mConnInfo;
-            decCompInfo = new JavaScriptSerializer().Deserialize<ConnectionInfoModel>(Cypher.Decrypt(computerInfo));
+            decCompInfo = new JavaScriptSerializer().Deserialize<GetDevice>(Cypher.Decrypt(computerInfo));
 
             return connInfo == decCompInfo.Hk;
         }
 
         private string CreateComputerInfo(string eInfo, string sConnInfo)
         {
-            var model = new ConnectionInfoModel
+            var model = new GetDevice
             {
                 Hk = Cypher.Decrypt(sConnInfo),             //HostId
                 Hn = Cypher.Decrypt(Cypher.Decrypt(eInfo)),  //HostName
@@ -143,7 +144,7 @@ namespace Drs.Service.Account
             }));
         }
 
-        public ConnectionInfoModel ValidateMainAccount()
+        public GetDevice ValidateMainAccount()
         {
             var eInfo = Cypher.Encrypt(Environment.MachineName);
             var mConnInfo = ManagementExt.GetKey();
@@ -158,7 +159,7 @@ namespace Drs.Service.Account
                     return null;
                 }
 
-                ConnectionInfoModel decServInfo;
+                GetDevice decServInfo;
                 if (IsUpdatedInfoServer(mConnInfo, infoServer, out decServInfo) == false)
                 {
                     UpdateInfoServer(mConnInfo, decServInfo, infoServer);
@@ -179,7 +180,7 @@ namespace Drs.Service.Account
             return IsValidDeviceInfo(decSerInfo);
         }
 
-        private void UpdateInfoServer(string mConnInfo, ConnectionInfoModel decServInfo, InfoServer infoServer)
+        private void UpdateInfoServer(string mConnInfo, GetDevice decServInfo, InfoServer infoServer)
         {
             decServInfo.Hk = mConnInfo;
             infoServer.Code = Cypher.Encrypt(new JavaScriptSerializer().Serialize(decServInfo));
@@ -189,10 +190,10 @@ namespace Drs.Service.Account
             //    return;
         }
 
-        private bool IsUpdatedInfoServer(string mConnInfo, InfoServer infoServer, out ConnectionInfoModel decCompInfo)
+        private bool IsUpdatedInfoServer(string mConnInfo, InfoServer infoServer, out GetDevice decCompInfo)
         {
             var connInfo = mConnInfo;
-            decCompInfo = new JavaScriptSerializer().Deserialize<ConnectionInfoModel>(Cypher.Decrypt(infoServer.Code));
+            decCompInfo = new JavaScriptSerializer().Deserialize<GetDevice>(Cypher.Decrypt(infoServer.Code));
 
             if (connInfo == decCompInfo.Hk)
                 return true;
@@ -202,7 +203,7 @@ namespace Drs.Service.Account
 
         private void CreateInfoServer(string eInfo, string mConnInfo)
         {
-            var model = new ConnectionInfoModel
+            var model = new GetDevice
             {
                 Hk = mConnInfo,             //HostId
                 Hn = Cypher.Decrypt(eInfo),  //HostName
@@ -226,6 +227,31 @@ namespace Drs.Service.Account
                 GetDevices(_repository.GetLstClients(), jsSer, deviceInfo.LstClients);
             }
             return deviceInfo;
+        }
+
+        public DeviceInfoModel GetLstClients()
+        {
+            var deviceInfo = new DeviceInfoModel();
+            using (_repository)
+            {
+                var jsSer = new JavaScriptSerializer();
+                GetDevices(_repository.GetLstClients(), jsSer, deviceInfo.LstClients);
+            }
+            return deviceInfo;
+        }
+
+        public ConnectionFullModel GetTerminalInfo(int id)
+        {
+            using (_repository)
+            {
+                var jsSer = new JavaScriptSerializer();
+                var model = _repository.GetClient(id);
+                if (model == null)
+                    return null;
+
+                GetDevice(model, jsSer);
+                return model;
+            }
         }
 
         public bool DoSelectServer(int id, bool enable)
@@ -347,7 +373,7 @@ namespace Drs.Service.Account
         {
             try
             {
-                var connInfo = device.DeserializeAndDecrypt<ConnectionInfoModel>();
+                var connInfo = device.DeserializeAndDecrypt<GetDevice>();
                 var deviceModel = _repository.GetServerByHost(Cypher.Encrypt(Cypher.Encrypt(connInfo.Hn)));
 
                 if (deviceModel == null)
@@ -366,7 +392,7 @@ namespace Drs.Service.Account
         {
             try
             {
-                var connInfo = device.DeserializeAndDecrypt<ConnectionInfoModel>();
+                var connInfo = device.DeserializeAndDecrypt<GetDevice>();
                 var deviceModel = _repository.GetClientTerminalByHost(Cypher.Encrypt(Cypher.Encrypt(connInfo.Hn)));
                 
                 if(deviceModel == null)
@@ -400,6 +426,11 @@ namespace Drs.Service.Account
 
         }
 
+        public List<TerminaFranchiseModel> GetLstTerminalFranchise(int id)
+        {
+            return _repository.GetLstTerminalFranchise(id);
+        }
+
         private int VerifyHasCallCenter()
         {
             var callCenterId = _repository.GetCallCenterId();
@@ -415,17 +446,9 @@ namespace Drs.Service.Account
         {
             foreach (var client in lstDevices)
             {
-                ConnectionInfoModel model;
-
                 try
                 {
-                    model = jsSer.Deserialize<ConnectionInfoModel>(Cypher.Decrypt(client.Code));
-                    client.DeviceName = model.Hn;
-                    client.StartDateTx = model.St.Date == DateTime.MinValue.Date ? "ND" : model.St.ToString(SharedConstants.DATE_FORMAT);
-                    client.EndDateTx = model.Et.Date == DateTime.MinValue.Date ? "ND" : model.Et.ToString(SharedConstants.DATE_FORMAT);
-                    client.IsValid = model.Iv;
-                    client.CodeId = model.Code;
-                    client.Code = AccountConstants.LstBadges[model.Code];
+                    GetDevice(client, jsSer);
                 }
                 catch
                 {
@@ -433,6 +456,17 @@ namespace Drs.Service.Account
                 }
                 lstInfo.Add(client);
             }
+        }
+
+        private static void GetDevice(ConnectionFullModel client, JavaScriptSerializer jsSer)
+        {
+            var model = jsSer.Deserialize<GetDevice>(Cypher.Decrypt(client.Code));
+            client.DeviceName = model.Hn;
+            client.StartDateTx = model.St.Date == DateTime.MinValue.Date ? "ND" : model.St.ToString(SharedConstants.DATE_FORMAT);
+            client.EndDateTx = model.Et.Date == DateTime.MinValue.Date ? "ND" : model.Et.ToString(SharedConstants.DATE_FORMAT);
+            client.IsValid = model.Iv;
+            client.CodeId = model.Code;
+            client.Code = AccountConstants.LstBadges[model.Code];
         }
 
         public void AddActivationCode(string actCode)
@@ -453,6 +487,14 @@ namespace Drs.Service.Account
                 {
                     _repository.UpdateActivationCode(code);
                 }
+            }
+        }
+
+        public int UpsertTerminalFranchise(TerminaFranchiseModel model)
+        {
+            using (_repository)
+            {
+                return _repository.UpsertTerminalFranchise(model);
             }
         }
     }

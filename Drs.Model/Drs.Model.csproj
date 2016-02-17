@@ -135,6 +135,7 @@
     <Compile Include="Franchise\FranchiseUpModel.cs" />
     <Compile Include="Franchise\SyncFileModel.cs" />
     <Compile Include="Franchise\SyncFranchiseModel.cs" />
+    <Compile Include="Franchise\TerminaFranchiseModel.cs" />
     <Compile Include="Franchise\UnSyncListModel.cs" />
     <Compile Include="Order\ClientInfoGrid.cs" />
     <Compile Include="Order\FranchiseInfoModel.cs" />

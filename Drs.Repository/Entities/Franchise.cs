@@ -20,6 +20,7 @@ namespace Drs.Repository.Entities
             this.FranchiseDataVersion = new HashSet<FranchiseDataVersion>();
             this.InfoClientTerminalVersion = new HashSet<InfoClientTerminalVersion>();
             this.OrderToStore = new HashSet<OrderToStore>();
+            this.InfoClientTerminalFranchise = new HashSet<InfoClientTerminalFranchise>();
         }
     
         public int FranchiseId { get; set; }
@@ -40,5 +41,6 @@ namespace Drs.Repository.Entities
         public virtual ICollection<InfoClientTerminalVersion> InfoClientTerminalVersion { get; set; }
         public virtual FranchiseButton FranchiseButton { get; set; }
         public virtual ICollection<OrderToStore> OrderToStore { get; set; }
+        public virtual ICollection<InfoClientTerminalFranchise> InfoClientTerminalFranchise { get; set; }
     }
 }

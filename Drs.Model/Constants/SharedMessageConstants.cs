@@ -13,7 +13,7 @@
         public const string ORDER_ADDRESSINFO = "Order-AddressInfo";
         public const string ORDER_SEND_POSORDER = "Order-SendPosOrder";
 
-        public const string ACCOUNT_ERROR_CHECK = "Account-ErrorCheck";
+        public const string INITIALIZE_ERROR_CHECK = "Initialize-ErrorCheck";
 
         public const string PROPAGATE_LASTORDER_FRANCHISE = "Propagate-LastOrder-Franchise";
         public const string PROPAGATE_LASTORDER_CLIENT = "Propagate-LastOrder-Client";

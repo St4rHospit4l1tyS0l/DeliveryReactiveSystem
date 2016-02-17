@@ -1,0 +1,10 @@
+﻿<Window x:Class="Drs.VirtualPos.Ui.LogWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LogWnd" Height="600" Width="800" Background="Black" WindowStyle="ToolWindow" ShowInTaskbar="False">
+    <Grid>
+        <ListBox ItemsSource="{Binding LogInformation}">
+            
+        </ListBox>
+    </Grid>
+</Window>

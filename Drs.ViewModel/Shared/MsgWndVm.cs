@@ -16,7 +16,7 @@ namespace Drs.ViewModel.Shared
 
         public MsgWndVm()
         {
-            MessageBus.Current.Listen<string>(SharedMessageConstants.ACCOUNT_ERROR_CHECK)
+            MessageBus.Current.Listen<string>(SharedMessageConstants.INITIALIZE_ERROR_CHECK)
                 .Subscribe(x =>
                 {
                     MsgInfo = x;
