@@ -112,7 +112,7 @@
                 Content="{Binding SendOrderTitleBtn}"
                     Width="200"
                     Height="35"
-                    Margin="0, 10, 0, 0"
+                    Margin="165,10,165,0"
                     Style="{DynamicResource AccentedSquareButtonStyle}" mah:ButtonHelper.PreserveTextCase="True" >
             </Button>
         </StackPanel>
