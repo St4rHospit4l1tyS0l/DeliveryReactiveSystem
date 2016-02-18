@@ -21,27 +21,30 @@ namespace Drs.Repository.Report
         }
         public IEnumerable<DailySaleModel> GetDailySaleInfo(DateTime startDate, DateTime endDate)
         {
-            return DbEntities.Daily_Sales_group_by_date(startDate, endDate)
-                    //.Where(e => e.SaleDate >= startDate && e.SaleDate <= endDate)
-                    .Select(x => x.Total != null ? new DailySaleModel { 
-                        month  = x.SaleDate, 
-                        sales = (decimal) x.Total} : null)
-                    .ToList();    
+            //return DbEntities.Daily_Sales_group_by_date(startDate, endDate)
+            //        //.Where(e => e.SaleDate >= startDate && e.SaleDate <= endDate)
+            //        .Select(x => x.Total != null ? new DailySaleModel { 
+            //            month  = x.SaleDate, 
+            //            sales = (decimal) x.Total} : null)
+            //        .ToList();   
+            return null;
         }
 
         public IEnumerable<AgentSalesModel> GetAgentSaleInfo(DateTime startDate, DateTime endDate)
         {
-            return DbEntities.User_Sales_group_by_date(startDate, endDate)
-                .Where(e => e.SaleDate >= startDate && e.SaleDate <= endDate)
-                .Select(e => new AgentSalesModel
-                {
-                    AgentName = e.UserName,
-                    SubTotal = (decimal) e.Subtotal,
-                    Tax = (decimal) e.Taxes,
-                    Total = (decimal) e.Total
+            //return DbEntities.User_Sales_group_by_date(startDate, endDate)
+            //    .Where(e => e.SaleDate >= startDate && e.SaleDate <= endDate)
+            //    .Select(e => new AgentSalesModel
+            //    {
+            //        AgentName = e.UserName,
+            //        SubTotal = (decimal) e.Subtotal,
+            //        Tax = (decimal) e.Taxes,
+            //        Total = (decimal) e.Total
 
-                }
-                );
+            //    }
+            //    );
+            return null;
+
         }
     }
 }
