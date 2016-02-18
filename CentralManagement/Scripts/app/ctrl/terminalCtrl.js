@@ -1,9 +1,19 @@
-﻿app.controller('terminalController', function ($scope) {
-    $scope.m = {};
+﻿app.controller('terminalController', function ($scope, $http) {
+    $scope.sel = {};
 
     $scope.init = function () {
-        $scope.m.selFranchise = $scope.lstFranchises[0];
-        console.log("ss", $scope.m.selFranchise);
+        $scope.sel.SelFranchise = $scope.lstFranchises[0];
+    };  
+    
+    $scope.add = function (url) {
+        var data = {
+            InfoClientTerminalId: $scope.m.InfoClientTerminalId,
+            Id: $scope.sel.Id,
+            FranchiseId: $scope.sel.SelFranchise.StKey,
+            Ip: $scope.sel.PosIpAddress
+        };
+        
+        $http.post(url, data);
     };
 
 });

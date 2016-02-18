@@ -42,7 +42,7 @@
                             <label class="control-label font-noraml">&nbsp;&nbsp;&nbsp;Elija la franquicia:</label>
                         </div>
                         <div class="row">
-                            <select class="form-control" ng-model="m.selFranchise" ng-options="e.Name for e in lstFranchises"></select>
+                            <select class="form-control" ng-model="sel.SelFranchise" ng-options="e.Name for e in lstFranchises"></select>
                         </div>
                     </div>
                     <div class="col-xs-4 col-xs-offset-1">
@@ -50,7 +50,7 @@
                             <label class="control-label font-noraml">&nbsp;&nbsp;&nbsp;IP del POS para la franquicia:</label>
                         </div>
                         <div class="row">
-                            <input type="text" name="PosIpAddress" ng-model="m.PosIpAddress"
+                            <input type="text" name="PosIpAddress" ng-model="sel.PosIpAddress"
                                    placeholder="Ingrese la IP del POS"
                                    required="required" ng-maxlength="200" class="form-control">
                             <span class="error" ng-show="FormCatId.PosIpAddress.$error.required">*Campo requerido</span>
@@ -61,7 +61,9 @@
                     <div class="col-xs-1  col-xs-offset-1">
                         <div class="row">&nbsp;</div>
                         <div class="row">
-                            <button class="btn btn-info"><i class="fa fa-plus-circle"></i> Agregar</button>
+                            <button class="btn btn-info" ng-click="add('@Url.Action("DoUpsert", "Settings", new{area = "Terminal"})')">
+                                <i class="fa fa-plus-circle"></i> Agregar
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -132,11 +134,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-white" ng-click="cancel()">
-                    Cancelar
-                </button>
-                <button class="btn btn-primary " ng-disabled="WaitFor==true"
-                        ng-click="submit('#FormCatId', '@Url.Action("DoUpsert", "Settings", new{area = "Terminal"})')">
-                    Guardar
+                    Regresar
                 </button>
             </div>
         </div>

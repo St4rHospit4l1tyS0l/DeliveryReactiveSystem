@@ -64,7 +64,7 @@ namespace CentralManagement.Areas.Terminal.Controllers
                 using (var repository = new FranchiseRepository())
                 {
                     IAccountService accountService = new AccountService(new AccountRepository(repository.Db));
-                    ViewBag.Model = jSer.Serialize(new AccountService(new AccountRepository(repository.Db)).GetTerminalInfo(id));
+                    ViewBag.Model = jSer.Serialize(accountService.GetTerminalInfo(id, jSer));
                     ViewBag.LstFranchises = jSer.Serialize(new FranchiseService(repository).LstFranchise());
                     ViewBag.LstTerminalFranchise = jSer.Serialize(accountService.GetLstTerminalFranchise(id));
                 }
@@ -93,7 +93,7 @@ namespace CentralManagement.Areas.Terminal.Controllers
                 return Json(new ResponseMessageModel
                 {
                     HasError = false,
-                    Data = new AccountService().UpsertTerminalFranchise(model)
+                    //Data = new AccountService().UpsertTerminalFranchise(model)
                 });
             }
             catch (Exception ex)
@@ -108,6 +108,5 @@ namespace CentralManagement.Areas.Terminal.Controllers
                 });
             }
         }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Drs.Infrastructure.Model;
 using Drs.Model.Account;
@@ -241,8 +242,30 @@ namespace Drs.Repository.Account
 
         public int UpsertTerminalFranchise(TerminaFranchiseModel model)
         {
-            //if(DbEntities.InfoClientTerminalFranchise.Any(e => e.))
-            return 0;
+            if(DbEntities.InfoClientTerminalFranchise.Any(e => e.InfoClientTerminalFranchiseId != model.Id 
+                && e.InfoClientTerminalId == model.InfoClientTerminalId && e.FranchiseId == model.FranchiseId))
+                throw new Exception("La franquicia para esa terminal ya fue definida");
+                
+            var oldModel = DbEntities.InfoClientTerminalFranchise.FirstOrDefault(e => model.Id == e.InfoClientTerminalFranchiseId);
+
+            if (oldModel == null)
+            {
+                oldModel = new InfoClientTerminalFranchise
+                {
+                    FranchiseId = model.FranchiseId,
+                    InfoClientTerminalId = model.InfoClientTerminalId,
+                    PosIpAddress = model.Ip
+                };
+            }
+            else
+            {
+                oldModel.FranchiseId = model.FranchiseId;
+                oldModel.PosIpAddress = model.Ip;
+            }
+
+            DbEntities.InfoClientTerminalFranchise.Add(oldModel);
+            DbEntities.SaveChanges();
+            return oldModel.InfoClientTerminalFranchiseId;
         }
 
         public bool IsValidUser(string id)

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using Drs.Infrastructure.Model;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Account;
@@ -16,7 +17,7 @@ namespace Drs.Service.Account
         string GetAccountInfo(string s, string s1);
         DeviceInfoModel GetLstDevices();
         DeviceInfoModel GetLstClients();
-        ConnectionFullModel GetTerminalInfo(int id);
+        ConnectionFullModel GetTerminalInfo(int id, JavaScriptSerializer jSer);
         bool DoSelectServer(int id, bool enable);
         bool DoSelectClient(int id, bool enable);
         Task<ResponseMessageModel> AskForLicense();

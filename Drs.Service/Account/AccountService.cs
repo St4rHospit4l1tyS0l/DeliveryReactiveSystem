@@ -24,7 +24,7 @@ namespace Drs.Service.Account
     {
         private readonly IAccountRepository _repository;
         public AccountService()
-            :this(new AccountRepository())
+            : this(new AccountRepository())
         {
         }
         public AccountService(IAccountRepository repository)
@@ -68,7 +68,8 @@ namespace Drs.Service.Account
             {
                 var computerInfo = _repository.GetComputerInfo(eInfo);
 
-                if (computerInfo == null){
+                if (computerInfo == null)
+                {
                     return CreateComputerInfo(eInfo, sConnInfo);
                 }
 
@@ -96,11 +97,11 @@ namespace Drs.Service.Account
 
             if (now > decCompInfo.Et.AddDays(10))
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE_ET]);
-                
-            if(decCompInfo.Iv == false)
+
+            if (decCompInfo.Iv == false)
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE]);
 
-            return  BuildResponse(SharedConstants.Client.STATUS_SCREEN_LOGIN, AccountConstants.LstCodes[AccountConstants.CODE_VALID]);
+            return BuildResponse(SharedConstants.Client.STATUS_SCREEN_LOGIN, AccountConstants.LstCodes[AccountConstants.CODE_VALID]);
         }
 
         private string UpdateComputerInfo(string eInfo, string mConnInfo, GetDevice decCompInfo)
@@ -125,8 +126,8 @@ namespace Drs.Service.Account
             {
                 Hk = Cypher.Decrypt(sConnInfo),             //HostId
                 Hn = Cypher.Decrypt(Cypher.Decrypt(eInfo)),  //HostName
-                St = DateTime.MinValue,             
-                Et = DateTime.MinValue,         
+                St = DateTime.MinValue,
+                Et = DateTime.MinValue,
                 Iv = false,                      //Is valid license
                 Code = AccountConstants.CODE_NEW
             };
@@ -174,7 +175,7 @@ namespace Drs.Service.Account
         {
             var decSerInfo = ValidateMainAccount();
 
-            if(decSerInfo == null)
+            if (decSerInfo == null)
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE]);
 
             return IsValidDeviceInfo(decSerInfo);
@@ -214,7 +215,7 @@ namespace Drs.Service.Account
             };
 
             _repository.AddInfoServer(Cypher.Encrypt(eInfo), Cypher.Encrypt(new JavaScriptSerializer().Serialize(model)));
-        
+
         }
 
         public DeviceInfoModel GetLstDevices()
@@ -240,18 +241,14 @@ namespace Drs.Service.Account
             return deviceInfo;
         }
 
-        public ConnectionFullModel GetTerminalInfo(int id)
+        public ConnectionFullModel GetTerminalInfo(int id, JavaScriptSerializer jSer)
         {
-            using (_repository)
-            {
-                var jsSer = new JavaScriptSerializer();
-                var model = _repository.GetClient(id);
-                if (model == null)
-                    return null;
+            var model = _repository.GetClient(id);
+            if (model == null)
+                return null;
 
-                GetDevice(model, jsSer);
-                return model;
-            }
+            GetDevice(model, jSer);
+            return model;
         }
 
         public bool DoSelectServer(int id, bool enable)
@@ -270,7 +267,7 @@ namespace Drs.Service.Account
                     infoServer.InfoCallCenterId = null;
 
                 _repository.SaveChanges();
-                return true; 
+                return true;
             }
         }
 
@@ -305,8 +302,10 @@ namespace Drs.Service.Account
                     ActivationCode = _repository.GetActivationCode()
                 };
 
-                if (deviceConn.LstClients.Count == 0 || deviceConn.LstServers.Count == 0){
-                    return new ResponseMessageModel{
+                if (deviceConn.LstClients.Count == 0 || deviceConn.LstServers.Count == 0)
+                {
+                    return new ResponseMessageModel
+                    {
                         HasError = true,
                         Title = "Error licencia",
                         Message = "Al menos debes tener una terminal y un servidor para activar la licencia"
@@ -382,7 +381,7 @@ namespace Drs.Service.Account
                 deviceModel.Code = device;
                 _repository.SaveChanges();
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 SharedLogger.LogError(ex, device);
             }
@@ -394,8 +393,8 @@ namespace Drs.Service.Account
             {
                 var connInfo = device.DeserializeAndDecrypt<GetDevice>();
                 var deviceModel = _repository.GetClientTerminalByHost(Cypher.Encrypt(Cypher.Encrypt(connInfo.Hn)));
-                
-                if(deviceModel == null)
+
+                if (deviceModel == null)
                     return;
 
                 deviceModel.Code = device;
@@ -473,7 +472,8 @@ namespace Drs.Service.Account
         {
             using (_repository)
             {
-                var code = new ActivationCodeModel{
+                var code = new ActivationCodeModel
+                {
                     ActivationCode = actCode,
                     ActivationCodeId = Guid.NewGuid().ToString()
                 }.SerializeAndEncrypt();
