@@ -5,7 +5,7 @@ using Drs.Repository.Report;
 
 namespace Drs.Service.Report  
 {
-    public class ReportService : IReportService
+    public class ReportService : IReportService 
     {
         private readonly IReportRepository _repository;
 
@@ -33,5 +33,7 @@ namespace Drs.Service.Report
                 return _repository.GetAgentSaleInfo(startDate, endDate);
             }
         }
+
+        
     }
 }

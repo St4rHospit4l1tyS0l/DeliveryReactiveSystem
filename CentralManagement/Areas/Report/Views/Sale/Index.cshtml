@@ -1,30 +1,8 @@
-﻿@{
-    ViewBag.Title = "Reporte Ventas";
+﻿@using Drs.Model.Report
+@model CentralManagement.Models.DailySalesReportModel
+@{
+    ViewBag.Title = ViewBag.reportTitle;
 }
-
-<script type="text/javascript">
-    // When the document is ready
-    $(document).ready(function () {
-
-        $('#calendar').datepicker({
-            format: "dd/mm/yyyy"
-        });
-
-    });
-</script>
-
-
-<script type="text/javascript">
-    // When the document is ready
-    $(document).ready(function () {
-
-        $('#calendar1').datepicker({
-            format: "dd/mm/yyyy"
-        });
-
-    });
-</script>
-
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -39,57 +17,72 @@
 
 <div ng-controller="reportController" ng-cloak>
     <div class="row">
-        @*<div class="col-xs-3 col-xs-offset-1">
-                <h4 class="black"><i class="fa fa-calendar-o"></i> &nbsp;Fecha inicial</h4>
-                <div style="display:inline-block; min-height:290px;">
-                    <datepicker ng-model="startDateTime" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Seleccion el rango de tiempo del reporte</div>
+            <div class="panel-body">
+
+
+
+                <div class="col-xs-6">
+                    <label for="startDate" class="label label-info"> Fecha inicial: </label>
+                    <div>
+                        <input type="date" ng-model="startDate"
+                               placeholder="Fecha inicial" id="startDate">
+                    </div>
                 </div>
-            </div>*@
-        @*<div class="col-xs-3 col-xs-offset-1">
-                <h4 class="black"><i class="fa fa-calendar-o"></i> &nbsp;Fecha final</h4>
-                <div class="input-group date  col-xs-5">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input type="text" name="endDateTime" class="form-control" ng-model="endDateTime" >
+
+                <div class="col-xs-6">
+                    <label for="endDate" class="label label-info"> Fecha final: </label>
+                    <div>
+                        <input type="date" ng-model="endDate"
+                               ng-change="checkErr(startDate, endDate)"
+                               placeholder="Fecha final" id="endDate">
+                    </div>
                 </div>
-            </div>*@
-        {{startDate}}
-        <div class="container">
-            <div >
-                <input type="text" ng-model="startDateTime" placeholder="Fecha inicial" id="calendar">
+                <span> {{errorMsg}} </span>
             </div>
         </div>
-        
-        {{startDate}}
-        <div class="container">
-            <div >
-                <input type="text" ng-model="endDateTime" placeholder="Fecha final" id="calendar1">
-            </div>
-        </div>
-        
     </div>
+</div>
 
-    @*<div class="element-center" style="padding-left: 60px;">
-            <timepicker ng-model="startDateTime" hour-step="1" minute-step="1" show-meridian="true"></timepicker>
-        </div>*@
+<div class="panel panel-default">
+    <div class="panel-heading">Panel heading</div>
+    <div class="panel-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        <div id="SalesGraph" style="height:1500px;">
+            Ventas
+        </div>
+    </div>
+</div>
 
+<div class="panel panel-info">
+    <div class="panel-heading">Ventas diarias del día: @ViewBag.sDate hasta el día @ViewBag.eDate </div>
+    <div class="panel-body" id="divTableDataHolder">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        <!-- Table -->
+        <table class="table">
+            <thead></thead>
+            <tr>
+                <th>Date</th>
+                <th>Total</th>
+            </tr>
+            <tbody>
+                @foreach (DailySaleModel sale in ViewBag.Sales)
+                {
+                    <tr>
+                        <th scope="row">
+                            @sale.month
 
-
-    <div class="row">
-        @foreach (var sale in ViewBag.LstSales)
-        {
-            <div class="col-xs-3">
-                Fecha: <strong>@sale.SaleDate</strong> &nbsp;&nbsp;
-            </div>
-            <div class="col-xs-2">
-                <span>SubTotal: @sale.SubTotal</span>
-            </div>
-            <div class="col-xs-3">
-                <span>Tax: @sale.Tax </span>
-            </div>
-            <div class="col-xs-2">
-                <span>Total: @sale.Total</span>
-            </div>
-        }
+                        </th>
+                        <th>
+                            @sale.sales
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button id="myButtonControlID">Export Table data into Excel</button>
     </div>
 </div>
 
@@ -97,17 +90,141 @@
 @section css{
     <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <style>
+        .chart {
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .bar {
+            fill: steelblue;
+        }
+    </style>
+
 }
 
 @section scripts{
-    
     <script src="~/Scripts/app/ctrl/reportsCtrl.js"></script>
-    @*<script src="~/Scripts/jquery-ui.min.js"></script>
-    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
-    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>*@
     <script src="~/Scripts/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-    
+
+    <script>
+        $("[id$=myButtonControlID]").click(function (e) {
+            window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=divTableDataHolder]').html()));
+            e.preventDefault();
+        });
+    </script>
+
+    <script>
+        var margin = { top: 40, right: 40, bottom: 40, left: 40 }, width = 600, height = 500;
+        var ds;
+        //empty var for dataset (ds)
+        var salesInfo = JSON.parse(@Html.Raw(Json.Encode(ViewBag.LstSales).ToString()));
+        //var salesInfo = '[{ "month": 20130101, "sales": 38 }, { "month": 20130201, "sales": 35 }, { "month": 20130301, "sales": 41 }, { "month": 20130401, "sales": 55 }, { "month": 20130501, "sales": 58 }, { "month": 20130601, "sales": 66 }, { "month": 20130701, "sales": 74 }, { "month": 20130801, "sales": 78 }, { "month": 20130901, "sales": 38 }, { "month": 20131001, "sales": 30 }, { "month": 20131101, "sales": 26 }, { "month": 20131201, "sales": 29 }]';
+        console.log(salesInfo);
+
+        function buildLine() {
+            var x = d3.time.scale()
+                .domain([new Date(ds[0].month), d3.time.day.offset(new Date(ds[ds.length - 1].month), 1)])
+                .rangeRound([0, width - margin.left - margin.right]);
+
+            var y = d3.scale.linear()
+                .domain([0, d3.max(ds, function (d) { return d.sales; })])
+                .range([height - margin.top - margin.bottom, 0]);
+
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient('bottom')
+                .ticks(d3.time.days, 1)
+                .tickFormat(d3.time.format('%d'))
+                .tickSize(0)
+                .tickPadding(8);
+
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient('left')
+                .tickPadding(8);
+
+            var svg = d3.select('#SalesGraph').append('svg')
+                .attr('class', 'chart')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+
+            var lineFun = d3.svg.line()
+                .x(function (d) { return x(new Date(d.month)); })
+                .y(function (d) { return height - margin.top - margin.bottom - (height - margin.top - margin.bottom - y(d.sales)); })
+                .interpolate("linear");
+
+            //build the viz
+            var viz = svg.append("path")
+                .attr({
+                    d: lineFun(ds),
+                    "stroke": "purple",
+                    "stroke-width": 6,
+                    "fill": "none"
+                });
+
+            //svg.selectAll('.chart')
+            //    .data(ds)
+            //     .enter().append('rect')
+            //    .attr('class', 'bar')
+            //    .attr('x', function (d) { return x(new Date(d.month)); })
+            //    .attr('y', function (d) { return height - margin.top - margin.bottom - (height - margin.top - margin.bottom - y(d.sales)); })
+            //    .attr('width', 10)
+            //    .attr('height', function (d) { return height - margin.top - margin.bottom - y(d.sales); });
+
+            svg.append('g')
+                .attr('class', 'x axis')
+                .attr('transform', 'translate(0, ' + (height - margin.top - margin.bottom) + ')')
+                .call(xAxis);
+
+            svg.append('g')
+                .attr('class', 'y axis')
+                .call(yAxis);
 
 
 
+            //add labels
+            var labels = svg.selectAll("text")
+                .data(ds)
+                .enter()
+                .append("text")
+                //.text(function(d){ return d.sales; } )
+                .text(function (d) { return d.sales; })
+                .attr({
+                    x: function (d) { return (d.month * 3) - 25; },
+                    y: function (d) { return h - d.sales; },
+                    "font-size": "12px",
+                    "font-family": "sans-serif",
+                    "fill": "#666666",
+                    "text-anchor": "start",
+                    "dy": ".35em",
+                    "font-weight": function (d, i) {
+                        if (i === 0 || i == (ds.length - 1)) {
+                            return "bold";
+                        }
+                        else {
+                            return "normal";
+                        }
+                    }
+                });
+
+        }
+        //call to load data and then build our viz
+        //d3.json("https://api.github.com/repos/bsullins/d3js-resources/contents/monthlySalesbyCategoryMultiple.json", function (error, data) {
+        var infoJSON = JSON.stringify(salesInfo);
+        data = JSON.parse(infoJSON); 
+        //salesInfo
+        console.log(data);
+        ds = data;
+        buildLine();
+
+    </script>
 }
