@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Projects\SHS\DeliveryReactiveSystem\Drs.Repository\Entities\CallCenter.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Israel\Source\Repos\DeliveryReactiveSystem\Drs.Repository\Entities\CallCenter.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
