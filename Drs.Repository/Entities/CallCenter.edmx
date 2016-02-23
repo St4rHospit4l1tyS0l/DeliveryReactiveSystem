@@ -580,11 +580,15 @@
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'CallCenter.dbo.ViewDailySales' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6002: The table/view 'CallCenter.dbo.ViewDailySales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewDailySales">
+          <Key>
+            <PropertyRef Name="PosOrderId" />
+          </Key>
+          <Property Name="PosOrderId" Type="bigint" Nullable="false" />
           <Property Name="SaleDate" Type="varchar" MaxLength="10" />
           <Property Name="Total" Type="decimal" Precision="38" Scale="4" />
-        </EntityType>-->
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CallCenter.dbo.ViewStoreInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewStoreInfo">
@@ -1657,6 +1661,13 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySet Name="StoreStatus" EntityType="Self.StoreStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZipCode" EntityType="Self.ZipCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewDailySales" EntityType="Self.ViewDailySales" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewDailySales].[PosOrderId] AS [PosOrderId], 
+    [ViewDailySales].[SaleDate] AS [SaleDate], 
+    [ViewDailySales].[Total] AS [Total]
+    FROM [dbo].[ViewDailySales] AS [ViewDailySales]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ViewStoreInfo" EntityType="Self.ViewStoreInfo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewStoreInfo].[FranchiseStoreId] AS [FranchiseStoreId], 
@@ -2359,22 +2370,6 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="OrderToStore" EntitySet="OrderToStore" />
             <End Role="StoreStatus" EntitySet="StoreStatus" />
           </AssociationSet>
-          <FunctionImport Name="User_Sales_group_by_date" ReturnType="Collection(CallCenterModel.User_Sales_group_by_date_Result)">
-            <Parameter Name="startdate" Mode="In" Type="DateTime" />
-            <Parameter Name="enddate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="User_Sales_group_by_date1" ReturnType="Collection(CallCenterModel.User_Sales_group_by_date1_Result)">
-            <Parameter Name="startdate" Mode="In" Type="DateTime" />
-            <Parameter Name="enddate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="Daily_Sales_group_by_date" ReturnType="Collection(CallCenterModel.Daily_Sales_group_by_date_Result)">
-            <Parameter Name="startdate" Mode="In" Type="DateTime" />
-            <Parameter Name="enddate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="User_Sales_group_by_date2" ReturnType="Collection(CallCenterModel.User_Sales_group_by_date2_Result)">
-            <Parameter Name="startdate" Mode="In" Type="DateTime" />
-            <Parameter Name="enddate" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="InfoClientTerminalFranchise" EntityType="CallCenterModel.InfoClientTerminalFranchise" />
           <AssociationSet Name="FK_InfoClientTerminalFranchise_Franchise" Association="CallCenterModel.FK_InfoClientTerminalFranchise_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
@@ -2384,6 +2379,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="InfoClientTerminal" EntitySet="InfoClientTerminal" />
             <End Role="InfoClientTerminalFranchise" EntitySet="InfoClientTerminalFranchise" />
           </AssociationSet>
+          <EntitySet Name="ViewDailySales" EntityType="CallCenterModel.ViewDailySales" />
           </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -4039,6 +4035,14 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ViewDailySales">
+          <Key>
+            <PropertyRef Name="PosOrderId" />
+          </Key>
+          <Property Name="PosOrderId" Type="Int64" Nullable="false" />
+          <Property Name="SaleDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Decimal" Precision="38" Scale="4" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4689,6 +4693,15 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
                 <ScalarProperty Name="InfoClientTerminalId" ColumnName="InfoClientTerminalId" />
                 <ScalarProperty Name="InfoClientTerminalFranchiseId" ColumnName="InfoClientTerminalFranchiseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewDailySales">
+            <EntityTypeMapping TypeName="CallCenterModel.ViewDailySales">
+              <MappingFragment StoreEntitySet="ViewDailySales">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
