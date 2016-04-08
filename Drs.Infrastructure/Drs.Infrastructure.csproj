@@ -160,6 +160,7 @@
     <Compile Include="Ui\GridBehaviours.cs" />
     <Compile Include="Ui\RowDoubleClickHandler.cs" />
     <Compile Include="Ui\Paint.cs" />
+    <Compile Include="Validation\IpAddressValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

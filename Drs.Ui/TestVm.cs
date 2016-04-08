@@ -47,11 +47,9 @@ namespace Drs.Ui
         {
             await Task.Run(() =>
             {
-                var iCount = 0;
                 Observable.Range(0, 20).Select(
                     x =>
                     {
-                        iCount++;
                         Thread.Sleep(200);
                         return x;
                     }).Subscribe(x => Console.Write(true));
