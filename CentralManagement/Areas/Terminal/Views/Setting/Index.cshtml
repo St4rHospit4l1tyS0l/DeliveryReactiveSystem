@@ -74,11 +74,12 @@
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
 
-        @*window.upsert = function (franchiseId, gridId) {
+                @*window.upsert = function (franchiseId, gridId) {
             window.showConfirmServiceWithMsg({ franchiseId: franchiseId },
                 { Title: 'Sincronizar archivos', Message: "¿Desea crear una nueva versión de los archivos para esta franquicia?", Type: 'info' }, "#angJsjqGridId",
                 "@Url.Action("DoVersion", "Sync", new { area = "Franchise" })", gridId);
         };
+            
 
         window.obsolete = function (id, gridId) {
             window.showObsolete(id, "#angJsjqGridId", "@Url.Action("DoObsolete", "Sync", new {area = "Franchise"})", gridId);
@@ -93,6 +94,7 @@
             colModel: [
                 { name: 'TerminalId', index: 'TerminalId', hidden: true },
                 { name: 'Name', index: 'Name', width: 220, align: "center", sorttype: 'string', searchoptions: { sopt: ['bw'] } },
+                { name: 'Code', index: 'Code', width: 110, align: "center", sorttype: 'string', search: false },
                 { name: 'Code', index: 'Code', width: 110, align: "center", sorttype: 'string', search: false },
                 { name: 'IsValid', index: 'IsValid', width: 80, align: "center", sorttype: 'string', search: false },
                 { name: 'IsValid', index: 'UserNameIns', width: 160, align: "center", sorttype: 'string', sortable: false, search: false }
