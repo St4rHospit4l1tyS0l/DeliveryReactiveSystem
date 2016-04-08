@@ -7,7 +7,7 @@ namespace Drs.Repository.Report
 {
     public interface IReportRepository : IBaseOneRepository, IDisposable
     {
-        IEnumerable<DailySaleModel> GetDailySaleInfo(DateTime startDate, DateTime endDate);
+        IEnumerable<DailySaleModel> GetDailySaleInfo(string startDate, string endDate);
         IEnumerable<AgentSalesModel> GetAgentSaleInfo(DateTime startDate, DateTime endDate);
     }
 }
