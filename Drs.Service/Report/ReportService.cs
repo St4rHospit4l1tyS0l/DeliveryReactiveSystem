@@ -26,6 +26,7 @@ namespace Drs.Service.Report
             }
         }
 
+
         public IEnumerable<AgentSalesModel> GetAgentSaleInfo(DateTime startDate, DateTime endDate)
         {
             using (_repository)
