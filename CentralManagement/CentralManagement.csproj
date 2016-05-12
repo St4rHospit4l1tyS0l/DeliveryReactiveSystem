@@ -192,6 +192,7 @@
     <Compile Include="Areas\Franchise\FranchiseAreaRegistration.cs" />
     <Compile Include="Areas\Report\Controllers\SaleController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
+    <Compile Include="Areas\Store\Controllers\StoreCoverageController.cs" />
     <Compile Include="Areas\Store\Controllers\OfflineController.cs" />
     <Compile Include="Areas\Management\Controllers\LicenseController.cs" />
     <Compile Include="Areas\Management\Controllers\UserController.cs" />
@@ -426,6 +427,7 @@
     <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\ctrl\storeCoverageCtrl.js" />
     <Content Include="Scripts\app\ctrl\terminalCtrl.js" />
     <Content Include="Scripts\app\ctrl\licenseCtrl.js" />
     <Content Include="Scripts\app\ctrl\franchiseCtrl.js" />
@@ -584,6 +586,8 @@
     <Content Include="Areas\Terminal\Views\Setting\Index.cshtml" />
     <Content Include="Areas\Terminal\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Terminal\Views\Setting\Upsert.cshtml" />
+    <Content Include="Areas\Store\Views\StoreCoverage\Index.cshtml" />
+    <Content Include="Areas\Store\Views\StoreCoverage\Assign.cshtml" />
     <None Include="Properties\PublishProfiles\CentralManagement.pubxml" />
     <Content Include="Resources\MonthlySales.json" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />

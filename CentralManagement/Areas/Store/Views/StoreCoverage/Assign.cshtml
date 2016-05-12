@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Cobertura por Franquicia";
+    ViewBag.Menu = 4004;
+}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Asignación de Coberturas por Franquicia</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li>
+                Tiendas
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "StoreCoverage", "Store")">Cobertura por Franquicia</a>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="modalDlgController">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Cobertura para la Franquicia <b><i>@ViewBag.FranchiseName</i></b></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="col-xs-12 control-label">Selecciona una tienda y establece su cobertura</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control m-b" name="account">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1" style="height: 700px !important" id="map">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blocker" ng-show="working">
+        <div>
+            Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />
+        </div>
+    </div>
+</div>
+
+@section css{
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
+    <link href="~/Content/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Content/plugins/chosen/chosen.css" rel="stylesheet" />
+    <style>
+        #map {
+            height: 100%;
+        }
+    </style>
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/js/plugins/jqGrid/i18n/grid.locale-es.js"></script>
+    <script src="~/Scripts/js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/app/shared/upsertCtrl.js"></script>
+    <script src="~/Scripts/app/shared/modalDlgCtrl.js"></script>
+    <script src="~/Scripts/app/shared/hiddenDrct.js"></script>
+    <script src="~/Scripts/app/ctrl/franchiseCtrl.js"></script>
+    <script src="~/Scripts/js/plugins/chosen/chosen.jquery.js"></script>
+
+
+    <script type="text/javascript" language="javascript">
+        function initMap() {
+
+            var map_options = {
+                zoom: 6,
+                center: new google.maps.LatLng(21, -100),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('map'), map_options);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer>
+    </script>
+}
+
+

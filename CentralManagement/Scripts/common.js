@@ -52,20 +52,6 @@ window.showModalFormDlg = function(divModalid, formId) {
     scope.setDlg(dlgCat);
 };
 
-window.goToUrlMvcUrl = function (url, params) {
-
-    for (var key in params) {
-        var param = params[key] || '';
-        url = url.replace(key, param);
-    }
-
-    try {
-        window.location.replace(url);
-    } catch (e) {
-        window.location = url;
-    }
-};
-
 window.sendPostAction = function(id, divScope, urlToGo, innerScp, showSuccess) {
     var scope = angular.element($(divScope)).scope();
     scope.sendPostAction({ id: id }, urlToGo, innerScp, showSuccess);

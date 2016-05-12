@@ -12,15 +12,11 @@ namespace Drs.Repository.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class InfoClientTerminalFranchise
+    public partial class ViewStoreCoverage
     {
-        public int InfoClientTerminalFranchiseId { get; set; }
-        public int InfoClientTerminalId { get; set; }
         public int FranchiseId { get; set; }
-        public string PosIpAddress { get; set; }
-        public string VirtualWndName { get; set; }
-    
-        public virtual Franchise Franchise { get; set; }
-        public virtual InfoClientTerminal InfoClientTerminal { get; set; }
+        public string Name { get; set; }
+        public int CountStore { get; set; }
+        public bool IsObsolete { get; set; }
     }
 }

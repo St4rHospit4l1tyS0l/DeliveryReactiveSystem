@@ -377,5 +377,11 @@ namespace Drs.Repository.Order
                     Name = e.Name
                 }).ToList();
         }
+
+        public string GetFranchiseNameById(int id)
+        {
+            return DbEntities.Franchise.Where(e => e.IsObsolete == false && e.FranchiseId == id)
+                .Select(e => e.Name).Single();
+        }
     }
 }

@@ -10,32 +10,29 @@ using Drs.Infrastructure.JqGrid;
 using Drs.Infrastructure.JqGrid.Model;
 using Drs.Repository.Entities;
 using Drs.Repository.Log;
-using Infrastructure.JqGrid;
 
 namespace Drs.Repository.Shared
 {
     public class GenericRepository<TEntity> : BaseRepository where TEntity : class
     {
-
-
-        protected readonly DbSet DbSet;
+        private readonly DbSet _dbSet;
         public GenericRepository(CallCenterEntities dbConnP)
             : base(dbConnP)
         {
-            DbSet = DbConn.Set(typeof(TEntity));
+            _dbSet = DbConn.Set(typeof(TEntity));
         }
 
         public GenericRepository()
             : base(new CallCenterEntities())
         {
-            DbSet = DbConn.Set(typeof(TEntity));
+            _dbSet = DbConn.Set(typeof(TEntity));
         }
 
         public TEntity FindById(object id)
         {
             try
             {
-                return (TEntity) DbSet.Find(id);
+                return (TEntity) _dbSet.Find(id);
             }
             catch (Exception ex)
             {
@@ -46,14 +43,14 @@ namespace Drs.Repository.Shared
 
         public void Add(TEntity model, bool bSaveChanges = true)
         {
-            DbSet.Add(model);
+            _dbSet.Add(model);
             if (bSaveChanges)
                 DbConn.SaveChanges();
         }
 
         public void Update(TEntity model, bool bSaveChanges = true)
         {
-            DbSet.Attach(model);
+            _dbSet.Attach(model);
             DbConn.Entry(model).State = EntityState.Modified;
             if (bSaveChanges)
                 DbConn.SaveChanges();
@@ -61,7 +58,7 @@ namespace Drs.Repository.Shared
 
         public void Delete(object id)
         {
-            dynamic model = DbSet.Find(id);
+            dynamic model = _dbSet.Find(id);
 
             if (model != null)
             {
@@ -71,8 +68,8 @@ namespace Drs.Repository.Shared
 
         public void Delete(TEntity model, bool bSaveChanges = true)
         {
-            DbSet.Attach(model);
-            DbSet.Remove(model);
+            _dbSet.Attach(model);
+            _dbSet.Remove(model);
             if (bSaveChanges)
                 DbConn.SaveChanges();
         }
@@ -84,7 +81,7 @@ namespace Drs.Repository.Shared
             try
             {
                 var result = new JqGridResultModel();
-                var query = DbSet as IQueryable<TEntity>;
+                var query = _dbSet as IQueryable<TEntity>;
 
                 if(query == null)
                     return null;
@@ -150,7 +147,7 @@ namespace Drs.Repository.Shared
 
         public List<TEntity> FindBy(Expression<Func<TEntity, bool>> exp)
         {
-            var query = DbSet as IQueryable<TEntity>;
+            var query = _dbSet as IQueryable<TEntity>;
 
             if (query == null)
                 return null;

@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Configuración de las tiendas";
-    ViewBag.Menu = 4002;
+    ViewBag.Title = "Cobertura por Franquicia";
+    ViewBag.Menu = 4004;
 }
 
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Administración de Tiendas</h2>
+        <h2>Asignación de Coberturas por Franquicia</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="@Url.Action("Index", "Home")">Inicio</a>
@@ -15,7 +15,7 @@
                 Tiendas
             </li>
             <li>
-                Configuración
+                Cobertura por Franquicia
             </li>
         </ol>
     </div>
@@ -56,7 +56,6 @@
     <link href="~/Content/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
     <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
     <link href="~/Content/plugins/chosen/chosen.css" rel="stylesheet" />
-    <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet">
 }
 
 @section scripts{
@@ -66,45 +65,32 @@
     <script src="~/Scripts/app/shared/upsertCtrl.js"></script>
     <script src="~/Scripts/app/shared/modalDlgCtrl.js"></script>
     <script src="~/Scripts/app/shared/hiddenDrct.js"></script>
-    <script src="~/Scripts/app/ctrl/storeCtrl.js"></script>
-    <script src="~/Scripts/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/app/ctrl/franchiseCtrl.js"></script>
     <script src="~/Scripts/js/plugins/chosen/chosen.jquery.js"></script>
-    <script src="~/Scripts/js/plugins/iCheck/icheck.min.js"></script>
-    
-    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
-    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
-    <script src="~/Scripts/app/svc/focusFactSvc.js"></script>
-    <script src="~/Scripts/app/shared/addressCtrl.js"></script>
+
 
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
 
-            window.upsert = function (id) {
-                window.showUpsert(id, "#angJsjqGridId", "@Url.Action("Upsert", "Setting", new {area = "Store"})", "#GridId");
-            };
-
-            window.obsolete = function (id) {
-                window.showObsolete(id, "#angJsjqGridId", "@Url.Action("DoObsolete", "Setting", new { area = "Store" })", "#GridId");
+            window.assign = function (id) {
+                window.goToUrlMvcUrl("@Url.Action("Assign", "StoreCoverage", new {area = "Store"})" + "?id=idPar", {idPar: id});
             };
 
             jQuery("#GridId").jqGrid({
-                url: '@Url.Action("List", "Setting", new { area = "Store" })',
+                url: '@Url.Action("List", "StoreCoverage", new { area = "Store" })',
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['ID', 'Tienda', 'Franquicia', 'Dirección', 'UrlWs', 'Gerente', 'Acci&oacute;n'],
+                colNames: ['ID', 'Franquicia', '# de Tiendas', 'Acci&oacute;n'],
                 colModel: [
-                    { name: 'FranchiseStoreId', index: 'FranchiseStoreId', hidden: true },
+                    { name: 'FranchiseId', index: 'FranchiseId', hidden: true },
                     { name: 'Name', index: 'Name', width: 180, align: "center", sorttype: 'string', searchoptions: { sopt: ['bw'] } },
-                    { name: 'FranchiseName', index: 'FranchiseName', width: 110, align: "center", sorttype: 'string', searchoptions: { sopt: ['bw'] } },
-                    { name: 'Address', index: 'Address', width: 200, align: "center", sorttype: 'string', search: false },
-                    { name: 'WsAddress', index: 'WsAddress', width: 200, align: "center", sorttype: 'string', search: false },
-                    { name: 'ManagerUser', index: 'ManagerUser', width: 90, align: "center", sorttype: 'string', search: false },
+                    { name: 'CountStore', index: 'CountStore', width: 80, align: "center", sorttype: 'string', search: false },
                     { name: 'Action', width: 100, align: "center", sortable: false, search: false, formatter: window.actionFormatter }
                 ],
                 rowNum: 10,
                 rowList: [10, 30, 60],
                 pager: '#GridPager',
-                sortname: 'FranchiseStoreId',
+                sortname: 'FranchiseId',
                 height: 450,
                 viewrecords: true,
                 autowidth: true,
@@ -113,7 +99,7 @@
                 caption: "",
                 add: true,
                 edit: false,
-                addtext: 'Agregar',
+                addtext: 'Asignar',
                 altRows: true,
                 hidegrid: false,
                 gridComplete: function () {
@@ -121,10 +107,7 @@
                     for (var i = 0; i < ids.length; i++) {
                         var cl = ids[i];
                         var be = "";
-
-                        be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Editar tienda\" onclick=\"window.upsert('" + cl + "');\"><i class=\"fa fa-pencil icon-grid-st blue-light\"></i></a>&nbsp;&nbsp;";
-                        be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Eliminar\" onclick=\"window.obsolete('" + cl + "');\"><i class=\"fa fa-times icon-grid-st red\"></i></a>  ";
-
+                        be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Asignar covertura\" onclick=\"window.assign('" + cl + "');\"><i class=\"fa fa-road icon-grid-st blue-light\"></i></a>&nbsp;&nbsp;";
                         $(this).jqGrid('setRowData', ids[i], { Action: be });
                     }
                 }

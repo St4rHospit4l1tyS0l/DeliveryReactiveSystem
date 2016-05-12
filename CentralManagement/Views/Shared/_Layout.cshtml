@@ -83,6 +83,11 @@
                                 </li>
                             </ul>
                             <ul class="nav nav-second-level">
+                                <li class="@(ViewBag.Menu == 4004 ? "active" : "")">
+                                    <a href="@Url.Action("Index", "StoreCoverage", new { area = "Store" })"><i class="fa fa-road"></i>Cobertura</a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-second-level">
                                 <li class="@(ViewBag.Menu == 4003 ? "active" : "")">
                                     <a href="@Url.Action("Index", "OffLine", new { area = "Store" })"><i class="fa fa-power-off"></i>Fuera de línea</a>
                                 </li>

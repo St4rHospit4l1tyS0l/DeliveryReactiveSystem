@@ -305,6 +305,7 @@
           <Property Name="InfoClientTerminalId" Type="int" Nullable="false" />
           <Property Name="FranchiseId" Type="int" Nullable="false" />
           <Property Name="PosIpAddress" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="VirtualWndName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="InfoClientTerminalVersion">
           <Key>
@@ -588,6 +589,20 @@ warning 6002: The table/view 'CallCenter.dbo.ViewDailySales' does not have a pri
           <Property Name="PosOrderId" Type="bigint" Nullable="false" />
           <Property Name="SaleDate" Type="varchar" MaxLength="10" />
           <Property Name="Total" Type="decimal" Precision="38" Scale="4" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CallCenter.dbo.ViewStoreCoverage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewStoreCoverage">
+          <Key>
+            <PropertyRef Name="FranchiseId" />
+            <PropertyRef Name="Name" />
+            
+            <PropertyRef Name="IsObsolete" />
+          </Key>
+          <Property Name="FranchiseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CountStore" Type="int" Nullable="false" />
+          <Property Name="IsObsolete" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CallCenter.dbo.ViewStoreInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1272,6 +1287,9 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_PosOrder_Franchise" />-->
         <Association Name="FK_PosOrderItem_PosOrder">
           <End Role="PosOrder" Type="Self.PosOrder" Multiplicity="1" />
           <End Role="PosOrderItem" Type="Self.PosOrderItem" Multiplicity="*" />
@@ -1667,6 +1685,14 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
     [ViewDailySales].[SaleDate] AS [SaleDate], 
     [ViewDailySales].[Total] AS [Total]
     FROM [dbo].[ViewDailySales] AS [ViewDailySales]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewStoreCoverage" EntityType="Self.ViewStoreCoverage" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewStoreCoverage].[FranchiseId] AS [FranchiseId], 
+    [ViewStoreCoverage].[Name] AS [Name], 
+    [ViewStoreCoverage].[CountStore] AS [CountStore], 
+    [ViewStoreCoverage].[IsObsolete] AS [IsObsolete]
+    FROM [dbo].[ViewStoreCoverage] AS [ViewStoreCoverage]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewStoreInfo" EntityType="Self.ViewStoreInfo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2380,6 +2406,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             <End Role="InfoClientTerminalFranchise" EntitySet="InfoClientTerminalFranchise" />
           </AssociationSet>
           <EntitySet Name="ViewDailySales" EntityType="CallCenterModel.ViewDailySales" />
+          <EntitySet Name="ViewStoreCoverage" EntityType="CallCenterModel.ViewStoreCoverage" />
           </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -4010,6 +4037,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="PosIpAddress" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_InfoClientTerminalFranchise_Franchise" FromRole="InfoClientTerminalFranchise" ToRole="Franchise" />
           <NavigationProperty Name="InfoClientTerminal" Relationship="CallCenterModel.FK_InfoClientTerminalFranchise_InfoClientTerminal" FromRole="InfoClientTerminalFranchise" ToRole="InfoClientTerminal" />
+          <Property Name="VirtualWndName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_InfoClientTerminalFranchise_Franchise">
           <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
@@ -4042,6 +4070,17 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="PosOrderId" Type="Int64" Nullable="false" />
           <Property Name="SaleDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Total" Type="Decimal" Precision="38" Scale="4" />
+        </EntityType>
+        <EntityType Name="ViewStoreCoverage">
+          <Key>
+            <PropertyRef Name="FranchiseId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="IsObsolete" />
+          </Key>
+          <Property Name="FranchiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CountStore" Type="Int32" Nullable="false" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4689,6 +4728,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <EntitySetMapping Name="InfoClientTerminalFranchise">
             <EntityTypeMapping TypeName="CallCenterModel.InfoClientTerminalFranchise">
               <MappingFragment StoreEntitySet="InfoClientTerminalFranchise">
+                <ScalarProperty Name="VirtualWndName" ColumnName="VirtualWndName" />
                 <ScalarProperty Name="PosIpAddress" ColumnName="PosIpAddress" />
                 <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
                 <ScalarProperty Name="InfoClientTerminalId" ColumnName="InfoClientTerminalId" />
@@ -4702,6 +4742,16 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
                 <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewStoreCoverage">
+            <EntityTypeMapping TypeName="CallCenterModel.ViewStoreCoverage">
+              <MappingFragment StoreEntitySet="ViewStoreCoverage">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="CountStore" ColumnName="CountStore" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

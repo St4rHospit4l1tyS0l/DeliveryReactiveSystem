@@ -1,22 +1,20 @@
 ﻿using System;
 using Drs.Infrastructure.JqGrid.Model;
 using Drs.Infrastructure.Resources;
-using Infrastructure.JqGrid;
 
 namespace Drs.Infrastructure.JqGrid
 {
-    public class JqGridClause
+    public static class JqGridClause
     {
+        private const string JQGRID_DESC = "desc";
+        private const string SQL_DESC = "descending";
+        private const string JQGRID_ASC = "asc";
 
-        public const string JQGRID_DESC = "desc";
-        public const string SQL_DESC = "descending";
-        public const string JQGRID_ASC = "asc";
+        private const string SQL_ASC = "ascending";
+        private const string SQL_OPERATOR_AND = "and";
+        private const string SQL_OPERATOR_BW = "bw";
 
-        public const string SQL_ASC = "ascending";
-        public const string SQL_OPERATOR_AND = "and";
-        public const string SQL_OPERATOR_BW = "bw";
-
-        public const string SQL_OPERATOR_BW_SW = ".StartsWith(@{0})";
+        private const string SQL_OPERATOR_BW_SW = ".Contains(@{0})";
         public static string OrderBy(JqGridFilterModel opt)
         {
 
@@ -32,8 +30,8 @@ namespace Drs.Infrastructure.JqGrid
         {
 
             int count = 0;
-            string sQuery = string.Empty;
-            dynamic respQry = new JqGridQueryWhere();
+            var sQuery = string.Empty;
+            var respQry = new JqGridQueryWhere();
 
 
             foreach (JqGridRulesModel rule in mulFilter.rules)

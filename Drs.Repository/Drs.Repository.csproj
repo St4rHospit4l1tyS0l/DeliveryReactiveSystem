@@ -140,6 +140,8 @@
     <Compile Include="Entities\InfoClientTerminalFranchise.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Metadata\ViewStoreCoverageDto.cs" />
+    <Compile Include="Entities\Metadata\ViewStoreCoverageJson.cs" />
     <Compile Include="Entities\Resource.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
@@ -153,6 +155,9 @@
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ViewDailySales.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ViewStoreCoverage.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Order\OrderRepository.cs" />
