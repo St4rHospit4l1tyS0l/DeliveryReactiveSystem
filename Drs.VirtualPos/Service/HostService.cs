@@ -44,6 +44,7 @@ namespace Drs.VirtualPos.Service
                 catch (Exception ex)
                 {
                     _mainvm.InsertItem("ERROR: (WH) " + ex.Message);
+                    break;
                 }
 
                 if (_cancellationHost == null || _cancellationHost.IsCancellationRequested)

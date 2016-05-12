@@ -152,6 +152,9 @@
     <Compile Include="Entities\User_Sales_group_by_date_Result.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ViewDailySales.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Order\OrderRepository.cs" />
     <Compile Include="Order\IOrderRepository.cs" />
     <Compile Include="Client\IClientRepository.cs" />
