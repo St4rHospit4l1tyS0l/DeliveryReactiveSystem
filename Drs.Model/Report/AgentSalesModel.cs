@@ -1,6 +1,6 @@
 ﻿namespace Drs.Model.Report
 {
-    public class AgentSaleModel
+    public class AgentSalesModel
     {
         public string UserName { get; set; }
         public string AgentName { get; set; }

@@ -20,7 +20,7 @@ namespace Drs.Repository.Report
         {
             
         }
-        public IEnumerable<DailySaleModel> GetDailySaleInfo(string startDate, string endDate)
+        public IEnumerable<DailySaleModel> GetDailySaleInfo(DateTime startDate, DateTime endDate)
         {
             return DbEntities.ViewDailySales
                 .Select(e => new DailySaleModel
@@ -29,7 +29,7 @@ namespace Drs.Repository.Report
                     Month = e.SaleDate,
                     Sales = (decimal) e.Total
                 })
-                .Where(e => String.Compare(e.Month, startDate, StringComparison.Ordinal) >= 0 && String.Compare(e.Month, endDate, StringComparison.Ordinal) <=0)
+                //.Where(e => String.Compare(e.Month, startDate, StringComparison.Ordinal) >= 0 && String.Compare(e.Month, endDate, StringComparison.Ordinal) <=0)
                 .ToList();
             //return DbEntities.Daily_Sales_group_by_date(startDate, endDate)
             //        //.Where(e => e.SaleDate >= startDate && e.SaleDate <= endDate)
