@@ -22,7 +22,7 @@ namespace CentralManagement.Areas.Report.Controllers
                                       System.Globalization.CultureInfo.InvariantCulture);
             DateTime endDate = DateTime.Parse(endDateString,
                                       System.Globalization.CultureInfo.InvariantCulture);
-
+                        
 
             ViewBag.reportTitle = " Reporte total de venta por día ";
             ViewBag.sDate = startDateString;
