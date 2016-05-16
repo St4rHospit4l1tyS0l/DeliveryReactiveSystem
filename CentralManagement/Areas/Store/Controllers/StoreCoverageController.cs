@@ -6,6 +6,7 @@ using Drs.Repository.Entities.Metadata;
 using Drs.Repository.Log;
 using Drs.Repository.Order;
 using Drs.Repository.Shared;
+using Newtonsoft.Json;
 
 namespace CentralManagement.Areas.Store.Controllers
 {
@@ -33,7 +34,12 @@ namespace CentralManagement.Areas.Store.Controllers
             {
                 using (var repository = new FranchiseRepository())
                 {
-                    ViewBag.FranchiseName = repository.GetFranchiseNameById(id);
+                    ViewBag.Model = JsonConvert.SerializeObject(new
+                    {
+                        Franchise = repository.GetFranchiseMapInfoById(id),
+                        LstStoresByFranchise = repository.GetListStoresByFranchiseId(id),
+                    });
+                        
                 }
 
             }

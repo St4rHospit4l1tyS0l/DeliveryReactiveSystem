@@ -77,5 +77,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<InfoClientTerminalFranchise> InfoClientTerminalFranchise { get; set; }
         public virtual DbSet<ViewDailySales> ViewDailySales { get; set; }
         public virtual DbSet<ViewStoreCoverage> ViewStoreCoverage { get; set; }
+        public virtual DbSet<FranchiseMap> FranchiseMap { get; set; }
     }
 }

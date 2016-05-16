@@ -166,3 +166,20 @@ div.blocker {
         direction: ltr;
         cursor: pointer;
     }
+
+.r-highlight {
+    background-color: #f0e68c;
+}
+
+.r-normal {
+    background-color: white;
+}
+
+.space-5 {
+  margin: 5px 0;
+}
+
+.center-size-150 {
+    text-align: center;
+    width: 150px;
+}

@@ -134,6 +134,8 @@
         <AssociationConnector Association="CallCenterModel.FK_InfoClientTerminalFranchise_InfoClientTerminal" />
         <EntityTypeShape EntityType="CallCenterModel.ViewDailySales" Width="1.5" PointX="3.375" PointY="4.75" />
         <EntityTypeShape EntityType="CallCenterModel.ViewStoreCoverage" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseMap" Width="1.5" PointX="19.875" PointY="26.875" />
+        <AssociationConnector Association="CallCenterModel.FK_FranchiseMap_Franchise" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

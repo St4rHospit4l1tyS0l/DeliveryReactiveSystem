@@ -378,10 +378,26 @@ namespace Drs.Repository.Order
                 }).ToList();
         }
 
-        public string GetFranchiseNameById(int id)
+        public FranchiseMapModel GetFranchiseMapInfoById(int id)
         {
             return DbEntities.Franchise.Where(e => e.IsObsolete == false && e.FranchiseId == id)
-                .Select(e => e.Name).Single();
+                .Select(e => new FranchiseMapModel
+                {
+                    Id = id,
+                    Name = e.Name,
+                    Coverage = e.FranchiseMap.StoresCoverage,
+                    LastConfig = e.FranchiseMap.LastConfig
+                }).Single();
+        }
+
+        public List<ListItemModel> GetListStoresByFranchiseId(int id)
+        {
+            return DbEntities.FranchiseStore.Where(e => e.IsObsolete == false && e.FranchiseId == id)
+                .Select(e => new ListItemModel
+                {
+                    IdKey = e.FranchiseStoreId,
+                    Value = e.Name
+                }).ToList();
         }
     }
 }

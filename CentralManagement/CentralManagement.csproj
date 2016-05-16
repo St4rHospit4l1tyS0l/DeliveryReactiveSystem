@@ -231,6 +231,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\colorpicker.min.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg">
@@ -417,6 +418,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-ui\bootstrap-colorpicker-module.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-custom-0.13.0.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-custom-0.13.0.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-custom-tpls-0.13.0.js" />
@@ -427,6 +429,7 @@
     <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\ctrl\franchiseAssignCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeCoverageCtrl.js" />
     <Content Include="Scripts\app\ctrl\terminalCtrl.js" />
     <Content Include="Scripts\app\ctrl\licenseCtrl.js" />

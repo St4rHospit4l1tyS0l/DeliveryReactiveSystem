@@ -240,6 +240,14 @@
           <Property Name="IsObsolete" Type="bit" />
           <Property Name="UserUpdId" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="FranchiseMap">
+          <Key>
+            <PropertyRef Name="FranchiseId" />
+          </Key>
+          <Property Name="FranchiseId" Type="int" Nullable="false" />
+          <Property Name="LastConfig" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StoresCoverage" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="FranchisePhone">
           <Key>
             <PropertyRef Name="FranchisePhoneId" />
@@ -935,6 +943,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
               <PropertyRef Name="FranchiseId" />
             </Principal>
             <Dependent Role="FranchiseDataVersion">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseMap_Franchise">
+          <End Role="Franchise" Type="Self.Franchise" Multiplicity="1" />
+          <End Role="FranchiseMap" Type="Self.FranchiseMap" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Franchise">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="FranchiseMap">
               <PropertyRef Name="FranchiseId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1649,6 +1669,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="FranchiseData" EntityType="Self.FranchiseData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseDataFile" EntityType="Self.FranchiseDataFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseDataVersion" EntityType="Self.FranchiseDataVersion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FranchiseMap" EntityType="Self.FranchiseMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchisePhone" EntityType="Self.FranchisePhone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseStore" EntityType="Self.FranchiseStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseStoreOffLine" EntityType="Self.FranchiseStoreOffLine" Schema="dbo" store:Type="Tables" />
@@ -1812,6 +1833,10 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="FK_FranchiseDataVersion_Franchise" Association="Self.FK_FranchiseDataVersion_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
             <End Role="FranchiseDataVersion" EntitySet="FranchiseDataVersion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseMap_Franchise" Association="Self.FK_FranchiseMap_Franchise">
+            <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="FranchiseMap" EntitySet="FranchiseMap" />
           </AssociationSet>
           <AssociationSet Name="FK_FranchisePhone_AspNetUsers" Association="Self.FK_FranchisePhone_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2407,6 +2432,11 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           </AssociationSet>
           <EntitySet Name="ViewDailySales" EntityType="CallCenterModel.ViewDailySales" />
           <EntitySet Name="ViewStoreCoverage" EntityType="CallCenterModel.ViewStoreCoverage" />
+          <EntitySet Name="FranchiseMap" EntityType="CallCenterModel.FranchiseMap" />
+          <AssociationSet Name="FK_FranchiseMap_Franchise" Association="CallCenterModel.FK_FranchiseMap_Franchise">
+            <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="FranchiseMap" EntitySet="FranchiseMap" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -2648,6 +2678,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="FranchiseButton" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="Franchise" ToRole="FranchiseButton" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="Franchise" ToRole="OrderToStore" />
           <NavigationProperty Name="InfoClientTerminalFranchise" Relationship="CallCenterModel.FK_InfoClientTerminalFranchise_Franchise" FromRole="Franchise" ToRole="InfoClientTerminalFranchise" />
+          <NavigationProperty Name="FranchiseMap" Relationship="CallCenterModel.FK_FranchiseMap_Franchise" FromRole="Franchise" ToRole="FranchiseMap" />
         </EntityType>
         <EntityType Name="FranchiseData">
           <Key>
@@ -4082,6 +4113,27 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="CountStore" Type="Int32" Nullable="false" />
           <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="FranchiseMap">
+          <Key>
+            <PropertyRef Name="FranchiseId" />
+          </Key>
+          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
+          <Property Name="LastConfig" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StoresCoverage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseMap_Franchise" FromRole="FranchiseMap" ToRole="Franchise" />
+        </EntityType>
+        <Association Name="FK_FranchiseMap_Franchise">
+          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseMap" Role="FranchiseMap" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Franchise">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="FranchiseMap">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4751,6 +4803,15 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
                 <ScalarProperty Name="CountStore" ColumnName="CountStore" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FranchiseMap">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseMap">
+              <MappingFragment StoreEntitySet="FranchiseMap">
+                <ScalarProperty Name="StoresCoverage" ColumnName="StoresCoverage" />
+                <ScalarProperty Name="LastConfig" ColumnName="LastConfig" />
                 <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
               </MappingFragment>
             </EntityTypeMapping>
