@@ -60,7 +60,10 @@
                                     <div class="space-5"></div>
                                     <button ng-disabled="!currPolygonSel" class="btn btn-danger btn-sm center-size-150" type="button" ng-click="delCoverage()"><i class="fa fa-minus"></i>&nbsp;&nbsp; Quitar cobertura &nbsp;&nbsp;</button>
                                     <div class="space-15"></div>
-                                    <button ng-show="vm.stores && vm.stores.length > 0" class="btn btn-success btn-sm center-size-150" type="button" ng-click="save()"><i class="fa fa-save"></i>&nbsp;&nbsp; Guardar &nbsp;&nbsp;</button>
+                                    <button ng-show="vm.stores && vm.stores.length > 0" class="btn btn-success btn-sm center-size-150" type="button"
+                                            ng-click="save('@Url.Action("Save", "StoreCoverage", new { area = "Store" })')">
+                                        <i class="fa fa-save"></i>&nbsp;&nbsp; Guardar &nbsp;&nbsp;
+                                    </button>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -105,6 +108,8 @@
     <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
     <link href="~/Content/plugins/chosen/chosen.css" rel="stylesheet" />
     <link href="~/Content/colorpicker.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/toastr/toastr.min.css" rel="stylesheet">
+
     <style>
         #map {
             height: 100%;
@@ -122,6 +127,7 @@
     <script src="~/Scripts/app/shared/hiddenDrct.js"></script>
     <script src="~/Scripts/app/ctrl/franchiseAssignCtrl.js"></script>
     <script src="~/Scripts/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="~/Scripts/js/plugins/toastr/toastr.min.js"></script>
 
     <script type="text/javascript" language="javascript">
         function initMap() {
@@ -134,12 +140,21 @@
                 };
                 window.appGlobalMap = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-            } catch (e) {
+            } catch(e) {
                 console.log(e);
             }
         }
+
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: 'toast-top-right',
+            timeOut: 8000
+        };
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer>
+        
     </script>
 }
 

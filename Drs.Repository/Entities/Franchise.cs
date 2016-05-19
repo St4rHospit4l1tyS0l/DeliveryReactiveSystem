@@ -42,6 +42,6 @@ namespace Drs.Repository.Entities
         public virtual FranchiseButton FranchiseButton { get; set; }
         public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<InfoClientTerminalFranchise> InfoClientTerminalFranchise { get; set; }
-        public virtual FranchiseMap FranchiseMap { get; set; }
+        public virtual FranchiseCoverage FranchiseCoverage { get; set; }
     }
 }

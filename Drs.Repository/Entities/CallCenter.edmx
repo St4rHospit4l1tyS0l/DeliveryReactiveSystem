@@ -202,6 +202,27 @@
           <Property Name="Products" Type="nvarchar" MaxLength="200" />
           <Property Name="ResourceId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="FranchiseCoverage">
+          <Key>
+            <PropertyRef Name="FranchiseId" />
+          </Key>
+          <Property Name="FranchiseId" Type="int" Nullable="false" />
+          <Property Name="LastConfig" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StoresCoverage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TimestampInsUpd" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FranchiseCoverageLog">
+          <Key>
+            <PropertyRef Name="FranchiseCoverageLogId" />
+          </Key>
+          <Property Name="FranchiseCoverageLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FranchiseId" Type="int" Nullable="false" />
+          <Property Name="LastConfig" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StoresCoverage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserIdLog" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TimestampLog" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="FranchiseData">
           <Key>
             <PropertyRef Name="FranchiseId" />
@@ -239,14 +260,6 @@
           <Property Name="TimestampComplete" Type="datetime2" Precision="7" />
           <Property Name="IsObsolete" Type="bit" />
           <Property Name="UserUpdId" Type="nvarchar" MaxLength="128" />
-        </EntityType>
-        <EntityType Name="FranchiseMap">
-          <Key>
-            <PropertyRef Name="FranchiseId" />
-          </Key>
-          <Property Name="FranchiseId" Type="int" Nullable="false" />
-          <Property Name="LastConfig" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="StoresCoverage" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="FranchisePhone">
           <Key>
@@ -887,6 +900,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FranchiseCoverageLog_FranchiseCoverage">
+          <End Role="FranchiseCoverage" Type="Self.FranchiseCoverage" Multiplicity="1" />
+          <End Role="FranchiseCoverageLog" Type="Self.FranchiseCoverageLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseCoverage">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="FranchiseCoverageLog">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FranchiseData_Franchise">
           <End Role="Franchise" Type="Self.Franchise" Multiplicity="1" />
           <End Role="FranchiseData" Type="Self.FranchiseData" Multiplicity="0..1" />
@@ -949,12 +974,12 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
         </Association>
         <Association Name="FK_FranchiseMap_Franchise">
           <End Role="Franchise" Type="Self.Franchise" Multiplicity="1" />
-          <End Role="FranchiseMap" Type="Self.FranchiseMap" Multiplicity="0..1" />
+          <End Role="FranchiseCoverage" Type="Self.FranchiseCoverage" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Franchise">
               <PropertyRef Name="FranchiseId" />
             </Principal>
-            <Dependent Role="FranchiseMap">
+            <Dependent Role="FranchiseCoverage">
               <PropertyRef Name="FranchiseId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1666,10 +1691,11 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Franchise" EntityType="Self.Franchise" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseButton" EntityType="Self.FranchiseButton" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FranchiseCoverage" EntityType="Self.FranchiseCoverage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FranchiseCoverageLog" EntityType="Self.FranchiseCoverageLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseData" EntityType="Self.FranchiseData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseDataFile" EntityType="Self.FranchiseDataFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseDataVersion" EntityType="Self.FranchiseDataVersion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FranchiseMap" EntityType="Self.FranchiseMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchisePhone" EntityType="Self.FranchisePhone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseStore" EntityType="Self.FranchiseStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseStoreOffLine" EntityType="Self.FranchiseStoreOffLine" Schema="dbo" store:Type="Tables" />
@@ -1814,6 +1840,10 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="Resource" EntitySet="Resource" />
             <End Role="FranchiseButton" EntitySet="FranchiseButton" />
           </AssociationSet>
+          <AssociationSet Name="FK_FranchiseCoverageLog_FranchiseCoverage" Association="Self.FK_FranchiseCoverageLog_FranchiseCoverage">
+            <End Role="FranchiseCoverage" EntitySet="FranchiseCoverage" />
+            <End Role="FranchiseCoverageLog" EntitySet="FranchiseCoverageLog" />
+          </AssociationSet>
           <AssociationSet Name="FK_FranchiseData_Franchise" Association="Self.FK_FranchiseData_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
             <End Role="FranchiseData" EntitySet="FranchiseData" />
@@ -1836,7 +1866,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           </AssociationSet>
           <AssociationSet Name="FK_FranchiseMap_Franchise" Association="Self.FK_FranchiseMap_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
-            <End Role="FranchiseMap" EntitySet="FranchiseMap" />
+            <End Role="FranchiseCoverage" EntitySet="FranchiseCoverage" />
           </AssociationSet>
           <AssociationSet Name="FK_FranchisePhone_AspNetUsers" Association="Self.FK_FranchisePhone_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2432,10 +2462,15 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           </AssociationSet>
           <EntitySet Name="ViewDailySales" EntityType="CallCenterModel.ViewDailySales" />
           <EntitySet Name="ViewStoreCoverage" EntityType="CallCenterModel.ViewStoreCoverage" />
-          <EntitySet Name="FranchiseMap" EntityType="CallCenterModel.FranchiseMap" />
+          <EntitySet Name="FranchiseCoverage" EntityType="CallCenterModel.FranchiseCoverage" />
           <AssociationSet Name="FK_FranchiseMap_Franchise" Association="CallCenterModel.FK_FranchiseMap_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
-            <End Role="FranchiseMap" EntitySet="FranchiseMap" />
+            <End Role="FranchiseCoverage" EntitySet="FranchiseCoverage" />
+          </AssociationSet>
+          <EntitySet Name="FranchiseCoverageLog" EntityType="CallCenterModel.FranchiseCoverageLog" />
+          <AssociationSet Name="FK_FranchiseCoverageLog_FranchiseCoverage" Association="CallCenterModel.FK_FranchiseCoverageLog_FranchiseCoverage">
+            <End Role="FranchiseCoverage" EntitySet="FranchiseCoverage" />
+            <End Role="FranchiseCoverageLog" EntitySet="FranchiseCoverageLog" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Address">
@@ -2678,7 +2713,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="FranchiseButton" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="Franchise" ToRole="FranchiseButton" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="Franchise" ToRole="OrderToStore" />
           <NavigationProperty Name="InfoClientTerminalFranchise" Relationship="CallCenterModel.FK_InfoClientTerminalFranchise_Franchise" FromRole="Franchise" ToRole="InfoClientTerminalFranchise" />
-          <NavigationProperty Name="FranchiseMap" Relationship="CallCenterModel.FK_FranchiseMap_Franchise" FromRole="Franchise" ToRole="FranchiseMap" />
+          <NavigationProperty Name="FranchiseCoverage" Relationship="CallCenterModel.FK_FranchiseMap_Franchise" FromRole="Franchise" ToRole="FranchiseCoverage" />
         </EntityType>
         <EntityType Name="FranchiseData">
           <Key>
@@ -4113,23 +4148,50 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="CountStore" Type="Int32" Nullable="false" />
           <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="FranchiseMap">
+        <EntityType Name="FranchiseCoverage">
           <Key>
             <PropertyRef Name="FranchiseId" />
           </Key>
           <Property Name="FranchiseId" Type="Int32" Nullable="false" />
           <Property Name="LastConfig" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StoresCoverage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseMap_Franchise" FromRole="FranchiseMap" ToRole="Franchise" />
+          <Property Name="LastUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="TimestampInsUpd" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseMap_Franchise" FromRole="FranchiseCoverage" ToRole="Franchise" />
+          <NavigationProperty Name="FranchiseCoverageLog" Relationship="CallCenterModel.FK_FranchiseCoverageLog_FranchiseCoverage" FromRole="FranchiseCoverage" ToRole="FranchiseCoverageLog" />
         </EntityType>
         <Association Name="FK_FranchiseMap_Franchise">
           <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseMap" Role="FranchiseMap" Multiplicity="0..1" />
+          <End Type="CallCenterModel.FranchiseCoverage" Role="FranchiseCoverage" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Franchise">
               <PropertyRef Name="FranchiseId" />
             </Principal>
-            <Dependent Role="FranchiseMap">
+            <Dependent Role="FranchiseCoverage">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FranchiseCoverageLog">
+          <Key>
+            <PropertyRef Name="FranchiseCoverageLogId" />
+          </Key>
+          <Property Name="FranchiseCoverageLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
+          <Property Name="LastConfig" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StoresCoverage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserIdLog" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="TimestampLog" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FranchiseCoverage" Relationship="CallCenterModel.FK_FranchiseCoverageLog_FranchiseCoverage" FromRole="FranchiseCoverageLog" ToRole="FranchiseCoverage" />
+        </EntityType>
+        <Association Name="FK_FranchiseCoverageLog_FranchiseCoverage">
+          <End Type="CallCenterModel.FranchiseCoverage" Role="FranchiseCoverage" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseCoverageLog" Role="FranchiseCoverageLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseCoverage">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="FranchiseCoverageLog">
               <PropertyRef Name="FranchiseId" />
             </Dependent>
           </ReferentialConstraint>
@@ -4807,12 +4869,26 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FranchiseMap">
-            <EntityTypeMapping TypeName="CallCenterModel.FranchiseMap">
-              <MappingFragment StoreEntitySet="FranchiseMap">
+          <EntitySetMapping Name="FranchiseCoverage">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseCoverage">
+              <MappingFragment StoreEntitySet="FranchiseCoverage">
+                <ScalarProperty Name="TimestampInsUpd" ColumnName="TimestampInsUpd" />
+                <ScalarProperty Name="LastUserId" ColumnName="LastUserId" />
                 <ScalarProperty Name="StoresCoverage" ColumnName="StoresCoverage" />
                 <ScalarProperty Name="LastConfig" ColumnName="LastConfig" />
                 <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FranchiseCoverageLog">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseCoverageLog">
+              <MappingFragment StoreEntitySet="FranchiseCoverageLog">
+                <ScalarProperty Name="TimestampLog" ColumnName="TimestampLog" />
+                <ScalarProperty Name="UserIdLog" ColumnName="UserIdLog" />
+                <ScalarProperty Name="StoresCoverage" ColumnName="StoresCoverage" />
+                <ScalarProperty Name="LastConfig" ColumnName="LastConfig" />
+                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+                <ScalarProperty Name="FranchiseCoverageLogId" ColumnName="FranchiseCoverageLogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -137,7 +137,10 @@
     <Compile Include="Entities\Daily_Sales_group_by_date_Result.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\FranchiseMap.cs">
+    <Compile Include="Entities\FranchiseCoverage.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\FranchiseCoverageLog.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\InfoClientTerminalFranchise.cs">

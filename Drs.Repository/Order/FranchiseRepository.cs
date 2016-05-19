@@ -385,8 +385,8 @@ namespace Drs.Repository.Order
                 {
                     Id = id,
                     Name = e.Name,
-                    Coverage = e.FranchiseMap.StoresCoverage,
-                    LastConfig = e.FranchiseMap.LastConfig
+                    Coverage = e.FranchiseCoverage.StoresCoverage,
+                    LastConfig = e.FranchiseCoverage.LastConfig
                 }).Single();
         }
 
@@ -398,6 +398,49 @@ namespace Drs.Repository.Order
                     IdKey = e.FranchiseStoreId,
                     Value = e.Name
                 }).ToList();
+        }
+
+        public bool AnyFranchiseById(int id)
+        {
+            return DbEntities.Franchise.Any(e => e.FranchiseId == id && e.IsObsolete == false);
+        }
+
+        public FranchiseCoverage GetFranchiseCoverageById(int id)
+        {
+            return DbEntities.FranchiseCoverage.FirstOrDefault(e => e.FranchiseId == id);
+        }
+
+        public void BackupFranchiseCoverageById(FranchiseCoverage lastCoverage)
+        {
+            var model = new FranchiseCoverageLog
+            {
+                FranchiseId = lastCoverage.FranchiseId,
+                LastConfig = lastCoverage.LastConfig,
+                StoresCoverage = lastCoverage.StoresCoverage,
+                TimestampLog = lastCoverage.TimestampInsUpd,
+                UserIdLog = lastCoverage.LastUserId,
+            };
+
+            DbEntities.FranchiseCoverageLog.Add(model);
+            DbEntities.SaveChanges();
+        }
+
+        public void SaveFranchiseCoverage(FranchiseCoverageModel franchiseCoverage, FranchiseCoverage lastCoverage, string userId)
+        {
+            var bIsNew = lastCoverage == null;
+            if (bIsNew)
+                lastCoverage = new FranchiseCoverage();
+
+            lastCoverage.FranchiseId = franchiseCoverage.Id;
+            lastCoverage.LastConfig = franchiseCoverage.LastConfig;
+            lastCoverage.LastUserId = userId;
+            lastCoverage.StoresCoverage = franchiseCoverage.Stores;
+            lastCoverage.TimestampInsUpd = DateTime.Now;
+
+            if (bIsNew) 
+                DbEntities.FranchiseCoverage.Add(lastCoverage);
+            
+            DbEntities.SaveChanges();
         }
     }
 }

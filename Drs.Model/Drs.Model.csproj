@@ -130,6 +130,7 @@
     <Compile Include="Constants\ClientFlags.cs" />
     <Compile Include="Constants\OrderStatus.cs" />
     <Compile Include="Constants\RoleConstants.cs" />
+    <Compile Include="Franchise\FranchiseCoverageModel.cs" />
     <Compile Include="Franchise\FranchiseDataModel.cs" />
     <Compile Include="Franchise\FranchiseMapModel.cs" />
     <Compile Include="Franchise\FranchiseStoreWsInfo.cs" />

@@ -2250,7 +2250,7 @@ label.error {
   padding-right: 0.5em;
   margin: auto 0.5em auto -1.5em;
 }
-#toast-container > .toast-warning:before {
+/*#toast-container > .toast-warning:before {
   content: "\f003";
 }
 #toast-container > .toast-error:before {
@@ -2261,7 +2261,7 @@ label.error {
 }
 #toast-container > .toast-success:before {
   content: "\f00C";
-}
+}*/
 #toast-container > div {
   -moz-box-shadow: 0 0 3px #999;
   -webkit-box-shadow: 0 0 3px #999;

@@ -128,6 +128,7 @@
     <Compile Include="Configuration\SettingAddress.cs" />
     <Compile Include="Factory\FactoryAddress.cs" />
     <Compile Include="Factory\LangAddress.cs" />
+    <Compile Include="Franchise\FranchiseCoverageService.cs" />
     <Compile Include="Franchise\FranchiseSettingService.cs" />
     <Compile Include="Franchise\ISyncServerFilesService.cs" />
     <Compile Include="Franchise\PosService.cs" />

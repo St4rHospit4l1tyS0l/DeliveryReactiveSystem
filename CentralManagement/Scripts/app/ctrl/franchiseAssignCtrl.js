@@ -1,6 +1,6 @@
 ﻿window.angJsDependencies.push("colorpicker.module");
 
-app.controller('franchiseAssignController', function ($scope) {
+app.controller('franchiseAssignController', function ($scope, $http, $timeout) {
     $scope.m = {};
     $scope.vm = { stores: [] };
 
@@ -16,7 +16,67 @@ app.controller('franchiseAssignController', function ($scope) {
         }
 
         $scope.bStore = true;
+
+        $timeout(function () {
+            $scope.initMap();
+        }, 100);
     };
+
+    $scope.selectStoreById = function(id) {
+        for (var i = $scope.lstStores.length-1; i > -1; i--) {
+            var store = $scope.lstStores[i];
+            if (store.IdKey === id)
+                return store;
+        }
+        return undefined;
+    };
+
+    $scope.initMap = function () {
+
+        try {
+            var lastCfg = JSON.parse($scope.m.Franchise.LastConfig);
+            if (lastCfg && lastCfg.zoom) {
+                window.appGlobalMap.setCenter(new google.maps.LatLng(lastCfg.lat, lastCfg.lng));
+                window.appGlobalMap.setZoom(lastCfg.zoom);
+            }
+        } catch(e) {
+            console.log(e);
+        }
+
+        try {
+            var iStores = JSON.parse($scope.m.Franchise.Coverage);
+            console.log(iStores);
+            var stores = [];
+            var i, j, k;
+
+            for (i = iStores.length-1; i > -1; i--) {
+                var iStore = iStores[i];
+                var polygons = [];
+                for (j = iStore.paths.length-1; j > -1; j--) {
+                    var path = iStore.paths[j].path;
+                    var coordinates = [];
+                    for (k = path.length-1; k > -1; k--) {
+                        var vertex = path[k];
+                        var position = new google.maps.LatLng(vertex.lat, vertex.lng);
+                        coordinates.push(position);
+                    }
+                    var polygon = $scope.createPolygon(coordinates, iStore.color);
+                    polygons.push(polygon);
+                }
+                stores.push({
+                    item: $scope.selectStoreById(iStore.id),
+                    color: iStore.color,
+                    polygons: polygons
+                });
+            }
+
+            $scope.vm.stores = stores;
+
+        } catch(e) {
+            console.log(e);
+        } 
+    };
+
 
     $scope.createCoordinates = function () {
         var bound = window.appGlobalMap.getBounds();
@@ -186,8 +246,56 @@ app.controller('franchiseAssignController', function ($scope) {
         }
     };
 
-    $scope.save = function() {
+    $scope.save = function (url) {
+        try {
+            $scope.working = true;
+            var stores = $scope.vm.stores;
+            var lastConfig = { lat: window.appGlobalMap.center.lat(), lng: window.appGlobalMap.center.lng(), zoom: window.appGlobalMap.getZoom() };
+            var dataToSend = { Id: $scope.m.Franchise.Id, LastConfig: JSON.stringify(lastConfig) };
 
+            var storesToSend = [];
+            for (var i = stores.length - 1; i > -1; i--) {
+                var store = stores[i];
+
+                var paths = [];
+                for (var j = store.polygons.length - 1; j > -1; j--) {
+                    var polygon = store.polygons[j];
+                    var path = [];
+                    polygon.getPath().forEach(function (pos, index) {
+                        path.push({ i: index, lat: pos.lat(), lng: pos.lng() });
+                    });
+                    paths.push({ path: path });
+                }
+
+                storesToSend.push({ id: store.item.IdKey, color: store.color, paths: paths });
+            }
+
+            dataToSend.Stores = JSON.stringify(storesToSend);
+            $http.post(url, dataToSend).success($scope.handleSuccess).error($scope.handleError);
+            
+        } catch(e) {
+            $scope.working = false;
+            toastr.error("Se generó el siguiente error: " + e, "Error al guardar la información");
+        }
+
+    };
+
+    $scope.handleSuccess = function (res) {
+        $scope.working = false;
+        try {
+            if (res.HasError) {
+                toastr.error(res.Message, res.Title);
+            } else {
+                toastr.success(res.Message, res.Title);
+            }
+        } catch(e) {
+            toastr.error("Se generó el siguiente error: " + e, "Error al obtener la respuesta");
+        } 
+    };
+
+    $scope.handleError = function (e) {
+        $scope.working = false;
+        toastr.error("Error: " + e.data + " | Estatus: " + e.status, "Petición fallida");
     };
 
 });
