@@ -97,7 +97,7 @@
                 shrinkToFit: true,
                 sortorder: "desc",
                 caption: "",
-                add: true,
+                add: false,
                 edit: false,
                 addtext: 'Asignar',
                 altRows: true,
@@ -115,8 +115,7 @@
 
             jQuery("#GridId").jqGrid('navGrid', '#GridPager', {
                 edit: false,
-                add: true,
-                addfunc: window.upsert,
+                add: false,
                 refresh: true,
                 del: false,
                 search: false
