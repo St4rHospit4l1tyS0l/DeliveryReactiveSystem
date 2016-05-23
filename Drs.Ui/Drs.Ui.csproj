@@ -582,6 +582,12 @@
     <Content Include="Gmap\js\bootstrap.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Gmap\js\angularjs.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Gmap\js\app.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Gmap\js\main.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
