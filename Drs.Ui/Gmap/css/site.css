@@ -25,3 +25,23 @@
       .controls:focus {
         border-color: #4d90fe;
       }
+      
+.color-red {
+    color: red;
+}
+
+.color-blue {
+    color: blue;
+}
+
+.color-orange {
+    color: orange;
+}
+
+.color-greenyellow {
+    color: greenyellow;
+}
+
+.bkcol-black {
+    background-color: black
+}

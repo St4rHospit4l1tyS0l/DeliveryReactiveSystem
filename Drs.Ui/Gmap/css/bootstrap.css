@@ -5246,12 +5246,12 @@ a.thumbnail.active {
 }
 .list-group {
   padding-left: 0;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 .list-group-item {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 4px 5px;
   margin-bottom: -1px;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -5277,9 +5277,9 @@ a.list-group-item:hover,
 button.list-group-item:hover,
 a.list-group-item:focus,
 button.list-group-item:focus {
-  color: #555;
+  color: #FFF;
   text-decoration: none;
-  background-color: #f5f5f5;
+  background-color: #9500db;
 }
 button.list-group-item {
   width: 100%;
