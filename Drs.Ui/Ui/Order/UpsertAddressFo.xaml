@@ -6,28 +6,36 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:shared="clr-namespace:Drs.Ui.Ui.Shared"
              xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
-             mc:Ignorable="d" Height="900" Width="500" Header="Agregar / Actualizar dirección"
-                 Position="Left" IsOpen="{Binding IsOpen}" Theme="Adapt" IsModal="True" Margin="100,0,0,150" AnimateOnPositionChange="False" AnimateOpacity="False" >
+             mc:Ignorable="d" Height="900" Header="Agregar / Actualizar dirección"
+                 Position="Left" IsOpen="{Binding IsOpen}" Theme="Adapt" IsModal="True" Margin="100,0,0,150" AnimateOnPositionChange="False" 
+                 AnimateOpacity="False" IsVisibleChanged="Flyout_IsVisibleChanged" >
 
     <ContentControl.Resources>
         <DataTemplate DataType="{x:Type vmShr:AutoCompleteTextVm}">
             <shared:AutoCompleteGenericUc/>
         </DataTemplate>
     </ContentControl.Resources>
-    
+
     <StackPanel Margin="50 0" Orientation="Vertical"  VerticalAlignment="Stretch">
         <Rectangle Margin="0, 0, 0, 10" Stroke="{DynamicResource AccentColorBrush}" StrokeThickness="2" />
-        <StackPanel Orientation="Horizontal">
-            <RadioButton Content="Búsqueda por código" IsChecked="{Binding IsSearchByCode}" GroupName="SearchType"></RadioButton>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <RadioButton Content="Búsqueda por mapa" IsChecked="{Binding IsSearchByMap}" GroupName="SearchType"></RadioButton>
+            <RadioButton Margin="20,0,0,0" Content="Búsqueda por código" IsChecked="{Binding IsSearchByCode}" GroupName="SearchType"></RadioButton>
             <RadioButton Margin="20,0,0,0" Content="Búsqueda en cascada" IsChecked="{Binding IsSearchByWaterfall}" GroupName="SearchType"></RadioButton>
         </StackPanel>
         <Rectangle Margin="0, 10, 0, 10" Stroke="{DynamicResource AccentColorBrush}" StrokeThickness="2" />
-        <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.ZipCode.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.ZipCode.Visibility}"></TextBlock>
-        <ContentControl IsEnabled="{Binding IsZipCodeSearchEnabled}" Content="{Binding ZipCodeSearchVm}" Margin="25, 5, 0, 0" IsTabStop="False" VerticalAlignment="Center" Width="100" HorizontalAlignment="Left" FontSize="12" >
-        </ContentControl>
-        <TextBlock Margin="25, 10, 0, 0" Width="250" TextWrapping="Wrap" Text="{Binding ErrorSearch}" HorizontalAlignment="Left" Visibility="{Binding ErrorSearchVisibility}" Foreground="Red"></TextBlock>
-        <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.Country.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.Country.Visibility}"></TextBlock>
-        <ComboBox Width="200" Visibility="{Binding Controls.Country.Visibility}" HorizontalAlignment="Left"
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="20 10 0 10" Visibility="{Binding VisibilityMap}">
+                <WebBrowser Name="WebBrowser" Height="510" Width="910" Visibility="Hidden"/>
+            </StackPanel>
+            <Border Padding="0,0,20,10" BorderThickness="2,0,0,0" BorderBrush="#FFC3C3C3">
+                <StackPanel Orientation="Vertical" Visibility="{Binding VisibilityManual}">
+                    <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.ZipCode.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.ZipCode.Visibility}"></TextBlock>
+                    <ContentControl IsEnabled="{Binding IsZipCodeSearchEnabled}" Content="{Binding ZipCodeSearchVm}" Margin="25, 5, 0, 0" IsTabStop="False" VerticalAlignment="Center" Width="100" HorizontalAlignment="Left" FontSize="12" >
+                    </ContentControl>
+                    <TextBlock Margin="25, 10, 0, 0" Width="250" TextWrapping="Wrap" Text="{Binding ErrorSearch}" HorizontalAlignment="Left" Visibility="{Binding ErrorSearchVisibility}" Foreground="Red"></TextBlock>
+                    <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.Country.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.Country.Visibility}"></TextBlock>
+                    <ComboBox Width="200" Visibility="{Binding Controls.Country.Visibility}" HorizontalAlignment="Left"
                       Margin="25, 5, 0, 0"
                       Style="{DynamicResource VirtualisedMetroComboBox}"
                       DisplayMemberPath="Value"
@@ -37,8 +45,8 @@
                       ItemsSource="{Binding Countries}"
                       MaxDropDownHeight="125"
                       Text="{Binding Path=Value}" />
-        <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.RegionA.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.RegionA.Visibility}"></TextBlock>
-        <ComboBox Width="200" Visibility="{Binding Controls.RegionA.Visibility}"
+                    <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.RegionA.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.RegionA.Visibility}"></TextBlock>
+                    <ComboBox Width="200" Visibility="{Binding Controls.RegionA.Visibility}"
                       Margin="25, 5, 0, 0"
                       Style="{DynamicResource VirtualisedMetroComboBox}"
                       DisplayMemberPath="Value"
@@ -48,8 +56,8 @@
                       ItemsSource="{Binding RegionsA}"
                       MaxDropDownHeight="125" HorizontalAlignment="Left"
                       Text="{Binding Path=Value}" />
-        <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.RegionB.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.RegionB.Visibility}"></TextBlock>
-        <ComboBox Width="200" Visibility="{Binding Controls.RegionB.Visibility}"
+                    <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.RegionB.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.RegionB.Visibility}"></TextBlock>
+                    <ComboBox Width="200" Visibility="{Binding Controls.RegionB.Visibility}"
                       Margin="25, 5, 0, 0" HorizontalAlignment="Left"
                       Style="{DynamicResource VirtualisedMetroComboBox}"
                       DisplayMemberPath="Value"
@@ -59,8 +67,8 @@
                       ItemsSource="{Binding RegionsB}"
                       MaxDropDownHeight="125"
                       Text="{Binding Path=Value}" />
-        <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.RegionC.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.RegionC.Visibility}"></TextBlock>
-        <ComboBox Width="200" Visibility="{Binding Controls.RegionC.Visibility}"
+                    <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.RegionC.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.RegionC.Visibility}"></TextBlock>
+                    <ComboBox Width="200" Visibility="{Binding Controls.RegionC.Visibility}"
                       Margin="25, 5, 0, 0" HorizontalAlignment="Left"
                       Style="{DynamicResource VirtualisedMetroComboBox}"
                       DisplayMemberPath="Value"
@@ -70,8 +78,8 @@
                       ItemsSource="{Binding RegionsC}"
                       MaxDropDownHeight="125"
                       Text="{Binding Path=Value}" />
-        <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.RegionD.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.RegionD.Visibility}"></TextBlock>
-        <ComboBox Width="200" Visibility="{Binding Controls.RegionD.Visibility}"
+                    <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.RegionD.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.RegionD.Visibility}"></TextBlock>
+                    <ComboBox Width="200" Visibility="{Binding Controls.RegionD.Visibility}"
                       Margin="25, 5, 0, 0" HorizontalAlignment="Left"
                       Style="{DynamicResource VirtualisedMetroComboBox}"
                       DisplayMemberPath="Value"
@@ -81,21 +89,24 @@
                       ItemsSource="{Binding RegionsD}"
                       MaxDropDownHeight="125"
                       Text="{Binding Path=Value}" />
-        <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.MainAddress.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.MainAddress.Visibility}"></TextBlock>
-        <TextBox Width="250" Visibility="{Binding Controls.MainAddress.Visibility}" HorizontalAlignment="Left"
+                    <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.MainAddress.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.MainAddress.Visibility}"></TextBlock>
+                    <TextBox Width="200" Visibility="{Binding Controls.MainAddress.Visibility}" HorizontalAlignment="Left"
                       Margin="25, 5, 0, 0"
                       Text="{Binding MainAddress}" />
-        <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.Reference.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.Reference.Visibility}"></TextBlock>
-        <TextBox Width="250" Visibility="{Binding Controls.Reference.Visibility}" HorizontalAlignment="Left"
+                    <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.Reference.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.Reference.Visibility}"></TextBlock>
+                    <TextBox Width="200" Visibility="{Binding Controls.Reference.Visibility}" HorizontalAlignment="Left"
                       Margin="25, 5, 0, 0"
                       Text="{Binding Reference}" />
-        <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.NumExt.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.NumExt.Visibility}"></TextBlock>
-        <TextBox Width="100" Visibility="{Binding Controls.NumExt.Visibility}"
+                    <TextBlock Margin="25, 10, 0, 0" Width="200" Text="{Binding Controls.NumExt.Title}" HorizontalAlignment="Left" Visibility="{Binding Controls.NumExt.Visibility}"></TextBlock>
+                    <TextBox Width="100" Visibility="{Binding Controls.NumExt.Visibility}"
                       Margin="25, 5, 0, 0" HorizontalAlignment="Left"
                       Text="{Binding NumExt}" />
-        <TextBlock Margin="25, 10, 0, 0" Width="250" TextWrapping="Wrap" Text="{Binding ErrorUpsert}" HorizontalAlignment="Left" Visibility="{Binding ErrorUpsertVisibility}" Foreground="Red"></TextBlock>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <TextBlock Margin="25, 10, 0, 0" Width="450" TextWrapping="Wrap" Text="{Binding ErrorUpsert}" HorizontalAlignment="Left" Visibility="{Binding ErrorUpsertVisibility}" Foreground="Red"></TextBlock>
         <Rectangle Margin="0, 25, 0, 5" Stroke="{DynamicResource AccentColorBrush}" StrokeThickness="2" />
-        <StackPanel Margin="0,5,0,0"
+        <StackPanel Margin="0,0,0,0"
                     Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Margin="0,0,10,0" Content="  Agregar / Actualizar  " Style="{DynamicResource AccentedSquareButtonStyle}" 
                     Command="{Binding UpsertCommand}" controls:ButtonHelper.PreserveTextCase="True" />

@@ -14,8 +14,11 @@ namespace Drs.ViewModel.Order
         IReactiveCommand<Unit> UpsertCommand { get; }
         IAutoCompleteTextVm ZipCodeSearchVm{ get; }
         bool IsSearchByCode { get; set; }
+        bool IsSearchByMap { get; set; }
         bool IsSearchByWaterfall { get; set; }
         bool IsZipCodeSearchEnabled { get; set; }
+        Visibility VisibilityMap { get; set; }
+        Visibility VisibilityManual { get; set; }
         string ErrorSearch { get; set; }
         Visibility ErrorSearchVisibility { get; set; }
         string ErrorUpsert { get; set; }

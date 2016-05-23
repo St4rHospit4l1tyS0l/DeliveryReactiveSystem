@@ -135,6 +135,7 @@
     <Compile Include="Franchise\IPosService.cs" />
     <Compile Include="Franchise\SyncServerFilesService.cs" />
     <Compile Include="Franchise\FranchiseService.cs" />
+    <Compile Include="Map\HtmlInteropService.cs" />
     <Compile Include="Order\OrderService.cs" />
     <Compile Include="Franchise\IFranchiseService.cs" />
     <Compile Include="Order\IOrderService.cs" />
@@ -383,6 +384,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

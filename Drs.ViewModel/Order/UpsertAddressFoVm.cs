@@ -27,6 +27,7 @@ namespace Drs.ViewModel.Order
         private IAutoCompleteTextVm _zipCodeSearchVm;
         private AddressControlSetting _controls;
         private bool _isSearchByCode;
+        private bool _isSearchByMap;
         private bool _isSearchByWaterfall;
         private bool _isZipCodeSearchEnabled;
         private string _errorSearch;
@@ -47,6 +48,8 @@ namespace Drs.ViewModel.Order
         private string _reference;
         private string _numExt;
         private List<IReactiveList<ListItemModel>> _lstRegions;
+        private Visibility _visibilityMap;
+        private Visibility _visibilityManual;
 
         public UpsertAddressFoVm(IAutoCompleteTextVm zipCodeSearchVm, IReactiveDeliveryClient client)
         {
@@ -59,9 +62,12 @@ namespace Drs.ViewModel.Order
             ZipCodeSearchVm.ExecuteSearch += ExecuteSearchZipCode;
             ZipCodeSearchVm.DoExecuteEvent += OnSelectZipCode;
             Controls = SettingsData.Constants.AddressUpsertSetting;
-            IsSearchByCode = true;
+            IsSearchByCode = false;
             IsSearchByWaterfall = false;
+            IsSearchByMap = true;
             ErrorSearch = String.Empty;
+
+            ErrorUpsertVisibility = Visibility.Hidden; 
 
             Countries = new ReactiveList<ListItemModel>();
             RegionsA = new ReactiveList<ListItemModel>();
@@ -329,6 +335,33 @@ namespace Drs.ViewModel.Order
             }
         }
 
+        private void ChangeVisibilityMap(bool bEnable)
+        {
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                if (bEnable)
+                {
+                    VisibilityManual = Visibility.Collapsed;
+                    VisibilityMap = Visibility.Visible;
+                }
+                else
+                {
+                    VisibilityMap = Visibility.Collapsed;
+                    VisibilityManual = Visibility.Visible;
+                }
+            });
+        }
+
+        public bool IsSearchByMap
+        {
+            get { return _isSearchByMap; }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _isSearchByMap, value);
+                ChangeVisibilityMap(value);
+            }
+        }
+
         public bool IsSearchByWaterfall
         {
             get { return _isSearchByWaterfall; }
@@ -352,6 +385,24 @@ namespace Drs.ViewModel.Order
                 this.RaiseAndSetIfChanged(ref _isZipCodeSearchEnabled, value);
                 if (_isZipCodeSearchEnabled)
                     RxApp.MainThreadScheduler.Schedule(_ => CleanLists());
+            }
+        }
+
+        public Visibility VisibilityMap
+        {
+            get { return _visibilityMap; }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _visibilityMap, value);
+            }
+        }
+
+        public Visibility VisibilityManual
+        {
+            get { return _visibilityManual; }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _visibilityManual, value);
             }
         }
 
@@ -531,7 +582,8 @@ namespace Drs.ViewModel.Order
         public void Clean()
         {
             IsSearchByWaterfall = false;
-            IsSearchByCode = true;
+            IsSearchByCode = false;
+            IsSearchByMap = true;
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {

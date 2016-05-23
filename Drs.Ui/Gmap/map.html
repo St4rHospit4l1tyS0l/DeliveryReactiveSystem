@@ -1,0 +1,41 @@
+﻿<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User-editable Shapes</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+<body style="width: 910px !important; height: 500px !important; padding-left: 10px;" ng-app="gMap" ng-controller="gMapController">  <!--ng-init="init();"-->
+    <div class="row">
+        <div class="col-xs-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Búsqueda por:</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <br /><input type="text" class="form-control" placeholder="Código Postal" ng-model="zipCode"><br />
+                        <input type="text" class="form-control" placeholder="Colonia" ng-model="level4"><br />
+                        <input id="pac-input" class="controls" type="text"
+                               placeholder="Enter a location">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary text-center" ng-click="search()"><i class="glyphicon glyphicon-search"></i>&nbsp;&nbsp;Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-10">
+            <div class="gmap-col" id="map"></div>
+        </div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&callback=window.initCb" async defer></script>
+    <script src="js/main.js"></script>
+    <script src="js/angularjs.js"></script>
+    <script src="js/app.js"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
+</body>
+</html>
