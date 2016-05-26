@@ -31,6 +31,8 @@ namespace Drs.Repository.Order
             return DbEntities.Franchise.Where(e => e.IsObsolete == false && e.FranchiseButton.Position > 0).Select(e => new ButtonItemModel
                     {
                         Color = e.FranchiseButton.Color,
+                        LastConfig = e.FranchiseCoverage.LastConfig,
+                        StoresCoverage = e.FranchiseCoverage.StoresCoverage,
                         Title = e.ShortName,
                         Position = e.FranchiseButton.Position,
                         Image = e.FranchiseButton.Resource.UidFileName,

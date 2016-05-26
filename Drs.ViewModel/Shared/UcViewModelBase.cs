@@ -10,6 +10,7 @@ namespace Drs.ViewModel.Shared
     {
         private IShellContainerVm _shellContainerVm;
         protected List<IUcViewModel> LstChildren;
+
         //protected ICurrentUserSettings CurrentUserSettingsLogin;
 
         public UcViewModelBase()

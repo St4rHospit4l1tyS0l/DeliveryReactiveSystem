@@ -38,7 +38,7 @@ namespace Drs.ViewModel.Order
             if (item == null)
                 return;
 
-            SetNotCheckedButtons(new FranchiseInfoModel { Code = item.Code, Title = item.Title, DataInfo = item.DataInfo, PropagateOrder = model });
+            SetNotCheckedButtons(FranchiseVm.FactoryFranchiseModel(item, model));
 
             if (model.Order != null)
                 MessageBus.Current.SendMessage(model, SharedMessageConstants.PROPAGATE_LASTORDER_CLIENT);

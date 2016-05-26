@@ -120,4 +120,7 @@
   <data name="ERROR_NOT_VALID_OPERATOR" xml:space="preserve">
     <value>Operador de concatenación no válido</value>
   </data>
+  <data name="ERROR_RECURSION" xml:space="preserve">
+    <value>Error en la recursión: {0}.</value>
+  </data>
 </root>

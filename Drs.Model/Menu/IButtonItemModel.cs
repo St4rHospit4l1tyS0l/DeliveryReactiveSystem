@@ -9,6 +9,7 @@
         string Code { get; set; }
         string Description { get; set; }
         dynamic DataInfo { get; set; }
-
+        string LastConfig { get; set; }
+        string StoresCoverage { get; set; }
     }
 }

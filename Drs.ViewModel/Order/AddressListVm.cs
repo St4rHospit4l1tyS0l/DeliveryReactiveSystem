@@ -8,6 +8,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Drs.Infrastructure.Extensions.Enumerables;
+using Drs.Infrastructure.Logging;
 using Drs.Model.Address;
 using Drs.Model.Constants;
 using Drs.Model.Order;
@@ -91,7 +92,7 @@ namespace Drs.ViewModel.Order
                 address.IsSelected = false;
             }
 
-            if(addressSelection != null)
+            if (addressSelection != null)
                 addressSelection.IsSelected = true;
             else if (LstAddresses.Count > 0)
                 LstAddresses[0].IsSelected = true;
@@ -100,8 +101,8 @@ namespace Drs.ViewModel.Order
         public IReactiveCommand<Unit> RetrySaveItem { get; set; }
 
         public AddressControlSetting Setting { get; set; }
-        
-        
+
+
         public Func<ClientFlags.ValidateOrder, ResponseMessage> ValidateModel { get; set; }
 
         public void SetOrderModel(Func<OrderModel> orderModel)
@@ -112,7 +113,7 @@ namespace Drs.ViewModel.Order
         public void OnStoresReceivedByAddress(List<ItemCatalog> obj)
         {
             HasAdditionalLstStore = Visibility.Collapsed;
-            
+
             if (obj == null || obj.Count < 2)
                 return;
 
@@ -155,7 +156,7 @@ namespace Drs.ViewModel.Order
                 }
             }
 
-            if(bHasToSelect)
+            if (bHasToSelect)
                 RxApp.MainThreadScheduler.Schedule(_ => { AddressSelection = model; });
         }
 
@@ -279,18 +280,31 @@ namespace Drs.ViewModel.Order
         {
             await Task.Run(() =>
             {
-                var response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise);
-                if (response.IsSuccess == false)
+                try
                 {
+                    var response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise);
+                    if (response.IsSuccess == false)
+                    {
+                        MessageBus.Current.SendMessage(new MessageBoxSettings
+                        {
+                            Message = response.Message,
+                            Title = "Información faltante",
+                        }, SharedMessageConstants.MSG_SHOW_ERRQST);
+                        return;
+                    }
+                    UpsertAddress.Clean(_orderModel().Franchise);
+                    UpsertAddress.IsOpen = true;
+
+                }
+                catch (Exception ex)
+                {
+                    InternalLogger.WriteException(ex);
                     MessageBus.Current.SendMessage(new MessageBoxSettings
                     {
-                        Message = response.Message,
-                        Title = "Información faltante",
+                        Message = ex.Message,
+                        Title = "Agregar dirección",
                     }, SharedMessageConstants.MSG_SHOW_ERRQST);
-                    return;
                 }
-                UpsertAddress.Clean();
-                UpsertAddress.IsOpen = true;
             });
             return new Unit();
         }
@@ -299,12 +313,25 @@ namespace Drs.ViewModel.Order
         {
             await Task.Run(() =>
             {
-                var clInfo = oRow as AddressInfoGrid;
-                if (clInfo == null)
-                    return;
+                try
+                {
 
-                UpsertAddress.Fill(clInfo);
-                UpsertAddress.IsOpen = true;
+                    var clInfo = oRow as AddressInfoGrid;
+                    if (clInfo == null)
+                        return;
+
+                    UpsertAddress.Fill(clInfo, _orderModel().Franchise);
+                    UpsertAddress.IsOpen = true;
+                }
+                catch (Exception ex)
+                {
+                    InternalLogger.WriteException(ex);
+                    MessageBus.Current.SendMessage(new MessageBoxSettings
+                    {
+                        Message = ex.Message,
+                        Title = "Editar dirección",
+                    }, SharedMessageConstants.MSG_SHOW_ERRQST);
+                }
             });
             return new Unit();
         }
@@ -329,7 +356,7 @@ namespace Drs.ViewModel.Order
             await Task.Run(() =>
             {
                 var clInfo = oRow as AddressInfoGrid;
-                if (clInfo == null || clInfo.AddressInfo == null ||  clInfo.AddressInfo.PrimaryPhone == null || clInfo.AddressInfo.AddressId == null)
+                if (clInfo == null || clInfo.AddressInfo == null || clInfo.AddressInfo.PrimaryPhone == null || clInfo.AddressInfo.AddressId == null)
                     return;
 
                 MessageBus.Current.SendMessage(new MessageBoxSettings
@@ -385,7 +412,8 @@ namespace Drs.ViewModel.Order
 
         private void OnRemoveDone(IStale<ResponseMessageData<bool>> obj, AddressInfoGrid clInfo)
         {
-            if (obj.IsStale){
+            if (obj.IsStale)
+            {
                 OnRemoveError(Resources.Network.ResNetwork.ERROR_NETWORK_DOWN);
                 return;
             }
@@ -399,7 +427,7 @@ namespace Drs.ViewModel.Order
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
                 var client = LstAddresses.FirstOrDefault(e => e.PreId == clInfo.PreId);
-                if(client != null)
+                if (client != null)
                     LstAddresses.Remove(client);
             });
         }

@@ -9,5 +9,7 @@
         public string Code { get; set; }
         public string Description { get; set; }
         public dynamic DataInfo { get; set; }
+        public string LastConfig { get; set; }
+        public string StoresCoverage { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Reactive;
 using System.Windows;
 using Drs.Model.Address;
+using Drs.Model.Order;
 using Drs.Model.Shared;
 using Drs.ViewModel.Shared;
 using ReactiveUI;
@@ -33,10 +34,11 @@ namespace Drs.ViewModel.Order
         ListItemModel RegionBrSel { get; set; }
         ListItemModel RegionCrSel { get; set; }
         ListItemModel RegionDrSel { get; set; }
+        FranchiseInfoModel Franchise { get; set; }  
         string MainAddress { get; set; }
         string Reference { get; set; }
         string NumExt { get; set; }
-        void Fill(AddressInfoGrid clInfo);
-        void Clean();
+        void Fill(AddressInfoGrid clInfo, FranchiseInfoModel franchise);
+        void Clean(FranchiseInfoModel franchise);
     }
 }

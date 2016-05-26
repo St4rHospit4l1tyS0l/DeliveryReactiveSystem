@@ -21,10 +21,12 @@ namespace ConnectCallCenter.Hubs
         {
             try
             {
+                var lstData = AppInit.Container.Resolve<IFranchiseService>().GetFranchiseButtons();
+
                 return new ResponseMessageData<ButtonItemModel>
                 {
                     IsSuccess = true,
-                    LstData = AppInit.Container.Resolve<IFranchiseService>().GetFranchiseButtons(),
+                    LstData = lstData
                 };
             }
             catch (Exception ex)

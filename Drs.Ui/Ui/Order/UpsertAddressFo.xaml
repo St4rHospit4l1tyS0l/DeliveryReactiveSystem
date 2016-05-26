@@ -7,7 +7,7 @@
              xmlns:shared="clr-namespace:Drs.Ui.Ui.Shared"
              xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
              mc:Ignorable="d" Height="900" Header="Agregar / Actualizar dirección"
-                 Position="Left" IsOpen="{Binding IsOpen}" Theme="Adapt" IsModal="True" Margin="100,0,0,150" AnimateOnPositionChange="False" 
+                 Position="Left" IsOpen="{Binding IsOpen}" Theme="Adapt" IsModal="True" Margin="100,0,0,50" AnimateOnPositionChange="False" 
                  AnimateOpacity="False" IsVisibleChanged="Flyout_IsVisibleChanged" >
 
     <ContentControl.Resources>
@@ -26,7 +26,7 @@
         <Rectangle Margin="0, 10, 0, 10" Stroke="{DynamicResource AccentColorBrush}" StrokeThickness="2" />
         <StackPanel Orientation="Horizontal">
             <StackPanel Margin="20 10 0 10" Visibility="{Binding VisibilityMap}">
-                <WebBrowser Name="WebBrowser" Height="510" Width="1000" Visibility="Hidden"/>
+                <WebBrowser Name="WebBrowser" Height="610" Width="1000" Visibility="Hidden"/>
             </StackPanel>
             <Border Padding="0,0,20,10" BorderThickness="2,0,0,0" BorderBrush="#FFC3C3C3">
                 <StackPanel Orientation="Vertical" Visibility="{Binding VisibilityManual}">
@@ -105,7 +105,7 @@
             </Border>
         </StackPanel>
         <TextBlock Margin="25, 10, 0, 0" Width="450" TextWrapping="Wrap" Text="{Binding ErrorUpsert}" HorizontalAlignment="Left" Visibility="{Binding ErrorUpsertVisibility}" Foreground="Red"></TextBlock>
-        <Rectangle Margin="0, 25, 0, 5" Stroke="{DynamicResource AccentColorBrush}" StrokeThickness="2" />
+        <Rectangle Margin="0, 5, 0, 5" Stroke="{DynamicResource AccentColorBrush}" StrokeThickness="2" />
         <StackPanel Margin="0,0,0,0"
                     Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Margin="0,0,10,0" Content="  Agregar / Actualizar  " Style="{DynamicResource AccentedSquareButtonStyle}" 

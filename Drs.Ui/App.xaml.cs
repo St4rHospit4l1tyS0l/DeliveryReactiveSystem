@@ -41,7 +41,7 @@ namespace Drs.Ui
     public partial class App
     {
         private const string SIGNAL_ADDRESS = "http://localhost:41956";
-        private static readonly ILog Log = LogManager.GetLogger(typeof(App));
+        public static readonly ILog Log = LogManager.GetLogger(typeof(App));
         private const int MILI_SECONDS_TO_INIT = 1000;
         private IDisposable _signalr;
 

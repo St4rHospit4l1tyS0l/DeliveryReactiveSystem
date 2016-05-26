@@ -28,10 +28,16 @@ namespace Drs.ViewModel.Order
             Products = model.Description;
             Code = model.Code;
             DataInfo = model.DataInfo;
+            LastConfig = model.LastConfig;
+            StoresCoverage = model.StoresCoverage;
             _onToggleButton = onToggleButton;
             //ExecuteCommand = ReactiveCommand.Create(Observable.Return(true));;
             //ExecuteCommand.Subscribe(_ => ShellContainerVm.ChangeCurrentView(model.Code.ToEnum(), true));
         }
+
+        public string StoresCoverage { get; set; }
+
+        public string LastConfig { get; set; }
 
         public dynamic DataInfo { get; set; }
 
@@ -128,9 +134,23 @@ namespace Drs.ViewModel.Order
                 this.RaiseAndSetIfChanged(ref _isChecked, value);
                 if (_onToggleButton != null && value)
                 {
-                    _onToggleButton(new FranchiseInfoModel{Code = Code, Title = Title, DataInfo = DataInfo});
+                    _onToggleButton(FactoryFranchiseModel(this));
                 }
             }
         }
+
+        public static FranchiseInfoModel FactoryFranchiseModel(IFranchiseVm item, PropagateOrderModel model = null)
+        {
+            return new FranchiseInfoModel
+            {
+                Code = item.Code,
+                Title = item.Title,
+                DataInfo = item.DataInfo,
+                PropagateOrder = model,
+                LastConfig = item.LastConfig,
+                StoresCoverage = item.StoresCoverage
+            };
+        }
+
     }
 }

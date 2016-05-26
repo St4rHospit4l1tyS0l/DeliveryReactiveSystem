@@ -135,7 +135,6 @@
     <Compile Include="Franchise\IPosService.cs" />
     <Compile Include="Franchise\SyncServerFilesService.cs" />
     <Compile Include="Franchise\FranchiseService.cs" />
-    <Compile Include="Map\HtmlInteropService.cs" />
     <Compile Include="Order\OrderService.cs" />
     <Compile Include="Franchise\IFranchiseService.cs" />
     <Compile Include="Order\IOrderService.cs" />

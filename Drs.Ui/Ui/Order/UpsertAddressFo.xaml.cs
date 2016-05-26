@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using Drs.Service.Map;
+using Drs.Ui.Gmap;
 using Drs.ViewModel.Shared;
 
 namespace Drs.Ui.Ui.Order
@@ -38,7 +38,7 @@ namespace Drs.Ui.Ui.Order
         {
             if (IsOpen)
             {
-                WebBrowser.ObjectForScripting = new HtmlInteropService();
+                WebBrowser.ObjectForScripting = new HtmlInteropService(this);
                 var uri = new Uri(_url);
                 WebBrowser.Navigate(uri);
 
@@ -68,11 +68,6 @@ namespace Drs.Ui.Ui.Order
                 WebBrowser.Visibility = Visibility.Visible;
             });
         }
-
-
-        //private void Storyboard_OnCompleted(object sender, DependencyPropertyChangedEventArgs e)
-        //{
-        //  FirstName.Focus();
-        //}
+        
     }
 }

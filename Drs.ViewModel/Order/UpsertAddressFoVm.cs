@@ -10,6 +10,7 @@ using System.Windows;
 using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Model.Address;
 using Drs.Model.Constants;
+using Drs.Model.Order;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
 using Drs.Service.ReactiveDelivery;
@@ -506,6 +507,8 @@ namespace Drs.ViewModel.Order
             }
         }
 
+        public FranchiseInfoModel Franchise { get; set; }  
+
         public ListItemModel RegionArSel
         {
             get { return _regionArSel; }
@@ -579,11 +582,12 @@ namespace Drs.ViewModel.Order
         }
 
 
-        public void Clean()
+        public void Clean(FranchiseInfoModel franchise)
         {
             IsSearchByWaterfall = false;
             IsSearchByCode = false;
             IsSearchByMap = true;
+            Franchise = franchise;
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
@@ -608,10 +612,11 @@ namespace Drs.ViewModel.Order
             });
         }
 
-        public void Fill(AddressInfoGrid clInfo)
+        public void Fill(AddressInfoGrid clInfo, FranchiseInfoModel franchise)
         {
             IsSearchByWaterfall = false;
             IsSearchByCode = true;
+            Franchise = franchise;
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {

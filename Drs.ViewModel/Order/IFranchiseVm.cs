@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Media;
+using Drs.Model.Order;
 using Drs.ViewModel.Shared;
 using ReactiveUI;
 
@@ -16,6 +17,7 @@ namespace Drs.ViewModel.Order
         string Code { get; set; }
         bool IsChecked { get; set; }
         dynamic DataInfo { get; set; }
-
+        string StoresCoverage { get; set; }
+        string LastConfig { get; set; }
     }
 }

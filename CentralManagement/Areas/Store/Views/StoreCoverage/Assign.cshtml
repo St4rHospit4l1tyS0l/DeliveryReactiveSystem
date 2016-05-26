@@ -59,7 +59,9 @@
                                     <button ng-disabled="!selStore || !selColor" class="btn btn-info btn-sm center-size-150" type="button" ng-click="addCoverage()"><i class="fa fa-plus"></i>&nbsp;&nbsp; Agregar cobertura</button>
                                     <div class="space-5"></div>
                                     <button ng-disabled="!currPolygonSel" class="btn btn-danger btn-sm center-size-150" type="button" ng-click="delCoverage()"><i class="fa fa-minus"></i>&nbsp;&nbsp; Quitar cobertura &nbsp;&nbsp;</button>
-                                    <div class="space-15"></div>
+                                    <div class="space-5"></div>
+                                    <button ng-disabled="!selStore" class="btn btn-warning btn-sm center-size-150" type="button" ng-click="setStoreLocation()"><i class="fa fa-crosshairs"></i>&nbsp;&nbsp; Establecer tienda</button>
+                                    <div class="space-20"></div>
                                     <button ng-show="vm.stores && vm.stores.length > 0" class="btn btn-success btn-sm center-size-150" type="button"
                                             ng-click="save('@Url.Action("Save", "StoreCoverage", new { area = "Store" })')">
                                         <i class="fa fa-save"></i>&nbsp;&nbsp; Guardar &nbsp;&nbsp;

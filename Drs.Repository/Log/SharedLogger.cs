@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Web.Script.Serialization;
+using Drs.Infrastructure.Logging;
 using Drs.Repository.Entities;
 using Drs.Repository.Resources;
 using log4net;
@@ -20,8 +21,8 @@ namespace Drs.Repository.Log
 
                 modelExcep.MsgException = ex.Message;
                 modelExcep.ExceptionLogUid = Guid.NewGuid();
-                modelExcep.InnerException = GetInnerExceptions(ex);
-                modelExcep.ParamsValues = GetSerializedValues(arrVal);
+                modelExcep.InnerException = InternalLogger.GetInnerExceptions(ex);
+                modelExcep.ParamsValues = InternalLogger.GetSerializedValues(arrVal);
                 modelExcep.StackTrace = ex.StackTrace;
                 modelExcep.Timestamp = DateTime.Now;
                 modelExcep.Username = username;
@@ -42,8 +43,8 @@ namespace Drs.Repository.Log
 
                 modelExcep.MsgException = ex.Message;
                 modelExcep.ExceptionLogUid = Guid.NewGuid();
-                modelExcep.InnerException = GetInnerExceptions(ex);
-                modelExcep.ParamsValues = GetSerializedValues(arrVal);
+                modelExcep.InnerException = InternalLogger.GetInnerExceptions(ex);
+                modelExcep.ParamsValues = InternalLogger.GetSerializedValues(arrVal);
                 modelExcep.StackTrace = ex.StackTrace;
                 modelExcep.Timestamp = DateTime.Now;
                 modelExcep.Username = username;
@@ -93,36 +94,6 @@ namespace Drs.Repository.Log
             catch (Exception)
             {
                 return string.Format(ResShared.ERROR_RECURSION, "GetSerializedValue");
-            }
-        }
-
-
-        private static string GetSerializedValues(object[] arrVal)
-        {
-            try
-            {
-                dynamic serializer = new JavaScriptSerializer();
-                return serializer.Serialize(arrVal);
-            }
-            catch (Exception)
-            {
-                return string.Format(ResShared.ERROR_RECURSION, "GetSerializedValues");
-            }
-        }
-
-        private static string GetInnerExceptions(Exception exception)
-        {
-            try
-            {
-                if (exception.InnerException == null)
-                {
-                    return "|EOE|";
-                }
-                return string.Format("|{0}|{1}", exception.InnerException.Message, GetInnerExceptions(exception.InnerException));
-            }
-            catch (Exception)
-            {
-                return string.Format(ResShared.ERROR_RECURSION, "GetInnerExceptions");
             }
         }
 

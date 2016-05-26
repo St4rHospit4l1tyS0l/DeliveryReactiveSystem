@@ -190,8 +190,7 @@ namespace Drs.Service.Client
 
         public void ProcessFranchise(FranchiseInfoModel franchiseInfo)
         {
-            _model.Franchise.Code = franchiseInfo.Code;
-            _model.Franchise.Title = franchiseInfo.Title;
+            franchiseInfo.CopyTo(_model.Franchise);
             _model.Franchise.Status = SharedConstants.Client.RECORD_SAVED;
             OnFranchiseChanged(franchiseInfo);
         }

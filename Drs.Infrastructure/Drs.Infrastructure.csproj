@@ -142,6 +142,7 @@
     <Compile Include="Logging\DebugLoggerFactory.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Logging\ILog.cs" />
+    <Compile Include="Logging\InternalLogger.cs" />
     <Compile Include="Model\ConnectionFullModel.cs" />
     <Compile Include="Model\GetDevice.cs" />
     <Compile Include="Model\ConnectionInfoResponse.cs" />

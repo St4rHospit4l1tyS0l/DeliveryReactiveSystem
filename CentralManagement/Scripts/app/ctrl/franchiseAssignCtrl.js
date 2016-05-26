@@ -45,8 +45,8 @@ app.controller('franchiseAssignController', function ($scope, $http, $timeout) {
 
         try {
             var iStores = JSON.parse($scope.m.Franchise.Coverage);
-            console.log(iStores);
-            var stores = [];
+            //console.log(iStores);
+            var stores = [], position;
             var i, j, k;
 
             for (i = iStores.length-1; i > -1; i--) {
@@ -57,17 +57,25 @@ app.controller('franchiseAssignController', function ($scope, $http, $timeout) {
                     var coordinates = [];
                     for (k = path.length-1; k > -1; k--) {
                         var vertex = path[k];
-                        var position = new google.maps.LatLng(vertex.lat, vertex.lng);
+                        position = new google.maps.LatLng(vertex.lat, vertex.lng);
                         coordinates.push(position);
                     }
                     var polygon = $scope.createPolygon(coordinates, iStore.color);
                     polygons.push(polygon);
                 }
-                stores.push({
+
+                var store = {
                     item: $scope.selectStoreById(iStore.id),
                     color: iStore.color,
                     polygons: polygons
-                });
+                };
+
+                if (iStore.position) {
+                    position = new google.maps.LatLng(iStore.position.lat, iStore.position.lng);
+                    createMarker(position, iStore.name, iStore.color, store.item);
+                }
+                
+                stores.push(store);
             }
 
             $scope.vm.stores = stores;
@@ -214,6 +222,7 @@ app.controller('franchiseAssignController', function ($scope, $http, $timeout) {
                 continue;
 
             store.color = $scope.selColor;
+            $scope.selStore.marker.setIcon(pinSymbol($scope.selColor));
 
             for (var j = 0; j < store.polygons.length; j++) {
                 var polygon = store.polygons[j];
@@ -245,6 +254,50 @@ app.controller('franchiseAssignController', function ($scope, $http, $timeout) {
             }
         }
     };
+    
+    function pinSymbol(color) {
+        return {
+            path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
+            fillColor: color,
+            fillOpacity: 1,
+            strokeColor: '#000',
+            strokeWeight: 2,
+            scale: 1,
+        };
+    }
+
+    function createMarker(position, title, color, store) {
+        store.marker = new google.maps.Marker({
+            map: window.appGlobalMap,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: position,
+            visible: true,
+            icon: pinSymbol(color),
+            title: title
+        });
+        store.infoWindow = new google.maps.InfoWindow({
+            content: '<div id="content"><div id="siteNotice"></div><h5 id="firstHeading" class="firstHeading">' + title + '</h5></div></div>'
+        });
+        store.marker.addListener('click', function () {
+            store.infoWindow.open(window.appGlobalMap, store.marker);
+        });
+    }
+
+    $scope.setStoreLocation = function () {
+        var selStore = $scope.selStore;
+        if (!selStore)
+            return;
+
+        var center = window.appGlobalMap.getCenter();
+
+        if (selStore.marker) {
+            selStore.marker.setPosition(center);
+        }
+        else {
+            createMarker(center, selStore.Value, $scope.selColor, selStore);
+        }
+    };
 
     $scope.save = function (url) {
         try {
@@ -266,8 +319,12 @@ app.controller('franchiseAssignController', function ($scope, $http, $timeout) {
                     });
                     paths.push({ path: path });
                 }
-
-                storesToSend.push({ id: store.item.IdKey, color: store.color, paths: paths });
+                var storeObj = { id: store.item.IdKey, color: store.color, paths: paths, name: store.item.Value };
+                if (store.item.marker) {
+                    var mkPos = store.item.marker.getPosition();
+                    storeObj.position = {lat: mkPos.lat(), lng: mkPos.lng()};
+                }
+                storesToSend.push(storeObj);
             }
 
             dataToSend.Stores = JSON.stringify(storesToSend);
