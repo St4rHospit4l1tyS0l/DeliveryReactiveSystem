@@ -14,6 +14,11 @@ namespace Drs.Model.Address
 
     public class AddressInfoModel : RecordModel
     {
+        public AddressInfoModel()
+        {
+            IsMap = false;
+        }
+
         public int? AddressId { get; set; }
         public string MainAddress { get; set; }
         public string ExtIntNumber { get; set; }
@@ -25,6 +30,11 @@ namespace Drs.Model.Address
         public ListItemModel RegionD { get; set; }
         public ListItemModel ZipCode { get; set; }
         public PhoneModel PrimaryPhone { get; set; }
+        public string PlaceId { get; set; }
+        public int[] StoreCoverageIds { get; set; }
+        public string Lat { get; set; }
+        public string Lng { get; set; }
+        public bool IsMap { get; set; }
     }
 
     public class AddressInfoGrid : RecordModel, INotifyPropertyChanged

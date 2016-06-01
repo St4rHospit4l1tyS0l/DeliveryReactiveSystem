@@ -21,7 +21,8 @@ namespace Drs.Repository.Setting
                     Container = e.Container,
                     ControlName = e.ControlName,
                     Name = e.Name,
-                    IsEnabled = e.IsEnabled
+                    IsEnabled = e.IsEnabled,
+                    Validation = e.Validation
                 }).ToList();
         }
     }

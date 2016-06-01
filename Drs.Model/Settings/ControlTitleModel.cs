@@ -16,5 +16,8 @@ namespace Drs.Model.Settings
 
         [DataMember]
         public bool IsEnabled { get; set; }
+
+        [DataMember]
+        public string Validation { get; set; }
     }
 }

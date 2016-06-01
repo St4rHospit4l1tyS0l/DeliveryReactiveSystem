@@ -17,20 +17,30 @@ namespace Drs.Repository.Entities
         public Address()
         {
             this.FranchiseStore = new HashSet<FranchiseStore>();
-            this.ClientPhone = new HashSet<ClientPhone>();
             this.OrderToStore = new HashSet<OrderToStore>();
+            this.ClientPhone = new HashSet<ClientPhone>();
         }
     
         public int AddressId { get; set; }
         public string MainAddress { get; set; }
         public string ExtIntNumber { get; set; }
         public string Reference { get; set; }
-        public int CountryId { get; set; }
+        public Nullable<int> CountryId { get; set; }
+        public string CountryName { get; set; }
         public Nullable<int> RegionArId { get; set; }
+        public string RegionNameA { get; set; }
         public Nullable<int> RegionBrId { get; set; }
+        public string RegionNameB { get; set; }
         public Nullable<int> RegionCrId { get; set; }
+        public string RegionNameC { get; set; }
         public Nullable<int> RegionDrId { get; set; }
+        public string RegionNameD { get; set; }
         public Nullable<int> ZipCodeId { get; set; }
+        public string ZipCodeValue { get; set; }
+        public bool IsMap { get; set; }
+        public string PlaceId { get; set; }
+        public string Lat { get; set; }
+        public string Lng { get; set; }
     
         public virtual Country Country { get; set; }
         public virtual RegionA RegionA { get; set; }
@@ -39,7 +49,7 @@ namespace Drs.Repository.Entities
         public virtual RegionD RegionD { get; set; }
         public virtual ZipCode ZipCode { get; set; }
         public virtual ICollection<FranchiseStore> FranchiseStore { get; set; }
-        public virtual ICollection<ClientPhone> ClientPhone { get; set; }
         public virtual ICollection<OrderToStore> OrderToStore { get; set; }
+        public virtual ICollection<ClientPhone> ClientPhone { get; set; }
     }
 }

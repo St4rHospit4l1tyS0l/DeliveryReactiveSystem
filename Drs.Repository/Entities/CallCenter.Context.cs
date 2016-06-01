@@ -25,7 +25,6 @@ namespace Drs.Repository.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<AddressHierarchy> AddressHierarchy { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -39,7 +38,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<ClientStatistics> ClientStatistics { get; set; }
         public virtual DbSet<Company> Company { get; set; }
         public virtual DbSet<Control> Control { get; set; }
-        public virtual DbSet<ControlTitle> ControlTitle { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Franchise> Franchise { get; set; }
         public virtual DbSet<FranchiseData> FranchiseData { get; set; }
@@ -79,5 +77,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<ViewStoreCoverage> ViewStoreCoverage { get; set; }
         public virtual DbSet<FranchiseCoverage> FranchiseCoverage { get; set; }
         public virtual DbSet<FranchiseCoverageLog> FranchiseCoverageLog { get; set; }
+        public virtual DbSet<ControlTitle> ControlTitle { get; set; }
+        public virtual DbSet<Address> Address { get; set; }
     }
 }

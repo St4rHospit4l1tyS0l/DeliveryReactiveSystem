@@ -4,6 +4,7 @@ using System.Linq;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
 using Drs.Repository.Setting;
+using Newtonsoft.Json.Linq;
 
 namespace Drs.Service.Settings
 {
@@ -214,7 +215,8 @@ namespace Drs.Service.Settings
                     {
                         Title = e.Name,
                         IsEnabled = e.IsEnabled,
-                        Name = sControl
+                        Name = sControl,
+                        Validation = JObject.Parse(e.Validation)
                     }).Single();
             }
             catch (Exception)

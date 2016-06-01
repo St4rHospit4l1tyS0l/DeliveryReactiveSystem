@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using Drs.Model.Address;
 using Drs.Model.Constants;
 using Drs.Model.Settings;
@@ -63,13 +64,21 @@ namespace Drs.Service.Address
         {
             using (_repository)
             {
-                if (model.ZipCode == null || model.ZipCode.IdKey == null || model.ZipCode.IdKey <= 0)
+                if (model.IsMap)
                 {
-                    var lastRegion = SettingsData.LastRegion;
-                    model.ZipCode = FactoryAddress.GetQueryToGetByZipCodeId(_repository.InnerDbEntities, lastRegion, model);
+                    model.AddressId = _repository.SaveAddressMap(model, model.AddressId == null || model.AddressId == SharedConstants.NULL_ID_VALUE);
                 }
+                else
+                {
+                    if (model.ZipCode == null || model.ZipCode.IdKey == null || model.ZipCode.IdKey <= 0)
+                    {
+                        var lastRegion = SettingsData.LastRegion;
+                        model.ZipCode = FactoryAddress.GetQueryToGetByZipCodeId(_repository.InnerDbEntities, lastRegion, model);
+                    }
 
-                model.AddressId = _repository.SaveAddress(model, model.AddressId == null || model.AddressId == SharedConstants.NULL_ID_VALUE);
+                    model.AddressId = _repository.SaveAddress(model, model.AddressId == null || model.AddressId == SharedConstants.NULL_ID_VALUE);
+
+                }
 
                 return new ResponseMessageData<AddressInfoModel>
                 {

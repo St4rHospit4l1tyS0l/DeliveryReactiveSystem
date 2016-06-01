@@ -16,7 +16,7 @@ namespace Drs.Repository.Address
         }
 
         public AddressRepository(CallCenterEntities callCenter)
-            :base(callCenter)
+            : base(callCenter)
         {
         }
 
@@ -42,10 +42,10 @@ namespace Drs.Repository.Address
                 .Select(e => new ListItemModel { Value = e.Code, Key = e.ZipCodeId.ToString() })
                 .OrderBy(e => e.Value)
                 .Take(maxResultsOnQuery)
-                .ToList();    
+                .ToList();
         }
 
-        public int? SaveAddress(AddressInfoModel model, bool bIsNew)
+        public int SaveAddress(AddressInfoModel model, bool bIsNew)
         {
             var address = bIsNew ? new Entities.Address() : DbEntities.Address.Single(e => e.AddressId == model.AddressId);
 
@@ -78,6 +78,44 @@ namespace Drs.Repository.Address
             return address.AddressId;
         }
 
+
+        public int SaveAddressMap(AddressInfoModel model, bool bIsNew)
+        {
+            var address = bIsNew ? new Entities.Address() : DbEntities.Address.Single(e => e.AddressId == model.AddressId);
+
+            var phoneToAdd = new ClientPhone { ClientPhoneId = model.PrimaryPhone.PhoneId };
+            DbEntities.ClientPhone.Attach(phoneToAdd);
+
+            for (var i = address.ClientPhone.Count - 1; i >= 0; i--)
+            {
+                var phone = address.ClientPhone.ElementAt(i);
+                address.ClientPhone.Remove(phone);
+            }
+
+            address.ClientPhone.Add(phoneToAdd);
+
+            address.CountryName = model.Country.Value;
+            address.RegionNameA = model.RegionA.Value;
+            address.RegionNameB = model.RegionB.Value;
+            address.RegionNameC = model.RegionC.Value;
+            address.RegionNameD = model.RegionD.Value;
+            address.ZipCodeValue = model.ZipCode.Value;
+
+            address.PlaceId = model.PlaceId;
+            address.Lat = model.Lat;
+            address.Lng = model.Lng;
+
+            address.ExtIntNumber = model.ExtIntNumber;
+            address.MainAddress = model.MainAddress;
+            address.Reference = model.Reference;
+
+            if (bIsNew)
+                DbEntities.Address.Add(address);
+            DbEntities.SaveChanges();
+
+            return address.AddressId;
+        }
+
         public IEnumerable<AddressInfoModel> SearchAddressByPhoneId(int phoneId)
         {
             return DbEntities.ClientPhone.Where(e => e.ClientPhoneId == phoneId)
@@ -88,35 +126,44 @@ namespace Drs.Repository.Address
                     e.Phone,
                     i.ClientPhone,
                     i.CountryId,
-                    CountryName = i.Country.Name,
+                    CountryName = i.IsMap ? i.CountryName : i.Country.Name,
                     i.ExtIntNumber,
                     i.MainAddress,
                     i.Reference,
                     i.RegionArId,
-                    RegionArName = i.RegionA.Name,
+                    RegionArName = i.IsMap ? i.RegionNameA : i.RegionA.Name,
                     i.RegionBrId,
-                    RegionBrName = i.RegionB.Name,
+                    RegionBrName = i.IsMap ? i.RegionNameB : i.RegionB.Name,
                     i.RegionCrId,
-                    RegionCrName = i.RegionC.Name,
+                    RegionCrName = i.IsMap ? i.RegionNameC : i.RegionC.Name,
                     i.RegionDrId,
-                    RegionDrName = i.RegionD.Name,
+                    RegionDrName = i.IsMap ? i.RegionNameD : i.RegionD.Name,
                     i.ZipCodeId,
-                    i.ZipCode.Code
+                    Code = i.IsMap ? i.ZipCodeValue : i.ZipCode.Code,
+                    i.IsMap,
+                    i.Lat,
+                    i.Lng,
+                    i.PlaceId
                 }))
                 .Select(e => new AddressInfoModel
-            {
-                AddressId = e.AddressId,
-                Country = new ListItemModel { IdKey = e.CountryId, Value = e.CountryName},
-                ExtIntNumber = e.ExtIntNumber,
-                MainAddress = e.MainAddress,
-                PrimaryPhone = new PhoneModel { Phone = e.Phone, PhoneId = e.ClientPhoneId },
-                Reference = e.Reference,
-                RegionA = new ListItemModel { IdKey = e.RegionArId, Value = e.RegionArName },
-                RegionB = new ListItemModel { IdKey = e.RegionBrId, Value = e.RegionBrName },
-                RegionC = new ListItemModel { IdKey = e.RegionCrId, Value = e.RegionCrName },
-                RegionD = new ListItemModel { IdKey = e.RegionDrId, Value = e.RegionDrName },
-                ZipCode = new ListItemModel { IdKey = e.ZipCodeId, Value = e.Code },
-            }).ToList();
+                    {
+                        AddressId = e.AddressId,
+                        Country = new ListItemModel { IdKey = e.CountryId, Value = e.CountryName },
+                        ExtIntNumber = e.ExtIntNumber,
+                        MainAddress = e.MainAddress,
+                        PrimaryPhone = new PhoneModel { Phone = e.Phone, PhoneId = e.ClientPhoneId },
+                        Reference = e.Reference,
+                        RegionA = new ListItemModel { IdKey = e.RegionArId, Value = e.RegionArName },
+                        RegionB = new ListItemModel { IdKey = e.RegionBrId, Value = e.RegionBrName },
+                        RegionC = new ListItemModel { IdKey = e.RegionCrId, Value = e.RegionCrName },
+                        RegionD = new ListItemModel { IdKey = e.RegionDrId, Value = e.RegionDrName },
+                        ZipCode = new ListItemModel { IdKey = e.ZipCodeId, Value = e.Code },
+                        IsMap = e.IsMap,
+                        Lat = e.Lat,
+                        Lng = e.Lng,
+                        PlaceId = e.PlaceId,
+                    }
+            ).ToList();
         }
 
         public int Add(AddressModel model)

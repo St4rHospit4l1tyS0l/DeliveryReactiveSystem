@@ -20,5 +20,6 @@ namespace Drs.Repository.Entities
         public int LanguageId { get; set; }
         public string Name { get; set; }
         public bool IsEnabled { get; set; }
+        public string Validation { get; set; }
     }
 }

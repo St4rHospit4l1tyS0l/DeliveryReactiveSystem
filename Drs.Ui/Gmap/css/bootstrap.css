@@ -2264,7 +2264,7 @@ th {
 .table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -2272,8 +2272,8 @@ th {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-  padding: 8px;
-  line-height: 1.42857143;
+  padding: 6px;
+  line-height: 0.42857143;
   vertical-align: top;
   border-top: 1px solid #ddd;
 }
@@ -5462,7 +5462,7 @@ button.list-group-item-danger.active:focus {
   line-height: 1.3;
 }
 .panel {
-  margin-bottom: 20px;
+  margin-bottom: 4px;
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -5470,7 +5470,7 @@ button.list-group-item-danger.active:focus {
           box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
 .panel-body {
-  padding: 6px;
+  padding: 2px;
 }
 .panel-heading {
   padding: 4px 6px;

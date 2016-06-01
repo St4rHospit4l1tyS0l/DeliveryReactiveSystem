@@ -116,11 +116,14 @@
     <Compile Include="Account\LoginModel.cs" />
     <Compile Include="Account\UserInfoModel.cs" />
     <Compile Include="Account\UserSalt.cs" />
+    <Compile Include="Address\AddressMapModel.cs" />
     <Compile Include="Address\AddressHierarchyInfo.cs" />
+    <Compile Include="Address\AddressMapInfoModel.cs" />
     <Compile Include="Address\AddressQuery.cs" />
     <Compile Include="Address\AddressResponseSearch.cs" />
     <Compile Include="Address\AddressInfoGrid.cs" />
     <Compile Include="Address\AddressPhoneModel.cs" />
+    <Compile Include="Address\PositionModel.cs" />
     <Compile Include="Catalog\CatalogsClientModel.cs" />
     <Compile Include="Client\ClientPhoneModel.cs" />
     <Compile Include="Client\Recurrence\RecurrenceClientModel.cs" />

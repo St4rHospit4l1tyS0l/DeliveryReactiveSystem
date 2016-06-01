@@ -34,7 +34,6 @@ namespace Drs.Repository.Entities
         public string WsAddress { get; set; }
         public string ManageUserId { get; set; }
     
-        public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual AspNetUsers AspNetUsers1 { get; set; }
         public virtual AspNetUsers AspNetUsers2 { get; set; }
@@ -44,5 +43,6 @@ namespace Drs.Repository.Entities
         public virtual ICollection<FranchisePhone> FranchisePhone { get; set; }
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual ICollection<OrderToStore> OrderToStore { get; set; }
+        public virtual Address Address { get; set; }
     }
 }

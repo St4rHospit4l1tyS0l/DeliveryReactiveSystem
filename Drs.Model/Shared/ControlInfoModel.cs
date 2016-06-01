@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Newtonsoft.Json.Linq;
 
 namespace Drs.Model.Shared
 {
@@ -20,5 +21,6 @@ namespace Drs.Model.Shared
         public String Title { get; set; }
         public Visibility Visibility { get; set; }
         public string Name { get; set; }
+        public dynamic Validation { get; set; }
     }
 }

@@ -16,10 +16,10 @@ namespace Drs.Repository.Entities
     {
         public RegionA()
         {
-            this.Address = new HashSet<Address>();
             this.RegionB = new HashSet<RegionB>();
             this.RegionC = new HashSet<RegionC>();
             this.RegionD = new HashSet<RegionD>();
+            this.Address = new HashSet<Address>();
         }
     
         public int RegionId { get; set; }
@@ -30,11 +30,11 @@ namespace Drs.Repository.Entities
         public int CountryId { get; set; }
         public Nullable<int> ZipCodeId { get; set; }
     
-        public virtual ICollection<Address> Address { get; set; }
         public virtual Country Country { get; set; }
         public virtual ZipCode ZipCode { get; set; }
         public virtual ICollection<RegionB> RegionB { get; set; }
         public virtual ICollection<RegionC> RegionC { get; set; }
         public virtual ICollection<RegionD> RegionD { get; set; }
+        public virtual ICollection<Address> Address { get; set; }
     }
 }

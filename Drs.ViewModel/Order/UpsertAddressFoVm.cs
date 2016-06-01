@@ -68,7 +68,7 @@ namespace Drs.ViewModel.Order
             IsSearchByMap = true;
             ErrorSearch = String.Empty;
 
-            ErrorUpsertVisibility = Visibility.Hidden; 
+            ErrorUpsertVisibility = Visibility.Hidden;
 
             Countries = new ReactiveList<ListItemModel>();
             RegionsA = new ReactiveList<ListItemModel>();
@@ -80,6 +80,40 @@ namespace Drs.ViewModel.Order
 
             UpsertCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => Save());
 
+        }
+
+        public void Save(AddressMapInfoModel model)
+        {
+            IsOpen = false;
+
+            var addressInfo = new AddressInfoModel
+            {
+                AddressId = Id,
+                Country = new ListItemModel { Value = model.Address.Country },
+                ExtIntNumber = model.Address.NumExt,
+                MainAddress = model.Address.MainAddress,
+                Reference = model.Address.Reference,
+                RegionA = new ListItemModel { Value = model.Address.RegionA },
+                RegionB = new ListItemModel { Value = model.Address.RegionB },
+                RegionC = new ListItemModel { Value = model.Address.RegionC },
+                RegionD = new ListItemModel { Value = model.Address.RegionD },
+                ZipCode = new ListItemModel { Value = model.Address.ZipCode },
+                PlaceId = model.PlaceId,
+                StoreCoverageIds = model.CoverageStoreIds,
+                IsMap = true
+            };
+
+            if (model.Position != null)
+            {
+                addressInfo.Lat = model.Position.Lat;
+                addressInfo.Lng = model.Position.Lng;
+            }
+
+            MessageBus.Current.SendMessage(new AddressInfoGrid
+                {
+                    PreId = PreId,
+                    AddressInfo = addressInfo
+                }, SharedMessageConstants.ORDER_ADDRESSINFO);
         }
 
         private async Task<Unit> Save()
@@ -507,7 +541,7 @@ namespace Drs.ViewModel.Order
             }
         }
 
-        public FranchiseInfoModel Franchise { get; set; }  
+        public FranchiseInfoModel Franchise { get; set; }
 
         public ListItemModel RegionArSel
         {
@@ -588,6 +622,7 @@ namespace Drs.ViewModel.Order
             IsSearchByCode = false;
             IsSearchByMap = true;
             Franchise = franchise;
+            AddressMapInfo = null;
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
@@ -615,28 +650,59 @@ namespace Drs.ViewModel.Order
         public void Fill(AddressInfoGrid clInfo, FranchiseInfoModel franchise)
         {
             IsSearchByWaterfall = false;
-            IsSearchByCode = true;
+            IsSearchByCode = !clInfo.AddressInfo.IsMap;
+            IsSearchByMap = clInfo.AddressInfo.IsMap;
             Franchise = franchise;
+            
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
                 PreId = clInfo.PreId;
-                Id = clInfo.AddressInfo.AddressId;
+                var addr = clInfo.AddressInfo;
+                Id = addr.AddressId;
 
-                ZipCode = clInfo.AddressInfo.ZipCode.Value;
-                ZipCodeId = clInfo.AddressInfo.ZipCode.IdKey;
-                ZipCodeSearchVm.Search = ZipCodeId != null ? ZipCode : String.Empty;
-                ZipCodeSearchVm.IsDone = SharedConstants.Client.IS_TRUE;
 
-                CountrySel = AddAndSelectToControl(clInfo.AddressInfo.Country, Countries);
-                RegionArSel = AddAndSelectToControl(clInfo.AddressInfo.RegionA, RegionsA);
-                RegionBrSel = AddAndSelectToControl(clInfo.AddressInfo.RegionB, RegionsB);
-                RegionCrSel = AddAndSelectToControl(clInfo.AddressInfo.RegionC, RegionsC);
-                RegionDrSel = AddAndSelectToControl(clInfo.AddressInfo.RegionD, RegionsD);
+                if (clInfo.AddressInfo.IsMap)
+                {
+                    AddressMapInfo = new AddressMapInfoModel
+                    {
+                        Address = new AddressMapModel
+                        {
+                            Country = addr.Country.Value,
+                            MainAddress = addr.MainAddress,
+                            NumExt = addr.ExtIntNumber,
+                            Reference = addr.Reference,
+                            RegionA = addr.RegionA.Value,
+                            RegionB = addr.RegionB.Value,
+                            RegionC = addr.RegionC.Value,
+                            RegionD = addr.RegionD.Value,
+                            ZipCode = addr.ZipCode.Value
+                        },
+                        PlaceId = addr.PlaceId,
+                        Position = new PositionModel
+                        {
+                            Lat = addr.Lat,
+                            Lng = addr.Lng,
+                        }
+                    };
+                }
+                else
+                {
+                    ZipCodeId = addr.ZipCode.IdKey;
+                    ZipCode = addr.ZipCode.Value;
+                    ZipCodeSearchVm.Search = ZipCodeId != null ? ZipCode : String.Empty;
+                    ZipCodeSearchVm.IsDone = SharedConstants.Client.IS_TRUE;
 
-                MainAddress = clInfo.AddressInfo.MainAddress;
-                Reference = clInfo.AddressInfo.Reference;
-                NumExt = clInfo.AddressInfo.ExtIntNumber;
+                    CountrySel = AddAndSelectToControl(addr.Country, Countries);
+                    RegionArSel = AddAndSelectToControl(addr.RegionA, RegionsA);
+                    RegionBrSel = AddAndSelectToControl(addr.RegionB, RegionsB);
+                    RegionCrSel = AddAndSelectToControl(addr.RegionC, RegionsC);
+                    RegionDrSel = AddAndSelectToControl(addr.RegionD, RegionsD);
+                }
+
+                MainAddress = addr.MainAddress;
+                Reference = addr.Reference;
+                NumExt = addr.ExtIntNumber;
 
             });
         }
@@ -742,5 +808,7 @@ namespace Drs.ViewModel.Order
         }
 
         public string Error { get { return string.Empty; } }
+
+        public AddressMapInfoModel AddressMapInfo { get; set; }
     }
 }

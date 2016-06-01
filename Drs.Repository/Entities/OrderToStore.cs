@@ -43,7 +43,6 @@ namespace Drs.Repository.Entities
         public int FailedStatusCounter { get; set; }
         public int PosOrderStatus { get; set; }
     
-        public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual CatPayment CatPayment { get; set; }
         public virtual Client Client { get; set; }
@@ -54,5 +53,6 @@ namespace Drs.Repository.Entities
         public virtual ICollection<OrderToStoreLog> OrderToStoreLog { get; set; }
         public virtual ICollection<Recurrence> Recurrence { get; set; }
         public virtual ICollection<StoreStatus> StoreStatus { get; set; }
+        public virtual Address Address { get; set; }
     }
 }

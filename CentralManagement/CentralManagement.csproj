@@ -256,14 +256,6 @@
     <Content Include="Content\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\img\a1.jpg" />
-    <Content Include="Content\img\a2.jpg" />
-    <Content Include="Content\img\a3.jpg" />
-    <Content Include="Content\img\a4.jpg" />
-    <Content Include="Content\img\a5.jpg" />
-    <Content Include="Content\img\a6.jpg" />
-    <Content Include="Content\img\a7.jpg" />
-    <Content Include="Content\img\a8.jpg" />
     <Content Include="Content\img\ajax_loader.gif" />
     <Content Include="Content\img\angular_logo.png" />
     <Content Include="Content\img\dashbard4_1.jpg" />

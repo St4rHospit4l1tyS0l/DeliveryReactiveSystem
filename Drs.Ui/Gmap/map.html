@@ -11,10 +11,14 @@
     <link href="css/site.css" rel="stylesheet" />
 </head>
 <body style="width: 990px !important; height: 600px !important; padding-left: 10px;" ng-app="gMap" ng-controller="gMapController">
-    <!--ng-init="init();"-->
     <div class="row" ng-show="error">
         <div class="col-xs-12">
-            <label class="label label-danger fs-error">{{error}}</label>
+            <label class="label label-danger fs-msg">{{error}}</label>
+        </div>
+    </div>
+    <div class="row" ng-show="msgInfo">
+        <div class="col-xs-12">
+            <label class="label label-success fs-msg">{{msgInfo}}</label>
         </div>
     </div>
     <div class="row" ng-show="isReady">
@@ -36,92 +40,153 @@
             <div class="panel panel-primary">
                 <div class="panel-heading ">Dirección</div>
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-12" ng-show="c.Country.IsEnabled">
-                            <label class="fs-address">{{c.Country.Title}}: {{m.Address.Country}}</label>
+                    <form name="frmAddr">
+                        <div class="row">
+                            <div class="col-xs-12" ng-show="c.Country.IsEnabled">
+                                <label class="fs-address">{{c.Country.Title}}: {{m.Address.Country}}</label>
+                            </div>
+                            <div class="col-xs-12" ng-show="c.RegionA.IsEnabled">
+                                <label class="fs-address">{{c.RegionA.Title}}: {{m.Address.RegionA}}</label>
+                            </div>
                         </div>
-                        <div class="col-xs-12" ng-show="c.RegionA.IsEnabled">
-                            <label class="fs-address">{{c.RegionA.Title}}: {{m.Address.RegionA}}</label>
+                        <div class="row" ng-show="c.ZipCode.IsEnabled">
+                            <div class="col-xs-5">
+                                <label class="fs-address" for="zipCode">{{c.ZipCode.Title}}: </label>
+                            </div>
+                            <div class="col-xs-7">
+                                <input type="text" class="form-control" ng-model="m.Address.ZipCode" name="zipCode" placeholder="Ingrese {{c.ZipCode.Title}}"
+                                       ng-required="c.ZipCode.Validation.IsRequired" ng-minlength="c.ZipCode.Validation.MinVal" ng-maxlength="c.ZipCode.Validation.MaxVal">
+                                <div ng-show="validate">
+                                    <span class="lbl-error" ng-show="frmAddr.zipCode.$error.required">Campo requerido</span>
+                                    <span class="lbl-error" ng-show="frmAddr.zipCode.$error.maxlength">Máximo {{c.ZipCode.Validation.MaxVal}} caracteres</span>
+                                    <span class="lbl-error" ng-show="frmAddr.zipCode.$error.minlength">Mínimo {{c.ZipCode.Validation.MinVal}} caracteres</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" ng-show="c.ZipCode.IsEnabled">
-                        <div class="col-xs-5">
-                            <label class="fs-address" for="zipCode">{{c.ZipCode.Title}}:</label>
+                        <div class="row" ng-show="c.RegionB.IsEnabled">
+                            <div class="col-xs-12">
+                                <label class="fs-address" for="regionB">{{c.RegionB.Title}}</label>
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="text" class="form-control" ng-model="m.Address.RegionB" name="regionB" placeholder="Ingrese {{c.RegionB.Title}}"
+                                       ng-required="c.RegionB.Validation.IsRequired" ng-minlength="c.RegionB.Validation.MinVal" ng-maxlength="c.RegionB.Validation.MaxVal">
+                                <div ng-show="validate">
+                                    <span class="lbl-error" ng-show="frmAddr.regionB.$error.required">Campo requerido</span>
+                                    <span class="lbl-error" ng-show="frmAddr.regionB.$error.maxlength">Máximo {{c.RegionB.Validation.MaxVal}} caracteres</span>
+                                    <span class="lbl-error" ng-show="frmAddr.regionB.$error.minlength">Mínimo {{c.RegionB.Validation.MinVal}} caracteres</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-7">
-                            <input type="text" class="form-control" ng-model="m.Address.ZipCode" id="zipCode" placeholder="Ingrese {{c.ZipCode.Title}}">
+                        <div class="row" style="padding-top: 8px !important;" ng-show="c.RegionC.IsEnabled">
+                            <div class="col-xs-12">
+                                <label class="fs-address" for="regionC">{{c.RegionC.Title}}</label>
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="text" class="form-control" ng-model="m.Address.RegionC" name="regionC" placeholder="Ingrese {{c.RegionC.Title}}"
+                                       ng-required="c.RegionC.Validation.IsRequired" ng-minlength="c.RegionC.Validation.MinVal" ng-maxlength="c.RegionC.Validation.MaxVal">
+                                <div ng-show="validate">
+                                    <span class="lbl-error" ng-show="frmAddr.regionC.$error.required">Campo requerido</span>
+                                    <span class="lbl-error" ng-show="frmAddr.regionC.$error.maxlength">Máximo {{c.RegionC.Validation.MaxVal}} caracteres</span>
+                                    <span class="lbl-error" ng-show="frmAddr.regionC.$error.minlength">Mínimo {{c.RegionC.Validation.MinVal}} caracteres</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" ng-show="c.RegionB.IsEnabled">
-                        <div class="col-xs-12">
-                            <label class="fs-address" for="regionB">{{c.RegionB.Title}}</label>
+                        <div class="row" style="padding-top: 8px !important;" ng-show="c.RegionD.IsEnabled">
+                            <div class="col-xs-12">
+                                <label class="fs-address" for="regionD">{{c.RegionD.Title}}</label>
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="text" class="form-control" ng-model="m.Address.RegionD" name="regionD" placeholder="Ingrese {{c.RegionD.Title}}"
+                                       ng-required="c.RegionD.Validation.IsRequired" ng-minlength="c.RegionD.Validation.MinVal" ng-maxlength="c.RegionD.Validation.MaxVal">
+                                <div ng-show="validate">
+                                    <span class="lbl-error" ng-show="frmAddr.regionD.$error.required">Campo requerido</span>
+                                    <span class="lbl-error" ng-show="frmAddr.regionD.$error.maxlength">Máximo {{c.RegionD.Validation.MaxVal}} caracteres</span>
+                                    <span class="lbl-error" ng-show="frmAddr.regionD.$error.minlength">Mínimo {{c.RegionD.Validation.MinVal}} caracteres</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-12">
-                            <input type="text" class="form-control" ng-model="m.Address.RegionB" id="regionB" placeholder="Ingrese {{c.RegionB.Title}}">
+                        <div class="row" style="padding-top: 8px !important;" ng-show="c.MainAddress.IsEnabled">
+                            <div class="col-xs-12">
+                                <label class="fs-address" for="MainAddress">{{c.MainAddress.Title}}</label>
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="text" class="form-control" ng-model="m.Address.MainAddress" name="MainAddress" placeholder="Ingrese {{c.MainAddress.Title}}"
+                                       ng-required="c.MainAddress.Validation.IsRequired" ng-minlength="c.MainAddress.Validation.MinVal" ng-maxlength="c.MainAddress.Validation.MaxVal">
+                                <div ng-show="validate">
+                                    <span class="lbl-error" ng-show="frmAddr.MainAddress.$error.required">Campo requerido</span>
+                                    <span class="lbl-error" ng-show="frmAddr.MainAddress.$error.maxlength">Máximo {{c.MainAddress.Validation.MaxVal}} caracteres</span>
+                                    <span class="lbl-error" ng-show="frmAddr.MainAddress.$error.minlength">Mínimo {{c.MainAddress.Validation.MinVal}} caracteres</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="padding-top: 8px !important;" ng-show="c.RegionC.IsEnabled">
-                        <div class="col-xs-12">
-                            <label class="fs-address" for="regionC">{{c.RegionC.Title}}</label>
+                        <div class="row" style="padding-top: 8px !important;" ng-show="c.NumExt.IsEnabled">
+                            <div class="col-xs-12">
+                                <label class="fs-address" for="NumExt">{{c.NumExt.Title}}</label>
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="text" class="form-control" ng-model="m.Address.NumExt" name="NumExt" placeholder="Ingrese {{c.NumExt.Title}}"
+                                       ng-required="c.NumExt.Validation.IsRequired" ng-minlength="c.NumExt.Validation.MinVal" ng-maxlength="c.NumExt.Validation.MaxVal">
+                                <div ng-show="validate">
+                                    <span class="lbl-error" ng-show="frmAddr.NumExt.$error.required">Campo requerido</span>
+                                    <span class="lbl-error" ng-show="frmAddr.NumExt.$error.maxlength">Máximo {{c.NumExt.Validation.MaxVal}} caracteres</span>
+                                    <span class="lbl-error" ng-show="frmAddr.NumExt.$error.minlength">Mínimo {{c.NumExt.Validation.MinVal}} caracteres</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-12">
-                            <input type="text" class="form-control" ng-model="m.Address.RegionC" id="regionC" placeholder="Ingrese {{c.RegionC.Title}}">
+                        <div class="row" style="padding-top: 8px !important;" ng-show="c.Reference.IsEnabled">
+                            <div class="col-xs-12">
+                                <label class="fs-address" for="Reference">{{c.Reference.Title}}</label>
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="text" class="form-control" ng-model="m.Address.Reference" name="Reference" placeholder="Ingrese {{c.Reference.Title}}"
+                                       ng-required="c.Reference.Validation.IsRequired" ng-minlength="c.Reference.Validation.MinVal" ng-maxlength="c.Reference.Validation.MaxVal">
+                                <div ng-show="validate">
+                                    <span class="lbl-error" ng-show="frmAddr.Reference.$error.required">Campo requerido</span>
+                                    <span class="lbl-error" ng-show="frmAddr.Reference.$error.maxlength">Máximo {{c.Reference.Validation.MaxVal}} caracteres</span>
+                                    <span class="lbl-error" ng-show="frmAddr.Reference.$error.minlength">Mínimo {{c.Reference.Validation.MinVal}} caracteres</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="padding-top: 8px !important;" ng-show="c.RegionD.IsEnabled">
-                        <div class="col-xs-12">
-                            <label class="fs-address" for="regionD">{{c.RegionD.Title}}</label>
-                        </div>
-                        <div class="col-xs-12">
-                            <input type="text" class="form-control" ng-model="m.Address.RegionD" id="regionD" placeholder="Ingrese {{c.RegionD.Title}}">
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top: 8px !important;" ng-show="c.MainAddress.IsEnabled">
-                        <div class="col-xs-12">
-                            <label class="fs-address" for="MainAddress">{{c.MainAddress.Title}}</label>
-                        </div>
-                        <div class="col-xs-12">
-                            <input type="text" class="form-control" ng-model="m.Address.MainAddress" id="MainAddress" placeholder="Ingrese {{c.MainAddress.Title}}">
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top: 8px !important;" ng-show="c.Reference.IsEnabled">
-                        <div class="col-xs-12">
-                            <label class="fs-address" for="Reference">{{c.Reference.Title}}</label>
-                        </div>
-                        <div class="col-xs-12">
-                            <input type="text" class="form-control" ng-model="m.Address.Reference" id="Reference" placeholder="Ingrese {{c.Reference.Title}}">
-                        </div>
-                    </div>
-
-                    <div class="row" style="padding-top: 8px !important;" ng-show="c.NumExt.IsEnabled">
-                        <div class="col-xs-12">
-                            <label class="fs-address" for="NumExt">{{c.NumExt.Title}}</label>
-                        </div>
-                        <div class="col-xs-12">
-                            <input type="text" class="form-control" ng-model="m.Address.NumExt" id="NumExt" placeholder="Ingrese {{c.NumExt.Title}}">
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">Coberturas</div>
                 <div class="panel-body">
-                    <div class="row" ng-repeat="cover in coverageStore">
-                        <div class="col-xs-12">
-                            {{cover.name}}
-                        </div>
-                    </div>
+                    <table class="table table-condensed">
+                        <!--<thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Establecimiento</th>
+                                </tr>
+                            </thead>-->
+                        <tbody>
+                            <tr ng-repeat="cover in coverageStore">
+                                <th scope="row" style="width: 13px">
+                                    <div class="color-box" ng-style="cover.stColor"></div>
+                                </th>
+                                <td style="padding-top: 8px !important;">{{cover.name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary text-center" ng-click="search()"><i class="glyphicon glyphicon-check"></i>&nbsp;&nbsp;Guardar</button>
+                <button type="submit" class="btn btn-primary text-center" ng-click="save(frmAddr.$valid)"><i class="glyphicon glyphicon-check"></i>&nbsp;&nbsp;Guardar</button>
             </div>
+            
+
         </div>
         <div class="col-xs-9">
             <div class="gmap-col" id="map"></div>
         </div>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&callback=window.initCb" async defer></script>
+    <div class="blocker" ng-show="working">
+        <div>
+            Procesando...<img src="images/ajax_loader.gif" alt="" />
+        </div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&sensor=false&callback=window.initCb" async defer></script>
     <script src="js/main.js"></script>
     <script src="js/angularjs.js"></script>
     <script src="js/app.js"></script>

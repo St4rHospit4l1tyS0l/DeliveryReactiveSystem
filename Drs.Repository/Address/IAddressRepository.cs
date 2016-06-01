@@ -12,7 +12,8 @@ namespace Drs.Repository.Address
         //AddressResponseSearch SearchByZipCode(IDictionary<string, AddressHierarchyInfo> dicAddressHierarchy, string zipCode);
         CallCenterEntities InnerDbEntities { get;}
         IEnumerable<ListItemModel> SearchByZipCode(string zipCode, int maxResultsOnQuery);
-        int? SaveAddress(AddressInfoModel model, bool bIsNew);
+        int SaveAddress(AddressInfoModel model, bool bIsNew);
+        int SaveAddressMap(AddressInfoModel model, bool bIsNew);
         IEnumerable<AddressInfoModel> SearchAddressByPhoneId(int phoneId);
     }
 }

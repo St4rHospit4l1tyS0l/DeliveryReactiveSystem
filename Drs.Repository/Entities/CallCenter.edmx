@@ -13,12 +13,22 @@
           <Property Name="MainAddress" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="ExtIntNumber" Type="nvarchar" MaxLength="100" />
           <Property Name="Reference" Type="nvarchar" MaxLength="500" />
-          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="200" />
           <Property Name="RegionArId" Type="int" />
+          <Property Name="RegionNameA" Type="nvarchar" MaxLength="200" />
           <Property Name="RegionBrId" Type="int" />
+          <Property Name="RegionNameB" Type="nvarchar" MaxLength="200" />
           <Property Name="RegionCrId" Type="int" />
+          <Property Name="RegionNameC" Type="nvarchar" MaxLength="200" />
           <Property Name="RegionDrId" Type="int" />
+          <Property Name="RegionNameD" Type="nvarchar" MaxLength="200" />
           <Property Name="ZipCodeId" Type="int" />
+          <Property Name="ZipCodeValue" Type="varchar" MaxLength="10" />
+          <Property Name="IsMap" Type="bit" Nullable="false" />
+          <Property Name="PlaceId" Type="varchar" MaxLength="500" />
+          <Property Name="Lat" Type="varchar" MaxLength="30" />
+          <Property Name="Lng" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="AddressHierarchy">
           <Key>
@@ -167,6 +177,7 @@
           <Property Name="LanguageId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="IsEnabled" Type="bit" Nullable="false" />
+          <Property Name="Validation" Type="nvarchar" MaxLength="1000" Nullable="false" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -665,7 +676,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
           <Property Name="Role" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <Association Name="FK_Address_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
@@ -2102,7 +2113,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
     <edmx:ConceptualModels>
       <Schema Namespace="CallCenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="CallCenterEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Address" EntityType="CallCenterModel.Address" />
           <EntitySet Name="AddressHierarchy" EntityType="CallCenterModel.AddressHierarchy" />
           <EntitySet Name="AspNetRoles" EntityType="CallCenterModel.AspNetRoles" />
           <EntitySet Name="AspNetUserClaims" EntityType="CallCenterModel.AspNetUserClaims" />
@@ -2116,7 +2126,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="ClientStatistics" EntityType="CallCenterModel.ClientStatistics" />
           <EntitySet Name="Company" EntityType="CallCenterModel.Company" />
           <EntitySet Name="Control" EntityType="CallCenterModel.Control" />
-          <EntitySet Name="ControlTitle" EntityType="CallCenterModel.ControlTitle" />
           <EntitySet Name="Country" EntityType="CallCenterModel.Country" />
           <EntitySet Name="Franchise" EntityType="CallCenterModel.Franchise" />
           <EntitySet Name="FranchiseData" EntityType="CallCenterModel.FranchiseData" />
@@ -2139,34 +2148,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="StoreStatus" EntityType="CallCenterModel.StoreStatus" />
           <EntitySet Name="UserDetail" EntityType="CallCenterModel.UserDetail" />
           <EntitySet Name="ZipCode" EntityType="CallCenterModel.ZipCode" />
-          <AssociationSet Name="FK_Address_Country" Association="CallCenterModel.FK_Address_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_RegionA" Association="CallCenterModel.FK_Address_RegionA">
-            <End Role="RegionA" EntitySet="RegionA" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_RegionB" Association="CallCenterModel.FK_Address_RegionB">
-            <End Role="RegionB" EntitySet="RegionB" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_RegionC1" Association="CallCenterModel.FK_Address_RegionC1">
-            <End Role="RegionC" EntitySet="RegionC" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_RegionD" Association="CallCenterModel.FK_Address_RegionD">
-            <End Role="RegionD" EntitySet="RegionD" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_ZipCode" Association="CallCenterModel.FK_Address_ZipCode">
-            <End Role="ZipCode" EntitySet="ZipCode" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStore_Address" Association="CallCenterModel.FK_FranchiseStore_Address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
           <AssociationSet Name="FK_Permission_AspNetRoles" Association="CallCenterModel.FK_Permission_AspNetRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="Permission" EntitySet="Permission" />
@@ -2327,10 +2308,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="RelClientPhoneAddress" Association="CallCenterModel.RelClientPhoneAddress">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="ClientPhone" EntitySet="ClientPhone" />
-          </AssociationSet>
           <AssociationSet Name="RelClientPhoneClient" Association="CallCenterModel.RelClientPhoneClient">
             <End Role="Client" EntitySet="Client" />
             <End Role="ClientPhone" EntitySet="ClientPhone" />
@@ -2407,10 +2384,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
           </AssociationSet>
           <EntitySet Name="OrderToStore" EntityType="CallCenterModel.OrderToStore" />
-          <AssociationSet Name="FK_OrderToStore_Address" Association="CallCenterModel.FK_OrderToStore_Address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderToStore_AspNetUsers" Association="CallCenterModel.FK_OrderToStore_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="OrderToStore" EntitySet="OrderToStore" />
@@ -2472,31 +2445,45 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="FranchiseCoverage" EntitySet="FranchiseCoverage" />
             <End Role="FranchiseCoverageLog" EntitySet="FranchiseCoverageLog" />
           </AssociationSet>
+          <EntitySet Name="ControlTitle" EntityType="CallCenterModel.ControlTitle" />
+          <EntitySet Name="Address" EntityType="CallCenterModel.Address" />
+          <AssociationSet Name="FK_Address_Country" Association="CallCenterModel.FK_Address_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_RegionA" Association="CallCenterModel.FK_Address_RegionA">
+            <End Role="RegionA" EntitySet="RegionA" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_RegionB" Association="CallCenterModel.FK_Address_RegionB">
+            <End Role="RegionB" EntitySet="RegionB" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_RegionC1" Association="CallCenterModel.FK_Address_RegionC1">
+            <End Role="RegionC" EntitySet="RegionC" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_RegionD" Association="CallCenterModel.FK_Address_RegionD">
+            <End Role="RegionD" EntitySet="RegionD" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_ZipCode" Association="CallCenterModel.FK_Address_ZipCode">
+            <End Role="ZipCode" EntitySet="ZipCode" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStore_Address" Association="CallCenterModel.FK_FranchiseStore_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_Address" Association="CallCenterModel.FK_OrderToStore_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+          </AssociationSet>
+          <AssociationSet Name="RelClientPhoneAddress" Association="CallCenterModel.RelClientPhoneAddress">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="ClientPhone" EntitySet="ClientPhone" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="Address">
-          <Key>
-            <PropertyRef Name="AddressId" />
-          </Key>
-          <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MainAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ExtIntNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Reference" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CountryId" Type="Int32" Nullable="false" />
-          <Property Name="RegionArId" Type="Int32" />
-          <Property Name="RegionBrId" Type="Int32" />
-          <Property Name="RegionCrId" Type="Int32" />
-          <Property Name="RegionDrId" Type="Int32" />
-          <Property Name="ZipCodeId" Type="Int32" />
-          <NavigationProperty Name="Country" Relationship="CallCenterModel.FK_Address_Country" FromRole="Address" ToRole="Country" />
-          <NavigationProperty Name="RegionA" Relationship="CallCenterModel.FK_Address_RegionA" FromRole="Address" ToRole="RegionA" />
-          <NavigationProperty Name="RegionB" Relationship="CallCenterModel.FK_Address_RegionB" FromRole="Address" ToRole="RegionB" />
-          <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_Address_RegionC1" FromRole="Address" ToRole="RegionC" />
-          <NavigationProperty Name="RegionD" Relationship="CallCenterModel.FK_Address_RegionD" FromRole="Address" ToRole="RegionD" />
-          <NavigationProperty Name="ZipCode" Relationship="CallCenterModel.FK_Address_ZipCode" FromRole="Address" ToRole="ZipCode" />
-          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="Address" ToRole="FranchiseStore" />
-          <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneAddress" FromRole="Address" ToRole="ClientPhone" />
-          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Address" FromRole="Address" ToRole="OrderToStore" />
-        </EntityType>
         <EntityType Name="AddressHierarchy">
           <Key>
             <PropertyRef Name="AddressHierarchyId" />
@@ -2624,9 +2611,9 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_ClientPhone_AspNetUsers" FromRole="ClientPhone" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_ClientPhone_AspNetUsers1" FromRole="ClientPhone" ToRole="AspNetUsers" />
           <NavigationProperty Name="ClientPhoneStatistics" Relationship="CallCenterModel.FK_ClientPhoneStatistics_ClientPhone" FromRole="ClientPhone" ToRole="ClientPhoneStatistics" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.RelClientPhoneAddress" FromRole="ClientPhone" ToRole="Address" />
           <NavigationProperty Name="Client" Relationship="CallCenterModel.RelClientPhoneClient" FromRole="ClientPhone" ToRole="Client" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_ClientPhone" FromRole="ClientPhone" ToRole="OrderToStore" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.RelClientPhoneAddress" FromRole="ClientPhone" ToRole="Address" />
         </EntityType>
         <EntityType Name="ClientPhoneStatistics">
           <Key>
@@ -2665,17 +2652,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="Position" Type="Int32" Nullable="false" />
           <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="ControlTitle">
-          <Key>
-            <PropertyRef Name="AddressTitleId" />
-          </Key>
-          <Property Name="AddressTitleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Container" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ControlName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LanguageId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="CountryId" />
@@ -2685,11 +2661,11 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Abbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_Country" FromRole="Country" ToRole="Address" />
           <NavigationProperty Name="RegionA" Relationship="CallCenterModel.FK_RegionA_Country" FromRole="Country" ToRole="RegionA" />
           <NavigationProperty Name="RegionB" Relationship="CallCenterModel.FK_RegionB_Country" FromRole="Country" ToRole="RegionB" />
           <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_RegionC_Country" FromRole="Country" ToRole="RegionC" />
           <NavigationProperty Name="RegionD" Relationship="CallCenterModel.FK_RegionD_Country" FromRole="Country" ToRole="RegionD" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_Country" FromRole="Country" ToRole="Address" />
         </EntityType>
         <EntityType Name="Franchise">
           <Key>
@@ -2755,7 +2731,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
           <Property Name="WsAddress" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="ManageUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="FranchiseStore" ToRole="Address" />
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers" FromRole="FranchiseStore" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers1" FromRole="FranchiseStore" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers2" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers2" FromRole="FranchiseStore" ToRole="AspNetUsers" />
@@ -2765,6 +2740,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="FranchisePhone" Relationship="CallCenterModel.RelFranchisePhoneStore" FromRole="FranchiseStore" ToRole="FranchisePhone" />
           <NavigationProperty Name="FranchiseStoreOffLine" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore" FromRole="FranchiseStore" ToRole="FranchiseStoreOffLine" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="FranchiseStore" ToRole="OrderToStore" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="FranchiseStore" ToRole="Address" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -2873,12 +2849,12 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="CountryId" Type="Int32" Nullable="false" />
           <Property Name="ZipCodeId" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_RegionA" FromRole="RegionA" ToRole="Address" />
           <NavigationProperty Name="Country" Relationship="CallCenterModel.FK_RegionA_Country" FromRole="RegionA" ToRole="Country" />
           <NavigationProperty Name="ZipCode" Relationship="CallCenterModel.FK_RegionA_ZipCode" FromRole="RegionA" ToRole="ZipCode" />
           <NavigationProperty Name="RegionB" Relationship="CallCenterModel.FK_RegionB_RegionA" FromRole="RegionA" ToRole="RegionB" />
           <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_RegionC_RegionA" FromRole="RegionA" ToRole="RegionC" />
           <NavigationProperty Name="RegionD" Relationship="CallCenterModel.FK_RegionD_RegionA" FromRole="RegionA" ToRole="RegionD" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_RegionA" FromRole="RegionA" ToRole="Address" />
         </EntityType>
         <EntityType Name="RegionB">
           <Key>
@@ -2892,12 +2868,12 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="CountryId" Type="Int32" Nullable="false" />
           <Property Name="RegionArId" Type="Int32" />
           <Property Name="ZipCodeId" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_RegionB" FromRole="RegionB" ToRole="Address" />
           <NavigationProperty Name="Country" Relationship="CallCenterModel.FK_RegionB_Country" FromRole="RegionB" ToRole="Country" />
           <NavigationProperty Name="RegionA" Relationship="CallCenterModel.FK_RegionB_RegionA" FromRole="RegionB" ToRole="RegionA" />
           <NavigationProperty Name="ZipCode" Relationship="CallCenterModel.FK_RegionB_ZipCode" FromRole="RegionB" ToRole="ZipCode" />
           <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_RegionC_RegionB" FromRole="RegionB" ToRole="RegionC" />
           <NavigationProperty Name="RegionD" Relationship="CallCenterModel.FK_RegionD_RegionB" FromRole="RegionB" ToRole="RegionD" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_RegionB" FromRole="RegionB" ToRole="Address" />
         </EntityType>
         <EntityType Name="RegionC">
           <Key>
@@ -2912,12 +2888,12 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="RegionArId" Type="Int32" />
           <Property Name="RegionBrId" Type="Int32" />
           <Property Name="ZipCodeId" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_RegionC1" FromRole="RegionC" ToRole="Address" />
           <NavigationProperty Name="Country" Relationship="CallCenterModel.FK_RegionC_Country" FromRole="RegionC" ToRole="Country" />
           <NavigationProperty Name="RegionA" Relationship="CallCenterModel.FK_RegionC_RegionA" FromRole="RegionC" ToRole="RegionA" />
           <NavigationProperty Name="RegionB" Relationship="CallCenterModel.FK_RegionC_RegionB" FromRole="RegionC" ToRole="RegionB" />
           <NavigationProperty Name="ZipCode" Relationship="CallCenterModel.FK_RegionC_ZipCode" FromRole="RegionC" ToRole="ZipCode" />
           <NavigationProperty Name="RegionD" Relationship="CallCenterModel.FK_RegionD_RegionC" FromRole="RegionC" ToRole="RegionD" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_RegionC1" FromRole="RegionC" ToRole="Address" />
         </EntityType>
         <EntityType Name="RegionD">
           <Key>
@@ -2933,12 +2909,12 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="RegionBrId" Type="Int32" />
           <Property Name="RegionCrId" Type="Int32" />
           <Property Name="ZipCodeId" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_RegionD" FromRole="RegionD" ToRole="Address" />
           <NavigationProperty Name="Country" Relationship="CallCenterModel.FK_RegionD_Country" FromRole="RegionD" ToRole="Country" />
           <NavigationProperty Name="RegionA" Relationship="CallCenterModel.FK_RegionD_RegionA" FromRole="RegionD" ToRole="RegionA" />
           <NavigationProperty Name="RegionB" Relationship="CallCenterModel.FK_RegionD_RegionB" FromRole="RegionD" ToRole="RegionB" />
           <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_RegionD_RegionC" FromRole="RegionD" ToRole="RegionC" />
           <NavigationProperty Name="ZipCode" Relationship="CallCenterModel.FK_RegionD_ZipCode" FromRole="RegionD" ToRole="ZipCode" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_RegionD" FromRole="RegionD" ToRole="Address" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
@@ -2996,96 +2972,12 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="ZipCodeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_ZipCode" FromRole="ZipCode" ToRole="Address" />
           <NavigationProperty Name="RegionA" Relationship="CallCenterModel.FK_RegionA_ZipCode" FromRole="ZipCode" ToRole="RegionA" />
           <NavigationProperty Name="RegionB" Relationship="CallCenterModel.FK_RegionB_ZipCode" FromRole="ZipCode" ToRole="RegionB" />
           <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_RegionC_ZipCode" FromRole="ZipCode" ToRole="RegionC" />
           <NavigationProperty Name="RegionD" Relationship="CallCenterModel.FK_RegionD_ZipCode" FromRole="ZipCode" ToRole="RegionD" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_Address_ZipCode" FromRole="ZipCode" ToRole="Address" />
         </EntityType>
-        <Association Name="FK_Address_Country">
-          <End Type="CallCenterModel.Country" Role="Country" Multiplicity="1" />
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_RegionA">
-          <End Type="CallCenterModel.RegionA" Role="RegionA" Multiplicity="0..1" />
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegionA">
-              <PropertyRef Name="RegionId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="RegionArId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_RegionB">
-          <End Type="CallCenterModel.RegionB" Role="RegionB" Multiplicity="0..1" />
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegionB">
-              <PropertyRef Name="RegionId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="RegionBrId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_RegionC1">
-          <End Type="CallCenterModel.RegionC" Role="RegionC" Multiplicity="0..1" />
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegionC">
-              <PropertyRef Name="RegionId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="RegionCrId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_RegionD">
-          <End Type="CallCenterModel.RegionD" Role="RegionD" Multiplicity="0..1" />
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegionD">
-              <PropertyRef Name="RegionId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="RegionDrId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_ZipCode">
-          <End Type="CallCenterModel.ZipCode" Role="ZipCode" Multiplicity="0..1" />
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ZipCode">
-              <PropertyRef Name="ZipCodeId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="ZipCodeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseStore_Address">
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="AddressId" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Permission_AspNetRoles">
           <End Type="CallCenterModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
           <End Type="CallCenterModel.Permission" Role="Permission" Multiplicity="*" />
@@ -3562,10 +3454,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <End Type="CallCenterModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-        <Association Name="RelClientPhoneAddress">
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
-          <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="*" />
-        </Association>
         <Association Name="RelClientPhoneClient">
           <End Type="CallCenterModel.Client" Role="Client" Multiplicity="*" />
           <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="*" />
@@ -3922,7 +3810,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="DateTimeCanceled" Type="DateTime" Precision="7" />
           <Property Name="FailedStatusCounter" Type="Int32" Nullable="false" />
           <Property Name="PosOrderStatus" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_OrderToStore_Address" FromRole="OrderToStore" ToRole="Address" />
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_OrderToStore_AspNetUsers" FromRole="OrderToStore" ToRole="AspNetUsers" />
           <NavigationProperty Name="CatPayment" Relationship="CallCenterModel.FK_OrderToStore_CatPayment" FromRole="OrderToStore" ToRole="CatPayment" />
           <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="OrderToStore" ToRole="Client" />
@@ -3933,19 +3820,8 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="OrderToStoreLog" Relationship="CallCenterModel.FK_OrderToStoreLog_OrderToStore" FromRole="OrderToStore" ToRole="OrderToStoreLog" />
           <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="OrderToStore" ToRole="Recurrence" />
           <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_OrderToStore" FromRole="OrderToStore" ToRole="StoreStatus" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_OrderToStore_Address" FromRole="OrderToStore" ToRole="Address" />
         </EntityType>
-        <Association Name="FK_OrderToStore_Address">
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="AddressId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderToStore_AspNetUsers">
           <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
           <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
@@ -4196,28 +4072,158 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ControlTitle">
+          <Key>
+            <PropertyRef Name="AddressTitleId" />
+          </Key>
+          <Property Name="AddressTitleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Container" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ControlName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="Validation" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MainAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ExtIntNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Reference" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="CountryName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RegionArId" Type="Int32" />
+          <Property Name="RegionNameA" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RegionBrId" Type="Int32" />
+          <Property Name="RegionNameB" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RegionCrId" Type="Int32" />
+          <Property Name="RegionNameC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RegionDrId" Type="Int32" />
+          <Property Name="RegionNameD" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCodeId" Type="Int32" />
+          <Property Name="ZipCodeValue" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsMap" Type="Boolean" Nullable="false" />
+          <Property Name="PlaceId" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Lat" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Lng" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Country" Relationship="CallCenterModel.FK_Address_Country" FromRole="Address" ToRole="Country" />
+          <NavigationProperty Name="RegionA" Relationship="CallCenterModel.FK_Address_RegionA" FromRole="Address" ToRole="RegionA" />
+          <NavigationProperty Name="RegionB" Relationship="CallCenterModel.FK_Address_RegionB" FromRole="Address" ToRole="RegionB" />
+          <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_Address_RegionC1" FromRole="Address" ToRole="RegionC" />
+          <NavigationProperty Name="RegionD" Relationship="CallCenterModel.FK_Address_RegionD" FromRole="Address" ToRole="RegionD" />
+          <NavigationProperty Name="ZipCode" Relationship="CallCenterModel.FK_Address_ZipCode" FromRole="Address" ToRole="ZipCode" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="Address" ToRole="FranchiseStore" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Address" FromRole="Address" ToRole="OrderToStore" />
+          <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneAddress" FromRole="Address" ToRole="ClientPhone" />
+        </EntityType>
+        <Association Name="FK_Address_Country">
+          <End Type="CallCenterModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_RegionA">
+          <End Type="CallCenterModel.RegionA" Role="RegionA" Multiplicity="0..1" />
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionA">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="RegionArId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_RegionB">
+          <End Type="CallCenterModel.RegionB" Role="RegionB" Multiplicity="0..1" />
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionB">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="RegionBrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_RegionC1">
+          <End Type="CallCenterModel.RegionC" Role="RegionC" Multiplicity="0..1" />
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionC">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="RegionCrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_RegionD">
+          <End Type="CallCenterModel.RegionD" Role="RegionD" Multiplicity="0..1" />
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionD">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="RegionDrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_ZipCode">
+          <End Type="CallCenterModel.ZipCode" Role="ZipCode" Multiplicity="0..1" />
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZipCode">
+              <PropertyRef Name="ZipCodeId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="ZipCodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStore_Address">
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_Address">
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RelClientPhoneAddress">
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
+          <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CallCenterModelStoreContainer" CdmEntityContainer="CallCenterEntities">
-          <EntitySetMapping Name="Address">
-            <EntityTypeMapping TypeName="CallCenterModel.Address">
-              <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="ZipCodeId" ColumnName="ZipCodeId" />
-                <ScalarProperty Name="RegionDrId" ColumnName="RegionDrId" />
-                <ScalarProperty Name="RegionCrId" ColumnName="RegionCrId" />
-                <ScalarProperty Name="RegionBrId" ColumnName="RegionBrId" />
-                <ScalarProperty Name="RegionArId" ColumnName="RegionArId" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="ExtIntNumber" ColumnName="ExtIntNumber" />
-                <ScalarProperty Name="MainAddress" ColumnName="MainAddress" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AddressHierarchy">
             <EntityTypeMapping TypeName="CallCenterModel.AddressHierarchy">
               <MappingFragment StoreEntitySet="AddressHierarchy">
@@ -4355,18 +4361,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ControIId" ColumnName="ControIId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ControlTitle">
-            <EntityTypeMapping TypeName="CallCenterModel.ControlTitle">
-              <MappingFragment StoreEntitySet="ControlTitle">
-                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
-                <ScalarProperty Name="ControlName" ColumnName="ControlName" />
-                <ScalarProperty Name="Container" ColumnName="Container" />
-                <ScalarProperty Name="AddressTitleId" ColumnName="AddressTitleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4652,14 +4646,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="RelClientPhoneAddress" TypeName="CallCenterModel.RelClientPhoneAddress" StoreEntitySet="RelClientPhoneAddress">
-            <EndProperty Name="ClientPhone">
-              <ScalarProperty Name="ClientPhoneId" ColumnName="ClientPhoneId" />
-            </EndProperty>
-            <EndProperty Name="Address">
-              <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="RelClientPhoneClient" TypeName="CallCenterModel.RelClientPhoneClient" StoreEntitySet="RelClientPhoneClient">
             <EndProperty Name="ClientPhone">
               <ScalarProperty Name="ClientPhoneId" ColumnName="ClientPhoneId" />
@@ -4892,6 +4878,53 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ControlTitle">
+            <EntityTypeMapping TypeName="CallCenterModel.ControlTitle">
+              <MappingFragment StoreEntitySet="ControlTitle">
+                <ScalarProperty Name="Validation" ColumnName="Validation" />
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="ControlName" ColumnName="ControlName" />
+                <ScalarProperty Name="Container" ColumnName="Container" />
+                <ScalarProperty Name="AddressTitleId" ColumnName="AddressTitleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="CallCenterModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+                <ScalarProperty Name="IsMap" ColumnName="IsMap" />
+                <ScalarProperty Name="ZipCodeValue" ColumnName="ZipCodeValue" />
+                <ScalarProperty Name="ZipCodeId" ColumnName="ZipCodeId" />
+                <ScalarProperty Name="RegionNameD" ColumnName="RegionNameD" />
+                <ScalarProperty Name="RegionDrId" ColumnName="RegionDrId" />
+                <ScalarProperty Name="RegionNameC" ColumnName="RegionNameC" />
+                <ScalarProperty Name="RegionCrId" ColumnName="RegionCrId" />
+                <ScalarProperty Name="RegionNameB" ColumnName="RegionNameB" />
+                <ScalarProperty Name="RegionBrId" ColumnName="RegionBrId" />
+                <ScalarProperty Name="RegionNameA" ColumnName="RegionNameA" />
+                <ScalarProperty Name="RegionArId" ColumnName="RegionArId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="ExtIntNumber" ColumnName="ExtIntNumber" />
+                <ScalarProperty Name="MainAddress" ColumnName="MainAddress" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RelClientPhoneAddress" TypeName="CallCenterModel.RelClientPhoneAddress" StoreEntitySet="RelClientPhoneAddress">
+            <EndProperty Name="ClientPhone">
+              <ScalarProperty Name="ClientPhoneId" ColumnName="ClientPhoneId" />
+            </EndProperty>
+            <EndProperty Name="Address">
+              <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+            </EndProperty>
+          </AssociationSetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

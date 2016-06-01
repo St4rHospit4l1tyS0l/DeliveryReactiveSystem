@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6c715760ce4748578ccdba8e8adbe1d0" Name="Diagram1" ZoomLevel="55">
-        <EntityTypeShape EntityType="CallCenterModel.Address" Width="1.5" PointX="1" PointY="0.75" />
         <EntityTypeShape EntityType="CallCenterModel.AddressHierarchy" Width="1.5" PointX="10.125" PointY="6.75" />
         <EntityTypeShape EntityType="CallCenterModel.AspNetRoles" Width="1.5" PointX="13.125" PointY="25.625" />
         <EntityTypeShape EntityType="CallCenterModel.AspNetUserClaims" Width="1.5" PointX="17.625" PointY="40.875" />
@@ -19,7 +18,6 @@
         <EntityTypeShape EntityType="CallCenterModel.ClientStatistics" Width="1.5" PointX="17.625" PointY="19.875" />
         <EntityTypeShape EntityType="CallCenterModel.Company" Width="1.5" PointX="13.125" PointY="15.875" />
         <EntityTypeShape EntityType="CallCenterModel.Control" Width="1.5" PointX="14.125" PointY="6.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ControlTitle" Width="1.5" PointX="16.125" PointY="6.75" />
         <EntityTypeShape EntityType="CallCenterModel.Country" Width="1.5" PointX="6" PointY="10" />
         <EntityTypeShape EntityType="CallCenterModel.Franchise" Width="1.5" PointX="17.625" PointY="23.375" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseData" Width="1.5" PointX="19.875" PointY="33.625" />
@@ -42,13 +40,6 @@
         <EntityTypeShape EntityType="CallCenterModel.StoreStatus" Width="1.5" PointX="24.375" PointY="18.5" />
         <EntityTypeShape EntityType="CallCenterModel.UserDetail" Width="1.5" PointX="17.625" PointY="43.5" />
         <EntityTypeShape EntityType="CallCenterModel.ZipCode" Width="1.5" PointX="0.75" PointY="10.25" />
-        <AssociationConnector Association="CallCenterModel.FK_Address_Country" />
-        <AssociationConnector Association="CallCenterModel.FK_Address_RegionA" />
-        <AssociationConnector Association="CallCenterModel.FK_Address_RegionB" />
-        <AssociationConnector Association="CallCenterModel.FK_Address_RegionC1" />
-        <AssociationConnector Association="CallCenterModel.FK_Address_RegionD" />
-        <AssociationConnector Association="CallCenterModel.FK_Address_ZipCode" />
-        <AssociationConnector Association="CallCenterModel.FK_FranchiseStore_Address" />
         <AssociationConnector Association="CallCenterModel.FK_Permission_AspNetRoles" />
         <AssociationConnector Association="CallCenterModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="CallCenterModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
@@ -89,7 +80,6 @@
         <AssociationConnector Association="CallCenterModel.FK_RegionD_RegionC" />
         <AssociationConnector Association="CallCenterModel.FK_RegionD_ZipCode" />
         <AssociationConnector Association="CallCenterModel.AspNetUserRoles" />
-        <AssociationConnector Association="CallCenterModel.RelClientPhoneAddress" />
         <AssociationConnector Association="CallCenterModel.RelClientPhoneClient" />
         <AssociationConnector Association="CallCenterModel.RelFranchisePhoneStore" />
         <EntityTypeShape EntityType="CallCenterModel.ViewStoreInfo" Width="1.5" PointX="3.375" PointY="0.75" />
@@ -118,7 +108,6 @@
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers1" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore" />
         <EntityTypeShape EntityType="CallCenterModel.OrderToStore" Width="1.5" PointX="22.125" PointY="19.875" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Address" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_CatPayment" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Client" />
@@ -138,6 +127,17 @@
         <AssociationConnector Association="CallCenterModel.FK_FranchiseMap_Franchise" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseCoverageLog" Width="1.5" PointX="22.125" PointY="10.5" />
         <AssociationConnector Association="CallCenterModel.FK_FranchiseCoverageLog_FranchiseCoverage" />
+        <EntityTypeShape EntityType="CallCenterModel.ControlTitle" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="CallCenterModel.Address" Width="1.5" PointX="20.75" PointY="2.625" />
+        <AssociationConnector Association="CallCenterModel.FK_Address_Country" />
+        <AssociationConnector Association="CallCenterModel.FK_Address_RegionA" />
+        <AssociationConnector Association="CallCenterModel.FK_Address_RegionB" />
+        <AssociationConnector Association="CallCenterModel.FK_Address_RegionC1" />
+        <AssociationConnector Association="CallCenterModel.FK_Address_RegionD" />
+        <AssociationConnector Association="CallCenterModel.FK_Address_ZipCode" />
+        <AssociationConnector Association="CallCenterModel.FK_FranchiseStore_Address" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Address" />
+        <AssociationConnector Association="CallCenterModel.RelClientPhoneAddress" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

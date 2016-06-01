@@ -580,6 +580,7 @@
     <Content Include="Gmap\fonts\glyphicons-halflings-regular.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Gmap\images\ajax_loader.gif" />
     <Content Include="Gmap\js\bootstrap.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
