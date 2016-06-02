@@ -149,7 +149,7 @@ namespace Drs.Service.Franchise
                 try
                 {
                     var syncListModelCs = syncListModel;
-                    using (var client = new SyncFranchiseClient(new BasicHttpBinding(), new EndpointAddress(syncListModel.WsAddress +
+                    using (var client = new SyncFranchiseClient(new BasicHttpBinding(BasicHttpSecurityMode.None), new EndpointAddress(syncListModel.WsAddress +
                         SettingsData.Constants.Franchise.WS_SYNC_FILES)))
                     {
                         WcfExt.SetMtomEncodingAndSize(client.Endpoint);
