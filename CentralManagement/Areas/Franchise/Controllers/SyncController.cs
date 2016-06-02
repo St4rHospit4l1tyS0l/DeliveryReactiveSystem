@@ -33,11 +33,11 @@ namespace CentralManagement.Areas.Franchise.Controllers
         }
 
 
-        public ActionResult VersionList(JqGridFilterModel opts)
+        public ActionResult VersionList(JqGridFilterModel opts, int id)
         {
             using (var repository = new GenericRepository<Drs.Repository.Entities.FranchiseDataVersion>())
             {
-                var result = repository.JqGridFindBy(opts, FranchiseDataVersionInfoJson.Key, FranchiseDataVersionInfoJson.Columns, (e => e.IsObsolete == false)
+                var result = repository.JqGridFindBy(opts, FranchiseDataVersionInfoJson.Key, FranchiseDataVersionInfoJson.Columns, (e => e.IsObsolete == false && e.FranchiseId == id)
                     , FranchiseDataVersionInfoJson.DynamicToDto);
                 return Json(result);
             }

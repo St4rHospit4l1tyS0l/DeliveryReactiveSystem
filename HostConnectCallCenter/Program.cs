@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using ConnectCallCenter;
 using Microsoft.Owin.Hosting;
 
@@ -10,13 +11,15 @@ namespace HostConnectCallCenter
         {
             try
             {
-                Console.WriteLine("Server try to init at http://localhost:8123/");
+                var ipPort = ConfigurationManager.AppSettings["IpPortHost"];
+
+                Console.WriteLine("Server try to init at " + ipPort);
 
                 AppInit.Start();
 
-                using (WebApp.Start<Startup>("http://localhost:8123/"))
+                using (WebApp.Start<Startup>(ipPort))
                 {
-                    Console.WriteLine("Server running at http://localhost:8123/");
+                    Console.WriteLine("Server running at " + ipPort);
                     Console.ReadLine();
                 }
 

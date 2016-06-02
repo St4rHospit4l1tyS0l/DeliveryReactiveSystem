@@ -20,7 +20,7 @@ namespace ConnectCallCenter
                 var hubConfiguration = new HubConfiguration
                 {
                     Resolver = new AutofacSignalRDependencyResolver(AppInit.Container),
-
+                    EnableDetailedErrors = true
                 };
                 // Run the SignalR pipeline. We're not using MapSignalR
                 // since this branch already runs under the "/signalr"

@@ -14,7 +14,8 @@ namespace Drs.Service.Client
     public class StoreAddressService : IStoreAddressService
     {
         private readonly IReactiveDeliveryClient _client;
-        private IDisposable _subscription;
+        private IDisposable _subscriptionAdAv;
+        private IDisposable _subscriptionAvSt;
 
         public StoreAddressService(IReactiveDeliveryClient client)
         {
@@ -55,13 +56,13 @@ namespace Drs.Service.Client
 
             var orderModel = OrderService.OrderModel;
 
-            if (orderModel.StoreModel != null && orderModel.StoreModel.IdKey == item.Id)
-                return;
+            //TODO if (orderModel.StoreModel != null && orderModel.StoreModel.IdKey == item.Id)
+            //    return;
 
             LookingAvailability();
             DisposeSubscription();
 
-            _subscription = _client.ExecutionProxy.ExecuteRequest<ItemCatalog, ItemCatalog, ResponseMessageData<StoreModel>,
+            _subscriptionAvSt = _client.ExecutionProxy.ExecuteRequest<ItemCatalog, ItemCatalog, ResponseMessageData<StoreModel>,
                 ResponseMessageData<StoreModel>>(item, TransferDto.TransferDto.SameType, SharedConstants.Server.STORE_HUB,
                     SharedConstants.Server.AVAILABLE_BY_STORE_STORE_HUB_METHOD, TransferDto.TransferDto.SameType)
                     .Subscribe(obj => OnResultStoreAvailableOk(obj, false, bIsLastStore), OnResultStoreAvailableError);            
@@ -69,12 +70,25 @@ namespace Drs.Service.Client
 
         private void DisposeSubscription()
         {
-            if (_subscription != null)
+            if (_subscriptionAvSt != null)
             {
                 try
                 {
-                    _subscription.Dispose();
-                    _subscription = null;
+                    _subscriptionAvSt.Dispose();
+                    _subscriptionAvSt = null;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message + @" - ST - " + ex.StackTrace);
+                }
+            }
+
+            if (_subscriptionAdAv != null)
+            {
+                try
+                {
+                    _subscriptionAdAv.Dispose();
+                    _subscriptionAdAv = null;
                 }
                 catch (Exception ex)
                 {
@@ -105,7 +119,7 @@ namespace Drs.Service.Client
                 Id = orderModel.LastStoreModelByClientAddress.IdKey.Value
             };
 
-            _client.ExecutionProxy.ExecuteRequest<ItemCatalog, ItemCatalog, ResponseMessageData<StoreModel>,
+            _subscriptionAvSt = _client.ExecutionProxy.ExecuteRequest<ItemCatalog, ItemCatalog, ResponseMessageData<StoreModel>,
                 ResponseMessageData<StoreModel>>(item, TransferDto.TransferDto.SameType, SharedConstants.Server.STORE_HUB,
                     SharedConstants.Server.AVAILABLE_BY_STORE_STORE_HUB_METHOD, TransferDto.TransferDto.SameType)
                 .Subscribe(obj => OnResultStoreAvailableOk(obj), OnResultStoreAvailableError);            
@@ -137,7 +151,7 @@ namespace Drs.Service.Client
                 AddressInfo = address.AddressInfo
             };
 
-            _client.ExecutionProxy.ExecuteRequest<StoreAvailableModel, StoreAvailableModel, ResponseMessageData<StoreModel>,
+            _subscriptionAdAv = _client.ExecutionProxy.ExecuteRequest<StoreAvailableModel, StoreAvailableModel, ResponseMessageData<StoreModel>,
                 ResponseMessageData<StoreModel>>(model, TransferDto.TransferDto.SameType, SharedConstants.Server.STORE_HUB,
                     SharedConstants.Server.AVAILABLE_FOR_ADDRESS_STORE_HUB_METHOD, TransferDto.TransferDto.SameType)
                 .Subscribe(e => OnResultStoreAvailableOk(e, true), OnResultStoreAvailableError);

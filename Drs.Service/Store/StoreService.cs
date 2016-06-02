@@ -481,7 +481,15 @@ namespace Drs.Service.Store
             using (_repositoryStore)
             {
                 var store = _repositoryStore.GetStoreById(item.Id);
-                return GetStoreAvailable(response, new List<StoreModel>{store});
+                return GetStoreAvailable(response, new List<StoreModel>{store}, false);
+            }
+        }
+
+        public void StoreAvailableForAddressMap(StoreAvailableModel model, ResponseMessageData<StoreModel> response)
+        {
+            using (_repositoryStore)
+            {
+                //var storeCoverage = 
             }
         }
 
@@ -493,11 +501,11 @@ namespace Drs.Service.Store
                 var stores = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model.FranchiseCode,
                     model.AddressInfo, out franchiseId);
 
-                return GetStoreAvailable(response, stores);
+                return GetStoreAvailable(response, stores, true);
             }
         }
 
-        private StoreModel GetStoreAvailable(ResponseMessageData<StoreModel> response, List<StoreModel> stores)
+        private StoreModel GetStoreAvailable(ResponseMessageData<StoreModel> response, List<StoreModel> stores, bool isByAddress)
         {
             if (stores.Any() == false)
             {
@@ -516,6 +524,13 @@ namespace Drs.Service.Store
             }
 
             response.LstData = stores;
+
+            if (isByAddress)
+            {
+                response.IsSuccess = true;
+                response.Data = store;
+                return store;
+            }
 
             var utcDateTime = DateTime.UtcNow;
 
@@ -580,7 +595,6 @@ namespace Drs.Service.Store
                 {
                     try
                     {
-
                         var result = client.CancelOrder(atoOrderId, false);
                         if (result.IsSuccess)
                         {

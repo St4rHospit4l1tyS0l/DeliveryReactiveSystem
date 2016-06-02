@@ -64,12 +64,21 @@ namespace ConnectCallCenter.Hubs
                 var response = new ResponseMessageData<StoreModel>();
 
 
-                var store = AppInit.Container.Resolve<IStoreService>().StoreAvailableForAddress(model, response);
+                //var store = 
+                if (model.AddressInfo.IsMap == false)
+                {
+                    AppInit.Container.Resolve<IStoreService>().StoreAvailableForAddress(model, response);
+                }
+                else
+                {
+                    AppInit.Container.Resolve<IStoreService>().StoreAvailableForAddressMap(model, response);
+                }
+
 
                 if (response.IsSuccess == false)
                     return response;
 
-                AppInit.Container.Resolve<IStoreService>().GetPreparationTime(store.WsAddress, response);
+                //AppInit.Container.Resolve<IStoreService>().GetPreparationTime(store.WsAddress, response);
 
                 return response;
             }

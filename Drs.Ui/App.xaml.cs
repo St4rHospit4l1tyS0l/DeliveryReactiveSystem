@@ -8,6 +8,7 @@ using System.Windows;
 using Autofac;
 using Drs.Infrastructure.Crypto;
 using Drs.Infrastructure.Extensions.Enumerables;
+using Drs.Infrastructure.Hinfo;
 using Drs.Infrastructure.Logging;
 using Drs.Infrastructure.Model;
 using Drs.Model.Constants;
@@ -26,6 +27,7 @@ using Drs.ViewModel.Setting;
 using Drs.ViewModel.Shared;
 using Drs.ViewModel.SignalR;
 using log4net;
+using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Owin;
 using Microsoft.Owin.Hosting;
 using ReactiveUI;
@@ -84,6 +86,36 @@ namespace Drs.Ui
                         SharedConstants.Server.STORE_HUB,
                         SharedConstants.Server.TRACK_HUB
                 };
+
+                #region Debug
+                //try
+                //{
+                //    var hubConnection = new HubConnection("http://localhost:8123/");
+                //    hubConnection.Headers.Add(SharedConstants.Server.USERNAME_HEADER, Cypher.Encrypt(Environment.MachineName));
+                //    var key = ManagementExt.GetKey();
+                //    hubConnection.Headers.Add(SharedConstants.Server.CONNECTION_ID_HEADER, Cypher.Encrypt(key));
+                //    var proxy = hubConnection.CreateHubProxy(SharedConstants.Server.ACCOUNT_HUB);
+                //    //proxy.On<ResponseMessageData<string>>(SharedConstants.Server.ACCOUNT_INFO_ACCOUNT_HUB_METHOD, res =>
+                //    //{
+                //    //    Log.Info(res);
+                //    //    Log.Info(res.Message);
+                //    //    Console.WriteLine(res.Data);
+                //    //});
+                //    await hubConnection.Start();
+                //    var resp = await proxy.Invoke<ResponseMessageData<string>>(SharedConstants.Server.ACCOUNT_INFO_ACCOUNT_HUB_METHOD);
+
+                //    Log.Info(resp);
+                //    Log.Info(resp.Message);
+                //    Log.Info(resp.Data);
+                //    Console.WriteLine(resp.Data);
+
+                //    hubConnection.Stop();
+                //}
+                //catch (Exception ex)
+                //{
+                //    Log.Info(ex.Message, ex);
+                //}
+                #endregion
 
                 reactiveDeliveryClient.Initialize(Cypher.Encrypt(Environment.MachineName), container.Resolve<IConfigurationProvider>().Servers, lstHubProxies, container.Resolve<ILoggerFactory>());
                 SettingsData.Client.Container = container;
