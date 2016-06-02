@@ -12,7 +12,7 @@ namespace Drs.Service.Client
         void OnAddressSelected(AddressInfoGrid obj);
         IMainOrderService OrderService { get; set; }
 
-        event Action<StoreModel, string> StoreSelected;
+        event Action<StoreModel, string, bool> StoreSelected;
 
         event Action<List<ItemCatalog>> StoresReceivedByAddress;
 

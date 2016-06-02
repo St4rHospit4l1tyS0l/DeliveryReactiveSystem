@@ -143,6 +143,9 @@
     <Compile Include="Entities\FranchiseCoverageLog.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\FranchiseStoreGeoMap.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\InfoClientTerminalFranchise.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>

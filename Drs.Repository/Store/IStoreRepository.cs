@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Drs.Model.Address;
 using Drs.Model.Franchise;
 using Drs.Model.Order;
 using Drs.Model.Store;
@@ -29,5 +31,7 @@ namespace Drs.Repository.Store
         StoreOfflineDto IsStoreOnline(int idKey, DateTime utcDateTime);
         StoreModel GetStoreById(int id);
         int GetFranchiseIdByStoreId(int franchiseStoreId);
+        List<CoverageStoreModel> GetAvailableCoverageByFrachiseCode(string franchiseCode);
+        List<StoreModel> GetStoresByIds(List<int> storesIds);
     }
 }

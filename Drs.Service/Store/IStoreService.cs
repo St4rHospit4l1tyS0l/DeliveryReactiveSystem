@@ -12,6 +12,6 @@ namespace Drs.Service.Store
         StoreModel StoreAvailableForAddress(StoreAvailableModel model, ResponseMessageData<StoreModel> response);
         void GetPreparationTime(string wsAddress, ResponseMessageData<StoreModel> response);
         StoreModel StoreAvailableByStore(ItemCatalog item, ResponseMessageData<StoreModel> response);
-        void StoreAvailableForAddressMap(StoreAvailableModel model, ResponseMessageData<StoreModel> response);
+        StoreModel StoreAvailableForAddressMap(StoreAvailableModel model, ResponseMessageData<StoreModel> response);
     }
 }

@@ -9,6 +9,7 @@ using Drs.Infrastructure.Extensions;
 using Drs.Infrastructure.Extensions.Classes;
 using Drs.Infrastructure.Extensions.Json;
 using Drs.Infrastructure.Model;
+using Drs.Model.Address;
 using Drs.Model.Constants;
 using Drs.Model.Franchise;
 using Drs.Model.Order;
@@ -25,6 +26,7 @@ using Drs.Service.Account;
 using Drs.Service.CustomerOrder;
 using Drs.Service.Factory;
 using Microsoft.AspNet.SignalR.Hubs;
+using Newtonsoft.Json.Linq;
 using QueryFunctionClient = Drs.Service.QueryFunction.QueryFunctionClient;
 using ResponseMessage = Drs.Model.Shared.ResponseMessage;
 
@@ -485,13 +487,52 @@ namespace Drs.Service.Store
             }
         }
 
-        public void StoreAvailableForAddressMap(StoreAvailableModel model, ResponseMessageData<StoreModel> response)
+        public StoreModel StoreAvailableForAddressMap(StoreAvailableModel model, ResponseMessageData<StoreModel> response)
         {
             using (_repositoryStore)
             {
-                //var storeCoverage = 
+                var lstStoresCoverage = _repositoryStore.GetAvailableCoverageByFrachiseCode(model.FranchiseCode);
+
+                if (lstStoresCoverage == null || lstStoresCoverage.Count == 0)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "La franquicia no tiene configurada la cobertura de sus tiendas";
+                    return null;
+                }
+
+                var storesIds = CalculateStoresCoverages(lstStoresCoverage, model.AddressInfo);
+
+                if (storesIds.Count == 0)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "No existe cobertura en esa dirección";
+                    return null;
+                }
+
+                var stores = _repositoryStore.GetStoresByIds(storesIds);
+
+                return GetStoreAvailable(response, stores, true);
+
             }
         }
+
+        private List<int> CalculateStoresCoverages(List<CoverageStoreModel> storesCoverage, AddressInfoModel addressInfo)
+        {
+            var lstStoresIds = new List<int>();
+            var gPoint = GeoHelper.PointFromText(addressInfo.Lat, addressInfo.Lng);
+
+            foreach (var coverage in storesCoverage)
+            {
+                if (coverage.Coverage.Intersects(gPoint))
+                {
+                    if(lstStoresIds.Any(e => e == coverage.StoreId) == false)
+                        lstStoresIds.Add(coverage.StoreId);
+                }
+            }
+            
+            return lstStoresIds;
+        }
+
 
         public StoreModel StoreAvailableForAddress(StoreAvailableModel model, ResponseMessageData<StoreModel> response)
         {

@@ -12,15 +12,12 @@ namespace Drs.Repository.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class StoreStatus
+    public partial class FranchiseStoreGeoMap
     {
+        public int FranchiseStoreGeoMapId { get; set; }
         public int FranchiseStoreId { get; set; }
-        public string Status { get; set; }
-        public Nullable<System.DateTime> LastDatetime { get; set; }
-        public Nullable<long> LastOrderToStoreId { get; set; }
-        public int MaxCapacity { get; set; }
+        public System.Data.Entity.Spatial.DbGeography Coverage { get; set; }
     
-        public virtual OrderToStore OrderToStore { get; set; }
         public virtual FranchiseStore FranchiseStore { get; set; }
     }
 }

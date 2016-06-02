@@ -14,6 +14,6 @@ namespace Drs.ViewModel.Order
         void OnClientSelected(ClientInfoGrid clientInfo);
         void OnAddressSelected(AddressInfoGrid info);
         void OnPosOrderChanged(PosCheck obj);
-        void OnStoreSelected(StoreModel obj, string sMsg);
+        void OnStoreSelected(StoreModel obj, string sMsg, bool pendingStatus);
     }
 }

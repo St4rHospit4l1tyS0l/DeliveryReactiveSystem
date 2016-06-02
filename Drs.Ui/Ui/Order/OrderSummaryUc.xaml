@@ -98,10 +98,15 @@
                                 <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_close}" />
                             </Rectangle.OpacityMask>
                         </Rectangle>
+                        <Rectangle Width="18" Height="18"  Margin="10,0,0,0" Visibility="{Binding StoreView.IsInProgress}" HorizontalAlignment="Center" Fill="#FFDCFF00" >
+                            <Rectangle.OpacityMask >
+                                <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_magnify_forward}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
                         <Label Margin="4,0" Content="Tienda:" Foreground="White"  HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" FontSize="13"></Label>
                     </StackPanel>
-                    <TextBlock Text="{Binding StoreView.FirstValue}" Visibility="{Binding StoreView.IsOk}" Foreground="WhiteSmoke"  TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Stretch" FontSize="13"></TextBlock>
-                    <TextBlock Text="{Binding StoreView.MsgErr}" Visibility="{Binding StoreView.IsError}" Foreground="#FFFFE800"  TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Stretch" FontSize="13"></TextBlock>
+                    <TextBlock Text="{Binding StoreView.FirstValue}" Visibility="{Binding StoreView.HasToShow}" Foreground="WhiteSmoke"  TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Stretch" FontSize="13"></TextBlock>
+                    <TextBlock Text="{Binding StoreView.MsgErr}" Visibility="{Binding StoreView.HasToShow}" Foreground="#FFFFE800"  TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Stretch" FontSize="13"></TextBlock>
                 </StackPanel>
             </Border>
             <Border>

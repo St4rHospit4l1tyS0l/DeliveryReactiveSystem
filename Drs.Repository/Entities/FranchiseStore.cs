@@ -16,10 +16,11 @@ namespace Drs.Repository.Entities
     {
         public FranchiseStore()
         {
-            this.StoreAddressDistribution = new HashSet<StoreAddressDistribution>();
-            this.FranchisePhone = new HashSet<FranchisePhone>();
+            this.FranchiseStoreGeoMap = new HashSet<FranchiseStoreGeoMap>();
             this.FranchiseStoreOffLine = new HashSet<FranchiseStoreOffLine>();
             this.OrderToStore = new HashSet<OrderToStore>();
+            this.StoreAddressDistribution = new HashSet<StoreAddressDistribution>();
+            this.FranchisePhone = new HashSet<FranchisePhone>();
         }
     
         public int FranchiseStoreId { get; set; }
@@ -34,15 +35,16 @@ namespace Drs.Repository.Entities
         public string WsAddress { get; set; }
         public string ManageUserId { get; set; }
     
+        public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual AspNetUsers AspNetUsers1 { get; set; }
         public virtual AspNetUsers AspNetUsers2 { get; set; }
         public virtual Franchise Franchise { get; set; }
+        public virtual ICollection<FranchiseStoreGeoMap> FranchiseStoreGeoMap { get; set; }
+        public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
+        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<StoreAddressDistribution> StoreAddressDistribution { get; set; }
         public virtual StoreStatus StoreStatus { get; set; }
         public virtual ICollection<FranchisePhone> FranchisePhone { get; set; }
-        public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
-        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
-        public virtual Address Address { get; set; }
     }
 }

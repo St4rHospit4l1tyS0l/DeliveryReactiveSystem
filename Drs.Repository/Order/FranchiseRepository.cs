@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using Drs.Infrastructure.Resources;
+using Drs.Model.Address;
 using Drs.Model.Franchise;
 using Drs.Model.Menu;
 using Drs.Model.Settings;
@@ -17,13 +18,13 @@ namespace Drs.Repository.Order
     {
         public FranchiseRepository()
         {
-            
+
         }
 
         public FranchiseRepository(CallCenterEntities db)
-            :base(db)
+            : base(db)
         {
-            
+
         }
 
         public IEnumerable<ButtonItemModel> GetFranchiseButtons()
@@ -38,7 +39,7 @@ namespace Drs.Repository.Order
                         Image = e.FranchiseButton.Resource.UidFileName,
                         Code = e.Code,
                         Description = e.FranchiseButton.Products,
-                        DataInfo = new FranchiseDataModel{DataFolder = e.FranchiseData.DataFolder, NewDataFolder = e.FranchiseData.NewDataFolder}
+                        DataInfo = new FranchiseDataModel { DataFolder = e.FranchiseData.DataFolder, NewDataFolder = e.FranchiseData.NewDataFolder }
                     }).OrderBy(e => e.Position).ToList();
 
         }
@@ -83,9 +84,9 @@ namespace Drs.Repository.Order
             var modelOld = DbEntities.Franchise.Single(e => e.FranchiseId == model.FranchiseId);
 
             modelOld.Code = model.Code;
-            
+
             modelOld.FranchiseButton.Color = model.Color;
-            
+
             var resource = DbEntities.Resource.Single(e => e.UidFileName == model.Resource.UidFileName);
             modelOld.FranchiseButton.Resource = resource;
 
@@ -115,7 +116,7 @@ namespace Drs.Repository.Order
             model.IsObsolete = true;
             model.UserIdUpd = userId;
             model.DatetimeUpd = DateTime.Now;
-            
+
             DbEntities.SaveChanges();
         }
 
@@ -273,7 +274,7 @@ namespace Drs.Repository.Order
 
         public IQueryable<UnSyncListModel> GetUnSyncListOfFiles()
         {
-            return DbEntities.FranchiseDataVersion.Where(e => e.Franchise.IsObsolete == false 
+            return DbEntities.FranchiseDataVersion.Where(e => e.Franchise.IsObsolete == false
                 && e.IsObsolete == false && e.IsListOfFilesReceived == false)
                 .Select(e => new UnSyncListModel
                 {
@@ -322,7 +323,7 @@ namespace Drs.Repository.Order
         public void UpdateSyncOkFile(int franchiseDataFileId)
         {
             DbEntities.Configuration.ValidateOnSaveEnabled = false;
-            var model = new FranchiseDataFile {FranchiseDataFileId = franchiseDataFileId, IsSync = true};
+            var model = new FranchiseDataFile { FranchiseDataFileId = franchiseDataFileId, IsSync = true };
             DbEntities.FranchiseDataFile.Attach(model);
             DbEntities.Entry(model).Property(e => e.IsSync).IsModified = true;
             DbEntities.SaveChanges();
@@ -330,7 +331,7 @@ namespace Drs.Repository.Order
 
         public List<UnSyncListModel> GetDataVersionsIdsReadyToDownload()
         {
-            return DbEntities.FranchiseDataVersion.Where(e => e.IsObsolete == false && e.IsCompleted == false 
+            return DbEntities.FranchiseDataVersion.Where(e => e.IsObsolete == false && e.IsCompleted == false
                 && e.IsListOfFilesReceived && e.Franchise.IsObsolete == false)
                 .Select(e => new UnSyncListModel
                 {
@@ -352,7 +353,7 @@ namespace Drs.Repository.Order
             var model = new FranchiseDataVersion { FranchiseDataVersionId = franchiseDataVersionId, IsCompleted = true };
             DbEntities.FranchiseDataVersion.Attach(model);
             DbEntities.Entry(model).Property(e => e.IsCompleted).IsModified = true;
-            DbEntities.SaveChanges(); 
+            DbEntities.SaveChanges();
         }
 
         public void SetFranchiseVersionTerminalOk(int franchiseId, string sVersion, string eHost)
@@ -363,7 +364,7 @@ namespace Drs.Repository.Order
             {
                 FranchiseId = franchiseId,
                 InfoClientTerminalId = infoClientTerminalId,
-                Version = sVersion                
+                Version = sVersion
             };
 
             DbEntities.InfoClientTerminalVersion.Add(model);
@@ -427,7 +428,7 @@ namespace Drs.Repository.Order
             DbEntities.SaveChanges();
         }
 
-        public void SaveFranchiseCoverage(FranchiseCoverageModel franchiseCoverage, FranchiseCoverage lastCoverage, string userId)
+        public void SaveFranchiseCoverage(FranchiseCoverageModel franchiseCoverage, FranchiseCoverage lastCoverage, string userId, List<SetCoverageStoreModel> lstFranchiseCoverage)
         {
             var bIsNew = lastCoverage == null;
             if (bIsNew)
@@ -441,7 +442,21 @@ namespace Drs.Repository.Order
 
             if (bIsNew) 
                 DbEntities.FranchiseCoverage.Add(lastCoverage);
-            
+
+            DbEntities.FranchiseStoreGeoMap.RemoveRange(DbEntities.FranchiseStoreGeoMap.Where(e => e.FranchiseStore.FranchiseId == franchiseCoverage.Id));
+
+            foreach (var coverageStoreModel in lstFranchiseCoverage)
+            {
+                foreach (var coverage in coverageStoreModel.Coverage)
+                {
+                    DbEntities.FranchiseStoreGeoMap.Add(new FranchiseStoreGeoMap
+                    {
+                        FranchiseStoreId = coverageStoreModel.StoreId,
+                        Coverage = coverage
+                    });
+                }
+            }
+
             DbEntities.SaveChanges();
         }
     }

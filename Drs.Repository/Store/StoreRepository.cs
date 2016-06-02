@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using Drs.Infrastructure.Resources;
+using Drs.Model.Address;
 using Drs.Model.Catalog;
 using Drs.Model.Constants;
 using Drs.Model.Franchise;
@@ -333,6 +335,20 @@ namespace Drs.Repository.Store
         }
 
 
+        public List<StoreModel> GetStoresByIds(List<int> storesIds)
+        {
+            return DbEntities.FranchiseStore.Where(e => storesIds.Any(i => i == e.FranchiseStoreId) && e.IsObsolete == false)
+                .Select(e => new StoreModel
+                {
+                    Key = e.FranchiseStoreId.ToString(),
+                    IdKey = e.FranchiseStoreId,
+                    Value = e.Name,
+                    MainAddress = e.Address.MainAddress,
+                    LstPhones = e.FranchisePhone.Select(i => i.Phone).ToList(),
+                    WsAddress = e.WsAddress
+                }).ToList();
+        }
+
         public void SaveRecurrence(Recurrence recurrence)
         {
             DbEntities.Recurrence.Add(recurrence);
@@ -496,6 +512,16 @@ namespace Drs.Repository.Store
         public int GetFranchiseIdByStoreId(int franchiseStoreId)
         {
             return DbEntities.FranchiseStore.Where(e => e.FranchiseStoreId == franchiseStoreId).Select(e => e.FranchiseId).Single();   
+        }
+
+        public List<CoverageStoreModel> GetAvailableCoverageByFrachiseCode(string franchiseCode)
+        {
+            return DbEntities.FranchiseStoreGeoMap.Where(e => e.FranchiseStore.Franchise.Code == franchiseCode && e.FranchiseStore.IsObsolete == false && e.FranchiseStore.Franchise.IsObsolete == false)
+                .Select(e => new CoverageStoreModel
+                {
+                    Coverage = e.Coverage,
+                    StoreId = e.FranchiseStoreId
+                }).ToList();
         }
 
     }

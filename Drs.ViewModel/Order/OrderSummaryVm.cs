@@ -16,7 +16,7 @@ namespace Drs.ViewModel.Order
 {
     public class OrderSummaryVm : UcViewModelBase, IOrderSummaryVm
     {
-        
+
         private readonly OrderSummaryItem _phoneView;
         private readonly OrderSummaryItem _franchiseView;
         private readonly OrderSummaryItem _clientView;
@@ -33,7 +33,7 @@ namespace Drs.ViewModel.Order
             _addressView = new OrderSummaryItem();
             _storeView = new OrderSummaryItem();
             _posCheckView = new OrderSummaryItem();
-            _lstOrderSum = new List<OrderSummaryItem>{_phoneView, _franchiseView, _clientView, _addressView, _storeView, _posCheckView};
+            _lstOrderSum = new List<OrderSummaryItem> { _phoneView, _franchiseView, _clientView, _addressView, _storeView, _posCheckView };
 
             _phoneView.RetrySave = ReactiveCommand.CreateAsyncTask(Observable.Return(true), async _ =>
             {
@@ -62,7 +62,7 @@ namespace Drs.ViewModel.Order
         public void OnPhoneChanged(PhoneModel modelPhone)
         {
             OnItemChanged(PhoneView, modelPhone.Status, modelPhone.Phone, modelPhone.Message);
-        } 
+        }
 
         public void OnFranchiseChanged(FranchiseInfoModel franchiseInfo)
         {
@@ -74,7 +74,7 @@ namespace Drs.ViewModel.Order
             if (clientInfo == null)
                 OnItemChanged(ClientView, SharedConstants.Client.RECORD_ERROR_SAVED, String.Empty, String.Empty);
             else
-                OnItemChanged(ClientView, SharedConstants.Client.RECORD_SAVED, 
+                OnItemChanged(ClientView, SharedConstants.Client.RECORD_SAVED,
                     String.Format("{0} {1}", clientInfo.ClientInfo.FirstName, clientInfo.ClientInfo.LastName), String.Empty);
         }
 
@@ -82,8 +82,8 @@ namespace Drs.ViewModel.Order
         {
             if (info == null)
                 OnItemChanged(AddressView, SharedConstants.Client.RECORD_ERROR_SAVED, String.Empty, String.Empty);
-            else 
-                OnItemChanged(AddressView, SharedConstants.Client.RECORD_SAVED, 
+            else
+                OnItemChanged(AddressView, SharedConstants.Client.RECORD_SAVED,
                     String.Format("{0} {1}", info.AddressInfo.MainAddress, info.AddressInfo.ExtIntNumber), String.Empty);
         }
 
@@ -101,7 +101,7 @@ namespace Drs.ViewModel.Order
             OnItemChanged(PosCheckView, posCheck.Status, checkInfo, posCheck.Message, checkTotal);
         }
 
-        public void OnStoreSelected(StoreModel obj, string sMsg)
+        public void OnStoreSelected(StoreModel obj, string sMsg, bool pendingStatus)
         {
             if (obj == null)
             {
@@ -109,33 +109,60 @@ namespace Drs.ViewModel.Order
             }
             else
             {
-                OnItemChanged(StoreView, SharedConstants.Client.RECORD_SAVED, String.Format("{0} - {1}{2}{3}", obj.Value, obj.MainAddress, Environment.NewLine, obj.ExtraMsg));
+                if (pendingStatus)
+                {
+                    var stData = String.IsNullOrWhiteSpace(obj.ExtraMsg) ? obj.MainAddress : String.Format("{0}{1}{2}", obj.MainAddress, Environment.NewLine, obj.ExtraMsg);
+
+                    OnItemChanged(StoreView, SharedConstants.Client.RECORD_ONPROGRESS_TO_PROCESS,
+                        String.Format("{0} - {1}", obj.Value, stData), sMsg);
+                }
+                else
+                {
+                    OnItemChanged(StoreView, SharedConstants.Client.RECORD_SAVED,
+                        String.Format("{0} - {1}{2}{3}", obj.Value, obj.MainAddress, Environment.NewLine, obj.ExtraMsg));
+                }
+
             }
         }
 
 
         private void OnItemChanged(OrderSummaryItem sumItem, int status, string value, string message = "", string secValue = "")
         {
-            if (status == SharedConstants.Client.RECORD_ERROR_SAVED)
+            switch (status)
             {
-                sumItem.IsOk = Visibility.Collapsed;
-                sumItem.IsError = Visibility.Visible;
-                sumItem.IsSaveInProgress = Visibility.Collapsed;
-                sumItem.MsgErr = message;
-            }
-            else if (status == SharedConstants.Client.RECORD_ONPROGRESS_TO_SAVED)
-            {
-                sumItem.IsOk = Visibility.Hidden;
-                sumItem.IsError = Visibility.Collapsed;
-                sumItem.IsSaveInProgress = Visibility.Visible;
-            }
-            else if (status == SharedConstants.Client.RECORD_SAVED)
-            {
-                sumItem.IsOk = Visibility.Visible;
-                sumItem.IsError = Visibility.Collapsed;
-                sumItem.IsSaveInProgress = Visibility.Collapsed;
-                sumItem.FirstValue = value;
-                sumItem.SecondValue = secValue;
+                case SharedConstants.Client.RECORD_ERROR_SAVED:
+                    sumItem.IsOk = Visibility.Collapsed;
+                    sumItem.IsInProgress = Visibility.Collapsed;
+                    sumItem.IsError = Visibility.Visible;
+                    sumItem.IsSaveInProgress = Visibility.Collapsed;
+                    sumItem.FirstValue = String.Empty;
+                    sumItem.SecondValue = String.Empty;
+                    sumItem.MsgErr = message;
+                    break;
+                case SharedConstants.Client.RECORD_ONPROGRESS_TO_SAVED:
+                    sumItem.IsOk = Visibility.Hidden;
+                    sumItem.IsInProgress = Visibility.Collapsed;
+                    sumItem.IsError = Visibility.Collapsed;
+                    sumItem.IsSaveInProgress = Visibility.Visible;
+                    break;
+                case SharedConstants.Client.RECORD_SAVED:
+                    sumItem.IsOk = Visibility.Visible;
+                    sumItem.IsInProgress = Visibility.Collapsed;
+                    sumItem.IsError = Visibility.Collapsed;
+                    sumItem.IsSaveInProgress = Visibility.Collapsed;
+                    sumItem.FirstValue = value;
+                    sumItem.SecondValue = secValue;
+                    sumItem.MsgErr = String.Empty;
+                    break;
+                case SharedConstants.Client.RECORD_ONPROGRESS_TO_PROCESS:
+                    sumItem.IsOk = Visibility.Collapsed;
+                    sumItem.IsInProgress = Visibility.Visible;
+                    sumItem.IsError = Visibility.Collapsed;
+                    sumItem.IsSaveInProgress = Visibility.Collapsed;
+                    sumItem.FirstValue = value;
+                    sumItem.SecondValue = secValue;
+                    sumItem.MsgErr = message;
+                    break;
             }
         }
 

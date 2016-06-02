@@ -42,7 +42,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<Franchise> Franchise { get; set; }
         public virtual DbSet<FranchiseData> FranchiseData { get; set; }
         public virtual DbSet<FranchisePhone> FranchisePhone { get; set; }
-        public virtual DbSet<FranchiseStore> FranchiseStore { get; set; }
         public virtual DbSet<Language> Language { get; set; }
         public virtual DbSet<MenuModule> MenuModule { get; set; }
         public virtual DbSet<Module> Module { get; set; }
@@ -79,5 +78,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<FranchiseCoverageLog> FranchiseCoverageLog { get; set; }
         public virtual DbSet<ControlTitle> ControlTitle { get; set; }
         public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<FranchiseStore> FranchiseStore { get; set; }
+        public virtual DbSet<FranchiseStoreGeoMap> FranchiseStoreGeoMap { get; set; }
     }
 }

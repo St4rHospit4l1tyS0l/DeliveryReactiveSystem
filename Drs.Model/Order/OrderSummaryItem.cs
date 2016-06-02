@@ -14,6 +14,7 @@ namespace Drs.Model.Order
         private String _msgErr;
         private string _firstValue;
         private string _secondValue;
+        private Visibility _isInProgress;
 
         public OrderSummaryItem()
         {
@@ -26,6 +27,7 @@ namespace Drs.Model.Order
             IsOk = Visibility.Hidden;
             IsError = Visibility.Collapsed;
             IsSaveInProgress = Visibility.Collapsed;
+            IsInProgress = Visibility.Collapsed;
             MsgErr = String.Empty;
             FirstValue = String.Empty;
             SecondValue = String.Empty;
@@ -54,7 +56,14 @@ namespace Drs.Model.Order
             get { return _isSaveInProgress; }
             set { this.RaiseAndSetIfChanged(ref _isSaveInProgress, value); }
         }
-        
+
+        public Visibility IsInProgress
+        {
+            get { return _isInProgress; }
+            set { this.RaiseAndSetIfChanged(ref _isInProgress, value); }
+
+        }
+
         public String MsgErr
         {
             get { return _msgErr; }

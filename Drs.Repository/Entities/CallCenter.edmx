@@ -299,6 +299,14 @@
           <Property Name="WsAddress" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="ManageUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
+        <EntityType Name="FranchiseStoreGeoMap">
+          <Key>
+            <PropertyRef Name="FranchiseStoreGeoMapId" />
+          </Key>
+          <Property Name="FranchiseStoreGeoMapId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FranchiseStoreId" Type="int" Nullable="false" />
+          <Property Name="Coverage" Type="geography" Nullable="false" />
+        </EntityType>
         <EntityType Name="FranchiseStoreOffLine">
           <Key>
             <PropertyRef Name="FranchiseStoreOffLineId" />
@@ -1079,6 +1087,18 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FranchiseStoreGeoMap_FranchiseStore">
+          <End Role="FranchiseStore" Type="Self.FranchiseStore" Multiplicity="1" />
+          <End Role="FranchiseStoreGeoMap" Type="Self.FranchiseStoreGeoMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="FranchiseStoreGeoMap">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FranchiseStoreOffLine_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="FranchiseStoreOffLine" Type="Self.FranchiseStoreOffLine" Multiplicity="*" />
@@ -1709,6 +1729,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="FranchiseDataVersion" EntityType="Self.FranchiseDataVersion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchisePhone" EntityType="Self.FranchisePhone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseStore" EntityType="Self.FranchiseStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FranchiseStoreGeoMap" EntityType="Self.FranchiseStoreGeoMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FranchiseStoreOffLine" EntityType="Self.FranchiseStoreOffLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InfoCallCenter" EntityType="Self.InfoCallCenter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InfoClientTerminal" EntityType="Self.InfoClientTerminal" Schema="dbo" store:Type="Tables" />
@@ -1906,6 +1927,10 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="FK_FranchiseStore_Franchise" Association="Self.FK_FranchiseStore_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStoreGeoMap_FranchiseStore" Association="Self.FK_FranchiseStoreGeoMap_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="FranchiseStoreGeoMap" EntitySet="FranchiseStoreGeoMap" />
           </AssociationSet>
           <AssociationSet Name="FK_FranchiseStoreOffLine_AspNetUsers" Association="Self.FK_FranchiseStoreOffLine_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2130,7 +2155,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="Franchise" EntityType="CallCenterModel.Franchise" />
           <EntitySet Name="FranchiseData" EntityType="CallCenterModel.FranchiseData" />
           <EntitySet Name="FranchisePhone" EntityType="CallCenterModel.FranchisePhone" />
-          <EntitySet Name="FranchiseStore" EntityType="CallCenterModel.FranchiseStore" />
           <EntitySet Name="Language" EntityType="CallCenterModel.Language" />
           <EntitySet Name="MenuModule" EntityType="CallCenterModel.MenuModule" />
           <EntitySet Name="Module" EntityType="CallCenterModel.Module" />
@@ -2184,18 +2208,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="FranchisePhone" EntitySet="FranchisePhone" />
           </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStore_AspNetUsers" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStore_AspNetUsers1" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers1">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStore_AspNetUsers2" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers2">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
           <AssociationSet Name="FK_PosOrder_AspNetUsers" Association="CallCenterModel.FK_PosOrder_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="PosOrder" EntitySet="PosOrder" />
@@ -2239,18 +2251,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="FK_FranchiseData_Franchise" Association="CallCenterModel.FK_FranchiseData_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
             <End Role="FranchiseData" EntitySet="FranchiseData" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStore_Franchise" Association="CallCenterModel.FK_FranchiseStore_Franchise">
-            <End Role="Franchise" EntitySet="Franchise" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StoreAddressDistribution_FranchiseStore" Association="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore">
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-            <End Role="StoreAddressDistribution" EntitySet="StoreAddressDistribution" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StoreStatus_FranchiseStore" Association="CallCenterModel.FK_StoreStatus_FranchiseStore">
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-            <End Role="StoreStatus" EntitySet="StoreStatus" />
           </AssociationSet>
           <AssociationSet Name="FK_MenuModule_Module" Association="CallCenterModel.FK_MenuModule_Module">
             <End Role="Module" EntitySet="Module" />
@@ -2311,10 +2311,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="RelClientPhoneClient" Association="CallCenterModel.RelClientPhoneClient">
             <End Role="Client" EntitySet="Client" />
             <End Role="ClientPhone" EntitySet="ClientPhone" />
-          </AssociationSet>
-          <AssociationSet Name="RelFranchisePhoneStore" Association="CallCenterModel.RelFranchisePhoneStore">
-            <End Role="FranchisePhone" EntitySet="FranchisePhone" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
           </AssociationSet>
           <EntitySet Name="ViewStoreInfo" EntityType="CallCenterModel.ViewStoreInfo" />
           <EntitySet Name="ViewUserInfo" EntityType="CallCenterModel.ViewUserInfo" />
@@ -2379,10 +2375,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
           </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStoreOffLine_FranchiseStore" Association="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore">
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-            <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
-          </AssociationSet>
           <EntitySet Name="OrderToStore" EntityType="CallCenterModel.OrderToStore" />
           <AssociationSet Name="FK_OrderToStore_AspNetUsers" Association="CallCenterModel.FK_OrderToStore_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2402,10 +2394,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           </AssociationSet>
           <AssociationSet Name="FK_OrderToStore_Franchise" Association="CallCenterModel.FK_OrderToStore_Franchise">
             <End Role="Franchise" EntitySet="Franchise" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderToStore_FranchiseStore" Association="CallCenterModel.FK_OrderToStore_FranchiseStore">
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
             <End Role="OrderToStore" EntitySet="OrderToStore" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderToStore_PosOrder" Association="CallCenterModel.FK_OrderToStore_PosOrder">
@@ -2471,10 +2459,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="ZipCode" EntitySet="ZipCode" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK_FranchiseStore_Address" Association="CallCenterModel.FK_FranchiseStore_Address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderToStore_Address" Association="CallCenterModel.FK_OrderToStore_Address">
             <End Role="Address" EntitySet="Address" />
             <End Role="OrderToStore" EntitySet="OrderToStore" />
@@ -2482,6 +2466,52 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="RelClientPhoneAddress" Association="CallCenterModel.RelClientPhoneAddress">
             <End Role="Address" EntitySet="Address" />
             <End Role="ClientPhone" EntitySet="ClientPhone" />
+          </AssociationSet>
+          <EntitySet Name="FranchiseStore" EntityType="CallCenterModel.FranchiseStore" />
+          <EntitySet Name="FranchiseStoreGeoMap" EntityType="CallCenterModel.FranchiseStoreGeoMap" />
+          <AssociationSet Name="FK_FranchiseStore_Address" Association="CallCenterModel.FK_FranchiseStore_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStore_AspNetUsers" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStore_AspNetUsers1" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStore_AspNetUsers2" Association="CallCenterModel.FK_FranchiseStore_AspNetUsers2">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStore_Franchise" Association="CallCenterModel.FK_FranchiseStore_Franchise">
+            <End Role="Franchise" EntitySet="Franchise" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStoreGeoMap_FranchiseStore" Association="CallCenterModel.FK_FranchiseStoreGeoMap_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="FranchiseStoreGeoMap" EntitySet="FranchiseStoreGeoMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FranchiseStoreOffLine_FranchiseStore" Association="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="FranchiseStoreOffLine" EntitySet="FranchiseStoreOffLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_FranchiseStore" Association="CallCenterModel.FK_OrderToStore_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreAddressDistribution_FranchiseStore" Association="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="StoreAddressDistribution" EntitySet="StoreAddressDistribution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreStatus_FranchiseStore" Association="CallCenterModel.FK_StoreStatus_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="StoreStatus" EntitySet="StoreStatus" />
+          </AssociationSet>
+          <AssociationSet Name="RelFranchisePhoneStore" Association="CallCenterModel.RelFranchisePhoneStore">
+            <End Role="FranchisePhone" EntitySet="FranchisePhone" />
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AddressHierarchy">
@@ -2549,9 +2579,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="Franchise1" Relationship="CallCenterModel.FK_Franchise_AspNetUsers1" FromRole="AspNetUsers" ToRole="Franchise" />
           <NavigationProperty Name="FranchisePhone" Relationship="CallCenterModel.FK_FranchisePhone_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchisePhone" />
           <NavigationProperty Name="FranchisePhone1" Relationship="CallCenterModel.FK_FranchisePhone_AspNetUsers1" FromRole="AspNetUsers" ToRole="FranchisePhone" />
-          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchiseStore" />
-          <NavigationProperty Name="FranchiseStore1" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers1" FromRole="AspNetUsers" ToRole="FranchiseStore" />
-          <NavigationProperty Name="FranchiseStore2" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers2" FromRole="AspNetUsers" ToRole="FranchiseStore" />
           <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrder_AspNetUsers" FromRole="AspNetUsers" ToRole="PosOrder" />
           <NavigationProperty Name="UserDetail" Relationship="CallCenterModel.FK_UserDetail_AspNetUsers" FromRole="AspNetUsers" ToRole="UserDetail" />
           <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
@@ -2561,6 +2588,9 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="FranchiseStoreOffLine" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchiseStoreOffLine" />
           <NavigationProperty Name="FranchiseStoreOffLine1" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers1" FromRole="AspNetUsers" ToRole="FranchiseStoreOffLine" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_AspNetUsers" FromRole="AspNetUsers" ToRole="OrderToStore" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchiseStore" />
+          <NavigationProperty Name="FranchiseStore1" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers1" FromRole="AspNetUsers" ToRole="FranchiseStore" />
+          <NavigationProperty Name="FranchiseStore2" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers2" FromRole="AspNetUsers" ToRole="FranchiseStore" />
           </EntityType>
         <EntityType Name="CatDeliveryStatus">
           <Key>
@@ -2683,13 +2713,13 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_Franchise_AspNetUsers" FromRole="Franchise" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_Franchise_AspNetUsers1" FromRole="Franchise" ToRole="AspNetUsers" />
           <NavigationProperty Name="FranchiseData" Relationship="CallCenterModel.FK_FranchiseData_Franchise" FromRole="Franchise" ToRole="FranchiseData" />
-          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_Franchise" FromRole="Franchise" ToRole="FranchiseStore" />
           <NavigationProperty Name="FranchiseDataVersion" Relationship="CallCenterModel.FK_FranchiseDataVersion_Franchise" FromRole="Franchise" ToRole="FranchiseDataVersion" />
           <NavigationProperty Name="InfoClientTerminalVersion" Relationship="CallCenterModel.FK_InfoClientTerminalVersion_Franchise" FromRole="Franchise" ToRole="InfoClientTerminalVersion" />
           <NavigationProperty Name="FranchiseButton" Relationship="CallCenterModel.FK_FranchiseButton_Franchise" FromRole="Franchise" ToRole="FranchiseButton" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="Franchise" ToRole="OrderToStore" />
           <NavigationProperty Name="InfoClientTerminalFranchise" Relationship="CallCenterModel.FK_InfoClientTerminalFranchise_Franchise" FromRole="Franchise" ToRole="InfoClientTerminalFranchise" />
           <NavigationProperty Name="FranchiseCoverage" Relationship="CallCenterModel.FK_FranchiseMap_Franchise" FromRole="Franchise" ToRole="FranchiseCoverage" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_Franchise" FromRole="Franchise" ToRole="FranchiseStore" />
         </EntityType>
         <EntityType Name="FranchiseData">
           <Key>
@@ -2715,32 +2745,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_FranchisePhone_AspNetUsers" FromRole="FranchisePhone" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_FranchisePhone_AspNetUsers1" FromRole="FranchisePhone" ToRole="AspNetUsers" />
           <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.RelFranchisePhoneStore" FromRole="FranchisePhone" ToRole="FranchiseStore" />
-        </EntityType>
-        <EntityType Name="FranchiseStore">
-          <Key>
-            <PropertyRef Name="FranchiseStoreId" />
-          </Key>
-          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="UserIdIns" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserIdUpd" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="DatetimeIns" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DatetimeUpd" Type="DateTime" Precision="3" />
-          <Property Name="AddressId" Type="Int32" Nullable="false" />
-          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
-          <Property Name="WsAddress" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="ManageUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers" FromRole="FranchiseStore" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers1" FromRole="FranchiseStore" ToRole="AspNetUsers" />
-          <NavigationProperty Name="AspNetUsers2" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers2" FromRole="FranchiseStore" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseStore_Franchise" FromRole="FranchiseStore" ToRole="Franchise" />
-          <NavigationProperty Name="StoreAddressDistribution" Relationship="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreAddressDistribution" />
-          <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreStatus" />
-          <NavigationProperty Name="FranchisePhone" Relationship="CallCenterModel.RelFranchisePhoneStore" FromRole="FranchiseStore" ToRole="FranchisePhone" />
-          <NavigationProperty Name="FranchiseStoreOffLine" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore" FromRole="FranchiseStore" ToRole="FranchiseStoreOffLine" />
-          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="FranchiseStore" ToRole="OrderToStore" />
-          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="FranchiseStore" ToRole="Address" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -2950,8 +2954,8 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="LastDatetime" Type="DateTime" Precision="3" />
           <Property Name="LastOrderToStoreId" Type="Int64" />
           <Property Name="MaxCapacity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_StoreStatus_FranchiseStore" FromRole="StoreStatus" ToRole="FranchiseStore" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_StoreStatus_OrderToStore" FromRole="StoreStatus" ToRole="OrderToStore" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_StoreStatus_FranchiseStore" FromRole="StoreStatus" ToRole="FranchiseStore" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -3090,42 +3094,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FranchiseStore_AspNetUsers">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="UserIdIns" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseStore_AspNetUsers1">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="UserIdUpd" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseStore_AspNetUsers2">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="ManageUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PosOrder_AspNetUsers">
           <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
           <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="*" />
@@ -3255,42 +3223,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Principal>
             <Dependent Role="FranchiseData">
               <PropertyRef Name="FranchiseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FranchiseStore_Franchise">
-          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Franchise">
-              <PropertyRef Name="FranchiseId" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="FranchiseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StoreAddressDistribution_FranchiseStore">
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
-          <End Type="CallCenterModel.StoreAddressDistribution" Role="StoreAddressDistribution" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FranchiseStore">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Principal>
-            <Dependent Role="StoreAddressDistribution">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StoreStatus_FranchiseStore">
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
-          <End Type="CallCenterModel.StoreStatus" Role="StoreStatus" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="FranchiseStore">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Principal>
-            <Dependent Role="StoreStatus">
-              <PropertyRef Name="FranchiseStoreId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3457,10 +3389,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
         <Association Name="RelClientPhoneClient">
           <End Type="CallCenterModel.Client" Role="Client" Multiplicity="*" />
           <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="*" />
-        </Association>
-        <Association Name="RelFranchisePhoneStore">
-          <End Type="CallCenterModel.FranchisePhone" Role="FranchisePhone" Multiplicity="*" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
         </Association>
         <EntityType Name="ViewStoreInfo">
           <Key>
@@ -3773,18 +3701,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FranchiseStoreOffLine_FranchiseStore">
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStoreOffLine" Role="FranchiseStoreOffLine" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FranchiseStore">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Principal>
-            <Dependent Role="FranchiseStoreOffLine">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="OrderToStore">
           <Key>
             <PropertyRef Name="OrderToStoreId" />
@@ -3815,12 +3731,12 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="OrderToStore" ToRole="Client" />
           <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.FK_OrderToStore_ClientPhone" FromRole="OrderToStore" ToRole="ClientPhone" />
           <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="OrderToStore" ToRole="Franchise" />
-          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="OrderToStore" ToRole="FranchiseStore" />
           <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="OrderToStore" ToRole="PosOrder" />
           <NavigationProperty Name="OrderToStoreLog" Relationship="CallCenterModel.FK_OrderToStoreLog_OrderToStore" FromRole="OrderToStore" ToRole="OrderToStoreLog" />
           <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="OrderToStore" ToRole="Recurrence" />
           <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_OrderToStore" FromRole="OrderToStore" ToRole="StoreStatus" />
           <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_OrderToStore_Address" FromRole="OrderToStore" ToRole="Address" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="OrderToStore" ToRole="FranchiseStore" />
         </EntityType>
         <Association Name="FK_OrderToStore_AspNetUsers">
           <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
@@ -3879,18 +3795,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Principal>
             <Dependent Role="OrderToStore">
               <PropertyRef Name="FranchiseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderToStore_FranchiseStore">
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FranchiseStore">
-              <PropertyRef Name="FranchiseStoreId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="FranchiseStoreId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4114,9 +4018,9 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="RegionC" Relationship="CallCenterModel.FK_Address_RegionC1" FromRole="Address" ToRole="RegionC" />
           <NavigationProperty Name="RegionD" Relationship="CallCenterModel.FK_Address_RegionD" FromRole="Address" ToRole="RegionD" />
           <NavigationProperty Name="ZipCode" Relationship="CallCenterModel.FK_Address_ZipCode" FromRole="Address" ToRole="ZipCode" />
-          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="Address" ToRole="FranchiseStore" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Address" FromRole="Address" ToRole="OrderToStore" />
           <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneAddress" FromRole="Address" ToRole="ClientPhone" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="Address" ToRole="FranchiseStore" />
         </EntityType>
         <Association Name="FK_Address_Country">
           <End Type="CallCenterModel.Country" Role="Country" Multiplicity="0..1" />
@@ -4190,18 +4094,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FranchiseStore_Address">
-          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="AddressId" />
-            </Principal>
-            <Dependent Role="FranchiseStore">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderToStore_Address">
           <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
           <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
@@ -4217,6 +4109,166 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
         <Association Name="RelClientPhoneAddress">
           <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
           <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="*" />
+        </Association>
+        <EntityType Name="FranchiseStore">
+          <Key>
+            <PropertyRef Name="FranchiseStoreId" />
+          </Key>
+          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FranchiseId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="UserIdIns" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserIdUpd" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DatetimeIns" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DatetimeUpd" Type="DateTime" Precision="3" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+          <Property Name="WsAddress" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ManageUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_FranchiseStore_Address" FromRole="FranchiseStore" ToRole="Address" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers" FromRole="FranchiseStore" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers1" FromRole="FranchiseStore" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers2" Relationship="CallCenterModel.FK_FranchiseStore_AspNetUsers2" FromRole="FranchiseStore" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_FranchiseStore_Franchise" FromRole="FranchiseStore" ToRole="Franchise" />
+          <NavigationProperty Name="FranchiseStoreGeoMap" Relationship="CallCenterModel.FK_FranchiseStoreGeoMap_FranchiseStore" FromRole="FranchiseStore" ToRole="FranchiseStoreGeoMap" />
+          <NavigationProperty Name="FranchiseStoreOffLine" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore" FromRole="FranchiseStore" ToRole="FranchiseStoreOffLine" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="FranchiseStore" ToRole="OrderToStore" />
+          <NavigationProperty Name="StoreAddressDistribution" Relationship="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreAddressDistribution" />
+          <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreStatus" />
+          <NavigationProperty Name="FranchisePhone" Relationship="CallCenterModel.RelFranchisePhoneStore" FromRole="FranchiseStore" ToRole="FranchisePhone" />
+        </EntityType>
+        <EntityType Name="FranchiseStoreGeoMap">
+          <Key>
+            <PropertyRef Name="FranchiseStoreGeoMapId" />
+          </Key>
+          <Property Name="FranchiseStoreGeoMapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
+          <Property Name="Coverage" Type="Geography" Nullable="false" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_FranchiseStoreGeoMap_FranchiseStore" FromRole="FranchiseStoreGeoMap" ToRole="FranchiseStore" />
+        </EntityType>
+        <Association Name="FK_FranchiseStore_Address">
+          <End Type="CallCenterModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStore_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="UserIdIns" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStore_AspNetUsers1">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="UserIdUpd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStore_AspNetUsers2">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="ManageUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStore_Franchise">
+          <End Type="CallCenterModel.Franchise" Role="Franchise" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Franchise">
+              <PropertyRef Name="FranchiseId" />
+            </Principal>
+            <Dependent Role="FranchiseStore">
+              <PropertyRef Name="FranchiseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStoreGeoMap_FranchiseStore">
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStoreGeoMap" Role="FranchiseStoreGeoMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="FranchiseStoreGeoMap">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FranchiseStoreOffLine_FranchiseStore">
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
+          <End Type="CallCenterModel.FranchiseStoreOffLine" Role="FranchiseStoreOffLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="FranchiseStoreOffLine">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_FranchiseStore">
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreAddressDistribution_FranchiseStore">
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
+          <End Type="CallCenterModel.StoreAddressDistribution" Role="StoreAddressDistribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="StoreAddressDistribution">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreStatus_FranchiseStore">
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
+          <End Type="CallCenterModel.StoreStatus" Role="StoreStatus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="StoreStatus">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RelFranchisePhoneStore">
+          <End Type="CallCenterModel.FranchisePhone" Role="FranchisePhone" Multiplicity="*" />
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -4410,23 +4462,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="FranchisePhoneId" ColumnName="FranchisePhoneId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FranchiseStore">
-            <EntityTypeMapping TypeName="CallCenterModel.FranchiseStore">
-              <MappingFragment StoreEntitySet="FranchiseStore">
-                <ScalarProperty Name="ManageUserId" ColumnName="ManageUserId" />
-                <ScalarProperty Name="WsAddress" ColumnName="WsAddress" />
-                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="DatetimeUpd" ColumnName="DatetimeUpd" />
-                <ScalarProperty Name="DatetimeIns" ColumnName="DatetimeIns" />
-                <ScalarProperty Name="UserIdUpd" ColumnName="UserIdUpd" />
-                <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
-                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4652,14 +4687,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </EndProperty>
             <EndProperty Name="Client">
               <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="RelFranchisePhoneStore" TypeName="CallCenterModel.RelFranchisePhoneStore" StoreEntitySet="RelFranchisePhoneStore">
-            <EndProperty Name="FranchiseStore">
-              <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
-            </EndProperty>
-            <EndProperty Name="FranchisePhone">
-              <ScalarProperty Name="FranchisePhoneId" ColumnName="FranchisePhoneId" />
             </EndProperty>
           </AssociationSetMapping>
           <EntitySetMapping Name="ViewStoreInfo">
@@ -4923,6 +4950,40 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </EndProperty>
             <EndProperty Name="Address">
               <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="FranchiseStore">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseStore">
+              <MappingFragment StoreEntitySet="FranchiseStore">
+                <ScalarProperty Name="ManageUserId" ColumnName="ManageUserId" />
+                <ScalarProperty Name="WsAddress" ColumnName="WsAddress" />
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="DatetimeUpd" ColumnName="DatetimeUpd" />
+                <ScalarProperty Name="DatetimeIns" ColumnName="DatetimeIns" />
+                <ScalarProperty Name="UserIdUpd" ColumnName="UserIdUpd" />
+                <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FranchiseStoreGeoMap">
+            <EntityTypeMapping TypeName="CallCenterModel.FranchiseStoreGeoMap">
+              <MappingFragment StoreEntitySet="FranchiseStoreGeoMap">
+                <ScalarProperty Name="Coverage" ColumnName="Coverage" />
+                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
+                <ScalarProperty Name="FranchiseStoreGeoMapId" ColumnName="FranchiseStoreGeoMapId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RelFranchisePhoneStore" TypeName="CallCenterModel.RelFranchisePhoneStore" StoreEntitySet="RelFranchisePhoneStore">
+            <EndProperty Name="FranchiseStore">
+              <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
+            </EndProperty>
+            <EndProperty Name="FranchisePhone">
+              <ScalarProperty Name="FranchisePhoneId" ColumnName="FranchisePhoneId" />
             </EndProperty>
           </AssociationSetMapping>
           </EntityContainerMapping>

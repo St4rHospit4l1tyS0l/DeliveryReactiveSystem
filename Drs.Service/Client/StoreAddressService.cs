@@ -23,7 +23,7 @@ namespace Drs.Service.Client
         }
 
         public IMainOrderService OrderService { get; set; }
-        public event Action<StoreModel, string> StoreSelected;
+        public event Action<StoreModel, string, bool> StoreSelected;
         public event Action<List<ItemCatalog>> StoresReceivedByAddress;
 
         protected virtual void OnStoresReceivedByAddress(List<ItemCatalog> obj)
@@ -33,10 +33,10 @@ namespace Drs.Service.Client
         }
 
 
-        protected virtual void OnStoreSelected(StoreModel obj, string sMsg)
+        protected virtual void OnStoreSelected(StoreModel obj, string sMsg, bool pendingStatus)
         {
             var handler = StoreSelected;
-            if (handler != null) handler(obj, sMsg);
+            if (handler != null) handler(obj, sMsg, pendingStatus);
         }
 
         public void OnAddressSelected(AddressInfoGrid obj)
@@ -99,8 +99,9 @@ namespace Drs.Service.Client
 
         private void LookingAvailability()
         {
+            var store = OrderService.OrderModel.StoreModel;
             OrderService.OrderModel.StoreModel = null;
-            OnStoreSelected(null, "Buscando disponiblidad...");
+            OnStoreSelected(store, "Buscando disponiblidad...", true);
         }
 
         public void OnUndoPickUpInStore()
@@ -165,7 +166,7 @@ namespace Drs.Service.Client
         private void OnResultStoreAvailableError(string sMsg)
         {
             OrderService.OrderModel.StoreModel = null;
-            OnStoreSelected(null, sMsg);
+            OnStoreSelected(null, sMsg, false);
         }
 
         private void OnResultStoreAvailableOk(IStale<ResponseMessageData<StoreModel>> obj, bool bIsForAddress = false, bool bIsLastStore = false)
@@ -195,16 +196,20 @@ namespace Drs.Service.Client
             }
 
             OrderService.OrderModel.StoreModel = dataResp;
+            OrderService.OrderModel.StoreModel.ExtraMsg = obj.Data.Message;
+
             if (bIsForAddress || bIsLastStore)
             {
                 OrderService.OrderModel.LastStoreModelByClientAddress = dataResp;
 
                 if (bIsLastStore == false)
+                {
                     ExtractStores(obj.Data.LstData);
+                    return;
+                }
             }
-            OrderService.OrderModel.StoreModel.ExtraMsg = obj.Data.Message;
 
-            OnStoreSelected(dataResp, null);
+            OnStoreSelected(dataResp, null, false);
         }
 
         private void ExtractStores(IEnumerable<StoreModel> lstData)
