@@ -115,7 +115,7 @@ namespace Drs.ViewModel.Order
         {
             HasAdditionalLstStore = Visibility.Collapsed;
 
-            if (obj == null || obj.Count < 2)
+            if (obj == null || obj.Count < 1)
                 return;
 
             RxApp.MainThreadScheduler.Schedule(_ =>

@@ -70,6 +70,7 @@ namespace Drs.Repository.Address
             address.MainAddress = model.MainAddress;
             address.Reference = model.Reference;
             if (model.ZipCode.IdKey != null) address.ZipCodeId = model.ZipCode.IdKey.Value;
+            address.IsMap = false;
 
             if (bIsNew)
                 DbEntities.Address.Add(address);
@@ -108,6 +109,7 @@ namespace Drs.Repository.Address
             address.ExtIntNumber = model.ExtIntNumber;
             address.MainAddress = model.MainAddress;
             address.Reference = model.Reference;
+            address.IsMap = true;
 
             if (bIsNew)
                 DbEntities.Address.Add(address);

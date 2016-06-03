@@ -26,7 +26,6 @@ using Drs.Service.Account;
 using Drs.Service.CustomerOrder;
 using Drs.Service.Factory;
 using Microsoft.AspNet.SignalR.Hubs;
-using Newtonsoft.Json.Linq;
 using QueryFunctionClient = Drs.Service.QueryFunction.QueryFunctionClient;
 using ResponseMessage = Drs.Model.Shared.ResponseMessage;
 
@@ -523,11 +522,17 @@ namespace Drs.Service.Store
 
             foreach (var coverage in storesCoverage)
             {
-                if (coverage.Coverage.Intersects(gPoint))
+                if (gPoint.Intersects(coverage.Coverage))
                 {
-                    if(lstStoresIds.Any(e => e == coverage.StoreId) == false)
+                    if (lstStoresIds.Any(e => e == coverage.StoreId) == false)
                         lstStoresIds.Add(coverage.StoreId);
                 }
+
+                //if (coverage.Coverage.Intersects(gPoint))
+                //{
+                //    if(lstStoresIds.Any(e => e == coverage.StoreId) == false)
+                //        lstStoresIds.Add(coverage.StoreId);
+                //}
             }
             
             return lstStoresIds;

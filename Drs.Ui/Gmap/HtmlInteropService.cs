@@ -27,7 +27,7 @@ namespace Drs.Ui.Gmap
             return JsonConvert.SerializeObject(new
             {
                 mv.Controls,
-                Address = mv.AddressMapInfo,
+                mv.AddressMapInfo,
                 mv.Franchise.LastConfig,
                 mv.Franchise.StoresCoverage
             });
@@ -50,7 +50,8 @@ namespace Drs.Ui.Gmap
 
                 var model = JsonConvert.DeserializeObject<AddressMapInfoModel>(sValue);
                 mv.Save(model);
-
+                mv.IsOpen = false;
+                
                 return JsonConvert.SerializeObject(new ResponseMessageModel
                 {
                     HasError = false,
@@ -66,6 +67,13 @@ namespace Drs.Ui.Gmap
                     Message = "Se presentó el siguiente error: " + ex.Message
                 });
             }
+        }
+
+        public void Cancel()
+        {
+            var mv = _control.DataContext as UpsertAddressFoVm;
+            if(mv != null)
+                mv.IsOpen = false;
         }
     }
 }

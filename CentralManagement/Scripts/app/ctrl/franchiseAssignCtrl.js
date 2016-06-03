@@ -246,8 +246,11 @@ app.controller('franchiseAssignController', function ($scope, $http, $timeout) {
                     currPoly.setMap(null);
                     store.polygons.splice(j, 1);
 
-                    if (store.polygons.length === 0)
+                    if (store.polygons.length === 0) {
+                        $scope.vm.stores[i].item.marker.setMap(null);
+                        $scope.vm.stores[i].item.marker = null;
                         $scope.vm.stores.splice(i, 1);
+                    }
 
                     return;
                 }
@@ -288,6 +291,20 @@ app.controller('franchiseAssignController', function ($scope, $http, $timeout) {
         var selStore = $scope.selStore;
         if (!selStore)
             return;
+
+        var stores = $scope.vm.stores;
+        var hasCoverage = false;
+        for (var i = stores.length - 1; i > -1; i--) {
+            var store = stores[i];
+            if (store.item.IdKey === selStore.IdKey) {
+                hasCoverage = true;
+            }
+        }
+
+        if (hasCoverage === false) {
+            toastr.error("Se necesita al menos tener una cobertura para establecer la tienda", "Sin coberturas");
+            return;
+        }
 
         var center = window.appGlobalMap.getCenter();
 

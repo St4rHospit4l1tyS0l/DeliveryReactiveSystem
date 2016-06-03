@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Spatial;
+using System.Linq;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Address;
 using Drs.Model.Franchise;
@@ -76,7 +77,11 @@ namespace Drs.Service.Franchise
                         }
 
                         if (lstPoints.Count > 0)
+                        {
                             lstPoints.Add(lstPoints[0]);
+                        }
+
+                        lstPoints.Reverse();
 
                         store.Coverage.Add(GeoHelper.PolygonFromText(String.Format("({0})", String.Join(", ", lstPoints))));
                     }

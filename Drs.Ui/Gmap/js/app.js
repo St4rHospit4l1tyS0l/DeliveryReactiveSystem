@@ -15,7 +15,7 @@ app.controller('gMapController', function ($scope, $timeout) {
         try {
             var infoMv = window.external.GetInfoAddress();
             var infoM = JSON.parse(infoMv);
-            var address = infoMv.AddressMapInfo;
+            var address = infoM.AddressMapInfo;
             var lastConfig = JSON.parse(infoM.LastConfig);
             $scope.storesCoverage = JSON.parse(infoM.StoresCoverage);
             
@@ -23,10 +23,10 @@ app.controller('gMapController', function ($scope, $timeout) {
             //var lastConfig = {"lat":19.48934343087218,"lng":-99.1259029507637,"zoom":13};
             //$scope.storesCoverage = [{ "id": 4, "color": "#bd00ff", "paths": [{ "path": [{ "i": 0, "lat": 19.47809676888959, "lng": -99.22441512346279 }, { "i": 1, "lat": 19.497677861942538, "lng": -99.23849135637295 }, { "i": 2, "lat": 19.497677861942538, "lng": -99.18411761522304 }, { "i": 3, "lat": 19.47162315835748, "lng": -99.18823748826992 }] }, { "path": [{ "i": 0, "lat": 19.500752368120445, "lng": -99.20999556779873 }, { "i": 1, "lat": 19.518712765638178, "lng": -99.20793563127529 }, { "i": 2, "lat": 19.53764183526815, "lng": -99.19385939836513 }, { "i": 3, "lat": 19.53764183526815, "lng": -99.16375428438198 }, { "i": 4, "lat": 19.528258470233624, "lng": -99.1374257206918 }, { "i": 5, "lat": 19.500752368120445, "lng": -99.15236026048672 }] }], "name": "Tienda Juventud", "position": { "lat": 19.50957039067487, "lng": -99.18667107820511 } }, { "id": 2, "color": "#ff9900", "paths": [{ "path": [{ "i": 0, "lat": 19.483275470294735, "lng": -99.10805016756069 }, { "i": 1, "lat": 19.496787866377296, "lng": -99.0755417943002 }, { "i": 2, "lat": 19.518470068227238, "lng": -99.08412486314785 }, { "i": 3, "lat": 19.518470068227238, "lng": -99.14176017045986 }, { "i": 4, "lat": 19.498628536406134, "lng": -99.15686637163174 }, { "i": 5, "lat": 19.493996473033857, "lng": -99.12940055131924 }, { "i": 6, "lat": 19.457218444561132, "lng": -99.13111716508877 }, { "i": 7, "lat": 19.45551892978478, "lng": -99.10811454057705 }] }], "name": "Tienda Ceylán", "position": { "lat": 19.504291398036905, "lng": -99.10805016756058 } }, { "id": 1, "color": "#9e2018", "paths": [{ "path": [{ "i": 0, "lat": 19.45818959075569, "lng": -99.18905287981045 }, { "i": 1, "lat": 19.497354225929126, "lng": -99.1837313771249 }, { "i": 2, "lat": 19.49881057941546, "lng": -99.1567161679269 }, { "i": 3, "lat": 19.49476512070239, "lng": -99.13055926561367 }, { "i": 4, "lat": 19.45818959075569, "lng": -99.13141757249844 }] }, { "path": [{ "i": 0, "lat": 19.45997000697041, "lng": -99.10562545061123 }, { "i": 1, "lat": 19.488292176434822, "lng": -99.10562545061123 }, { "i": 2, "lat": 19.50188506039608, "lng": -99.07339602708828 }, { "i": 3, "lat": 19.45802773376695, "lng": -99.06755954027187 }] }], "name": "Tienda Prados", "position": { "lat": 19.477044203666512, "lng": -99.15817528963089 } }];
             //var address = { "Address": { "NumExt": "7", "MainAddress": "Calle Tulipán", "RegionD": null, "RegionC": "Habitacional Miraflores", "RegionB": "Tlalnepantla de Baz", "RegionA": "Estado de México", "Country": "Mexico", "ZipCode": "54160", "Reference": "Casa cerrada" }, "PlaceId": "EkRDYWxsZSBUdWxpcMOhbiA3LCBIYWIgTWlyYWZsb3JlcywgNTQxNjAgVGxhbG5lcGFudGxhLCBNw6l4LiwgTcOpeGljbw", "Position": { "Lat": "19.5311079", "Lng": "-99.181451" } };
-
             if (address) {
                 lastConfig.lat = address.Position.Lat;
                 lastConfig.lng = address.Position.Lng;
+                lastConfig.zoom = 17;
                 $scope.m.PlaceId = address.PlaceId;
                 $scope.m.Address = address.Address;
             }
@@ -397,6 +397,10 @@ app.controller('gMapController', function ($scope, $timeout) {
         } finally {
             $scope.working = false;
         }
+    };
+
+    $scope.cancel = function() {
+        window.external.Cancel();
     };
 
 

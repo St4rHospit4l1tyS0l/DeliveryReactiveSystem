@@ -84,8 +84,6 @@ namespace Drs.ViewModel.Order
 
         public void Save(AddressMapInfoModel model)
         {
-            IsOpen = false;
-
             var addressInfo = new AddressInfoModel
             {
                 AddressId = Id,
@@ -626,6 +624,7 @@ namespace Drs.ViewModel.Order
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
+                ErrorUpsert = String.Empty;
                 ZipCode = String.Empty;
                 ZipCodeId = null;
                 ZipCodeSearchVm.Search = String.Empty;
@@ -657,6 +656,7 @@ namespace Drs.ViewModel.Order
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
+                ErrorUpsert = String.Empty;
                 PreId = clInfo.PreId;
                 var addr = clInfo.AddressInfo;
                 Id = addr.AddressId;

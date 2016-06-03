@@ -101,16 +101,19 @@
                     <TextBox Width="100" Visibility="{Binding Controls.NumExt.Visibility}"
                       Margin="25, 5, 0, 0" HorizontalAlignment="Left"
                       Text="{Binding NumExt}" />
+                    <TextBlock Margin="25, 40, 0, 0" Width="225" Height="60" TextWrapping="WrapWithOverflow" Text="{Binding ErrorUpsert}" HorizontalAlignment="Left" Visibility="{Binding ErrorUpsertVisibility}" Foreground="Red"></TextBlock>
                 </StackPanel>
             </Border>
         </StackPanel>
-        <TextBlock Margin="25, 10, 0, 0" Width="450" TextWrapping="Wrap" Text="{Binding ErrorUpsert}" HorizontalAlignment="Left" Visibility="{Binding ErrorUpsertVisibility}" Foreground="Red"></TextBlock>
         <Rectangle Margin="0, 5, 0, 5" Stroke="{DynamicResource AccentColorBrush}" StrokeThickness="2" />
-        <StackPanel Margin="0,0,0,0"
+        <StackPanel Orientation="Vertical" Visibility="{Binding VisibilityManual}">
+            <StackPanel Margin="0,0,0,0"
                     Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Margin="0,0,10,0" Content="  Agregar / Actualizar  " Style="{DynamicResource AccentedSquareButtonStyle}" 
+                <Button Margin="0,0,10,0" Content="  Agregar / Actualizar  " Style="{DynamicResource AccentedSquareButtonStyle}" 
                     Command="{Binding UpsertCommand}" controls:ButtonHelper.PreserveTextCase="True" />
-            <Button Content="  Cancelar  " Style="{DynamicResource SquareButtonStyle}" Command="{Binding CancelCommand}" controls:ButtonHelper.PreserveTextCase="True" />
+                <Button Content="  Cancelar  " Style="{DynamicResource SquareButtonStyle}" Command="{Binding CancelCommand}" controls:ButtonHelper.PreserveTextCase="True" />
+            </StackPanel>
+
         </StackPanel>
     </StackPanel>
 </controls:Flyout>
