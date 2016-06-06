@@ -187,10 +187,26 @@
             Procesando...<img src="images/ajax_loader.gif" alt="" />
         </div>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&sensor=false&callback=window.initCb" async defer></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&sensor=false&callback=window.initCb" async defer></script>-->
     <script src="js/main.js"></script>
     <script src="js/angularjs.js"></script>
     <script src="js/app.js"></script>
+    <script>
+        function loadScript(src, callback) {
+
+            var script = window.document.createElement("script");
+            script.type = "text/javascript";
+            if (callback) script.onload = callback;
+            window.document.getElementsByTagName("head")[0].appendChild(script);
+            script.src = src;
+        }
+
+        function initialize() {
+            window.initCb();
+        }
+        
+
+    </script>
     <!--<script src="js/bootstrap.min.js"></script>-->
 </body>
 </html>

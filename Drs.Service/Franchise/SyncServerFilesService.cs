@@ -229,7 +229,7 @@ namespace Drs.Service.Franchise
 
             using (var repository = new FranchiseRepository())
             {
-                repository.UpdateSyncOkFile(fileModel.FranchiseDataFileId);
+                repository.UpdateSyncOkFile(fileModel);
             }
         }
     }

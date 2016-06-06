@@ -316,16 +316,23 @@ namespace Drs.Repository.Order
                      {
                          CheckSum = e.CheckSum,
                          FileName = e.FileName,
-                         FranchiseDataFileId = e.FranchiseDataFileId
+                         FranchiseDataFileId = e.FranchiseDataFileId,
+                         FranchiseDataVersionId = e.FranchiseDataVersionId
                      });
         }
 
-        public void UpdateSyncOkFile(int franchiseDataFileId)
+        public void UpdateSyncOkFile(SyncFileModel syncFile)
         {
             DbEntities.Configuration.ValidateOnSaveEnabled = false;
-            var model = new FranchiseDataFile { FranchiseDataFileId = franchiseDataFileId, IsSync = true };
+            var model = new FranchiseDataFile { FranchiseDataFileId = syncFile.FranchiseDataFileId, IsSync = true };
             DbEntities.FranchiseDataFile.Attach(model);
             DbEntities.Entry(model).Property(e => e.IsSync).IsModified = true;
+            DbEntities.SaveChanges();
+
+            var countSyncFiles = DbEntities.FranchiseDataFile.Count(e => e.FranchiseDataVersionId == syncFile.FranchiseDataVersionId && e.IsSync);
+            var countModel = new FranchiseDataVersion{ FranchiseDataVersionId = syncFile.FranchiseDataVersionId, NumberOfFilesDownloaded = countSyncFiles};
+            DbEntities.FranchiseDataVersion.Attach(countModel);
+            DbEntities.Entry(countModel).Property(e => e.NumberOfFilesDownloaded).IsModified = true;
             DbEntities.SaveChanges();
         }
 
@@ -350,9 +357,10 @@ namespace Drs.Repository.Order
                 return;
 
             DbEntities.Configuration.ValidateOnSaveEnabled = false;
-            var model = new FranchiseDataVersion { FranchiseDataVersionId = franchiseDataVersionId, IsCompleted = true };
+            var model = new FranchiseDataVersion { FranchiseDataVersionId = franchiseDataVersionId, IsCompleted = true, TimestampComplete = DateTime.Now};
             DbEntities.FranchiseDataVersion.Attach(model);
             DbEntities.Entry(model).Property(e => e.IsCompleted).IsModified = true;
+            DbEntities.Entry(model).Property(e => e.TimestampComplete).IsModified = true;
             DbEntities.SaveChanges();
         }
 
