@@ -402,7 +402,6 @@ app.controller('gMapController', function ($scope, $timeout) {
     $scope.cancel = function() {
         window.external.Cancel();
     };
-
-
+    
     window.initCb = init;
 });

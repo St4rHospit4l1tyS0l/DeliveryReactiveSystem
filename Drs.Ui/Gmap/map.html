@@ -187,7 +187,6 @@
             Procesando...<img src="images/ajax_loader.gif" alt="" />
         </div>
     </div>
-    <!--<script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&sensor=false&callback=window.initCb" async defer></script>-->
     <script src="js/main.js"></script>
     <script src="js/angularjs.js"></script>
     <script src="js/app.js"></script>
@@ -205,6 +204,16 @@
             window.initCb();
         }
         
+        function log(str) {
+            //TODO Cambiar para que lo almacene a archivo o a la base de datos
+            console.log(str);
+        }
+        
+        loadScript('https://maps.googleapis.com/maps/api/js?libraries=geometry,places&sensor=false&callback=initialize',
+              function () { log('Google-loader cargado, resta maps-API '); });
+        //function log(str) {
+        //    document.getElementsByTagName('pre')[0].appendChild(document.createTextNode('[' + new Date().getTime() + ']\n' + str + '\n\n'));
+        //}
 
     </script>
     <!--<script src="js/bootstrap.min.js"></script>-->
