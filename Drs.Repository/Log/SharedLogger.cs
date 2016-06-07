@@ -21,7 +21,7 @@ namespace Drs.Repository.Log
 
                 modelExcep.MsgException = ex.Message;
                 modelExcep.ExceptionLogUid = Guid.NewGuid();
-                modelExcep.InnerException = InternalLogger.GetInnerExceptions(ex);
+                modelExcep.InnerException = InternalLogger.GetInternalErrors(ex);
                 modelExcep.ParamsValues = InternalLogger.GetSerializedValues(arrVal);
                 modelExcep.StackTrace = ex.StackTrace;
                 modelExcep.Timestamp = DateTime.Now;
@@ -43,7 +43,7 @@ namespace Drs.Repository.Log
 
                 modelExcep.MsgException = ex.Message;
                 modelExcep.ExceptionLogUid = Guid.NewGuid();
-                modelExcep.InnerException = InternalLogger.GetInnerExceptions(ex);
+                modelExcep.InnerException = InternalLogger.GetInternalErrors(ex);
                 modelExcep.ParamsValues = InternalLogger.GetSerializedValues(arrVal);
                 modelExcep.StackTrace = ex.StackTrace;
                 modelExcep.Timestamp = DateTime.Now;
@@ -68,7 +68,7 @@ namespace Drs.Repository.Log
             }
             catch (Exception ex)
             {
-                modelExcep.MsgException = String.Format("Error: {0} - Second Error: {1} -ST- {2}", modelExcep.MsgException, ex.Message, ex.StackTrace);
+                modelExcep.MsgException = String.Format("Error: {0} - Second Error: {1} -ST- {2} -IE- {3}", modelExcep.MsgException, ex.Message, ex.StackTrace, InternalLogger.GetInternalErrors(ex));
                 SaveLogToFile(modelExcep);
             }
         }
