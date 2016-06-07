@@ -6,7 +6,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              x:Class="Drs.Ui.Ui.Account.LoginUc"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="1200" Height="500" HorizontalAlignment="Stretch" >
+             Width="1920"  Height="700" HorizontalAlignment="Stretch" >
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

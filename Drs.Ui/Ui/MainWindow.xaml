@@ -54,18 +54,20 @@
             </controls:FlyoutsControl.ItemContainerStyle>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
-
-    <Grid Background="#FFFFFFFF">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="4" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FF01668B" Visibility="{Binding HeaderVisibility}">
-            <Label Content="Advanced Delivery Management" Foreground="White" FontFamily="Segoe UI Light" HorizontalAlignment="Stretch"
+    <Viewbox MaxHeight="{Binding SystemParameters.PrimaryScreenHeight}" MinHeight="{Binding SystemParameters.PrimaryScreenHeight}" 
+             MaxWidth="{Binding SystemParameters.PrimaryScreenWidth}" MinWidth="{Binding SystemParameters.PrimaryScreenWidth}">
+        <Grid Background="#FFFFFFFF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch" Background="#FF01668B" Visibility="{Binding HeaderVisibility}">
+                <Label Content="Advanced Delivery Management" Foreground="White" FontFamily="Segoe UI Light" HorizontalAlignment="Stretch"
                    HorizontalContentAlignment="Right" Margin="0,0,10,0"/>
-        </StackPanel>
-        <ContentControl  Content="{Binding CurrentView}" Grid.Row="2" >
-        </ContentControl>
-    </Grid>
+            </StackPanel>
+            <ContentControl  Content="{Binding CurrentView}" Grid.Row="2" >
+            </ContentControl>
+        </Grid>
+    </Viewbox>
 </controls:MetroWindow>

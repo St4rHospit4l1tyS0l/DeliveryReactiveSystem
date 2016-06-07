@@ -9,7 +9,7 @@
              xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1400" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+             Width="1900"  Height="1000" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
