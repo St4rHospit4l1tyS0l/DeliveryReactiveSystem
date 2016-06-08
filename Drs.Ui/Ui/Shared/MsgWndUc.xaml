@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="1200" Height="500" HorizontalAlignment="Stretch">
+             Width="1900"  Height="1040" Margin="20 0 20 20" HorizontalAlignment="Stretch">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Background="#FF9B9B2D">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="450" >
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="1600" Height="900" >
             <Rectangle Width="120" Margin="10"
                            Height="120" Fill="#FFF3F3F3">
                 <Rectangle.OpacityMask>

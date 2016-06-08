@@ -75,7 +75,7 @@ namespace Drs.Service.Franchise
                     var process = ProcessExt.ForceStartProcess(
                             Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.BIN_FOLDER),
                             SettingsData.AlohaIberToInit,
-                            SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty));
+                            SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty), true);
 
                     if (process == null)
                     {

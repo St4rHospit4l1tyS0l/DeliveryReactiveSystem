@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows;
 
 namespace Drs.Infrastructure.Extensions.Proc
 {
@@ -42,7 +45,7 @@ namespace Drs.Infrastructure.Extensions.Proc
             }
         }
 
-        public static Process ForceStartProcess(string sPathFile, string sFileName, string sProcessName, int iTries = 4)
+        public static Process ForceStartProcess(string sPathFile, string sFileName, string sProcessName, bool bIsPos, int iTries = 4)
         {
             while (iTries >= 0)
             {
@@ -53,16 +56,26 @@ namespace Drs.Infrastructure.Extensions.Proc
                     if (processes.Length > 0)
                         return processes[0];
 
+
                     var process = new Process
                     {
                         StartInfo =
                         {
                             FileName = Path.Combine(sPathFile, sFileName),
-                            WorkingDirectory = sPathFile
-                            //,UseShellExecute = true,
+                            WorkingDirectory = sPathFile,
+                            UseShellExecute = false,
                             //WindowStyle = ProcessWindowStyle.Normal
                         }
                     };
+
+                    if (bIsPos)
+                    {
+                        process.StartInfo.EnvironmentVariables["AlohaLeft"] = (SystemParameters.PrimaryScreenWidth * (0.15625)).ToString(CultureInfo.InvariantCulture);
+                        process.StartInfo.EnvironmentVariables["AlohaXRes"] = (SystemParameters.PrimaryScreenWidth * (0.52083)).ToString(CultureInfo.InvariantCulture);
+                        process.StartInfo.EnvironmentVariables["AlohaTop"] = (SystemParameters.PrimaryScreenHeight * (0.125)).ToString(CultureInfo.InvariantCulture);
+                        process.StartInfo.EnvironmentVariables["AlohaYRes"] = (SystemParameters.PrimaryScreenHeight * (0.74074)).ToString(CultureInfo.InvariantCulture);
+                    }
+                    
                     process.Start();
 
                     //Process.Start(sExeFile);

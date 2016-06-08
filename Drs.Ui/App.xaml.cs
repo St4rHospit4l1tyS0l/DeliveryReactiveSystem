@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -53,6 +54,7 @@ namespace Drs.Ui
             {
                 base.OnStartup(e);
                 InitializeLogging();
+                //SetEnvirontmentValues();
                 Start();
             }
             catch (Exception ex)
@@ -60,6 +62,14 @@ namespace Drs.Ui
                 MessageBox.Show(String.Format("Se presentó el siguiente error: {0} - {1}", ex.Message, ex.InnerException == null ? String.Empty : ex.InnerException.Message), "Error iniciar aplicación");
             }
         }
+
+        //private void SetEnvirontmentValues()
+        //{
+        //    Environment.SetEnvironmentVariable("AlohaLeft", (SystemParameters.PrimaryScreenWidth * (0.15625)).ToString(CultureInfo.InvariantCulture), EnvironmentVariableTarget.Machine);
+        //    Environment.SetEnvironmentVariable("AlohaXRes", (SystemParameters.PrimaryScreenWidth * (0.52083)).ToString(CultureInfo.InvariantCulture), EnvironmentVariableTarget.Machine);
+        //    Environment.SetEnvironmentVariable("AlohaTop", (SystemParameters.PrimaryScreenHeight * (0.125)).ToString(CultureInfo.InvariantCulture), EnvironmentVariableTarget.Machine);
+        //    Environment.SetEnvironmentVariable("AlohaYRes", (SystemParameters.PrimaryScreenHeight * (0.74074)).ToString(CultureInfo.InvariantCulture), EnvironmentVariableTarget.Machine);
+        //}
 
         private async void Start()
         {
