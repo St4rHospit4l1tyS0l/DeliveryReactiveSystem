@@ -78,5 +78,10 @@ namespace Drs.Infrastructure.Extensions.Io
             var path = Uri.UnescapeDataString(uri.Path);
             return Path.GetDirectoryName(path);
         }
+
+        public static void ForceToCreateFile(string fileCode)
+        {
+            File.Create(fileCode);
+        }
     }
 }

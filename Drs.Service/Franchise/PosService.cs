@@ -47,24 +47,30 @@ namespace Drs.Service.Franchise
                         FileExt.ForceDeleteFile(stopFile);
 
                     var isUpdated = IsUpdatedUpToDay(dataFolder);
+                    var fileCode = Path.Combine(dataFolder, model.Code);
 
-                    SharedLogger.LogError(new Exception("**** RGP **** " + isUpdated));
                     //Check if DATA y NEWDATA has already franchise selected
-                    if (isUpdated == false || !File.Exists(Path.Combine(dataFolder, model.Code)))
+                    if (isUpdated == false || !File.Exists(fileCode))
                     {
                         //Kill Iber process if exists
                         ProcessExt.ForceKillProcess(SettingsData.AlohaIber.Replace(
                             SettingsData.Constants.EXTENSION_EXE, String.Empty));
 
                         //Delete DATA folders
-                        
                         DirExt.ForceDeleteFolder(dataFolder);
                         //Copy directories of franchise 
                         DirExt.ForceCopyFolder(Path.Combine(SettingsData.AlohaPath, dataFolderFranchise.ToString()),
                             dataFolder);
+                        try
+                        {
+                            DirExt.ForceToCreateFile(fileCode);
+                        }
+                        catch (Exception ex)
+                        {
+                            SharedLogger.LogErrorToFile(ex, fileCode);
+                        }
                         //WaitForTopMostToDisable(process);
 
-                        SharedLogger.LogError(new Exception("**** RGP **** Entra 1"));
                     }
 
                     if (isUpdated == false)
@@ -72,17 +78,7 @@ namespace Drs.Service.Franchise
                         ChangeAlohaIniDate(dataFolder);
                         DeleteTransLog(dataFolder);
                         DeleteTmpFiles(tmpFolder);
-                        SharedLogger.LogError(new Exception("**** RGP **** Entra 2"));
                     }
-
-                    SharedLogger.LogError(new Exception("**** RGP **** " + Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.BIN_FOLDER) + " / " + SettingsData.AlohaIberToInit
-                        + " / " + SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty)));
-
-                    var processes = Process.GetProcessesByName(SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty));
-                    SharedLogger.LogError(new Exception("**** RGP **** LN:" + processes.Length));
-                    if (processes.Length > 0)
-                        SharedLogger.LogError(new Exception("**** RGP **** " + processes[0]));
-
 
                     //Start Iber
                     var process = ProcessExt.ForceStartProcess(
@@ -287,8 +283,6 @@ namespace Drs.Service.Franchise
                     return false;
 
                 var alohaDate = new DateTime(int.Parse(splitDob[2]), int.Parse(splitDob[0]), int.Parse(splitDob[1]));
-
-                SharedLogger.LogError(new Exception("**** RGP **** " + int.Parse(splitDob[2]) + "/" + int.Parse(splitDob[0]) + "/" + int.Parse(splitDob[1])));
 
                 return alohaDate >= today;
             }
