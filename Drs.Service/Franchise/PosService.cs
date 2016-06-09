@@ -48,6 +48,7 @@ namespace Drs.Service.Franchise
 
                     var isUpdated = IsUpdatedUpToDay(dataFolder);
 
+                    SharedLogger.LogError(new Exception("**** RGP **** " + isUpdated));
                     //Check if DATA y NEWDATA has already franchise selected
                     if (isUpdated == false || !File.Exists(Path.Combine(dataFolder, model.Code)))
                     {
@@ -61,7 +62,6 @@ namespace Drs.Service.Franchise
                         DirExt.ForceCopyFolder(Path.Combine(SettingsData.AlohaPath, dataFolderFranchise.ToString()),
                             dataFolder);
                         //WaitForTopMostToDisable(process);
-
                     }
 
                     if (isUpdated == false)
@@ -70,6 +70,9 @@ namespace Drs.Service.Franchise
                         DeleteTransLog(dataFolder);
                         DeleteTmpFiles(tmpFolder);
                     }
+
+                    SharedLogger.LogError(new Exception("**** RGP **** " + Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.BIN_FOLDER) + " / " + SettingsData.AlohaIberToInit
+                        + " / " + SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty)));
 
                     //Start Iber
                     var process = ProcessExt.ForceStartProcess(
@@ -274,6 +277,8 @@ namespace Drs.Service.Franchise
                     return false;
 
                 var alohaDate = new DateTime(int.Parse(splitDob[2]), int.Parse(splitDob[0]), int.Parse(splitDob[1]));
+
+                SharedLogger.LogError(new Exception("**** RGP **** " + int.Parse(splitDob[2]) + "/" + int.Parse(splitDob[0]) + "/" + int.Parse(splitDob[1])));
 
                 return alohaDate >= today;
             }
