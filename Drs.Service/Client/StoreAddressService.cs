@@ -57,7 +57,7 @@ namespace Drs.Service.Client
             //if (orderModel.StoreModel != null && orderModel.StoreModel.IdKey == item.Id)
             //    return;
 
-            LookingAvailability();
+            LookingAvailability(item);
             DisposeSubscription();
 
             _subscription = _client.ExecutionProxy.ExecuteRequest<ItemCatalog, ItemCatalog, ResponseMessageData<StoreModel>,
@@ -82,10 +82,12 @@ namespace Drs.Service.Client
             }
         }
 
-        private void LookingAvailability()
+        private void LookingAvailability(ItemCatalog item)
         {
             var store = OrderService.OrderModel.StoreModel;
             OrderService.OrderModel.StoreModel = null;
+            if (store == null || store.IdKey != item.Id)
+                store = null;
             OnStoreSelected(store, "Buscando disponiblidad...", true);
         }
 
@@ -97,13 +99,16 @@ namespace Drs.Service.Client
                 (orderModel.StoreModel != null && orderModel.LastStoreModelByClientAddress.IdKey == orderModel.StoreModel.IdKey))
                 return;
 
-            LookingAvailability();
-            DisposeSubscription();
-
             var item = new ItemCatalog
             {
-                Id = orderModel.LastStoreModelByClientAddress.IdKey.Value
+                Id = orderModel.LastStoreModelByClientAddress.IdKey.Value,
+                Name = String.Format("{0} ({1})", orderModel.LastStoreModelByClientAddress.Value, orderModel.LastStoreModelByClientAddress.MainAddress),
+                Value = orderModel.LastStoreModelByClientAddress.MainAddress
             };
+
+            LookingAvailability(item);
+            DisposeSubscription();
+                
 
             _subscription = _client.ExecutionProxy.ExecuteRequest<ItemCatalog, ItemCatalog, ResponseMessageData<StoreModel>,
                 ResponseMessageData<StoreModel>>(item, TransferDto.TransferDto.SameType, SharedConstants.Server.STORE_HUB,
