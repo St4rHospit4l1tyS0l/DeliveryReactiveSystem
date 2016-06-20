@@ -6,6 +6,7 @@ using Drs.Model.Client.Recurrence;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;
+using Drs.Repository.Log;
 using Drs.Service.Client;
 using Drs.Service.Order;
 using Microsoft.AspNet.SignalR;
@@ -29,11 +30,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<ListItemModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<ListItemModel>.CreateCriticalMessage("No fue posible buscar por el teléfono");
             }
         }
         
@@ -50,11 +48,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<ListItemModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<ListItemModel>.CreateCriticalMessage("No fue posible buscar por compañía");
             }
         }
 
@@ -72,11 +67,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<ClientInfoModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<ClientInfoModel>.CreateCriticalMessage("No fue posible listar los clientes por el teléfono");
             }
         }
 
@@ -94,11 +86,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<ListItemModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<ListItemModel>.CreateCriticalMessage("No fue posible listar los clientes por su nombre");
             }
         }
 
@@ -112,11 +101,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<bool>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message// + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<bool>.CreateCriticalMessage("No fue posible eliminar la relación teléfono-cliente");
             }
         }
 
@@ -129,11 +115,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<RecurrenceResponseModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message// + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<RecurrenceResponseModel>.CreateCriticalMessage("No fue posible calcular la recurrencia del cliente");
             }
         }
     }

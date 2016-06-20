@@ -3,6 +3,7 @@ using Autofac;
 using Drs.Model.Constants;
 using Drs.Model.Shared;
 using Drs.Model.Track;
+using Drs.Repository.Log;
 using Drs.Service.Track;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -28,11 +29,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<TrackOrderDto>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<TrackOrderDto>.CreateCriticalMessage("No fue posible rastrear por número telefónico");
             }
         }
 
@@ -50,11 +48,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<TrackOrderDto>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<TrackOrderDto>.CreateCriticalMessage("No fue posible rastrear por nombre del cliente");
             }
         }
 
@@ -71,11 +66,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<TrackOrderDto>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<TrackOrderDto>.CreateCriticalMessage("No fue posible rastrear el detalle de la orden");
             }
         }
 

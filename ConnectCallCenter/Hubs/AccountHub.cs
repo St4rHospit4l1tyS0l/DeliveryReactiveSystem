@@ -2,7 +2,9 @@
 using Autofac;
 using Drs.Model.Constants;
 using Drs.Model.Menu;
+using Drs.Model.Settings;
 using Drs.Model.Shared;
+using Drs.Repository.Log;
 using Drs.Service.Account;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -26,11 +28,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<ButtonItemModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<ButtonItemModel>.CreateCriticalMessage("No hay menú disponible");
             }
         }
 
@@ -49,11 +48,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<string>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<string>.CreateCriticalMessage("No hay información disponible del usuario");
             }
         }
     }

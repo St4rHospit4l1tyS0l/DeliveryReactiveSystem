@@ -3,6 +3,7 @@ using Autofac;
 using Drs.Model.Constants;
 using Drs.Model.Franchise;
 using Drs.Model.Shared;
+using Drs.Repository.Log;
 using Drs.Service.Franchise;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -26,11 +27,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<SyncFranchiseModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<SyncFranchiseModel>.CreateCriticalMessage("No fue posible obtener los archivos a sincronizar");
             }
         }
     }

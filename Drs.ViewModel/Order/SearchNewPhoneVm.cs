@@ -50,12 +50,23 @@ namespace Drs.ViewModel.Order
                 return false;
             }
 
-            if (phone.Trim().Length >= SettingsData.Client.MinLengthPhone) 
+            string msgError;
+            if (phone.Trim().Length < SettingsData.Client.MinLengthPhone)
+            {
+                msgError = "La longitud mínima del teléfono es de " + SettingsData.Client.MinLengthPhone;
+            }
+            else if (phone.Trim().Length > SettingsData.Client.MaxLengthPhone)
+            {
+                msgError = "La longitud máxima del teléfono es de " + SettingsData.Client.MaxLengthPhone;
+            }
+            else
+            {
                 return true;
+            }
             
             MessageBus.Current.SendMessage(new MessageBoxSettings
             {
-                Message = "La longitud mínima del teléfono es de " + SettingsData.Client.MinLengthPhone,
+                Message = msgError,
                 Title = "Error de validación",
             }, SharedMessageConstants.MSG_SHOW_ERRQST);
             return false;

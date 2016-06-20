@@ -13,6 +13,7 @@ namespace Drs.Model.Order
             Franchise = new FranchiseInfoModel();
             LstClientInfo = new ReactiveList<ClientInfoGrid>();
             LstAddressInfo = new ReactiveList<AddressInfoGrid>();
+            StoreModel = null;
         }
         public PhoneModel PhoneInfo { get; set; }
         public FranchiseInfoModel Franchise { get; set; }

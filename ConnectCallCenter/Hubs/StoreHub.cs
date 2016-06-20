@@ -4,6 +4,7 @@ using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;
 using Drs.Model.Store;
+using Drs.Repository.Log;
 using Drs.Service.Store;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -19,17 +20,12 @@ namespace ConnectCallCenter.Hubs
         {
             try
             {
-                //this.Context.Headers["UsrHdr"]
-                //Thread.Sleep(5000);
                 return AppInit.Container.Resolve<IStoreService>().SendOrderToStore(model, Clients);
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<OrderModelDto>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<OrderModelDto>.CreateCriticalMessage("No fue posible enviar la orden a la tienda");
             }
         }
 
@@ -47,11 +43,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<ResponseMessage>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<ResponseMessage>.CreateCriticalMessage("No fue posible cancelar la orden");
             }
         }
 
@@ -63,8 +56,6 @@ namespace ConnectCallCenter.Hubs
             {
                 var response = new ResponseMessageData<StoreModel>();
 
-
-                //var store = 
                 if (model.AddressInfo.IsMap == false)
                 {
                     AppInit.Container.Resolve<IStoreService>().StoreAvailableForAddress(model, response);
@@ -78,17 +69,12 @@ namespace ConnectCallCenter.Hubs
                 if (response.IsSuccess == false)
                     return response;
 
-                //AppInit.Container.Resolve<IStoreService>().GetPreparationTime(store.WsAddress, response);
-
                 return response;
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<StoreModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<StoreModel>.CreateCriticalMessage("No fue posible obtener una tienda disponible para esa dirección");
             }
         }
 
@@ -113,11 +99,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<StoreModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<StoreModel>.CreateCriticalMessage("No fue posible obtener una tienda disponible para esa selección");
             }
         }
     }

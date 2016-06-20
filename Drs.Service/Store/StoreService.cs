@@ -141,7 +141,7 @@ namespace Drs.Service.Store
                     {
                         Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_FAILURE,
                         IsSuccess = true,
-                        Message = String.Format("Después de varios intentos no fue posible enviar el envío a la tienda. Por favor intente de nuevo o reporte a su supervisor")
+                        Message = String.Format("Después de varios intentos no fue posible enviar el pedido a la tienda. Por favor intente de nuevo o reporte a su supervisor")
                     });
                     return;
                 }
@@ -257,6 +257,8 @@ namespace Drs.Service.Store
                             client.Close();
                             return result;
                         }
+
+                        SharedLogger.LogError(new Exception(String.Format("SendOrderToStore: {0} | {1} | {2} | {3}", result.IsSuccess, result.ErrMsg, result.ResultCode, result.ResultData)));
                     }
                     catch (Exception ex)
                     {

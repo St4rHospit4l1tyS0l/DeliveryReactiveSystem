@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using ConnectCallCenter;
+using log4net;
 using Microsoft.Owin.Hosting;
 
 namespace HostConnectCallCenter
@@ -14,6 +15,7 @@ namespace HostConnectCallCenter
                 var ipPort = ConfigurationManager.AppSettings["IpPortHost"];
 
                 Console.WriteLine("Server try to init at " + ipPort);
+                LogManager.GetLogger("INFO").Info("Server try to init at " + ipPort);
 
                 AppInit.Start();
 

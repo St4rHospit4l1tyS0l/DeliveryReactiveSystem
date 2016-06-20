@@ -9,7 +9,7 @@ using log4net;
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace Drs.Repository.Log
 {
-    public class SharedLogger
+    public static class SharedLogger
     {
 
         public static void LogError(Exception ex, params object[] arrVal)
@@ -23,9 +23,11 @@ namespace Drs.Repository.Log
                 modelExcep.ExceptionLogUid = Guid.NewGuid();
                 modelExcep.InnerException = InternalLogger.GetInternalErrors(ex);
                 modelExcep.ParamsValues = InternalLogger.GetSerializedValues(arrVal);
-                modelExcep.StackTrace = ex.StackTrace;
+                modelExcep.StackTrace = ex.StackTrace ?? String.Empty;
                 modelExcep.Timestamp = DateTime.Now;
                 modelExcep.Username = username;
+                Console.WriteLine(modelExcep.MsgException);
+                Console.WriteLine(modelExcep.InnerException);
                 SaveLogToDb(modelExcep);
             }
             catch (Exception)

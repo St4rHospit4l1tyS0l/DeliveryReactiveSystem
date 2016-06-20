@@ -3,6 +3,7 @@ using Autofac;
 using Drs.Model.Address;
 using Drs.Model.Constants;
 using Drs.Model.Shared;
+using Drs.Repository.Log;
 using Drs.Service.Address;
 using Drs.Service.Order;
 using Microsoft.AspNet.SignalR;
@@ -26,11 +27,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<AddressResponseSearch>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<AddressResponseSearch>.CreateCriticalMessage("No fue posible determinar la jerarquía con el código postal");
             }
         }
 
@@ -47,11 +45,9 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<ListItemModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<ListItemModel>.CreateCriticalMessage("No fue posible determinar la dirección con el código postal");
+
             }
         }
         
@@ -72,11 +68,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<ListItemModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<ListItemModel>.CreateCriticalMessage("No fue posible determinar la siguiente región");
             }
         }
 
@@ -90,11 +83,9 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<AddressInfoModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message// + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<AddressInfoModel>.CreateCriticalMessage("No fue posible guardar el cliente");
+
             }
         }
         
@@ -111,17 +102,14 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<AddressInfoModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<AddressInfoModel>.CreateCriticalMessage("No fue posible buscar una dirección por el teléfono");
             }
         }
 
 
         [HubMethodName(SharedConstants.Server.REMOVE_REL_PHONECLIENT_ADDRESS_HUB_METHOD)]
-        public ResponseMessageData<bool> RemoveRelPhoneClient(AddressPhoneModel model)
+        public ResponseMessageData<bool> RemoveRelPhoneAddress(AddressPhoneModel model)
         {
             try
             {
@@ -129,11 +117,9 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<bool>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message// + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<bool>.CreateCriticalMessage("No fue posible eliminar la relación teléfono-dirección");
+
             }
         }
     }

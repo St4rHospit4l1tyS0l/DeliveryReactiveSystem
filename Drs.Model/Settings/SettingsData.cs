@@ -67,6 +67,7 @@ namespace Drs.Model.Settings
                 public const string USER_ALOHA_POS_ID = "USER_ALOHA_POS_ID";
                 public const string TOTAL_SECONDS_TO_LOGOUT = "TOTAL_SECONDS_TO_LOGOUT";
                 public const string MIN_LENGTH_PHONE = "MIN_LENGTH_PHONE";
+                public const string MAX_LENGTH_PHONE = "MAX_LENGTH_PHONE";
                 public const string ROWS_SIZE_GRIDS = "ROWS_SIZE_GRIDS";
             }
 
@@ -205,6 +206,7 @@ namespace Drs.Model.Settings
         {
             public static int TotalSecondsToLogOut = 600;
             public static int MinLengthPhone = 5;
+            public static int MaxLengthPhone = 10;
             public static IContainer Container;
             public static double SencondsToWaitForResponse = 90;
             public static double SencondsToDetectStale = 70;
@@ -242,6 +244,11 @@ namespace Drs.Model.Settings
             public static IDictionary<string, RecurrenceType> LstRecurrenceTypeTotal { get; set; }
             public static IDictionary<string, RecurrenceLevel> LstRecurrenceLevelTime { get; set; }
             public static IDictionary<string, RecurrenceLevel> LstRecurrenceLevelTotal { get; set; } 
+        }
+
+        public static class Resources
+        {
+            public const string CONTACT_SUPPORT = "Contacte a soporte"; 
         }
 
     }

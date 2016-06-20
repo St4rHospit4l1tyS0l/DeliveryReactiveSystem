@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Threading;
 using Autofac;
 using Drs.Model.Constants;
 using Drs.Model.Menu;
 using Drs.Model.Order;
 using Drs.Model.Shared;
+using Drs.Repository.Log;
 using Drs.Service.Franchise;
 using Drs.Service.Order;
 using Microsoft.AspNet.SignalR;
@@ -31,54 +31,37 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<ButtonItemModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<ButtonItemModel>.CreateCriticalMessage("No fue posible obtener las franquicias a emplear");
             }
         }
 
-        //public static int i = 0;
         [HubMethodName(SharedConstants.Server.SAVE_PHONE_ORDER_HUB_METHOD)]
         public ResponseMessageData<PhoneModel> SavePhone(PhoneModel model)
         {
             try
             {
-                //Thread.Sleep(1000);
-                //if(i++ % 2 == 0)
-                //throw new Exception("Error al guardar");
                 return AppInit.Container.Resolve<IOrderService>().SavePhone(model);
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<PhoneModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message// + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<PhoneModel>.CreateCriticalMessage("No fue posible almacenar el número telefónico");
             }
         }
 
 
-        //public static int I = 1;
         [HubMethodName(SharedConstants.Server.SAVE_CLIENT_ORDER_HUB_METHOD)]
         public ResponseMessageData<ClientInfoModel> SaveClient(ClientInfoModel model)
         {
             try
             {
-                Thread.Sleep(1000);
-                ////if (I++ % 5 != 0)
-                //    throw new Exception("Error al guardar el cliente");
                 return AppInit.Container.Resolve<IOrderService>().SaveClient(model);
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<ClientInfoModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message// + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<ClientInfoModel>.CreateCriticalMessage("No fue posible almacenar los datos del cliente");
             }
         }
 
@@ -91,11 +74,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<PosCheck>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message// + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<PosCheck>.CreateCriticalMessage("No fue posible almacenar la orden del POS");
             }
         }
 
@@ -109,11 +89,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<PropagateOrderModel>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message// + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<PropagateOrderModel>.CreateCriticalMessage("No fue posible obtener la última orden");
             }
         }
 
@@ -127,11 +104,8 @@ namespace ConnectCallCenter.Hubs
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<PosCheck>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message// + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<PosCheck>.CreateCriticalMessage("No fue posible calcular el costo del pedido");
             }
         }
     }

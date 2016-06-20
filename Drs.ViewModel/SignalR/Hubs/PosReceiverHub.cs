@@ -2,6 +2,7 @@
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;
+using Drs.Repository.Log;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using ReactiveUI;
@@ -21,18 +22,13 @@ namespace Drs.ViewModel.SignalR.Hubs
                 
                 return new ResponseMessageData<bool>
                 {
-                    IsSuccess = true,
-                    //LstData = lstItems.Select(e => e.Name).ToList()
-                    //LstData = AppInit.Container.Resolve<IFranchiseService>().GetFranchiseButtons(),
+                    IsSuccess = true
                 };
             }
             catch (Exception ex)
             {
-                return new ResponseMessageData<bool>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message + ex.StackTrace
-                };
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<bool>.CreateCriticalMessage("No fue posible enviar la orden al POS");
             }
         }
     }

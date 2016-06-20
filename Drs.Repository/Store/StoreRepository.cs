@@ -482,7 +482,7 @@ namespace Drs.Repository.Store
 
         public List<StoreConnection> GetStoreConnection()
         {
-            return DbEntities.FranchiseStore.Where(e => e.IsObsolete == false)
+            return DbEntities.FranchiseStore.Where(e => e.IsObsolete == false && e.Franchise.IsObsolete == false)
                 .Select(e => new StoreConnection
                 {
                     StoreId = e.FranchiseStoreId,

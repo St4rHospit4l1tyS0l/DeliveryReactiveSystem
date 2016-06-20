@@ -146,7 +146,7 @@ namespace Drs.ViewModel.Main
 
         private void SetIdleWindow()
         {
-            Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1))
+            Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(5))
             .Subscribe(x =>
             {
                 var idle = IdleTimeDetector.GetIdleTimeInfo();
