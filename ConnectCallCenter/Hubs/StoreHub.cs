@@ -100,7 +100,7 @@ namespace ConnectCallCenter.Hubs
             catch (Exception ex)
             {
                 SharedLogger.LogError(ex);
-                return ResponseMessageData<StoreModel>.CreateCriticalMessage("No fue posible obtener una tienda disponible para esa selección");
+                return ResponseMessageData<StoreModel>.CreateCriticalMessage("No fue posible obtener una tienda disponible para esa dirección o selección");
             }
         }
     }
