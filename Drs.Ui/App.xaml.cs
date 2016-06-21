@@ -55,7 +55,8 @@ namespace Drs.Ui
             }
             catch (Exception ex)
             {
-                MessageBox.Show(String.Format("Se presentó el siguiente error: {0} - {1}", ex.Message, ex.InnerException == null ? String.Empty : ex.InnerException.Message), "Error iniciar aplicación");
+                MessageBox.Show(String.Format("No fue posible iniciar la aplicación. Revise si hay conexión al servidor. {0} Error: {1} - {2}",
+                    Environment.NewLine, ex.Message, ex.InnerException == null ? String.Empty : ex.InnerException.Message), "Error al iniciar la aplicación");
             }
         }
 
@@ -106,7 +107,8 @@ namespace Drs.Ui
             }
             catch (Exception ex)
             {
-                MessageBox.Show(String.Format("Se presentó el siguiente error: {0} - {1}", ex.Message, ex.InnerException == null ? String.Empty : ex.InnerException.Message), "Error al iniciar");
+                MessageBox.Show(String.Format("No fue posible iniciar la aplicación. Revise si hay conexión al servidor. {0} Error: {1} - {2}",
+                    Environment.NewLine, ex.Message, ex.InnerException == null ? String.Empty : ex.InnerException.Message), "Error al iniciar");
                 Shutdown();
             }
         }

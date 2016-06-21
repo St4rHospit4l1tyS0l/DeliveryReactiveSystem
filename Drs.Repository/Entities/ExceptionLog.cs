@@ -15,6 +15,7 @@ namespace Drs.Repository.Entities
     public partial class ExceptionLog
     {
         public System.Guid ExceptionLogUid { get; set; }
+        public string TerminalName { get; set; }
         public string Username { get; set; }
         public string MsgException { get; set; }
         public string InnerException { get; set; }

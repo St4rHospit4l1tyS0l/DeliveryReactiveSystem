@@ -10,6 +10,7 @@
             <PropertyRef Name="ExceptionLogUid" />
           </Key>
           <Property Name="ExceptionLogUid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TerminalName" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Username" Type="nvarchar(max)" />
           <Property Name="MsgException" Type="nvarchar(max)" Nullable="false" />
           <Property Name="InnerException" Type="nvarchar(max)" />
@@ -32,6 +33,7 @@
             <PropertyRef Name="ExceptionLogUid" />
           </Key>
           <Property Name="ExceptionLogUid" Type="Guid" Nullable="false" />
+          <Property Name="TerminalName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MsgException" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -54,6 +56,7 @@
                 <ScalarProperty Name="InnerException" ColumnName="InnerException" />
                 <ScalarProperty Name="MsgException" ColumnName="MsgException" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="TerminalName" ColumnName="TerminalName" />
                 <ScalarProperty Name="ExceptionLogUid" ColumnName="ExceptionLogUid" />
               </MappingFragment>
             </EntityTypeMapping>

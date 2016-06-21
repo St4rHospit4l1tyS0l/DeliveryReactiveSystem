@@ -458,6 +458,10 @@
       <Project>{3FFC893E-2E6F-44C5-A3D1-0BEF4DA3F271}</Project>
       <Name>Drs.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Drs.Repository\Drs.Repository.csproj">
+      <Project>{BF14A5CA-658C-45DA-8580-A8D309B45A83}</Project>
+      <Name>Drs.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Drs.Resources\Drs.Resources.csproj">
       <Project>{2CC9F539-A4C4-4F80-98BF-FC00D6F540D3}</Project>
       <Name>Drs.Resources</Name>
@@ -584,7 +588,9 @@
     <Content Include="Gmap\fonts\glyphicons-halflings-regular.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Gmap\images\ajax_loader.gif" />
+    <Content Include="Gmap\images\ajax_loader.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Gmap\js\bootstrap.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

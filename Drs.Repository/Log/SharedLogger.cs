@@ -11,6 +11,20 @@ namespace Drs.Repository.Log
 {
     public static class SharedLogger
     {
+        private static readonly string ComputerName;
+
+        static SharedLogger()
+        {
+            try
+            {
+                ComputerName = Environment.MachineName;
+            }
+            catch (Exception ex)
+            {
+                LogErrorToFile(ex);
+                ComputerName = String.Empty;
+            }
+        }
 
         public static void LogError(Exception ex, params object[] arrVal)
         {
@@ -19,6 +33,7 @@ namespace Drs.Repository.Log
                 dynamic username = GetUser();
                 dynamic modelExcep = new ExceptionLog();
 
+                modelExcep.TerminalName = ComputerName;
                 modelExcep.MsgException = ex.Message;
                 modelExcep.ExceptionLogUid = Guid.NewGuid();
                 modelExcep.InnerException = InternalLogger.GetInternalErrors(ex);
@@ -43,6 +58,7 @@ namespace Drs.Repository.Log
                 dynamic username = GetUser();
                 dynamic modelExcep = new ExceptionLog();
 
+                modelExcep.TerminalName = "Local";
                 modelExcep.MsgException = ex.Message;
                 modelExcep.ExceptionLogUid = Guid.NewGuid();
                 modelExcep.InnerException = InternalLogger.GetInternalErrors(ex);

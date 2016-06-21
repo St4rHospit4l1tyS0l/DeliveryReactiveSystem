@@ -135,5 +135,38 @@ div.blocker {
     div.blocker img {
         position: relative;
         top: -55px;
-        left: 15%;
+        left: 26%;
+    }
+
+    div.blocker div.loading {
+        width: 10em;
+    }
+
+    div.blocker img.loading {
+        left: 23%; 
+    }
+
+div.blocker-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    -ms-opacity: .5;
+    opacity: .5;
+    background-color: #030cb9;
+    z-index: 1000;
+    overflow: auto;
+}
+
+    div.blocker-alert div {
+        position: absolute;
+        top: 50%;
+        left: 46%;
+        width: 20em;
+        height: 2em;
+        margin: -1em 0 0 -2.5em;
+        color: #fff;
+        font-weight: bold;
+        font-size: 14px;
     }

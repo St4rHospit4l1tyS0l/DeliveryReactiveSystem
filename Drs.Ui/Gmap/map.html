@@ -10,7 +10,7 @@
     <link href="css/bootstrap-theme.css" rel="stylesheet" />
     <link href="css/site.css" rel="stylesheet" />
 </head>
-<body style="width: 990px !important; height: 600px !important; padding-left: 10px;" ng-app="gMap" ng-controller="gMapController">
+<body style="width: 990px !important; height: 600px !important; padding-left: 10px;" ng-app="gMap" ng-controller="gMapController" ng-init="loadingMap=true; hasInternet=true;">
     <div class="row" ng-show="error">
         <div class="col-xs-12">
             <label class="label label-danger fs-msg">{{error}}</label>
@@ -154,12 +154,6 @@
                 <div class="panel-heading">Coberturas</div>
                 <div class="panel-body">
                     <table class="table table-condensed">
-                        <!--<thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Establecimiento</th>
-                                </tr>
-                            </thead>-->
                         <tbody>
                             <tr ng-repeat="cover in coverageStore">
                                 <th scope="row" style="width: 13px">
@@ -175,7 +169,7 @@
                 <button class="btn btn-primary text-center" ng-click="save(frmAddr.$valid)"><i class="glyphicon glyphicon-check"></i>&nbsp;&nbsp;Guardar</button>
                 <button class="btn btn-default text-center" ng-click="cancel()"><i class="glyphicon glyphicon-backward"></i>&nbsp;&nbsp;Cancelar</button>
             </div>
-            
+
 
         </div>
         <div class="col-xs-9">
@@ -187,35 +181,46 @@
             Procesando...<img src="images/ajax_loader.gif" alt="" />
         </div>
     </div>
+    <div class="blocker" ng-show="loadingMap">
+        <div class="loading">
+            Cargando mapa...<img class="loading" src="images/ajax_loader.gif" alt="" />
+        </div>
+    </div>
+
+    <div class="blocker-alert" ng-show="!hasInternet">
+        <div>
+            - No hay conexión a Internet -
+        </div>
+    </div>
     <script src="js/main.js"></script>
     <script src="js/angularjs.js"></script>
     <script src="js/app.js"></script>
     <script>
+        window.hasInternet = false;
         function loadScript(src, callback) {
-
             var script = window.document.createElement("script");
             script.type = "text/javascript";
             if (callback) script.onload = callback;
             window.document.getElementsByTagName("head")[0].appendChild(script);
+            window.setInterval(function () {
+                if (!window.hasInternet)
+                    window.setInternet(false);
+            }, 10000);
             script.src = src;
         }
 
         function initialize() {
             window.initCb();
         }
-        
-        function log(str) {
-            //TODO Cambiar para que lo almacene a archivo o a la base de datos
-            console.log(str);
+
+        function internetOk() {
+            window.hasInternet = true;
         }
-        
+
         loadScript('https://maps.googleapis.com/maps/api/js?libraries=geometry,places&sensor=false&callback=initialize',
-              function () { log('Google-loader cargado, resta maps-API '); });
-        //function log(str) {
-        //    document.getElementsByTagName('pre')[0].appendChild(document.createTextNode('[' + new Date().getTime() + ']\n' + str + '\n\n'));
-        //}
+            function () { internetOk(); });
 
     </script>
-    <!--<script src="js/bootstrap.min.js"></script>-->
 </body>
+
 </html>
