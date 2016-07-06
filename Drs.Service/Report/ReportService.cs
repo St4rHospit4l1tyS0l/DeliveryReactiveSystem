@@ -14,10 +14,12 @@ namespace Drs.Service.Report
         {
             
         }
+        
         public ReportService(IReportRepository repository)
         {
             _repository = repository;
         }
+
         public IEnumerable<DailySaleModel> GetDailySaleInfo(DateTime startDate, DateTime endDate)
         {
             using (_repository)
@@ -26,14 +28,14 @@ namespace Drs.Service.Report
             }
         }
 
-
+        /*
         public IEnumerable<AgentSalesModel> GetAgentSaleInfo(DateTime startDate, DateTime endDate)
         {
             using (_repository)
             {
                 return _repository.GetAgentSaleInfo(startDate, endDate);
             }
-        }
+        }*/
 
         
     }

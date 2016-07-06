@@ -108,12 +108,20 @@ namespace Drs.Repository.Store
                 PromiseTime = sPromiseTime,
                 FailedStatusCounter = 0
             };
+
+
             DbEntities.OrderToStore.Attach(orderToStore);
 
             var entry = DbEntities.Entry(orderToStore);
             entry.Property(e => e.LastStatus).IsModified = true;
             entry.Property(e => e.PromiseTime).IsModified = true;
             entry.Property(e => e.FailedStatusCounter).IsModified = true;
+
+            if (SettingsData.Constants.TrackConst.OrderStatusEnd.Contains(orderToStore.LastStatus))
+            {
+                orderToStore.EndDatetime = DateTime.Now;
+                entry.Property(e => e.EndDatetime).IsModified = true;
+            }
 
             DbEntities.SaveChanges();
             SaveLogOrderToStore(orderToStore, "Se consulta el histórico de la orden", sStatus, DateTime.Now, true);

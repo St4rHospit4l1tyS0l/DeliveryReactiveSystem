@@ -123,6 +123,7 @@
     <Compile Include="Entity\Generator.cs" />
     <Compile Include="Extensions\AppWin\AppExt.cs" />
     <Compile Include="Extensions\Classes\DateTimeExt.cs" />
+    <Compile Include="Extensions\DateTimeExt.cs" />
     <Compile Include="Extensions\Enumerables\ListExt.cs" />
     <Compile Include="Extensions\Io\FileExt.cs" />
     <Compile Include="Extensions\Io\FileHelperExt.cs" />

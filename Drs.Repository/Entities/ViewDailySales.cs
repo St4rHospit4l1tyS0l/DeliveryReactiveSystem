@@ -14,8 +14,11 @@ namespace Drs.Repository.Entities
     
     public partial class ViewDailySales
     {
-        public long PosOrderId { get; set; }
-        public string SaleDate { get; set; }
-        public Nullable<decimal> Total { get; set; }
+        public string LastStatus { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
+        public Nullable<decimal> TotalPerDay { get; set; }
+        public int FranchiseStoreId { get; set; }
+        public string FranchiseStore { get; set; }
+        public string Franchise { get; set; }
     }
 }

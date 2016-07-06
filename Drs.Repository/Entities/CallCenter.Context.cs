@@ -72,7 +72,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual DbSet<OrderToStore> OrderToStore { get; set; }
         public virtual DbSet<InfoClientTerminalFranchise> InfoClientTerminalFranchise { get; set; }
-        public virtual DbSet<ViewDailySales> ViewDailySales { get; set; }
         public virtual DbSet<ViewStoreCoverage> ViewStoreCoverage { get; set; }
         public virtual DbSet<FranchiseCoverage> FranchiseCoverage { get; set; }
         public virtual DbSet<FranchiseCoverageLog> FranchiseCoverageLog { get; set; }
@@ -80,5 +79,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<FranchiseStore> FranchiseStore { get; set; }
         public virtual DbSet<FranchiseStoreGeoMap> FranchiseStoreGeoMap { get; set; }
+        public virtual DbSet<ViewDailySales> ViewDailySales { get; set; }
     }
 }

@@ -7,6 +7,5 @@ namespace Drs.Service.Report
     public interface IReportService
     {
         IEnumerable<DailySaleModel> GetDailySaleInfo(DateTime startDate, DateTime endDate);
-        IEnumerable<AgentSalesModel> GetAgentSaleInfo(DateTime startDate, DateTime endDate);
     }
 }

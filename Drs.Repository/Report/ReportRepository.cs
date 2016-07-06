@@ -22,39 +22,21 @@ namespace Drs.Repository.Report
         }
         public IEnumerable<DailySaleModel> GetDailySaleInfo(DateTime startDate, DateTime endDate)
         {
-            return DbEntities.ViewDailySales
-                .Select(e => new DailySaleModel
+            startDate = startDate.FloorDate();
+            endDate = endDate.CeilDate();
+
+            return Db.ViewDailySales.Where(e => e.OrderDate >= startDate && e.OrderDate < endDate)
+                .OrderBy(e => e.OrderDate).ThenBy(e => e.LastStatus).Select(e => new DailySaleModel
                 {
-                    PosOrderId = (int) e.PosOrderId,
-                    Month = e.SaleDate,
-                    Sales = (decimal) e.Total
-                })
-                //.Where(e => String.Compare(e.Month, startDate, StringComparison.Ordinal) >= 0 && String.Compare(e.Month, endDate, StringComparison.Ordinal) <=0)
-                .ToList();
-            //return DbEntities.Daily_Sales_group_by_date(startDate, endDate)
-            //        //.Where(e => e.SaleDate >= startDate && e.SaleDate <= endDate)
-            //        .Select(x => x.Total != null ? new DailySaleModel { 
-            //            month  = x.SaleDate, 
-            //            sales = (decimal) x.Total} : null)
-            //        .ToList();   
-            //return null;
-        }
-
-        public IEnumerable<AgentSalesModel> GetAgentSaleInfo(DateTime startDate, DateTime endDate)
-        {
-            //return DbEntities.User_Sales_group_by_date(startDate, endDate)
-            //    .Where(e => e.SaleDate >= startDate && e.SaleDate <= endDate)
-            //    .Select(e => new AgentSalesModel
-            //    {
-            //        AgentName = e.UserName,
-            //        SubTotal = (decimal) e.Subtotal,
-            //        Tax = (decimal) e.Taxes,
-            //        Total = (decimal) e.Total
-
-            //    }
-            //    );
-            return null;
+                    LastStatus = e.LastStatus,
+                    OrderDate = e.OrderDate,
+                    TotalPerDay = e.TotalPerDay,
+                    FranchiseStoreId = e.FranchiseStoreId,
+                    FranchiseStore = e.FranchiseStore,
+                    Franchise = e.Franchise
+                }).ToList();
 
         }
+
     }
 }

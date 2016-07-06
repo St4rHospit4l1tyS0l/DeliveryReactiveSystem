@@ -2,10 +2,17 @@
 {
     public class DailySaleModel 
     {
-        public int PosOrderId { get; set; }
-        public string Month { get; set; }
-        public decimal Sales { get; set; }
 
-        
+        public string LastStatus { get; set; }
+
+        public System.DateTime? OrderDate { get; set; }
+
+        public decimal? TotalPerDay { get; set; }
+
+        public int FranchiseStoreId { get; set; }
+
+        public string FranchiseStore { get; set; }
+
+        public string Franchise { get; set; }
     }
 }

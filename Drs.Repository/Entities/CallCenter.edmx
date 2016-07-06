@@ -624,11 +624,17 @@
 warning 6002: The table/view 'CallCenter.dbo.ViewDailySales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewDailySales">
           <Key>
-            <PropertyRef Name="PosOrderId" />
+            <PropertyRef Name="LastStatus" />
+            <PropertyRef Name="FranchiseStoreId" />
+            <PropertyRef Name="FranchiseStore" />
+            <PropertyRef Name="Franchise" />
           </Key>
-          <Property Name="PosOrderId" Type="bigint" Nullable="false" />
-          <Property Name="SaleDate" Type="varchar" MaxLength="10" />
-          <Property Name="Total" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="LastStatus" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="TotalPerDay" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="FranchiseStoreId" Type="int" Nullable="false" />
+          <Property Name="FranchiseStore" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Franchise" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CallCenter.dbo.ViewStoreCoverage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1760,9 +1766,12 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="ZipCode" EntityType="Self.ZipCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ViewDailySales" EntityType="Self.ViewDailySales" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [ViewDailySales].[PosOrderId] AS [PosOrderId], 
-    [ViewDailySales].[SaleDate] AS [SaleDate], 
-    [ViewDailySales].[Total] AS [Total]
+    [ViewDailySales].[LastStatus] AS [LastStatus], 
+    [ViewDailySales].[OrderDate] AS [OrderDate], 
+    [ViewDailySales].[TotalPerDay] AS [TotalPerDay], 
+    [ViewDailySales].[FranchiseStoreId] AS [FranchiseStoreId], 
+    [ViewDailySales].[FranchiseStore] AS [FranchiseStore], 
+    [ViewDailySales].[Franchise] AS [Franchise]
     FROM [dbo].[ViewDailySales] AS [ViewDailySales]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewStoreCoverage" EntityType="Self.ViewStoreCoverage" store:Type="Views" store:Schema="dbo">
@@ -2421,7 +2430,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="InfoClientTerminal" EntitySet="InfoClientTerminal" />
             <End Role="InfoClientTerminalFranchise" EntitySet="InfoClientTerminalFranchise" />
           </AssociationSet>
-          <EntitySet Name="ViewDailySales" EntityType="CallCenterModel.ViewDailySales" />
           <EntitySet Name="ViewStoreCoverage" EntityType="CallCenterModel.ViewStoreCoverage" />
           <EntitySet Name="FranchiseCoverage" EntityType="CallCenterModel.FranchiseCoverage" />
           <AssociationSet Name="FK_FranchiseMap_Franchise" Association="CallCenterModel.FK_FranchiseMap_Franchise">
@@ -2513,6 +2521,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="FranchisePhone" EntitySet="FranchisePhone" />
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
           </AssociationSet>
+          <EntitySet Name="ViewDailySales" EntityType="CallCenterModel.ViewDailySales" />
           </EntityContainer>
         <EntityType Name="AddressHierarchy">
           <Key>
@@ -3909,14 +3918,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ViewDailySales">
-          <Key>
-            <PropertyRef Name="PosOrderId" />
-          </Key>
-          <Property Name="PosOrderId" Type="Int64" Nullable="false" />
-          <Property Name="SaleDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Total" Type="Decimal" Precision="38" Scale="4" />
-        </EntityType>
         <EntityType Name="ViewStoreCoverage">
           <Key>
             <PropertyRef Name="FranchiseId" />
@@ -4270,6 +4271,20 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <End Type="CallCenterModel.FranchisePhone" Role="FranchisePhone" Multiplicity="*" />
           <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
         </Association>
+        <EntityType Name="ViewDailySales">
+          <Key>
+            <PropertyRef Name="LastStatus" />
+            <PropertyRef Name="FranchiseStoreId" />
+            <PropertyRef Name="FranchiseStore" />
+            <PropertyRef Name="Franchise" />
+          </Key>
+          <Property Name="LastStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="TotalPerDay" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
+          <Property Name="FranchiseStore" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Franchise" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4863,15 +4878,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ViewDailySales">
-            <EntityTypeMapping TypeName="CallCenterModel.ViewDailySales">
-              <MappingFragment StoreEntitySet="ViewDailySales">
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
-                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ViewStoreCoverage">
             <EntityTypeMapping TypeName="CallCenterModel.ViewStoreCoverage">
               <MappingFragment StoreEntitySet="ViewStoreCoverage">
@@ -4986,6 +4992,18 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               <ScalarProperty Name="FranchisePhoneId" ColumnName="FranchisePhoneId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ViewDailySales">
+            <EntityTypeMapping TypeName="CallCenterModel.ViewDailySales">
+              <MappingFragment StoreEntitySet="ViewDailySales">
+                <ScalarProperty Name="Franchise" ColumnName="Franchise" />
+                <ScalarProperty Name="FranchiseStore" ColumnName="FranchiseStore" />
+                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
+                <ScalarProperty Name="TotalPerDay" ColumnName="TotalPerDay" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="LastStatus" ColumnName="LastStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
