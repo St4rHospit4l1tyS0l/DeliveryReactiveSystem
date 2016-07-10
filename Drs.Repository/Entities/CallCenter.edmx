@@ -631,6 +631,7 @@ warning 6002: The table/view 'CallCenter.dbo.ViewDailySales' does not have a pri
           </Key>
           <Property Name="LastStatus" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="OrderDate" Type="date" />
+          <Property Name="SalesPerDay" Type="int" />
           <Property Name="TotalPerDay" Type="decimal" Precision="38" Scale="4" />
           <Property Name="FranchiseStoreId" Type="int" Nullable="false" />
           <Property Name="FranchiseStore" Type="nvarchar" MaxLength="500" Nullable="false" />
@@ -1768,6 +1769,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <DefiningQuery>SELECT 
     [ViewDailySales].[LastStatus] AS [LastStatus], 
     [ViewDailySales].[OrderDate] AS [OrderDate], 
+    [ViewDailySales].[SalesPerDay] AS [SalesPerDay], 
     [ViewDailySales].[TotalPerDay] AS [TotalPerDay], 
     [ViewDailySales].[FranchiseStoreId] AS [FranchiseStoreId], 
     [ViewDailySales].[FranchiseStore] AS [FranchiseStore], 
@@ -4280,6 +4282,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           </Key>
           <Property Name="LastStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="SalesPerDay" Type="Int32" />
           <Property Name="TotalPerDay" Type="Decimal" Precision="38" Scale="4" />
           <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
           <Property Name="FranchiseStore" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -4999,6 +5002,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <ScalarProperty Name="FranchiseStore" ColumnName="FranchiseStore" />
                 <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
                 <ScalarProperty Name="TotalPerDay" ColumnName="TotalPerDay" />
+                <ScalarProperty Name="SalesPerDay" ColumnName="SalesPerDay" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="LastStatus" ColumnName="LastStatus" />
               </MappingFragment>

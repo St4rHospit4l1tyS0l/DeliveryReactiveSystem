@@ -16,6 +16,7 @@ namespace Drs.Repository.Entities
     {
         public string LastStatus { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
+        public Nullable<int> SalesPerDay { get; set; }
         public Nullable<decimal> TotalPerDay { get; set; }
         public int FranchiseStoreId { get; set; }
         public string FranchiseStore { get; set; }

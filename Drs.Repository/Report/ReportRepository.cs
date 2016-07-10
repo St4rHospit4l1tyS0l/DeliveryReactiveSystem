@@ -26,14 +26,15 @@ namespace Drs.Repository.Report
             endDate = endDate.CeilDate();
 
             return Db.ViewDailySales.Where(e => e.OrderDate >= startDate && e.OrderDate < endDate)
-                .OrderBy(e => e.OrderDate).ThenBy(e => e.LastStatus).Select(e => new DailySaleModel
+                .OrderBy(e => e.LastStatus).ThenBy(e => e.OrderDate).Select(e => new DailySaleModel
                 {
-                    LastStatus = e.LastStatus,
                     OrderDate = e.OrderDate,
-                    TotalPerDay = e.TotalPerDay,
+                    LastStatus = e.LastStatus,
+                    Franchise = e.Franchise,
                     FranchiseStoreId = e.FranchiseStoreId,
                     FranchiseStore = e.FranchiseStore,
-                    Franchise = e.Franchise
+                    SalesPerDay = e.SalesPerDay,
+                    TotalPerDay = e.TotalPerDay
                 }).ToList();
 
         }
