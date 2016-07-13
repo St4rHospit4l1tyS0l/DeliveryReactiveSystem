@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Drs.ViewModel.Order;
 using Drs.ViewModel.Shared;
 
 namespace Drs.Ui.Ui.Order

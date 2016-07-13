@@ -26,6 +26,7 @@ namespace Drs.Model.Order
         public PhoneModel SecondPhone { get; set; }
         public DateTime? BirthDate { get; set; }
         public List<RecurrenceClientView> LstRecurrence { get; set; }
+        public string LoyaltyCode { get; set; }
 
         public ClientInfoModel()
         {
@@ -100,8 +101,9 @@ namespace Drs.Model.Order
         
         static ClientInfoGrid()
         {
-            DicValidation.Add(new KeyValuePair<string, Func<object, string>>(StaticReflection.GetMemberName<ClientInfoGrid>(x => x.ClientInfo.FirstName), value => GenericValidator.ValidateEmptyAndLength(value, 2, 50)));
-            DicValidation.Add(new KeyValuePair<string, Func<object, string>>(StaticReflection.GetMemberName<ClientInfoGrid>(x => x.ClientInfo.LastName), value => GenericValidator.ValidateEmptyAndLength(value, 2, 50)));
+            DicValidation.Add(new KeyValuePair<string, Func<object, string>>(StaticReflection.GetMemberName<ClientInfoGrid>(x => x.ClientInfo.FirstName), value => GenericValidator.ValidateEmptyAndLength(value, 2, 100)));
+            DicValidation.Add(new KeyValuePair<string, Func<object, string>>(StaticReflection.GetMemberName<ClientInfoGrid>(x => x.ClientInfo.LastName), value => GenericValidator.ValidateEmptyAndLength(value, 2, 200)));
+            DicValidation.Add(new KeyValuePair<string, Func<object, string>>(StaticReflection.GetMemberName<ClientInfoGrid>(x => x.ClientInfo.LoyaltyCode), value => GenericValidator.ValidateLength(value, 5, 14)));
         }
 
         public ClientInfoGrid()

@@ -65,6 +65,7 @@ namespace Drs.Repository.Client
                     e.ClientPhoneId,
                     e.Phone,
                     i.BirthDate,
+                    i.LoyaltyCode,
                     i.Company.Name,
                     i.CompanyId,
                     i.Email,
@@ -76,6 +77,7 @@ namespace Drs.Repository.Client
             {
                 ClientId = e.ClientId,
                 BirthDate = e.BirthDate,
+                LoyaltyCode = e.LoyaltyCode,
                 Company = e.Name,
                 CompanyId = e.CompanyId,
                 Email = e.Email,
@@ -92,6 +94,7 @@ namespace Drs.Repository.Client
             {
                 ClientId = e.ClientId,
                 BirthDate = e.BirthDate,
+                LoyaltyCode = e.LoyaltyCode,
                 CompanyId = e.CompanyId,
                 Company = e.Company.Name,
                 Email = e.Email,

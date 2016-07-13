@@ -91,6 +91,7 @@ namespace Drs.Repository.Order
             if (phoneSecToAdd != null)
                 client.ClientPhone.Add(phoneSecToAdd);
 
+            client.LoyaltyCode = model.LoyaltyCode;
             client.BirthDate = model.BirthDate;
             client.CompanyId = model.CompanyId;
             client.Email = model.Email;

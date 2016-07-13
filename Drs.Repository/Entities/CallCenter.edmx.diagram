@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="CallCenterModel.AspNetUsers" Width="1.5" PointX="15.375" PointY="26.125" />
         <EntityTypeShape EntityType="CallCenterModel.CatDeliveryStatus" Width="1.5" PointX="12.125" PointY="6.75" />
         <EntityTypeShape EntityType="CallCenterModel.CatPayment" Width="1.5" PointX="19.875" PointY="20.375" />
-        <EntityTypeShape EntityType="CallCenterModel.Client" Width="1.5" PointX="15.375" PointY="15.125" />
         <EntityTypeShape EntityType="CallCenterModel.ClientPhone" Width="1.5" PointX="17.625" PointY="15" />
         <EntityTypeShape EntityType="CallCenterModel.ClientPhoneStatistics" Width="1.5" PointX="19.875" PointY="23.625" />
         <EntityTypeShape EntityType="CallCenterModel.ClientStatistics" Width="1.5" PointX="17.625" PointY="19.875" />
@@ -50,9 +49,6 @@
         <AssociationConnector Association="CallCenterModel.FK_FranchisePhone_AspNetUsers1" />
         <AssociationConnector Association="CallCenterModel.FK_PosOrder_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_UserDetail_AspNetUsers" />
-        <AssociationConnector Association="CallCenterModel.FK_Client_Company" />
-        <AssociationConnector Association="CallCenterModel.FK_ClientStatistics_Client" />
-        <AssociationConnector Association="CallCenterModel.FK_Recurrence_Client" />
         <AssociationConnector Association="CallCenterModel.FK_ClientPhoneStatistics_ClientPhone" />
         <AssociationConnector Association="CallCenterModel.FK_RegionA_Country" />
         <AssociationConnector Association="CallCenterModel.FK_RegionB_Country" />
@@ -73,7 +69,6 @@
         <AssociationConnector Association="CallCenterModel.FK_RegionD_RegionC" />
         <AssociationConnector Association="CallCenterModel.FK_RegionD_ZipCode" />
         <AssociationConnector Association="CallCenterModel.AspNetUserRoles" />
-        <AssociationConnector Association="CallCenterModel.RelClientPhoneClient" />
         <EntityTypeShape EntityType="CallCenterModel.ViewStoreInfo" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="CallCenterModel.ViewUserInfo" Width="1.5" PointX="6.875" PointY="0.625" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseDataVersion" Width="1.5" PointX="24.875" PointY="32.125" />
@@ -101,7 +96,6 @@
         <EntityTypeShape EntityType="CallCenterModel.OrderToStore" Width="1.5" PointX="22.125" PointY="19.875" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_CatPayment" />
-        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Client" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_ClientPhone" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Franchise" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_PosOrder" />
@@ -140,6 +134,12 @@
         <AssociationConnector Association="CallCenterModel.FK_StoreStatus_FranchiseStore" />
         <AssociationConnector Association="CallCenterModel.RelFranchisePhoneStore" />
         <EntityTypeShape EntityType="CallCenterModel.ViewDailySales" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CallCenterModel.Client" Width="1.5" PointX="15.375" PointY="15.125" />
+        <AssociationConnector Association="CallCenterModel.FK_Client_Company" />
+        <AssociationConnector Association="CallCenterModel.FK_ClientStatistics_Client" />
+        <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Client" />
+        <AssociationConnector Association="CallCenterModel.FK_Recurrence_Client" />
+        <AssociationConnector Association="CallCenterModel.RelClientPhoneClient" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

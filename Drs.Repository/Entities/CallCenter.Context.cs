@@ -32,7 +32,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CatDeliveryStatus> CatDeliveryStatus { get; set; }
         public virtual DbSet<CatPayment> CatPayment { get; set; }
-        public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<ClientPhone> ClientPhone { get; set; }
         public virtual DbSet<ClientPhoneStatistics> ClientPhoneStatistics { get; set; }
         public virtual DbSet<ClientStatistics> ClientStatistics { get; set; }
@@ -80,5 +79,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<FranchiseStore> FranchiseStore { get; set; }
         public virtual DbSet<FranchiseStoreGeoMap> FranchiseStoreGeoMap { get; set; }
         public virtual DbSet<ViewDailySales> ViewDailySales { get; set; }
+        public virtual DbSet<Client> Client { get; set; }
     }
 }

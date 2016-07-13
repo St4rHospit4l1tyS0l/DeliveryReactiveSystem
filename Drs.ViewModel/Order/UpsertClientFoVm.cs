@@ -26,6 +26,7 @@ namespace Drs.ViewModel.Order
         private IAutoCompleteTextVm _companySearchVm;
         private readonly IReactiveDeliveryClient _client;
         private IAutoCompleteTextVm _secondPhoneVm;
+        private string _loyaltyCode;
 
         public UpsertClientFoVm(IAutoCompleteTextVm companySearchVm, IAutoCompletePhoneVm secondPhoneVm, IReactiveDeliveryClient client)
         {
@@ -43,21 +44,11 @@ namespace Drs.ViewModel.Order
             SecondPhoneVm.ExecuteSearch += ExecuteSearchPhone;
             SecondPhoneVm.DoExecuteEvent += OnSelectPhone;
 
-            var canSave = this.WhenAnyValue(vm => vm.FirstName, vm => vm.LastName, (f, l) =>
-                !String.IsNullOrWhiteSpace(f) && f.Length >= 2 && f.Length <= 50 &&
-                !String.IsNullOrWhiteSpace(l) && l.Length >= 2 && l.Length <= 50);
-            ////var canSave = this.WhenAny(vm => vm.IsOpen, o =>
-            ////{
-            ////    return o.Value;
-            ////});
-            //canSave.Subscribe(x =>
-            //{
-            //    bool canExecute = false;
+            var canSave = this.WhenAnyValue(vm => vm.FirstName, vm => vm.LastName, vm => vm.LoyaltyCode, (f, l, lc) =>
+                !String.IsNullOrWhiteSpace(f) && f.Length >= 2 && f.Length <= 100
+                && !String.IsNullOrWhiteSpace(l) && l.Length >= 2 && l.Length <= 200
+                && (String.IsNullOrEmpty(lc) || lc.Length >= 2 && lc.Length <= 14));
 
-            //    if (UpsertCommand != null)
-            //        canExecute = UpsertCommand.CanExecute(null);
-            //    Console.WriteLine(x + " " + canExecute);
-            //});
             UpsertCommand = ReactiveCommand.CreateAsyncTask(canSave, _ => SaveClient());
 
         }
@@ -127,6 +118,7 @@ namespace Drs.ViewModel.Order
                         ClientPreId = ClientPreId,
                         ClientInfo =
                         {
+                            LoyaltyCode =  LoyaltyCode,
                             BirthDate = BirthDate,
                             Company = Company,
                             CompanyId = CompanyId,
@@ -185,6 +177,12 @@ namespace Drs.ViewModel.Order
             set { this.RaiseAndSetIfChanged(ref _birthDate, value); }
         }
 
+        public string LoyaltyCode
+        {
+            get { return _loyaltyCode; }
+            set { this.RaiseAndSetIfChanged(ref _loyaltyCode, value); }
+        }
+
         public IReactiveCommand<Unit> UpsertCommand { get; private set; }
 
         public string this[string columnName]
@@ -228,6 +226,7 @@ namespace Drs.ViewModel.Order
                 SecondPhoneVm.Search = String.Empty;
                 SecondPhoneVm.ListData.Clear();
                 BirthDate = null;
+                LoyaltyCode = String.Empty;
                 ClientPreId = SharedConstants.NULL_ID_VALUE;
                 ClientId = SharedConstants.NULL_ID_VALUE;
             });
@@ -252,6 +251,7 @@ namespace Drs.ViewModel.Order
                 SecondPhoneVm.IsDone = SharedConstants.Client.IS_TRUE;
 
                 BirthDate = clInfo.ClientInfo.BirthDate;
+                LoyaltyCode = clInfo.ClientInfo.LoyaltyCode;
             });
         }
 

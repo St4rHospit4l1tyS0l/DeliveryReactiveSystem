@@ -21,19 +21,19 @@
     <StackPanel Margin="50 0" Orientation="Vertical"  VerticalAlignment="Stretch">
         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch" FocusManager.IsFocusScope="True">
             <TextBox Margin="4" Width="292" IsVisibleChanged="Storyboard_OnCompleted" x:Name="FirstName"
-                controls:TextboxHelper.Watermark="*Nombre del cliente"
+                controls:TextboxHelper.Watermark="*Nombre del cliente" MaxLength="100"
                 controls:TextboxHelper.UseFloatingWatermark="True"
                 Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                 FontFamily="Segoe UI" FontSize="12" />
 
             <TextBox Margin="4" Width="292"
                      controls:TextboxHelper.Watermark="*Apellidos"
-                     controls:TextboxHelper.UseFloatingWatermark="True"
+                     controls:TextboxHelper.UseFloatingWatermark="True" MaxLength="200"
                      Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
                      FontFamily="Segoe UI" FontSize="12" />
         </StackPanel>
         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch">
-            <TextBox Margin="4" Width="292"
+            <TextBox Margin="4" Width="292" MaxLength="500"
                      controls:TextboxHelper.Watermark="Correo electrónico"
                          controls:TextboxHelper.UseFloatingWatermark="True"
                          Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" FontFamily="Segoe UI" FontSize="12" />
@@ -50,6 +50,13 @@
                             HorizontalAlignment="Center"
                             SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}"
                             controls:TextboxHelper.Watermark="Fecha de nacimiento" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch">
+            <TextBox Margin="4" Width="292"
+                     controls:TextboxHelper.Watermark="Código de lealtad"
+                     controls:TextboxHelper.UseFloatingWatermark="True"
+                     Text="{Binding LoyaltyCode, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                     FontFamily="Segoe UI" FontSize="12" MaxLength="15" />
         </StackPanel>
         <StackPanel>
             <Label Content="* Datos requeridos" FontSize="9"></Label>
