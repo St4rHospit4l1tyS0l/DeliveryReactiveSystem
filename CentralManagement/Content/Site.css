@@ -208,3 +208,21 @@ div.blocker {
     -webkit-min-width: 160px;
     min-width: 160px;
 }
+
+.strip-row {
+    background: #f0f8fe;
+}
+
+.info-client {
+    position: relative;
+}
+
+.client-row-1 {
+    border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.client-row-2 {
+    /*position: absolute;
+    left: 0;
+    top: 20px;*/
+}

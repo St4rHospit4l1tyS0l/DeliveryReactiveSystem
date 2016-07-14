@@ -28,15 +28,37 @@ namespace Drs.Service.Report
             }
         }
 
-        /*
+        
         public IEnumerable<AgentSalesModel> GetAgentSaleInfo(DateTime startDate, DateTime endDate)
         {
             using (_repository)
             {
                 return _repository.GetAgentSaleInfo(startDate, endDate);
             }
-        }*/
+        }
 
-        
+        public IEnumerable<TopProductModel> GetTopProductsByRangeDates(DateTime startDate, DateTime endDate)
+        {
+            using (_repository)
+            {
+                return _repository.GetTopProductsByRangeDates(startDate, endDate);
+            }
+        }
+
+        public IEnumerable<ClientSalesModel> GetTopFrequentClientByRangeDates(DateTime startDate, DateTime endDate)
+        {
+            using (_repository)
+            {
+                return _repository.GetTopFrequentClientByRangeDates(startDate, endDate);
+            }
+        }
+
+        public IEnumerable<ClientSalesModel> GetTopConsumerClientByRangeDates(DateTime startDate, DateTime endDate)
+        {
+            using (_repository)
+            {
+                return _repository.GetTopConsumerClientByRangeDates(startDate, endDate);
+            }
+        }
     }
 }

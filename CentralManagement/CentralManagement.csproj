@@ -190,6 +190,9 @@
     <Compile Include="Areas\Franchise\Controllers\SettingController.cs" />
     <Compile Include="Areas\Franchise\Controllers\SyncController.cs" />
     <Compile Include="Areas\Franchise\FranchiseAreaRegistration.cs" />
+    <Compile Include="Areas\Report\Controllers\AgentSaleController.cs" />
+    <Compile Include="Areas\Report\Controllers\TopClientsController.cs" />
+    <Compile Include="Areas\Report\Controllers\TopProductsController.cs" />
     <Compile Include="Areas\Report\Controllers\TimeSaleController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
     <Compile Include="Areas\Store\Controllers\StoreCoverageController.cs" />
@@ -583,6 +586,10 @@
     <Content Include="Areas\Store\Views\StoreCoverage\Index.cshtml" />
     <Content Include="Areas\Store\Views\StoreCoverage\Assign.cshtml" />
     <Content Include="Areas\Report\Views\TimeSale\Index.cshtml" />
+    <Content Include="Areas\Report\Views\AgentSale\Index.cshtml" />
+    <Content Include="Areas\Report\Views\TopProducts\Index.cshtml" />
+    <Content Include="Areas\Report\Views\TopClients\IndexFrequent.cshtml" />
+    <Content Include="Areas\Report\Views\TopClients\IndexConsume.cshtml" />
     <None Include="Properties\PublishProfiles\CentralManagement.pubxml" />
     <Content Include="Resources\MonthlySales.json" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />

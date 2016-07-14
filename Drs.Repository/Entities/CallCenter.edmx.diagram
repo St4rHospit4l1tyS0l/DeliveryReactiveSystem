@@ -140,6 +140,8 @@
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Client" />
         <AssociationConnector Association="CallCenterModel.FK_Recurrence_Client" />
         <AssociationConnector Association="CallCenterModel.RelClientPhoneClient" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewLocation" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewAgentSales" Width="1.5" PointX="7.375" PointY="3.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

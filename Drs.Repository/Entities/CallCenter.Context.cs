@@ -12,6 +12,8 @@ namespace Drs.Repository.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class CallCenterEntities : DbContext
     {
@@ -80,5 +82,49 @@ namespace Drs.Repository.Entities
         public virtual DbSet<FranchiseStoreGeoMap> FranchiseStoreGeoMap { get; set; }
         public virtual DbSet<ViewDailySales> ViewDailySales { get; set; }
         public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<ViewLocation> ViewLocation { get; set; }
+        public virtual DbSet<ViewAgentSales> ViewAgentSales { get; set; }
+    
+        [DbFunction("CallCenterEntities", "ufnGetTopProductsByRangeDates")]
+        public virtual IQueryable<ufnGetTopProductsByRangeDates_Result1> ufnGetTopProductsByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)
+        {
+            var starDateParameter = starDate.HasValue ?
+                new ObjectParameter("StarDate", starDate) :
+                new ObjectParameter("StarDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<ufnGetTopProductsByRangeDates_Result1>("[CallCenterEntities].[ufnGetTopProductsByRangeDates](@StarDate, @EndDate)", starDateParameter, endDateParameter);
+        }
+    
+        [DbFunction("CallCenterEntities", "ufnGetConsumerClientByRangeDates")]
+        public virtual IQueryable<ufnGetConsumerClientByRangeDates_Result> ufnGetConsumerClientByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)
+        {
+            var starDateParameter = starDate.HasValue ?
+                new ObjectParameter("StarDate", starDate) :
+                new ObjectParameter("StarDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<ufnGetConsumerClientByRangeDates_Result>("[CallCenterEntities].[ufnGetConsumerClientByRangeDates](@StarDate, @EndDate)", starDateParameter, endDateParameter);
+        }
+    
+        [DbFunction("CallCenterEntities", "ufnGetFrequentClientByRangeDates")]
+        public virtual IQueryable<ufnGetFrequentClientByRangeDates_Result> ufnGetFrequentClientByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)
+        {
+            var starDateParameter = starDate.HasValue ?
+                new ObjectParameter("StarDate", starDate) :
+                new ObjectParameter("StarDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<ufnGetFrequentClientByRangeDates_Result>("[CallCenterEntities].[ufnGetFrequentClientByRangeDates](@StarDate, @EndDate)", starDateParameter, endDateParameter);
+        }
     }
 }

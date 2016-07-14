@@ -10,7 +10,7 @@
         public string OrderDateTx {
             get
             {
-                return OrderDate == null ? "ND" : OrderDate.Value.ToString(Constants.SharedConstants.DATE_FORMAT_REPORT);
+                return OrderDate == null ? "ND" : OrderDate.Value.ToString(Constants.SharedConstants.REPORT_DATE_FORMAT);
             }
         }
 

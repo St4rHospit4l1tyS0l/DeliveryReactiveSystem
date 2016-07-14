@@ -1,11 +1,12 @@
-﻿@{
-    ViewBag.Title = "Reporte de ventas por periodo";
-    ViewBag.Menu = 6002;
+﻿
+@{
+    ViewBag.Title = "Top 10 clientes mayor consumo por tienda";
+    ViewBag.Menu = 6006;
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Reporte de ventas por periodo</h2>
+        <h2>Top 10 clientes mayor consumo por tienda</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="@Url.Action("Index", "Home")">Inicio</a>
@@ -14,7 +15,7 @@
                 Reportes
             </li>
             <li>
-                Ventas por periodo
+                Top 10 clientes mayor consumo por tienda
             </li>
         </ol>
     </div>
@@ -25,7 +26,7 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Ventas por periodo</h5>
+                    <h5>Top 10 clientes mayor consumo por tienda</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -52,7 +53,8 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
-                                    <button class="btn btn-primary " ng-disabled="!m.startDate" ng-click="searchDaysByRange('@Url.Action("SearchDaysByRange", "TimeSale", new { area = "Report" })')">
+                                    <button class="btn btn-primary " ng-disabled="!m.startDate"
+                                            ng-click="searchDaysByRange('@Url.Action("SearchTopConsumerClientByRangeDates", "TopClients", new { area = "Report" })')">
                                         <i class="fa fa-search-plus"></i> &nbsp;&nbsp;Buscar
                                     </button>
                                 </div>
@@ -74,26 +76,50 @@
                             <table class="table table-hover no-margins">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Estatus</th>
-                                        <th class="text-center"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Fecha </th>
+                                        <th class="text-center"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Periodo</th>
                                         <th class="text-center">Franquicia</th>
                                         <th class="text-center">Sucursal</th>
-                                        <th class="text-center"># de órdenes</th>
-                                        <th class="text-center">Total de ventas</th>
+                                        <th class="text-center">Posición</th>
+                                        <th class="text-center">Cliente</th>
+                                        <th class="text-center">
+                                            <div class="info-client">
+                                                <div class="client-row-1">Correo</div>
+                                                <div class="client-row-2">Cumpleaños</div>
+                                            </div>
+                                        </th>
+                                        <th class="text-center">
+                                            <div class="info-client">
+                                                <div class="client-row-1">Compañía</div>
+                                                <div class="client-row-2">Código lealtad</div>
+                                            </div>
+                                        </th>
+                                        <th class="text-center">Cantidad</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="r in lstResult">
-                                        <td class="text-center"> <span ng-class="'label label-' + setByStatus(r.LastStatus)">{{r.LastStatus}}</span></td>
-                                        <td class="text-center font-bold">{{r.OrderDateTx}}</td>
-                                        <td class="text-center">{{r.Franchise}}</td>
-                                        <td class="text-center">{{r.FranchiseStore}}</td>
-                                        <td ng-class="'text-' + colorBySale($index, lstResult, 'SalesPerDay') + ' text-center'">
-                                            {{r.SalesPerDay}} &nbsp;&nbsp; <i ng-class="'fa fa-' + iconBySale($index, lstResult, 'SalesPerDay')"></i>
+                                    <tr ng-repeat="r in lstResult" ng-class="setRowBinaryClass($index, lstResult, 'StoreName', 'rowColor', '', 'strip-row')">
+                                        <td class="text-center"> {{r.Period}}</td>
+                                        <td class="text-center">{{r.FranchiseName}}</td>
+                                        <td class="text-center">{{r.StoreName}}</td>
+                                        <td class="text-center">
+                                            <span ng-class="'label label-' + setRowBinaryClass($index, lstResult, 'StoreName', 'rowLabel', 'info', 'primary')">
+                                                <b>{{setPosition($index, lstResult, 'StoreName')}}</b>
+                                            </span>
                                         </td>
-                                        <td ng-class="'text-' + colorBySale($index, lstResult, 'TotalPerDay') + ' text-right'">
-                                            $ {{r.TotalPerDay}} &nbsp;&nbsp; <i ng-class="'fa fa-' + iconBySale($index, lstResult, 'TotalPerDay')"></i>
+                                        <td class="text-center font-bold">{{r.FullName}}</td>
+                                        <td class="text-center">
+                                            <div class="info-client">
+                                                <div class="client-row-1">{{r.Email}}</div>
+                                                <div class="client-row-2">{{r.BirthDateTx}}</div>
+                                            </div>
                                         </td>
+                                        <td class="text-center">
+                                            <div class="info-client">
+                                                <div class="client-row-1">{{r.CompanyName}}</div>
+                                                <div class="client-row-2">{{r.LoyaltyCode}}</div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">{{r.TotalByConsume}}</td>
                                     </tr>
                                 </tbody>
                             </table>

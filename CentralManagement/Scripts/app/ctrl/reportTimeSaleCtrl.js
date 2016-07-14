@@ -89,4 +89,39 @@
         }, 10000);
     };
 
+    $scope.setRowBinaryClass = function (i, items, colName, colNew, evenLabel, oddLabel) {
+        if (i === 0) {
+            items[0][colNew] = {pos: i, val:0};
+            result = evenLabel;
+        } else {
+            if (items[0][colNew].pos !== i) {
+                items[0][colNew].pos = i;
+                
+                if (items[i - 1][colName] != items[i][colName]) {
+                    items[0][colNew].val = (items[0][colNew].val + 1) % 2;
+                }
+            }
+            var result = (items[0][colNew].val === 0 ? evenLabel : oddLabel);
+        }
+        return result;
+    };
+    
+    var iPos;
+    $scope.setPosition = function (i, items, colName) {
+        if (i === 0) {
+            iPos = 1;
+            return iPos;
+        }
+
+        if (items[0].iVal != i) {
+            items[0].iVal = i;
+            iPos++;
+        }
+        
+        if (items[i - 1][colName] != items[i][colName]) {
+            iPos = 1;
+        }
+        return iPos;
+    };
+    
 });

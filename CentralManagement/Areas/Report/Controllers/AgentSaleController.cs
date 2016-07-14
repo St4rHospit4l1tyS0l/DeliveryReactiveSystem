@@ -7,7 +7,7 @@ using Drs.Service.Report;
 
 namespace CentralManagement.Areas.Report.Controllers
 {
-    public class TimeSaleController : Controller
+    public class AgentSaleController : Controller
     {
         public ActionResult Index()
         {
@@ -21,7 +21,7 @@ namespace CentralManagement.Areas.Report.Controllers
             try
             {
                 IReportService reportService = new ReportService();
-                response.Data = reportService.GetDailySaleInfo(reportRequest.StartCalculatedDate, reportRequest.EndCalculatedDate);
+                response.Data = reportService.GetAgentSaleInfo(reportRequest.StartCalculatedDate, reportRequest.EndCalculatedDate);
             }
             catch (Exception ex)
             {

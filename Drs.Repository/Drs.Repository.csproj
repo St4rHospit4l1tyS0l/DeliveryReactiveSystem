@@ -154,6 +154,18 @@
     <Compile Include="Entities\Resource.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ufnGetConsumerClientByRangeDates_Result.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ufnGetFrequentClientByRangeDates_Result.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ufnGetTopProductsByRangeDates_Result.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ufnGetTopProductsByRangeDates_Result1.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\User_Sales_group_by_date1_Result.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
@@ -163,7 +175,13 @@
     <Compile Include="Entities\User_Sales_group_by_date_Result.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ViewAgentSales.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\ViewDailySales.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ViewLocation.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ViewStoreCoverage.cs">

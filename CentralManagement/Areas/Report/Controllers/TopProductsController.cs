@@ -7,21 +7,21 @@ using Drs.Service.Report;
 
 namespace CentralManagement.Areas.Report.Controllers
 {
-    public class TimeSaleController : Controller
+    public class TopProductsController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult SearchDaysByRange(ReportRequestModel reportRequest)
+        public ActionResult SearchTopProductsByRangeDates(ReportRequestModel reportRequest)
         {
-            var response = new ResponseMessageModel{HasError = false};
+            var response = new ResponseMessageModel { HasError = false };
 
             try
             {
                 IReportService reportService = new ReportService();
-                response.Data = reportService.GetDailySaleInfo(reportRequest.StartCalculatedDate, reportRequest.EndCalculatedDate);
+                response.Data = reportService.GetTopProductsByRangeDates(reportRequest.StartCalculatedDate, reportRequest.EndCalculatedDate);
             }
             catch (Exception ex)
             {
@@ -31,6 +31,5 @@ namespace CentralManagement.Areas.Report.Controllers
 
             return Json(response);
         }
-
     }
 }

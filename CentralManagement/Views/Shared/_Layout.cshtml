@@ -121,20 +121,20 @@
                         <li class="@((int)((ViewBag.Menu??0) / 1000) == 6 ? "active" : "")">
                             <a href="#"><i class="fa fa-bar-chart"></i> <span class="nav-label">Reportes</span> </a>
                             <ul class="nav nav-second-level">
-                                <li class="@(ViewBag.Menu == 5002 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "TimeSale", new { area = "Report" })"><i class="fa fa-line-chart"></i>Ventas diarias</a>
+                                <li class="@(ViewBag.Menu == 6002 ? "active" : "")">
+                                    <a href="@Url.Action("Index", "TimeSale", new { area = "Report" })"><i class="fa fa-line-chart"></i>Ventas por periodo</a>
                                 </li>
-                                <li class="@(ViewBag.Menu == 5003 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "TimeAgentSale", new { area = "Report" })"><i class="fa fa-line-chart"></i>Ventas por agente</a>
+                                <li class="@(ViewBag.Menu == 6003 ? "active" : "")">
+                                    <a href="@Url.Action("Index", "AgentSale", new { area = "Report" })"><i class="fa fa-line-chart"></i>Ventas por agente</a>
                                 </li>
-                                <li class="@(ViewBag.Menu == 5004 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "TopProductSold", new { area = "Report" })"><i class="fa fa-shopping-cart"></i>Top 10 productos venidos</a>
+                                <li class="@(ViewBag.Menu == 6004 ? "active" : "")">
+                                    <a href="@Url.Action("Index", "TopProducts", new { area = "Report" })"><i class="fa fa-shopping-cart"></i>Top 10 productos venidos</a>
                                 </li>
-                                <li class="@(ViewBag.Menu == 5005 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "TopClientFrequently", new { area = "Report" })"><i class="fa fa-users"></i>Top 10 clientes frecuentes</a>
+                                <li class="@(ViewBag.Menu == 6005 ? "active" : "")">
+                                    <a href="@Url.Action("IndexFrequent", "TopClients", new { area = "Report" })"><i class="fa fa-users"></i>Top 10 clientes frecuentes</a>
                                 </li>
-                                <li class="@(ViewBag.Menu == 5006 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "TopClientHigherConsumption", new { area = "Report" })"><i class="fa fa-users"></i>Top 10 clientes mayor consumo</a>
+                                <li class="@(ViewBag.Menu == 6006 ? "active" : "")">
+                                    <a href="@Url.Action("IndexConsume", "TopClients", new { area = "Report" })"><i class="fa fa-users"></i>Top 10 clientes mayor consumo</a>
                                 </li>
                             </ul>
                         </li>
