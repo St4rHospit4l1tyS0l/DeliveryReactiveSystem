@@ -12,16 +12,12 @@ namespace Drs.Repository.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Recurrence
+    public partial class ViewMonthSalesByDay
     {
-        public int RecurrenceId { get; set; }
-        public int ClientId { get; set; }
-        public long OrderToStoreId { get; set; }
-        public System.DateTime Timestamp { get; set; }
-        public long TimestampShort { get; set; }
-        public decimal Total { get; set; }
-    
-        public virtual Client Client { get; set; }
-        public virtual OrderToStore OrderToStore { get; set; }
+        public int Key { get; set; }
+        public Nullable<int> OrderYear { get; set; }
+        public Nullable<int> OrderMonth { get; set; }
+        public Nullable<int> OrderDay { get; set; }
+        public Nullable<decimal> TotalPerDay { get; set; }
     }
 }

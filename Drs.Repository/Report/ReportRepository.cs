@@ -126,5 +126,18 @@ namespace Drs.Repository.Report
                 FranchiseName = e.FranchiseName
             }).ToList();
         }
+
+        public IEnumerable<MonthSalesModel> GetMonthSalesByDays(int year, int month)
+        {
+            return DbEntities.ViewMonthSalesByDay.Where(e => e.OrderYear == year && e.OrderMonth == month)
+                .Select(e => new MonthSalesModel
+                {
+                    Key = e.Key,
+                    Year = e.OrderYear,
+                    Month = e.OrderMonth,
+                    Day = e.OrderDay,
+                    TotalPerDay = e.TotalPerDay
+                }).ToList();
+        }
     }
 }

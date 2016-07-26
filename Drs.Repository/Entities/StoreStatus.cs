@@ -20,7 +20,7 @@ namespace Drs.Repository.Entities
         public Nullable<long> LastOrderToStoreId { get; set; }
         public int MaxCapacity { get; set; }
     
-        public virtual OrderToStore OrderToStore { get; set; }
         public virtual FranchiseStore FranchiseStore { get; set; }
+        public virtual OrderToStore OrderToStore { get; set; }
     }
 }

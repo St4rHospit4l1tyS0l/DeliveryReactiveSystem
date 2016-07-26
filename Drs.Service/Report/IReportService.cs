@@ -11,5 +11,6 @@ namespace Drs.Service.Report
         IEnumerable<TopProductModel> GetTopProductsByRangeDates(DateTime startCalculatedDate, DateTime endCalculatedDate);
         IEnumerable<ClientSalesModel> GetTopFrequentClientByRangeDates(DateTime startCalculatedDate, DateTime endCalculatedDate);
         IEnumerable<ClientSalesModel> GetTopConsumerClientByRangeDates(DateTime startCalculatedDate, DateTime endCalculatedDate);
+        IEnumerable<MonthSalesModel> GetMonthSalesByDays(int year, int month);
     }
 }

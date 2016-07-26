@@ -30,11 +30,11 @@ namespace Drs.Repository.Entities
         public Nullable<int> RegionCrId { get; set; }
         public Nullable<int> ZipCodeId { get; set; }
     
+        public virtual ICollection<Address> Address { get; set; }
         public virtual Country Country { get; set; }
         public virtual RegionA RegionA { get; set; }
         public virtual RegionB RegionB { get; set; }
         public virtual RegionC RegionC { get; set; }
         public virtual ZipCode ZipCode { get; set; }
-        public virtual ICollection<Address> Address { get; set; }
     }
 }

@@ -22,19 +22,19 @@ namespace Drs.Repository.Entities
             this.ClientPhone1 = new HashSet<ClientPhone>();
             this.Franchise = new HashSet<Franchise>();
             this.Franchise1 = new HashSet<Franchise>();
-            this.FranchisePhone = new HashSet<FranchisePhone>();
-            this.FranchisePhone1 = new HashSet<FranchisePhone>();
-            this.PosOrder = new HashSet<PosOrder>();
-            this.AspNetRoles = new HashSet<AspNetRoles>();
             this.FranchiseDataVersion = new HashSet<FranchiseDataVersion>();
             this.FranchiseDataVersion1 = new HashSet<FranchiseDataVersion>();
-            this.Resource = new HashSet<Resource>();
-            this.FranchiseStoreOffLine = new HashSet<FranchiseStoreOffLine>();
-            this.FranchiseStoreOffLine1 = new HashSet<FranchiseStoreOffLine>();
-            this.OrderToStore = new HashSet<OrderToStore>();
+            this.FranchisePhone = new HashSet<FranchisePhone>();
+            this.FranchisePhone1 = new HashSet<FranchisePhone>();
             this.FranchiseStore = new HashSet<FranchiseStore>();
             this.FranchiseStore1 = new HashSet<FranchiseStore>();
             this.FranchiseStore2 = new HashSet<FranchiseStore>();
+            this.FranchiseStoreOffLine = new HashSet<FranchiseStoreOffLine>();
+            this.FranchiseStoreOffLine1 = new HashSet<FranchiseStoreOffLine>();
+            this.OrderToStore = new HashSet<OrderToStore>();
+            this.PosOrder = new HashSet<PosOrder>();
+            this.Resource = new HashSet<Resource>();
+            this.AspNetRoles = new HashSet<AspNetRoles>();
         }
     
         public string Id { get; set; }
@@ -56,19 +56,19 @@ namespace Drs.Repository.Entities
         public virtual ICollection<ClientPhone> ClientPhone1 { get; set; }
         public virtual ICollection<Franchise> Franchise { get; set; }
         public virtual ICollection<Franchise> Franchise1 { get; set; }
-        public virtual ICollection<FranchisePhone> FranchisePhone { get; set; }
-        public virtual ICollection<FranchisePhone> FranchisePhone1 { get; set; }
-        public virtual ICollection<PosOrder> PosOrder { get; set; }
-        public virtual UserDetail UserDetail { get; set; }
-        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
         public virtual ICollection<FranchiseDataVersion> FranchiseDataVersion { get; set; }
         public virtual ICollection<FranchiseDataVersion> FranchiseDataVersion1 { get; set; }
-        public virtual ICollection<Resource> Resource { get; set; }
-        public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
-        public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine1 { get; set; }
-        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
+        public virtual ICollection<FranchisePhone> FranchisePhone { get; set; }
+        public virtual ICollection<FranchisePhone> FranchisePhone1 { get; set; }
         public virtual ICollection<FranchiseStore> FranchiseStore { get; set; }
         public virtual ICollection<FranchiseStore> FranchiseStore1 { get; set; }
         public virtual ICollection<FranchiseStore> FranchiseStore2 { get; set; }
+        public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
+        public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine1 { get; set; }
+        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
+        public virtual ICollection<PosOrder> PosOrder { get; set; }
+        public virtual ICollection<Resource> Resource { get; set; }
+        public virtual UserDetail UserDetail { get; set; }
+        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
     }
 }

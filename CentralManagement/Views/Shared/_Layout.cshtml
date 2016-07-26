@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Licensing Call Center</title>
+    <title>Call Center Management</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     @RenderSection("css", false)
@@ -25,7 +25,7 @@
     <script src="~/Scripts/common.js"></script>
     <script src="~/Scripts/js/inspinia.js"></script>
     <script src="~/Scripts/js/plugins/pace/pace.min.js"></script>
-    <script src="~/Scripts/d3.min.js" ></script>
+    <script src="~/Scripts/d3.min.js"></script>
 
 </head>
 <body ng-app="licenseDr" class="pace-done skin-1">
@@ -114,8 +114,8 @@
                             </ul>
                         </li>
                     }
-                    
-                    
+
+
                     @if (RoleHelper.RoleForUser(User.Identity.Name) == RoleConstants.MANAGER)
                     {
                         <li class="@((int)((ViewBag.Menu??0) / 1000) == 6 ? "active" : "")">
@@ -126,6 +126,9 @@
                                 </li>
                                 <li class="@(ViewBag.Menu == 6003 ? "active" : "")">
                                     <a href="@Url.Action("Index", "AgentSale", new { area = "Report" })"><i class="fa fa-line-chart"></i>Ventas por agente</a>
+                                </li>
+                                <li class="@(ViewBag.Menu == 6007 ? "active" : "")">
+                                    <a href="@Url.Action("IndexMonthSalesByDay", "TimeSale", new { area = "Report" })"><i class="fa fa-line-chart"></i>Ventas mensuales por día</a>
                                 </li>
                                 <li class="@(ViewBag.Menu == 6004 ? "active" : "")">
                                     <a href="@Url.Action("Index", "TopProducts", new { area = "Report" })"><i class="fa fa-shopping-cart"></i>Top 10 productos venidos</a>
@@ -168,7 +171,7 @@
             <div id="dlgUpsert"></div>
             <div class="footer fixed">
                 <div class="pull-right">
-                    Management Call Center
+                    Call Center Management
                 </div>
                 <div>
                     <strong>Copyright</strong> Star Hospitality Solutions &copy; @DateTime.Today.Year.ToString()

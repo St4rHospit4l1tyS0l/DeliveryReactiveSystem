@@ -171,7 +171,9 @@
     <Compile Include="Report\AgentSalesModel.cs" />
     <Compile Include="Report\ClientSalesModel.cs" />
     <Compile Include="Report\DailySaleModel.cs" />
+    <Compile Include="Report\MonthSalesModel.cs" />
     <Compile Include="Report\ReportRequestModel.cs" />
+    <Compile Include="Report\ReportRequestMonthModel.cs" />
     <Compile Include="Report\TopProductModel.cs" />
     <Compile Include="Settings\ControlTitleModel.cs" />
     <Compile Include="Settings\RecurrenceLevel.cs" />

@@ -8,7 +8,7 @@ namespace Drs.Model.Report
         private DateTime? _startCalculatedDate;
         private DateTime? _endCalculatedDate;
         public string StartRequestDate { get; set; }
-        
+
         public string EndRequestDate { get; set; }
 
         public DateTime StartCalculatedDate
@@ -17,12 +17,13 @@ namespace Drs.Model.Report
             {
                 if (_startCalculatedDate != null)
                     return _startCalculatedDate.Value;
-                _startCalculatedDate = StartRequestDate.ExtractDateOrDefault(DateTime.Today); 
+                _startCalculatedDate = StartRequestDate.ExtractDateOrDefault(DateTime.Today);
                 return _startCalculatedDate.Value;
             }
         }
-        
-        public DateTime EndCalculatedDate {
+
+        public DateTime EndCalculatedDate
+        {
             get
             {
                 if (_endCalculatedDate != null)

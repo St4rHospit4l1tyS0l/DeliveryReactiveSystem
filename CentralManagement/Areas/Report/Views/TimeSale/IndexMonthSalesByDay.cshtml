@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Reporte de ventas mensuales por día";
+    ViewBag.Menu = 6007;
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Reporte de ventas mensuales por día</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li>
+                Reportes
+            </li>
+            <li>
+                Ventas mensuales por día
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="reportController">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Ventas mensuales por día</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>
+                                        Elige el mes
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="input-group date monthDate" id="monthDate">
+                                        <input type="text" class="form-control" ng-model="m.startDate" ng-init="m.startDate='09/2015'"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="btn btn-primary " ng-disabled="!m.startDate"
+                                            ng-click="search('@Url.Action("SearchMonthSalesByDays", "TimeSale", new { area = "Report" })', {RequestDate: m.startDate}, monthByDayVisualize)">
+                                        <i class="fa fa-search-plus"></i> &nbsp;&nbsp;Buscar
+                                    </button>
+                                    <button class="btn btn-info " ng-disabled="!m.hasChart"
+                                            ng-click="export('ventas.png')">
+                                        <i class="fa fa-download"></i> &nbsp;&nbsp;Exportar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row" id="canvasReport"></div>
+                    <canvas width="1920" height="1080" style="display:none"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blocker" ng-show="working">
+        <div>
+            Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />
+        </div>
+    </div>
+</div>
+
+@section css{
+    <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+    <style>
+
+        div.tooltip {
+            position: absolute;
+            max-width: 200px;
+            height: auto;
+            padding: 5px;
+            background-color: white;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+            -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+            pointer-events: none; 
+            font-size: 14px;
+            font-weight: lighter;
+        }
+    </style>
+}
+
+@section scripts{
+    <script src="~/Scripts/d3.min.js"></script>
+    <script src="~/Scripts/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/app/ctrl/reportCtrl.js"></script>
+    <script src="~/Scripts/app/shared/initDatePicker.js"></script>
+}
+
+

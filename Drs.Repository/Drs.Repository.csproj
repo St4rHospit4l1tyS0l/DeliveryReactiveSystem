@@ -184,6 +184,9 @@
     <Compile Include="Entities\ViewLocation.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ViewMonthSalesByDay.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\ViewStoreCoverage.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>

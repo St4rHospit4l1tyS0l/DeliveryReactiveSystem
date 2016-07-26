@@ -16,11 +16,11 @@ namespace Drs.Repository.Entities
     {
         public Country()
         {
+            this.Address = new HashSet<Address>();
             this.RegionA = new HashSet<RegionA>();
             this.RegionB = new HashSet<RegionB>();
             this.RegionC = new HashSet<RegionC>();
             this.RegionD = new HashSet<RegionD>();
-            this.Address = new HashSet<Address>();
         }
     
         public int CountryId { get; set; }
@@ -29,10 +29,10 @@ namespace Drs.Repository.Entities
         public string Abbreviation { get; set; }
         public string Description { get; set; }
     
+        public virtual ICollection<Address> Address { get; set; }
         public virtual ICollection<RegionA> RegionA { get; set; }
         public virtual ICollection<RegionB> RegionB { get; set; }
         public virtual ICollection<RegionC> RegionC { get; set; }
         public virtual ICollection<RegionD> RegionD { get; set; }
-        public virtual ICollection<Address> Address { get; set; }
     }
 }

@@ -425,12 +425,12 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\ctrl\franchiseAssignCtrl.js" />
+    <Content Include="Scripts\app\ctrl\reportCtrl.js" />
     <Content Include="Scripts\app\ctrl\reportTimeSaleCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeCoverageCtrl.js" />
     <Content Include="Scripts\app\ctrl\terminalCtrl.js" />
     <Content Include="Scripts\app\ctrl\licenseCtrl.js" />
     <Content Include="Scripts\app\ctrl\franchiseCtrl.js" />
-    <Content Include="Scripts\app\ctrl\reportsCtrl.js" />
     <Content Include="Scripts\app\ctrl\salesCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeOfflineCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeCtrl.js" />
@@ -440,6 +440,7 @@
     <Content Include="Scripts\app\main\licenseDr.js" />
     <Content Include="Scripts\app\shared\addressCtrl.js" />
     <Content Include="Scripts\app\shared\hiddenDrct.js" />
+    <Content Include="Scripts\app\shared\initDatePicker.js" />
     <Content Include="Scripts\app\shared\modalDlgCtrl.js" />
     <Content Include="Scripts\app\shared\uploadFileCtrl.js" />
     <Content Include="Scripts\app\shared\upsertCtrl.js" />
@@ -590,6 +591,7 @@
     <Content Include="Areas\Report\Views\TopProducts\Index.cshtml" />
     <Content Include="Areas\Report\Views\TopClients\IndexFrequent.cshtml" />
     <Content Include="Areas\Report\Views\TopClients\IndexConsume.cshtml" />
+    <Content Include="Areas\Report\Views\TimeSale\IndexMonthSalesByDay.cshtml" />
     <None Include="Properties\PublishProfiles\CentralManagement.pubxml" />
     <Content Include="Resources\MonthlySales.json" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />

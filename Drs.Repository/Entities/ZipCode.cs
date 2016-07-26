@@ -16,21 +16,21 @@ namespace Drs.Repository.Entities
     {
         public ZipCode()
         {
+            this.Address = new HashSet<Address>();
             this.RegionA = new HashSet<RegionA>();
             this.RegionB = new HashSet<RegionB>();
             this.RegionC = new HashSet<RegionC>();
             this.RegionD = new HashSet<RegionD>();
-            this.Address = new HashSet<Address>();
         }
     
         public int ZipCodeId { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
     
+        public virtual ICollection<Address> Address { get; set; }
         public virtual ICollection<RegionA> RegionA { get; set; }
         public virtual ICollection<RegionB> RegionB { get; set; }
         public virtual ICollection<RegionC> RegionC { get; set; }
         public virtual ICollection<RegionD> RegionD { get; set; }
-        public virtual ICollection<Address> Address { get; set; }
     }
 }

@@ -16,8 +16,8 @@ namespace Drs.Repository.Entities
     {
         public InfoClientTerminal()
         {
-            this.InfoClientTerminalVersion = new HashSet<InfoClientTerminalVersion>();
             this.InfoClientTerminalFranchise = new HashSet<InfoClientTerminalFranchise>();
+            this.InfoClientTerminalVersion = new HashSet<InfoClientTerminalVersion>();
         }
     
         public int InfoClientTerminalId { get; set; }
@@ -26,7 +26,7 @@ namespace Drs.Repository.Entities
         public Nullable<int> InfoCallCenterId { get; set; }
     
         public virtual InfoCallCenter InfoCallCenter { get; set; }
-        public virtual ICollection<InfoClientTerminalVersion> InfoClientTerminalVersion { get; set; }
         public virtual ICollection<InfoClientTerminalFranchise> InfoClientTerminalFranchise { get; set; }
+        public virtual ICollection<InfoClientTerminalVersion> InfoClientTerminalVersion { get; set; }
     }
 }

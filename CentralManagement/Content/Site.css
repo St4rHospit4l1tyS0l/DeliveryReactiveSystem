@@ -226,3 +226,21 @@ div.blocker {
     left: 0;
     top: 20px;*/
 }
+
+.monthDate {
+    width: 130px;
+    max-width: 130px;
+    -moz-min-width: 130px;
+    -ms-min-width: 130px;
+    -o-min-width: 130px;
+    -webkit-min-width: 130px;
+    min-width: 130px;
+}
+
+.reportTitle {
+    text-align: center;
+}
+
+#canvasReport {
+    height: 700px;
+}

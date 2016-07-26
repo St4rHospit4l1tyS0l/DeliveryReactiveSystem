@@ -60,5 +60,13 @@ namespace Drs.Service.Report
                 return _repository.GetTopConsumerClientByRangeDates(startDate, endDate);
             }
         }
+
+        public IEnumerable<MonthSalesModel> GetMonthSalesByDays(int year, int month)
+        {
+            using (_repository)
+            {
+                return _repository.GetMonthSalesByDays(year, month);
+            }
+        }
     }
 }
