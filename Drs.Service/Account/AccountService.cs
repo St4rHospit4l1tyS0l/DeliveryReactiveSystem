@@ -85,24 +85,37 @@ namespace Drs.Service.Account
             }
         }
 
-        private string IsValidDeviceInfo(GetDevice decCompInfo)
+        private static string IsValidDeviceInfo(GetDevice device)
         {
             var now = DateTime.Now;
 
-            if (decCompInfo.Code != AccountConstants.CODE_VALID)
-                return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[decCompInfo.Code]);
+            if (device.Code != AccountConstants.CODE_VALID)
+                return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[device.Code]);
 
-            if (now < decCompInfo.St.AddDays(-2))
+            if (now < device.St.AddDays(-2))
+            {
+                device.Iv = false;
+                device.Code = AccountConstants.CODE_NOT_ACTIVE_ST;
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE_ST]);
+            }
 
-            if (now > decCompInfo.Et.AddDays(10))
+            if (now > device.Et.AddDays(10))
+            {
+                device.Iv = false;
+                device.Code = AccountConstants.CODE_NOT_ACTIVE_ET;
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE_ET]);
+            }
 
-            if (decCompInfo.Iv == false)
+            if (device.Iv == false)
+            {
+                device.Iv = false;
+                device.Code = AccountConstants.CODE_NOT_ACTIVE;
                 return BuildResponse(SharedConstants.Client.STATUS_SCREEN_MESSAGE, AccountConstants.LstCodes[AccountConstants.CODE_NOT_ACTIVE]);
+            }
 
             return BuildResponse(SharedConstants.Client.STATUS_SCREEN_LOGIN, AccountConstants.LstCodes[AccountConstants.CODE_VALID]);
         }
+
 
         private string UpdateComputerInfo(string eInfo, string mConnInfo, GetDevice decCompInfo)
         {
@@ -460,6 +473,7 @@ namespace Drs.Service.Account
         private static void GetDevice(ConnectionFullModel client, JavaScriptSerializer jsSer)
         {
             var model = jsSer.Deserialize<GetDevice>(Cypher.Decrypt(client.Code));
+            IsValidDeviceInfo(model);
             client.DeviceName = model.Hn;
             client.StartDateTx = model.St.Date == DateTime.MinValue.Date ? "ND" : model.St.ToString(SharedConstants.DATE_FORMAT);
             client.EndDateTx = model.Et.Date == DateTime.MinValue.Date ? "ND" : model.Et.ToString(SharedConstants.DATE_FORMAT);

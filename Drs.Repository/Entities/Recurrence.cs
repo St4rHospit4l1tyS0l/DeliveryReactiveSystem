@@ -21,7 +21,7 @@ namespace Drs.Repository.Entities
         public long TimestampShort { get; set; }
         public decimal Total { get; set; }
     
-        public virtual Client Client { get; set; }
         public virtual OrderToStore OrderToStore { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

@@ -24,10 +24,10 @@ namespace Drs.Model.Shared
         public static readonly Dictionary<int, string> LstBadges = new Dictionary<int, string>
         {
             {CODE_NEW, "Equipo nuevo"},
-            {CODE_NOT_ACTIVE_ST, "Equipo pendiente"},
-            {CODE_NOT_ACTIVE_ET, "Equipo expirado"},
-            {CODE_NOT_ACTIVE, "Equipo no activo"},
-            {CODE_VALID, "Equipo activo"}
+            {CODE_NOT_ACTIVE_ST, "Licencia del equipo pendiente"},
+            {CODE_NOT_ACTIVE_ET, "Licencia del equipo expirada"},
+            {CODE_NOT_ACTIVE, "Licencia del equipo no activa"},
+            {CODE_VALID, "Licencia del equipo activa"}
         };
 
     }

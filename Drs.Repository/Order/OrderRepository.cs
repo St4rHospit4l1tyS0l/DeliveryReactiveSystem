@@ -99,7 +99,10 @@ namespace Drs.Repository.Order
             client.LastName = model.LastName;
 
             if (bIsNew)
+            {
+                client.DatetimeIns = DateTime.Now;
                 DbEntities.Client.Add(client);
+            }
             DbEntities.SaveChanges();
 
             return client.ClientId;

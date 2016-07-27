@@ -29,6 +29,7 @@ namespace Drs.Repository.Entities
         public string Email { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
         public string LoyaltyCode { get; set; }
+        public System.DateTime DatetimeIns { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual ICollection<ClientStatistics> ClientStatistics { get; set; }

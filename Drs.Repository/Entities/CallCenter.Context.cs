@@ -35,7 +35,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CatDeliveryStatus> CatDeliveryStatus { get; set; }
         public virtual DbSet<CatPayment> CatPayment { get; set; }
-        public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<ClientPhone> ClientPhone { get; set; }
         public virtual DbSet<ClientPhoneStatistics> ClientPhoneStatistics { get; set; }
         public virtual DbSet<ClientStatistics> ClientStatistics { get; set; }
@@ -85,6 +84,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<ViewStoreCoverage> ViewStoreCoverage { get; set; }
         public virtual DbSet<ViewStoreInfo> ViewStoreInfo { get; set; }
         public virtual DbSet<ViewUserInfo> ViewUserInfo { get; set; }
+        public virtual DbSet<Client> Client { get; set; }
     
         [DbFunction("CallCenterEntities", "ufnGetTopProductsByRangeDates")]
         public virtual IQueryable<ufnGetTopProductsByRangeDates_Result1> ufnGetTopProductsByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)

@@ -122,6 +122,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="500" />
           <Property Name="BirthDate" Type="date" />
           <Property Name="LoyaltyCode" Type="nvarchar" MaxLength="15" />
+          <Property Name="DatetimeIns" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="ClientPhone">
           <Key>
@@ -2296,7 +2297,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="AspNetUsers" EntityType="CallCenterModel.AspNetUsers" />
           <EntitySet Name="CatDeliveryStatus" EntityType="CallCenterModel.CatDeliveryStatus" />
           <EntitySet Name="CatPayment" EntityType="CallCenterModel.CatPayment" />
-          <EntitySet Name="Client" EntityType="CallCenterModel.Client" />
           <EntitySet Name="ClientPhone" EntityType="CallCenterModel.ClientPhone" />
           <EntitySet Name="ClientPhoneStatistics" EntityType="CallCenterModel.ClientPhoneStatistics" />
           <EntitySet Name="ClientStatistics" EntityType="CallCenterModel.ClientStatistics" />
@@ -2461,22 +2461,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="FK_OrderToStore_CatPayment" Association="CallCenterModel.FK_OrderToStore_CatPayment">
             <End Role="CatPayment" EntitySet="CatPayment" />
             <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Client_Company" Association="CallCenterModel.FK_Client_Company">
-            <End Role="Company" EntitySet="Company" />
-            <End Role="Client" EntitySet="Client" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientStatistics_Client" Association="CallCenterModel.FK_ClientStatistics_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="ClientStatistics" EntitySet="ClientStatistics" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderToStore_Client" Association="CallCenterModel.FK_OrderToStore_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Recurrence_Client" Association="CallCenterModel.FK_Recurrence_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Recurrence" EntitySet="Recurrence" />
           </AssociationSet>
           <AssociationSet Name="FK_ClientPhoneStatistics_ClientPhone" Association="CallCenterModel.FK_ClientPhoneStatistics_ClientPhone">
             <End Role="ClientPhone" EntitySet="ClientPhone" />
@@ -2658,13 +2642,30 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="Address" EntitySet="Address" />
             <End Role="ClientPhone" EntitySet="ClientPhone" />
           </AssociationSet>
-          <AssociationSet Name="RelClientPhoneClient" Association="CallCenterModel.RelClientPhoneClient">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="ClientPhone" EntitySet="ClientPhone" />
-          </AssociationSet>
           <AssociationSet Name="RelFranchisePhoneStore" Association="CallCenterModel.RelFranchisePhoneStore">
             <End Role="FranchisePhone" EntitySet="FranchisePhone" />
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+          </AssociationSet>
+          <EntitySet Name="Client" EntityType="CallCenterModel.Client" />
+          <AssociationSet Name="FK_Client_Company" Association="CallCenterModel.FK_Client_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientStatistics_Client" Association="CallCenterModel.FK_ClientStatistics_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientStatistics" EntitySet="ClientStatistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_Client" Association="CallCenterModel.FK_OrderToStore_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurrence_Client" Association="CallCenterModel.FK_Recurrence_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Recurrence" EntitySet="Recurrence" />
+          </AssociationSet>
+          <AssociationSet Name="RelClientPhoneClient" Association="CallCenterModel.RelClientPhoneClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientPhone" EntitySet="ClientPhone" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="User_Sales_group_by_date_Result">
@@ -2861,23 +2862,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_CatPayment" FromRole="CatPayment" ToRole="OrderToStore" />
-        </EntityType>
-        <EntityType Name="Client">
-          <Key>
-            <PropertyRef Name="ClientId" />
-          </Key>
-          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="BirthDate" Type="DateTime" Precision="0" />
-          <Property Name="LoyaltyCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Company" Relationship="CallCenterModel.FK_Client_Company" FromRole="Client" ToRole="Company" />
-          <NavigationProperty Name="ClientStatistics" Relationship="CallCenterModel.FK_ClientStatistics_Client" FromRole="Client" ToRole="ClientStatistics" />
-          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="Client" ToRole="OrderToStore" />
-          <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_Client" FromRole="Client" ToRole="Recurrence" />
-          <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneClient" FromRole="Client" ToRole="ClientPhone" />
         </EntityType>
         <EntityType Name="ClientPhone">
           <Key>
@@ -3245,7 +3229,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="Address" Relationship="CallCenterModel.FK_OrderToStore_Address" FromRole="OrderToStore" ToRole="Address" />
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_OrderToStore_AspNetUsers" FromRole="OrderToStore" ToRole="AspNetUsers" />
           <NavigationProperty Name="CatPayment" Relationship="CallCenterModel.FK_OrderToStore_CatPayment" FromRole="OrderToStore" ToRole="CatPayment" />
-          <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="OrderToStore" ToRole="Client" />
           <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.FK_OrderToStore_ClientPhone" FromRole="OrderToStore" ToRole="ClientPhone" />
           <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="OrderToStore" ToRole="Franchise" />
           <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="OrderToStore" ToRole="FranchiseStore" />
@@ -3253,6 +3236,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="OrderToStoreLog" Relationship="CallCenterModel.FK_OrderToStoreLog_OrderToStore" FromRole="OrderToStore" ToRole="OrderToStoreLog" />
           <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="OrderToStore" ToRole="Recurrence" />
           <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_OrderToStore" FromRole="OrderToStore" ToRole="StoreStatus" />
+          <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="OrderToStore" ToRole="Client" />
         </EntityType>
         <EntityType Name="OrderToStoreLog">
           <Key>
@@ -3315,8 +3299,8 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TimestampShort" Type="Int64" Nullable="false" />
           <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_Recurrence_Client" FromRole="Recurrence" ToRole="Client" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="Recurrence" ToRole="OrderToStore" />
+          <NavigationProperty Name="Client" Relationship="CallCenterModel.FK_Recurrence_Client" FromRole="Recurrence" ToRole="Client" />
         </EntityType>
         <EntityType Name="RegionA">
           <Key>
@@ -3926,54 +3910,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Client_Company">
-          <End Type="CallCenterModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="Client">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientStatistics_Client">
-          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="CallCenterModel.ClientStatistics" Role="ClientStatistics" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="ClientId" />
-            </Principal>
-            <Dependent Role="ClientStatistics">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderToStore_Client">
-          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="ClientId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Recurrence_Client">
-          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="CallCenterModel.Recurrence" Role="Recurrence" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="ClientId" />
-            </Principal>
-            <Dependent Role="Recurrence">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClientPhoneStatistics_ClientPhone">
           <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="1" />
           <End Type="CallCenterModel.ClientPhoneStatistics" Role="ClientPhoneStatistics" Multiplicity="*" />
@@ -4498,13 +4434,79 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <End Type="CallCenterModel.Address" Role="Address" Multiplicity="*" />
           <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="*" />
         </Association>
-        <Association Name="RelClientPhoneClient">
-          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="*" />
-          <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="*" />
-        </Association>
         <Association Name="RelFranchisePhoneStore">
           <End Type="CallCenterModel.FranchisePhone" Role="FranchisePhone" Multiplicity="*" />
           <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="LoyaltyCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="DatetimeIns" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Company" Relationship="CallCenterModel.FK_Client_Company" FromRole="Client" ToRole="Company" />
+          <NavigationProperty Name="ClientStatistics" Relationship="CallCenterModel.FK_ClientStatistics_Client" FromRole="Client" ToRole="ClientStatistics" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_Client" FromRole="Client" ToRole="OrderToStore" />
+          <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_Client" FromRole="Client" ToRole="Recurrence" />
+          <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.RelClientPhoneClient" FromRole="Client" ToRole="ClientPhone" />
+        </EntityType>
+        <Association Name="FK_Client_Company">
+          <End Type="CallCenterModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientStatistics_Client">
+          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="CallCenterModel.ClientStatistics" Role="ClientStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="ClientStatistics">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_Client">
+          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurrence_Client">
+          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="CallCenterModel.Recurrence" Role="Recurrence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Recurrence">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RelClientPhoneClient">
+          <End Type="CallCenterModel.Client" Role="Client" Multiplicity="*" />
+          <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -4653,19 +4655,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CatPaymentId" ColumnName="CatPaymentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Client">
-            <EntityTypeMapping TypeName="CallCenterModel.Client">
-              <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="LoyaltyCode" ColumnName="LoyaltyCode" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5287,20 +5276,34 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               <ScalarProperty Name="AddressId" ColumnName="AddressId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="RelClientPhoneClient" TypeName="CallCenterModel.RelClientPhoneClient" StoreEntitySet="RelClientPhoneClient">
-            <EndProperty Name="ClientPhone">
-              <ScalarProperty Name="ClientPhoneId" ColumnName="ClientPhoneId" />
-            </EndProperty>
-            <EndProperty Name="Client">
-              <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="RelFranchisePhoneStore" TypeName="CallCenterModel.RelFranchisePhoneStore" StoreEntitySet="RelFranchisePhoneStore">
             <EndProperty Name="FranchiseStore">
               <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
             </EndProperty>
             <EndProperty Name="FranchisePhone">
               <ScalarProperty Name="FranchisePhoneId" ColumnName="FranchisePhoneId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="CallCenterModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="DatetimeIns" ColumnName="DatetimeIns" />
+                <ScalarProperty Name="LoyaltyCode" ColumnName="LoyaltyCode" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RelClientPhoneClient" TypeName="CallCenterModel.RelClientPhoneClient" StoreEntitySet="RelClientPhoneClient">
+            <EndProperty Name="ClientPhone">
+              <ScalarProperty Name="ClientPhoneId" ColumnName="ClientPhoneId" />
+            </EndProperty>
+            <EndProperty Name="Client">
+              <ScalarProperty Name="ClientId" ColumnName="ClientId" />
             </EndProperty>
           </AssociationSetMapping>
           </EntityContainerMapping>
