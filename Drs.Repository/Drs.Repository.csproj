@@ -157,7 +157,13 @@
     <Compile Include="Entities\ufnGetConsumerClientByRangeDates_Result.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ufnGetConsumerClientByRangeDates_Result1.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\ufnGetFrequentClientByRangeDates_Result.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ufnGetFrequentClientByRangeDates_Result1.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ufnGetTopProductsByRangeDates_Result.cs">

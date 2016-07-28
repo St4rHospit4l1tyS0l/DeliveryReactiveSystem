@@ -101,7 +101,7 @@ namespace Drs.Repository.Entities
         }
     
         [DbFunction("CallCenterEntities", "ufnGetConsumerClientByRangeDates")]
-        public virtual IQueryable<ufnGetConsumerClientByRangeDates_Result> ufnGetConsumerClientByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)
+        public virtual IQueryable<ufnGetConsumerClientByRangeDates_Result1> ufnGetConsumerClientByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)
         {
             var starDateParameter = starDate.HasValue ?
                 new ObjectParameter("StarDate", starDate) :
@@ -111,11 +111,11 @@ namespace Drs.Repository.Entities
                 new ObjectParameter("EndDate", endDate) :
                 new ObjectParameter("EndDate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<ufnGetConsumerClientByRangeDates_Result>("[CallCenterEntities].[ufnGetConsumerClientByRangeDates](@StarDate, @EndDate)", starDateParameter, endDateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<ufnGetConsumerClientByRangeDates_Result1>("[CallCenterEntities].[ufnGetConsumerClientByRangeDates](@StarDate, @EndDate)", starDateParameter, endDateParameter);
         }
     
         [DbFunction("CallCenterEntities", "ufnGetFrequentClientByRangeDates")]
-        public virtual IQueryable<ufnGetFrequentClientByRangeDates_Result> ufnGetFrequentClientByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)
+        public virtual IQueryable<ufnGetFrequentClientByRangeDates_Result1> ufnGetFrequentClientByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)
         {
             var starDateParameter = starDate.HasValue ?
                 new ObjectParameter("StarDate", starDate) :
@@ -125,7 +125,7 @@ namespace Drs.Repository.Entities
                 new ObjectParameter("EndDate", endDate) :
                 new ObjectParameter("EndDate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<ufnGetFrequentClientByRangeDates_Result>("[CallCenterEntities].[ufnGetFrequentClientByRangeDates](@StarDate, @EndDate)", starDateParameter, endDateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<ufnGetFrequentClientByRangeDates_Result1>("[CallCenterEntities].[ufnGetFrequentClientByRangeDates](@StarDate, @EndDate)", starDateParameter, endDateParameter);
         }
     }
 }

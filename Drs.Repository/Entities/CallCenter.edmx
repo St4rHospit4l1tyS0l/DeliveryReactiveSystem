@@ -1766,7 +1766,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <Property Name="Email" Type="nvarchar" MaxLength="500" />
                 <Property Name="LoyaltyCode" Type="nvarchar" MaxLength="15" />
                 <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
-                <Property Name="TotalByConsume" Type="int" />
+                <Property Name="TotalByProduct" Type="decimal" Precision="38" Scale="4" />
                 <Property Name="StoreName" Type="nvarchar" MaxLength="500" Nullable="false" />
                 <Property Name="FranchiseName" Type="nvarchar" MaxLength="500" Nullable="false" />
               </RowType>
@@ -1784,7 +1784,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <Property Name="Email" Type="nvarchar" MaxLength="500" />
                 <Property Name="LoyaltyCode" Type="nvarchar" MaxLength="15" />
                 <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
-                <Property Name="TotalByProduct" Type="decimal" Precision="38" Scale="4" />
+                <Property Name="TotalByConsume" Type="int" />
                 <Property Name="StoreName" Type="nvarchar" MaxLength="500" Nullable="false" />
                 <Property Name="FranchiseName" Type="nvarchar" MaxLength="500" Nullable="false" />
               </RowType>
@@ -2281,14 +2281,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <Parameter Name="StarDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="ufnGetConsumerClientByRangeDates" IsComposable="true" ReturnType="Collection(CallCenterModel.ufnGetConsumerClientByRangeDates_Result)">
-            <Parameter Name="StarDate" Mode="In" Type="DateTime" />
-            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="ufnGetFrequentClientByRangeDates" IsComposable="true" ReturnType="Collection(CallCenterModel.ufnGetFrequentClientByRangeDates_Result)">
-            <Parameter Name="StarDate" Mode="In" Type="DateTime" />
-            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="Address" EntityType="CallCenterModel.Address" />
           <EntitySet Name="AddressHierarchy" EntityType="CallCenterModel.AddressHierarchy" />
           <EntitySet Name="AspNetRoles" EntityType="CallCenterModel.AspNetRoles" />
@@ -2667,6 +2659,14 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="Client" EntitySet="Client" />
             <End Role="ClientPhone" EntitySet="ClientPhone" />
           </AssociationSet>
+          <FunctionImport Name="ufnGetConsumerClientByRangeDates" IsComposable="true" ReturnType="Collection(CallCenterModel.ufnGetConsumerClientByRangeDates_Result1)">
+            <Parameter Name="StarDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ufnGetFrequentClientByRangeDates" IsComposable="true" ReturnType="Collection(CallCenterModel.ufnGetFrequentClientByRangeDates_Result1)">
+            <Parameter Name="StarDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="User_Sales_group_by_date_Result">
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
@@ -4508,6 +4508,26 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <End Type="CallCenterModel.Client" Role="Client" Multiplicity="*" />
           <End Type="CallCenterModel.ClientPhone" Role="ClientPhone" Multiplicity="*" />
         </Association>
+        <ComplexType Name="ufnGetConsumerClientByRangeDates_Result1">
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="301" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="true" Precision="10" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LoyaltyCode" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="TotalByProduct" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="String" Name="StoreName" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="FranchiseName" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="ufnGetFrequentClientByRangeDates_Result1">
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="301" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="true" Precision="10" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LoyaltyCode" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="TotalByConsume" Nullable="true" />
+          <Property Type="String" Name="StoreName" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="FranchiseName" Nullable="false" MaxLength="500" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4521,34 +4541,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="TotalByProduct" ColumnName="TotalByProduct" />
                 <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
-                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
-                <ScalarProperty Name="FranchiseName" ColumnName="FranchiseName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ufnGetConsumerClientByRangeDates" FunctionName="CallCenterModel.Store.ufnGetConsumerClientByRangeDates">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CallCenterModel.ufnGetConsumerClientByRangeDates_Result">
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LoyaltyCode" ColumnName="LoyaltyCode" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="TotalByConsume" ColumnName="TotalByConsume" />
-                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
-                <ScalarProperty Name="FranchiseName" ColumnName="FranchiseName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ufnGetFrequentClientByRangeDates" FunctionName="CallCenterModel.Store.ufnGetFrequentClientByRangeDates">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CallCenterModel.ufnGetFrequentClientByRangeDates_Result">
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LoyaltyCode" ColumnName="LoyaltyCode" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="TotalByProduct" ColumnName="TotalByProduct" />
                 <ScalarProperty Name="StoreName" ColumnName="StoreName" />
                 <ScalarProperty Name="FranchiseName" ColumnName="FranchiseName" />
               </ComplexTypeMapping>
@@ -5306,6 +5298,34 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               <ScalarProperty Name="ClientId" ColumnName="ClientId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="ufnGetConsumerClientByRangeDates" FunctionName="CallCenterModel.Store.ufnGetConsumerClientByRangeDates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CallCenterModel.ufnGetConsumerClientByRangeDates_Result1">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LoyaltyCode" ColumnName="LoyaltyCode" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="TotalByProduct" ColumnName="TotalByProduct" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="FranchiseName" ColumnName="FranchiseName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ufnGetFrequentClientByRangeDates" FunctionName="CallCenterModel.Store.ufnGetFrequentClientByRangeDates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CallCenterModel.ufnGetFrequentClientByRangeDates_Result1">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LoyaltyCode" ColumnName="LoyaltyCode" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="TotalByConsume" ColumnName="TotalByConsume" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="FranchiseName" ColumnName="FranchiseName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -96,9 +96,9 @@ namespace Drs.Repository.Report
                 FullName = e.FullName,
                 BirthDate = e.BirthDate,
                 Email = e.Email,
+                TotalByConsume = e.TotalByConsume,
                 CompanyName = e.CompanyName,
                 LoyaltyCode = e.LoyaltyCode,
-                TotalByProduct = e.TotalByProduct,
                 StoreName = e.StoreName,
                 FranchiseName = e.FranchiseName
             }).ToList();
@@ -121,7 +121,7 @@ namespace Drs.Repository.Report
                 Email = e.Email,
                 CompanyName = e.CompanyName,
                 LoyaltyCode = e.LoyaltyCode,
-                TotalByConsume = e.TotalByConsume,
+                TotalByProduct = e.TotalByProduct,
                 StoreName = e.StoreName,
                 FranchiseName = e.FranchiseName
             }).ToList();
