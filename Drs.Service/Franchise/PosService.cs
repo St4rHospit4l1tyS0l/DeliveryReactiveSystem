@@ -71,10 +71,6 @@ namespace Drs.Service.Franchise
                         }
                         //WaitForTopMostToDisable(process);
 
-                    }
-
-                    if (isUpdated == false)
-                    {
                         ChangeAlohaIniDate(dataFolder);
                         DeleteTransLog(dataFolder);
                         DeleteTmpFiles(tmpFolder);
