@@ -1,6 +1,11 @@
 SELECT 
 	COUNT(*) 
 FROM Client
+GO
+SELECT 
+	COUNT(*) 
+FROM ClientPhone
+GO
 
 DELETE FROM Recurrence
 GO

@@ -18,7 +18,7 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource WhiteColor}"  />
             <CollectionViewSource x:Key="LstClientsKey" Source="{Binding LstClients}">
                 <CollectionViewSource.SortDescriptions>
-                    <componentModel:SortDescription PropertyName="FirstName"/>
+                    <componentModel:SortDescription PropertyName="ClientInfo.FirstName"/>
                 </CollectionViewSource.SortDescriptions>
             </CollectionViewSource>
             <converter:EnumToVisualConverter x:Key="IconConverter"
@@ -80,9 +80,8 @@
                                Foreground="#FFF" />
             </StackPanel>
         </DockPanel>
-        <Grid HorizontalAlignment="Stretch">
-
-            <DataGrid x:Name="ClientDtGrid" TextOptions.TextFormattingMode="Display" Margin="0"
+        <Grid HorizontalAlignment="Stretch" MaxHeight="315">
+            <DataGrid x:Name="ClientDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" VerticalScrollBarVisibility="Auto"
                   ItemsSource="{Binding Source={StaticResource LstClientsKey}}" SelectionMode="Single"
                   Style="{DynamicResource AzureDataGrid}" SelectedItem="{Binding ClientSelection}"
                   AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">

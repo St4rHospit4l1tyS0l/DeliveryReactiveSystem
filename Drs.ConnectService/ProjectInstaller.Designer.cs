@@ -29,31 +29,41 @@
         private void InitializeComponent()
         {
             this.processInstaller = new System.ServiceProcess.ServiceProcessInstaller();
-            this.installer = new System.ServiceProcess.ServiceInstaller();
+            this.UpdateOrderStatusInstaller = new System.ServiceProcess.ServiceInstaller();
+            this.SyncServerFilesInstaller = new System.ServiceProcess.ServiceInstaller();
             // 
             // processInstaller
             // 
             this.processInstaller.Password = null;
             this.processInstaller.Username = null;
             // 
-            // installer
+            // UpdateOrderStatusInstaller
             // 
-            this.installer.Description = "Service to update order status from stores";
-            this.installer.DisplayName = "Drs.UpdateOrderStatus Service";
-            this.installer.ServiceName = "UpdateOrderStatus";
-            this.installer.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.UpdateOrderStatusInstaller.Description = "Service to update order status from stores";
+            this.UpdateOrderStatusInstaller.DisplayName = "Drs.UpdateOrderStatus Service";
+            this.UpdateOrderStatusInstaller.ServiceName = "UpdateOrderStatus";
+            this.UpdateOrderStatusInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            // 
+            // SyncServerFilesInstaller
+            // 
+            this.SyncServerFilesInstaller.Description = "Service to syncronize DBF files of POS System (DATA)";
+            this.SyncServerFilesInstaller.DisplayName = "Drs.SyncServerFiles Service";
+            this.SyncServerFilesInstaller.ServiceName = "SyncServerFiles";
+            this.SyncServerFilesInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
             // 
             this.Installers.AddRange(new System.Configuration.Install.Installer[] {
             this.processInstaller,
-            this.installer});
+            this.UpdateOrderStatusInstaller,
+            this.SyncServerFilesInstaller});
 
         }
 
         #endregion
 
         private System.ServiceProcess.ServiceProcessInstaller processInstaller;
-        private System.ServiceProcess.ServiceInstaller installer;
+        private System.ServiceProcess.ServiceInstaller UpdateOrderStatusInstaller;
+        private System.ServiceProcess.ServiceInstaller SyncServerFilesInstaller;
     }
 }

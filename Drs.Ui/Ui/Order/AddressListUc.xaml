@@ -17,7 +17,7 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource WhiteColor}"  />
             <CollectionViewSource x:Key="LstDataKey" Source="{Binding LstAddresses}">
                 <CollectionViewSource.SortDescriptions>
-                    <componentModel:SortDescription PropertyName="Street"/>
+                    <componentModel:SortDescription PropertyName="AddressInfo.MainAddress"/>
                 </CollectionViewSource.SortDescriptions>
             </CollectionViewSource>
             <ui:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -77,7 +77,7 @@
                                Foreground="#FFF" />
             </StackPanel>
         </DockPanel>
-        <Grid HorizontalAlignment="Stretch">
+        <Grid HorizontalAlignment="Stretch" MaxHeight="315">
             <DataGrid x:Name="DtGrid" TextOptions.TextFormattingMode="Display" Margin="0"
                   ItemsSource="{Binding Source={StaticResource LstDataKey}}" SelectionMode="Single"
                   Style="{DynamicResource AzureDataGrid}" SelectedItem="{Binding AddressSelection}"
