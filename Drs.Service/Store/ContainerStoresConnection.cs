@@ -6,13 +6,14 @@ namespace Drs.Service.Store
 {
     public static class ContainerStoresConnection
     {
-        public static List<StoreConnection> Stores { get; private set; }
-        static ContainerStoresConnection()
-        {
-            using (var repository = new StoreRepository())
+        public static List<StoreConnection> Stores {
+            get
             {
-                Stores = repository.GetStoreConnection();
-            }        
+                using (var repository = new StoreRepository())
+                {
+                    return repository.GetStoreConnection();
+                }                        
+            }
         }
     }
 }

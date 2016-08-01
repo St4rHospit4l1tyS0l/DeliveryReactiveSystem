@@ -27,7 +27,7 @@ namespace Drs.Service.Store
         {
             _connectionPool = new ConnectionPoolWs<UpdateOrderClient>
             {
-                LstConnections = new List<UpdateOrderClient>(ContainerStoresConnection.Stores.Count)
+                LstConnections = new List<UpdateOrderClient>()
             };
 
             foreach (var storeConnection in ContainerStoresConnection.Stores)
