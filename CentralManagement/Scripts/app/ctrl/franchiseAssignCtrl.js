@@ -87,9 +87,9 @@ app.controller('franchiseAssignController', function ($scope, $http, $timeout) {
 
 
     $scope.createCoordinates = function () {
-        var bound = window.appGlobalMap.getBounds();
-        var sizLat = Math.abs(bound.H.H - bound.H.j) / 8;
-        var sizLng = Math.abs(bound.j.H - bound.j.j) / 8;
+        var bound = window.appGlobalMap.getBounds().toJSON();
+        var sizLat = Math.abs(bound.north - bound.south) / 8;
+        var sizLng = Math.abs(bound.east - bound.west) / 8;
         var lat = window.appGlobalMap.center.lat();
         var lng = window.appGlobalMap.center.lng();
 
