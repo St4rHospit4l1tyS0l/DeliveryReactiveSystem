@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:Drs.Ui.Ui.Shared"
              xmlns:vm="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="1024" HorizontalAlignment="Stretch" Margin="20,0,20,10">
+             d:DesignHeight="250" d:DesignWidth="1100" HorizontalAlignment="Stretch" Margin="20,0,20,10">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,6 +21,8 @@
             <DataTemplate DataType="{x:Type vm:PagerVm}">
                 <view:PagerUc/>
             </DataTemplate>
+            <FontFamily x:Key="BaseFontFamily">Calibri</FontFamily>
+            <system:Double x:Key="BaseFontSize">15</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
@@ -29,13 +32,14 @@
                     <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_people_profile}" />
                 </Rectangle.OpacityMask>
             </Rectangle>
-            <Label Content="Órdenes encontradas " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+            <Label Content="Órdenes encontradas " FontSize="18" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                                VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
         </DockPanel>
         <Grid HorizontalAlignment="Stretch">
-            <DataGrid x:Name="ItemDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="250"
+            <DataGrid x:Name="ItemDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="350"
                   ItemsSource="{Binding Source={StaticResource LstItemsKey}}" SelectionMode="Single"
-                  SelectedItem="{Binding ItemSelection}" MinHeight="320"
+                  SelectedItem="{Binding ItemSelection}" MinHeight="320" VerticalScrollBarVisibility="Auto"
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                   AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Detalles" MinWidth="70">

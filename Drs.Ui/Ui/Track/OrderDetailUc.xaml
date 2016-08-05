@@ -6,6 +6,7 @@
              xmlns:shared="clr-namespace:Drs.Ui.Ui.Shared"
              xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
              xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" Height="500" Width="1080">
 
     <UserControl.Resources>
@@ -28,7 +29,9 @@
             </CollectionViewSource>
             <CollectionViewSource x:Key="LstOrderLogKey" Source="{Binding OrderDetail.LstOrderLog}">
             </CollectionViewSource>
-
+            <FontFamily x:Key="BaseFontFamily">Calibri</FontFamily>
+            <system:Double x:Key="BaseFontSize">14</system:Double>
+            <system:Double x:Key="BaseFontSizeGrid">15</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -39,13 +42,13 @@
                     <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_resource_group}" />
                 </Rectangle.OpacityMask>
             </Rectangle>
-            <Label Content="Detalles del pedido" FontSize="18" Foreground="{DynamicResource AccentColorBrush}"></Label>
+            <Label Content="Detalles del pedido" FontSize="19" Foreground="{DynamicResource AccentColorBrush}"></Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Label Content="Teléfono: " FontSize="15" Foreground="{DynamicResource AccentColorBrush}"></Label>
-            <TextBlock Text="{Binding OrderDetail.Phone}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Margin="20 0" FontSize="14"></TextBlock>
-            <Label Margin="20 0 0 0" Content="Cliente: " FontSize="15" Foreground="{DynamicResource AccentColorBrush}"></Label>
-            <TextBlock Text="{Binding OrderDetail.FullName}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Margin="20 0" FontSize="14"></TextBlock>
+            <Label Content="Teléfono: " FontSize="16" Foreground="{DynamicResource AccentColorBrush}"></Label>
+            <TextBlock Text="{Binding OrderDetail.Phone}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Margin="20 0" FontSize="16"></TextBlock>
+            <Label Margin="20 0 0 0" Content="Cliente: " FontSize="16" Foreground="{DynamicResource AccentColorBrush}"></Label>
+            <TextBlock Text="{Binding OrderDetail.FullName}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Margin="20 0" FontSize="16"></TextBlock>
         </StackPanel>
         <Grid>
             <Grid.RowDefinitions>
@@ -64,27 +67,27 @@
                 <ColumnDefinition Width="140"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Fecha / Hora pedido:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"></Label>
-            <Label Content="ID Orden:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right"></Label>
-            <Label Content="Tienda:" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right"></Label>
-            <Label Content="Franquicia:" Grid.Row="0" Grid.Column="6" HorizontalAlignment="Right"></Label>
-            <Label Content="Último estado:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"></Label>
-            <Label Content="Tiempo promesa:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right"></Label>
-            <Label Content="Modo:" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Right"></Label>
-            <Label Content="Total de la orden:" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Right"></Label>
-            <Label Content="Fecha / Hora cerrado:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"></Label>
-            <Label Content="Usuario:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right"></Label>
+            <Label Content="Fecha/Hora pedido:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="ID Orden:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="Tienda:" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="Franquicia:" Grid.Row="0" Grid.Column="6" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="Último estado:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="Tiempo promesa:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="Modo:" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="Total de la orden:" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="Fecha / Hora cerrado:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="Usuario:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
 
-            <TextBlock Text="{Binding OrderDetail.DateTimeOrder}" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.OrderAtoId}" Grid.Row="0" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.StoreName}" Grid.Row="0" Grid.Column="5" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.FranchiseName}" Grid.Row="0" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.LastStatusEx}" Grid.Row="1" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.PromiseTime}" Grid.Row="1" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.Mode}" Grid.Row="1" Grid.Column="5" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.CurrOrderTotal}" Grid.Row="1" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.StrEndDatetime}" Grid.Row="2" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.UserTakeOrder}" Grid.Row="2" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.DateTimeOrder}" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.OrderAtoId}" Grid.Row="0" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.StoreName}" Grid.Row="0" Grid.Column="5" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.FranchiseName}" Grid.Row="0" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.LastStatusEx}" Grid.Row="1" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.PromiseTime}" Grid.Row="1" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.Mode}" Grid.Row="1" Grid.Column="5" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.CurrOrderTotal}" Grid.Row="1" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.StrEndDatetime}" Grid.Row="2" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.UserTakeOrder}" Grid.Row="2" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
 
         </Grid>
         <StackPanel Visibility="{Binding VisiblityStoreErrMsg}">
@@ -106,12 +109,13 @@
                             <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_checkmark}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <Label Content="Listado del pedido" FontSize="13" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                    <Label Content="Listado del pedido" FontSize="15" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                                VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
                 </DockPanel>
                 <Grid HorizontalAlignment="Stretch">
                     <DataGrid x:Name="OrderDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="200"
                           ItemsSource="{Binding Source={StaticResource LstOrderKey}}" SelectionMode="Single"
+                          FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSizeGrid}"
                           AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
 
                         <DataGrid.Columns>
@@ -142,12 +146,13 @@
                             <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_list}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <Label Content="Historial del pedido" FontSize="13" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                    <Label Content="Historial del pedido" FontSize="15" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                                VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
                 </DockPanel>
                 <Grid HorizontalAlignment="Stretch">
                     <DataGrid x:Name="OrderLogDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="200"
                           ItemsSource="{Binding Source={StaticResource LstOrderLogKey}}" SelectionMode="Single"
+                          FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSizeGrid}"
                           AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
 
                         <DataGrid.Columns>
