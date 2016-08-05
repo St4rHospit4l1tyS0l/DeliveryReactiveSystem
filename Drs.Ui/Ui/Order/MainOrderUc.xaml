@@ -8,8 +8,7 @@
              xmlns:viewOrder="clr-namespace:Drs.Ui.Ui.Order"
              xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             mc:Ignorable="d" 
-             Width="1900"  Height="1060" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+             mc:Ignorable="d" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -44,8 +43,8 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
+    <Viewbox Name="VwBoxMainOrder">
+        <Grid Height="1080" Width="1900">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -100,12 +99,12 @@
                         <StackPanel Orientation="Vertical">
                             <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#FF51A0FF" Margin="0,0,0,0"></Rectangle>
                             <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0" >
-                                <ContentControl  Content="{Binding ClientsList}" Width="1250" MaxHeight="350" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+                                <ContentControl  Content="{Binding ClientsList}" Width="1450" MaxHeight="350" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
                                 </ContentControl>
                             </StackPanel>
                             <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#898989" Margin="0,20,0,20"></Rectangle>
                             <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 0" >
-                                <ContentControl  Content="{Binding AddressList}" Width="1250" MaxHeight="350" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+                                <ContentControl  Content="{Binding AddressList}" Width="1450" MaxHeight="350" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
                                 </ContentControl>
                             </StackPanel>
                         </StackPanel>
@@ -133,5 +132,5 @@
                 </controls:MetroAnimatedSingleRowTabControl>
             </StackPanel>
         </Grid>
-    </ScrollViewer>
+    </Viewbox>
 </UserControl>

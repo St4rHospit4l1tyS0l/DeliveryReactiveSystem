@@ -18,6 +18,8 @@ namespace Drs.Ui.Ui
         public MainWindow()
         {
             InitializeComponent();
+            VwBoxMainWnd.Height = SystemParameters.PrimaryScreenHeight;
+            VwBoxMainWnd.Width = SystemParameters.PrimaryScreenWidth;
 
             MessageBus.Current.Listen<MessageBoxSettings>(SharedMessageConstants.MSG_SHOW_ERRQST)
                 .Subscribe(x => RxApp.MainThreadScheduler.Schedule(_ => ShowMessageErrorOrQuestion(x)));

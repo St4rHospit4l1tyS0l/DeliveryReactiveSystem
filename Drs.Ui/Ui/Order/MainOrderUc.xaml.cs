@@ -1,4 +1,6 @@
-﻿namespace Drs.Ui.Ui.Order
+﻿using System.Windows;
+
+namespace Drs.Ui.Ui.Order
 {
     /// <summary>
     /// Interaction logic for MainOrderUc.xaml
@@ -8,6 +10,9 @@
         public MainOrderUc()
         {
             InitializeComponent();
+            VwBoxMainOrder.Height = SystemParameters.PrimaryScreenHeight;
+            VwBoxMainOrder.Width = SystemParameters.PrimaryScreenWidth;
+
         }
 
     }

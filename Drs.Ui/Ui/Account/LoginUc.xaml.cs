@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using Drs.Model.Constants;
 using ReactiveUI;
 
@@ -12,6 +13,8 @@ namespace Drs.Ui.Ui.Account
         public LoginUc()
         {
             InitializeComponent();
+            VwBoxLogin.Height = SystemParameters.PrimaryScreenHeight;
+            VwBoxLogin.Width = SystemParameters.PrimaryScreenWidth;
             MessageBus.Current.Listen<string>(SharedMessageConstants.LOGIN_FOCUS_USERNAME)
                 .Subscribe(_ =>
                 {

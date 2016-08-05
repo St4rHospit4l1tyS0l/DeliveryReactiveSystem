@@ -54,61 +54,62 @@ namespace Drs.ViewModel.Order
             LstPayments.ClearAndAddRange(CatalogsClientModel.CatPayments);
 
             LstStores = new ReactiveList<ItemCatalog>();
-
             ResetValues();
-
-            SendOrderToStore = ReactiveCommand.CreateAsyncTask(Observable.Return(true), async _ =>
-            {
-                EventsMsg = "Enviando el pedido al servidor. \nEspere por favor...";
-                HasError = Visibility.Collapsed;
-                ErrorMsg = SuccessMsg = String.Empty;
-                HasSuccess = Visibility.Collapsed;
-
-                var response = ValidateOrderDelivery();
-                if (response.IsSuccess == false)
-                {
-                    MessageBus.Current.SendMessage(new MessageBoxSettings
-                    {
-                        Message = response.Message,
-                        Title = "Envío de la orden",
-                    }, SharedMessageConstants.MSG_SHOW_ERRQST);
-                    return new Unit();
-                }
-
-                response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise | ClientFlags.ValidateOrder.Client
-                | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.Order | ClientFlags.ValidateOrder.StoreAvailable | ClientFlags.ValidateOrder.OrderSaved);
-
-                if (response.IsSuccess == false)
-                {
-                    MessageBus.Current.SendMessage(new MessageBoxSettings
-                    {
-                        Message = response.Message,
-                        Title = "Información faltante",
-                    }, SharedMessageConstants.MSG_SHOW_ERRQST);
-                    return new Unit();
-                }
-
-                IsReadyToSend = Visibility.Collapsed;
-                IsSending = Visibility.Visible;
-                SendOrderTitleBtn = "Reenviar pedido a la tienda";
-
-                var posOrderStatus = ExtractPosOrderStatus();
-                var posOrderMode = ExtractPosOrderMode();
-
-                var orderDetails = new OrderDetails
-                {
-                    PosOrderMode = posOrderMode, 
-                    PosOrderStatus = posOrderStatus,
-                    ExtraNotes = ExtraNotes,
-                    PromiseTime = _promiseTime,
-                    Payment = Payment
-                };
-
-                await Task.Run(() => OrderService.SendOrderToStore(orderDetails));
-                return new Unit();
-            });
-
+            SendOrderToStore = ReactiveCommand.CreateAsyncTask(Observable.Return(true), async _ => await SendOrderTask());
             MessageBus.Current.Listen<PropagateOrderModel>(SharedMessageConstants.PROPAGATE_LASTORDER_POSCHECK).Subscribe(OnPropagate);
+        }
+
+        private async Task<Unit> SendOrderTask()
+        {
+            EventsMsg = "Enviando el pedido al servidor. \nEspere por favor...";
+            HasError = Visibility.Collapsed;
+            ErrorMsg = SuccessMsg = String.Empty;
+            HasSuccess = Visibility.Collapsed;
+
+            var response = ValidateOrderDelivery();
+            if (response.IsSuccess == false)
+            {
+                MessageBus.Current.SendMessage(new MessageBoxSettings
+                {
+                    Message = response.Message,
+                    Title = "Envío de la orden",
+                }, SharedMessageConstants.MSG_SHOW_ERRQST);
+                return new Unit();
+            }
+
+            response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise |
+                              ClientFlags.ValidateOrder.Client
+                              | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.Order |
+                              ClientFlags.ValidateOrder.StoreAvailable | ClientFlags.ValidateOrder.OrderSaved);
+
+            if (response.IsSuccess == false)
+            {
+                MessageBus.Current.SendMessage(new MessageBoxSettings
+                {
+                    Message = response.Message,
+                    Title = "Información faltante",
+                }, SharedMessageConstants.MSG_SHOW_ERRQST);
+                return new Unit();
+            }
+
+            IsReadyToSend = Visibility.Collapsed;
+            IsSending = Visibility.Visible;
+            SendOrderTitleBtn = "Reenviar pedido a la tienda";
+
+            var posOrderStatus = ExtractPosOrderStatus();
+            var posOrderMode = ExtractPosOrderMode();
+
+            var orderDetails = new OrderDetails
+            {
+                PosOrderMode = posOrderMode,
+                PosOrderStatus = posOrderStatus,
+                ExtraNotes = ExtraNotes,
+                PromiseTime = _promiseTime,
+                Payment = Payment
+            };
+
+            await Task.Run(() => OrderService.SendOrderToStore(orderDetails));
+            return new Unit();
         }
 
         private string ExtractPosOrderMode()
