@@ -8,7 +8,7 @@ namespace Drs.Service.Track
     public interface ITrackService
     {
         IList<TrackOrderDto> SearchByPhone(PagerDto<String> phone);
-        IEnumerable<TrackOrderDto> SearchByClientName(PagerDto<string> clientName);
+        IEnumerable<TrackOrderDto> SearchByClient(PagerDto<int> client);
         TrackOrderDto ShowDetailByOrderId(long orderId);
     }
 }

@@ -35,15 +35,15 @@ namespace ConnectCallCenter.Hubs
         }
 
         [HubMethodName(SharedConstants.Server.SEARCH_BY_CLIENTNAME_TRACK_HUB_METHOD)]
-        public ResponseMessageData<TrackOrderDto> SearchByClientName(PagerDto<String> clientName)
+        public ResponseMessageData<TrackOrderDto> SearchByClientName(PagerDto<int> client)
         {
             try
             {
                 return new ResponseMessageData<TrackOrderDto>
                 {
                     IsSuccess = true,
-                    LstData = AppInit.Container.Resolve<ITrackService>().SearchByClientName(clientName),
-                    Pager = clientName.Pager
+                    LstData = AppInit.Container.Resolve<ITrackService>().SearchByClient(client),
+                    Pager = client.Pager
                 };
             }
             catch (Exception ex)

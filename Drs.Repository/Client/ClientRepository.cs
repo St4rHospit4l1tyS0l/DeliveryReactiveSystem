@@ -20,8 +20,10 @@ namespace Drs.Repository.Client
 
         public IEnumerable<ListItemModel> SearchClientsByClientName(string clientName, int maxResults)
         {
-            return DbEntities.Client.Where(e => e.FirstName.Contains(clientName) || e.LastName.Contains(clientName))
-                .Select(e => new ListItemModel { Value = e.FirstName + " " + e.LastName, Key = e.ClientId.ToString() })
+            return DbEntities.Client.Where(e => e.FirstName.Contains(clientName) || e.LastName.Contains(clientName) || (e.FirstName + " " + e.LastName).Contains(clientName))
+                .SelectMany(e => e.ClientPhone.Select(i =>
+                    new ListItemModel { Value = e.FirstName + " " + e.LastName + " (" + i.Phone + ")", IdKey = e.ClientId }))
+                .Distinct()
                 .OrderBy(e => e.Value)
                 .Take(maxResults)
                 .ToList();

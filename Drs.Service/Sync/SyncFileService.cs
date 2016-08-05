@@ -12,6 +12,7 @@ using Drs.Model.Franchise;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
 using Drs.Service.SyncServerSvc;
+using Drs.Service.Transport;
 
 namespace Drs.Service.Sync
 {
@@ -29,6 +30,7 @@ namespace Drs.Service.Sync
 
             using (var client = new SyncServerSvcClient())
             {
+                WcfExt.SetMtomEncodingAndSize(client.Endpoint);
                 foreach (var syncFranchiseModel in lstFranchiseSyncFiles)
                 {
                     var clientIn = client;

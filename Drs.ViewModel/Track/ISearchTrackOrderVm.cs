@@ -9,6 +9,6 @@ namespace Drs.ViewModel.Track
         IAutoCompleteTextVm PhoneSearchVm { get; set; }
         IAutoCompleteTextVm NameSearchVm { get; set; }
         event Action<String> PhoneChanged;
-        event Action<String> ClientNameChanged;
+        event Action<int> ClientNameChanged;
     }
 }

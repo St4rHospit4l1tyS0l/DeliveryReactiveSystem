@@ -171,27 +171,25 @@ namespace Drs.ViewModel.Track
         }
 
 
-        public void OnClientNameChanged(string clientName)
+        public void OnClientNameChanged(int clientId)
         {
-            _pagerCache.SearchValue = clientName;
+            _pagerCache.SearchIdValue = clientId;
             _pagerCache.SearchType = SettingsData.Constants.TrackConst.SEARCH_BY_CLIENTNAME;
             Pager.Reset();
             GetResultByClientName();
-
-
         }
 
         private void GetResultByClientName()
         {
             OnStatusChanged(SettingsData.Constants.TrackConst.SEARCH_ORDERLIST_ON_PROGRESS, "Buscando pedidos...");
 
-            var pagerDto = new PagerDto<string>
+            var pagerDto = new PagerDto<int>
             {
-                Data = _pagerCache.SearchValue,
+                Data = _pagerCache.SearchIdValue,
                 Pager = Pager.PagerModel,
             };
 
-            _client.ExecutionProxy.ExecuteRequest<PagerDto<string>, PagerDto<string>, ResponseMessageData<TrackOrderDto>, ResponseMessageData<TrackOrderDto>>
+            _client.ExecutionProxy.ExecuteRequest<PagerDto<int>, PagerDto<int>, ResponseMessageData<TrackOrderDto>, ResponseMessageData<TrackOrderDto>>
                     (pagerDto, TransferDto.SameType, SharedConstants.Server.TRACK_HUB,
                         SharedConstants.Server.SEARCH_BY_CLIENTNAME_TRACK_HUB_METHOD, TransferDto.SameType)
                         .Subscribe(OnResultSearchOk, OnResultSearchError);

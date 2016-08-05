@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:ui="clr-namespace:Drs.Infrastructure.Ui;assembly=Drs.Infrastructure"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" x:Name="UsrCtrl"
              d:DesignHeight="250" d:DesignWidth="1024" HorizontalAlignment="Stretch" Margin="30,0,30,0">
     <UserControl.Resources>
@@ -21,17 +22,19 @@
                 </CollectionViewSource.SortDescriptions>
             </CollectionViewSource>
             <ui:BindingProxy x:Key="proxy" Data="{Binding}" />
+            <FontFamily x:Key="BaseFontFamily">Calibri</FontFamily>
+            <system:Double x:Key="BaseFontSize">15</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
         <StackPanel Orientation="Horizontal" Height="40" Visibility="{Binding HasAdditionalLstStore}">
-            <Label FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+            <Label FontSize="17" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                    FontWeight="SemiBold">Existe una o más tiendas alternativas para la dirección elegida, puede cambiar de tienda: </Label>
-            <ComboBox ItemsSource="{Binding Path=LstStores}" DisplayMemberPath="Name" 
-                      SelectedValue="{Binding Path=PickUpStore}" Background="{DynamicResource AccentColorBrush}" Margin="10 5 0 5" Width="300"></ComboBox>
+            <ComboBox ItemsSource="{Binding Path=LstStores}" DisplayMemberPath="Name" FontSize="16"
+                      SelectedValue="{Binding Path=PickUpStore}" Background="{DynamicResource AccentColorBrush}" Margin="10 5 0 5" Width="363"></ComboBox>
         </StackPanel>
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource AccentColorBrush}" Margin="0 15 0 0">
-            <Label Content="4) Agregue o elija la dirección:   " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+            <Label Content="4) Agregue o elija la dirección:   " FontSize="17" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                                VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
                 <Button Width="34" Cursor="Hand" Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding Add}" 
@@ -45,7 +48,7 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Agregar      " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Agregar      " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
                 <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=DtGrid}" 
                         Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding Edit}" 
@@ -59,7 +62,7 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Modificar      " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Modificar      " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
                 <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=DtGrid}" 
                         Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding Remove}" 
@@ -73,7 +76,7 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Eliminar " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Eliminar " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
             </StackPanel>
         </DockPanel>
@@ -81,6 +84,7 @@
             <DataGrid x:Name="DtGrid" TextOptions.TextFormattingMode="Display" Margin="0"
                   ItemsSource="{Binding Source={StaticResource LstDataKey}}" SelectionMode="Single"
                   Style="{DynamicResource AzureDataGrid}" SelectedItem="{Binding AddressSelection}"
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                   AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">

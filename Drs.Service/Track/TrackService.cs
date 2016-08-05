@@ -27,11 +27,11 @@ namespace Drs.Service.Track
             }
         }
 
-        public IEnumerable<TrackOrderDto> SearchByClientName(PagerDto<string> clientName)
+        public IEnumerable<TrackOrderDto> SearchByClient(PagerDto<int> client)
         {
             using (_trackRepository)
             {
-                return _trackRepository.SearchByClientName(clientName);
+                return _trackRepository.SearchByClient(client);
             }
         }
 

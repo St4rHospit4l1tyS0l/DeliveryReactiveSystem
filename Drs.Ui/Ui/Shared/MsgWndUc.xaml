@@ -23,9 +23,9 @@
                                      Visual="{DynamicResource appbar_warning}" />
                 </Rectangle.OpacityMask>
             </Rectangle>
-            <Border BorderBrush="{x:Null}" Height="250">
-                <TextBlock Text="{Binding MsgInfo}" VerticalAlignment="Center"
-                    Foreground="White"  FontSize="24" FontFamily="helvetica" FontWeight="Light" TextWrapping="Wrap"
+            <Border BorderBrush="{x:Null}" Height="450">
+                <TextBlock Text="{Binding MsgInfo}" VerticalAlignment="Top"
+                    Foreground="White"  FontSize="15" FontFamily="helvetica" FontWeight="Light" TextWrapping="Wrap"
                     HorizontalAlignment="Center" TextAlignment="Center"/>
             </Border>
         </StackPanel>

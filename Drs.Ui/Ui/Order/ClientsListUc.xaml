@@ -6,6 +6,7 @@
              xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:ui="clr-namespace:Drs.Infrastructure.Ui;assembly=Drs.Infrastructure"
              xmlns:converter="clr-namespace:Drs.Ui.Converter"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="1100" HorizontalAlignment="Stretch" Margin="30,0,30,0">
     <UserControl.Resources>
@@ -30,11 +31,13 @@
                     AppbarStarwarsRebel ="{StaticResource appbar_starwars_rebel}"
                     AppbarStarwarsJedi ="{StaticResource appbar_starwars_jedi}"
                     AppbarStarwarsSith ="{StaticResource appbar_starwars_sith}"/>
+            <FontFamily x:Key="BaseFontFamily">Calibri</FontFamily>
+            <system:Double x:Key="BaseFontSize">15</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource AccentColorBrush}">
-            <Label Content="3) Agregue o elija al cliente:   " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+            <Label Content="3) Agregue o elija al cliente:   " FontSize="17" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                                VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
                 <Button Width="34" Cursor="Hand" Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding AddClient}" 
@@ -48,7 +51,7 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Agregar      " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Agregar      " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
                 <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=ClientDtGrid}" 
                         Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding EditClient}" 
@@ -62,7 +65,7 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Modificar      " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Modificar      " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
                 <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=ClientDtGrid}" 
                         Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding RemoveClient}" 
@@ -76,14 +79,15 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Eliminar " FontSize="13" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Eliminar " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
             </StackPanel>
         </DockPanel>
         <Grid HorizontalAlignment="Stretch" MaxHeight="315">
             <DataGrid x:Name="ClientDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" VerticalScrollBarVisibility="Auto"
                   ItemsSource="{Binding Source={StaticResource LstClientsKey}}" SelectionMode="Single"
-                  Style="{DynamicResource AzureDataGrid}" SelectedItem="{Binding ClientSelection}"
+                  Style="{DynamicResource AzureDataGrid}" SelectedItem="{Binding ClientSelection}" 
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                   AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">

@@ -31,11 +31,11 @@ namespace Drs.Repository.Track
             return query.OrderByDescending(e => e.OrderToStoreId).Skip(phone.Pager.SkipRow).Take(phone.Pager.Size).ToList();
         }
 
-        public IList<TrackOrderDto> SearchByClientName(PagerDto<string> clientName)
+        public IList<TrackOrderDto> SearchByClient(PagerDto<int> client)
         {
-            var data = clientName.Data;
+            var clientId = client.Data;
             var query = DbEntities.OrderToStore.Where(e => e.OrderAtoId != null &&
-                (e.Client.FirstName.Contains(data) || e.Client.LastName.Contains(data) || (e.Client.FirstName + " " + e.Client.LastName).Contains(data)))
+                e.Client.ClientId == clientId)
                 .Select(e => new TrackOrderDto
                 {
                     OrderToStoreId = e.OrderToStoreId,
@@ -49,10 +49,10 @@ namespace Drs.Repository.Track
                     LastStatus = e.LastStatus,
                     IsCanceled = e.IsCanceled
                 });
-            
-            clientName.Pager.Total = query.Count();
-            
-            return query.OrderByDescending(e => e.OrderToStoreId).Skip(clientName.Pager.SkipRow).Take(clientName.Pager.Size).ToList();
+
+            client.Pager.Total = query.Count();
+
+            return query.OrderByDescending(e => e.OrderToStoreId).Skip(client.Pager.SkipRow).Take(client.Pager.Size).ToList();
         }
 
         public TrackOrderDetailDto ShowDetailByOrderId(long orderId)

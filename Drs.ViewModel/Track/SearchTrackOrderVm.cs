@@ -34,7 +34,7 @@ namespace Drs.ViewModel.Track
         {
             if (!ValidateModel(model))
                 return;
-            OnClientNameChanged(model.Value);            
+            OnClientNameChanged(model.IdKey ?? -1);            
         }
 
         public override bool Initialize(bool bForceToInit = false)
@@ -56,6 +56,7 @@ namespace Drs.ViewModel.Track
         {
             if (String.IsNullOrWhiteSpace(model.Value))
                 return false;
+
             //if(valur.Trim().Length >= SettingsData.Client.MinLengthPhone)
             //    return true;
 
@@ -100,9 +101,9 @@ namespace Drs.ViewModel.Track
         }
 
 
-        public event Action<String> ClientNameChanged;
+        public event Action<int> ClientNameChanged;
 
-        protected virtual void OnClientNameChanged(String clientName)
+        protected virtual void OnClientNameChanged(int clientName)
         {
             var handler = ClientNameChanged;
             if (handler != null) handler(clientName);
