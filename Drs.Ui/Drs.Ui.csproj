@@ -600,9 +600,6 @@
     <Content Include="Gmap\js\app.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Gmap\js\main.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Gmap\map.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

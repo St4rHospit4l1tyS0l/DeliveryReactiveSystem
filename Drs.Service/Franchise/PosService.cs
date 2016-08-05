@@ -53,8 +53,8 @@ namespace Drs.Service.Franchise
                     if (isUpdated == false || !File.Exists(fileCode))
                     {
                         //Kill Iber process if exists
-                        ProcessExt.ForceKillProcess(SettingsData.AlohaIber.Replace(
-                            SettingsData.Constants.EXTENSION_EXE, String.Empty));
+                        ProcessExt.ForceKillProcess
+                            (SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty));
 
                         //Delete DATA folders
                         DirExt.ForceDeleteFolder(dataFolder);
@@ -183,8 +183,6 @@ namespace Drs.Service.Franchise
                 var tableId = funcs.AddTable(termId, (isTableService ? 0 : 1), 0, "TbCc", 1);
                 checkId = funcs.AddCheck(termId, tableId);
                 funcs.RefreshCheckDisplay();
-                //funcs.DisplayMessage(resp.ToString(CultureInfo.InvariantCulture));
-                //Console.WriteLine(resp);
             }
             catch (Exception ex)
             {
@@ -289,24 +287,15 @@ namespace Drs.Service.Franchise
             }
         }
 
-        //public bool ValidatePrices(PosCheck posCheck)
-        //{
-        //    var newDataFolderFranchise = posCheck.Franchise.Name;
-        //    var pathNewData = Path.Combine(SettingsData.AlohaPath, newDataFolderFranchise, SettingsData.);
-        //    if(File.Exists(pathNewData) == false)
-        //}
 
-        /*private void WaitForTopMostToDisable(Process process)
+        public static void DeletePosFolderDataIfPosIsDown()
         {
-            while (true)
-            {
-                if (GetForegroundWindow() == process.MainWindowHandle)
-                {
-                    //MessageBox.Show("Prueba");
-                    break;
-                }
-                Thread.Sleep(200);
-            }
-        }*/
+            if(ProcessExt.ProcessIsRunning
+                (SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty))) 
+                return;
+
+            var dataFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.DATA_FOLDER);
+            DirExt.ForceDeleteFolder(dataFolder);
+        }
     }
 }

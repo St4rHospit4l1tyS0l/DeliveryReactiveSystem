@@ -61,8 +61,7 @@ namespace Drs.Service.Store
                 var store = model.Store;
 
                 //var store = FactoryAddress.GetQueryToSearchStore(_repositoryStore.InnerDbEntities, model.FranchiseCode, model.AddressInfo, out franchiseId);
-
-                //TODO Falta vewrificar si tiene la capacidad para albergar una orden más
+                //TODO Falta verificar si tiene la capacidad para albergar una orden más
 
                 if (store == null || store.IdKey.HasValue == false)
                 {
@@ -369,10 +368,12 @@ namespace Drs.Service.Store
                 {
                     new OrderCustomer
                     {
-                        firstNameField = model.ClientInfo.FirstName,
-                        lastNameField = model.ClientInfo.LastName,
-                        addressLine1Field = model.AddressInfo.MainAddress + 
-                            (String.IsNullOrWhiteSpace(model.AddressInfo.ExtIntNumber) ? String.Empty : String.Format(" {0}", model.AddressInfo.ExtIntNumber)),
+                        firstNameField = model.ClientInfo.FirstName.SubstringMax(27),
+                        lastNameField = model.ClientInfo.LastName.SubstringMax(27),
+                        addressLine1Field = ((String.IsNullOrWhiteSpace(model.AddressInfo.ExtIntNumber) ? 
+                                String.Empty : 
+                                String.Format("{0} ", model.AddressInfo.ExtIntNumber))
+                                + model.AddressInfo.MainAddress).SubstringMax(44),
                         cityField = model.AddressInfo.RegionB.Value,
                         stateField = model.AddressInfo.RegionA.Value,
                         zipCodeField = model.AddressInfo.ZipCode.Value,

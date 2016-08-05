@@ -15,6 +15,7 @@ using Drs.Model.Settings;
 using Drs.Model.Shared;
 using Drs.Resources.Network;
 using Drs.Service.Configuration;
+using Drs.Service.Franchise;
 using Drs.Service.ReactiveDelivery;
 using Drs.Service.TransferDto;
 using Drs.Ui.Ui;
@@ -160,9 +161,23 @@ namespace Drs.Ui
                     , showWnd);
                 return;
             }
+            
+            InitPosServices(reactiveDeliveryClient, showWnd, vm, response);
 
-            SyncPosFiles.GetUnsyncFiles(reactiveDeliveryClient, showWnd, vm, response);
+        }
 
+        private void InitPosServices(IReactiveDeliveryClient reactiveDeliveryClient, Action showWnd, IShellContainerVm vm,
+            ConnectionInfoResponse response)
+        {
+            try
+            {
+                PosService.DeletePosFolderDataIfPosIsDown();
+                SyncPosFiles.GetUnsyncFiles(reactiveDeliveryClient, showWnd, vm, response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error al iniciar los servicios de POS: ", ex);
+            }
         }
 
 

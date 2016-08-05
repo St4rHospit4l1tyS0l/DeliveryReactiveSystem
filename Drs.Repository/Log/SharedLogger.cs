@@ -41,6 +41,7 @@ namespace Drs.Repository.Log
                 modelExcep.StackTrace = ex.StackTrace ?? String.Empty;
                 modelExcep.Timestamp = DateTime.Now;
                 modelExcep.Username = username;
+                Console.WriteLine(DateTime.Now.ToString("yyyy MMMM dd - HH:mm:ss"));
                 Console.WriteLine(modelExcep.MsgException);
                 Console.WriteLine(modelExcep.InnerException);
                 SaveLogToDb(modelExcep);

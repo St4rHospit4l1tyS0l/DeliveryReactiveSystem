@@ -130,5 +130,11 @@ namespace Drs.Infrastructure.Extensions.Proc
             SetForegroundWindow(hWnd);
             ShowWindow(hWnd, 5);
         }
+
+        public static bool ProcessIsRunning(string processName)
+        {
+            var process = Process.GetProcessesByName(processName).FirstOrDefault();
+            return process != null;
+        }
     }
 }
