@@ -4,8 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" HorizontalAlignment="Center" VerticalAlignment="Center"
-             d:DesignHeight="800" d:DesignWidth="460" Width="530" >
+             d:DesignHeight="800" d:DesignWidth="460" Width="800" >
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <system:Double x:Key="BaseFontSize">16</system:Double>
+            <FontFamily x:Key="BaseFontFamily">Calibri</FontFamily>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical">
         <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Resumen de la orden" Margin="0 5 0 0" FontFamily="Candara" FontSize="25" />
         <Grid Margin="0 15 0 0">
@@ -14,11 +22,14 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <DataGrid x:Name="MetroDataGrid" MaxHeight="300"
+            <DataGrid x:Name="MetroDataGrid"
+                      MaxHeight="364"
+                      VerticalScrollBarVisibility="Auto"
                   Grid.Row="0"
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                   RenderOptions.ClearTypeHint="Enabled"
                   TextOptions.TextFormattingMode="Display"
-                  Margin="20 0 20 0"
+                  Margin="20 0 20 0" HorizontalAlignment="Center"
                   SelectionUnit="FullRow"
                   ItemsSource="{Binding Path=PosCheck.LstItems}"
                   AutoGenerateColumns="False" GridLinesVisibility="All">
@@ -34,39 +45,42 @@
             <Rectangle Grid.Row="1" HorizontalAlignment="Stretch" Height="2" Stroke="#9B9B9B" Margin="0,10,0,0"></Rectangle>
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20" />
-                    <RowDefinition Height="20" />
-                    <RowDefinition Height="20" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="290" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="458" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Sub-total" Margin="0 0 10 0" FontSize="12" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Impuestos" Margin="0 0 10 0" FontSize="12" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Total" Margin="0 0 10 0" FontSize="12" FontWeight="SemiBold" />
+                <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Sub-total" Margin="0,2,10,2" FontSize="16" FontWeight="SemiBold"  />
+                <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Impuestos" Margin="0,2,10,2" FontSize="16" FontWeight="SemiBold"  />
+                <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="Total" Margin="0,2,10,2" FontSize="16" FontWeight="SemiBold"  />
 
-                <TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.SubTotalTx}" Margin="0 0 45 0" FontSize="12" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.TaxTx}" Margin="0 0 45 0" FontSize="12" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.TotalTx}" Margin="0 0 45 0" FontSize="12" FontWeight="SemiBold" />
+                <TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.SubTotalTx}" Margin="0,4,210,4" FontSize="16" FontWeight="SemiBold"  />
+                <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.TaxTx}" Margin="0,4,210,4" FontSize="16" FontWeight="SemiBold"  />
+                <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding PosCheck.TotalTx}" Margin="0,4,210,4" FontSize="16" FontWeight="SemiBold"  />
 
             </Grid>
         </Grid>
         <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#9B9B9B" Margin="0,10,0,0"></Rectangle>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 10">
-            <Grid Width="444">
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+            <Grid Width="550" Margin="0 5 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="6*" />
                 </Grid.ColumnDefinitions>
 
-                <CheckBox Content="Recoger en la tienda" Grid.Column="0" IsChecked="{Binding HasPickUpInStore}" ></CheckBox>
+                <CheckBox Content="Recoger en la tienda" Grid.Column="0" 
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
+                          IsChecked="{Binding HasPickUpInStore}" ></CheckBox>
                 <ComboBox Grid.Column="1" ItemsSource="{Binding Path=LstStores}" IsEnabled="{Binding HasPickUpInStore}"
+                    FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                       DisplayMemberPath="Name" 
                       SelectedValue="{Binding Path=PickUpStore}"></ComboBox>
             </Grid>
-            
+
         </StackPanel>
         <StackPanel Orientation="Vertical" Margin="0 5 0 0">
             <Grid>
@@ -77,41 +91,48 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="1">
                     <RadioButton Margin="30, 10, 0, 0"
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                          Content="Entrega inmediata"
                          GroupName="Mode" 
                          IsChecked="{Binding ImmediateDelivery}" />
                 </StackPanel>
                 <StackPanel Grid.Column="2">
                     <RadioButton Margin="40, 10, 0, 0" 
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                          Content="Entrega a futuro"
                          GroupName="Mode" IsChecked="{Binding FutureDelivery}"/>
                     <StackPanel Margin="0 10 0 0" Visibility="{Binding FutureOrderVisibility}">
-                        <xctk:DateTimePicker Width="250" HorizontalContentAlignment="Center" Watermark="Ingrese la fecha y hora de la entrega"
+                        <xctk:DateTimePicker HorizontalContentAlignment="Center" Watermark="Ingrese la fecha y hora de la entrega"
+                                             FontSize="14"
                                              VerticalContentAlignment="Center" CultureInfo="{Binding CultureSystem}" Kind="Local" Text="{Binding PromiseTimeTx}" 
                                              IsOpen="{Binding FutureDelivery}" Format="Custom" FormatString="dddd, dd/MMMM/yyyy HH:mm" 
-                                             Minimum="{Binding MinDateTime}" TimeFormat="Custom" TimeFormatString="HH:mm"/>
+                                             Minimum="{Binding MinDateTime}" TimeFormat="Custom" TimeFormatString="HH:mm" Margin="70,0,39,0"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
         </StackPanel>
         <StackPanel Margin="30 15 30 0" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Label Content="Tipo de pago: "></Label>
-            <ComboBox Width="180" ItemsSource="{Binding Path=LstPayments}"
+            <Label Content="Tipo de pago: "
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <ComboBox Width="217" ItemsSource="{Binding Path=LstPayments}"
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                       DisplayMemberPath="Name" 
                       SelectedValue="{Binding Path=Payment}">
             </ComboBox>
         </StackPanel>
         <StackPanel Margin="30 5 30 0">
-            <Label Content="Nota adicional al pedido (campo no requerido): "></Label>
-            <TextBox MaxLines="3" MaxLength="500" Text="{Binding ExtraNotes}" TextWrapping="Wrap" Height="60"></TextBox>
+            <Label Content="Nota adicional al pedido (campo no requerido): "
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <TextBox MaxLines="3" MaxLength="500" Text="{Binding ExtraNotes}" TextWrapping="Wrap" FontSize="14" Height="70"></TextBox>
         </StackPanel>
         <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#9B9B9B" Margin="0,10,0,0"></Rectangle>
         <StackPanel Orientation="Vertical" Visibility="{Binding IsReadyToSend}">
             <Button 
                 Command="{Binding SendOrderToStore}"
                 Content="{Binding SendOrderTitleBtn}"
-                    Width="200"
-                    Height="35"
+                    Width="300"
+                    FontFamily="{DynamicResource BaseFontFamily}" FontSize="20"
+                    Height="42"
                     Margin="165,10,165,0"
                     Style="{DynamicResource AccentedSquareButtonStyle}" mah:ButtonHelper.PreserveTextCase="True" >
             </Button>

@@ -23,7 +23,7 @@
             </CollectionViewSource>
             <ui:BindingProxy x:Key="proxy" Data="{Binding}" />
             <FontFamily x:Key="BaseFontFamily">Calibri</FontFamily>
-            <system:Double x:Key="BaseFontSize">15</system:Double>
+            <system:Double x:Key="BaseFontSize">17</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
@@ -34,11 +34,11 @@
                       SelectedValue="{Binding Path=PickUpStore}" Background="{DynamicResource AccentColorBrush}" Margin="10 5 0 5" Width="363"></ComboBox>
         </StackPanel>
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource AccentColorBrush}" Margin="0 15 0 0">
-            <Label Content="4) Agregue o elija la dirección:   " FontSize="17" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
-                               VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
+            <Label Content="4) Agregue o elija la dirección:   " FontSize="18" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="35"/>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                <Button Width="34" Cursor="Hand" Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding Add}" 
-            		Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
+                <Button Width="42" Cursor="Hand" Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding Add}" 
+            		Height="42" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
                     <Rectangle Width="12"
             			Height="12"
             			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
@@ -48,11 +48,11 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Agregar      " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Agregar      " FontSize="16" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
-                <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=DtGrid}" 
+                <Button Width="42" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=DtGrid}" 
                         Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding Edit}" 
-            		    Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
+            		    Height="42" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
                     <Rectangle Width="12"
             			Height="12"
             			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
@@ -62,11 +62,11 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Modificar      " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Modificar      " FontSize="16" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
-                <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=DtGrid}" 
+                <Button Width="42" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=DtGrid}" 
                         Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding Remove}" 
-            		    Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
+            		    Height="42" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
                     <Rectangle Width="12"
             			Height="12"
             			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
@@ -76,7 +76,7 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Eliminar " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Eliminar " FontSize="16" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
             </StackPanel>
         </DockPanel>

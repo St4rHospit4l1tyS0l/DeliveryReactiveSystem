@@ -22,7 +22,7 @@
                 <view:PagerUc/>
             </DataTemplate>
             <FontFamily x:Key="BaseFontFamily">Calibri</FontFamily>
-            <system:Double x:Key="BaseFontSize">15</system:Double>
+            <system:Double x:Key="BaseFontSize">17</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">

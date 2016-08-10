@@ -21,6 +21,8 @@ namespace Drs.Service.Settings
             SettingsData.Client.MaxLengthPhone = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.MAX_LENGTH_PHONE, 10);
             SettingsData.Client.UserAlohaPosId = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.USER_ALOHA_POS_ID, 999);
             SettingsData.Client.JobAlohaPosId = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.JOB_ALOHA_POS_ID, 4);
+            SettingsData.Client.TablePosId = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.TABLE_POS_ID, 1);
+            SettingsData.Client.TablePosName = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.TABLE_POS_NAME, "Mp");
             SettingsData.Client.RowsSizeGrids = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.ROWS_SIZE_GRIDS, 10);
             
 

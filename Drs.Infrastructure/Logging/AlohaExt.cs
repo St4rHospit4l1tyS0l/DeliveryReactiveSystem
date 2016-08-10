@@ -9,11 +9,11 @@ namespace Drs.Infrastructure.Logging
         {
             try
             {
-                var propInfo = ex.GetType().GetProperty("HResult", BindingFlags.Instance | BindingFlags.NonPublic);
-                var hresult = Convert.ToInt32(propInfo.GetValue(ex, null));
+                PropertyInfo propInfo = ex.GetType().GetProperty("HResult", BindingFlags.Instance | BindingFlags.NonPublic);
+                Int32 hresult = Convert.ToInt32(propInfo.GetValue(ex, null));
 
                 return ((hresult >> 16) & 0x07ff) != 0x06
-                    ? ex.ToString()
+                    ? string.Format("COM error: " + ex.Message)
                     : string.Format("Aloha returned error code {0}", hresult & 0xFFF);
 
             }

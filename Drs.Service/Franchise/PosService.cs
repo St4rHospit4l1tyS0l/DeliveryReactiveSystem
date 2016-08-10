@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Drs.Infrastructure.Extensions;
 using Drs.Infrastructure.Extensions.Io;
 using Drs.Infrastructure.Extensions.Proc;
@@ -108,9 +109,11 @@ namespace Drs.Service.Franchise
 
                 bool isExecuteOk;
                 var iCount = 0;
+                var randomTime = new Random();
                 do
                 {
-                    Thread.Sleep(1000);
+                    if(iCount != 0)
+                        Thread.Sleep(randomTime.Next(100, 500));
                     isExecuteOk = StartInjectPosData(model.PropagateOrder);
 
                     if(Process.GetProcessesByName(SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty)).Any() == false)
@@ -134,7 +137,9 @@ namespace Drs.Service.Franchise
             }
             catch (Exception ex)
             {
-                SharedLogger.LogErrorToFile(ex, ex.AlohaError());
+                var sMsg = ex.AlohaError();
+                SharedLogger.LogErrorToFile(ex, sMsg);
+                MessageBox.Show("Func error: " + sMsg + " | " + ex.Message);
                 return false;
             }
 
@@ -154,6 +159,7 @@ namespace Drs.Service.Franchise
             }
             catch (Exception ex)
             {
+                MessageBox.Show("LogIn error: " + " | " + ex.Message);
                 Console.WriteLine(ex.Message);
             }
             
@@ -163,6 +169,7 @@ namespace Drs.Service.Franchise
             }
             catch (Exception ex)
             {
+                MessageBox.Show("ClockIn Error: " + " | " + ex.Message);
                 Console.WriteLine(ex.Message);
             }
 
@@ -174,22 +181,26 @@ namespace Drs.Service.Franchise
             }
             catch (Exception ex)
             {
-                SharedLogger.LogErrorToFile(ex, ex.AlohaError());
+                var sMsg = ex.AlohaError();
+                SharedLogger.LogErrorToFile(ex, sMsg);
+                MessageBox.Show("Refresh Error: " + sMsg + " | " + ex.Message);
                 return false;
             }
 
             try
             {
-                var tableId = funcs.AddTable(termId, (isTableService ? 0 : 1), 0, "TbCc", 1);
+                var tableId = funcs.AddTable(termId, (isTableService ? 0 : 1), (isTableService ? 0 : SettingsData.Client.TablePosId), SettingsData.Client.TablePosName, 1);
                 checkId = funcs.AddCheck(termId, tableId);
                 funcs.RefreshCheckDisplay();
             }
             catch (Exception ex)
             {
-                SharedLogger.LogErrorToFile(ex, ex.AlohaError());
+                var sMsg = ex.AlohaError();
+                SharedLogger.LogErrorToFile(ex, sMsg);
+                MessageBox.Show("AddTable Error: " + sMsg + " | " + ex.Message);
                 return false;
             }
-
+            MessageBox.Show("Ok Add Table: " + SettingsData.Client.TablePosId + " | " + SettingsData.Client.TablePosName);
             return InjectPosData(propagateOrder, termId, checkId);
         }
 
@@ -208,6 +219,7 @@ namespace Drs.Service.Franchise
                             funcs.EndItem(termId);
 
                         lastParentEntry = funcs.BeginItem(termId, checkId, (int)itemModel.ItemId, "", -999999999);
+                        MessageBox.Show("Ok Begin Item");
                         continue;
                     }
 
@@ -215,14 +227,20 @@ namespace Drs.Service.Franchise
                 }
 
                 if (lastParentEntry != EntityConstants.NULL_VALUE)
+                {
                     funcs.EndItem(termId);
+                    MessageBox.Show("Ok End Item");
+                }
 
                 funcs.RefreshCheckDisplay();
+                MessageBox.Show("Ok Item");
                 return true;
             }
             catch (Exception ex)
             {
-                SharedLogger.LogErrorToFile(ex, ex.AlohaError());
+                var sMsg = ex.AlohaError();
+                SharedLogger.LogErrorToFile(ex, sMsg);
+                MessageBox.Show("BeginItem Error: " + sMsg + " | " + ex.Message);
                 return false;
             }
         }

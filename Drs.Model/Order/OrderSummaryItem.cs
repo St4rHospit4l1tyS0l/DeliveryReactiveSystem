@@ -23,14 +23,14 @@ namespace Drs.Model.Order
 
         public void ResetItem()
         {
+            MsgErr = String.Empty;
+            FirstValue = String.Empty;
+            SecondValue = String.Empty;
             HasToShow = Visibility.Collapsed;
             IsOk = Visibility.Hidden;
             IsError = Visibility.Collapsed;
             IsSaveInProgress = Visibility.Collapsed;
             IsInProgress = Visibility.Collapsed;
-            MsgErr = String.Empty;
-            FirstValue = String.Empty;
-            SecondValue = String.Empty;
         }
 
         public Visibility HasToShow

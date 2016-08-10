@@ -95,7 +95,7 @@
             public const int ORDER_TAB_ORDER = 3;
             public const int ORDER_TAB_DELIVERY = 4;
 
-            public const int TRIES_INJECT_POS_DATA = 30;
+            public const int TRIES_INJECT_POS_DATA = 5;
         
         }
     }

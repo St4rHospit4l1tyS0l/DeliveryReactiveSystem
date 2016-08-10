@@ -69,6 +69,8 @@ namespace Drs.Model.Settings
                 public const string MIN_LENGTH_PHONE = "MIN_LENGTH_PHONE";
                 public const string MAX_LENGTH_PHONE = "MAX_LENGTH_PHONE";
                 public const string ROWS_SIZE_GRIDS = "ROWS_SIZE_GRIDS";
+                public const string TABLE_POS_ID = "TABLE_POS_ID";
+                public const string TABLE_POS_NAME = "TABLE_POS_NAME";
             }
 
             public static class Control
@@ -213,6 +215,8 @@ namespace Drs.Model.Settings
             public static int UserAlohaPosId = 999;
             public static int JobAlohaPosId = 4;
             public static int RowsSizeGrids = 10;
+            public static int TablePosId = 1;
+            public static string TablePosName = "Mp";
         }
 
         public static int Language = 1;

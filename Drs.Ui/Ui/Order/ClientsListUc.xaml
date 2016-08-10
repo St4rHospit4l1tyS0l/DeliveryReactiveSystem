@@ -32,16 +32,16 @@
                     AppbarStarwarsJedi ="{StaticResource appbar_starwars_jedi}"
                     AppbarStarwarsSith ="{StaticResource appbar_starwars_sith}"/>
             <FontFamily x:Key="BaseFontFamily">Calibri</FontFamily>
-            <system:Double x:Key="BaseFontSize">15</system:Double>
+            <system:Double x:Key="BaseFontSize">17</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource AccentColorBrush}">
-            <Label Content="3) Agregue o elija al cliente:   " FontSize="17" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
-                               VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
+            <Label Content="3) Agregue o elija al cliente:   " FontSize="18" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="35"/>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                <Button Width="34" Cursor="Hand" Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding AddClient}" 
-            		x:Name="AddClient" Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
+                <Button Width="42" Cursor="Hand" Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding AddClient}" 
+            		x:Name="AddClient" Height="42" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
                     <Rectangle Width="12"
             			Height="12"
             			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
@@ -51,11 +51,11 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Agregar      " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Agregar      " FontSize="16" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
-                <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=ClientDtGrid}" 
+                <Button Width="42" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=ClientDtGrid}" 
                         Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding EditClient}" 
-            		    x:Name="EditClient" Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
+            		    x:Name="EditClient" Height="42" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
                     <Rectangle Width="12"
             			Height="12"
             			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
@@ -65,11 +65,11 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Modificar      " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Modificar      " FontSize="16" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
-                <Button Width="34" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=ClientDtGrid}" 
+                <Button Width="42" Cursor="Hand" CommandParameter="{Binding SelectedItem, ElementName=ClientDtGrid}" 
                         Margin="0,-2,0,0" HorizontalAlignment="Right" Command="{Binding RemoveClient}" 
-            		    x:Name="RemoveClient" Height="34" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
+            		    x:Name="RemoveClient" Height="42" Style="{DynamicResource MetroCircleButtonStyle}" BorderBrush="White" BorderThickness="3">
                     <Rectangle Width="12"
             			Height="12"
             			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
@@ -79,7 +79,7 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </Button>
-                <Label Content="Eliminar " FontSize="14" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
+                <Label Content="Eliminar " FontSize="16" FontFamily="DengXian" VerticalAlignment="Stretch" VerticalContentAlignment="Center" 
                                Foreground="#FFF" />
             </StackPanel>
         </DockPanel>

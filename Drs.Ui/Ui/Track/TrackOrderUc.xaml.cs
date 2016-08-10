@@ -7,8 +7,6 @@ namespace Drs.Ui.Ui.Track
         public TrackOrderUc()
         {
             InitializeComponent();
-            VwBoxTrackOrder.Height = SystemParameters.PrimaryScreenHeight;
-            VwBoxTrackOrder.Width = SystemParameters.PrimaryScreenWidth;
         }
 
     }

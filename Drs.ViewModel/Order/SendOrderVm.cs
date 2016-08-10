@@ -486,7 +486,7 @@ namespace Drs.ViewModel.Order
         public bool HasPickUpInStore
         {
             get { return _hasPickUpInStore; }
-            set
+            private set
             {
                 this.RaiseAndSetIfChanged(ref _hasPickUpInStore, value);
 
@@ -494,7 +494,6 @@ namespace Drs.ViewModel.Order
                     PickUpStore = SelectLastStoreByAddress();
             }
         }
-
 
         public ItemCatalog PickUpStore
         {

@@ -151,8 +151,8 @@ namespace Drs.ViewModel.Order
 
         public override bool Initialize(bool bForceToInit = false)
         {
-            var bResult = base.Initialize(true);
             _orderService.ResetAndCreateNewOrder();
+            var bResult = base.Initialize(true);
             GoNextStep(SharedConstants.Client.ORDER_TAB_PHONE); 
             return bResult;
         }

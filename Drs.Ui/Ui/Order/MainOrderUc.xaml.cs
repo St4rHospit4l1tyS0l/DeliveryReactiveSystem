@@ -10,9 +10,6 @@ namespace Drs.Ui.Ui.Order
         public MainOrderUc()
         {
             InitializeComponent();
-            VwBoxMainOrder.Height = SystemParameters.PrimaryScreenHeight;
-            VwBoxMainOrder.Width = SystemParameters.PrimaryScreenWidth;
-
         }
 
     }

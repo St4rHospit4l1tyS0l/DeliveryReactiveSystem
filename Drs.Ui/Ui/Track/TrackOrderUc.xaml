@@ -66,7 +66,7 @@
                 <StackPanel Visibility="{Binding OrderListVisibility}">
                     <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="{DynamicResource AccentColorBrush}" Margin="0,0,0,0"></Rectangle>
                     <ContentControl  Content="{Binding OrdersListTrack}" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                    HorizontalAlignment="Center" Margin="0, 5, 0, 5" >
+                                    HorizontalAlignment="Center" Margin="0, 5, 0, 5" Width="1500" >
                     </ContentControl>
                 </StackPanel>
                 <StackPanel Visibility="{Binding OrderDetailVisibility}">

@@ -125,7 +125,7 @@
                         <StackPanel>
                             <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#FF51A0FF" Margin="0,0,0,0"></Rectangle>
                             <ContentControl  Content="{Binding SendOrder}" VerticalAlignment="Stretch" HorizontalContentAlignment="Center"
-                                         HorizontalAlignment="Stretch" Margin="0, 50, 0, 0" >
+                                         HorizontalAlignment="Stretch" Margin="0, 20, 0, 0" >
                             </ContentControl>
                         </StackPanel>
                     </controls:MetroTabItem>
