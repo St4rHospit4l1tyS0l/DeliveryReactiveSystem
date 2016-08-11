@@ -20,13 +20,6 @@ namespace Drs.PosService.BsLogic
         public const int INTERNAL_ENTRIES_ITEM_DATA = 562;
         private int _iTries;
 
-        //public static int GetCheckNumber(int iCheckId)
-        //{
-        //    long lDecodeTerm = iCheckId >> 20;
-        //    long iDecodeRel = iCheckId & 0xFFFFF;
-        //    return Convert.ToInt32(lDecodeTerm * 10000 + iDecodeRel);
-        //}
-
         private void GetInternalItems(int iCheckId)
         {
             var pDepot = new IberDepot();
@@ -34,54 +27,26 @@ namespace Drs.PosService.BsLogic
             {
                 _iTries = 0;
                 var posCheck = new PosCheck();
-                //var sItems = String.Empty;
                 var lstItems = new List<ItemModel>();
-                ItemModel lastItemModelLvl0 = null;
-                ItemModel lastItemModelLvl1 = null;
-                ItemModel lastItemModelLvl2 = null;
-                ItemModel lastItemModelLvl3 = null;
-                ItemModel lastItemModelLvl4 = null;
+                var dictLevels = new Dictionary<int, ItemModel>();
 
                 foreach (IIberObject chkObject in pDepot.FindObjectFromId(INTERNAL_CHECKS, iCheckId))
                 {
                     foreach (IIberObject objItem in chkObject.GetEnum(INTERNAL_CHECKS_ENTRIES))
                     {
-                        //foreach (IIberObject objItem in entryObject.GetEnum(INTERNAL_ENTRIES_ITEM_DATA))
-                        //{
                         var idCheckItem = objItem.GetLongVal("ID");
                         var idItem = objItem.GetLongVal("DATA");
                         var itemName = objItem.GetStringVal("DISP_NAME");
                         var price = objItem.GetDoubleVal("PRICE");
                         var level = objItem.GetLongVal("LEVEL");
                         var item = new ItemModel { ItemId = idItem, CheckItemId = idCheckItem, Name = itemName, IsIdSpecified = true, Price = price, Level = level };
-                        switch (level)
-                        {
-                            case 0:
-                                lastItemModelLvl0 = item;
-                                break;
-                            case 1:
-                                lastItemModelLvl1 = item;
-                                item.Parent = lastItemModelLvl0;
-                                break;
-                            case 2:
-                                lastItemModelLvl2 = item;
-                                item.Parent = lastItemModelLvl1;
-                                break;
-                            case 3:
-                                lastItemModelLvl3 = item;
-                                item.Parent = lastItemModelLvl2;
-                                break;
-                            case 4:
-                                lastItemModelLvl4 = item;
-                                item.Parent = lastItemModelLvl3;
-                                break;
-                            default:
-                                item.Parent = lastItemModelLvl4;
-                                break;
-                        }
+
+                        dictLevels[level] = item;
+
+                        if (level > 0)
+                            item.Parent = dictLevels[level - 1];
+
                         lstItems.Add(item);
-                        //sItems = sItems + String.Format(" *** Id: {0} Name: {1}", idItem, itemName);
-                        //}
                     }
 
                     posCheck.CheckId = iCheckId;
@@ -98,9 +63,9 @@ namespace Drs.PosService.BsLogic
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message + " - " + ex.StackTrace);
+                MessageBox.Show(ex.Message + @" - " + ex.StackTrace);
             }
         }
 
@@ -118,7 +83,7 @@ namespace Drs.PosService.BsLogic
 
         private void OnSendPosError(string msgError, PosCheck posCheck)
         {
-            MessageBox.Show("Error pos: " + msgError);
+            MessageBox.Show(@"Error pos: " + msgError);
 
             if (_iTries++ > MAX_TRIES)
                 return;
@@ -135,10 +100,7 @@ namespace Drs.PosService.BsLogic
             }
 
             if (obj.Data.IsSuccess == false)
-            {
                 OnSendPosError(obj.Data.Message, posCheck);
-                return;
-            }
         }
 
         public void LogOut(int iEmployeeId, string sName)

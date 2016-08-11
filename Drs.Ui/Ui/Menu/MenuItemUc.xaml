@@ -47,7 +47,9 @@
                                     <Image Source="{Binding MenuItemLogo}" Width="75" Height="75" ></Image>
                                 </StackPanel>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="110">
-                                    <Label Content="{Binding Title}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Corbel" FontSize="20" />
+                                    <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" TextAlignment="Center" 
+                                               TextWrapping="Wrap" VerticalAlignment="Center" 
+                                           Foreground="White" FontFamily="Calibri" FontSize="23" Width="110"  />
                                 </StackPanel>
                             </StackPanel>
                         </ControlTemplate>

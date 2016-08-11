@@ -139,7 +139,9 @@ namespace Drs.ViewModel.Main
                 {StatusScreen.ShMenu, menuVm},
                 {StatusScreen.UmOrd, orderVm},
                 {StatusScreen.UmTrc, trackOrderVm},
-                {StatusScreen.UmMsg, msgWndVm}
+                {StatusScreen.UmMsg, msgWndVm},
+                {StatusScreen.UmStt, loginVm}
+
             });
 
             CurrentView = DictionaryViews[StatusScreen.UmMsg];

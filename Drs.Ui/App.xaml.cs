@@ -171,7 +171,7 @@ namespace Drs.Ui
         {
             try
             {
-                PosService.DeletePosFolderDataIfPosIsDown();
+                PosService.DeletePosFoldersDataAndNewDataIfPosIsDown();
                 SyncPosFiles.GetUnsyncFiles(reactiveDeliveryClient, showWnd, vm, response);
             }
             catch (Exception ex)

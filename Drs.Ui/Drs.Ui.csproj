@@ -266,6 +266,9 @@
     <Compile Include="Ui\Splash\SplashWnd.xaml.cs">
       <DependentUpon>SplashWnd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ui\Status\DailyOrderStatusUc.xaml.cs">
+      <DependentUpon>DailyOrderStatusUc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ui\Track\OrdersListUc.xaml.cs">
       <DependentUpon>OrdersListUc.xaml</DependentUpon>
     </Compile>
@@ -381,6 +384,10 @@
     <Page Include="Ui\Splash\SplashWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ui\Status\DailyOrderStatusUc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Ui\Track\OrdersListUc.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -573,6 +580,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\IconLogOff.png" />
+    <Resource Include="Resources\Images\IconLogOfft.png" />
     <Resource Include="DrsLogoII.ico" />
     <Content Include="Gmap\css\bootstrap-theme.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

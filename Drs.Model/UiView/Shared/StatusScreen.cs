@@ -24,13 +24,15 @@ namespace Drs.Model.UiView.Shared
         public const string UM_MSS = "UM_MSS";
         public const string SM_MO = "SM_MO";
         public const string UM_STT = "UM_STT";
-
+        public const string UM_CS = "UM_CS";
+        
         public static readonly Dictionary<string, StatusScreen> DicStatusScreen = new Dictionary<string, StatusScreen>
         {
             { UM_ORD, StatusScreen.UmOrd },
             { UM_TRC, StatusScreen.UmTrc },
             { UM_MSS, StatusScreen.UmMss },
-            { UM_STT, StatusScreen.UmStt }
+            { UM_STT, StatusScreen.UmStt },
+            { UM_CS, StatusScreen.Login }
         };
 
         public static StatusScreen ToEnum(this string value)

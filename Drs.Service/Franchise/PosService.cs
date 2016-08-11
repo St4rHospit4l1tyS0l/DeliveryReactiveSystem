@@ -309,7 +309,7 @@ namespace Drs.Service.Franchise
         }
 
 
-        public static void DeletePosFolderDataIfPosIsDown()
+        public static void DeletePosFoldersDataAndNewDataIfPosIsDown()
         {
             if(ProcessExt.ProcessIsRunning
                 (SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty))) 
@@ -317,6 +317,9 @@ namespace Drs.Service.Franchise
 
             var dataFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.DATA_FOLDER);
             DirExt.ForceDeleteFolder(dataFolder);
+
+            var newDataFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.NEWDATA_FOLDER);
+            DirExt.ForceDeleteFolder(newDataFolder);
         }
     }
 }
