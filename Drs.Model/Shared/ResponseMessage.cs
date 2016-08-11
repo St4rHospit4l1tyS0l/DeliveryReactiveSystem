@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Drs.Model.Account;
 
 namespace Drs.Model.Shared
 {
@@ -15,5 +16,8 @@ namespace Drs.Model.Shared
 
         [DataMember]
         public int Code { get; set; }
+
+        [DataMember]
+        public UserDetailModel UserDetail { get; set; }
     }
 }

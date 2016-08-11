@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -206,26 +207,34 @@ namespace Drs.Service.Franchise
             try
             {
                 LasaFOHLib67.IberFuncs funcs = new LasaFOHLib67.IberFuncsClass();
-                int lastParentEntry = EntityConstants.NULL_VALUE;
-
+                var dicParents = new Dictionary<long, int>();
+                var bLastItemIsEndItem = true;
                 foreach (var itemModel in propagateOrder.PosCheck.LstItems)
                 {
+                    bLastItemIsEndItem = false;
+                    int entryId;
                     if (itemModel.ParentId == null)
                     {
-                        if (lastParentEntry != EntityConstants.NULL_VALUE)
+                        if (dicParents.Count != 0)
+                        {
                             funcs.EndItem(termId);
+                            bLastItemIsEndItem = true;
+                        }
 
-                        lastParentEntry = funcs.BeginItem(termId, checkId, (int)itemModel.ItemId, "", -999999999);
+                        entryId = funcs.BeginItem(termId, checkId, (int)itemModel.ItemId, "", -999999999);
+                        dicParents.Add(itemModel.CheckItemId, entryId);
                         continue;
                     }
 
-                    funcs.ModItem(termId, lastParentEntry, (int)itemModel.ItemId, "", -999999999, 0);
+                    if (!dicParents.TryGetValue(itemModel.ParentId.Value, out entryId))
+                        continue;
+
+                    entryId = funcs.ModItem(termId, entryId, (int)itemModel.ItemId, "", -999999999, 0);
+                    dicParents.Add(itemModel.CheckItemId, entryId);
                 }
 
-                if (lastParentEntry != EntityConstants.NULL_VALUE)
-                {
+                if (!bLastItemIsEndItem)
                     funcs.EndItem(termId);
-                }
 
                 funcs.RefreshCheckDisplay();
                 return true;

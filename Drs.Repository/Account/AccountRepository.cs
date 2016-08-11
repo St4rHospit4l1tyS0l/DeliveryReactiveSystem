@@ -273,6 +273,17 @@ namespace Drs.Repository.Account
             return DbEntities.UserDetail.Any(e => e.Id == id && e.IsObsolete == false);
         }
 
+        public UserDetailModel GetValidUser(string id)
+        {
+            return DbEntities.UserDetail.Where(e => e.Id == id && e.IsObsolete == false)
+                .SelectMany(e => e.AspNetUsers.AspNetRoles.Select(i => new UserDetailModel
+                {
+                    FullName = e.FirstName + " " + e.LastName,
+                    Role = i.Description,
+                    UserName = e.AspNetUsers.UserName
+                })).FirstOrDefault();
+        }
+
         public IList<OptionModel> GetManagerStoreUsers()
         {
             return DbEntities.AspNetUsers.Where(e => e.UserDetail.IsObsolete == false &&

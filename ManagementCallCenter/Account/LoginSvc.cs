@@ -35,14 +35,14 @@ namespace ManagementCallCenter.Account
 
                     using (var accountRepository = new AccountRepository())
                     {
-                        if (!accountRepository.IsValidUser(result.Id))
+                        var userDetail = accountRepository.GetValidUser(result.Id);
+                        if (userDetail == null)
                         {
                             return new ResponseMessage { IsSuccess = false, Message = ResAccount.ERROR_USERNAME_PASSWORD_INCORRECT };
                         }
+
+                        return new ResponseMessage { IsSuccess = true, UserDetail = userDetail };
                     }
-
-                    return new ResponseMessage { IsSuccess = true };
-
                 }
             
                 //Thread.Sleep(4000);

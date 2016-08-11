@@ -10,7 +10,9 @@ using Drs.Resources.Network;
 using Drs.ViewModel.LoginSvc;
 using Drs.ViewModel.Shared;
 using ReactiveUI;
+using LoginModel = Drs.ViewModel.LoginSvc.LoginModel;
 using ReactiveCommand = ReactiveUI.ReactiveCommand;
+using ResponseMessage = Drs.ViewModel.LoginSvc.ResponseMessage;
 
 namespace Drs.ViewModel.Account
 {
@@ -36,6 +38,14 @@ namespace Drs.ViewModel.Account
         {
             get { return _isSignInVisible; }
             set { this.RaiseAndSetIfChanged(ref _isSignInVisible, value); }
+        }
+
+        public event Action<UserInfoModel> UserChanged;
+
+        protected virtual void OnUserChanged(UserInfoModel obj)
+        {
+            Action<UserInfoModel> handler = UserChanged;
+            if (handler != null) handler(obj);
         }
 
         private Visibility _isOnSignIn;
@@ -107,8 +117,11 @@ namespace Drs.ViewModel.Account
                     var bForceToInit = CurrentUserSettings.UserInfo.Username == null ||
                                         CurrentUserSettings.UserInfo.Username != UserName;
 
-                    CurrentUserSettings.UserInfo.Username = UserName; 
+                    CurrentUserSettings.UserInfo.Username = x.UserDetail.UserName;
+                    CurrentUserSettings.UserInfo.FullName= x.UserDetail.FullName;
+                    CurrentUserSettings.UserInfo.Role = x.UserDetail.Role;
                     ShellContainerVm.ChangeCurrentView(StatusScreen.ShMenu, true, bForceToInit);  //Only when comes from login, it should be reinit
+                    OnUserChanged(CurrentUserSettings.UserInfo);
                 }
                 else
                 {

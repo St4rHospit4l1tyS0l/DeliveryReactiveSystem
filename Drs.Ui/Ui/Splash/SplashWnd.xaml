@@ -65,8 +65,8 @@
                     </Ellipse.Fill>
                 </Ellipse>
             </StackPanel>
-            <StackPanel Canvas.Left="474" Canvas.Top="483">
-                <TextBlock Text="Version 0.1.0" Foreground="#FFD9DEE4" FontSize="12" FontFamily="helvetica neue" HorizontalAlignment="Center" />
+            <StackPanel Canvas.Left="410" Canvas.Top="483">
+                <TextBlock Text="{Binding ProductVersion}" Foreground="#FFD9DEE4" FontSize="12" FontFamily="helvetica neue" HorizontalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Canvas.Left="320" Canvas.Top="405" Width="160">

@@ -122,6 +122,7 @@
     <Compile Include="Account\DeviceInfoModel.cs" />
     <Compile Include="Account\ICurrentUserSettings.cs" />
     <Compile Include="Account\LoginModel.cs" />
+    <Compile Include="Account\UserDetailModel.cs" />
     <Compile Include="Account\UserInfoModel.cs" />
     <Compile Include="Account\UserSalt.cs" />
     <Compile Include="Address\AddressMapModel.cs" />

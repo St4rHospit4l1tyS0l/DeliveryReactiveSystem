@@ -220,7 +220,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Service References\CustomerOrder\CustomerOrder.wsdl" />
+    <None Include="Service References\CustomerOrder\CustomerOrder1.wsdl" />
     <None Include="Service References\CustomerOrder\Drs.Service.CustomerOrder.ResponseGen.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -230,16 +230,16 @@
     <None Include="Service References\CustomerOrder\Drs.Service.CustomerOrder.ResponseTor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\CustomerOrder\item.xsd">
+    <None Include="Service References\CustomerOrder\item4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\CustomerOrder\item1.xsd">
+    <None Include="Service References\CustomerOrder\item41.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\CustomerOrder\item2.xsd">
+    <None Include="Service References\CustomerOrder\item42.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\CustomerOrder\item3.xsd">
+    <None Include="Service References\CustomerOrder\item43.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\LicProxySvc\LicProxy.xsd">
@@ -252,6 +252,19 @@
     <None Include="Service References\QueryFunction\Drs.Service.QueryFunction.ResponseRd.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\QueryFunction\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\QueryFunction\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\QueryFunction\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\QueryFunction\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\QueryFunction\QueryFunction.wsdl" />
     <None Include="Service References\SyncFranchiseSvc\Drs.Service.SyncFranchiseSvc.ResponseMessageFc.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -305,26 +318,10 @@
     <None Include="Service References\QueryFunction\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\QueryFunction\item4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\QueryFunction\item41.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\QueryFunction\item42.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\QueryFunction\item43.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\QueryFunction\QueryFunction1.wsdl" />
     <None Include="Service References\QueryFunction\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\QueryFunction\item1.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\LicProxySvc\configuration91.svcinfo" />
@@ -337,9 +334,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\CustomerOrder\item.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\CustomerOrder\configuration91.svcinfo" />
@@ -383,7 +377,12 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Service References\QueryFunction\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CustomerOrder\item1.disco" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -460,6 +460,7 @@
           </Key>
           <Property Name="PosOrderItemId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PosOrderId" Type="int" Nullable="false" />
+          <Property Name="CheckItemId" Type="bigint" Nullable="false" />
           <Property Name="ItemId" Type="bigint" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="4" Nullable="false" />
@@ -2319,7 +2320,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="OrderToStoreLog" EntityType="CallCenterModel.OrderToStoreLog" />
           <EntitySet Name="Permission" EntityType="CallCenterModel.Permission" />
           <EntitySet Name="PosOrder" EntityType="CallCenterModel.PosOrder" />
-          <EntitySet Name="PosOrderItem" EntityType="CallCenterModel.PosOrderItem" />
           <EntitySet Name="Recurrence" EntityType="CallCenterModel.Recurrence" />
           <EntitySet Name="RegionA" EntityType="CallCenterModel.RegionA" />
           <EntitySet Name="RegionB" EntityType="CallCenterModel.RegionB" />
@@ -2582,10 +2582,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="OrderToStore" EntitySet="OrderToStore" />
             <End Role="StoreStatus" EntitySet="StoreStatus" />
           </AssociationSet>
-          <AssociationSet Name="FK_PosOrderItem_PosOrder" Association="CallCenterModel.FK_PosOrderItem_PosOrder">
-            <End Role="PosOrder" EntitySet="PosOrder" />
-            <End Role="PosOrderItem" EntitySet="PosOrderItem" />
-          </AssociationSet>
           <AssociationSet Name="FK_RegionA_ZipCode" Association="CallCenterModel.FK_RegionA_ZipCode">
             <End Role="ZipCode" EntitySet="ZipCode" />
             <End Role="RegionA" EntitySet="RegionA" />
@@ -2667,6 +2663,11 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <Parameter Name="StarDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="PosOrderItem" EntityType="CallCenterModel.PosOrderItem" />
+          <AssociationSet Name="FK_PosOrderItem_PosOrder" Association="CallCenterModel.FK_PosOrderItem_PosOrder">
+            <End Role="PosOrder" EntitySet="PosOrder" />
+            <End Role="PosOrderItem" EntitySet="PosOrderItem" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="User_Sales_group_by_date_Result">
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
@@ -3275,19 +3276,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_PosOrder_AspNetUsers" FromRole="PosOrder" ToRole="AspNetUsers" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="PosOrder" ToRole="OrderToStore" />
           <NavigationProperty Name="PosOrderItem" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrder" ToRole="PosOrderItem" />
-        </EntityType>
-        <EntityType Name="PosOrderItem">
-          <Key>
-            <PropertyRef Name="PosOrderItemId" />
-          </Key>
-          <Property Name="PosOrderItemId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PosOrderId" Type="Int32" Nullable="false" />
-          <Property Name="ItemId" Type="Int64" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <Property Name="LevelItem" Type="Int32" Nullable="false" />
-          <Property Name="ParentId" Type="Int64" />
-          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrderItem" ToRole="PosOrder" />
         </EntityType>
         <EntityType Name="Recurrence">
           <Key>
@@ -4294,18 +4282,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PosOrderItem_PosOrder">
-          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
-          <End Type="CallCenterModel.PosOrderItem" Role="PosOrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PosOrder">
-              <PropertyRef Name="PosOrderId" />
-            </Principal>
-            <Dependent Role="PosOrderItem">
-              <PropertyRef Name="PosOrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RegionA_ZipCode">
           <End Type="CallCenterModel.ZipCode" Role="ZipCode" Multiplicity="0..1" />
           <End Type="CallCenterModel.RegionA" Role="RegionA" Multiplicity="*" />
@@ -4528,6 +4504,32 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Type="String" Name="StoreName" Nullable="false" MaxLength="500" />
           <Property Type="String" Name="FranchiseName" Nullable="false" MaxLength="500" />
         </ComplexType>
+        <EntityType Name="PosOrderItem">
+          <Key>
+            <PropertyRef Name="PosOrderItemId" />
+          </Key>
+          <Property Name="PosOrderItemId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PosOrderId" Type="Int32" Nullable="false" />
+          <Property Name="CheckItemId" Type="Int64" Nullable="false" />
+          <Property Name="ItemId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="LevelItem" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int64" />
+          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrderItem" ToRole="PosOrder" />
+        </EntityType>
+        <Association Name="FK_PosOrderItem_PosOrder">
+          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
+          <End Type="CallCenterModel.PosOrderItem" Role="PosOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosOrder">
+              <PropertyRef Name="PosOrderId" />
+            </Principal>
+            <Dependent Role="PosOrderItem">
+              <PropertyRef Name="PosOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5010,19 +5012,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PosOrderItem">
-            <EntityTypeMapping TypeName="CallCenterModel.PosOrderItem">
-              <MappingFragment StoreEntitySet="PosOrderItem">
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="LevelItem" ColumnName="LevelItem" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
-                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
-                <ScalarProperty Name="PosOrderItemId" ColumnName="PosOrderItemId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Recurrence">
             <EntityTypeMapping TypeName="CallCenterModel.Recurrence">
               <MappingFragment StoreEntitySet="Recurrence">
@@ -5326,6 +5315,20 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="PosOrderItem">
+            <EntityTypeMapping TypeName="CallCenterModel.PosOrderItem">
+              <MappingFragment StoreEntitySet="PosOrderItem">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="LevelItem" ColumnName="LevelItem" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="CheckItemId" ColumnName="CheckItemId" />
+                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
+                <ScalarProperty Name="PosOrderItemId" ColumnName="PosOrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

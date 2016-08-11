@@ -17,14 +17,17 @@ namespace Drs.Model.Order
 
                 return _name.Insert(0, String.Empty.PadLeft((int)Level*4, ' '));
             }
-            set { _name = value; }
+            set
+            {
+                _name = value;
+            }
         }
 
         public string RealName
         {
             get
             {
-                return _name;
+                return String.IsNullOrWhiteSpace(_name) ? String.Empty : _name.Trim();
             }
         }
 

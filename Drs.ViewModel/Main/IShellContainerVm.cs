@@ -10,13 +10,13 @@ namespace Drs.ViewModel.Main
     public interface IShellContainerVm
     {
         IUcViewModel CurrentView { get; set; }
-        //ICurrentUserSettings CurrentUserSettings { get; set; }
         ReadOnlyDictionary<StatusScreen, IUcViewModel> DictionaryViews { get; set; }
         void ChangeCurrentView(StatusScreen statusScreen, bool bHasToInit, bool bForzeToInit = false);
         Visibility HeaderVisibility { get; set; }
         IReactiveList<Flyout> Flyouts { get; }
         BootstrapperBase BootStrapper { get; set; }
         bool IsInOrder { get; set; }
+        string UserTitle { get; set; }
         void AddOrUpdateFlyouts(IFlyoutBaseVm flyout);
         void Initialize();
     }

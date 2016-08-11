@@ -163,6 +163,7 @@ namespace Drs.Repository.Order
             {
                 var item = new PosOrderItem
                 {
+                    CheckItemId = itemModel.CheckItemId,
                     ItemId = itemModel.ItemId,
                     Name = itemModel.RealName,
                     Price = (Decimal) itemModel.Price,
@@ -211,6 +212,7 @@ namespace Drs.Repository.Order
                     OrderDateTime = e.OrderDatetime,
                     LstItems = e.PosOrderItem.Select(i => new ItemModel
                     {
+                        CheckItemId = i.CheckItemId,
                         ItemId = i.ItemId,
                         Name = i.Name,
                         Price = (double)i.Price,

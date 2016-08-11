@@ -1,5 +1,7 @@
-﻿using System.Windows;
-using Drs.Model.Shared;
+﻿using System;
+using System.Windows;
+using Drs.Model.Account;
+using Drs.ViewModel.LoginSvc;
 using Drs.ViewModel.Shared;
 using ReactiveUI;
 
@@ -12,5 +14,6 @@ namespace Drs.ViewModel.Account
         IReactiveCommand<ResponseMessage> SignInCommand { get; set; }
         Visibility IsSignInVisible { get; set; }
 
+        event Action<UserInfoModel> UserChanged;
     }
 }

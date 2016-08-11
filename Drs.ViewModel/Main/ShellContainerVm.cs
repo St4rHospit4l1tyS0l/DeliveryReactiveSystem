@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Windows;
 using Drs.Infrastructure.Time;
+using Drs.Model.Account;
 using Drs.Model.Settings;
 using Drs.Model.UiView.Shared;
 using Drs.ViewModel.Account;
@@ -68,17 +70,22 @@ namespace Drs.ViewModel.Main
 
         private void CloseFlyouts()
         {
-            foreach (var flyout in Flyouts)
+            RxApp.MainThreadScheduler.Schedule(_ =>
             {
-                flyout.IsOpen = false;
-            }
+                foreach (var flyout in Flyouts.Where(flyout => flyout != null && flyout.IsOpen))
+                {
+                    flyout.IsOpen = false;
+                }
+            });
         }
 
         private Visibility _headerVisibility;
         private IReactiveList<Flyout> _flyouts;
         private bool _isInOrder;
+        private string _userTitle;
 
-        public Visibility HeaderVisibility {
+        public Visibility HeaderVisibility
+        {
             get
             {
                 return _headerVisibility;
@@ -122,6 +129,8 @@ namespace Drs.ViewModel.Main
         {
             HeaderVisibility = Visibility.Collapsed;
 
+            loginVm.UserChanged += OnUserChanged;
+
             Flyouts = new ReactiveList<Flyout>();
 
             DictionaryViews = new ReadOnlyDictionary<StatusScreen, IUcViewModel>(new Dictionary<StatusScreen, IUcViewModel>
@@ -135,6 +144,17 @@ namespace Drs.ViewModel.Main
 
             CurrentView = DictionaryViews[StatusScreen.UmMsg];
             SetIdleWindow();
+        }
+
+        public void OnUserChanged(UserInfoModel user)
+        {
+            UserTitle = String.Format("Bienvenido:  {0} ({1}) | {2}", user.FullName, user.Username, user.Role);
+        }
+
+        public string UserTitle
+        {
+            get { return _userTitle; }
+            set { this.RaiseAndSetIfChanged(ref _userTitle, value); }
         }
 
         public void Initialize()
@@ -154,8 +174,7 @@ namespace Drs.ViewModel.Main
                 {
                     if (DictionaryViews != null && CurrentView != DictionaryViews[StatusScreen.Login])
                     {
-                        _lastView = CurrentView; 
-                        CurrentView = DictionaryViews[StatusScreen.Login];
+                        ChangeCurrentView(StatusScreen.Login, false);
                     }
                 }
             });

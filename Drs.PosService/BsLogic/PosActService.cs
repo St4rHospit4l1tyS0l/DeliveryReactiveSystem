@@ -38,6 +38,9 @@ namespace Drs.PosService.BsLogic
                 var lstItems = new List<ItemModel>();
                 ItemModel lastItemModelLvl0 = null;
                 ItemModel lastItemModelLvl1 = null;
+                ItemModel lastItemModelLvl2 = null;
+                ItemModel lastItemModelLvl3 = null;
+                ItemModel lastItemModelLvl4 = null;
 
                 foreach (IIberObject chkObject in pDepot.FindObjectFromId(INTERNAL_CHECKS, iCheckId))
                 {
@@ -60,8 +63,20 @@ namespace Drs.PosService.BsLogic
                                 lastItemModelLvl1 = item;
                                 item.Parent = lastItemModelLvl0;
                                 break;
-                            default:
+                            case 2:
+                                lastItemModelLvl2 = item;
                                 item.Parent = lastItemModelLvl1;
+                                break;
+                            case 3:
+                                lastItemModelLvl3 = item;
+                                item.Parent = lastItemModelLvl2;
+                                break;
+                            case 4:
+                                lastItemModelLvl4 = item;
+                                item.Parent = lastItemModelLvl3;
+                                break;
+                            default:
+                                item.Parent = lastItemModelLvl4;
                                 break;
                         }
                         lstItems.Add(item);

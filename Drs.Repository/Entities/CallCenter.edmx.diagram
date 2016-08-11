@@ -43,7 +43,6 @@
         <EntityTypeShape EntityType="CallCenterModel.OrderToStoreLog" Width="1.5" PointX="15.75" PointY="44.5" />
         <EntityTypeShape EntityType="CallCenterModel.Permission" Width="1.5" PointX="3" PointY="32" />
         <EntityTypeShape EntityType="CallCenterModel.PosOrder" Width="1.5" PointX="5.25" PointY="29.375" />
-        <EntityTypeShape EntityType="CallCenterModel.PosOrderItem" Width="1.5" PointX="7.5" PointY="29.75" />
         <EntityTypeShape EntityType="CallCenterModel.Recurrence" Width="1.5" PointX="15.75" PointY="38" />
         <EntityTypeShape EntityType="CallCenterModel.RegionA" Width="1.5" PointX="3.75" PointY="17.125" />
         <EntityTypeShape EntityType="CallCenterModel.RegionB" Width="1.5" PointX="3.75" PointY="9" />
@@ -123,7 +122,6 @@
         <AssociationConnector Association="CallCenterModel.FK_OrderToStoreLog_OrderToStore" />
         <AssociationConnector Association="CallCenterModel.FK_Recurrence_OrderToStore" />
         <AssociationConnector Association="CallCenterModel.FK_StoreStatus_OrderToStore" />
-        <AssociationConnector Association="CallCenterModel.FK_PosOrderItem_PosOrder" />
         <AssociationConnector Association="CallCenterModel.FK_RegionA_ZipCode" />
         <AssociationConnector Association="CallCenterModel.FK_RegionB_RegionA" />
         <AssociationConnector Association="CallCenterModel.FK_RegionC_RegionA" />
@@ -143,6 +141,8 @@
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_Client" />
         <AssociationConnector Association="CallCenterModel.FK_Recurrence_Client" />
         <AssociationConnector Association="CallCenterModel.RelClientPhoneClient" />
+        <EntityTypeShape EntityType="CallCenterModel.PosOrderItem" Width="1.5" PointX="7.5" PointY="29.625" />
+        <AssociationConnector Association="CallCenterModel.FK_PosOrderItem_PosOrder" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

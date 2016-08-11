@@ -189,11 +189,11 @@ namespace Drs.ViewModel.Order
             {
                 LstItems.Clear();
 
-                var lstNewItems = PropagateOrder.PosCheck.LstItems.GroupBy(e => new { e.ItemId, e.RealName, e.ParentId }).Select(e => new QtItemModel
+                var lstNewItems = PropagateOrder.PosCheck.LstItems.Select(e => new QtItemModel
                 {
-                    ItemId = e.Key.ItemId,
-                    Name = e.Key.RealName,
-                    Quantity = e.Count()
+                    ItemId = e.ItemId,
+                    Name = e.Name,
+                    Quantity = 1
                 }).ToList();
 
                 foreach (var item in lstNewItems)

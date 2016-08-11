@@ -288,14 +288,56 @@ namespace Drs.Service.Store
 
             OrderItemsItem itemLevel0 = null;
             OrderItemsItemSubItemsItem itemLevel1 = null;
+            OrderItemsItemSubItemsItemSubItemsItem itemLevel2 = null;
+            OrderItemsItemSubItemsItemSubItemsItemSubItemsItem itemLevel3 = null;
             var lstSubLevel0 = new List<OrderItemsItemSubItemsItem>();
             var lstSubLevel1 = new List<OrderItemsItemSubItemsItemSubItemsItem>();
+            var lstSubLevel2 = new List<OrderItemsItemSubItemsItemSubItemsItemSubItemsItem>();
+            var lstSubLevel3 = new List<OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem>();
 
             foreach (var item in model.PosOrder.LstItems)
             {
                 switch (item.Level)
                 {
+                    case 4:
+                        var itemL4 = new OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem
+                        {
+                            menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
+                            referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
+                            quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
+                            priceField = item.Price.ToString(CultureInfo.InvariantCulture),
+                            levelField = item.Level.ToString(CultureInfo.InvariantCulture)
+                        };
+
+                        lstSubLevel3.Add(itemL4);
+
+                        break;
+                    case 3:
+                        if (itemLevel3 != null && lstSubLevel3.Any())
+                            itemLevel3.subItemsField = lstSubLevel3.ToArray();
+
+                        var itemL3 = new OrderItemsItemSubItemsItemSubItemsItemSubItemsItem
+                        {
+                            menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
+                            referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
+                            quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
+                            priceField = item.Price.ToString(CultureInfo.InvariantCulture),
+                            levelField = item.Level.ToString(CultureInfo.InvariantCulture)
+                        };
+
+                        itemLevel3 = itemL3;                        
+                        lstSubLevel2.Add(itemL3);
+                        lstSubLevel3.Clear();
+                        break;
                     case 2:
+                        if (itemLevel2 != null && lstSubLevel2.Any())
+                        {
+                            if (lstSubLevel3.Any())
+                                lstSubLevel2[lstSubLevel2.Count - 1].subItemsField = lstSubLevel3.ToArray();
+
+                            itemLevel2.subItemsField = lstSubLevel2.ToArray();
+                        }
+
                         var itemL2 = new OrderItemsItemSubItemsItemSubItemsItem
                         {
                             menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
@@ -305,13 +347,22 @@ namespace Drs.Service.Store
                             levelField = item.Level.ToString(CultureInfo.InvariantCulture)
                         };
 
+                        itemLevel2 = itemL2;
                         lstSubLevel1.Add(itemL2);
-
+                        lstSubLevel2.Clear(); lstSubLevel3.Clear();
                         break;
                     case 1:
 
                         if (itemLevel1 != null && lstSubLevel1.Any())
+                        {
+                            if (lstSubLevel3.Any())
+                                lstSubLevel2[lstSubLevel2.Count - 1].subItemsField = lstSubLevel3.ToArray();
+
+                            if (lstSubLevel2.Any())
+                                lstSubLevel1[lstSubLevel1.Count - 1].subItemsField = lstSubLevel2.ToArray();
+
                             itemLevel1.subItemsField = lstSubLevel1.ToArray();
+                        }
 
                         var itemL1 = new OrderItemsItemSubItemsItem
                         {
@@ -324,15 +375,21 @@ namespace Drs.Service.Store
 
                         itemLevel1 = itemL1;
                         lstSubLevel0.Add(itemL1);
-                        lstSubLevel1.Clear();
+                        lstSubLevel1.Clear(); lstSubLevel2.Clear(); lstSubLevel3.Clear();
 
                         break;
                     default:
 
                         if (itemLevel0 != null && lstSubLevel0.Any())
                         {
+                            if (lstSubLevel3.Any())
+                                lstSubLevel2[lstSubLevel2.Count - 1].subItemsField = lstSubLevel3.ToArray();
+
+                            if (lstSubLevel2.Any())
+                                lstSubLevel1[lstSubLevel1.Count - 1].subItemsField = lstSubLevel2.ToArray();
+
                             if (lstSubLevel1.Any())
-                                lstSubLevel0[lstSubLevel1.Count - 1].subItemsField = lstSubLevel1.ToArray();
+                                lstSubLevel0[lstSubLevel0.Count - 1].subItemsField = lstSubLevel1.ToArray();
 
                             itemLevel0.subItemsField = lstSubLevel0.ToArray();
                         }
@@ -347,16 +404,21 @@ namespace Drs.Service.Store
                         };
 
                         lstItem.Add(itemLevel0);
-                        lstSubLevel0.Clear();
-                        lstSubLevel1.Clear();
+                        lstSubLevel0.Clear(); lstSubLevel1.Clear(); lstSubLevel2.Clear(); lstSubLevel3.Clear(); 
                         break;
                 }
             }
 
             if (itemLevel0 != null && lstSubLevel0.Any())
             {
+                if (lstSubLevel3.Any())
+                    lstSubLevel2[lstSubLevel2.Count - 1].subItemsField = lstSubLevel3.ToArray();
+
+                if (lstSubLevel2.Any())
+                    lstSubLevel1[lstSubLevel1.Count - 1].subItemsField = lstSubLevel2.ToArray();
+
                 if (lstSubLevel1.Any())
-                    lstSubLevel0[lstSubLevel1.Count - 1].subItemsField = lstSubLevel1.ToArray();
+                    lstSubLevel0[lstSubLevel0.Count - 1].subItemsField = lstSubLevel1.ToArray();
 
                 itemLevel0.subItemsField = lstSubLevel0.ToArray();
             }

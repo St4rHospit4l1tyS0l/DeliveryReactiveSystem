@@ -359,10 +359,60 @@
       <xs:element name="quantityField" nillable="true" type="xs:string" />
       <xs:element name="referenceIdField" nillable="true" type="xs:string" />
       <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="subItemsField" nillable="true" type="tns:ArrayOfOrderItemsItemSubItemsItemSubItemsItemSubItemsItem" />
       <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrderItemsItemSubItemsItemSubItemsItem" />
+  <xs:complexType name="ArrayOfOrderItemsItemSubItemsItemSubItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrderItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:ArrayOfOrderItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+  <xs:complexType name="OrderItemsItemSubItemsItemSubItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element name="entryTypeField" nillable="true" type="xs:string" />
+      <xs:element name="itemIdField" nillable="true" type="xs:string" />
+      <xs:element name="levelField" nillable="true" type="xs:string" />
+      <xs:element name="menuItemIdField" nillable="true" type="xs:string" />
+      <xs:element name="modCodeIdField" nillable="true" type="xs:string" />
+      <xs:element name="modGroupIdField" nillable="true" type="xs:string" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="posEntryIdField" nillable="true" type="xs:string" />
+      <xs:element name="priceField" nillable="true" type="xs:string" />
+      <xs:element name="quantityField" nillable="true" type="xs:string" />
+      <xs:element name="referenceIdField" nillable="true" type="xs:string" />
+      <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="subItemsField" nillable="true" type="tns:ArrayOfOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+      <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrderItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+  <xs:complexType name="ArrayOfOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:ArrayOfOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+  <xs:complexType name="OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element name="entryTypeField" nillable="true" type="xs:string" />
+      <xs:element name="itemIdField" nillable="true" type="xs:string" />
+      <xs:element name="levelField" nillable="true" type="xs:string" />
+      <xs:element name="menuItemIdField" nillable="true" type="xs:string" />
+      <xs:element name="modCodeIdField" nillable="true" type="xs:string" />
+      <xs:element name="modGroupIdField" nillable="true" type="xs:string" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="posEntryIdField" nillable="true" type="xs:string" />
+      <xs:element name="priceField" nillable="true" type="xs:string" />
+      <xs:element name="quantityField" nillable="true" type="xs:string" />
+      <xs:element name="referenceIdField" nillable="true" type="xs:string" />
+      <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" />
   <xs:complexType name="ArrayOfOrderTendersTender">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderTendersTender" nillable="true" type="tns:OrderTendersTender" />
@@ -518,8 +568,56 @@
       <xs:element name="priceField" nillable="true" type="xs:string" />
       <xs:element name="quantityField" nillable="true" type="xs:string" />
       <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="subItemsField" nillable="true" type="tns:ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem" />
       <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrdersOrderItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrdersOrderItemsItemSubItemsItemSubItemsItem" />
+  <xs:complexType name="ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+  <xs:complexType name="OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element name="entryTypeField" nillable="true" type="xs:string" />
+      <xs:element name="itemIdField" nillable="true" type="xs:string" />
+      <xs:element name="levelField" nillable="true" type="xs:string" />
+      <xs:element name="menuItemIdField" nillable="true" type="xs:string" />
+      <xs:element name="modCodeIdField" nillable="true" type="xs:string" />
+      <xs:element name="modGroupIdField" nillable="true" type="xs:string" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="posEntryIdField" nillable="true" type="xs:string" />
+      <xs:element name="priceField" nillable="true" type="xs:string" />
+      <xs:element name="quantityField" nillable="true" type="xs:string" />
+      <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="subItemsField" nillable="true" type="tns:ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+      <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+  <xs:complexType name="ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:ArrayOfOrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" />
+  <xs:complexType name="OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem">
+    <xs:sequence>
+      <xs:element name="entryTypeField" nillable="true" type="xs:string" />
+      <xs:element name="itemIdField" nillable="true" type="xs:string" />
+      <xs:element name="levelField" nillable="true" type="xs:string" />
+      <xs:element name="menuItemIdField" nillable="true" type="xs:string" />
+      <xs:element name="modCodeIdField" nillable="true" type="xs:string" />
+      <xs:element name="modGroupIdField" nillable="true" type="xs:string" />
+      <xs:element name="nameField" nillable="true" type="xs:string" />
+      <xs:element name="posEntryIdField" nillable="true" type="xs:string" />
+      <xs:element name="priceField" nillable="true" type="xs:string" />
+      <xs:element name="quantityField" nillable="true" type="xs:string" />
+      <xs:element name="resultCodeField" nillable="true" type="xs:string" />
+      <xs:element name="useTakeOutPriceField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" nillable="true" type="tns:OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem" />
 </xs:schema>

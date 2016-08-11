@@ -22,15 +22,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.1.110:8732/CustomerOrder/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="ba7c1ee8-a008-4a73-b973-f33669265797" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/?disco" />
-    <MetadataFile FileName="CustomerOrder.wsdl" MetadataType="Wsdl" ID="98c3fa73-7ce4-4c9c-a7e0-afb1cf504697" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/?wsdl" />
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="8c324a85-8b0d-4f1f-9ad5-39b62b5c9af1" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/?xsd=xsd0" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="e849473d-c38d-430c-8e09-f12472ed4530" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/?xsd=xsd1" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="c77d5130-a404-48d5-9f61-1714f759584e" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/?xsd=xsd2" />
-    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="42a37a50-9378-45fb-ae69-aec463d6eec8" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/?xsd=xsd3" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="26bd068f-e7fa-4823-b89e-8db7485f79ba" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?xsd=xsd0" />
+    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="9b72d47b-35e6-49b2-bb61-0d50023d0035" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?disco" />
+    <MetadataFile FileName="item41.xsd" MetadataType="Schema" ID="f0f839e8-31f0-4910-aabf-8cc365df2f03" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?xsd=xsd1" />
+    <MetadataFile FileName="CustomerOrder1.wsdl" MetadataType="Wsdl" ID="4b41c9b2-2657-46fa-a32c-fdabe4b50410" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?wsdl" />
+    <MetadataFile FileName="item42.xsd" MetadataType="Schema" ID="df22842a-0629-4b72-9506-7d6a1b6d24a6" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?xsd=xsd3" />
+    <MetadataFile FileName="item43.xsd" MetadataType="Schema" ID="10e56745-0ebc-4643-b768-c25a1c5e10fc" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

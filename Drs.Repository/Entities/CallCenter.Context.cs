@@ -65,7 +65,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<OrderToStoreLog> OrderToStoreLog { get; set; }
         public virtual DbSet<Permission> Permission { get; set; }
         public virtual DbSet<PosOrder> PosOrder { get; set; }
-        public virtual DbSet<PosOrderItem> PosOrderItem { get; set; }
         public virtual DbSet<Recurrence> Recurrence { get; set; }
         public virtual DbSet<RegionA> RegionA { get; set; }
         public virtual DbSet<RegionB> RegionB { get; set; }
@@ -85,6 +84,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<ViewStoreInfo> ViewStoreInfo { get; set; }
         public virtual DbSet<ViewUserInfo> ViewUserInfo { get; set; }
         public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<PosOrderItem> PosOrderItem { get; set; }
     
         [DbFunction("CallCenterEntities", "ufnGetTopProductsByRangeDates")]
         public virtual IQueryable<ufnGetTopProductsByRangeDates_Result1> ufnGetTopProductsByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)

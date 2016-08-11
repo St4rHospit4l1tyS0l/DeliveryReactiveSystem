@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Drs.Model.Shared" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Drs.Model.Shared" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:2898/Account/Login.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Drs.Model.Account" />
   <xs:complexType name="ResponseMessage">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:int" />
       <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
       <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Drs.Model.Account" minOccurs="0" name="UserDetail" nillable="true" type="q1:UserDetailModel" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ResponseMessage" nillable="true" type="tns:ResponseMessage" />

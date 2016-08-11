@@ -21,15 +21,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.1.110:8732/QueryFunction/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="QueryFunction1.wsdl" MetadataType="Wsdl" ID="9b30ff9a-473e-45b8-a270-1a5e0f00ee0b" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?wsdl" />
-    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="35f7ac03-f265-4403-90a9-53df70fd229d" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd1" />
-    <MetadataFile FileName="item41.xsd" MetadataType="Schema" ID="7b8291f2-91ca-4838-bba4-62468d62eae2" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd0" />
-    <MetadataFile FileName="item42.xsd" MetadataType="Schema" ID="7c504fa0-da08-4d21-8443-e3119d6b827d" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd3" />
-    <MetadataFile FileName="item43.xsd" MetadataType="Schema" ID="deef2543-242c-471e-a21d-a77eb75b2460" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd2" />
-    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="52c78cb5-fc6e-4a8e-837e-ba4d961feeb1" SourceId="1" SourceUrl="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?disco" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="ce64e692-390b-4a8b-bff1-6700ee85e8d6" SourceId="1" SourceUrl="http://192.168.1.110:8732/QueryFunction/?xsd=xsd1" />
+    <MetadataFile FileName="QueryFunction.wsdl" MetadataType="Wsdl" ID="bbb82f80-a9e1-4d2a-b963-b91edcf4f183" SourceId="1" SourceUrl="http://192.168.1.110:8732/QueryFunction/?wsdl" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="8d8b0513-7b25-4851-9af4-fcd90096bab2" SourceId="1" SourceUrl="http://192.168.1.110:8732/QueryFunction/?disco" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="4749244b-5775-419a-baa6-6963c0109fd4" SourceId="1" SourceUrl="http://192.168.1.110:8732/QueryFunction/?xsd=xsd2" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="46ee5f32-96e7-4251-94e3-02a1b20a77ae" SourceId="1" SourceUrl="http://192.168.1.110:8732/QueryFunction/?xsd=xsd3" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="716833a9-c6a3-4526-8c1f-8ecf644bb89b" SourceId="1" SourceUrl="http://192.168.1.110:8732/QueryFunction/?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="PhGJJhdoRGYZAjd1x3bGAAMOLg8=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="3jp52if8UNj8QF/o+aTVy7MEML0=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_ICustomerOrder">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_ICustomerOrder" contract="CustomerOrder.ICustomerOrder" bindingType="basicHttpBinding" address="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/CustomerOrder" bindingConfiguration="BasicHttpBinding_ICustomerOrder">
+    <endpoint name="BasicHttpBinding_ICustomerOrder" contract="CustomerOrder.ICustomerOrder" bindingType="basicHttpBinding" address="http://192.168.1.110:8732/CustomerOrder/CustomerOrder" bindingConfiguration="BasicHttpBinding_ICustomerOrder">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/CustomerOrder/CustomerOrder</serializedValue>
+          <serializedValue>http://192.168.1.110:8732/CustomerOrder/CustomerOrder</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

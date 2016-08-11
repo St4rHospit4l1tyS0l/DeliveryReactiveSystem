@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.1.110:8732/LASA_CallCenter_Interface_Ws/QueryFunction/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LASA_CallCenter_Interface_Ws.Model" />
+  <xs:import schemaLocation="http://192.168.1.110:8732/QueryFunction/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LASA_CallCenter_Interface_Ws.Model" />
   <xs:element name="GetOrderById">
     <xs:complexType>
       <xs:sequence>
