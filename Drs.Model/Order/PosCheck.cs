@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reactive.Linq;
 using Drs.Model.Shared;
 
 namespace Drs.Model.Order
@@ -40,5 +42,25 @@ namespace Drs.Model.Order
 
         public string FranchiseCode { get; set; }
         public DateTime OrderDateTime { get; set; }
+
+        public void FixItemParents()
+        {
+            var lstPosItems = LstItems;
+
+            if(lstPosItems == null)
+                return;
+
+            var dictItems = new Dictionary<long, ItemModel>();
+
+            foreach (var item in lstPosItems.OrderBy(e => e.CheckItemId))
+            {
+                dictItems[item.CheckItemId] = item;
+
+                if (item.ParentId != null)
+                {
+                    item.Parent = dictItems[item.ParentId.Value];
+                }
+            }
+        }
     }
 }

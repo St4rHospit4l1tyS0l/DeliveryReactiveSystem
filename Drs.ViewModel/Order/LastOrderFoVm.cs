@@ -9,6 +9,7 @@ using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;
+using Drs.Repository.Log;
 using Drs.Service.ReactiveDelivery;
 using Drs.Service.TransferDto;
 using Drs.ViewModel.Shared;
@@ -184,6 +185,21 @@ namespace Drs.ViewModel.Order
                 return;
 
             PropagateOrder = obj.Data.Data;
+
+            try
+            {
+                if (PropagateOrder != null && PropagateOrder.PosCheck != null)
+                    PropagateOrder.PosCheck.FixItemParents();
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+                MessageBus.Current.SendMessage(new MessageBoxSettings
+                {
+                    Message = "Existe el siguiente problema al obtener el último pedido: " + ex.Message,
+                    Title = "Error al obtener último pedido",
+                }, SharedMessageConstants.MSG_SHOW_ERRQST);
+            }
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {

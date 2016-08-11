@@ -24,7 +24,7 @@ namespace Drs.Service.CustomerOrder {
         
         private string addressLine1FieldField;
         
-        private Drs.Service.CustomerOrder.CustomerAddressLine2[] addressLine2FieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomerAddressLine2> addressLine2FieldField;
         
         private string cityFieldField;
         
@@ -36,11 +36,11 @@ namespace Drs.Service.CustomerOrder {
         
         private string notesFieldField;
         
-        private Drs.Service.CustomerOrder.CustomerPhoneNumbersPhoneNumber[] phoneNumbersFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomerPhoneNumbersPhoneNumber> phoneNumbersFieldField;
         
         private string referenceIdFieldField;
         
-        private Drs.Service.CustomerOrder.CustomerVehicle[] vehicleFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomerVehicle> vehicleFieldField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -66,7 +66,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.CustomerAddressLine2[] addressLine2Field {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomerAddressLine2> addressLine2Field {
             get {
                 return this.addressLine2FieldField;
             }
@@ -144,7 +144,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.CustomerPhoneNumbersPhoneNumber[] phoneNumbersField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomerPhoneNumbersPhoneNumber> phoneNumbersField {
             get {
                 return this.phoneNumbersFieldField;
             }
@@ -170,7 +170,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.CustomerVehicle[] vehicleField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomerVehicle> vehicleField {
             get {
                 return this.vehicleFieldField;
             }
@@ -685,7 +685,7 @@ namespace Drs.Service.CustomerOrder {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private Drs.Service.CustomerOrder.CustomerAddressesAddress[] addressesFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomerAddressesAddress> addressesFieldField;
         
         private string customerIdFieldField;
         
@@ -697,7 +697,7 @@ namespace Drs.Service.CustomerOrder {
         
         private string orderCountFieldField;
         
-        private Drs.Service.CustomerOrder.CustomerPhoneNumbersPhoneNumber[] phoneNumbersFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomerPhoneNumbersPhoneNumber> phoneNumbersFieldField;
         
         private string referenceIdFieldField;
         
@@ -712,7 +712,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.CustomerAddressesAddress[] addressesField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomerAddressesAddress> addressesField {
             get {
                 return this.addressesFieldField;
             }
@@ -790,7 +790,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.CustomerPhoneNumbersPhoneNumber[] phoneNumbersField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomerPhoneNumbersPhoneNumber> phoneNumbersField {
             get {
                 return this.phoneNumbersFieldField;
             }
@@ -834,7 +834,7 @@ namespace Drs.Service.CustomerOrder {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private Drs.Service.CustomerOrder.CustomersCustomer[] itemsFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomersCustomer> itemsFieldField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -847,7 +847,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.CustomersCustomer[] itemsField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomersCustomer> itemsField {
             get {
                 return this.itemsFieldField;
             }
@@ -1027,7 +1027,7 @@ namespace Drs.Service.CustomerOrder {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private Drs.Service.CustomerOrder.DriversDriver[] itemsFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.DriversDriver> itemsFieldField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1040,7 +1040,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.DriversDriver[] itemsField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.DriversDriver> itemsField {
             get {
                 return this.itemsFieldField;
             }
@@ -1073,7 +1073,7 @@ namespace Drs.Service.CustomerOrder {
         
         private string closedTimeFieldField;
         
-        private Drs.Service.CustomerOrder.OrderCustomer[] customerFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.OrderCustomer> customerFieldField;
         
         private string estimatedSubTotalFieldField;
         
@@ -1085,7 +1085,7 @@ namespace Drs.Service.CustomerOrder {
         
         private string fulfilledTimeFieldField;
         
-        private Drs.Service.CustomerOrder.OrderItems[] itemsFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.OrderItems> itemsFieldField;
         
         private string lastPaymentTimeFieldField;
         
@@ -1129,7 +1129,7 @@ namespace Drs.Service.CustomerOrder {
         
         private string tenderedFieldField;
         
-        private Drs.Service.CustomerOrder.OrderTendersTender[] tendersFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.OrderTendersTender> tendersFieldField;
         
         private string totalFieldField;
         
@@ -1157,7 +1157,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrderCustomer[] customerField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.OrderCustomer> customerField {
             get {
                 return this.customerFieldField;
             }
@@ -1235,7 +1235,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrderItems[] itemsField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.OrderItems> itemsField {
             get {
                 return this.itemsFieldField;
             }
@@ -1521,7 +1521,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrderTendersTender[] tendersField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.OrderTendersTender> tendersField {
             get {
                 return this.tendersFieldField;
             }
@@ -1565,7 +1565,7 @@ namespace Drs.Service.CustomerOrder {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private Drs.Service.CustomerOrder.OrdersOrder[] orderFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.OrdersOrder> orderFieldField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1578,7 +1578,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrdersOrder[] orderField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.OrdersOrder> orderField {
             get {
                 return this.orderFieldField;
             }
@@ -1773,7 +1773,7 @@ namespace Drs.Service.CustomerOrder {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private Drs.Service.CustomerOrder.CustomersCustomerAddressesAddress[] addressesFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomersCustomerAddressesAddress> addressesFieldField;
         
         private string customerIdFieldField;
         
@@ -1785,7 +1785,7 @@ namespace Drs.Service.CustomerOrder {
         
         private string orderCountFieldField;
         
-        private Drs.Service.CustomerOrder.CustomersCustomerPhoneNumbersPhoneNumber[] phoneNumbersFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomersCustomerPhoneNumbersPhoneNumber> phoneNumbersFieldField;
         
         private string referenceIdFieldField;
         
@@ -1800,7 +1800,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.CustomersCustomerAddressesAddress[] addressesField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomersCustomerAddressesAddress> addressesField {
             get {
                 return this.addressesFieldField;
             }
@@ -1878,7 +1878,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.CustomersCustomerPhoneNumbersPhoneNumber[] phoneNumbersField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.CustomersCustomerPhoneNumbersPhoneNumber> phoneNumbersField {
             get {
                 return this.phoneNumbersFieldField;
             }
@@ -2623,9 +2623,9 @@ namespace Drs.Service.CustomerOrder {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private Drs.Service.CustomerOrder.OrderItemsFailedItem[] failedItemFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.OrderItemsFailedItem> failedItemFieldField;
         
-        private Drs.Service.CustomerOrder.OrderItemsItem[] itemFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.Item> itemFieldField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -2638,7 +2638,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrderItemsFailedItem[] failedItemField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.OrderItemsFailedItem> failedItemField {
             get {
                 return this.failedItemFieldField;
             }
@@ -2651,7 +2651,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrderItemsItem[] itemField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.Item> itemField {
             get {
                 return this.itemFieldField;
             }
@@ -2988,9 +2988,9 @@ namespace Drs.Service.CustomerOrder {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrderItemsItem", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Item", Namespace="http://schemas.datacontract.org/2004/07/")]
     [System.SerializableAttribute()]
-    public partial class OrderItemsItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Item : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -3019,7 +3019,7 @@ namespace Drs.Service.CustomerOrder {
         
         private string resultCodeFieldField;
         
-        private Drs.Service.CustomerOrder.OrderItemsItemSubItemsItem[] subItemsFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.Item> subItemsFieldField;
         
         private string useTakeOutPriceFieldField;
         
@@ -3190,7 +3190,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrderItemsItemSubItemsItem[] subItemsField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.Item> subItemsField {
             get {
                 return this.subItemsFieldField;
             }
@@ -3198,947 +3198,6 @@ namespace Drs.Service.CustomerOrder {
                 if ((object.ReferenceEquals(this.subItemsFieldField, value) != true)) {
                     this.subItemsFieldField = value;
                     this.RaisePropertyChanged("subItemsField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string useTakeOutPriceField {
-            get {
-                return this.useTakeOutPriceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.useTakeOutPriceFieldField, value) != true)) {
-                    this.useTakeOutPriceFieldField = value;
-                    this.RaisePropertyChanged("useTakeOutPriceField");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrderItemsItemSubItemsItem", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrderItemsItemSubItemsItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string entryTypeFieldField;
-        
-        private string itemIdFieldField;
-        
-        private string levelFieldField;
-        
-        private string menuItemIdFieldField;
-        
-        private string modCodeIdFieldField;
-        
-        private string modGroupIdFieldField;
-        
-        private string nameFieldField;
-        
-        private string posEntryIdFieldField;
-        
-        private string priceFieldField;
-        
-        private string quantityFieldField;
-        
-        private string referenceIdFieldField;
-        
-        private string resultCodeFieldField;
-        
-        private Drs.Service.CustomerOrder.OrderItemsItemSubItemsItemSubItemsItem[] subItemsFieldField;
-        
-        private string useTakeOutPriceFieldField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string entryTypeField {
-            get {
-                return this.entryTypeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.entryTypeFieldField, value) != true)) {
-                    this.entryTypeFieldField = value;
-                    this.RaisePropertyChanged("entryTypeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string itemIdField {
-            get {
-                return this.itemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemIdFieldField, value) != true)) {
-                    this.itemIdFieldField = value;
-                    this.RaisePropertyChanged("itemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string levelField {
-            get {
-                return this.levelFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.levelFieldField, value) != true)) {
-                    this.levelFieldField = value;
-                    this.RaisePropertyChanged("levelField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string menuItemIdField {
-            get {
-                return this.menuItemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.menuItemIdFieldField, value) != true)) {
-                    this.menuItemIdFieldField = value;
-                    this.RaisePropertyChanged("menuItemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modCodeIdField {
-            get {
-                return this.modCodeIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modCodeIdFieldField, value) != true)) {
-                    this.modCodeIdFieldField = value;
-                    this.RaisePropertyChanged("modCodeIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modGroupIdField {
-            get {
-                return this.modGroupIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modGroupIdFieldField, value) != true)) {
-                    this.modGroupIdFieldField = value;
-                    this.RaisePropertyChanged("modGroupIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string nameField {
-            get {
-                return this.nameFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameFieldField, value) != true)) {
-                    this.nameFieldField = value;
-                    this.RaisePropertyChanged("nameField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string posEntryIdField {
-            get {
-                return this.posEntryIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.posEntryIdFieldField, value) != true)) {
-                    this.posEntryIdFieldField = value;
-                    this.RaisePropertyChanged("posEntryIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceField {
-            get {
-                return this.priceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.priceFieldField, value) != true)) {
-                    this.priceFieldField = value;
-                    this.RaisePropertyChanged("priceField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string quantityField {
-            get {
-                return this.quantityFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.quantityFieldField, value) != true)) {
-                    this.quantityFieldField = value;
-                    this.RaisePropertyChanged("quantityField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string referenceIdField {
-            get {
-                return this.referenceIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.referenceIdFieldField, value) != true)) {
-                    this.referenceIdFieldField = value;
-                    this.RaisePropertyChanged("referenceIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string resultCodeField {
-            get {
-                return this.resultCodeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.resultCodeFieldField, value) != true)) {
-                    this.resultCodeFieldField = value;
-                    this.RaisePropertyChanged("resultCodeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrderItemsItemSubItemsItemSubItemsItem[] subItemsField {
-            get {
-                return this.subItemsFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.subItemsFieldField, value) != true)) {
-                    this.subItemsFieldField = value;
-                    this.RaisePropertyChanged("subItemsField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string useTakeOutPriceField {
-            get {
-                return this.useTakeOutPriceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.useTakeOutPriceFieldField, value) != true)) {
-                    this.useTakeOutPriceFieldField = value;
-                    this.RaisePropertyChanged("useTakeOutPriceField");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrderItemsItemSubItemsItemSubItemsItem", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrderItemsItemSubItemsItemSubItemsItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string entryTypeFieldField;
-        
-        private string itemIdFieldField;
-        
-        private string levelFieldField;
-        
-        private string menuItemIdFieldField;
-        
-        private string modCodeIdFieldField;
-        
-        private string modGroupIdFieldField;
-        
-        private string nameFieldField;
-        
-        private string posEntryIdFieldField;
-        
-        private string priceFieldField;
-        
-        private string quantityFieldField;
-        
-        private string referenceIdFieldField;
-        
-        private string resultCodeFieldField;
-        
-        private Drs.Service.CustomerOrder.OrderItemsItemSubItemsItemSubItemsItemSubItemsItem[] subItemsFieldField;
-        
-        private string useTakeOutPriceFieldField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string entryTypeField {
-            get {
-                return this.entryTypeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.entryTypeFieldField, value) != true)) {
-                    this.entryTypeFieldField = value;
-                    this.RaisePropertyChanged("entryTypeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string itemIdField {
-            get {
-                return this.itemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemIdFieldField, value) != true)) {
-                    this.itemIdFieldField = value;
-                    this.RaisePropertyChanged("itemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string levelField {
-            get {
-                return this.levelFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.levelFieldField, value) != true)) {
-                    this.levelFieldField = value;
-                    this.RaisePropertyChanged("levelField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string menuItemIdField {
-            get {
-                return this.menuItemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.menuItemIdFieldField, value) != true)) {
-                    this.menuItemIdFieldField = value;
-                    this.RaisePropertyChanged("menuItemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modCodeIdField {
-            get {
-                return this.modCodeIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modCodeIdFieldField, value) != true)) {
-                    this.modCodeIdFieldField = value;
-                    this.RaisePropertyChanged("modCodeIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modGroupIdField {
-            get {
-                return this.modGroupIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modGroupIdFieldField, value) != true)) {
-                    this.modGroupIdFieldField = value;
-                    this.RaisePropertyChanged("modGroupIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string nameField {
-            get {
-                return this.nameFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameFieldField, value) != true)) {
-                    this.nameFieldField = value;
-                    this.RaisePropertyChanged("nameField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string posEntryIdField {
-            get {
-                return this.posEntryIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.posEntryIdFieldField, value) != true)) {
-                    this.posEntryIdFieldField = value;
-                    this.RaisePropertyChanged("posEntryIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceField {
-            get {
-                return this.priceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.priceFieldField, value) != true)) {
-                    this.priceFieldField = value;
-                    this.RaisePropertyChanged("priceField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string quantityField {
-            get {
-                return this.quantityFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.quantityFieldField, value) != true)) {
-                    this.quantityFieldField = value;
-                    this.RaisePropertyChanged("quantityField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string referenceIdField {
-            get {
-                return this.referenceIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.referenceIdFieldField, value) != true)) {
-                    this.referenceIdFieldField = value;
-                    this.RaisePropertyChanged("referenceIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string resultCodeField {
-            get {
-                return this.resultCodeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.resultCodeFieldField, value) != true)) {
-                    this.resultCodeFieldField = value;
-                    this.RaisePropertyChanged("resultCodeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrderItemsItemSubItemsItemSubItemsItemSubItemsItem[] subItemsField {
-            get {
-                return this.subItemsFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.subItemsFieldField, value) != true)) {
-                    this.subItemsFieldField = value;
-                    this.RaisePropertyChanged("subItemsField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string useTakeOutPriceField {
-            get {
-                return this.useTakeOutPriceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.useTakeOutPriceFieldField, value) != true)) {
-                    this.useTakeOutPriceFieldField = value;
-                    this.RaisePropertyChanged("useTakeOutPriceField");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrderItemsItemSubItemsItemSubItemsItemSubItemsItem", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrderItemsItemSubItemsItemSubItemsItemSubItemsItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string entryTypeFieldField;
-        
-        private string itemIdFieldField;
-        
-        private string levelFieldField;
-        
-        private string menuItemIdFieldField;
-        
-        private string modCodeIdFieldField;
-        
-        private string modGroupIdFieldField;
-        
-        private string nameFieldField;
-        
-        private string posEntryIdFieldField;
-        
-        private string priceFieldField;
-        
-        private string quantityFieldField;
-        
-        private string referenceIdFieldField;
-        
-        private string resultCodeFieldField;
-        
-        private Drs.Service.CustomerOrder.OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem[] subItemsFieldField;
-        
-        private string useTakeOutPriceFieldField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string entryTypeField {
-            get {
-                return this.entryTypeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.entryTypeFieldField, value) != true)) {
-                    this.entryTypeFieldField = value;
-                    this.RaisePropertyChanged("entryTypeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string itemIdField {
-            get {
-                return this.itemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemIdFieldField, value) != true)) {
-                    this.itemIdFieldField = value;
-                    this.RaisePropertyChanged("itemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string levelField {
-            get {
-                return this.levelFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.levelFieldField, value) != true)) {
-                    this.levelFieldField = value;
-                    this.RaisePropertyChanged("levelField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string menuItemIdField {
-            get {
-                return this.menuItemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.menuItemIdFieldField, value) != true)) {
-                    this.menuItemIdFieldField = value;
-                    this.RaisePropertyChanged("menuItemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modCodeIdField {
-            get {
-                return this.modCodeIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modCodeIdFieldField, value) != true)) {
-                    this.modCodeIdFieldField = value;
-                    this.RaisePropertyChanged("modCodeIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modGroupIdField {
-            get {
-                return this.modGroupIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modGroupIdFieldField, value) != true)) {
-                    this.modGroupIdFieldField = value;
-                    this.RaisePropertyChanged("modGroupIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string nameField {
-            get {
-                return this.nameFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameFieldField, value) != true)) {
-                    this.nameFieldField = value;
-                    this.RaisePropertyChanged("nameField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string posEntryIdField {
-            get {
-                return this.posEntryIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.posEntryIdFieldField, value) != true)) {
-                    this.posEntryIdFieldField = value;
-                    this.RaisePropertyChanged("posEntryIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceField {
-            get {
-                return this.priceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.priceFieldField, value) != true)) {
-                    this.priceFieldField = value;
-                    this.RaisePropertyChanged("priceField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string quantityField {
-            get {
-                return this.quantityFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.quantityFieldField, value) != true)) {
-                    this.quantityFieldField = value;
-                    this.RaisePropertyChanged("quantityField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string referenceIdField {
-            get {
-                return this.referenceIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.referenceIdFieldField, value) != true)) {
-                    this.referenceIdFieldField = value;
-                    this.RaisePropertyChanged("referenceIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string resultCodeField {
-            get {
-                return this.resultCodeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.resultCodeFieldField, value) != true)) {
-                    this.resultCodeFieldField = value;
-                    this.RaisePropertyChanged("resultCodeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem[] subItemsField {
-            get {
-                return this.subItemsFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.subItemsFieldField, value) != true)) {
-                    this.subItemsFieldField = value;
-                    this.RaisePropertyChanged("subItemsField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string useTakeOutPriceField {
-            get {
-                return this.useTakeOutPriceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.useTakeOutPriceFieldField, value) != true)) {
-                    this.useTakeOutPriceFieldField = value;
-                    this.RaisePropertyChanged("useTakeOutPriceField");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string entryTypeFieldField;
-        
-        private string itemIdFieldField;
-        
-        private string levelFieldField;
-        
-        private string menuItemIdFieldField;
-        
-        private string modCodeIdFieldField;
-        
-        private string modGroupIdFieldField;
-        
-        private string nameFieldField;
-        
-        private string posEntryIdFieldField;
-        
-        private string priceFieldField;
-        
-        private string quantityFieldField;
-        
-        private string referenceIdFieldField;
-        
-        private string resultCodeFieldField;
-        
-        private string useTakeOutPriceFieldField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string entryTypeField {
-            get {
-                return this.entryTypeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.entryTypeFieldField, value) != true)) {
-                    this.entryTypeFieldField = value;
-                    this.RaisePropertyChanged("entryTypeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string itemIdField {
-            get {
-                return this.itemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemIdFieldField, value) != true)) {
-                    this.itemIdFieldField = value;
-                    this.RaisePropertyChanged("itemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string levelField {
-            get {
-                return this.levelFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.levelFieldField, value) != true)) {
-                    this.levelFieldField = value;
-                    this.RaisePropertyChanged("levelField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string menuItemIdField {
-            get {
-                return this.menuItemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.menuItemIdFieldField, value) != true)) {
-                    this.menuItemIdFieldField = value;
-                    this.RaisePropertyChanged("menuItemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modCodeIdField {
-            get {
-                return this.modCodeIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modCodeIdFieldField, value) != true)) {
-                    this.modCodeIdFieldField = value;
-                    this.RaisePropertyChanged("modCodeIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modGroupIdField {
-            get {
-                return this.modGroupIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modGroupIdFieldField, value) != true)) {
-                    this.modGroupIdFieldField = value;
-                    this.RaisePropertyChanged("modGroupIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string nameField {
-            get {
-                return this.nameFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameFieldField, value) != true)) {
-                    this.nameFieldField = value;
-                    this.RaisePropertyChanged("nameField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string posEntryIdField {
-            get {
-                return this.posEntryIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.posEntryIdFieldField, value) != true)) {
-                    this.posEntryIdFieldField = value;
-                    this.RaisePropertyChanged("posEntryIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceField {
-            get {
-                return this.priceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.priceFieldField, value) != true)) {
-                    this.priceFieldField = value;
-                    this.RaisePropertyChanged("priceField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string quantityField {
-            get {
-                return this.quantityFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.quantityFieldField, value) != true)) {
-                    this.quantityFieldField = value;
-                    this.RaisePropertyChanged("quantityField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string referenceIdField {
-            get {
-                return this.referenceIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.referenceIdFieldField, value) != true)) {
-                    this.referenceIdFieldField = value;
-                    this.RaisePropertyChanged("referenceIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string resultCodeField {
-            get {
-                return this.resultCodeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.resultCodeFieldField, value) != true)) {
-                    this.resultCodeFieldField = value;
-                    this.RaisePropertyChanged("resultCodeField");
                 }
             }
         }
@@ -4177,7 +3236,7 @@ namespace Drs.Service.CustomerOrder {
         
         private string closedTimeFieldField;
         
-        private Drs.Service.CustomerOrder.OrdersOrderCustomer[] customerFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.OrdersOrderCustomer> customerFieldField;
         
         private string estimatedSubTotalFieldField;
         
@@ -4189,7 +3248,7 @@ namespace Drs.Service.CustomerOrder {
         
         private string fulfilledTimeFieldField;
         
-        private Drs.Service.CustomerOrder.OrdersOrderItemsItem[] itemsFieldField;
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.Item> itemsFieldField;
         
         private string lastPaymentTimeFieldField;
         
@@ -4257,7 +3316,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrdersOrderCustomer[] customerField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.OrdersOrderCustomer> customerField {
             get {
                 return this.customerFieldField;
             }
@@ -4335,7 +3394,7 @@ namespace Drs.Service.CustomerOrder {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrdersOrderItemsItem[] itemsField {
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.Item> itemsField {
             get {
                 return this.itemsFieldField;
             }
@@ -4885,1111 +3944,6 @@ namespace Drs.Service.CustomerOrder {
                 if ((object.ReferenceEquals(this.zipCodeFieldField, value) != true)) {
                     this.zipCodeFieldField = value;
                     this.RaisePropertyChanged("zipCodeField");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrdersOrderItemsItem", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrdersOrderItemsItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string entryTypeFieldField;
-        
-        private string itemIdFieldField;
-        
-        private string levelFieldField;
-        
-        private string menuItemIdFieldField;
-        
-        private string modCodeIdFieldField;
-        
-        private string modGroupIdFieldField;
-        
-        private string nameFieldField;
-        
-        private string posEntryIdFieldField;
-        
-        private string priceFieldField;
-        
-        private string quantityFieldField;
-        
-        private string resultCodeFieldField;
-        
-        private Drs.Service.CustomerOrder.OrdersOrderItemsItemSubItemsItem[] subItemsFieldField;
-        
-        private string useTakeOutPriceFieldField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string entryTypeField {
-            get {
-                return this.entryTypeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.entryTypeFieldField, value) != true)) {
-                    this.entryTypeFieldField = value;
-                    this.RaisePropertyChanged("entryTypeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string itemIdField {
-            get {
-                return this.itemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemIdFieldField, value) != true)) {
-                    this.itemIdFieldField = value;
-                    this.RaisePropertyChanged("itemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string levelField {
-            get {
-                return this.levelFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.levelFieldField, value) != true)) {
-                    this.levelFieldField = value;
-                    this.RaisePropertyChanged("levelField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string menuItemIdField {
-            get {
-                return this.menuItemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.menuItemIdFieldField, value) != true)) {
-                    this.menuItemIdFieldField = value;
-                    this.RaisePropertyChanged("menuItemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modCodeIdField {
-            get {
-                return this.modCodeIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modCodeIdFieldField, value) != true)) {
-                    this.modCodeIdFieldField = value;
-                    this.RaisePropertyChanged("modCodeIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modGroupIdField {
-            get {
-                return this.modGroupIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modGroupIdFieldField, value) != true)) {
-                    this.modGroupIdFieldField = value;
-                    this.RaisePropertyChanged("modGroupIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string nameField {
-            get {
-                return this.nameFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameFieldField, value) != true)) {
-                    this.nameFieldField = value;
-                    this.RaisePropertyChanged("nameField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string posEntryIdField {
-            get {
-                return this.posEntryIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.posEntryIdFieldField, value) != true)) {
-                    this.posEntryIdFieldField = value;
-                    this.RaisePropertyChanged("posEntryIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceField {
-            get {
-                return this.priceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.priceFieldField, value) != true)) {
-                    this.priceFieldField = value;
-                    this.RaisePropertyChanged("priceField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string quantityField {
-            get {
-                return this.quantityFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.quantityFieldField, value) != true)) {
-                    this.quantityFieldField = value;
-                    this.RaisePropertyChanged("quantityField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string resultCodeField {
-            get {
-                return this.resultCodeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.resultCodeFieldField, value) != true)) {
-                    this.resultCodeFieldField = value;
-                    this.RaisePropertyChanged("resultCodeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrdersOrderItemsItemSubItemsItem[] subItemsField {
-            get {
-                return this.subItemsFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.subItemsFieldField, value) != true)) {
-                    this.subItemsFieldField = value;
-                    this.RaisePropertyChanged("subItemsField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string useTakeOutPriceField {
-            get {
-                return this.useTakeOutPriceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.useTakeOutPriceFieldField, value) != true)) {
-                    this.useTakeOutPriceFieldField = value;
-                    this.RaisePropertyChanged("useTakeOutPriceField");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrdersOrderItemsItemSubItemsItem", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrdersOrderItemsItemSubItemsItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string entryTypeFieldField;
-        
-        private string itemIdFieldField;
-        
-        private string levelFieldField;
-        
-        private string menuItemIdFieldField;
-        
-        private string modCodeIdFieldField;
-        
-        private string modGroupIdFieldField;
-        
-        private string nameFieldField;
-        
-        private string posEntryIdFieldField;
-        
-        private string priceFieldField;
-        
-        private string quantityFieldField;
-        
-        private string resultCodeFieldField;
-        
-        private Drs.Service.CustomerOrder.OrdersOrderItemsItemSubItemsItemSubItemsItem[] subItemsFieldField;
-        
-        private string useTakeOutPriceFieldField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string entryTypeField {
-            get {
-                return this.entryTypeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.entryTypeFieldField, value) != true)) {
-                    this.entryTypeFieldField = value;
-                    this.RaisePropertyChanged("entryTypeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string itemIdField {
-            get {
-                return this.itemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemIdFieldField, value) != true)) {
-                    this.itemIdFieldField = value;
-                    this.RaisePropertyChanged("itemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string levelField {
-            get {
-                return this.levelFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.levelFieldField, value) != true)) {
-                    this.levelFieldField = value;
-                    this.RaisePropertyChanged("levelField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string menuItemIdField {
-            get {
-                return this.menuItemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.menuItemIdFieldField, value) != true)) {
-                    this.menuItemIdFieldField = value;
-                    this.RaisePropertyChanged("menuItemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modCodeIdField {
-            get {
-                return this.modCodeIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modCodeIdFieldField, value) != true)) {
-                    this.modCodeIdFieldField = value;
-                    this.RaisePropertyChanged("modCodeIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modGroupIdField {
-            get {
-                return this.modGroupIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modGroupIdFieldField, value) != true)) {
-                    this.modGroupIdFieldField = value;
-                    this.RaisePropertyChanged("modGroupIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string nameField {
-            get {
-                return this.nameFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameFieldField, value) != true)) {
-                    this.nameFieldField = value;
-                    this.RaisePropertyChanged("nameField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string posEntryIdField {
-            get {
-                return this.posEntryIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.posEntryIdFieldField, value) != true)) {
-                    this.posEntryIdFieldField = value;
-                    this.RaisePropertyChanged("posEntryIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceField {
-            get {
-                return this.priceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.priceFieldField, value) != true)) {
-                    this.priceFieldField = value;
-                    this.RaisePropertyChanged("priceField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string quantityField {
-            get {
-                return this.quantityFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.quantityFieldField, value) != true)) {
-                    this.quantityFieldField = value;
-                    this.RaisePropertyChanged("quantityField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string resultCodeField {
-            get {
-                return this.resultCodeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.resultCodeFieldField, value) != true)) {
-                    this.resultCodeFieldField = value;
-                    this.RaisePropertyChanged("resultCodeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrdersOrderItemsItemSubItemsItemSubItemsItem[] subItemsField {
-            get {
-                return this.subItemsFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.subItemsFieldField, value) != true)) {
-                    this.subItemsFieldField = value;
-                    this.RaisePropertyChanged("subItemsField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string useTakeOutPriceField {
-            get {
-                return this.useTakeOutPriceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.useTakeOutPriceFieldField, value) != true)) {
-                    this.useTakeOutPriceFieldField = value;
-                    this.RaisePropertyChanged("useTakeOutPriceField");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrdersOrderItemsItemSubItemsItemSubItemsItem", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrdersOrderItemsItemSubItemsItemSubItemsItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string entryTypeFieldField;
-        
-        private string itemIdFieldField;
-        
-        private string levelFieldField;
-        
-        private string menuItemIdFieldField;
-        
-        private string modCodeIdFieldField;
-        
-        private string modGroupIdFieldField;
-        
-        private string nameFieldField;
-        
-        private string posEntryIdFieldField;
-        
-        private string priceFieldField;
-        
-        private string quantityFieldField;
-        
-        private string resultCodeFieldField;
-        
-        private Drs.Service.CustomerOrder.OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem[] subItemsFieldField;
-        
-        private string useTakeOutPriceFieldField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string entryTypeField {
-            get {
-                return this.entryTypeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.entryTypeFieldField, value) != true)) {
-                    this.entryTypeFieldField = value;
-                    this.RaisePropertyChanged("entryTypeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string itemIdField {
-            get {
-                return this.itemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemIdFieldField, value) != true)) {
-                    this.itemIdFieldField = value;
-                    this.RaisePropertyChanged("itemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string levelField {
-            get {
-                return this.levelFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.levelFieldField, value) != true)) {
-                    this.levelFieldField = value;
-                    this.RaisePropertyChanged("levelField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string menuItemIdField {
-            get {
-                return this.menuItemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.menuItemIdFieldField, value) != true)) {
-                    this.menuItemIdFieldField = value;
-                    this.RaisePropertyChanged("menuItemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modCodeIdField {
-            get {
-                return this.modCodeIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modCodeIdFieldField, value) != true)) {
-                    this.modCodeIdFieldField = value;
-                    this.RaisePropertyChanged("modCodeIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modGroupIdField {
-            get {
-                return this.modGroupIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modGroupIdFieldField, value) != true)) {
-                    this.modGroupIdFieldField = value;
-                    this.RaisePropertyChanged("modGroupIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string nameField {
-            get {
-                return this.nameFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameFieldField, value) != true)) {
-                    this.nameFieldField = value;
-                    this.RaisePropertyChanged("nameField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string posEntryIdField {
-            get {
-                return this.posEntryIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.posEntryIdFieldField, value) != true)) {
-                    this.posEntryIdFieldField = value;
-                    this.RaisePropertyChanged("posEntryIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceField {
-            get {
-                return this.priceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.priceFieldField, value) != true)) {
-                    this.priceFieldField = value;
-                    this.RaisePropertyChanged("priceField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string quantityField {
-            get {
-                return this.quantityFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.quantityFieldField, value) != true)) {
-                    this.quantityFieldField = value;
-                    this.RaisePropertyChanged("quantityField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string resultCodeField {
-            get {
-                return this.resultCodeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.resultCodeFieldField, value) != true)) {
-                    this.resultCodeFieldField = value;
-                    this.RaisePropertyChanged("resultCodeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem[] subItemsField {
-            get {
-                return this.subItemsFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.subItemsFieldField, value) != true)) {
-                    this.subItemsFieldField = value;
-                    this.RaisePropertyChanged("subItemsField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string useTakeOutPriceField {
-            get {
-                return this.useTakeOutPriceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.useTakeOutPriceFieldField, value) != true)) {
-                    this.useTakeOutPriceFieldField = value;
-                    this.RaisePropertyChanged("useTakeOutPriceField");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string entryTypeFieldField;
-        
-        private string itemIdFieldField;
-        
-        private string levelFieldField;
-        
-        private string menuItemIdFieldField;
-        
-        private string modCodeIdFieldField;
-        
-        private string modGroupIdFieldField;
-        
-        private string nameFieldField;
-        
-        private string posEntryIdFieldField;
-        
-        private string priceFieldField;
-        
-        private string quantityFieldField;
-        
-        private string resultCodeFieldField;
-        
-        private Drs.Service.CustomerOrder.OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem[] subItemsFieldField;
-        
-        private string useTakeOutPriceFieldField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string entryTypeField {
-            get {
-                return this.entryTypeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.entryTypeFieldField, value) != true)) {
-                    this.entryTypeFieldField = value;
-                    this.RaisePropertyChanged("entryTypeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string itemIdField {
-            get {
-                return this.itemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemIdFieldField, value) != true)) {
-                    this.itemIdFieldField = value;
-                    this.RaisePropertyChanged("itemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string levelField {
-            get {
-                return this.levelFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.levelFieldField, value) != true)) {
-                    this.levelFieldField = value;
-                    this.RaisePropertyChanged("levelField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string menuItemIdField {
-            get {
-                return this.menuItemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.menuItemIdFieldField, value) != true)) {
-                    this.menuItemIdFieldField = value;
-                    this.RaisePropertyChanged("menuItemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modCodeIdField {
-            get {
-                return this.modCodeIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modCodeIdFieldField, value) != true)) {
-                    this.modCodeIdFieldField = value;
-                    this.RaisePropertyChanged("modCodeIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modGroupIdField {
-            get {
-                return this.modGroupIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modGroupIdFieldField, value) != true)) {
-                    this.modGroupIdFieldField = value;
-                    this.RaisePropertyChanged("modGroupIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string nameField {
-            get {
-                return this.nameFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameFieldField, value) != true)) {
-                    this.nameFieldField = value;
-                    this.RaisePropertyChanged("nameField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string posEntryIdField {
-            get {
-                return this.posEntryIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.posEntryIdFieldField, value) != true)) {
-                    this.posEntryIdFieldField = value;
-                    this.RaisePropertyChanged("posEntryIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceField {
-            get {
-                return this.priceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.priceFieldField, value) != true)) {
-                    this.priceFieldField = value;
-                    this.RaisePropertyChanged("priceField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string quantityField {
-            get {
-                return this.quantityFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.quantityFieldField, value) != true)) {
-                    this.quantityFieldField = value;
-                    this.RaisePropertyChanged("quantityField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string resultCodeField {
-            get {
-                return this.resultCodeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.resultCodeFieldField, value) != true)) {
-                    this.resultCodeFieldField = value;
-                    this.RaisePropertyChanged("resultCodeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public Drs.Service.CustomerOrder.OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem[] subItemsField {
-            get {
-                return this.subItemsFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.subItemsFieldField, value) != true)) {
-                    this.subItemsFieldField = value;
-                    this.RaisePropertyChanged("subItemsField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string useTakeOutPriceField {
-            get {
-                return this.useTakeOutPriceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.useTakeOutPriceFieldField, value) != true)) {
-                    this.useTakeOutPriceFieldField = value;
-                    this.RaisePropertyChanged("useTakeOutPriceField");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrdersOrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string entryTypeFieldField;
-        
-        private string itemIdFieldField;
-        
-        private string levelFieldField;
-        
-        private string menuItemIdFieldField;
-        
-        private string modCodeIdFieldField;
-        
-        private string modGroupIdFieldField;
-        
-        private string nameFieldField;
-        
-        private string posEntryIdFieldField;
-        
-        private string priceFieldField;
-        
-        private string quantityFieldField;
-        
-        private string resultCodeFieldField;
-        
-        private string useTakeOutPriceFieldField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string entryTypeField {
-            get {
-                return this.entryTypeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.entryTypeFieldField, value) != true)) {
-                    this.entryTypeFieldField = value;
-                    this.RaisePropertyChanged("entryTypeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string itemIdField {
-            get {
-                return this.itemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemIdFieldField, value) != true)) {
-                    this.itemIdFieldField = value;
-                    this.RaisePropertyChanged("itemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string levelField {
-            get {
-                return this.levelFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.levelFieldField, value) != true)) {
-                    this.levelFieldField = value;
-                    this.RaisePropertyChanged("levelField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string menuItemIdField {
-            get {
-                return this.menuItemIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.menuItemIdFieldField, value) != true)) {
-                    this.menuItemIdFieldField = value;
-                    this.RaisePropertyChanged("menuItemIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modCodeIdField {
-            get {
-                return this.modCodeIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modCodeIdFieldField, value) != true)) {
-                    this.modCodeIdFieldField = value;
-                    this.RaisePropertyChanged("modCodeIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string modGroupIdField {
-            get {
-                return this.modGroupIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.modGroupIdFieldField, value) != true)) {
-                    this.modGroupIdFieldField = value;
-                    this.RaisePropertyChanged("modGroupIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string nameField {
-            get {
-                return this.nameFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameFieldField, value) != true)) {
-                    this.nameFieldField = value;
-                    this.RaisePropertyChanged("nameField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string posEntryIdField {
-            get {
-                return this.posEntryIdFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.posEntryIdFieldField, value) != true)) {
-                    this.posEntryIdFieldField = value;
-                    this.RaisePropertyChanged("posEntryIdField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string priceField {
-            get {
-                return this.priceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.priceFieldField, value) != true)) {
-                    this.priceFieldField = value;
-                    this.RaisePropertyChanged("priceField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string quantityField {
-            get {
-                return this.quantityFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.quantityFieldField, value) != true)) {
-                    this.quantityFieldField = value;
-                    this.RaisePropertyChanged("quantityField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string resultCodeField {
-            get {
-                return this.resultCodeFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.resultCodeFieldField, value) != true)) {
-                    this.resultCodeFieldField = value;
-                    this.RaisePropertyChanged("resultCodeField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string useTakeOutPriceField {
-            get {
-                return this.useTakeOutPriceFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.useTakeOutPriceFieldField, value) != true)) {
-                    this.useTakeOutPriceFieldField = value;
-                    this.RaisePropertyChanged("useTakeOutPriceField");
                 }
             }
         }

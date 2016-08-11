@@ -283,150 +283,45 @@ namespace Drs.Service.Store
         {
             model.ClientInfo = _repositoryClient.GetClientById(model.ClientId ?? SettingsData.Constants.Entities.NULL_ID_INT);
             model.Phone = _repositoryClient.GetPhoneById(model.PhoneId);
-            //var arrItem = new OrderItemsItem[model.PosOrder.LstItems.Count];
-            var lstItem = new List<OrderItemsItem>();
-
-            OrderItemsItem itemLevel0 = null;
-            OrderItemsItemSubItemsItem itemLevel1 = null;
-            OrderItemsItemSubItemsItemSubItemsItem itemLevel2 = null;
-            OrderItemsItemSubItemsItemSubItemsItemSubItemsItem itemLevel3 = null;
-            var lstSubLevel0 = new List<OrderItemsItemSubItemsItem>();
-            var lstSubLevel1 = new List<OrderItemsItemSubItemsItemSubItemsItem>();
-            var lstSubLevel2 = new List<OrderItemsItemSubItemsItemSubItemsItemSubItemsItem>();
-            var lstSubLevel3 = new List<OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem>();
+            var lstItem = new List<Item>();
+            var dictItem = new Dictionary<long, Item>();
 
             foreach (var item in model.PosOrder.LstItems)
             {
-                switch (item.Level)
+                var itemToSend = new Item
                 {
-                    case 4:
-                        var itemL4 = new OrderItemsItemSubItemsItemSubItemsItemSubItemsItemSubItemsItem
-                        {
-                            menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
-                            referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
-                            quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
-                            priceField = item.Price.ToString(CultureInfo.InvariantCulture),
-                            levelField = item.Level.ToString(CultureInfo.InvariantCulture)
-                        };
+                    menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
+                    referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
+                    quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
+                    priceField = item.Price.ToString(CultureInfo.InvariantCulture),
+                    levelField = item.Level.ToString(CultureInfo.InvariantCulture)
 
-                        lstSubLevel3.Add(itemL4);
+                };
 
-                        break;
-                    case 3:
-                        if (itemLevel3 != null && lstSubLevel3.Any())
-                            itemLevel3.subItemsField = lstSubLevel3.ToArray();
+                dictItem[item.CheckItemId] = itemToSend;
 
-                        var itemL3 = new OrderItemsItemSubItemsItemSubItemsItemSubItemsItem
-                        {
-                            menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
-                            referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
-                            quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
-                            priceField = item.Price.ToString(CultureInfo.InvariantCulture),
-                            levelField = item.Level.ToString(CultureInfo.InvariantCulture)
-                        };
-
-                        itemLevel3 = itemL3;                        
-                        lstSubLevel2.Add(itemL3);
-                        lstSubLevel3.Clear();
-                        break;
-                    case 2:
-                        if (itemLevel2 != null && lstSubLevel2.Any())
-                        {
-                            if (lstSubLevel3.Any())
-                                lstSubLevel2[lstSubLevel2.Count - 1].subItemsField = lstSubLevel3.ToArray();
-
-                            itemLevel2.subItemsField = lstSubLevel2.ToArray();
-                        }
-
-                        var itemL2 = new OrderItemsItemSubItemsItemSubItemsItem
-                        {
-                            menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
-                            referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
-                            quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
-                            priceField = item.Price.ToString(CultureInfo.InvariantCulture),
-                            levelField = item.Level.ToString(CultureInfo.InvariantCulture)
-                        };
-
-                        itemLevel2 = itemL2;
-                        lstSubLevel1.Add(itemL2);
-                        lstSubLevel2.Clear(); lstSubLevel3.Clear();
-                        break;
-                    case 1:
-
-                        if (itemLevel1 != null && lstSubLevel1.Any())
-                        {
-                            if (lstSubLevel3.Any())
-                                lstSubLevel2[lstSubLevel2.Count - 1].subItemsField = lstSubLevel3.ToArray();
-
-                            if (lstSubLevel2.Any())
-                                lstSubLevel1[lstSubLevel1.Count - 1].subItemsField = lstSubLevel2.ToArray();
-
-                            itemLevel1.subItemsField = lstSubLevel1.ToArray();
-                        }
-
-                        var itemL1 = new OrderItemsItemSubItemsItem
-                        {
-                            menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
-                            referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
-                            quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
-                            priceField = item.Price.ToString(CultureInfo.InvariantCulture),
-                            levelField = item.Level.ToString(CultureInfo.InvariantCulture),
-                        };
-
-                        itemLevel1 = itemL1;
-                        lstSubLevel0.Add(itemL1);
-                        lstSubLevel1.Clear(); lstSubLevel2.Clear(); lstSubLevel3.Clear();
-
-                        break;
-                    default:
-
-                        if (itemLevel0 != null && lstSubLevel0.Any())
-                        {
-                            if (lstSubLevel3.Any())
-                                lstSubLevel2[lstSubLevel2.Count - 1].subItemsField = lstSubLevel3.ToArray();
-
-                            if (lstSubLevel2.Any())
-                                lstSubLevel1[lstSubLevel1.Count - 1].subItemsField = lstSubLevel2.ToArray();
-
-                            if (lstSubLevel1.Any())
-                                lstSubLevel0[lstSubLevel0.Count - 1].subItemsField = lstSubLevel1.ToArray();
-
-                            itemLevel0.subItemsField = lstSubLevel0.ToArray();
-                        }
-
-                        itemLevel0 = new OrderItemsItem
-                        {
-                            menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
-                            referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
-                            quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
-                            priceField = item.Price.ToString(CultureInfo.InvariantCulture),
-                            levelField = item.Level.ToString(CultureInfo.InvariantCulture)
-                        };
-
-                        lstItem.Add(itemLevel0);
-                        lstSubLevel0.Clear(); lstSubLevel1.Clear(); lstSubLevel2.Clear(); lstSubLevel3.Clear(); 
-                        break;
+                if (item.Parent == null)
+                {
+                    lstItem.Add(itemToSend);
+                    continue;
                 }
+
+                var itemParent = dictItem[item.Parent.CheckItemId];
+
+                if (itemParent.subItemsField == null)
+                {
+                    itemParent.subItemsField = new List<Item>{itemToSend};
+                }
+                else
+                {
+                    itemParent.subItemsField.Add(itemToSend);
+                }
+
             }
-
-            if (itemLevel0 != null && lstSubLevel0.Any())
-            {
-                if (lstSubLevel3.Any())
-                    lstSubLevel2[lstSubLevel2.Count - 1].subItemsField = lstSubLevel3.ToArray();
-
-                if (lstSubLevel2.Any())
-                    lstSubLevel1[lstSubLevel1.Count - 1].subItemsField = lstSubLevel2.ToArray();
-
-                if (lstSubLevel1.Any())
-                    lstSubLevel0[lstSubLevel0.Count - 1].subItemsField = lstSubLevel1.ToArray();
-
-                itemLevel0.subItemsField = lstSubLevel0.ToArray();
-            }
-
 
             var order = new CustomerOrder.Order
             {
-                customerField = new[]
+                customerField = new List<OrderCustomer>
                 {
                     new OrderCustomer
                     {
@@ -448,11 +343,11 @@ namespace Drs.Service.Store
                 referenceIdField = model.OrderToStoreId.ToString(CultureInfo.InvariantCulture),
                 modeField = model.OrderDetails.PosOrderMode,//SettingsData.Constants.StoreConst.SENDING_MODE_DELIVERY,
                 //statusField = "InDelay",
-                itemsField = new[]
+                itemsField = new List<OrderItems>
                 {
                     new OrderItems
                     {
-                        itemField = lstItem.ToArray(),
+                        itemField = lstItem,
                     }
                 }
             };
