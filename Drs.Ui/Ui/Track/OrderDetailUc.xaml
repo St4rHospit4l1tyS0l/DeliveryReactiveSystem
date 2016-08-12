@@ -69,7 +69,7 @@
 
             <Label Content="Fecha/Hora pedido:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
             <Label Content="ID Orden:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
-            <Label Content="Tienda:" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="Sucursal:" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
             <Label Content="Franquicia:" Grid.Row="0" Grid.Column="6" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
             <Label Content="Último estado:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
             <Label Content="Tiempo promesa:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>

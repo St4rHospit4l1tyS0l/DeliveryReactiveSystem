@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="1100" HorizontalAlignment="Stretch" Margin="20,0,20,10">
+             d:DesignHeight="250" d:DesignWidth="1400" HorizontalAlignment="Stretch" Margin="20,0,20,10">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -36,8 +36,8 @@
                                VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="32"/>
         </DockPanel>
         <Grid HorizontalAlignment="Stretch">
-            <DataGrid x:Name="ItemDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="350"
-                  ItemsSource="{Binding Source={StaticResource LstItemsKey}}" SelectionMode="Single"
+            <DataGrid x:Name="ItemDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="350" HorizontalContentAlignment="Center"
+                  ItemsSource="{Binding Source={StaticResource LstItemsKey}}" SelectionMode="Single" HorizontalAlignment="Center"
                   SelectedItem="{Binding ItemSelection}" MinHeight="320" VerticalScrollBarVisibility="Auto"
                   FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                   AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
@@ -93,22 +93,6 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <!--<DataGridTextColumn Header="Fecha"  MinWidth="100" 
-                                    Binding="{Binding DateOrder}" >
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Hora"  MinWidth="100" 
-                                    Binding="{Binding TimeOrder}" >
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>-->
                     <DataGridTextColumn Header="Nombre completo" MinWidth="220"
                                     Binding="{Binding FullName}" >
                         <DataGridTextColumn.ElementStyle>
@@ -125,8 +109,16 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Tienda" MinWidth="140"
+                    <DataGridTextColumn Header="Sucursal" MinWidth="140"
                                     Binding="{Binding StoreName}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Estado" MinWidth="140"
+                                    Binding="{Binding LastStatusEx}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />

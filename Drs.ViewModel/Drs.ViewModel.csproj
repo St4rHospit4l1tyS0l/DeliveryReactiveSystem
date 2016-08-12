@@ -136,6 +136,8 @@
     <Compile Include="Setting\SettingConfigureWs.cs" />
     <Compile Include="Shared\IMsgWndVm.cs" />
     <Compile Include="Shared\PagerVm.cs" />
+    <Compile Include="Status\IDailyOrderStatusVm.cs" />
+    <Compile Include="Status\DailyOrderStatusVm.cs" />
     <Compile Include="Track\IOrderDetailVm.cs" />
     <Compile Include="Shared\IWizItem.cs" />
     <Compile Include="Order\OrderSummaryVm.cs" />

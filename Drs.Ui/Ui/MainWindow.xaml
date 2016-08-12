@@ -14,6 +14,8 @@
         xmlns:viewTrack="clr-namespace:Drs.Ui.Ui.Track"
         xmlns:vmShared="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
         xmlns:shared="clr-namespace:Drs.Ui.Ui.Shared"
+        xmlns:vmDailyOrder="clr-namespace:Drs.ViewModel.Status;assembly=Drs.ViewModel"
+        xmlns:viewDailyOrder="clr-namespace:Drs.Ui.Ui.Status"
         mc:Ignorable="d"  d:DesignHeight="1024" d:DesignWidth="1920" WindowStyle="None" ResizeMode="NoResize"  Topmost="False" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized" UseNoneWindowStyle="True" ShowCloseButton="False" ShowIconOnTitleBar="False" 
                       ShowMinButton="False" ShowTitleBar="False" IgnoreTaskbarOnMaximize="True" Deactivated="MainWindow_OnDeactivated" LostFocus="MainWindow_OnLostFocus">
@@ -29,6 +31,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vmTrack:TrackOrderVm}">
             <viewTrack:TrackOrderUc/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmDailyOrder:DailyOrderStatusVm}">
+            <viewDailyOrder:DailyOrderStatusUc/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vmOrder:UpsertClientFoVm}">
             <viewOrder:UpsertClientFo/>

@@ -14,6 +14,7 @@ using Drs.ViewModel.Main;
 using Drs.ViewModel.Menu;
 using Drs.ViewModel.Order;
 using Drs.ViewModel.Shared;
+using Drs.ViewModel.Status;
 using Drs.ViewModel.Track;
 using MahApps.Metro.Controls;
 
@@ -57,6 +58,8 @@ namespace Drs.Ui
             builder.RegisterType<LastOrderFoVm>().As<ILastOrderFoVm>().ExternallyOwned();
 
             builder.RegisterType<TrackOrderVm>().As<ITrackOrderVm>().ExternallyOwned();
+            builder.RegisterType<DailyOrderStatusVm>().As <IDailyOrderStatusVm>().ExternallyOwned();
+
             builder.RegisterType<SearchTrackOrderVm>().As<ISearchTrackOrderVm>().ExternallyOwned();
             builder.RegisterType<OrdersListVm>().As<IOrdersListVm>().ExternallyOwned();
             builder.RegisterType<OrderDetailVm>().As<IOrderDetailVm>().ExternallyOwned();

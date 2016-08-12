@@ -13,6 +13,7 @@ using Drs.ViewModel.Account;
 using Drs.ViewModel.Menu;
 using Drs.ViewModel.Order;
 using Drs.ViewModel.Shared;
+using Drs.ViewModel.Status;
 using Drs.ViewModel.Track;
 using MahApps.Metro.Controls;
 using ReactiveUI;
@@ -125,7 +126,7 @@ namespace Drs.ViewModel.Main
             Flyouts.Add(BootStrapper.CreateFlyoutControl(flyout));
         }
 
-        public ShellContainerVm(ILoginVm loginVm, IMenuVm menuVm, IMainOrderVm orderVm, ITrackOrderVm trackOrderVm, IMsgWndVm msgWndVm)
+        public ShellContainerVm(ILoginVm loginVm, IMenuVm menuVm, IMainOrderVm orderVm, IDailyOrderStatusVm dailyOrderVm, ITrackOrderVm trackOrderVm, IMsgWndVm msgWndVm)
         {
             HeaderVisibility = Visibility.Collapsed;
 
@@ -140,7 +141,7 @@ namespace Drs.ViewModel.Main
                 {StatusScreen.UmOrd, orderVm},
                 {StatusScreen.UmTrc, trackOrderVm},
                 {StatusScreen.UmMsg, msgWndVm},
-                {StatusScreen.UmStt, loginVm}
+                {StatusScreen.UmStt, dailyOrderVm}
 
             });
 
