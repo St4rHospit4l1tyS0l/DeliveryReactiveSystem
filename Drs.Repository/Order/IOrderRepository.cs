@@ -20,8 +20,8 @@ namespace Drs.Repository.Order
         void RemoveRelPhoneAddress(AddressPhoneModel model);
         int? SavePosCheck(PosCheck model);
         int GetPhoneIdByPhone(string phone);
-        OrderInfoModel GetPosOrderById(int clientPhoneId);
-        PosCheck GetPosCheckByOrderId(int posOrderId);
-        IEnumerable<LastOrderInfoModel> GetLastNthPosOrderIdByPhoneId(int clientPhoneId);
+        OrderInfoModel GetPosOrderByOrderToStoreId(long orderToStoreId);
+        PosCheck GetPosCheckById(int posOrderId);
+        IEnumerable<LastOrderInfoModel> GetLastNthOrdersIdByClientPhoneId(int clientPhoneId);
     }
 }

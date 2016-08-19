@@ -6,9 +6,9 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Drs.Infrastructure.Extensions.Enumerables;
-using Drs.Model.Annotations;
 using Drs.Model.Constants;
 using Drs.Model.Order;
+using Drs.Model.Properties;
 using Drs.Model.Shared;
 using Drs.Model.UiView.Shared;
 using Drs.Repository.Log;
@@ -85,15 +85,15 @@ namespace Drs.ViewModel.Order
         {
             await Task.Run(() =>
             {
-                var posOrderId = o as int?;
+                var orderToStoreId = o as long?;
 
-                if (posOrderId == null)
+                if (orderToStoreId == null)
                     return;
 
                 RxApp.MainThreadScheduler.Schedule(_ =>
                 {
-                    SingleSelectButton(posOrderId.Value);
-                    OnPosOrderIdSelected(posOrderId.Value);
+                    SingleSelectButton(orderToStoreId.Value);
+                    OnPosOrderIdSelected(orderToStoreId.Value);
                 });
             });
 
@@ -132,12 +132,12 @@ namespace Drs.ViewModel.Order
                     .Subscribe(OnLastNthOrdersReady, OnLastNthOrdersError);
         }
 
-        public void OnPosOrderIdSelected(int posOrderId)
+        public void OnPosOrderIdSelected(long orderToStoreId)
         {
             RxApp.MainThreadScheduler.Schedule(_ => { IsGettingSelectedOrder = true; });
 
-            _client.ExecutionProxy.ExecuteRequest<int, int, ResponseMessageData<PropagateOrderModel>, ResponseMessageData<PropagateOrderModel>>
-                    (posOrderId, TransferDto.SameType, SharedConstants.Server.ORDER_HUB,
+            _client.ExecutionProxy.ExecuteRequest<long, long, ResponseMessageData<PropagateOrderModel>, ResponseMessageData<PropagateOrderModel>>
+                    (orderToStoreId, TransferDto.SameType, SharedConstants.Server.ORDER_HUB,
                         SharedConstants.Server.POS_ORDER_BYID_ORDER_HUB_METHOD, TransferDto.SameType)
                     .Subscribe(OnPosCheckReady, OnPosCheckError);
 
@@ -183,9 +183,9 @@ namespace Drs.ViewModel.Order
                         LstLastOrdersButtons.Add(new StackButtonModel(order));
                     }
 
-                    var firstPosOrderId = LstLastOrdersButtons[0].PosOrderId;
-                    OnPosOrderIdSelected(firstPosOrderId);
-                    SingleSelectButton(firstPosOrderId);
+                    var firstOrderToStoreId = LstLastOrdersButtons[0].OrderToStoreId;
+                    OnPosOrderIdSelected(firstOrderToStoreId);
+                    SingleSelectButton(firstOrderToStoreId);
                     IsOpen = true;
                 });
                 
@@ -201,16 +201,16 @@ namespace Drs.ViewModel.Order
             }
         }
 
-        private void SingleSelectButton(int firstPosOrderId)
+        private void SingleSelectButton(long firstOrderToStoreId)
         {
-            var order = LstLastOrdersButtons.FirstOrDefault(e => e.PosOrderId == firstPosOrderId);
+            var order = LstLastOrdersButtons.FirstOrDefault(e => e.OrderToStoreId == firstOrderToStoreId);
             if (order == null)
                 return;
 
             if (!order.IsSelected)
                 order.IsSelected = true;
 
-            foreach (var orderNotSelected in LstLastOrdersButtons.Where(e => e.PosOrderId != firstPosOrderId))
+            foreach (var orderNotSelected in LstLastOrdersButtons.Where(e => e.OrderToStoreId != firstOrderToStoreId))
                 orderNotSelected.IsSelected = false;
 
         }
@@ -249,26 +249,22 @@ namespace Drs.ViewModel.Order
                     IsGettingSelectedOrder = false;
                     LstItems.Clear();
                     PropagateOrder = obj.Data.Data;
-                });
-
-
-                try
-                {
-                    if (PropagateOrder != null && PropagateOrder.PosCheck != null)
-                        PropagateOrder.PosCheck.FixItemParents();
-                }
-                catch (Exception ex)
-                {
-                    SharedLogger.LogError(ex);
-                    MessageBus.Current.SendMessage(new MessageBoxSettings
+                    try
                     {
-                        Message = "Existe el siguiente problema al obtener el pedido: " + ex.Message,
-                        Title = "Error al obtener el pedido",
-                    }, SharedMessageConstants.MSG_SHOW_ERRQST);
-                }
+                        if (PropagateOrder != null && PropagateOrder.PosCheck != null)
+                            PropagateOrder.PosCheck.FixItemParents();
+                    }
+                    catch (Exception ex)
+                    {
+                        SharedLogger.LogError(ex);
+                        MessageBus.Current.SendMessage(new MessageBoxSettings
+                        {
+                            Message = "Existe el siguiente problema al jerarquizar el pedido: " + ex.Message,
+                            Title = "Error al obtener el pedido",
+                        }, SharedMessageConstants.MSG_SHOW_ERRQST);
+                        return;
+                    }
 
-                RxApp.MainThreadScheduler.Schedule(_ =>
-                {
                     var lstNewItems = PropagateOrder.PosCheck.LstItems.Select(e => new QtItemModel
                     {
                         ItemId = e.ItemId,

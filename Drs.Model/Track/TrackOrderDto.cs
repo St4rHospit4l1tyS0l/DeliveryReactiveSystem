@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using Drs.Model.Annotations;
 using Drs.Model.Catalog;
+using Drs.Model.Properties;
 using Drs.Model.Shared;
 
 namespace Drs.Model.Track

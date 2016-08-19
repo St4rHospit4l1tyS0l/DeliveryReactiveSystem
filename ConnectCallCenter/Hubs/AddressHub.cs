@@ -2,6 +2,7 @@
 using Autofac;
 using Drs.Model.Address;
 using Drs.Model.Constants;
+using Drs.Model.Properties;
 using Drs.Model.Shared;
 using Drs.Repository.Log;
 using Drs.Service.Address;
@@ -11,10 +12,10 @@ using Microsoft.AspNet.SignalR.Hubs;
 
 namespace ConnectCallCenter.Hubs
 {
-    [HubName(SharedConstants.Server.ADDRESS_HUB)]
+    [HubName(SharedConstants.Server.ADDRESS_HUB), UsedImplicitly]
     public class AddressHub : Hub
     {
-        [HubMethodName(SharedConstants.Server.SEARCH_HIERARCHY_BY_ZIPCODE_ADDRESS_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEARCH_HIERARCHY_BY_ZIPCODE_ADDRESS_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<AddressResponseSearch> SearchHierarchyByZipCode(String zipCode)
         {
             try
@@ -32,7 +33,7 @@ namespace ConnectCallCenter.Hubs
             }
         }
 
-        [HubMethodName(SharedConstants.Server.SEARCH_BY_ZIPCODE_ADDRESS_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEARCH_BY_ZIPCODE_ADDRESS_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<ListItemModel> SearchByZipCode(String zipCode)
         {
             try
@@ -51,7 +52,7 @@ namespace ConnectCallCenter.Hubs
             }
         }
         
-        [HubMethodName(SharedConstants.Server.FILL_NEXT_LIST_BYNAME_ADDRESS_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.FILL_NEXT_LIST_BYNAME_ADDRESS_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<ListItemModel> FillNextListByName(AddressQuery addressQuery)
         {
             try
@@ -74,7 +75,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.SAVE_ADDRESS_ADDRESS_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SAVE_ADDRESS_ADDRESS_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<AddressInfoModel> SaveClient(AddressInfoModel model)
         {
             try
@@ -89,7 +90,7 @@ namespace ConnectCallCenter.Hubs
             }
         }
         
-        [HubMethodName(SharedConstants.Server.SEARCH_ADDRESS_BY_PHONE_ADDRESS_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEARCH_ADDRESS_BY_PHONE_ADDRESS_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<AddressInfoModel> SearchAddressByPhone(String phone)
         {
             try
@@ -108,7 +109,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.REMOVE_REL_PHONECLIENT_ADDRESS_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.REMOVE_REL_PHONECLIENT_ADDRESS_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<bool> RemoveRelPhoneAddress(AddressPhoneModel model)
         {
             try

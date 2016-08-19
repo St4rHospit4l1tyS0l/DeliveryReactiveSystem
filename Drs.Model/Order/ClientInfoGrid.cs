@@ -5,9 +5,9 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using Drs.Infrastructure.Entity;
 using Drs.Infrastructure.Extensions;
-using Drs.Model.Annotations;
 using Drs.Model.Client.Recurrence;
 using Drs.Model.Constants;
+using Drs.Model.Properties;
 using Drs.Model.Shared;
 using Drs.Model.Validation;
 

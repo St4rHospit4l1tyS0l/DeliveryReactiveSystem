@@ -1,6 +1,6 @@
 ﻿using System;
 using Drs.Infrastructure.Extensions;
-using Drs.Model.Annotations;
+using Drs.Model.Properties;
 
 namespace Drs.Repository.Entities.Metadata
 {

@@ -2,7 +2,7 @@
 using Autofac;
 using Drs.Model.Constants;
 using Drs.Model.Menu;
-using Drs.Model.Settings;
+using Drs.Model.Properties;
 using Drs.Model.Shared;
 using Drs.Repository.Log;
 using Drs.Service.Account;
@@ -12,10 +12,10 @@ using Microsoft.AspNet.SignalR.Hubs;
 namespace ConnectCallCenter.Hubs
 {
 
-    [HubName(SharedConstants.Server.ACCOUNT_HUB)]
+    [HubName(SharedConstants.Server.ACCOUNT_HUB), UsedImplicitly]
     public class AccountHub : Hub
     {
-        [HubMethodName(SharedConstants.Server.MENU_INFO_ACCOUNT_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.MENU_INFO_ACCOUNT_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<ButtonItemModel> GetMenuByUser(String username)
         {
             try
@@ -34,7 +34,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.ACCOUNT_INFO_ACCOUNT_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.ACCOUNT_INFO_ACCOUNT_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<string> GetAccountInfo()
         {
             try

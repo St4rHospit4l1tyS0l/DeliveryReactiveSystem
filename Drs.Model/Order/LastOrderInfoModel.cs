@@ -4,7 +4,7 @@ namespace Drs.Model.Order
 {
     public class LastOrderInfoModel
     {
-        public int PosOrderId { get; set; }
+        public long OrderToStoreId { get; set; }
         public string ClientName { get; set; }
         public string FranchiseName { get; set; }
         public string StoreName { get; set; }

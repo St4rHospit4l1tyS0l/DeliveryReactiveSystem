@@ -147,11 +147,11 @@ namespace Drs.Service.Order
             }
         }
 
-        public ResponseMessageData<PropagateOrderModel> PosOrderById(int posOrderId)
+        public ResponseMessageData<PropagateOrderModel> PosOrderByOrderToStoreId(long orderToStoreId)
         {
             using (_repository)
             {
-                var order = _repository.GetPosOrderById(posOrderId);
+                var order = _repository.GetPosOrderByOrderToStoreId(orderToStoreId);
 
                 if (order == null)
                 {
@@ -162,7 +162,7 @@ namespace Drs.Service.Order
                     };
                 }
 
-                var posCheck = _repository.GetPosCheckByOrderId(order.PosOrderId);
+                var posCheck = _repository.GetPosCheckById(order.PosOrderId);
 
                 if (posCheck == null)
                 {
@@ -202,7 +202,7 @@ namespace Drs.Service.Order
             using (_repository)
             {
                 var clientPhoneId = _repository.GetPhoneIdByPhone(phone);
-                var lstLastNthOrders = _repository.GetLastNthPosOrderIdByPhoneId(clientPhoneId);
+                var lstLastNthOrders = _repository.GetLastNthOrdersIdByClientPhoneId(clientPhoneId);
 
                 return new ResponseMessageData<LastOrderInfoModel>
                 {

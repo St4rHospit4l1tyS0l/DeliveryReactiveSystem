@@ -70,21 +70,21 @@ namespace Drs.Service.Store
                     return resMsg;
                 }
 
-                int franchiseId = _repositoryStore.GetFranchiseIdByStoreId(store.IdKey.Value);
-
-                var offline = _repositoryStore.IsStoreOnline(store.IdKey.Value, DateTime.UtcNow);
-                
-                if(offline != null)
-                {
-                    resMsg.IsSuccess = false;
-                    resMsg.Message = GetMessageStoreOffline(offline, store);
-                    return resMsg;
-                }
+                var franchiseId = _repositoryStore.GetFranchiseIdByStoreId(store.IdKey.Value);
 
                 model.Store = store;
                 model.FranchiseId = franchiseId;
                 model.UserId = AccountRepository.GetIdByUsername(model.Username, _repositoryStore.InnerDbEntities);
                 _repositoryStore.SaveOrderToStore(model);
+
+                var offline = _repositoryStore.IsStoreOnline(store.IdKey.Value, DateTime.UtcNow);
+
+                if (offline != null)
+                {
+                    resMsg.IsSuccess = false;
+                    resMsg.Message = GetMessageStoreOffline(offline, store);
+                    return resMsg;
+                }
             }
 
             Task.Run(() => SendOrderToStoreEvent(model, clients));

@@ -5,6 +5,7 @@ using Drs.Model.Client;
 using Drs.Model.Client.Recurrence;
 using Drs.Model.Constants;
 using Drs.Model.Order;
+using Drs.Model.Properties;
 using Drs.Model.Shared;
 using Drs.Repository.Log;
 using Drs.Service.Client;
@@ -14,10 +15,10 @@ using Microsoft.AspNet.SignalR.Hubs;
 
 namespace ConnectCallCenter.Hubs
 {
-    [HubName(SharedConstants.Server.CLIENT_HUB)]
+    [HubName(SharedConstants.Server.CLIENT_HUB), UsedImplicitly]
     public class ClientHub : Hub
     {
-        [HubMethodName(SharedConstants.Server.SEARCH_BY_PHONE_CLIENT_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEARCH_BY_PHONE_CLIENT_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<ListItemModel> SearchByPhone(String phone)
         {
             try
@@ -35,7 +36,7 @@ namespace ConnectCallCenter.Hubs
             }
         }
         
-        [HubMethodName(SharedConstants.Server.SEARCH_BY_COMPANY_CLIENT_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEARCH_BY_COMPANY_CLIENT_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<ListItemModel> SearchByCompany(String company)
         {
             try
@@ -54,7 +55,7 @@ namespace ConnectCallCenter.Hubs
         }
 
         
-        [HubMethodName(SharedConstants.Server.SEARCH_CLIENTS_BY_PHONE_CLIENT_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEARCH_CLIENTS_BY_PHONE_CLIENT_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<ClientInfoModel> SearchClientsByPhone(String phone)
         {
             try
@@ -73,7 +74,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.SEARCH_BY_CLIENTNAME_CLIENT_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEARCH_BY_CLIENTNAME_CLIENT_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<ListItemModel> SearchClientsByClientName(String clientName)
         {
             try
@@ -92,7 +93,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.REMOVE_REL_PHONECLIENT_CLIENT_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.REMOVE_REL_PHONECLIENT_CLIENT_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<bool> RemoveRelPhoneClient(ClientPhoneModel model)
         {
             try
@@ -106,7 +107,7 @@ namespace ConnectCallCenter.Hubs
             }
         }
 
-        [HubMethodName(SharedConstants.Server.CALCULATE_RECURRENCE_CLIENT_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.CALCULATE_RECURRENCE_CLIENT_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<RecurrenceResponseModel> CalculateRecurrence(List<int> lstClientId)
         {
             try

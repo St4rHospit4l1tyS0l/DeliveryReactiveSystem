@@ -2,6 +2,7 @@
 using Autofac;
 using Drs.Model.Constants;
 using Drs.Model.Order;
+using Drs.Model.Properties;
 using Drs.Model.Shared;
 using Drs.Model.Store;
 using Drs.Repository.Log;
@@ -12,10 +13,10 @@ using Microsoft.AspNet.SignalR.Hubs;
 namespace ConnectCallCenter.Hubs
 {
 
-    [HubName(SharedConstants.Server.STORE_HUB)]
+    [HubName(SharedConstants.Server.STORE_HUB), UsedImplicitly]
     public class StoreHub : Hub
     {
-        [HubMethodName(SharedConstants.Server.SEND_ORDER_TO_STORE_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEND_ORDER_TO_STORE_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<OrderModelDto> SendOrderToStore(OrderModelDto model)
         {
             try
@@ -30,7 +31,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.CANCEL_ORDER_STORE_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.CANCEL_ORDER_STORE_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<ResponseMessage> CancelOrder(long orderToStoreId)
         {
             try
@@ -49,7 +50,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.AVAILABLE_FOR_ADDRESS_STORE_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.AVAILABLE_FOR_ADDRESS_STORE_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<StoreModel> StoreAvailableForAddress(StoreAvailableModel model)
         {
             try
@@ -80,7 +81,7 @@ namespace ConnectCallCenter.Hubs
 
 
 
-        [HubMethodName(SharedConstants.Server.AVAILABLE_BY_STORE_STORE_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.AVAILABLE_BY_STORE_STORE_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<StoreModel> StoreAvailableByStore(ItemCatalog item)
         {
             try

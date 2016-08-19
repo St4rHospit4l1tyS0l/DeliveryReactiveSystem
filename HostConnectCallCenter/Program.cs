@@ -28,7 +28,7 @@ namespace HostConnectCallCenter
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message + " | " + ex.StackTrace + " | " + (ex.InnerException != null ? ex.InnerException.Message : "") );
                 Console.ReadLine();
             }
         }

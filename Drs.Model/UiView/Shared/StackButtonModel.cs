@@ -14,11 +14,11 @@ namespace Drs.Model.UiView.Shared
                     _order.ClientName, Environment.NewLine, _order.StoreName, _order.Total);
             }
         }
-        public int PosOrderId
+        public long OrderToStoreId
         {
             get
             {
-                return _order.PosOrderId;
+                return _order.OrderToStoreId;
             }
         }
 

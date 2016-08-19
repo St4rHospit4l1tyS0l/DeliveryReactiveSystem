@@ -81,8 +81,9 @@ namespace Drs.ViewModel.Order
 
             response = ValidateModel(ClientFlags.ValidateOrder.Phone | ClientFlags.ValidateOrder.Franchise |
                               ClientFlags.ValidateOrder.Client
-                              | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.Order |
-                              ClientFlags.ValidateOrder.StoreAvailable | ClientFlags.ValidateOrder.OrderSaved);
+                              | ClientFlags.ValidateOrder.Address | ClientFlags.ValidateOrder.Order 
+                              | ClientFlags.ValidateOrder.StoreAvailable 
+                              | ClientFlags.ValidateOrder.OrderSaved);
 
             if (response.IsSuccess == false)
             {

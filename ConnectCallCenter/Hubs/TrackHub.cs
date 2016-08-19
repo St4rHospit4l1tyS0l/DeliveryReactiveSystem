@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using Drs.Model.Constants;
+using Drs.Model.Properties;
 using Drs.Model.Shared;
 using Drs.Model.Track;
 using Drs.Repository.Log;
@@ -11,10 +12,10 @@ using Microsoft.AspNet.SignalR.Hubs;
 namespace ConnectCallCenter.Hubs
 {
 
-    [HubName(SharedConstants.Server.TRACK_HUB)]
+    [HubName(SharedConstants.Server.TRACK_HUB), UsedImplicitly]
     public class TrackHub : Hub
     {
-        [HubMethodName(SharedConstants.Server.SEARCH_BY_PHONE_TRACK_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEARCH_BY_PHONE_TRACK_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<TrackOrderDto> SearchByPhone(PagerDto<String> phone)
         {
             try
@@ -34,7 +35,7 @@ namespace ConnectCallCenter.Hubs
             }
         }
 
-        [HubMethodName(SharedConstants.Server.SEARCH_BY_CLIENTNAME_TRACK_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEARCH_BY_CLIENTNAME_TRACK_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<TrackOrderDto> SearchByClientName(PagerDto<int> client)
         {
             try
@@ -54,7 +55,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.SEARCH_BY_DAILY_INFO_TRACK_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SEARCH_BY_DAILY_INFO_TRACK_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<TrackOrderDto> SearchByDailyInfo(PagerDto<DailySearchModel> model)
         {
             try
@@ -73,7 +74,7 @@ namespace ConnectCallCenter.Hubs
             }
         }
 
-        [HubMethodName(SharedConstants.Server.SHOW_DETAIL_TRACK_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SHOW_DETAIL_TRACK_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<TrackOrderDto> ShowDetailByOrderId(long orderId)
         {
             try

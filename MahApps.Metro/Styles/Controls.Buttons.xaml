@@ -726,7 +726,7 @@
     <Style TargetType="ToggleButton"
            x:Key="MetroToggleButton">
         <Setter Property="Background"
-                Value="{DynamicResource GrayBrush5}" />
+                Value="{DynamicResource GrayBrush2}" />
         <Setter Property="BorderBrush"
                 Value="{DynamicResource TextBoxBorderBrush}" />
         <Setter Property="Foreground"

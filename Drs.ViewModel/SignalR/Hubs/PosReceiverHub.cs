@@ -1,6 +1,7 @@
 ﻿using System;
 using Drs.Model.Constants;
 using Drs.Model.Order;
+using Drs.Model.Properties;
 using Drs.Model.Shared;
 using Drs.Repository.Log;
 using Microsoft.AspNet.SignalR;
@@ -10,10 +11,10 @@ using ReactiveUI;
 namespace Drs.ViewModel.SignalR.Hubs
 {
 
-    [HubName(SharedConstants.Server.POS_RECEIVER_HUB)]
+    [HubName(SharedConstants.Server.POS_RECEIVER_HUB), UsedImplicitly]
     public class PosReceiverHub : Hub
     {
-        [HubMethodName(SharedConstants.Server.ORDER_POS_RECEIVER_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.ORDER_POS_RECEIVER_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<bool> SendOrder(PosCheck posCheck)
         {
             try

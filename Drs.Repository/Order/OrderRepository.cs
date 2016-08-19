@@ -188,9 +188,9 @@ namespace Drs.Repository.Order
             return DbEntities.ClientPhone.Where(e => e.Phone == phone).Select(e => e.ClientPhoneId).FirstOrDefault();
         }
 
-        public OrderInfoModel GetPosOrderById(int posOrderId)
+        public OrderInfoModel GetPosOrderByOrderToStoreId(long orderToStoreId)
         {
-            return DbEntities.OrderToStore.Where(e => e.PosOrderId == posOrderId)
+            return DbEntities.OrderToStore.Where(e => e.OrderToStoreId == orderToStoreId)
                         .OrderByDescending(e => e.OrderToStoreId)
                         .Select(e => new OrderInfoModel
                         {
@@ -202,13 +202,13 @@ namespace Drs.Repository.Order
         }
 
 
-        public IEnumerable<LastOrderInfoModel> GetLastNthPosOrderIdByPhoneId(int clientPhoneId)
+        public IEnumerable<LastOrderInfoModel> GetLastNthOrdersIdByClientPhoneId(int clientPhoneId)
         {
             return DbEntities.OrderToStore.Where(e => e.ClientPhoneId == clientPhoneId)
             .OrderByDescending(e => e.OrderToStoreId)
             .Select(e => new LastOrderInfoModel
             {
-                PosOrderId = e.PosOrderId,
+                OrderToStoreId = e.OrderToStoreId,
                 ClientName = e.Client.FirstName + " " + e.Client.LastName,
                 FranchiseName = e.Franchise.Name,
                 StoreName = e.FranchiseStore.Name,
@@ -217,16 +217,16 @@ namespace Drs.Repository.Order
             }).Take(5).ToList();
         }
 
-        public PosCheck GetPosCheckByOrderId(int posOrderId)
+        public PosCheck GetPosCheckById(int posOrderId)
         {
             return DbEntities.PosOrder.Where(e => e.PosOrderId == posOrderId)
                 .Select(e => new PosCheck
                 {
                     FranchiseCode = e.FranchiseCode,
                     CheckId = e.CheckId,
-                    SubTotal = (double) e.Subtotal,
-                    Tax = (double) e.Taxes,
-                    Total = (double) e.Total,
+                    SubTotal = (double)e.Subtotal,
+                    Tax = (double)e.Taxes,
+                    Total = (double)e.Total,
                     OrderDateTime = e.OrderDatetime,
                     LstItems = e.PosOrderItem.Select(i => new ItemModel
                     {

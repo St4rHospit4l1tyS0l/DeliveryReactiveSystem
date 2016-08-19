@@ -3,6 +3,7 @@ using Autofac;
 using Drs.Model.Constants;
 using Drs.Model.Menu;
 using Drs.Model.Order;
+using Drs.Model.Properties;
 using Drs.Model.Shared;
 using Drs.Repository.Log;
 using Drs.Service.Franchise;
@@ -13,10 +14,10 @@ using Microsoft.AspNet.SignalR.Hubs;
 namespace ConnectCallCenter.Hubs
 {
 
-    [HubName(SharedConstants.Server.ORDER_HUB)]
+    [HubName(SharedConstants.Server.ORDER_HUB), UsedImplicitly]
     public class OrderHub : Hub
     {
-        [HubMethodName(SharedConstants.Server.LST_FRANCHISE_ORDER_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.LST_FRANCHISE_ORDER_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<ButtonItemModel> GetFranchiseButtons()
         {
             try
@@ -36,7 +37,7 @@ namespace ConnectCallCenter.Hubs
             }
         }
 
-        [HubMethodName(SharedConstants.Server.SAVE_PHONE_ORDER_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SAVE_PHONE_ORDER_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<PhoneModel> SavePhone(PhoneModel model)
         {
             try
@@ -51,7 +52,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.SAVE_CLIENT_ORDER_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SAVE_CLIENT_ORDER_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<ClientInfoModel> SaveClient(ClientInfoModel model)
         {
             try
@@ -65,7 +66,7 @@ namespace ConnectCallCenter.Hubs
             }
         }
 
-        [HubMethodName(SharedConstants.Server.SAVE_POS_CHECK_ORDER_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.SAVE_POS_CHECK_ORDER_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<PosCheck> SavePosCheck(PosCheck model)
         {
             try
@@ -80,12 +81,12 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.POS_ORDER_BYID_ORDER_HUB_METHOD)]
-        public ResponseMessageData<PropagateOrderModel> PosOrderById(int posOrderId)
+        [HubMethodName(SharedConstants.Server.POS_ORDER_BYID_ORDER_HUB_METHOD), UsedImplicitly]
+        public ResponseMessageData<PropagateOrderModel> PosOrderByOrderToStoreId(long orderToStoreId)
         {
             try
             {
-                return AppInit.Container.Resolve<IOrderService>().PosOrderById(posOrderId);
+                return AppInit.Container.Resolve<IOrderService>().PosOrderByOrderToStoreId(orderToStoreId);
             }
             catch (Exception ex)
             {
@@ -95,7 +96,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.LAST_N_ORDERS_ORDER_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.LAST_N_ORDERS_ORDER_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<LastOrderInfoModel> LastNthOrdersByPhone(String phone)
         {
             try
@@ -110,7 +111,7 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.CALCULATE_PRICES_ORDER_HUB_METHOD)]
+        [HubMethodName(SharedConstants.Server.CALCULATE_PRICES_ORDER_HUB_METHOD), UsedImplicitly]
         public ResponseMessageData<PosCheck> CalculatePrices(String phone)
         {
             try
