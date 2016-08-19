@@ -148,7 +148,7 @@ namespace Drs.ViewModel.Track
 
         public void OnPhoneChanged(String phone)
         {
-            _pagerCache.SearchValue = phone;
+            _pagerCache.SearchObjValue = phone;
             _pagerCache.SearchType = SettingsData.Constants.TrackConst.SEARCH_BY_PHONE;
             Pager.Reset();
             GetResultByPhone();
@@ -160,7 +160,7 @@ namespace Drs.ViewModel.Track
 
             var pagerDto = new PagerDto<string>
             {
-                Data = _pagerCache.SearchValue,
+                Data = (string)_pagerCache.SearchObjValue,
                 Pager = Pager.PagerModel,
             };
 
@@ -173,7 +173,7 @@ namespace Drs.ViewModel.Track
 
         public void OnClientNameChanged(int clientId)
         {
-            _pagerCache.SearchIdValue = clientId;
+            _pagerCache.SearchObjValue = clientId;
             _pagerCache.SearchType = SettingsData.Constants.TrackConst.SEARCH_BY_CLIENTNAME;
             Pager.Reset();
             GetResultByClientName();
@@ -185,7 +185,7 @@ namespace Drs.ViewModel.Track
 
             var pagerDto = new PagerDto<int>
             {
-                Data = _pagerCache.SearchIdValue,
+                Data = (int)_pagerCache.SearchObjValue,
                 Pager = Pager.PagerModel,
             };
 
@@ -252,6 +252,30 @@ namespace Drs.ViewModel.Track
             }
         }
 
+        public void OnDailySearchCommand(DailySearchModel obj)
+        {
+            _pagerCache.SearchObjValue = obj;
+            _pagerCache.SearchType = SettingsData.Constants.TrackConst.SEARCH_BY_DAILYSEARCH;
+            Pager.Reset();
+            GetResultByDailySearch();
+        }
+
+        private void GetResultByDailySearch()
+        {
+            OnStatusChanged(SettingsData.Constants.TrackConst.SEARCH_ORDERLIST_ON_PROGRESS, "Buscando pedidos...");
+
+            var pagerDto = new PagerDto<DailySearchModel>
+            {
+                Data = (DailySearchModel)_pagerCache.SearchObjValue,
+                Pager = Pager.PagerModel,
+            };
+
+            _client.ExecutionProxy.ExecuteRequest<PagerDto<DailySearchModel>, PagerDto<DailySearchModel>, ResponseMessageData<TrackOrderDto>, ResponseMessageData<TrackOrderDto>>
+                    (pagerDto, TransferDto.SameType, SharedConstants.Server.TRACK_HUB,
+                        SharedConstants.Server.SEARCH_BY_DAILY_INFO_TRACK_HUB_METHOD, TransferDto.SameType)
+                        .Subscribe(OnResultSearchOk, OnResultSearchError);
+        }
+
         protected virtual void OnStatusChanged(int iStatus, string sMsg)
         {
             var handler = StatusChanged;
@@ -268,6 +292,10 @@ namespace Drs.ViewModel.Track
 
                 case SettingsData.Constants.TrackConst.SEARCH_BY_CLIENTNAME:
                     GetResultByClientName();
+                    break;
+
+                case SettingsData.Constants.TrackConst.SEARCH_BY_DAILYSEARCH:
+                    GetResultByDailySearch();
                     break;
 
                 default:

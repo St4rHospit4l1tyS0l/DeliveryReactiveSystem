@@ -15,7 +15,7 @@ namespace Drs.Model.Order
                     return _name;
                 
 
-                return _name.Insert(0, String.Empty.PadLeft((int)Level*4, ' '));
+                return _name.Insert(0, String.Empty.PadLeft((int)Level * Constants.SharedConstants.LEVEL_PAD_ITEM, ' '));
             }
             set
             {

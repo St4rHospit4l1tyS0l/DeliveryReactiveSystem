@@ -14,7 +14,8 @@ namespace Drs.Service.Order
         ResponseMessageData<bool> RemoveRelPhoneClient(ClientPhoneModel model);
         ResponseMessageData<bool> RemoveRelPhoneAddress(AddressPhoneModel model);
         ResponseMessageData<PosCheck> SavePosCheck(PosCheck model);
-        ResponseMessageData<PropagateOrderModel> LastOrderByPhone(string phone);
+        ResponseMessageData<PropagateOrderModel> PosOrderById(int posOrderId);
         ResponseMessageData<PosCheck> CalculatePrices(string phone);
+        ResponseMessageData<LastOrderInfoModel> LastNthOrdersByPhone(string phone);
     }
 }

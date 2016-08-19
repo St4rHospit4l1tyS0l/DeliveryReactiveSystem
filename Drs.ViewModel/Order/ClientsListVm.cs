@@ -29,6 +29,7 @@ namespace Drs.ViewModel.Order
         private readonly IReactiveDeliveryClient _client;
         private ClientInfoGrid _clientSelection;
         private Func<OrderModel> _orderModel;
+        private bool _isGettingData;
 
         public ClientsListVm(IUpsertClientFoVm upsertClientFo, IReactiveDeliveryClient client)
         {
@@ -81,6 +82,12 @@ namespace Drs.ViewModel.Order
                 ClearAndSelect(_clientSelection);
                 OnClientSelected(_clientSelection);
             }
+        }
+
+        public bool IsGettingData
+        {
+            get { return _isGettingData; }
+            set { this.RaiseAndSetIfChanged(ref _isGettingData, value); }
         }
 
         private void ClearAndSelect(ClientInfoGrid clientSelection)
@@ -143,7 +150,11 @@ namespace Drs.ViewModel.Order
 
         public void ProcessPhone(ListItemModel model)
         {
-            RxApp.MainThreadScheduler.Schedule(_ => LstClients.Clear());
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                IsGettingData = true;
+                LstClients.Clear(); 
+            });
             _client.ExecutionProxy
                 .ExecuteRequest<String, String, ResponseMessageData<ClientInfoModel>, ResponseMessageData<ClientInfoModel>>
                 (model.Value, TransferDto.SameType, SharedConstants.Server.CLIENT_HUB,
@@ -175,6 +186,7 @@ namespace Drs.ViewModel.Order
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
+                IsGettingData = false;
                 var lstRecurrence = new List<int>(obj.Data.LstData.Count());
                 LstClients.Clear();
                 var bIsFirst = true;

@@ -15,5 +15,8 @@ namespace Drs.Model.Settings
 
         [DataMember]
         public IList<ItemCatalog> LstStores { get; set; }
+
+        [DataMember]
+        public IList<ItemCatalog> LstAgents { get; set; }
     }
 }

@@ -6,9 +6,10 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:shared="clr-namespace:Drs.Ui.Ui.Shared"
              xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
-             mc:Ignorable="d" Height="380" Width="900" Header="Cerrar"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" Height="500" Width="1300" Header="Cerrar"
                  Position="Bottom" IsOpen="{Binding IsOpen}" IsModal="False" BorderThickness="2"   
-                 AnimateOnPositionChange="False" AnimateOpacity="False" Theme="Adapt" Margin="0 0 200 10" BorderBrush="#FF002E64" Background="#FFFCFCFC" >
+                 AnimateOnPositionChange="False" AnimateOpacity="False" Theme="Adapt" Margin="0 0 200 10" BorderBrush="#FF002E64" >
     <ContentControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,69 +21,98 @@
         </ResourceDictionary>
     </ContentControl.Resources>
 
-    <StackPanel Orientation="Vertical"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <Rectangle Margin="0, 5, 0, 0" Stroke="Black" StrokeThickness="2" />
-        <StackPanel Orientation="Vertical">
-            <Label Margin="0,0,0,0" Content="{Binding TitleLastOrder}" HorizontalAlignment="Center" FontSize="18" Foreground="Black" ></Label>
-        </StackPanel>
-        <Rectangle Margin="0, 10, 0, 10" Stroke="White" StrokeThickness="2" />
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Vertical">
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Fecha de la última orden: "></TextBlock>
-                <TextBlock TextWrapping="Wrap" Text="{Binding LastOrderDateTx}" FontWeight="Bold"></TextBlock>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Border Margin="15" BorderThickness="0" BorderBrush="#FF58B3FF" >
+            <StackPanel Orientation="Vertical">
+
+                <TextBlock FontSize="15" HorizontalAlignment="Center">
+                Últimos pedidos
+                </TextBlock>
+                <StackPanel Orientation="Vertical" Margin="0 20 0 0" HorizontalAlignment="Center" MinWidth="270">
+                    <ItemsControl ItemsSource="{Binding LstLastOrdersButtons}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <ToggleButton Margin="1" FontSize="12" IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                    Style="{DynamicResource MetroToggleButton}" 
+                                    Command="{Binding DataContext.OrderCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentControl}}}" 
+                                    CommandParameter="{Binding PosOrderId}">
+                                    <TextBlock Text="{Binding Content}" Height="50" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" Margin="2 1 2 1">
+                                    </TextBlock>
+                                </ToggleButton>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+        </Border>
+        <xctk:BusyIndicator Grid.Column="1" IsBusy="{Binding IsGettingSelectedOrder}" BusyContent="Cargando el pedido seleccionado...">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Rectangle Margin="0, 5, 0, 0" Stroke="Black" StrokeThickness="2" />
+                <StackPanel Orientation="Vertical">
+                    <Label Margin="0,0,0,0" Content="{Binding TitleLastOrder}" HorizontalAlignment="Center" FontSize="18" Foreground="Black" ></Label>
+                </StackPanel>
+                <Rectangle Margin="0, 10, 0, 10" Stroke="White" StrokeThickness="2" />
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Vertical">
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <TextBlock TextWrapping="Wrap" Text="Fecha de la última orden: "></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding LastOrderDateTx}" FontWeight="Bold"></TextBlock>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="0 10 0 0">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
                            VerticalAlignment="Center"
-                           Text="¿Acción del último pedido?" Margin="0 5 0 0" FontFamily="Corbel" FontSize="16" />
-                <Button Width="160"
+                           Text="¿Acción del pedido seleccionado?" Margin="0 5 0 0" FontFamily="Corbel" FontSize="16" />
+                        <Button Width="160"
                     Height="40" Command="{Binding DoEditLastOrderCommand}"
                     Margin="40, 0, 0, 0"
                     Style="{DynamicResource AccentedSquareButtonStyle}" Background="#CC37B911">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Modificar pedido" Foreground="White" Margin="0 0 10 0">
-                        </Label>
-                        <Rectangle Width="20"
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Modificar pedido" Foreground="White" Margin="0 0 10 0">
+                                </Label>
+                                <Rectangle Width="20"
                            Height="20"
                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Fill"
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Fill"
                                      Visual="{DynamicResource appbar_food_silverware_cross}" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                    </StackPanel>
-                </Button>
-                <Button Width="160"
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </StackPanel>
+                        </Button>
+                        <Button Width="160"
                     Height="40" Command="{Binding DoLastOrderCommand}"
                     Margin="10, 0, 0, 0"
                     Style="{DynamicResource AccentedSquareButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Ordenar pedido" Foreground="White" Margin="0 0 10 0">
-                        </Label>
-                        <Rectangle Width="20"
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Ordenar pedido" Foreground="White" Margin="0 0 10 0">
+                                </Label>
+                                <Rectangle Width="20"
                            Height="20"
                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Fill"
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Fill"
                                      Visual="{DynamicResource appbar_food_silverware}" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
-                </Button>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                    <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
                            VerticalAlignment="Center"
                            Text="{Binding FranchiseName}" Margin="0 10 0 0" FontFamily="Candara" FontSize="12" />
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Vertical">
-                <Grid Margin="0 15 0 0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <DataGrid Height="200" 
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Vertical">
+                        <Grid Margin="0 15 0 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <DataGrid Height="310" 
                       Grid.Row="0"
                       RenderOptions.ClearTypeHint="Enabled"
                       TextOptions.TextFormattingMode="Display"
@@ -90,27 +120,30 @@
                       SelectionUnit="FullRow"
                       ItemsSource="{Binding LstItems}"
                       AutoGenerateColumns="False" GridLinesVisibility="All" BorderBrush="#CCFFFFFF">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Producto" Width="400"
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Producto" Width="400"
                                         Binding="{Binding Name}" >
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Left" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Cantidad" Width="100"
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Cantidad" Width="100"
                                         Binding="{Binding Quantity}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </StackPanel>
+        </xctk:BusyIndicator>
+    </Grid>
+
 </controls:Flyout>

@@ -31,13 +31,25 @@ namespace Drs.Repository.Catalog
 
         public IList<ItemCatalog> GetStores()
         {
-            return Db.FranchiseStore.Where(e => e.IsObsolete == false)
+            return Db.FranchiseStore.Where(e => e.Franchise.IsObsolete == false && e.IsObsolete == false)
                 .Select(e => new ItemCatalog
                 {
                     Id = e.FranchiseStoreId,
                     Code = e.Franchise.Code,
                     Name = e.Name,
+                    SecondName = e.Franchise.Name,
                     Value = e.Address.MainAddress
+                }).ToList();
+        }
+
+        public IList<ItemCatalog> GetUsersAgents()
+        {
+            return Db.UserDetail.Where(e => e.IsObsolete == false && e.AspNetUsers.AspNetRoles.Any(i => i.Name == "Agent"))
+                .Select(e => new ItemCatalog
+                {
+                    Key = e.AspNetUsers.Id,
+                    Name = e.FirstName + " " + e.LastName,
+                    SecondName = e.AspNetUsers.UserName
                 }).ToList();
         }
     }

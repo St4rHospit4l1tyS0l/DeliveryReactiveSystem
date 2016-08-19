@@ -7,6 +7,7 @@
              xmlns:ui="clr-namespace:Drs.Infrastructure.Ui;assembly=Drs.Infrastructure"
              xmlns:converter="clr-namespace:Drs.Ui.Converter"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="1100" HorizontalAlignment="Stretch" Margin="30,0,30,0">
     <UserControl.Resources>
@@ -35,7 +36,8 @@
             <system:Double x:Key="BaseFontSize">17</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
+    <xctk:BusyIndicator Grid.Column="1" IsBusy="{Binding IsGettingData}" BusyContent="Cargando el o los clientes ...">
+        <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource AccentColorBrush}">
             <Label Content="3) Agregue o elija al cliente:   " FontSize="18" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                                VerticalContentAlignment="Center" Foreground="#FFF" FontWeight="SemiBold" Height="35"/>
@@ -215,4 +217,5 @@
             </DataGrid>
         </Grid>
     </StackPanel>
+    </xctk:BusyIndicator>
 </UserControl>

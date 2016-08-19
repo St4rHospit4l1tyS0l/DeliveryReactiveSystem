@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Drs.Model.Catalog;
+using Drs.Model.Settings;
 using Drs.Repository.Catalog;
 using Drs.ViewModel.CatalogsSvc;
 using ItemCatalog = Drs.Model.Shared.ItemCatalog;
@@ -23,8 +24,28 @@ namespace Drs.ViewModel.Catalog
                 CatalogsClientModel.CatPayments = FillCategory(catalogs.LstPayments);
                 CatalogsClientModel.DicFranchiseStore = FillDicLstCategory(catalogs.LstStores);
                 CatalogsClientModel.DicOrderStatus = FillDicCategory(catalogs.LstDeliveryStatus);
-
+                CatalogsClientModel.LstStores = FillLstCategory(catalogs.LstStores, "Todas las sucursales");
+                CatalogsClientModel.LstAgents = FillLstCategory(catalogs.LstAgents, "Todos los agentes");
             }
+        }
+
+        private static List<ItemCatalog> FillLstCategory(IEnumerable<CatalogsSvc.ItemCatalog> lstCatalog, string allItems)
+        {
+            var lstNewCatalog = lstCatalog.Select(e => new ItemCatalog
+            {
+                Id = e.Id,
+                Key = e.Key,
+                Name = String.Format("{0} ({1})", e.Name, e.SecondName),
+            }).ToList();
+
+            lstNewCatalog.Insert(0, new ItemCatalog
+            {
+                Id = SettingsData.Constants.Entities.NULL_ID_INT,
+                Key = String.Empty,
+                Name = allItems,                
+            });
+
+            return lstNewCatalog;
         }
 
         public static void Initialize(ICatalogRepository repository)

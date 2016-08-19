@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Drs.Model.Address;
@@ -187,16 +188,33 @@ namespace Drs.Repository.Order
             return DbEntities.ClientPhone.Where(e => e.Phone == phone).Select(e => e.ClientPhoneId).FirstOrDefault();
         }
 
-        public OrderInfoModel GetLastPosOrderIdByPhone(int clientPhoneId)
+        public OrderInfoModel GetPosOrderById(int posOrderId)
         {
-            return DbEntities.OrderToStore.Where(e => e.ClientPhoneId == clientPhoneId)
+            return DbEntities.OrderToStore.Where(e => e.PosOrderId == posOrderId)
                         .OrderByDescending(e => e.OrderToStoreId)
                         .Select(e => new OrderInfoModel
                         {
                             PosOrderId = e.PosOrderId,
+                            Phone = e.ClientPhone.Phone,
                             ClientId = e.ClientId,
                             AddressId = e.AddressId
                         }).FirstOrDefault();
+        }
+
+
+        public IEnumerable<LastOrderInfoModel> GetLastNthPosOrderIdByPhoneId(int clientPhoneId)
+        {
+            return DbEntities.OrderToStore.Where(e => e.ClientPhoneId == clientPhoneId)
+            .OrderByDescending(e => e.OrderToStoreId)
+            .Select(e => new LastOrderInfoModel
+            {
+                PosOrderId = e.PosOrderId,
+                ClientName = e.Client.FirstName + " " + e.Client.LastName,
+                FranchiseName = e.Franchise.Name,
+                StoreName = e.FranchiseStore.Name,
+                OrderDate = e.StartDatetime,
+                Total = e.PosOrder.Total
+            }).Take(5).ToList();
         }
 
         public PosCheck GetPosCheckByOrderId(int posOrderId)
@@ -221,5 +239,6 @@ namespace Drs.Repository.Order
                     }).ToList(),
                 }).FirstOrDefault();
         }
+
     }
 }

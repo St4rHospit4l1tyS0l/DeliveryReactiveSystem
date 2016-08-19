@@ -12,6 +12,6 @@ namespace Drs.ViewModel.Order
         PropagateOrderModel PropagateOrder { get; set; }
         IReactiveCommand<Unit> DoLastOrderCommand { get; set; }
         IReactiveCommand<Unit> DoEditLastOrderCommand { get; set; }
-
+        bool IsGettingSelectedOrder { get; set; }
     }
 }

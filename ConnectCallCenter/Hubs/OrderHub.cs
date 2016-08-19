@@ -80,17 +80,32 @@ namespace ConnectCallCenter.Hubs
         }
 
 
-        [HubMethodName(SharedConstants.Server.LAST_ORDER_ORDER_HUB_METHOD)]
-        public ResponseMessageData<PropagateOrderModel> LastOrderByPhone(String phone)
+        [HubMethodName(SharedConstants.Server.POS_ORDER_BYID_ORDER_HUB_METHOD)]
+        public ResponseMessageData<PropagateOrderModel> PosOrderById(int posOrderId)
         {
             try
             {
-                return AppInit.Container.Resolve<IOrderService>().LastOrderByPhone(phone);
+                return AppInit.Container.Resolve<IOrderService>().PosOrderById(posOrderId);
             }
             catch (Exception ex)
             {
                 SharedLogger.LogError(ex);
                 return ResponseMessageData<PropagateOrderModel>.CreateCriticalMessage("No fue posible obtener la última orden");
+            }
+        }
+
+
+        [HubMethodName(SharedConstants.Server.LAST_N_ORDERS_ORDER_HUB_METHOD)]
+        public ResponseMessageData<LastOrderInfoModel> LastNthOrdersByPhone(String phone)
+        {
+            try
+            {
+                return AppInit.Container.Resolve<IOrderService>().LastNthOrdersByPhone(phone);
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<LastOrderInfoModel>.CreateCriticalMessage("No fue posible obtener la última orden");
             }
         }
 

@@ -53,6 +53,26 @@ namespace ConnectCallCenter.Hubs
             }
         }
 
+
+        [HubMethodName(SharedConstants.Server.SEARCH_BY_DAILY_INFO_TRACK_HUB_METHOD)]
+        public ResponseMessageData<TrackOrderDto> SearchByDailyInfo(PagerDto<DailySearchModel> model)
+        {
+            try
+            {
+                return new ResponseMessageData<TrackOrderDto>
+                {
+                    IsSuccess = true,
+                    LstData = AppInit.Container.Resolve<ITrackService>().SearchByDailyInfo(model),
+                    Pager = model.Pager
+                };
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<TrackOrderDto>.CreateCriticalMessage("No fue posible obtener los pedidos con esos parámetros");
+            }
+        }
+
         [HubMethodName(SharedConstants.Server.SHOW_DETAIL_TRACK_HUB_METHOD)]
         public ResponseMessageData<TrackOrderDto> ShowDetailByOrderId(long orderId)
         {

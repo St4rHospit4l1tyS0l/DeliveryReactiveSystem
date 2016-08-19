@@ -32,6 +32,7 @@
     <MetadataFile FileName="Catalogs1.xsd" MetadataType="Schema" ID="86182232-1f84-4acd-87a4-7b5b8682bb15" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?xsd=xsd1" />
     <MetadataFile FileName="Catalogs2.xsd" MetadataType="Schema" ID="86f1ef9f-3be9-4019-b2ef-215a5d32522b" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?xsd=xsd0" />
     <MetadataFile FileName="CatalogsSvc.wsdl" MetadataType="Wsdl" ID="32f24bd7-facb-4609-a085-811fa2f44ded" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?wsdl" />
+    <MetadataFile FileName="Catalogs4.xsd" MetadataType="Schema" ID="24e8327c-989d-4082-8aab-05e073133405" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?xsd=xsd4" />
     <MetadataFile FileName="Catalogs3.xsd" MetadataType="Schema" ID="ca4c06b4-8717-444e-b0cb-8c9f3e7dc5e4" SourceId="1" SourceUrl="http://localhost:2898/Catalogs/Catalogs.svc?xsd=xsd3" />
   </Metadata>
   <Extensions>

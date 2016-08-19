@@ -7,7 +7,7 @@ namespace Drs.ViewModel.Status
 {
     public interface IDailyOrderStatusVm : IUcViewModel
     {
-        IUcViewModel SearchTrack { get; set; }
+        IUcViewModel SearchDaily { get; set; }
         IUcViewModel BackPrevious { get; set; }
         IUcViewModel OrdersListTrack { get; set; }
         IOrderDetailVm OrderDetail { get; set; }

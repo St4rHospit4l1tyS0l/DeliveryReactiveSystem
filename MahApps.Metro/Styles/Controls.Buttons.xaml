@@ -726,7 +726,7 @@
     <Style TargetType="ToggleButton"
            x:Key="MetroToggleButton">
         <Setter Property="Background"
-                Value="{DynamicResource GrayBrush10}" />
+                Value="{DynamicResource GrayBrush5}" />
         <Setter Property="BorderBrush"
                 Value="{DynamicResource TextBoxBorderBrush}" />
         <Setter Property="Foreground"
@@ -774,10 +774,10 @@
                                     Value="2" />
                             <Setter TargetName="Background"
                                     Property="Background"
-                                    Value="{DynamicResource GrayBrush2}" />
+                                    Value="{DynamicResource AccentColorBrush}" />
                             <Setter TargetName="Background"
                                     Property="BorderBrush"
-                                    Value="{DynamicResource GrayBrush5}" />
+                                    Value="{DynamicResource AccentColorBrush2}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -788,7 +788,7 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Background"
                                     Property="Background"
-                                    Value="{DynamicResource GrayBrush8}" />
+                                    Value="{DynamicResource AccentColorBrush3}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -799,13 +799,13 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Background"
                                     Property="Background"
-                                    Value="{DynamicResource GrayBrush3}" />
+                                    Value="{DynamicResource AccentColorBrush}" />
                         </MultiTrigger>
                         <Trigger Property="IsPressed"
                                  Value="True">
                             <Setter TargetName="Background"
                                     Property="Background"
-                                    Value="{DynamicResource GrayBrush7}" />
+                                    Value="{DynamicResource AccentColorBrush4}" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocusWithin"
                                  Value="True">

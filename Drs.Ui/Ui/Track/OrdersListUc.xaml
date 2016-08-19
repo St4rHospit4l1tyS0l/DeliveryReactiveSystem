@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="1400" HorizontalAlignment="Stretch" Margin="20,0,20,10">
+             d:DesignHeight="250" d:DesignWidth="1500" HorizontalAlignment="Stretch" Margin="20,0,20,10">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -122,6 +122,16 @@
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="10 0 10 0" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Agente" MinWidth="140"
+                                    Binding="{Binding Agent}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="10 0 10 0" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>

@@ -6,6 +6,7 @@
              xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:ui="clr-namespace:Drs.Infrastructure.Ui;assembly=Drs.Infrastructure"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" x:Name="UsrCtrl"
              d:DesignHeight="250" d:DesignWidth="1024" HorizontalAlignment="Stretch" Margin="30,0,30,0">
     <UserControl.Resources>
@@ -26,7 +27,8 @@
             <system:Double x:Key="BaseFontSize">17</system:Double>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
+    <xctk:BusyIndicator Grid.Column="1" IsBusy="{Binding IsGettingData}" BusyContent="Cargando la o las direcciones ...">
+        <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
         <StackPanel Orientation="Horizontal" Height="40" Visibility="{Binding HasAdditionalLstStore}">
             <Label FontSize="17" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                    FontWeight="SemiBold">Existe una o más tiendas alternativas para la dirección elegida, puede cambiar de tienda: </Label>
@@ -209,4 +211,5 @@
             </DataGrid>
         </Grid>
     </StackPanel>
+    </xctk:BusyIndicator>
 </UserControl>

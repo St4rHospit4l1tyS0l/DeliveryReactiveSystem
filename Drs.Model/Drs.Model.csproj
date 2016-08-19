@@ -67,18 +67,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="ReactiveUI, Version=6.4.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\reactiveui-core.6.4.0.1\lib\Net45\ReactiveUI.dll</HintPath>
+    <Reference Include="ReactiveUI, Version=6.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\reactiveui-core.6.5.1\lib\Net45\ReactiveUI.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -159,6 +159,7 @@
     <Compile Include="Order\ItemLogOrder.cs" />
     <Compile Include="Order\ItemModel.cs" />
     <Compile Include="Order\ItemPosOrder.cs" />
+    <Compile Include="Order\LastOrderInfoModel.cs" />
     <Compile Include="Order\OrderDetails.cs" />
     <Compile Include="Order\OrderInfoModel.cs" />
     <Compile Include="Order\OrderModel.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Settings\RecurrenceType.cs" />
     <Compile Include="Settings\ResponseCatalogs.cs" />
     <Compile Include="Shared\AccountConstants.cs" />
+    <Compile Include="Track\DailySearchModel.cs" />
     <Compile Include="Shared\ItemCatalog.cs" />
     <Compile Include="Shared\OptionModel.cs" />
     <Compile Include="Shared\PagerDto.cs" />
@@ -207,6 +209,7 @@
     <Compile Include="Track\PagerCacheInfo.cs" />
     <Compile Include="Track\TrackOrderDetailDto.cs" />
     <Compile Include="Track\TrackOrderDto.cs" />
+    <Compile Include="UiView\Shared\StackButtonModel.cs" />
     <Compile Include="UiView\Shared\StatusScreen.cs" />
     <Compile Include="Constants\SharedConstants.cs" />
     <Compile Include="Constants\SharedMessageConstants.cs" />

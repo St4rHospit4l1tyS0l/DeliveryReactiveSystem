@@ -18,5 +18,6 @@ namespace Drs.ViewModel.Track
         IReactiveCommand<Unit> CmdCancelOrder { get; set; }
         IPagerVm Pager { get; set; }
 
+        void OnDailySearchCommand(DailySearchModel obj);
     }
 }

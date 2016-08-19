@@ -117,6 +117,8 @@ namespace Drs.Model.Track
             }
         }
 
+        public string Agent { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

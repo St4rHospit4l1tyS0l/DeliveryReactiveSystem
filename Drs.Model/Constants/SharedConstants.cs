@@ -2,6 +2,7 @@
 {
     public static class SharedConstants
     {
+        public const int LEVEL_PAD_ITEM = 3;
         public const string YES = "YES";
         public const string NO = "NO";
         public const string DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm";
@@ -36,7 +37,9 @@
             public const string SAVE_PHONE_ORDER_HUB_METHOD = "SavePhone-Order";
             public const string SAVE_CLIENT_ORDER_HUB_METHOD = "SaveClient-Order";
             public const string SAVE_POS_CHECK_ORDER_HUB_METHOD = "SavePosCheck-Order";
-            public const string LAST_ORDER_ORDER_HUB_METHOD = "LastOrder-Order";
+            public const string POS_ORDER_BYID_ORDER_HUB_METHOD = "LastOrder-Order";
+            public const string LAST_N_ORDERS_ORDER_HUB_METHOD = "LastNthOrders-Order";
+            
             public const string CALCULATE_PRICES_ORDER_HUB_METHOD = "CalculatePrices-Order";
 
             //Module Address
@@ -66,7 +69,9 @@
             public const string TRACK_HUB = "ModTrack";
             public const string SEARCH_BY_PHONE_TRACK_HUB_METHOD = "SearchByPhone-Track";
             public const string SEARCH_BY_CLIENTNAME_TRACK_HUB_METHOD = "SearchByClientName-Track";
+            public const string SEARCH_BY_DAILY_INFO_TRACK_HUB_METHOD = "SearchByDailyInfo-Track";
             public const string SHOW_DETAIL_TRACK_HUB_METHOD = "ShowDetail-Track";
+            
 
             //Module Franchise
             public const string FRANCHISE_HUB = "ModFranchise";

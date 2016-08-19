@@ -32,6 +32,7 @@ namespace Drs.ViewModel.Order
         private Func<OrderModel> _orderModel;
         private Visibility _hasAdditionalLstStore;
         private ItemCatalog _pickUpStore;
+        private bool _isGettingData;
 
         public AddressListVm(IUpsertAddressFoVm upsertAddressFo, IReactiveDeliveryClient client)
         {
@@ -84,6 +85,12 @@ namespace Drs.ViewModel.Order
                 ClearAndSelect(_addressSelection);
                 OnAddressSelected(_addressSelection);
             }
+        }
+
+        public bool IsGettingData
+        {
+            get { return _isGettingData; }
+            set { this.RaiseAndSetIfChanged(ref _isGettingData, value); }
         }
 
         private void ClearAndSelect(AddressInfoGrid addressSelection)
@@ -163,12 +170,19 @@ namespace Drs.ViewModel.Order
 
         public void ProcessPhone(ListItemModel model)
         {
-            RxApp.MainThreadScheduler.Schedule(_ => LstAddresses.Clear());
+
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                IsGettingData = true;
+                LstAddresses.Clear();
+            });
+
             _client.ExecutionProxy.ExecuteRequest<String, String, ResponseMessageData<AddressInfoModel>, ResponseMessageData<AddressInfoModel>>
                 (model.Value, TransferDto.SameType, SharedConstants.Server.ADDRESS_HUB,
                     SharedConstants.Server.SEARCH_ADDRESS_BY_PHONE_ADDRESS_HUB_METHOD, TransferDto.SameType)
                 .Subscribe(OnAddressListReady, OnAddressListError);
         }
+
 
         public event Action<AddressInfoGrid> ItemSelected;
 
@@ -203,6 +217,7 @@ namespace Drs.ViewModel.Order
 
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
+                IsGettingData = false;
                 LstAddresses.Clear();
                 var bIsFirst = true;
                 foreach (var info in obj.Data.LstData)
@@ -232,6 +247,11 @@ namespace Drs.ViewModel.Order
 
         private void OnAddressListError(string msgErr)
         {
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                IsGettingData = false;
+            });
+
             MessageBus.Current.SendMessage(new MessageBoxSettings
             {
                 Message = msgErr,

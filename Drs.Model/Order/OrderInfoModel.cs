@@ -5,5 +5,6 @@
         public int PosOrderId { get; set; }
         public int ClientId { get; set; }
         public int AddressId { get; set; }
+        public string Phone { get; set; }
     }
 }

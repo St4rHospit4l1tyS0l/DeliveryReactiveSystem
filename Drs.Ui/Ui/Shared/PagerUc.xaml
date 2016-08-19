@@ -25,7 +25,7 @@
                     Content="&gt;&gt;"
                     Style="{DynamicResource AccentedSquareButtonStyle}" />
         <StackPanel Margin="10 0 10 5" Orientation="Vertical">
-            <Label Content="{Binding TotalFound}" FontSize="11" HorizontalAlignment="Right" Foreground="{DynamicResource AccentColorBrush}" HorizontalContentAlignment="Right" FontWeight="Bold"/>
+            <Label Content="{Binding TotalFound}" FontSize="14" HorizontalAlignment="Right" Foreground="{DynamicResource AccentColorBrush}" HorizontalContentAlignment="Right" FontWeight="Bold"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

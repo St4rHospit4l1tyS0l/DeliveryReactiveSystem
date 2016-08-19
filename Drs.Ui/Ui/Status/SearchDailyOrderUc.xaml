@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="Drs.Ui.Ui.Status.SearchDailyOrderUc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewShr="clr-namespace:Drs.Ui.Ui.Shared"
+             xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="1500">
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vmShr:AutoCompleteTextVm}">
+            <viewShr:AutoCompleteGenericUc/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel>
+        <StackPanel HorizontalAlignment="Stretch">
+            <Label Content="Pedidos por día, sucursal y agente" FontSize="20" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FF729DB7" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+        </StackPanel>
+        <Grid Margin="0 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300*"></ColumnDefinition>
+                <ColumnDefinition Width="40*"></ColumnDefinition>
+                <ColumnDefinition Width="300*"></ColumnDefinition>
+                <ColumnDefinition Width="40*"></ColumnDefinition>
+                <ColumnDefinition Width="300*"></ColumnDefinition>
+                <ColumnDefinition Width="40*"></ColumnDefinition>
+                <ColumnDefinition Width="300*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Height="45" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
+                <Label Content="Día: " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FF729DB7" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                <DatePicker Margin="10 0 0 0" Height="35" FontSize="14" FontFamily="Segoe UI Light" MinWidth="160"
+                           HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                           SelectedDate="{Binding SearchDate}"/>
+            </StackPanel>
+            <StackPanel Margin="50 0 0 0" Height="45" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
+                <Label Content="Sucursal: " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FF729DB7" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                <ComboBox FontSize="14" FontFamily="Segoe UI Light" Height="35" MinWidth="200" SelectedValue="{Binding Path=StoreSelected}"
+                          ItemsSource="{Binding LstStores}" DisplayMemberPath="Name"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="50 0 0 0" Height="45" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
+                <Label Content="Agente: " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
+                               VerticalContentAlignment="Center" Foreground="#FF729DB7" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                <ComboBox FontSize="14" FontFamily="Segoe UI Light" Height="35" MinWidth="200" SelectedValue="{Binding Path=AgentSelected}"
+                          ItemsSource="{Binding LstAgents}" DisplayMemberPath="Name"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="50 0 0 0" Height="35" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
+                <Button Margin="0,0,10,0" Content="  Buscar  " Style="{DynamicResource AccentedSquareButtonStyle}"  FontSize="16" FontFamily="Segoe UI Light"
+                    Command="{Binding SearchCommand}" controls:ButtonHelper.PreserveTextCase="True" MinWidth="110" />
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+
+
+</UserControl>

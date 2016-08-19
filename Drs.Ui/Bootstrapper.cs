@@ -58,11 +58,13 @@ namespace Drs.Ui
             builder.RegisterType<LastOrderFoVm>().As<ILastOrderFoVm>().ExternallyOwned();
 
             builder.RegisterType<TrackOrderVm>().As<ITrackOrderVm>().ExternallyOwned();
-            builder.RegisterType<DailyOrderStatusVm>().As <IDailyOrderStatusVm>().ExternallyOwned();
-
             builder.RegisterType<SearchTrackOrderVm>().As<ISearchTrackOrderVm>().ExternallyOwned();
             builder.RegisterType<OrdersListVm>().As<IOrdersListVm>().ExternallyOwned();
             builder.RegisterType<OrderDetailVm>().As<IOrderDetailVm>().ExternallyOwned();
+
+            builder.RegisterType<DailyOrderStatusVm>().As<IDailyOrderStatusVm>().ExternallyOwned();
+            builder.RegisterType<SearchDailyOrderVm>().As<ISearchDailyOrderVm>().ExternallyOwned();
+
             builder.RegisterType<PagerVm>().As<IPagerVm>().ExternallyOwned();
 
             builder.RegisterType<ShellContainerVm>().As<IShellContainerVm>().ExternallyOwned();

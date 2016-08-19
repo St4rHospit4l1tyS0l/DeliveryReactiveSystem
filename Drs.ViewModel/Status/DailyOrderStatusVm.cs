@@ -10,7 +10,7 @@ namespace Drs.ViewModel.Status
     public class DailyOrderStatusVm : UcViewModelBase, IDailyOrderStatusVm
     {
         private IUcViewModel _backPrevious;
-        private IUcViewModel _searchTrack;
+        private IUcViewModel _searchDaily;
         private IUcViewModel _ordersListTrack;
         private IOrderDetailVm _orderDetail;
         private Visibility _loadingVisibility;
@@ -21,11 +21,11 @@ namespace Drs.ViewModel.Status
         private Visibility _errorVisibility;
         //private readonly IDictionary<int, IUcViewModel> _dicTabItems;
 
-        public DailyOrderStatusVm(IBackPreviousVm backPreviousVm, ISearchTrackOrderVm searchTrack, IOrdersListVm ordersListTrack, IOrderDetailVm orderDetail)
+        public DailyOrderStatusVm(IBackPreviousVm backPreviousVm, ISearchDailyOrderVm searchDaily, IOrdersListVm ordersListTrack, IOrderDetailVm orderDetail)
         {
 
             BackPrevious = backPreviousVm;
-            SearchTrack = searchTrack;
+            SearchDaily = searchDaily;
             OrdersListTrack = ordersListTrack;
             OrderDetail = orderDetail;
             
@@ -35,18 +35,18 @@ namespace Drs.ViewModel.Status
             //};
             //LstChildren.AddRange(_dicTabItems.Values);
 
-            LstChildren.Add(_searchTrack);
+            LstChildren.Add(_searchDaily);
             LstChildren.Add(_backPrevious);
             LstChildren.Add(_ordersListTrack);
             LstChildren.Add(_orderDetail);
 
-            InitializeServices(searchTrack, ordersListTrack, orderDetail);
+            InitializeServices(searchDaily, ordersListTrack, orderDetail);
         }
 
-        private void InitializeServices(ISearchTrackOrderVm searchTrack, IOrdersListVm ordersListTrack, IOrderDetailVm orderDetail)
+        private void InitializeServices(ISearchDailyOrderVm searchDaily, IOrdersListVm ordersListTrack, IOrderDetailVm orderDetail)
         {
-            searchTrack.PhoneChanged += ordersListTrack.OnPhoneChanged;
-            searchTrack.ClientNameChanged += ordersListTrack.OnClientNameChanged;
+            searchDaily.DailySearch += ordersListTrack.OnDailySearchCommand;
+            //searchDaily.ClientNameChanged += ordersListTrack.OnClientNameChanged;
             ordersListTrack.StatusChanged += OnStatusChanged;
             ordersListTrack.ShowDetail += orderDetail.OnShowDetail;
             orderDetail.StatusChanged += OnStatusChanged;
@@ -183,12 +183,12 @@ namespace Drs.ViewModel.Status
         }
 
 
-        public IUcViewModel SearchTrack
+        public IUcViewModel SearchDaily
         {
-            get { return _searchTrack; }
+            get { return _searchDaily; }
             set
             {
-                this.RaiseAndSetIfChanged(ref _searchTrack, value);
+                this.RaiseAndSetIfChanged(ref _searchDaily, value);
             }
         }
 

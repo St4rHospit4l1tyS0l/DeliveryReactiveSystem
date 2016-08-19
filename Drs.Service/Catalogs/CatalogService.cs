@@ -18,13 +18,15 @@ namespace Drs.Service.Catalogs
                 var lstPayments = _repository.GetPayments();
                 var lstDeliveryStatus = _repository.GetDeliveryStatus();
                 var lstStores = _repository.GetStores();
+                var lstAgents = _repository.GetUsersAgents();
 
                 return new ResponseCatalogs
                 {
                     IsSuccess = true,
                     LstPayments = lstPayments,
                     LstDeliveryStatus = lstDeliveryStatus,
-                    LstStores = lstStores
+                    LstStores = lstStores,
+                    LstAgents = lstAgents
                 };
             }
         }

@@ -6,9 +6,11 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Drs.Infrastructure.Extensions.Enumerables;
+using Drs.Model.Annotations;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;
+using Drs.Model.UiView.Shared;
 using Drs.Repository.Log;
 using Drs.Service.ReactiveDelivery;
 using Drs.Service.TransferDto;
@@ -24,6 +26,7 @@ namespace Drs.ViewModel.Order
         private PropagateOrderModel _propagateOrder;
         private string _titleLastOrder;
         private string _franchiseName;
+        private bool _isGettingSelectedOrder;
 
         public string this[string columnName]
         {
@@ -33,7 +36,7 @@ namespace Drs.ViewModel.Order
             }
         }
 
-        public string Error { get; private set; }
+        public string Error { get; [UsedImplicitly] private set; }
 
         public string FranchiseName
         {
@@ -43,9 +46,13 @@ namespace Drs.ViewModel.Order
 
         public IReactiveList<QtItemModel> LstItems { get; set; }
 
+        public IReactiveList<StackButtonModel> LstLastOrdersButtons { get; set; }
+
         public IReactiveCommand<Unit> DoLastOrderCommand { get; set; }
 
         public IReactiveCommand<Unit> DoEditLastOrderCommand { get; set; }
+
+        public IReactiveCommand<Unit> OrderCommand { get; set; }
 
 
         public string TitleLastOrder
@@ -65,9 +72,32 @@ namespace Drs.ViewModel.Order
         {
             _client = client;
             LstItems = new ReactiveList<QtItemModel>();
-            DoLastOrderCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => OnDoLastOrder(false));
-            DoEditLastOrderCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => OnDoLastOrder(true));
+            LstLastOrdersButtons = new ReactiveList<StackButtonModel>();
+            var canOrder = this.WhenAny(vm => vm.PropagateOrder, x => x.Value != null);
+            DoLastOrderCommand = ReactiveCommand.CreateAsyncTask(canOrder, _ => OnDoLastOrder(false));
+            DoEditLastOrderCommand = ReactiveCommand.CreateAsyncTask(canOrder, _ => OnDoLastOrder(true));
+            OrderCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), OnDoOrderCommand);
+
             MessageBus.Current.Listen<String>(SharedMessageConstants.FLYOUT_LASTORDER_CLOSE).Subscribe(OnClose);
+        }
+
+        private async Task<Unit> OnDoOrderCommand(object o)
+        {
+            await Task.Run(() =>
+            {
+                var posOrderId = o as int?;
+
+                if (posOrderId == null)
+                    return;
+
+                RxApp.MainThreadScheduler.Schedule(_ =>
+                {
+                    SingleSelectButton(posOrderId.Value);
+                    OnPosOrderIdSelected(posOrderId.Value);
+                });
+            });
+
+            return new Unit();
         }
 
         private void OnClose(string msg)
@@ -76,6 +106,9 @@ namespace Drs.ViewModel.Order
             {
                 if (IsOpen)
                     IsOpen = false;
+
+                LstItems.Clear();
+                LstLastOrdersButtons.Clear();
             });
 
         }
@@ -91,77 +124,24 @@ namespace Drs.ViewModel.Order
 
         public void ProcessPhone(ListItemModel model)
         {
-            _client.ExecutionProxy.ExecuteRequest<String, String, ResponseMessageData<PropagateOrderModel>, ResponseMessageData<PropagateOrderModel>>
+            RxApp.MainThreadScheduler.Schedule(_ => { IsGettingSelectedOrder = true; });
+
+            _client.ExecutionProxy.ExecuteRequest<String, String, ResponseMessageData<LastOrderInfoModel>, ResponseMessageData<LastOrderInfoModel>>
                     (model.Value, TransferDto.SameType, SharedConstants.Server.ORDER_HUB,
-                        SharedConstants.Server.LAST_ORDER_ORDER_HUB_METHOD, TransferDto.SameType)
-                    .Subscribe(e => OnPosCheckReady(e, model.Value), OnPosCheckError);
-
-                //_client.ExecutionProxy.ExecuteRequest<PosCheck, PosCheck, PosCheck, PosCheck>(PosCheck,
-                //    TransferDto.SameType, SharedConstants.Server.ORDER_HUB, SharedConstants.Server.CALCULATE_PRICES_ORDER_HUB_METHOD,
-                //    TransferDto.SameType).Subscribe(OnCalculatePricesOk, OnCalculatePricesError);
-                ////IsOnSignIn = Visibility.Collapsed;
-                //IsOnWaiting = Visibility.Visible;
-                //var pass = (PasswordBox)x;
-                //using (var loginSvc = new LoginSvcClient())
-                //{
-                //    try
-                //    {
-                //        var response =
-                //            await
-                //                loginSvc.LoginAsync(new LoginModel
-                //                {
-                //                    Password = Cypher.Encrypt(pass.Password),
-                //                    Username = Cypher.Encrypt(UserName)
-                //                });
-                //        return response;
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        return new ResponseMessage { IsSuccess = false, Message = ResNetwork.ERROR_NETWORK_DOWN + ex.Message};
-                //    }
-                //    finally
-                //    {
-                //        pass.Password = String.Empty;
-                //        IsOnSignIn = Visibility.Visible;
-                //        IsOnWaiting = Visibility.Collapsed;
-                //        MessageBus.Current.SendMessage(String.Empty, SharedMessageConstants.LOGIN_FOCUS_USERNAME);
-                //    }
-                //}
-            //    return null;
-            //});
-
-
-            DoLastOrderCommand.Subscribe(x =>
-            {
-                //if (x.IsSuccess)
-                //{
-                //    var bForceToInit = CurrentUserSettings.UserInfo.Username == null ||
-                //                        CurrentUserSettings.UserInfo.Username != UserName;
-
-                //    CurrentUserSettings.UserInfo.Username = UserName; 
-                //    ShellContainerVm.ChangeCurrentView(StatusScreen.ShMenu, true, bForceToInit);  //Only when comes from login, it should be reinit
-                //}
-                //else
-                //{
-                //    MessageBus.Current.SendMessage(new MessageBoxSettings
-                //    {
-                //        Message = x.Message,
-                //        Title = "Error al ingresar",
-                //    }, SharedMessageConstants.MSG_SHOW_ERRQST);
-                //    //Message = x.Message;
-                //}
-            });
+                        SharedConstants.Server.LAST_N_ORDERS_ORDER_HUB_METHOD, TransferDto.SameType)
+                    .Subscribe(OnLastNthOrdersReady, OnLastNthOrdersError);
         }
 
-        //private void OnCalculatePricesError(object o)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void OnPosOrderIdSelected(int posOrderId)
+        {
+            RxApp.MainThreadScheduler.Schedule(_ => { IsGettingSelectedOrder = true; });
 
-        //private void OnCalculatePricesOk(IStale<PosCheck> stale)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            _client.ExecutionProxy.ExecuteRequest<int, int, ResponseMessageData<PropagateOrderModel>, ResponseMessageData<PropagateOrderModel>>
+                    (posOrderId, TransferDto.SameType, SharedConstants.Server.ORDER_HUB,
+                        SharedConstants.Server.POS_ORDER_BYID_ORDER_HUB_METHOD, TransferDto.SameType)
+                    .Subscribe(OnPosCheckReady, OnPosCheckError);
+
+        }
 
         public PropagateOrderModel PropagateOrder
         {
@@ -169,60 +149,153 @@ namespace Drs.ViewModel.Order
             set { _propagateOrder = this.RaiseAndSetIfChanged(ref _propagateOrder, value); }
         }
 
-
-        private void OnPosCheckError(Exception ex)
+        public bool IsGettingSelectedOrder
         {
-            IsOpen = false;
+            get { return _isGettingSelectedOrder; }
+            set { _isGettingSelectedOrder = this.RaiseAndSetIfChanged(ref _isGettingSelectedOrder, value); }
         }
 
-        private void OnPosCheckReady(IStale<ResponseMessageData<PropagateOrderModel>> obj, string phone)
+        private void OnLastNthOrdersError(Exception ex)
         {
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                IsOpen = false;
+            });
+        }
 
-            if (obj.IsStale)
+        private void OnLastNthOrdersReady(IStale<ResponseMessageData<LastOrderInfoModel>> obj)
+        {
+            RxApp.MainThreadScheduler.Schedule(_ =>{IsOpen = false;});
+
+            if (obj.IsStale || obj.Data.IsSuccess == false || obj.Data.LstData == null || !obj.Data.LstData.Any())
                 return;
-
-            if (obj.Data.IsSuccess == false || obj.Data.Data == null || obj.Data.Data.PosCheck == null || obj.Data.Data.PosCheck.LstItems.Count == 0)
-                return;
-
-            PropagateOrder = obj.Data.Data;
 
             try
             {
-                if (PropagateOrder != null && PropagateOrder.PosCheck != null)
-                    PropagateOrder.PosCheck.FixItemParents();
+                RxApp.MainThreadScheduler.Schedule(_ =>
+                {
+                    PropagateOrder = null;
+                    LstItems.Clear();
+                    LstLastOrdersButtons.Clear();
+
+                    foreach (var order in obj.Data.LstData)
+                    {
+                        LstLastOrdersButtons.Add(new StackButtonModel(order));
+                    }
+
+                    var firstPosOrderId = LstLastOrdersButtons[0].PosOrderId;
+                    OnPosOrderIdSelected(firstPosOrderId);
+                    SingleSelectButton(firstPosOrderId);
+                    IsOpen = true;
+                });
+                
             }
             catch (Exception ex)
             {
                 SharedLogger.LogError(ex);
                 MessageBus.Current.SendMessage(new MessageBoxSettings
                 {
-                    Message = "Existe el siguiente problema al obtener el último pedido: " + ex.Message,
-                    Title = "Error al obtener último pedido",
+                    Message = "Existe el siguiente problema al obtener los últimos pedidos: " + ex.Message,
+                    Title = "Error al obtener los últimos pedidos",
                 }, SharedMessageConstants.MSG_SHOW_ERRQST);
             }
-
-            RxApp.MainThreadScheduler.Schedule(_ =>
-            {
-                LstItems.Clear();
-
-                var lstNewItems = PropagateOrder.PosCheck.LstItems.Select(e => new QtItemModel
-                {
-                    ItemId = e.ItemId,
-                    Name = e.Name,
-                    Quantity = 1
-                }).ToList();
-
-                foreach (var item in lstNewItems)
-                {
-                    LstItems.Add(item);
-                }
-
-                LastOrderDateTx = PropagateOrder.PosCheck.OrderDateTime.ToString(" dd/MM/yyyy |  HH:mm:ss");
-                TitleLastOrder = String.Format("Último pedido de {0}", phone);
-                FranchiseName = String.Format("Franquicia: {0}", PropagateOrder.Franchise.Name);
-                IsOpen = true;
-            });
         }
 
+        private void SingleSelectButton(int firstPosOrderId)
+        {
+            var order = LstLastOrdersButtons.FirstOrDefault(e => e.PosOrderId == firstPosOrderId);
+            if (order == null)
+                return;
+
+            if (!order.IsSelected)
+                order.IsSelected = true;
+
+            foreach (var orderNotSelected in LstLastOrdersButtons.Where(e => e.PosOrderId != firstPosOrderId))
+                orderNotSelected.IsSelected = false;
+
+        }
+
+
+        private void OnPosCheckError(Exception ex)
+        {
+            RxApp.MainThreadScheduler.Schedule(_ =>
+            {
+                IsGettingSelectedOrder = false;
+                PropagateOrder = null;
+                LstItems.Clear();
+            });
+
+            MessageBus.Current.SendMessage(new MessageBoxSettings
+            {
+                Message = "Existe el siguiente problema al obtener el pedido: " + ex.Message,
+                Title = "Error al obtener el pedido",
+            }, SharedMessageConstants.MSG_SHOW_ERRQST);
+        }
+
+        private void OnPosCheckReady(IStale<ResponseMessageData<PropagateOrderModel>> obj)
+        {
+
+            try
+            {
+                if (obj.IsStale || obj.Data.IsSuccess == false || obj.Data.Data == null ||
+                    obj.Data.Data.PosCheck == null || obj.Data.Data.PosCheck.LstItems.Count == 0)
+                {
+                    OnPosCheckError(new Exception("No hay datos que mostrar. Información no válida"));
+                    return;
+                }
+
+                RxApp.MainThreadScheduler.Schedule(_ =>
+                {
+                    IsGettingSelectedOrder = false;
+                    LstItems.Clear();
+                    PropagateOrder = obj.Data.Data;
+                });
+
+
+                try
+                {
+                    if (PropagateOrder != null && PropagateOrder.PosCheck != null)
+                        PropagateOrder.PosCheck.FixItemParents();
+                }
+                catch (Exception ex)
+                {
+                    SharedLogger.LogError(ex);
+                    MessageBus.Current.SendMessage(new MessageBoxSettings
+                    {
+                        Message = "Existe el siguiente problema al obtener el pedido: " + ex.Message,
+                        Title = "Error al obtener el pedido",
+                    }, SharedMessageConstants.MSG_SHOW_ERRQST);
+                }
+
+                RxApp.MainThreadScheduler.Schedule(_ =>
+                {
+                    var lstNewItems = PropagateOrder.PosCheck.LstItems.Select(e => new QtItemModel
+                    {
+                        ItemId = e.ItemId,
+                        Name = e.Name,
+                        Quantity = 1
+                    }).ToList();
+
+                    foreach (var item in lstNewItems)
+                    {
+                        LstItems.Add(item);
+                    }
+
+                    LastOrderDateTx = PropagateOrder.PosCheck.OrderDateTime.ToString(" dd/MM/yyyy |  HH:mm:ss");
+                    TitleLastOrder = String.Format("Pedido del {0}", PropagateOrder.Order.Phone);
+                    FranchiseName = String.Format("Franquicia: {0}", PropagateOrder.Franchise.Name);
+                    IsOpen = true;
+                });
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+                MessageBus.Current.SendMessage(new MessageBoxSettings
+                {
+                    Message = "Existe el siguiente problema al obtener la información del pedido: " + ex.Message,
+                    Title = "Error al obtener el pedido",
+                }, SharedMessageConstants.MSG_SHOW_ERRQST);
+            }
+        }
     }
 }

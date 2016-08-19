@@ -19,7 +19,7 @@ namespace Drs.Service.Track
             _trackRepository = trackRepository;
         }
 
-        public IList<TrackOrderDto> SearchByPhone(PagerDto<String> phone)
+        public IEnumerable<TrackOrderDto> SearchByPhone(PagerDto<String> phone)
         {
             using (_trackRepository)
             {
@@ -44,37 +44,17 @@ namespace Drs.Service.Track
                 if (orderDetail == null)
                     return null;
 
-                //var lastLog = orderDetail.LstOrderLog.OrderByDescending(e => e.Id).FirstOrDefault();
-                //var wsAddress = orderDetail.WsAddress;
                 orderDetail.WsAddress = String.Empty;
 
-                //var now = DateTime.Now;
-
-                //if (lastLog == null || (lastLog.Timestamp.AddSeconds(SettingsData.SecondsToAskForStatusOrder) < now && lastLog.Status != SettingsData.Constants.TrackConst.CLOSED))
-                //{
-                //    var response = GetOrderFromStore(orderDetail.OrderAtoId, wsAddress);
-                //    if (response != null && response.Order != null)
-                //    {
-                //        using (var storeRepository = new StoreRepository())
-                //        {
-                //            var newStatusLog = storeRepository.SaveLogOrderToStore(orderId, "Se consulta el histórico de la orden", response.Order.statusField, DateTime.Now, true);
-
-                //            orderDetail.LstOrderLog.Add(new ItemLogOrder
-                //            {
-                //                Id = newStatusLog.OrderToStoreLogId,
-                //                Status = newStatusLog.Status,
-                //                Timestamp = newStatusLog.Timestamp
-                //            });
-
-                //            orderDetail.LastStatus = newStatusLog.Status;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        orderDetail.StoreErrMsg = "No hay conexión con la tienda para obtener el último estado";
-                //    }
-                //}
                 return orderDetail;
+            }
+        }
+
+        public IEnumerable<TrackOrderDto> SearchByDailyInfo(PagerDto<DailySearchModel> model)
+        {
+            using (_trackRepository)
+            {
+                return _trackRepository.SearchByDailyInfo(model);
             }
         }
 

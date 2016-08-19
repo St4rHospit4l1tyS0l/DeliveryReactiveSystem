@@ -154,7 +154,8 @@ namespace Drs.Model.Settings
             public class TrackConst
             {
                 public const int SEARCH_BY_CLIENTNAME = 2100;
-                public const int SEARCH_BY_PHONE = 3100;
+                public const int SEARCH_BY_PHONE = 2105;
+                public const int SEARCH_BY_DAILYSEARCH = 2110;
                 public const int SECONDS_TO_ASK_FOR_STATUS_ORDER = 180;
                 public const int SEARCH_ORDERLIST_ON_PROGRESS = 3100;
                 public const int SEARCH_ORDERLIST_READY = 3101;

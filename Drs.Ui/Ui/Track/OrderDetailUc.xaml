@@ -22,11 +22,6 @@
             <DataTemplate DataType="{x:Type vmShr:AutoCompletePhoneVm}">
                 <shared:AutoCompleteSecPhoneUc/>
             </DataTemplate>
-            <CollectionViewSource x:Key="LstOrderKey" Source="{Binding OrderDetail.LstOrderPos}">
-                <CollectionViewSource.SortDescriptions>
-                    <componentModel:SortDescription PropertyName="Name"/>
-                </CollectionViewSource.SortDescriptions>
-            </CollectionViewSource>
             <CollectionViewSource x:Key="LstOrderLogKey" Source="{Binding OrderDetail.LstOrderLog}">
             </CollectionViewSource>
             <FontFamily x:Key="BaseFontFamily">Calibri</FontFamily>
@@ -114,16 +109,16 @@
                 </DockPanel>
                 <Grid HorizontalAlignment="Stretch">
                     <DataGrid x:Name="OrderDtGrid" TextOptions.TextFormattingMode="Display" Margin="0" MaxHeight="200"
-                          ItemsSource="{Binding Source={StaticResource LstOrderKey}}" SelectionMode="Single"
+                          ItemsSource="{Binding OrderDetail.LstOrderPos}" SelectionMode="Single"
                           FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSizeGrid}"
                           AutoGenerateColumns="False" Foreground="#000" IsReadOnly="True">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Producto"  MinWidth="380" 
-                                    Binding="{Binding Name}" >
+                                    Binding="{Binding NameEx}" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>

@@ -5,6 +5,7 @@
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Drs.Model.Shared" base="q1:ResponseMessage">
         <xs:sequence>
+          <xs:element minOccurs="0" name="LstAgents" nillable="true" type="q1:ArrayOfItemCatalog" />
           <xs:element minOccurs="0" name="LstDeliveryStatus" nillable="true" type="q1:ArrayOfItemCatalog" />
           <xs:element minOccurs="0" name="LstPayments" nillable="true" type="q1:ArrayOfItemCatalog" />
           <xs:element minOccurs="0" name="LstStores" nillable="true" type="q1:ArrayOfItemCatalog" />

@@ -147,12 +147,11 @@ namespace Drs.Service.Order
             }
         }
 
-        public ResponseMessageData<PropagateOrderModel> LastOrderByPhone(string phone)
+        public ResponseMessageData<PropagateOrderModel> PosOrderById(int posOrderId)
         {
             using (_repository)
             {
-                var clientPhoneId = _repository.GetPhoneIdByPhone(phone);
-                var order = _repository.GetLastPosOrderIdByPhone(clientPhoneId);
+                var order = _repository.GetPosOrderById(posOrderId);
 
                 if (order == null)
                 {
@@ -196,6 +195,22 @@ namespace Drs.Service.Order
         public ResponseMessageData<PosCheck> CalculatePrices(string phone)
         {
             return null;
+        }
+
+        public ResponseMessageData<LastOrderInfoModel> LastNthOrdersByPhone(string phone)
+        {
+            using (_repository)
+            {
+                var clientPhoneId = _repository.GetPhoneIdByPhone(phone);
+                var lstLastNthOrders = _repository.GetLastNthPosOrderIdByPhoneId(clientPhoneId);
+
+                return new ResponseMessageData<LastOrderInfoModel>
+                {
+                    LstData = lstLastNthOrders,
+                    IsSuccess = true,
+                    Message = String.Empty
+                };
+            }
         }
 
 

@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewShr="clr-namespace:Drs.Ui.Ui.Shared"
+             xmlns:vmStatus="clr-namespace:Drs.ViewModel.Status;assembly=Drs.ViewModel"
+             xmlns:viewStatus="clr-namespace:Drs.Ui.Ui.Status"
              xmlns:vmTrack="clr-namespace:Drs.ViewModel.Track;assembly=Drs.ViewModel"
              xmlns:viewTrack="clr-namespace:Drs.Ui.Ui.Track"
              xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
@@ -19,8 +21,8 @@
             <DataTemplate DataType="{x:Type vmShr:BackPreviousVm}">
                 <viewShr:BackPreviousUc/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vmTrack:SearchTrackOrderVm}">
-                <viewTrack:SearchTrackOrderUc/>
+            <DataTemplate DataType="{x:Type vmStatus:SearchDailyOrderVm}">
+                <viewStatus:SearchDailyOrderUc/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vmTrack:OrdersListVm}">
                 <viewTrack:OrdersListUc/>
@@ -50,7 +52,7 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </StackPanel>
-                <Label Content="ESTATUS DE LOS PEDIDOS DEL DÍA ACTUAL" HorizontalContentAlignment="Center" Foreground="#FF676767" FontFamily="Kalinga" FontSize="23" />
+                <Label Content="ESTATUS DE LOS PEDIDOS DEL DÍA" HorizontalContentAlignment="Center" Foreground="#FF676767" FontFamily="Kalinga" FontSize="23" />
             </StackPanel>
 
             <ContentControl  Content="{Binding BackPrevious}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" >
@@ -59,7 +61,7 @@
             <StackPanel Margin="0, 0" Grid.Column="1" Grid.Row="1">
                 <StackPanel>
                     <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="{DynamicResource AccentColorBrush}" Margin="0,0,0,0"></Rectangle>
-                    <ContentControl  Content="{Binding SearchTrack}" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                    <ContentControl  Content="{Binding SearchDaily}" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                     HorizontalAlignment="Center" Margin="0, 5, 0, 0" >
                     </ContentControl>
                 </StackPanel>
