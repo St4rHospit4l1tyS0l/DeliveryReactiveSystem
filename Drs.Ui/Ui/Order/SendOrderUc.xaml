@@ -66,16 +66,19 @@
         </Grid>
         <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#9B9B9B" Margin="0,10,0,0"></Rectangle>
         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-            <Grid Width="550" Margin="0 5 0 0">
+            <Grid Width="750" Margin="0 5 0 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="5*" />
                 </Grid.ColumnDefinitions>
-
                 <CheckBox Content="Recoger en la tienda" Grid.Column="0" 
                   FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                           IsChecked="{Binding HasPickUpInStore}" ></CheckBox>
-                <ComboBox Grid.Column="1" ItemsSource="{Binding Path=LstStores}" IsEnabled="{Binding HasPickUpInStore}"
+                <CheckBox Content="Enviar sin cobertura desde..." Grid.Column="1" 
+                  FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
+                          IsChecked="{Binding HasSendFromStore}" ></CheckBox>
+                <ComboBox Grid.Column="2" ItemsSource="{Binding Path=LstStores}" IsEnabled="{Binding HasEnableStores}"
                     FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"
                       DisplayMemberPath="Name" 
                       SelectedValue="{Binding Path=PickUpStore}"></ComboBox>

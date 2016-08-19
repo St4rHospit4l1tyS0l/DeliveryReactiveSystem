@@ -43,6 +43,8 @@ namespace Drs.ViewModel.Order
         private ItemCatalog _pickUpStore;
         private string _currentFranchiseCode;
         private bool _hasPickUpInStore;
+        private bool _hasSendFromStore;
+        private bool _hasEnableStores;
 
         public SendOrderVm(IReactiveDeliveryClient client)
         {
@@ -203,6 +205,7 @@ namespace Drs.ViewModel.Order
             _currentFranchiseCode = String.Empty;
 
             HasPickUpInStore = false;
+            HasSendFromStore = false;
         }
 
         public override bool Initialize(bool bForceToInit = false)
@@ -483,6 +486,15 @@ namespace Drs.ViewModel.Order
 
         public IReactiveList<ItemCatalog> LstStores { get; set; }
 
+        public bool HasEnableStores
+        {
+            get { return _hasEnableStores; }
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref _hasEnableStores, value);
+            }
+        }
+
         public bool HasPickUpInStore
         {
             get { return _hasPickUpInStore; }
@@ -490,9 +502,33 @@ namespace Drs.ViewModel.Order
             {
                 this.RaiseAndSetIfChanged(ref _hasPickUpInStore, value);
 
-                if (_hasPickUpInStore == false)
-                    PickUpStore = SelectLastStoreByAddress();
+                if (_hasPickUpInStore)
+                    HasSendFromStore = false;
+
+                GetStoreLastSelected();
             }
+        }
+
+        public bool HasSendFromStore
+        {
+            get { return _hasSendFromStore; }
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref _hasSendFromStore, value);
+
+                if (_hasSendFromStore)
+                    HasPickUpInStore = false;
+
+                GetStoreLastSelected();
+            }
+        }
+
+        private void GetStoreLastSelected()
+        {
+            if (_hasPickUpInStore == false && _hasSendFromStore == false)
+                PickUpStore = SelectLastStoreByAddress();
+            
+            HasEnableStores = _hasPickUpInStore || _hasSendFromStore;
         }
 
         public ItemCatalog PickUpStore
