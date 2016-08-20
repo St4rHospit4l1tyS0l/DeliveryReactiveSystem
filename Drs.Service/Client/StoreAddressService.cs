@@ -217,12 +217,12 @@ namespace Drs.Service.Client
                 return;
             }
 
-            OnStoresReceivedByAddress(storeModels.Select(e => new ItemCatalog
+            OnStoresReceivedByAddress(storeModels.Select(e => e.IdKey != null ? new ItemCatalog
             {
                 Id = e.IdKey.Value,
                 Name = String.Format("{0} ({1})", e.Value, e.MainAddress),
                 Value = e.MainAddress
-            }).ToList());
+            } : null).ToList());
         }
     }
 }

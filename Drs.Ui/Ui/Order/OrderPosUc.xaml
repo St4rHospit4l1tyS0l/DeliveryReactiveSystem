@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-             d:DesignHeight="200" d:DesignWidth="1024" >
+             d:DesignHeight="500" d:DesignWidth="1024" >
     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical">
         <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Cargando aplicación POS " Margin="0 60 0 0" FontFamily="Candara" FontSize="25" />
         <mah:MetroProgressBar Height="25" Margin="40 20 40 0" Width="600" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
                               EllipseDiameter="10" EllipseOffset="10" IsIndeterminate="True" Foreground="#FF2480EE" />
+        <Button Width="200" Margin="0 30 0 0" Height="35" Content="  Recargar POS  " Style="{DynamicResource AccentedSquareButtonStyle}" 
+                    Command="{Binding ReloadPosCommand}" mah:ButtonHelper.PreserveTextCase="True" />
     </StackPanel>
 </UserControl>

@@ -5,6 +5,6 @@ namespace Drs.Service.Franchise
     public interface IPosService
     {
         void OnFranchiseChanged(FranchiseInfoModel obj);
-        //bool ValidatePrices(PosCheck posCheck);
+        void StarPosEmbedded(FranchiseInfoModel model, bool bHasToSetThisWndTopMost);
     }
 }

@@ -94,11 +94,15 @@ namespace Drs.ViewModel.Order
             MessageBus.Current.Listen<ClientInfoGrid>(SharedMessageConstants.ORDER_CLIENTINFO).Subscribe(_orderService.ProcessClient);
             MessageBus.Current.Listen<AddressInfoGrid>(SharedMessageConstants.ORDER_ADDRESSINFO).Subscribe(_orderService.ProcessAddress);
 
-            var orderSummary = ((IOrderSummaryVm) OrderSummary);
+            var orderSummary = ((IOrderSummaryVm)OrderSummary);
             _orderService.PhoneChanged += orderSummary.OnPhoneChanged;
             _orderService.FranchiseChanged += orderSummary.OnFranchiseChanged;
             _orderService.FranchiseChanged += _posService.OnFranchiseChanged;
+            _orderService.StartPosEmbedded = _posService.StarPosEmbedded;
             _orderService.FranchiseChanged += _storeAddressService.OnFranchiseChanged;
+
+            var orderPos = ((IOrderPosVm)OrderPos);
+            orderPos.ReloadPosAction = _orderService.OnReloadPos;
 
             var clientsList = ((IClientsListVm)ClientsList);
             _orderService.ClientChanged += clientsList.OnClientChanged;

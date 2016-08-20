@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,7 +17,6 @@ using Drs.Model.Order;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
 using Drs.Repository.Log;
-using Drs.Repository.Shared;
 using ReactiveUI;
 
 namespace Drs.Service.Franchise
@@ -26,103 +25,134 @@ namespace Drs.Service.Franchise
     {
         private static readonly object Lock = new object();
 
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetForegroundWindow();
-
-
         public void OnFranchiseChanged(FranchiseInfoModel model)
         {
-            Task.Run(() =>
+            Task.Run(() => StarPosEmbedded(model, true)).ContinueWith(_ => DoInjectPosDataByPropagate(model));
+        }
+
+        public void StarPosEmbedded(FranchiseInfoModel model, bool bHasToSetThisWndTopMost)
+        {
+            var dataFolderFranchise = model.DataInfo[StaticReflection.GetMemberName<FranchiseDataModel>(x => x.DataFolder)];
+            var newDataFolderFranchise =
+                model.DataInfo[StaticReflection.GetMemberName<FranchiseDataModel>(x => x.NewDataFolder)];
+            var dataFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.DATA_FOLDER);
+            var newDataFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.NEWDATA_FOLDER);
+
+            lock (Lock)
             {
-                var dataFolderFranchise = model.DataInfo[StaticReflection.GetMemberName<FranchiseDataModel>(x => x.DataFolder)];
-                var newDataFolderFranchise = model.DataInfo[StaticReflection.GetMemberName<FranchiseDataModel>(x => x.NewDataFolder)];
-                var dataFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.DATA_FOLDER);
-                var newDataFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.NEWDATA_FOLDER);
+                //Delete STOP file if exists
+                var tmpFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.TMP_FOLDER);
+                var stopFile = Path.Combine(tmpFolder, SettingsData.Constants.Franchise.STOP_FILE);
+                if (File.Exists(stopFile))
+                    FileExt.ForceDeleteFile(stopFile);
 
-                lock (Lock)
+                var isUpdated = IsUpdatedUpToDay(dataFolder);
+                var fileCode = Path.Combine(dataFolder, model.Code);
+
+                //Check if DATA y NEWDATA has already franchise selected
+                ReinitPosIfNotCurrentDobOrDifferentFranchise(isUpdated, fileCode, dataFolder, dataFolderFranchise, tmpFolder);
+
+                //Start Iber
+                var process =
+                    ProcessExt.ForceStartProcess(
+                        Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.BIN_FOLDER),
+                        SettingsData.AlohaIberToInit,
+                        SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty), true);
+
+                if (process == null)
                 {
-                    
-                    //Delete STOP file if exists
-                    var tmpFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.TMP_FOLDER);
-                    var stopFile = Path.Combine(tmpFolder, SettingsData.Constants.Franchise.STOP_FILE);
-                    if (File.Exists(stopFile))
-                        FileExt.ForceDeleteFile(stopFile);
-
-                    var isUpdated = IsUpdatedUpToDay(dataFolder);
-                    var fileCode = Path.Combine(dataFolder, model.Code);
-
-                    //Check if DATA y NEWDATA has already franchise selected
-                    if (isUpdated == false || !File.Exists(fileCode))
+                    MessageBus.Current.SendMessage(new MessageBoxSettings
                     {
-                        //Kill Iber process if exists
-                        ProcessExt.ForceKillProcess
-                            (SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty));
-
-                        //Delete DATA folders
-                        DirExt.ForceDeleteFolder(dataFolder);
-                        //Copy directories of franchise 
-                        DirExt.ForceCopyFolder(Path.Combine(SettingsData.AlohaPath, dataFolderFranchise.ToString()),
-                            dataFolder);
-                        try
-                        {
-                            DirExt.ForceToCreateFile(fileCode);
-                        }
-                        catch (Exception ex)
-                        {
-                            SharedLogger.LogErrorToFile(ex, fileCode);
-                        }
-                        //WaitForTopMostToDisable(process);
-
-                        ChangeAlohaIniDate(dataFolder);
-                        DeleteTransLog(dataFolder);
-                        DeleteTmpFiles(tmpFolder);
-                    }
-
-                    //Start Iber
-                    var process = ProcessExt.ForceStartProcess(
-                            Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.BIN_FOLDER),
-                            SettingsData.AlohaIberToInit,
-                            SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty), true);
-
-                    if (process == null)
-                    {
-                        MessageBus.Current.SendMessage(new MessageBoxSettings
-                        {
-                            Message =
-                                "No fue posible ejecutar el proceso del POS, por favor reporte a soporte técnico.",
-                            Title = "Error al ejecutar la aplicación",
-                        }, SharedMessageConstants.MSG_SHOW_ERRQST);
-                    }
-
-                    if (File.Exists(Path.Combine(newDataFolder, model.Code))) 
-                        return;
-                    
-                    //Delete NEWDATA folders
-                    DirExt.ForceDeleteFolder(newDataFolder);
-                    //Copy directories of franchise 
-                    DirExt.ForceCopyFolder(Path.Combine(SettingsData.AlohaPath, newDataFolderFranchise.ToString()), newDataFolder);
+                        Message =
+                            "No fue posible ejecutar el proceso del POS, por favor reporte a soporte técnico.",
+                        Title = "Error al ejecutar la aplicación",
+                    }, SharedMessageConstants.MSG_SHOW_ERRQST);
                 }
 
-            }).ContinueWith(_ =>
-            {
-                if (model.PropagateOrder == null || model.PropagateOrder.HasEdit == false)
+                if(bHasToSetThisWndTopMost)
+                    SetOnTopMostWindowForNotShowingPosWindow();
+
+                if (File.Exists(Path.Combine(newDataFolder, model.Code)))
                     return;
 
-                bool isExecuteOk;
-                var iCount = 0;
-                var randomTime = new Random();
-                do
+                //Delete NEWDATA folders
+                DirExt.ForceDeleteFolder(newDataFolder);
+                //Copy directories of franchise 
+                DirExt.ForceCopyFolder(Path.Combine(SettingsData.AlohaPath, newDataFolderFranchise.ToString()), newDataFolder);
+            }
+        }
+
+        private void ReinitPosIfNotCurrentDobOrDifferentFranchise(bool isUpdated, string fileCode, string dataFolder,
+            dynamic dataFolderFranchise, string tmpFolder)
+        {
+            if (isUpdated == false || !File.Exists(fileCode))
+            {
+                //Kill Iber process if exists
+                ProcessExt.ForceKillProcess(SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty));
+
+                //Delete DATA folders
+                DirExt.ForceDeleteFolder(dataFolder);
+                //Copy directories of franchise 
+                DirExt.ForceCopyFolder(Path.Combine(SettingsData.AlohaPath, dataFolderFranchise.ToString()),
+                    dataFolder);
+                try
                 {
-                    if(iCount != 0)
-                        Thread.Sleep(randomTime.Next(100, 500));
-                    isExecuteOk = StartInjectPosData(model.PropagateOrder);
+                    DirExt.ForceToCreateFile(fileCode);
+                }
+                catch (Exception ex)
+                {
+                    SharedLogger.LogErrorToFile(ex, fileCode);
+                }
+                //WaitForTopMostToDisable(process);
 
-                    if(Process.GetProcessesByName(SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty)).Any() == false)
-                        break;
+                ChangeAlohaIniDate(dataFolder);
+                DeleteTransLog(dataFolder);
+                DeleteTmpFiles(tmpFolder);
+            }
+        }
 
-                } while (!isExecuteOk && iCount++ < SharedConstants.Client.TRIES_INJECT_POS_DATA);
+        private void DoInjectPosDataByPropagate(FranchiseInfoModel model)
+        {
+            if (model.PropagateOrder == null || model.PropagateOrder.HasEdit == false)
+                return;
 
-            });
+            bool isExecuteOk;
+            var iCount = 0;
+            var randomTime = new Random();
+            do
+            {
+                if (iCount != 0)
+                    Thread.Sleep(randomTime.Next(100, 500));
+                isExecuteOk = StartInjectPosData(model.PropagateOrder);
+
+                if (
+                    Process.GetProcessesByName(SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty))
+                        .Any() == false)
+                    break;
+            } while (!isExecuteOk && iCount++ < SharedConstants.Client.TRIES_INJECT_POS_DATA);
+        }
+
+        private static void SetOnTopMostWindowForNotShowingPosWindow()
+        {
+            Observable.Interval(TimeSpan.FromMilliseconds(50))
+                .Take(30)
+                .ObserveOn(RxApp.MainThreadScheduler).Subscribe(_ =>
+                {
+                    if (Application.Current.Windows.Count > 0)
+                    {
+                        var wnd = Application.Current.Windows[0];
+                        if (wnd != null)
+                            wnd.Topmost = true;
+                    }
+
+                    if (Application.Current.Windows.Count > 0)
+                    {
+                        var wnd = Application.Current.Windows[0];
+                        if (wnd != null)
+                            wnd.Topmost = false;
+                    }
+                });
+
         }
 
         private bool StartInjectPosData(PropagateOrderModel propagateOrder)
@@ -162,7 +192,7 @@ namespace Drs.Service.Franchise
             {
                 Console.WriteLine(ex.Message);
             }
-            
+
             try
             {
                 funcs.ClockIn(termId, SettingsData.Client.JobAlohaPosId);
@@ -271,7 +301,7 @@ namespace Drs.Service.Franchise
             }
         }
 
-        private bool IsUpdatedUpToDay(string dataFolder)
+        private static bool IsUpdatedUpToDay(string dataFolder)
         {
             try
             {
@@ -309,17 +339,30 @@ namespace Drs.Service.Franchise
         }
 
 
-        public static void DeletePosFoldersDataAndNewDataIfPosIsDown()
+        public static bool DeletePosFoldersDataAndNewDataIfPosIsDown()
         {
-            if(ProcessExt.ProcessIsRunning
-                (SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty))) 
-                return;
+            var posProcessName = SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty);
+            var lstGndDirectories = Directory.GetDirectories(SettingsData.AlohaPath).Select(e => new DirectoryInfo(e).Name).Where(e => e.StartsWith("20") && e.Length == 8).ToList();
+
+            if (lstGndDirectories.Any())
+            {
+                ProcessExt.ForceKillProcess(posProcessName);
+                foreach (var gndDirectory in lstGndDirectories)
+                {
+                    DirExt.ForceDeleteFolder(Path.Combine(SettingsData.AlohaPath, gndDirectory));
+                }
+            }
+
+            if (ProcessExt.ProcessIsRunning(posProcessName))
+                return false;
 
             var dataFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.DATA_FOLDER);
             DirExt.ForceDeleteFolder(dataFolder);
 
             var newDataFolder = Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.NEWDATA_FOLDER);
             DirExt.ForceDeleteFolder(newDataFolder);
+
+            return true;
         }
     }
 }

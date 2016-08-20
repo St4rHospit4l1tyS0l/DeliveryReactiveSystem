@@ -125,7 +125,6 @@ namespace Drs.ViewModel.Order
         {
             model.PosCheck.GuidId = Guid.NewGuid();
             model.PosCheck.OrderDateTime = DateTime.Now;
-
             MessageBus.Current.SendMessage(model.PosCheck, SharedMessageConstants.ORDER_SEND_POSORDER);
         }
 

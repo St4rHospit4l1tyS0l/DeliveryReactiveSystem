@@ -123,6 +123,7 @@
     <Compile Include="Crypto\Cypher.cs" />
     <Compile Include="Crypto\HashMd5.cs" />
     <Compile Include="Entity\Generator.cs" />
+    <Compile Include="Extensions\ActionExt.cs" />
     <Compile Include="Extensions\AppWin\AppExt.cs" />
     <Compile Include="Extensions\Classes\DateTimeExt.cs" />
     <Compile Include="Extensions\DateTimeExt.cs" />

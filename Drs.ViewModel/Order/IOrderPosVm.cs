@@ -8,5 +8,6 @@ namespace Drs.ViewModel.Order
     public interface IOrderPosVm : IUcViewModel
     {
         Func<ClientFlags.ValidateOrder, ResponseMessage> ValidateModel { get; set; }
+        Action ReloadPosAction { get; set; }
     }
 }

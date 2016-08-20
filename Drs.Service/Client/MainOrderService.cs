@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reactive.Concurrency;
+using Drs.Infrastructure.Extensions;
 using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Model.Account;
 using Drs.Model.Address;
@@ -188,6 +189,12 @@ namespace Drs.Service.Client
             if (handler != null) handler(model);
         }
 
+        public void OnReloadPos()
+        {
+            if(_model != null && _model.Franchise != null)
+                StartPosEmbedded.SafeExecuteAction(_model.Franchise, false);
+        }
+
         public void ProcessFranchise(FranchiseInfoModel franchiseInfo)
         {
             franchiseInfo.CopyTo(_model.Franchise);
@@ -246,6 +253,8 @@ namespace Drs.Service.Client
         {
             get { return _model; }
         }
+
+        public Action<FranchiseInfoModel, bool> StartPosEmbedded { get; set; }
 
         public void ProcessPosOrder(PosCheck posCheck)
         {

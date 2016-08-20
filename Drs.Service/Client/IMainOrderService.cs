@@ -19,6 +19,8 @@ namespace Drs.Service.Client
         event Action<PosCheck> PosOrderChanged;
         event Action<OrderModelDto> SendOrderToStoreStatusChanged;
 
+        void OnReloadPos();
+
         void ProcessFranchise(FranchiseInfoModel franchiseInfo);
         Func<ClientFlags.ValidateOrder, ResponseMessage> ValidateModel { get; }
         void ProcessClient(ClientInfoGrid clientInfoModel);
@@ -26,6 +28,7 @@ namespace Drs.Service.Client
         //IReactiveList<ClientInfoGrid> LstClientInfo { get; }
         //IReactiveList<AddressInfoGrid> LstAddressInfo { get; }
         OrderModel OrderModel { get; }
+        Action<FranchiseInfoModel, bool> StartPosEmbedded { get; set; }
         void ProcessPosOrder(PosCheck posCheck);
         void SavePosOrder();
         void SendOrderToStore(OrderDetails orderDetails);
