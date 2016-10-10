@@ -45,7 +45,7 @@ namespace Drs.ViewModel.Order
         }
 
 
-        public override bool Initialize(bool bForceToInit = false)
+        public override bool Initialize(bool bForceToInit = false, string parameters = null)
         {   
             if (base.Initialize(bForceToInit) == false)
                 return false;

@@ -44,14 +44,14 @@ namespace Drs.ViewModel.Shared
             }
         }
 
-        public virtual bool Initialize(bool bForceToInit = false)
+        public virtual bool Initialize(bool bForceToInit = false, string parameters = null)
         {
             if (IsInitialize && !bForceToInit)
                 return false;
 
             foreach (var ucViewModel in LstChildren)
             {
-                ucViewModel.Initialize(bForceToInit);
+                ucViewModel.Initialize(bForceToInit, parameters);
             }
 
             IsInitialize = true;

@@ -10,6 +10,7 @@ using Drs.Ui.Ui;
 using Drs.Ui.Ui.Order;
 using Drs.ViewModel;
 using Drs.ViewModel.Account;
+using Drs.ViewModel.External;
 using Drs.ViewModel.Main;
 using Drs.ViewModel.Menu;
 using Drs.ViewModel.Order;
@@ -64,6 +65,8 @@ namespace Drs.Ui
 
             builder.RegisterType<DailyOrderStatusVm>().As<IDailyOrderStatusVm>().ExternallyOwned();
             builder.RegisterType<SearchDailyOrderVm>().As<ISearchDailyOrderVm>().ExternallyOwned();
+
+            builder.RegisterType<BrowserVm>().As<IBrowserVm>().ExternallyOwned();
 
             builder.RegisterType<PagerVm>().As<IPagerVm>().ExternallyOwned();
 

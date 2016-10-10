@@ -37,7 +37,7 @@ namespace Drs.ViewModel.Track
             OnClientNameChanged(model.IdKey ?? -1);            
         }
 
-        public override bool Initialize(bool bForceToInit = false)
+        public override bool Initialize(bool bForceToInit = false, string parameters = null)
         {
             PhoneSearchVm.Search = String.Empty;
             PhoneSearchVm.IsFocused = true;

@@ -394,6 +394,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="InsertDate" Type="datetime" Nullable="false" />
+          <Property Name="Parameters" Type="nvarchar(max)" />
           <Property Name="IsObsolete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderToStore">
@@ -2315,7 +2316,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="InfoServer" EntityType="CallCenterModel.InfoServer" />
           <EntitySet Name="Language" EntityType="CallCenterModel.Language" />
           <EntitySet Name="MenuModule" EntityType="CallCenterModel.MenuModule" />
-          <EntitySet Name="Module" EntityType="CallCenterModel.Module" />
           <EntitySet Name="OrderToStore" EntityType="CallCenterModel.OrderToStore" />
           <EntitySet Name="OrderToStoreLog" EntityType="CallCenterModel.OrderToStoreLog" />
           <EntitySet Name="Permission" EntityType="CallCenterModel.Permission" />
@@ -2558,14 +2558,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="InfoClientTerminal" EntitySet="InfoClientTerminal" />
             <End Role="InfoClientTerminalVersion" EntitySet="InfoClientTerminalVersion" />
           </AssociationSet>
-          <AssociationSet Name="FK_MenuModule_Module" Association="CallCenterModel.FK_MenuModule_Module">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="MenuModule" EntitySet="MenuModule" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Permission_Module" Association="CallCenterModel.FK_Permission_Module">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="Permission" EntitySet="Permission" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderToStore_PosOrder" Association="CallCenterModel.FK_OrderToStore_PosOrder">
             <End Role="PosOrder" EntitySet="PosOrder" />
             <End Role="OrderToStore" EntitySet="OrderToStore" />
@@ -2667,6 +2659,15 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="FK_PosOrderItem_PosOrder" Association="CallCenterModel.FK_PosOrderItem_PosOrder">
             <End Role="PosOrder" EntitySet="PosOrder" />
             <End Role="PosOrderItem" EntitySet="PosOrderItem" />
+          </AssociationSet>
+          <EntitySet Name="Module" EntityType="CallCenterModel.Module" />
+          <AssociationSet Name="FK_MenuModule_Module" Association="CallCenterModel.FK_MenuModule_Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="MenuModule" EntitySet="MenuModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_Module" Association="CallCenterModel.FK_Permission_Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Permission" EntitySet="Permission" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="User_Sales_group_by_date_Result">
@@ -3188,19 +3189,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="Color" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Module" Relationship="CallCenterModel.FK_MenuModule_Module" FromRole="MenuModule" ToRole="Module" />
-        </EntityType>
-        <EntityType Name="Module">
-          <Key>
-            <PropertyRef Name="ModuleId" />
-          </Key>
-          <Property Name="ModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="InsertDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="MenuModule" Relationship="CallCenterModel.FK_MenuModule_Module" FromRole="Module" ToRole="MenuModule" />
-          <NavigationProperty Name="Permission" Relationship="CallCenterModel.FK_Permission_Module" FromRole="Module" ToRole="Permission" />
         </EntityType>
         <EntityType Name="OrderToStore">
           <Key>
@@ -4210,30 +4198,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MenuModule_Module">
-          <End Type="CallCenterModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="CallCenterModel.MenuModule" Role="MenuModule" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="ModuleId" />
-            </Principal>
-            <Dependent Role="MenuModule">
-              <PropertyRef Name="ModuleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Permission_Module">
-          <End Type="CallCenterModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="CallCenterModel.Permission" Role="Permission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="ModuleId" />
-            </Principal>
-            <Dependent Role="Permission">
-              <PropertyRef Name="ModuleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderToStore_PosOrder">
           <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
           <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
@@ -4527,6 +4491,44 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Principal>
             <Dependent Role="PosOrderItem">
               <PropertyRef Name="PosOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="ModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="InsertDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Parameters" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MenuModule" Relationship="CallCenterModel.FK_MenuModule_Module" FromRole="Module" ToRole="MenuModule" />
+          <NavigationProperty Name="Permission" Relationship="CallCenterModel.FK_Permission_Module" FromRole="Module" ToRole="Permission" />
+        </EntityType>
+        <Association Name="FK_MenuModule_Module">
+          <End Type="CallCenterModel.Module" Role="Module" Multiplicity="1" />
+          <End Type="CallCenterModel.MenuModule" Role="MenuModule" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="MenuModule">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_Module">
+          <End Type="CallCenterModel.Module" Role="Module" Multiplicity="1" />
+          <End Type="CallCenterModel.Permission" Role="Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="ModuleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4938,18 +4940,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Module">
-            <EntityTypeMapping TypeName="CallCenterModel.Module">
-              <MappingFragment StoreEntitySet="Module">
-                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
-                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrderToStore">
             <EntityTypeMapping TypeName="CallCenterModel.OrderToStore">
               <MappingFragment StoreEntitySet="OrderToStore">
@@ -5326,6 +5316,19 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <ScalarProperty Name="CheckItemId" ColumnName="CheckItemId" />
                 <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
                 <ScalarProperty Name="PosOrderItemId" ColumnName="PosOrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Module">
+            <EntityTypeMapping TypeName="CallCenterModel.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="Parameters" ColumnName="Parameters" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

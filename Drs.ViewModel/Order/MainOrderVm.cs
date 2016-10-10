@@ -153,7 +153,7 @@ namespace Drs.ViewModel.Order
             ShellContainerVm.AddOrUpdateFlyouts(LastOrderFo);
         }
 
-        public override bool Initialize(bool bForceToInit = false)
+        public override bool Initialize(bool bForceToInit = false, string parameters = null)
         {
             _orderService.ResetAndCreateNewOrder();
             var bResult = base.Initialize(true);

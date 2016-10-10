@@ -60,7 +60,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<InfoServer> InfoServer { get; set; }
         public virtual DbSet<Language> Language { get; set; }
         public virtual DbSet<MenuModule> MenuModule { get; set; }
-        public virtual DbSet<Module> Module { get; set; }
         public virtual DbSet<OrderToStore> OrderToStore { get; set; }
         public virtual DbSet<OrderToStoreLog> OrderToStoreLog { get; set; }
         public virtual DbSet<Permission> Permission { get; set; }
@@ -85,6 +84,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<ViewUserInfo> ViewUserInfo { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<PosOrderItem> PosOrderItem { get; set; }
+        public virtual DbSet<Module> Module { get; set; }
     
         [DbFunction("CallCenterEntities", "ufnGetTopProductsByRangeDates")]
         public virtual IQueryable<ufnGetTopProductsByRangeDates_Result1> ufnGetTopProductsByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)

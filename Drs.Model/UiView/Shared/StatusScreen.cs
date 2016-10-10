@@ -5,13 +5,14 @@ namespace Drs.Model.UiView.Shared
 {
     public enum StatusScreen
     {
+        UmMsg = SharedConstants.Client.STATUS_SCREEN_MESSAGE,
         Login = 1000,
         ShMenu = 2000,
         UmOrd = 3000,
         UmTrc = 4000,
         UmMss = 5000,
         UmStt = 6000,
-        UmMsg = SharedConstants.Client.STATUS_SCREEN_MESSAGE
+        UmEx = 7000,
     }
 
     public static class StatusScreenName
@@ -25,6 +26,7 @@ namespace Drs.Model.UiView.Shared
         public const string SM_MO = "SM_MO";
         public const string UM_STT = "UM_STT";
         public const string UM_CS = "UM_CS";
+        public const string UM_EX = "UM_EX";
         
         public static readonly Dictionary<string, StatusScreen> DicStatusScreen = new Dictionary<string, StatusScreen>
         {
@@ -32,7 +34,8 @@ namespace Drs.Model.UiView.Shared
             { UM_TRC, StatusScreen.UmTrc },
             { UM_MSS, StatusScreen.UmMss },
             { UM_STT, StatusScreen.UmStt },
-            { UM_CS, StatusScreen.Login }
+            { UM_CS, StatusScreen.Login },
+            { UM_EX, StatusScreen.UmEx }
         };
 
         public static StatusScreen ToEnum(this string value)

@@ -108,6 +108,8 @@
     <Compile Include="Account\ILoginVm.cs" />
     <Compile Include="BootstrapperBase.cs" />
     <Compile Include="Catalog\CatalogsClientConfigure.cs" />
+    <Compile Include="External\BrowserVm.cs" />
+    <Compile Include="External\IBrowserVm.cs" />
     <Compile Include="Main\IShellContainerVm.cs" />
     <Compile Include="Main\ShellContainerVm.cs" />
     <Compile Include="Menu\IMenuItemVm.cs" />

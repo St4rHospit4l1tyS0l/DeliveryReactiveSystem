@@ -59,6 +59,7 @@ namespace Drs.Repository.Account
                             {
                                 per.Id,
                                 mo.Name,
+                                mo.Parameters,
                                 mo.MenuModule.Color,
                                 mo.MenuModule.Position,
                                 mo.MenuModule.Image,
@@ -71,7 +72,8 @@ namespace Drs.Repository.Account
                         Title = e.Name,
                         Position = e.Position,
                         Image = e.Image,
-                        Code = e.Code
+                        Code = e.Code,
+                        Parameters = e.Parameters
                     }).OrderBy(e => e.Position).ToList();
         }
 

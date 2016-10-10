@@ -10,6 +10,7 @@ using Drs.Model.Account;
 using Drs.Model.Settings;
 using Drs.Model.UiView.Shared;
 using Drs.ViewModel.Account;
+using Drs.ViewModel.External;
 using Drs.ViewModel.Menu;
 using Drs.ViewModel.Order;
 using Drs.ViewModel.Shared;
@@ -37,7 +38,7 @@ namespace Drs.ViewModel.Main
         //public ICurrentUserSettings CurrentUserSettings { get; set; }
 
         public ReadOnlyDictionary<StatusScreen, IUcViewModel> DictionaryViews { get; set; }
-        public void ChangeCurrentView(StatusScreen statusScreen, bool bHasToInit, bool bForzeToInit = false)
+        public void ChangeCurrentView(StatusScreen statusScreen, bool bHasToInit, bool bForzeToInit = false, string parameters = null)
         {
             if (_lastView != null)
             {
@@ -52,7 +53,7 @@ namespace Drs.ViewModel.Main
             HasToShowHeader(statusScreen);
 
             if (bHasToInit)
-                CurrentView.Initialize(bForzeToInit);
+                CurrentView.Initialize(bForzeToInit, parameters);
         }
 
         private void HasToShowHeader(StatusScreen statusScreen)
@@ -60,6 +61,7 @@ namespace Drs.ViewModel.Main
             switch (statusScreen)
             {
                 case StatusScreen.Login:
+                case StatusScreen.UmEx:
                 case StatusScreen.ShMenu:
                     HeaderVisibility = Visibility.Collapsed;
                     CloseFlyouts();
@@ -126,7 +128,8 @@ namespace Drs.ViewModel.Main
             Flyouts.Add(BootStrapper.CreateFlyoutControl(flyout));
         }
 
-        public ShellContainerVm(ILoginVm loginVm, IMenuVm menuVm, IMainOrderVm orderVm, IDailyOrderStatusVm dailyOrderVm, ITrackOrderVm trackOrderVm, IMsgWndVm msgWndVm)
+        public ShellContainerVm(ILoginVm loginVm, IMenuVm menuVm, IMainOrderVm orderVm, IDailyOrderStatusVm dailyOrderVm, ITrackOrderVm trackOrderVm
+            , IMsgWndVm msgWndVm, IBrowserVm browserVm)
         {
             HeaderVisibility = Visibility.Collapsed;
 
@@ -141,8 +144,8 @@ namespace Drs.ViewModel.Main
                 {StatusScreen.UmOrd, orderVm},
                 {StatusScreen.UmTrc, trackOrderVm},
                 {StatusScreen.UmMsg, msgWndVm},
-                {StatusScreen.UmStt, dailyOrderVm}
-
+                {StatusScreen.UmStt, dailyOrderVm},
+                {StatusScreen.UmEx, browserVm}
             });
 
             CurrentView = DictionaryViews[StatusScreen.UmMsg];

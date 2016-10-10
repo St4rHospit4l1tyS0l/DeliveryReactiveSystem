@@ -38,7 +38,6 @@
         <EntityTypeShape EntityType="CallCenterModel.InfoServer" Width="1.5" PointX="8.25" PointY="63.75" />
         <EntityTypeShape EntityType="CallCenterModel.Language" Width="1.5" PointX="5.75" PointY="4.75" />
         <EntityTypeShape EntityType="CallCenterModel.MenuModule" Width="1.5" PointX="3" PointY="29" />
-        <EntityTypeShape EntityType="CallCenterModel.Module" Width="1.5" PointX="0.75" PointY="30.75" />
         <EntityTypeShape EntityType="CallCenterModel.OrderToStore" Width="1.5" PointX="13.5" PointY="35.625" />
         <EntityTypeShape EntityType="CallCenterModel.OrderToStoreLog" Width="1.5" PointX="15.75" PointY="44.5" />
         <EntityTypeShape EntityType="CallCenterModel.Permission" Width="1.5" PointX="3" PointY="32" />
@@ -116,8 +115,6 @@
         <AssociationConnector Association="CallCenterModel.FK_InfoServer_InfoCallCenter" />
         <AssociationConnector Association="CallCenterModel.FK_InfoClientTerminalFranchise_InfoClientTerminal" />
         <AssociationConnector Association="CallCenterModel.FK_InfoClientTerminalVersion_InfoClientTerminal" />
-        <AssociationConnector Association="CallCenterModel.FK_MenuModule_Module" />
-        <AssociationConnector Association="CallCenterModel.FK_Permission_Module" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_PosOrder" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStoreLog_OrderToStore" />
         <AssociationConnector Association="CallCenterModel.FK_Recurrence_OrderToStore" />
@@ -143,6 +140,9 @@
         <AssociationConnector Association="CallCenterModel.RelClientPhoneClient" />
         <EntityTypeShape EntityType="CallCenterModel.PosOrderItem" Width="1.5" PointX="7.5" PointY="29.625" />
         <AssociationConnector Association="CallCenterModel.FK_PosOrderItem_PosOrder" />
+        <EntityTypeShape EntityType="CallCenterModel.Module" Width="1.5" PointX="0.75" PointY="30.125" />
+        <AssociationConnector Association="CallCenterModel.FK_MenuModule_Module" />
+        <AssociationConnector Association="CallCenterModel.FK_Permission_Module" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -24,6 +24,7 @@ namespace Drs.Repository.Entities
         public string Description { get; set; }
         public string Code { get; set; }
         public System.DateTime InsertDate { get; set; }
+        public string Parameters { get; set; }
         public bool IsObsolete { get; set; }
     
         public virtual MenuModule MenuModule { get; set; }

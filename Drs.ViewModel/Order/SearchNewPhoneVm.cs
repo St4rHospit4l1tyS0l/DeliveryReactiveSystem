@@ -22,7 +22,7 @@ namespace Drs.ViewModel.Order
             PhoneSearchVm.DoExecuteEvent += FindOrCreateClient;
         }
 
-        public override bool Initialize(bool bForceToInit = false)
+        public override bool Initialize(bool bForceToInit = false, string parameters = null)
         {
             PhoneSearchVm.Search = String.Empty;
             return base.Initialize(bForceToInit);

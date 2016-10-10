@@ -11,5 +11,6 @@
         public dynamic DataInfo { get; set; }
         public string LastConfig { get; set; }
         public string StoresCoverage { get; set; }
+        public string Parameters { get; set; }
     }
 }

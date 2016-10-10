@@ -24,7 +24,8 @@ namespace Drs.ViewModel.Menu
             MenuItemLogo = new BitmapImage(new Uri(URI_RESOURCE + model.Image));
             Title = model.Title;
             ExecuteCommand = ReactiveCommand.Create(Observable.Return(true));
-            ExecuteCommand.Subscribe(_ => ShellContainerVm.ChangeCurrentView(model.Code.ToEnum(), true));
+            _parameters = model.Parameters;
+            ExecuteCommand.Subscribe(_ => ShellContainerVm.ChangeCurrentView(model.Code.ToEnum(), true, false, _parameters));
         }
 
         public IReactiveCommand<object> ExecuteCommand { get; private set; }
@@ -86,6 +87,8 @@ namespace Drs.ViewModel.Menu
 
 
         private Brush _menuItemBackgroundPressedColor;
+        private string _parameters;
+
         public Brush MenuItemBackgroundPressedColor
         {
             get

@@ -11,7 +11,7 @@ namespace Drs.ViewModel.Main
     {
         IUcViewModel CurrentView { get; set; }
         ReadOnlyDictionary<StatusScreen, IUcViewModel> DictionaryViews { get; set; }
-        void ChangeCurrentView(StatusScreen statusScreen, bool bHasToInit, bool bForzeToInit = false);
+        void ChangeCurrentView(StatusScreen statusScreen, bool bHasToInit, bool bForzeToInit = false, string parameters = null);
         Visibility HeaderVisibility { get; set; }
         IReactiveList<Flyout> Flyouts { get; }
         BootstrapperBase BootStrapper { get; set; }

@@ -112,7 +112,7 @@ namespace Drs.ViewModel.Status
         }
 
 
-        public override bool Initialize(bool bForceToInit = false)
+        public override bool Initialize(bool bForceToInit = false, string parameters = null)
         {
             InitializeVisibility();
             return base.Initialize(true);

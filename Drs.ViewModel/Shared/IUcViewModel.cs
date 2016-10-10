@@ -8,7 +8,7 @@ namespace Drs.ViewModel.Shared
     {
         bool IsInitialize { get; set; }
         IShellContainerVm ShellContainerVm { get; set; }
-        bool Initialize(bool bForceToInit = false);
+        bool Initialize(bool bForceToInit = false, string parameters = null);
         ResponseMessage OnViewSelected(int iSelectedTab);
     }
 }

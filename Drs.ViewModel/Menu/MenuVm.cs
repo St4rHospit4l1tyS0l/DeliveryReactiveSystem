@@ -28,7 +28,7 @@ namespace Drs.ViewModel.Menu
             MenuItems = new ReactiveList<IMenuItemVm>();
         }
 
-        public override bool Initialize(bool bForceToInit = false)
+        public override bool Initialize(bool bForceToInit = false, string parameters = null)
         {
             base.Initialize(bForceToInit);
             _client.ExecutionProxy.ExecuteRequest<String, String, ResponseMessageData<ButtonItemModel>, ResponseMessageData<ButtonItemModel>>

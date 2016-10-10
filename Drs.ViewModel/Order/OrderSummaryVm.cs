@@ -49,7 +49,7 @@ namespace Drs.ViewModel.Order
 
         }
 
-        public override bool Initialize(bool bForceToInit = false)
+        public override bool Initialize(bool bForceToInit = false, string parameters = null)
         {
             foreach (var sumItem in _lstOrderSum)
             {

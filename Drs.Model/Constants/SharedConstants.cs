@@ -88,7 +88,7 @@
             public const int RECORD_ERROR_SAVED = 1003;
             public const int RECORD_ONPROGRESS_TO_PROCESS = 1004;
 
-            public const int STATUS_SCREEN_MESSAGE = 7000;
+            public const int STATUS_SCREEN_MESSAGE = 100;
             public const int STATUS_SCREEN_LOGIN = 1000;
             
             public const string IS_TRUE = "TRUE";

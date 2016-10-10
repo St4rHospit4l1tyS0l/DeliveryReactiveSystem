@@ -43,7 +43,7 @@ namespace Drs.ViewModel.Status
             return new Unit();
         }
 
-        public override bool Initialize(bool bForceToInit = false)
+        public override bool Initialize(bool bForceToInit = false, string parameters = null)
         {
             SearchDate = DateTime.Today;    
             return base.Initialize(bForceToInit);

@@ -7,7 +7,7 @@
              mc:Ignorable="d" VerticalAlignment="Stretch">
     <Viewbox Name="VwBoxMenu">
         <Grid Height="1080" Width="1900">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="650px">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="850px">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100" />

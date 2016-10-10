@@ -22,5 +22,7 @@
 
         public const string FLYOUT_LASTORDER_CLOSE = "Flyout-LastOrder-Close";
 
+        public const string BROWSER_REFRESH_URL = "Browser-Refresh-Url";
+
     }
 }

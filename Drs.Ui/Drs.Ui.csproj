@@ -208,6 +208,9 @@
     <Compile Include="Ui\Account\LoginUc.xaml.cs">
       <DependentUpon>LoginUc.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ui\External\BrowserUc.xaml.cs">
+      <DependentUpon>BrowserUc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ui\Menu\MenuItemUc.xaml.cs">
       <DependentUpon>MenuItemUc.xaml</DependentUpon>
     </Compile>
@@ -298,6 +301,10 @@
     <Page Include="Ui\Account\LoginUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ui\External\BrowserUc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Ui\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -594,6 +601,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\IconAppt.png" />
+    <Resource Include="Resources\Images\IconCmdt.png" />
     <Resource Include="Resources\Images\IconLogOff.png" />
     <Resource Include="Resources\Images\IconLogOfft.png" />
     <Resource Include="DrsLogoII.ico" />
