@@ -34,6 +34,8 @@ namespace Drs.PosService.BsLogic
                 {
                     foreach (IIberObject objItem in chkObject.GetEnum(INTERNAL_CHECKS_ENTRIES))
                     {
+                        if(objItem.GetLongVal("MOD_CODE") == 8) continue; //ITEM DELETED
+
                         var idCheckItem = objItem.GetLongVal("ID");
                         var idItem = objItem.GetLongVal("DATA");
                         var itemName = objItem.GetStringVal("DISP_NAME");

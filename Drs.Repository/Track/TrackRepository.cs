@@ -96,6 +96,7 @@ namespace Drs.Repository.Track
                 ))
                 .Select(ExpGetTrackOrderDto());
 
+            model.Pager.ExtraData = query.Sum(e => (decimal?)e.OrderTotal) ?? 0;
             model.Pager.Total = query.Count();
 
             return query.OrderByDescending(e => e.OrderToStoreId).Skip(model.Pager.SkipRow).Take(model.Pager.Size).ToList();

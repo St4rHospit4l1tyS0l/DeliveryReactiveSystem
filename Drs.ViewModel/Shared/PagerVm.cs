@@ -66,6 +66,7 @@ namespace Drs.ViewModel.Shared
             }
             set
             {
+                _pagerModel.ExtraData = value.ExtraData;
                 _pagerModel.Page = value.Page;
                 _pagerModel.Total = value.Total;
             }
@@ -109,6 +110,20 @@ namespace Drs.ViewModel.Shared
 
             PagerPos = String.Format("{0} / {1}", Total == 0 ? 0 : (Page + 1), Pages);
             TotalFound = String.Format("Mostrando del {0} al {1} de {2} registro(s)", leftLim, rightLim, Total);
+            TotalFound = GetExtraInfo(TotalFound, PagerModel);
+        }
+
+        private string GetExtraInfo(string totalFound, PagerModel pagerModel)
+        {
+            if (pagerModel.ExtraData == null)
+                return totalFound;
+
+            decimal totalOrder;
+
+            if (!decimal.TryParse(pagerModel.ExtraData.ToString(), out totalOrder))
+                return totalFound;
+
+            return String.Format("{0}. Total de las órdenes consultadas: ${1:#,##0.00}", totalFound, pagerModel.ExtraData);
         }
 
         public int Pages

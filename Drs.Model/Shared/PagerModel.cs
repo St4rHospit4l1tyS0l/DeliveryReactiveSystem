@@ -20,6 +20,8 @@ namespace Drs.Model.Shared
             }
         }
 
+        public object ExtraData { get; set; }
+
         public int CalculatePages()
         {
             if (Total == 0)
