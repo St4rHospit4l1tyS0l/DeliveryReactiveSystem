@@ -107,6 +107,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -145,6 +146,7 @@
     <Compile Include="Constants\ClientFlags.cs" />
     <Compile Include="Constants\OrderStatus.cs" />
     <Compile Include="Constants\RoleConstants.cs" />
+    <Compile Include="Constants\WebSharedContext.cs" />
     <Compile Include="Franchise\FranchiseCoverageModel.cs" />
     <Compile Include="Franchise\FranchiseDataModel.cs" />
     <Compile Include="Franchise\FranchiseMapModel.cs" />
@@ -182,6 +184,7 @@
     <Compile Include="Settings\RecurrenceType.cs" />
     <Compile Include="Settings\ResponseCatalogs.cs" />
     <Compile Include="Shared\AccountConstants.cs" />
+    <Compile Include="Shared\MenuItem.cs" />
     <Compile Include="Track\DailySearchModel.cs" />
     <Compile Include="Shared\ItemCatalog.cs" />
     <Compile Include="Shared\OptionModel.cs" />

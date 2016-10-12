@@ -12,21 +12,26 @@ namespace Drs.Repository.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoles
+    public partial class AspNetMenu
     {
-        public AspNetRoles()
+        public AspNetMenu()
         {
-            this.Permission = new HashSet<Permission>();
-            this.AspNetUsers = new HashSet<AspNetUsers>();
+            this.AspNetMenu1 = new HashSet<AspNetMenu>();
             this.AspNetMenuRole = new HashSet<AspNetMenuRole>();
         }
     
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int AspNetMenuId { get; set; }
+        public int Position { get; set; }
+        public Nullable<int> ParentId { get; set; }
+        public string Area { get; set; }
+        public string Controller { get; set; }
+        public string Action { get; set; }
+        public string Title { get; set; }
+        public string Icon { get; set; }
+        public bool IsObsolete { get; set; }
     
-        public virtual ICollection<Permission> Permission { get; set; }
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        public virtual ICollection<AspNetMenu> AspNetMenu1 { get; set; }
+        public virtual AspNetMenu AspNetMenu2 { get; set; }
         public virtual ICollection<AspNetMenuRole> AspNetMenuRole { get; set; }
     }
 }

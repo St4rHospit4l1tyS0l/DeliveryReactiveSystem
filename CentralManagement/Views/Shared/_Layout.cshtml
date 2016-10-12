@@ -1,6 +1,18 @@
 ﻿@using CentralManagement.Controllers
 @using CentralManagement.Helper
 @using Drs.Model.Constants
+@using Drs.Model.Shared
+@{
+    var role = RoleHelper.RoleForUser(User.Identity.Name);
+    List<MenuItem> lstMenu;
+    if (WebSharedContext.DicWebMenu.TryGetValue(role, out lstMenu) == false)
+    {
+        lstMenu = new List<MenuItem>();
+    }
+
+    ViewBag.Menu = WebSharedContext.GetMenuPosition(role);    
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,95 +66,27 @@
                             CM
                         </div>
                     </li>
-                    @if (new List<string> { RoleConstants.MANAGER, RoleConstants.INSTALLER }.Any(e => e == RoleHelper.RoleForUser(User.Identity.Name)))
+                    @foreach (var menu in lstMenu)
                     {
-                        <li class="@(ViewBag.Menu == 1001 ? "active" : "")">
-                            <a href="@Url.Action("Index", "User",new {area = "Management"})"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span> </a>
-                        </li>
-                        <li class="@(ViewBag.Menu == 2001 ? "active" : "")">
-                            <a href="@Url.Action("Index", "License", new { area = "Management" })"><i class="fa fa-lock"></i> <span class="nav-label">Licenciamiento</span> </a>
-                        </li>
-                        <li class="@((int)((ViewBag.Menu??0) / 1000) == 3 ? "active" : "")">
-                            <a href="#"><i class="fa fa-puzzle-piece"></i> <span class="nav-label">Franquicias</span> </a>
-                            <ul class="nav nav-second-level">
-                                <li class="@(ViewBag.Menu == 3002 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "Setting",new {area = "Franchise"})"><i class="fa fa-cogs"></i>Configuración</a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-second-level">
-                                <li class="@(ViewBag.Menu == 3003 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "Sync", new { area = "Franchise" })"><i class="fa fa-laptop"></i>Sincronización de archivos</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="@((int)((ViewBag.Menu??0) / 1000) == 4 ? "active" : "")">
-                            <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Tiendas</span> </a>
-                            <ul class="nav nav-second-level">
-                                <li class="@(ViewBag.Menu == 4002 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "Setting",new {area = "Store"})"><i class="fa fa-cogs"></i>Configuración</a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-second-level">
-                                <li class="@(ViewBag.Menu == 4004 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "StoreCoverage", new { area = "Store" })"><i class="fa fa-road"></i>Cobertura</a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-second-level">
-                                <li class="@(ViewBag.Menu == 4003 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "OffLine", new { area = "Store" })"><i class="fa fa-power-off"></i>Fuera de línea</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="@((int)((ViewBag.Menu??0) / 1000) == 5 ? "active" : "")">
-                            <a href="#"><i class="fa fa-terminal"></i> <span class="nav-label">Terminales</span> </a>
-                            <ul class="nav nav-second-level">
-                                <li class="@(ViewBag.Menu == 5002 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "Setting", new { area = "Terminal" })"><i class="fa fa-cogs"></i>Configuración</a>
-                                </li>
-                            </ul>
+                        <li class="@((int)(ViewBag.Menu / 1000) == menu.Position / 1000 ? "active" : "")">
+                            @if (menu.SubMenu.Any())
+                            {
+                                <a href="#"><i class="fa @menu.Icon"></i> <span class="nav-label">@menu.Title</span> </a>
+                                foreach (var subMenu in menu.SubMenu)
+                                {
+                                    <ul class="nav nav-second-level">
+                                        <li class="@(ViewBag.Menu == subMenu.Position ? "active" : "")">
+                                            <a href="@Url.Action(subMenu.Action, subMenu.Controller, new { area = subMenu.Area })"><i class="fa @subMenu.Icon"></i> @subMenu.Title</a>
+                                        </li>
+                                    </ul>
+                                }
+                            }
+                            else
+                            {
+                                <a href="@Url.Action(menu.Action, menu.Controller,new {area = menu.Area})"><i class="fa @menu.Icon"></i> <span class="nav-label">@menu.Title</span> </a>
+                            }
                         </li>
                     }
-
-                    @if (RoleHelper.RoleForUser(User.Identity.Name) == RoleConstants.STORE_MANAGER)
-                    {
-                        <li class="@((int)((ViewBag.Menu??0) / 1000) == 4 ? "active" : "")">
-                            <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Tiendas</span> </a>
-                            <ul class="nav nav-second-level">
-                                <li class="@(ViewBag.Menu == 4003 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "OffLine", new { area = "Store" })"><i class="fa fa-power-off"></i>Fuera de línea</a>
-                                </li>
-                            </ul>
-                        </li>
-                    }
-
-
-                    @if (RoleHelper.RoleForUser(User.Identity.Name) == RoleConstants.MANAGER)
-                    {
-                        <li class="@((int)((ViewBag.Menu??0) / 1000) == 6 ? "active" : "")">
-                            <a href="#"><i class="fa fa-bar-chart"></i> <span class="nav-label">Reportes</span> </a>
-                            <ul class="nav nav-second-level">
-                                <li class="@(ViewBag.Menu == 6002 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "TimeSale", new { area = "Report" })"><i class="fa fa-line-chart"></i>Ventas por periodo</a>
-                                </li>
-                                <li class="@(ViewBag.Menu == 6003 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "AgentSale", new { area = "Report" })"><i class="fa fa-line-chart"></i>Ventas por agente</a>
-                                </li>
-                                <li class="@(ViewBag.Menu == 6007 ? "active" : "")">
-                                    <a href="@Url.Action("IndexMonthSalesByDay", "TimeSale", new { area = "Report" })"><i class="fa fa-line-chart"></i>Ventas mensuales por día</a>
-                                </li>
-                                <li class="@(ViewBag.Menu == 6004 ? "active" : "")">
-                                    <a href="@Url.Action("Index", "TopProducts", new { area = "Report" })"><i class="fa fa-shopping-cart"></i>Top 10 productos venidos</a>
-                                </li>
-                                <li class="@(ViewBag.Menu == 6005 ? "active" : "")">
-                                    <a href="@Url.Action("IndexFrequent", "TopClients", new { area = "Report" })"><i class="fa fa-users"></i>Top 10 clientes frecuentes</a>
-                                </li>
-                                <li class="@(ViewBag.Menu == 6006 ? "active" : "")">
-                                    <a href="@Url.Action("IndexConsume", "TopClients", new { area = "Report" })"><i class="fa fa-users"></i>Top 10 clientes mayor consumo</a>
-                                </li>
-                            </ul>
-                        </li>
-                    }
-
                 </ul>
             </div>
         </nav>

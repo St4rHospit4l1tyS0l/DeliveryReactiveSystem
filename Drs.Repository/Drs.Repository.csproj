@@ -135,6 +135,12 @@
     <Compile Include="Catalog\CatalogRepository.cs" />
     <Compile Include="Catalog\ICatalogRepository.cs" />
     <Compile Include="Client\ClientRepository.cs" />
+    <Compile Include="Entities\AspNetMenu.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\AspNetMenuRole.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Daily_Sales_group_by_date_Result.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>

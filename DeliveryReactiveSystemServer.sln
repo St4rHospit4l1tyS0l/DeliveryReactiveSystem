@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Terminal", "Terminal", "{9E31C9AE-5CE2-41A9-908A-94C64D19E308}"
 EndProject
@@ -119,5 +119,8 @@ Global
 		{89535441-B59E-4E88-A3C5-F6CB61349920} = {01C8B945-AA9D-4D07-B556-E839084A8236}
 		{C0D16FF4-182D-4AB5-B4F7-950279300418} = {01C8B945-AA9D-4D07-B556-E839084A8236}
 		{ECD5C7F7-5790-4AF2-899F-4ED5AFC15241} = {01C8B945-AA9D-4D07-B556-E839084A8236}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

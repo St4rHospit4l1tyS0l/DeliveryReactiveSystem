@@ -1,4 +1,7 @@
-﻿namespace Drs.Model.Constants
+﻿using System.Collections.Generic;
+using Drs.Model.Shared;
+
+namespace Drs.Model.Constants
 {
     public static class SharedConstants
     {

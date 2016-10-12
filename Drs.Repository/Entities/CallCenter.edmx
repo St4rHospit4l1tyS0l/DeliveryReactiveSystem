@@ -40,6 +40,28 @@
           <Property Name="PropertyParent" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PropertyChild" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="AspNetMenu">
+          <Key>
+            <PropertyRef Name="AspNetMenuId" />
+          </Key>
+          <Property Name="AspNetMenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Area" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsObsolete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetMenuRole">
+          <Key>
+            <PropertyRef Name="AspNetMenuRoleId" />
+          </Key>
+          <Property Name="AspNetMenuRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspNetMenuId" Type="int" Nullable="false" />
+          <Property Name="AspNetRoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -807,6 +829,42 @@ warning 6002: The table/view 'CallCenter.dbo.ViewUserInfo' does not have a prima
             </Principal>
             <Dependent Role="Address">
               <PropertyRef Name="ZipCodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetMenu_AspNetMenu">
+          <End Role="AspNetMenu" Type="Self.AspNetMenu" Multiplicity="0..1" />
+          <End Role="AspNetMenu1" Type="Self.AspNetMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetMenu">
+              <PropertyRef Name="AspNetMenuId" />
+            </Principal>
+            <Dependent Role="AspNetMenu1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetMenuRole_AspNetMenu">
+          <End Role="AspNetMenu" Type="Self.AspNetMenu" Multiplicity="1" />
+          <End Role="AspNetMenuRole" Type="Self.AspNetMenuRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetMenu">
+              <PropertyRef Name="AspNetMenuId" />
+            </Principal>
+            <Dependent Role="AspNetMenuRole">
+              <PropertyRef Name="AspNetMenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetMenuRole_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="AspNetMenuRole" Type="Self.AspNetMenuRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetMenuRole">
+              <PropertyRef Name="AspNetRoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1812,6 +1870,8 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
         <EntityContainer Name="CallCenterModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AddressHierarchy" EntityType="Self.AddressHierarchy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetMenu" EntityType="Self.AspNetMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetMenuRole" EntityType="Self.AspNetMenuRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -1960,6 +2020,18 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="FK_Address_ZipCode" Association="Self.FK_Address_ZipCode">
             <End Role="ZipCode" EntitySet="ZipCode" />
             <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetMenu_AspNetMenu" Association="Self.FK_AspNetMenu_AspNetMenu">
+            <End Role="AspNetMenu" EntitySet="AspNetMenu" />
+            <End Role="AspNetMenu1" EntitySet="AspNetMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetMenuRole_AspNetMenu" Association="Self.FK_AspNetMenuRole_AspNetMenu">
+            <End Role="AspNetMenu" EntitySet="AspNetMenu" />
+            <End Role="AspNetMenuRole" EntitySet="AspNetMenuRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetMenuRole_AspNetRoles" Association="Self.FK_AspNetMenuRole_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetMenuRole" EntitySet="AspNetMenuRole" />
           </AssociationSet>
           <AssociationSet Name="FK_Client_Company" Association="Self.FK_Client_Company">
             <End Role="Company" EntitySet="Company" />
@@ -2669,6 +2741,20 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="Module" EntitySet="Module" />
             <End Role="Permission" EntitySet="Permission" />
           </AssociationSet>
+          <EntitySet Name="AspNetMenuRole" EntityType="CallCenterModel.AspNetMenuRole" />
+          <AssociationSet Name="FK_AspNetMenuRole_AspNetRoles" Association="CallCenterModel.FK_AspNetMenuRole_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetMenuRole" EntitySet="AspNetMenuRole" />
+          </AssociationSet>
+          <EntitySet Name="AspNetMenu" EntityType="CallCenterModel.AspNetMenu" />
+          <AssociationSet Name="FK_AspNetMenu_AspNetMenu" Association="CallCenterModel.FK_AspNetMenu_AspNetMenu">
+            <End Role="AspNetMenu" EntitySet="AspNetMenu" />
+            <End Role="AspNetMenu1" EntitySet="AspNetMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetMenuRole_AspNetMenu" Association="CallCenterModel.FK_AspNetMenuRole_AspNetMenu">
+            <End Role="AspNetMenu" EntitySet="AspNetMenu" />
+            <End Role="AspNetMenuRole" EntitySet="AspNetMenuRole" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="User_Sales_group_by_date_Result">
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
@@ -2786,6 +2872,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Permission" Relationship="CallCenterModel.FK_Permission_AspNetRoles" FromRole="AspNetRoles" ToRole="Permission" />
           <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetMenuRole" Relationship="CallCenterModel.FK_AspNetMenuRole_AspNetRoles" FromRole="AspNetRoles" ToRole="AspNetMenuRole" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
@@ -4532,6 +4619,69 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AspNetMenuRole">
+          <Key>
+            <PropertyRef Name="AspNetMenuRoleId" />
+          </Key>
+          <Property Name="AspNetMenuRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetMenuId" Type="Int32" Nullable="false" />
+          <Property Name="AspNetRoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.FK_AspNetMenuRole_AspNetRoles" FromRole="AspNetMenuRole" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetMenu" Relationship="CallCenterModel.FK_AspNetMenuRole_AspNetMenu" FromRole="AspNetMenuRole" ToRole="AspNetMenu" />
+        </EntityType>
+        <Association Name="FK_AspNetMenuRole_AspNetRoles">
+          <End Type="CallCenterModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="CallCenterModel.AspNetMenuRole" Role="AspNetMenuRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetMenuRole">
+              <PropertyRef Name="AspNetRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetMenu">
+          <Key>
+            <PropertyRef Name="AspNetMenuId" />
+          </Key>
+          <Property Name="AspNetMenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetMenu1" Relationship="CallCenterModel.FK_AspNetMenu_AspNetMenu" FromRole="AspNetMenu" ToRole="AspNetMenu1" />
+          <NavigationProperty Name="AspNetMenu2" Relationship="CallCenterModel.FK_AspNetMenu_AspNetMenu" FromRole="AspNetMenu1" ToRole="AspNetMenu" />
+          <NavigationProperty Name="AspNetMenuRole" Relationship="CallCenterModel.FK_AspNetMenuRole_AspNetMenu" FromRole="AspNetMenu" ToRole="AspNetMenuRole" />
+        </EntityType>
+        <Association Name="FK_AspNetMenu_AspNetMenu">
+          <End Type="CallCenterModel.AspNetMenu" Role="AspNetMenu" Multiplicity="0..1" />
+          <End Type="CallCenterModel.AspNetMenu" Role="AspNetMenu1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetMenu">
+              <PropertyRef Name="AspNetMenuId" />
+            </Principal>
+            <Dependent Role="AspNetMenu1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetMenuRole_AspNetMenu">
+          <End Type="CallCenterModel.AspNetMenu" Role="AspNetMenu" Multiplicity="1" />
+          <End Type="CallCenterModel.AspNetMenuRole" Role="AspNetMenuRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetMenu">
+              <PropertyRef Name="AspNetMenuId" />
+            </Principal>
+            <Dependent Role="AspNetMenuRole">
+              <PropertyRef Name="AspNetMenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5329,6 +5479,30 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetMenuRole">
+            <EntityTypeMapping TypeName="CallCenterModel.AspNetMenuRole">
+              <MappingFragment StoreEntitySet="AspNetMenuRole">
+                <ScalarProperty Name="AspNetRoleId" ColumnName="AspNetRoleId" />
+                <ScalarProperty Name="AspNetMenuId" ColumnName="AspNetMenuId" />
+                <ScalarProperty Name="AspNetMenuRoleId" ColumnName="AspNetMenuRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetMenu">
+            <EntityTypeMapping TypeName="CallCenterModel.AspNetMenu">
+              <MappingFragment StoreEntitySet="AspNetMenu">
+                <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="AspNetMenuId" ColumnName="AspNetMenuId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

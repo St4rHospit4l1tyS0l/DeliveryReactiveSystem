@@ -5,6 +5,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.SessionState;
 using System.Web.Http;
+using Drs.Model.Constants;
+using Drs.Repository.Catalog;
 using Drs.Repository.Log;
 using Drs.Service.Settings;
 
@@ -22,7 +24,22 @@ namespace CentralManagement
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             InitializeSettings();
+            InitializeMenu();
+        }
 
+        private void InitializeMenu()
+        {
+            try
+            {
+                using (var repository = new CatalogRepository())
+                {
+                    WebSharedContext.DicWebMenu = repository.GetWebMenu();
+                }
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+            }
         }
 
         private void InitializeSettings()

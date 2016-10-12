@@ -143,6 +143,11 @@
         <EntityTypeShape EntityType="CallCenterModel.Module" Width="1.5" PointX="0.75" PointY="30.125" />
         <AssociationConnector Association="CallCenterModel.FK_MenuModule_Module" />
         <AssociationConnector Association="CallCenterModel.FK_Permission_Module" />
+        <EntityTypeShape EntityType="CallCenterModel.AspNetMenuRole" Width="1.5" PointX="10.625" PointY="23.625" />
+        <AssociationConnector Association="CallCenterModel.FK_AspNetMenuRole_AspNetRoles" />
+        <EntityTypeShape EntityType="CallCenterModel.AspNetMenu" Width="1.5" PointX="0.75" PointY="12" />
+        <AssociationConnector Association="CallCenterModel.FK_AspNetMenu_AspNetMenu" />
+        <AssociationConnector Association="CallCenterModel.FK_AspNetMenuRole_AspNetMenu" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
