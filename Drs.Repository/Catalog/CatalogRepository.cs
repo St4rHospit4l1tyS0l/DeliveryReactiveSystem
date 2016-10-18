@@ -69,7 +69,9 @@ namespace Drs.Repository.Catalog
                     Icon = e.Icon,
                     Title = e.Title,
                     Position = e.Position,
-                    ParentId = e.ParentId
+                    ParentId = e.ParentId,
+                    MenuName = e.MenuName,
+                    HasToShow = e.HasToShow
                 }).ToList();
 
             foreach (var role in Db.AspNetRoles.Select(e => new {e.Id, e.Name}))

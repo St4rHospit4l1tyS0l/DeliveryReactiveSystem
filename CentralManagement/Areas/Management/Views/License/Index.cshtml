@@ -1,20 +1,4 @@
-﻿@{
-    ViewBag.Title = "Licencias";
-    ViewBag.Menu = 2001;
-}
-
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Licencias</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="@Url.Action("Index", "Home", new {area=""})">Inicio</a>
-            </li>
-        </ol>
-    </div>
-</div>
-
-<div class="wrapper wrapper-content" ng-controller="licenseCtrl">
+﻿<div class="wrapper wrapper-content" ng-controller="licenseCtrl">
     <div class="blocker" ng-show="working">
         <div>
             Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />

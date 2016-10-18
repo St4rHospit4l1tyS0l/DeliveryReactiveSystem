@@ -148,6 +148,14 @@
         <EntityTypeShape EntityType="CallCenterModel.AspNetMenu" Width="1.5" PointX="0.75" PointY="12" />
         <AssociationConnector Association="CallCenterModel.FK_AspNetMenu_AspNetMenu" />
         <AssociationConnector Association="CallCenterModel.FK_AspNetMenuRole_AspNetMenu" />
+        <EntityTypeShape EntityType="CallCenterModel.CategoryMessage" Width="1.5" PointX="13.5" PointY="28.875" />
+        <EntityTypeShape EntityType="CallCenterModel.StoreMessage" Width="1.5" PointX="13.5" PointY="32.125" />
+        <EntityTypeShape EntityType="CallCenterModel.StoreMessageDate" Width="1.5" PointX="15.75" PointY="34.125" />
+        <AssociationConnector Association="CallCenterModel.FK_StoreMessage_AspNetUsers" />
+        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_AspNetUsers" />
+        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_CategoryMessage" />
+        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_FranchiseStore" />
+        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_StoreMessage" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

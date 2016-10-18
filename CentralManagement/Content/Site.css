@@ -244,3 +244,10 @@ div.blocker {
 #canvasReport {
     height: 700px;
 }
+
+.btn-tb {
+    width: 21px;
+    height: 21px;
+    padding: 0;
+    text-align: center;
+}

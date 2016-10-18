@@ -10,7 +10,7 @@ namespace Drs.Model.Catalog
         {
             //DicOrderStatus = new Dictionary<string, string>
             //{
-            //    { OrderStatus.NEW_READY_TO_SEND, "Orden para enviar a la tienda" },
+            //    { OrderStatus.NEW_READY_TO_SEND, "Orden para enviar a la sucursal" },
             //    { SettingsData.Constants.TrackConst.NONE, "Nueva orden" },
             //    { SettingsData.Constants.TrackConst.PRE_DELAY, "Nueva orden orden futura" },
             //    { SettingsData.Constants.TrackConst.IN_DELAY, "Orden retrasada (orden futura)" },

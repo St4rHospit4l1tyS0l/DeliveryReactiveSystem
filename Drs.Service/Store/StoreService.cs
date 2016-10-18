@@ -66,7 +66,7 @@ namespace Drs.Service.Store
                 if (store == null || store.IdKey.HasValue == false)
                 {
                     resMsg.IsSuccess = false;
-                    resMsg.Message = "No se encontró una tienda cercana a este domicilio, por favor reporte a soporte técnico";
+                    resMsg.Message = "No se encontró una sucursal cercana a este domicilio, por favor reporte a soporte técnico";
                     return resMsg;
                 }
 
@@ -99,11 +99,11 @@ namespace Drs.Service.Store
         {
             if (offline.IsUndefinedOfflineTime)
             {
-                return String.Format("La tienda {0} no está en línea en estos momentos. Fuera de línea por tiempo indefinido.",
+                return String.Format("La sucursal {0} no está en línea en estos momentos. Fuera de línea por tiempo indefinido.",
                     store.Value);
             }
             
-            return String.Format("La tienda {0} no está en línea en estos momentos. Fuera de línea hasta {1}",
+            return String.Format("La sucursal {0} no está en línea en estos momentos. Fuera de línea hasta {1}",
                 store.Value, offline.DateTimeEnd.ToLocalTime().ToString(SharedConstants.DATE_TIME_FORMAT));
         }
 
@@ -117,7 +117,7 @@ namespace Drs.Service.Store
                     {
                         Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_PING_ERROR,
                         IsSuccess = false,
-                        Message = String.Format("La tienda se encuentra fuera de línea, intente de nuevo por favor o reporte a su supervisor")
+                        Message = String.Format("La sucursal se encuentra fuera de línea, intente de nuevo por favor o reporte a su supervisor")
                     });
 
                     return;
@@ -127,7 +127,7 @@ namespace Drs.Service.Store
                 {
                     Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_PING_OK,
                     IsSuccess = true,
-                    Message = String.Format("La tienda está en línea, se continua con el envío del pedido")
+                    Message = String.Format("La sucursal está en línea, se continua con el envío del pedido")
                 });
 
 
@@ -140,7 +140,7 @@ namespace Drs.Service.Store
                     {
                         Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_FAILURE,
                         IsSuccess = true,
-                        Message = String.Format("Después de varios intentos no fue posible enviar el pedido a la tienda. Por favor intente de nuevo o reporte a su supervisor")
+                        Message = String.Format("Después de varios intentos no fue posible enviar el pedido a la sucursal. Por favor intente de nuevo o reporte a su supervisor")
                     });
                     return;
                 }
@@ -150,7 +150,7 @@ namespace Drs.Service.Store
                 {
                     Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_ORDER_OK,
                     IsSuccess = true,
-                    Message = String.Format("El pedido se ha enviado a la tienda de forma exitosa. Fecha y tiempo estimado de llegada {0:F}", 
+                    Message = String.Format("El pedido se ha enviado a la sucursal de forma exitosa. Fecha y tiempo estimado de llegada {0:F}", 
                         response.Order.promiseTimeField.ToDateTimeSafe())
                 });
 
@@ -389,7 +389,7 @@ namespace Drs.Service.Store
                     return new ResponseMessage
                     {
                         IsSuccess = false,
-                        Message = "No existe configuración para realizar peticiones a la tienda"
+                        Message = "No existe configuración para realizar peticiones a la sucursal"
                     };
                 }
 
@@ -398,7 +398,7 @@ namespace Drs.Service.Store
                     return new ResponseMessage
                     {
                         IsSuccess = false,
-                        Message = "El pedido nunca se envió a la tienda. No hay orden que cancelar."
+                        Message = "El pedido nunca se envió a la sucursal. No hay orden que cancelar."
                     };
                 }
 
@@ -455,7 +455,7 @@ namespace Drs.Service.Store
                 if (lstStoresCoverage == null || lstStoresCoverage.Count == 0)
                 {
                     response.IsSuccess = false;
-                    response.Message = "La franquicia no tiene configurada la cobertura de sus tiendas";
+                    response.Message = "La franquicia no tiene configurada la cobertura de sus sucursales";
                     return null;
                 }
 
@@ -516,7 +516,7 @@ namespace Drs.Service.Store
             if (stores.Any() == false)
             {
                 response.IsSuccess = false;
-                response.Message = "No hay una tienda disponible en la dirección que seleccionó";
+                response.Message = "No hay una sucursal disponible en la dirección que seleccionó";
                 return null;
             }
 
@@ -525,7 +525,7 @@ namespace Drs.Service.Store
             if (store.IdKey.HasValue == false)
             {
                 response.IsSuccess = false;
-                response.Message = "No hay una tienda disponible en la dirección que seleccionó";
+                response.Message = "No hay una sucursal disponible en la dirección que seleccionó";
                 return null;
             }
 
@@ -587,7 +587,7 @@ namespace Drs.Service.Store
                 client.Close();
 
                 response.IsSuccess = false;
-                response.Message = "No fue posible comunicarse a la tienda para obtener el tiempo de preparación ";
+                response.Message = "No fue posible comunicarse a la sucursal para obtener el tiempo de preparación ";
             }
         }
 
@@ -631,8 +631,8 @@ namespace Drs.Service.Store
                 return new ResponseMessage
                 {
                     IsSuccess = false,
-                    Message = "No fue posible comunicarse a la tienda para realizar la cancelación. " +
-                              "Por favor reporte a soporte técnico para revisar la conexión con la tienda " + fsInfo.Name
+                    Message = "No fue posible comunicarse a la sucursal para realizar la cancelación. " +
+                              "Por favor reporte a soporte técnico para revisar la conexión con la sucursal " + fsInfo.Name
                 };
             }
         }

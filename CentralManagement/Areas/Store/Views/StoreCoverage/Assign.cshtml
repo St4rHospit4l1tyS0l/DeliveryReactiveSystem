@@ -1,27 +1,4 @@
-﻿@{
-    ViewBag.Title = "Cobertura por Franquicia";
-    ViewBag.Menu = 4004;
-}
-
-
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Asignación de Coberturas por Franquicia</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="@Url.Action("Index", "Home")">Inicio</a>
-            </li>
-            <li>
-                Tiendas
-            </li>
-            <li>
-                <a href="@Url.Action("Index", "StoreCoverage", "Store")">Cobertura por Franquicia</a>
-            </li>
-        </ol>
-    </div>
-</div>
-
-<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="franchiseAssignController" ng-init="m = @(ViewBag.Model ?? "[]"); init();">
+﻿<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="franchiseAssignController" ng-init="m = @(ViewBag.Model ?? "[]"); init();">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
@@ -36,7 +13,7 @@
                 <div class="ibox-content" ng-show="bStore === false">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h3>La franquicia seleccionada no está habilitada o no tiene tiendas configuradas</h3>
+                            <h3>La franquicia seleccionada no está habilitada o no tiene sucursales configuradas</h3>
                         </div>
                     </div>
                 </div>
@@ -45,14 +22,14 @@
                     <div class="row">
                         <div class="col-xs-2 m-b">
                             <div class="row">
-                                <label class="col-xs-12 control-label" style="text-align: center">Cobertura de las tiendas</label>
+                                <label class="col-xs-12 control-label" style="text-align: center">Cobertura de las sucursales</label>
                                 <div class="col-xs-12">
                                     <select class="form-control m-b" id="chosen-select"
                                             ng-init="lstStores = m.LstStoresByFranchise" ng-options="c.Value for c in lstStores" ng-model="selStore">
-                                        <option value="" disabled selected style="display: none;">Selecciona una tienda...</option>
+                                        <option value="" disabled selected style="display: none;">Selecciona una sucursal...</option>
                                     </select>
                                 </div>
-                                <label class="col-xs-12 control-label" style="text-align: center">Selecciona el color para la tienda</label>
+                                <label class="col-xs-12 control-label" style="text-align: center">Selecciona el color para la sucursal</label>
                                 <div class="col-xs-12" style="text-align: center">
                                     <input readonly="readonly" colorpicker colorpicker-fixed-position="true" class="center-size-150" type="text" ng-model="selColor" ng-change="changeColor()" />
                                     <div class="space-5"></div>
@@ -60,7 +37,7 @@
                                     <div class="space-5"></div>
                                     <button ng-disabled="!currPolygonSel" class="btn btn-danger btn-sm center-size-150" type="button" ng-click="delCoverage()"><i class="fa fa-minus"></i>&nbsp;&nbsp; Quitar cobertura &nbsp;&nbsp;</button>
                                     <div class="space-5"></div>
-                                    <button ng-disabled="!selStore" class="btn btn-warning btn-sm center-size-150" type="button" ng-click="setStoreLocation()"><i class="fa fa-crosshairs"></i>&nbsp;&nbsp; Establecer tienda</button>
+                                    <button ng-disabled="!selStore" class="btn btn-warning btn-sm center-size-150" type="button" ng-click="setStoreLocation()"><i class="fa fa-crosshairs"></i>&nbsp;&nbsp; Establecer sucursal</button>
                                     <div class="space-20"></div>
                                     <button ng-show="vm.stores && vm.stores.length > 0" class="btn btn-success btn-sm center-size-150" type="button"
                                             ng-click="save('@Url.Action("Save", "StoreCoverage", new { area = "Store" })')">
@@ -73,7 +50,7 @@
                                 <table class="table table-hover no-margins">
                                     <thead>
                                         <tr>
-                                            <th>Tienda</th>
+                                            <th>Sucursal</th>
                                             <th style="text-align: center">Color</th>
                                             <th style="text-align: center">Regiones</th>
                                         </tr>

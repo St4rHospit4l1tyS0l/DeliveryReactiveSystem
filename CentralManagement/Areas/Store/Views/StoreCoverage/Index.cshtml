@@ -1,32 +1,9 @@
-﻿@{
-    ViewBag.Title = "Cobertura por Franquicia";
-    ViewBag.Menu = 4004;
-}
-
-
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Asignación de Coberturas por Franquicia</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="@Url.Action("Index", "Home")">Inicio</a>
-            </li>
-            <li>
-                Tiendas
-            </li>
-            <li>
-                Cobertura por Franquicia
-            </li>
-        </ol>
-    </div>
-</div>
-
-<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="modalDlgController">
+﻿<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="modalDlgController">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Tiendas del Call Center</h5>
+                    <h5>Sucursales del Call Center</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -80,7 +57,7 @@
                 url: '@Url.Action("List", "StoreCoverage", new { area = "Store" })',
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['ID', 'Franquicia', '# de Tiendas', 'Acci&oacute;n'],
+                colNames: ['ID', 'Franquicia', '# de sucursales', 'Acci&oacute;n'],
                 colModel: [
                     { name: 'FranchiseId', index: 'FranchiseId', hidden: true },
                     { name: 'Name', index: 'Name', width: 180, align: "center", sorttype: 'string', searchoptions: { sopt: ['bw'] } },
@@ -107,7 +84,7 @@
                     for (var i = 0; i < ids.length; i++) {
                         var cl = ids[i];
                         var be = "";
-                        be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Asignar covertura\" onclick=\"window.assign('" + cl + "');\"><i class=\"fa fa-road icon-grid-st blue-light\"></i></a>&nbsp;&nbsp;";
+                        be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Asignar cobertura\" onclick=\"window.assign('" + cl + "');\"><i class=\"fa fa-road icon-grid-st blue-light\"></i></a>&nbsp;&nbsp;";
                         $(this).jqGrid('setRowData', ids[i], { Action: be });
                     }
                 }

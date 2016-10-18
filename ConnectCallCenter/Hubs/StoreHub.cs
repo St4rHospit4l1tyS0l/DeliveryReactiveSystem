@@ -26,7 +26,7 @@ namespace ConnectCallCenter.Hubs
             catch (Exception ex)
             {
                 SharedLogger.LogError(ex);
-                return ResponseMessageData<OrderModelDto>.CreateCriticalMessage("No fue posible enviar la orden a la tienda");
+                return ResponseMessageData<OrderModelDto>.CreateCriticalMessage("No fue posible enviar la orden a la sucursal");
             }
         }
 
@@ -75,7 +75,7 @@ namespace ConnectCallCenter.Hubs
             catch (Exception ex)
             {
                 SharedLogger.LogError(ex);
-                return ResponseMessageData<StoreModel>.CreateCriticalMessage("No fue posible obtener una tienda disponible para esa dirección");
+                return ResponseMessageData<StoreModel>.CreateCriticalMessage("No fue posible obtener una sucursal disponible para esa dirección");
             }
         }
 
@@ -101,7 +101,7 @@ namespace ConnectCallCenter.Hubs
             catch (Exception ex)
             {
                 SharedLogger.LogError(ex);
-                return ResponseMessageData<StoreModel>.CreateCriticalMessage("No fue posible obtener una tienda disponible para esa dirección o selección");
+                return ResponseMessageData<StoreModel>.CreateCriticalMessage("No fue posible obtener una sucursal disponible para esa dirección o selección");
             }
         }
     }

@@ -199,6 +199,7 @@
     <Compile Include="Areas\Report\Controllers\TopProductsController.cs" />
     <Compile Include="Areas\Report\Controllers\TimeSaleController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
+    <Compile Include="Areas\Store\Controllers\StoreNotificationController.cs" />
     <Compile Include="Areas\Store\Controllers\StoreCoverageController.cs" />
     <Compile Include="Areas\Store\Controllers\OfflineController.cs" />
     <Compile Include="Areas\Management\Controllers\LicenseController.cs" />
@@ -432,6 +433,7 @@
     <Content Include="Scripts\app\ctrl\reportCtrl.js" />
     <Content Include="Scripts\app\ctrl\reportTimeSaleCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeCoverageCtrl.js" />
+    <Content Include="Scripts\app\ctrl\storeNotificationCtrl.js" />
     <Content Include="Scripts\app\ctrl\terminalCtrl.js" />
     <Content Include="Scripts\app\ctrl\licenseCtrl.js" />
     <Content Include="Scripts\app\ctrl\franchiseCtrl.js" />
@@ -596,6 +598,8 @@
     <Content Include="Areas\Report\Views\TopClients\IndexFrequent.cshtml" />
     <Content Include="Areas\Report\Views\TopClients\IndexConsume.cshtml" />
     <Content Include="Areas\Report\Views\TimeSale\IndexMonthSalesByDay.cshtml" />
+    <Content Include="Areas\Store\Views\StoreNotification\Index.cshtml" />
+    <Content Include="Areas\Store\Views\StoreNotification\Upsert.cshtml" />
     <None Include="Properties\PublishProfiles\CentralManagement.pubxml" />
     <Content Include="Resources\MonthlySales.json" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />

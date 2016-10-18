@@ -302,7 +302,7 @@ app.controller('franchiseAssignController', function ($scope, $http, $timeout) {
         }
 
         if (hasCoverage === false) {
-            toastr.error("Se necesita al menos tener una cobertura para establecer la tienda", "Sin coberturas");
+            toastr.error("Se necesita al menos tener una cobertura para establecer la sucursal", "Sin coberturas");
             return;
         }
 

@@ -550,9 +550,9 @@ body-small.fixed-sidebar.mini-navbar .top-navigation #page-wrapper {
   color: #fff;
 }
 .btn-primary {
-  background-color: #1ab394;
-  border-color: #1ab394;
-  color: #FFFFFF;
+  background-color: #1ab394 !important;
+  border-color: #1ab394 !important;
+  color: #FFFFFF !important;
 }
 .btn-primary:hover,
 .btn-primary:focus,

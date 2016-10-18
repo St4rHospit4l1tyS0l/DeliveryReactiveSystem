@@ -75,7 +75,7 @@ namespace Drs.Service.Client
                     var item = _model.StoreModel;
                     if (item == null || String.IsNullOrEmpty(item.Key))
                     {
-                        return new ResponseMessage { IsSuccess = false, Message = "No hay tienda disponible para brindar el servicio", View = SharedConstants.Client.ORDER_TAB_CLIENTS };
+                        return new ResponseMessage { IsSuccess = false, Message = "No hay sucursal disponible para brindar el servicio", View = SharedConstants.Client.ORDER_TAB_CLIENTS };
                     }
                 }
 
@@ -319,7 +319,7 @@ namespace Drs.Service.Client
 
             modelDto = obj.Data.Data;
             modelDto.HasError = false;
-            modelDto.Message = String.Format("Enviando a la tienda: {0}.\nDirección: {1}\nTeléfono(s): {2}",
+            modelDto.Message = String.Format("Enviando a la sucursal: {0}.\nDirección: {1}\nTeléfono(s): {2}",
                 modelDto.Store.Value, modelDto.Store.MainAddress, string.Join(", ", modelDto.Store.LstPhones));
             OnSendOrderToStoreStatusChanged(modelDto);
         }

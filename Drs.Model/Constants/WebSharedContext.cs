@@ -10,12 +10,12 @@ namespace Drs.Model.Constants
     {
         public static Dictionary<string, List<MenuItem>> DicWebMenu { get; set; }
 
-        public static int GetMenuPosition(string role)
+        public static MenuItem GetMenuPosition(string role)
         {
             List<MenuItem> lstMenuByRole;
 
             if(DicWebMenu.TryGetValue(role, out lstMenuByRole) == false)
-                return 0;
+                return null;
 
             var area = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"];
             var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"];
@@ -24,15 +24,18 @@ namespace Drs.Model.Constants
             return FindMenuPosition(route, lstMenuByRole);
         }
 
-        private static int FindMenuPosition(string route, List<MenuItem> lstMenuByRole)
+        private static MenuItem FindMenuPosition(string route, List<MenuItem> lstMenuByRole)
         {
             var menuItem = lstMenuByRole.FirstOrDefault(e => e.Route == route);
             if (menuItem != null)
-                return menuItem.Position;
+                return menuItem;
 
-            return (lstMenuByRole.Where(item => item.SubMenu.Any())
-                .Select(item => FindMenuPosition(route, item.SubMenu)))
-                .FirstOrDefault(position => position != 0);
+            foreach (var item in lstMenuByRole.Where(item => item.SubMenu.Any()))
+            {
+                menuItem = FindMenuPosition(route, item.SubMenu);
+                if (menuItem != null) return menuItem;
+            }
+            return null;
         }
     }
 }

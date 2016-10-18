@@ -15,6 +15,8 @@ namespace Drs.Model.Shared
         public int? ParentId { get; set; }
         public int Position { get; set; }
         public string Route { get; set; }
+        public string MenuName { get; set; }
+        public bool HasToShow { get; set; }
 
         public MenuItem()
         {
@@ -31,8 +33,10 @@ namespace Drs.Model.Shared
                 Action = Action,
                 Title = Title,
                 Icon = Icon,
+                MenuName = MenuName,
                 ParentId = ParentId,
                 Position = Position,
+                HasToShow = HasToShow,
                 Route = String.Format("{0}/{1}/{2}", Area, Controller, Action)
             };
         }

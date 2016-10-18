@@ -141,6 +141,9 @@
     <Compile Include="Entities\AspNetMenuRole.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\CategoryMessage.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Daily_Sales_group_by_date_Result.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
@@ -159,6 +162,12 @@
     <Compile Include="Entities\Metadata\ViewStoreCoverageDto.cs" />
     <Compile Include="Entities\Metadata\ViewStoreCoverageJson.cs" />
     <Compile Include="Entities\Resource.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\StoreMessage.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\StoreMessageDate.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ufnGetConsumerClientByRangeDates_Result.cs">
@@ -203,6 +212,7 @@
     <Compile Include="Entities\ViewStoreCoverage.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Notification\CatalogRepository.cs" />
     <Compile Include="Order\OrderRepository.cs" />
     <Compile Include="Order\IOrderRepository.cs" />
     <Compile Include="Client\IClientRepository.cs" />

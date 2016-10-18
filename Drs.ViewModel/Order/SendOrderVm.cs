@@ -97,7 +97,7 @@ namespace Drs.ViewModel.Order
 
             IsReadyToSend = Visibility.Collapsed;
             IsSending = Visibility.Visible;
-            SendOrderTitleBtn = "Reenviar pedido a la tienda";
+            SendOrderTitleBtn = "Reenviar pedido a la sucursal";
 
             var posOrderStatus = ExtractPosOrderStatus();
             var posOrderMode = ExtractPosOrderMode();
@@ -181,7 +181,7 @@ namespace Drs.ViewModel.Order
 
         private void ResetValues()
         {
-            SendOrderTitleBtn = "Enviar pedido a la tienda";
+            SendOrderTitleBtn = "Enviar pedido a la sucursal";
 
             IsSending = Visibility.Collapsed;
             IsReadyToSend = Visibility.Collapsed;

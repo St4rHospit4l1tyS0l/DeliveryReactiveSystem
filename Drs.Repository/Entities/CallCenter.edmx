@@ -50,8 +50,10 @@
           <Property Name="Area" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Controller" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Action" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Icon" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HasToShow" Type="bit" Nullable="false" />
           <Property Name="IsObsolete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetMenuRole">
@@ -123,6 +125,16 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Color" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="IsObsolete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoryMessage">
+          <Key>
+            <PropertyRef Name="CategoryMessageId" />
+          </Key>
+          <Property Name="CategoryMessageId" Type="int" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Color" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CatPayment">
           <Key>
@@ -616,6 +628,25 @@
           <Property Name="RegionDrId" Type="int" />
           <Property Name="ZipCodeId" Type="int" />
           <Property Name="Importance" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreMessage">
+          <Key>
+            <PropertyRef Name="StoreMessageId" />
+          </Key>
+          <Property Name="StoreMessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserIdIns" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreMessageDate">
+          <Key>
+            <PropertyRef Name="StoreMessageDateId" />
+          </Key>
+          <Property Name="StoreMessageDateId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryMessageId" Type="int" Nullable="false" />
+          <Property Name="StoreMessageId" Type="int" Nullable="false" />
+          <Property Name="FranchiseStoreId" Type="int" Nullable="false" />
+          <Property Name="DateApplied" Type="date" Nullable="false" />
+          <Property Name="UserIdIns" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="StoreStatus">
           <Key>
@@ -1779,6 +1810,66 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StoreMessage_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="StoreMessage" Type="Self.StoreMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreMessage">
+              <PropertyRef Name="UserIdIns" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreMessageDate_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="StoreMessageDate" Type="Self.StoreMessageDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreMessageDate">
+              <PropertyRef Name="UserIdIns" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreMessageDate_CategoryMessage">
+          <End Role="CategoryMessage" Type="Self.CategoryMessage" Multiplicity="1" />
+          <End Role="StoreMessageDate" Type="Self.StoreMessageDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryMessage">
+              <PropertyRef Name="CategoryMessageId" />
+            </Principal>
+            <Dependent Role="StoreMessageDate">
+              <PropertyRef Name="CategoryMessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreMessageDate_FranchiseStore">
+          <End Role="FranchiseStore" Type="Self.FranchiseStore" Multiplicity="1" />
+          <End Role="StoreMessageDate" Type="Self.StoreMessageDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="StoreMessageDate">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreMessageDate_StoreMessage">
+          <End Role="StoreMessage" Type="Self.StoreMessage" Multiplicity="1" />
+          <End Role="StoreMessageDate" Type="Self.StoreMessageDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreMessage">
+              <PropertyRef Name="StoreMessageId" />
+            </Principal>
+            <Dependent Role="StoreMessageDate">
+              <PropertyRef Name="StoreMessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StoreStatus_FranchiseStore">
           <End Role="FranchiseStore" Type="Self.FranchiseStore" Multiplicity="1" />
           <End Role="StoreStatus" Type="Self.StoreStatus" Multiplicity="0..1" />
@@ -1878,6 +1969,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CatDeliveryStatus" EntityType="Self.CatDeliveryStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryMessage" EntityType="Self.CategoryMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CatPayment" EntityType="Self.CatPayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientPhone" EntityType="Self.ClientPhone" Schema="dbo" store:Type="Tables" />
@@ -1922,6 +2014,8 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreAddressDistribution" EntityType="Self.StoreAddressDistribution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreMessage" EntityType="Self.StoreMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreMessageDate" EntityType="Self.StoreMessageDate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreStatus" EntityType="Self.StoreStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZipCode" EntityType="Self.ZipCode" Schema="dbo" store:Type="Tables" />
@@ -2332,6 +2426,26 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="FK_StoreAddressDistribution_FranchiseStore" Association="Self.FK_StoreAddressDistribution_FranchiseStore">
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
             <End Role="StoreAddressDistribution" EntitySet="StoreAddressDistribution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreMessage_AspNetUsers" Association="Self.FK_StoreMessage_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="StoreMessage" EntitySet="StoreMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreMessageDate_AspNetUsers" Association="Self.FK_StoreMessageDate_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="StoreMessageDate" EntitySet="StoreMessageDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreMessageDate_CategoryMessage" Association="Self.FK_StoreMessageDate_CategoryMessage">
+            <End Role="CategoryMessage" EntitySet="CategoryMessage" />
+            <End Role="StoreMessageDate" EntitySet="StoreMessageDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreMessageDate_FranchiseStore" Association="Self.FK_StoreMessageDate_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="StoreMessageDate" EntitySet="StoreMessageDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreMessageDate_StoreMessage" Association="Self.FK_StoreMessageDate_StoreMessage">
+            <End Role="StoreMessage" EntitySet="StoreMessage" />
+            <End Role="StoreMessageDate" EntitySet="StoreMessageDate" />
           </AssociationSet>
           <AssociationSet Name="FK_StoreStatus_FranchiseStore" Association="Self.FK_StoreStatus_FranchiseStore">
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
@@ -2755,6 +2869,29 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="AspNetMenu" EntitySet="AspNetMenu" />
             <End Role="AspNetMenuRole" EntitySet="AspNetMenuRole" />
           </AssociationSet>
+          <EntitySet Name="CategoryMessage" EntityType="CallCenterModel.CategoryMessage" />
+          <EntitySet Name="StoreMessage" EntityType="CallCenterModel.StoreMessage" />
+          <EntitySet Name="StoreMessageDate" EntityType="CallCenterModel.StoreMessageDate" />
+          <AssociationSet Name="FK_StoreMessage_AspNetUsers" Association="CallCenterModel.FK_StoreMessage_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="StoreMessage" EntitySet="StoreMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreMessageDate_AspNetUsers" Association="CallCenterModel.FK_StoreMessageDate_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="StoreMessageDate" EntitySet="StoreMessageDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreMessageDate_CategoryMessage" Association="CallCenterModel.FK_StoreMessageDate_CategoryMessage">
+            <End Role="CategoryMessage" EntitySet="CategoryMessage" />
+            <End Role="StoreMessageDate" EntitySet="StoreMessageDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreMessageDate_FranchiseStore" Association="CallCenterModel.FK_StoreMessageDate_FranchiseStore">
+            <End Role="FranchiseStore" EntitySet="FranchiseStore" />
+            <End Role="StoreMessageDate" EntitySet="StoreMessageDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreMessageDate_StoreMessage" Association="CallCenterModel.FK_StoreMessageDate_StoreMessage">
+            <End Role="StoreMessage" EntitySet="StoreMessage" />
+            <End Role="StoreMessageDate" EntitySet="StoreMessageDate" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="User_Sales_group_by_date_Result">
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
@@ -2931,6 +3068,8 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="Resource" Relationship="CallCenterModel.FK_Resource_AspNetUsers" FromRole="AspNetUsers" ToRole="Resource" />
           <NavigationProperty Name="UserDetail" Relationship="CallCenterModel.FK_UserDetail_AspNetUsers" FromRole="AspNetUsers" ToRole="UserDetail" />
           <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="StoreMessage" Relationship="CallCenterModel.FK_StoreMessage_AspNetUsers" FromRole="AspNetUsers" ToRole="StoreMessage" />
+          <NavigationProperty Name="StoreMessageDate" Relationship="CallCenterModel.FK_StoreMessageDate_AspNetUsers" FromRole="AspNetUsers" ToRole="StoreMessageDate" />
         </EntityType>
         <EntityType Name="CatDeliveryStatus">
           <Key>
@@ -3177,6 +3316,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="StoreAddressDistribution" Relationship="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreAddressDistribution" />
           <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreStatus" />
           <NavigationProperty Name="FranchisePhone" Relationship="CallCenterModel.RelFranchisePhoneStore" FromRole="FranchiseStore" ToRole="FranchisePhone" />
+          <NavigationProperty Name="StoreMessageDate" Relationship="CallCenterModel.FK_StoreMessageDate_FranchiseStore" FromRole="FranchiseStore" ToRole="StoreMessageDate" />
         </EntityType>
         <EntityType Name="FranchiseStoreGeoMap">
           <Key>
@@ -4651,8 +4791,10 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="Area" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Controller" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Action" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MenuName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Icon" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HasToShow" Type="Boolean" Nullable="false" />
           <Property Name="IsObsolete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetMenu1" Relationship="CallCenterModel.FK_AspNetMenu_AspNetMenu" FromRole="AspNetMenu" ToRole="AspNetMenu1" />
           <NavigationProperty Name="AspNetMenu2" Relationship="CallCenterModel.FK_AspNetMenu_AspNetMenu" FromRole="AspNetMenu1" ToRole="AspNetMenu" />
@@ -4679,6 +4821,102 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Principal>
             <Dependent Role="AspNetMenuRole">
               <PropertyRef Name="AspNetMenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CategoryMessage">
+          <Key>
+            <PropertyRef Name="CategoryMessageId" />
+          </Key>
+          <Property Name="CategoryMessageId" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StoreMessageDate" Relationship="CallCenterModel.FK_StoreMessageDate_CategoryMessage" FromRole="CategoryMessage" ToRole="StoreMessageDate" />
+        </EntityType>
+        <EntityType Name="StoreMessage">
+          <Key>
+            <PropertyRef Name="StoreMessageId" />
+          </Key>
+          <Property Name="StoreMessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserIdIns" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_StoreMessage_AspNetUsers" FromRole="StoreMessage" ToRole="AspNetUsers" />
+          <NavigationProperty Name="StoreMessageDate" Relationship="CallCenterModel.FK_StoreMessageDate_StoreMessage" FromRole="StoreMessage" ToRole="StoreMessageDate" />
+        </EntityType>
+        <EntityType Name="StoreMessageDate">
+          <Key>
+            <PropertyRef Name="StoreMessageDateId" />
+          </Key>
+          <Property Name="StoreMessageDateId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryMessageId" Type="Int32" Nullable="false" />
+          <Property Name="StoreMessageId" Type="Int32" Nullable="false" />
+          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
+          <Property Name="DateApplied" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserIdIns" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_StoreMessageDate_AspNetUsers" FromRole="StoreMessageDate" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CategoryMessage" Relationship="CallCenterModel.FK_StoreMessageDate_CategoryMessage" FromRole="StoreMessageDate" ToRole="CategoryMessage" />
+          <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_StoreMessageDate_FranchiseStore" FromRole="StoreMessageDate" ToRole="FranchiseStore" />
+          <NavigationProperty Name="StoreMessage" Relationship="CallCenterModel.FK_StoreMessageDate_StoreMessage" FromRole="StoreMessageDate" ToRole="StoreMessage" />
+        </EntityType>
+        <Association Name="FK_StoreMessage_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.StoreMessage" Role="StoreMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreMessage">
+              <PropertyRef Name="UserIdIns" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreMessageDate_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.StoreMessageDate" Role="StoreMessageDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreMessageDate">
+              <PropertyRef Name="UserIdIns" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreMessageDate_CategoryMessage">
+          <End Type="CallCenterModel.CategoryMessage" Role="CategoryMessage" Multiplicity="1" />
+          <End Type="CallCenterModel.StoreMessageDate" Role="StoreMessageDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryMessage">
+              <PropertyRef Name="CategoryMessageId" />
+            </Principal>
+            <Dependent Role="StoreMessageDate">
+              <PropertyRef Name="CategoryMessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreMessageDate_FranchiseStore">
+          <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="1" />
+          <End Type="CallCenterModel.StoreMessageDate" Role="StoreMessageDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FranchiseStore">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Principal>
+            <Dependent Role="StoreMessageDate">
+              <PropertyRef Name="FranchiseStoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreMessageDate_StoreMessage">
+          <End Type="CallCenterModel.StoreMessage" Role="StoreMessage" Multiplicity="1" />
+          <End Type="CallCenterModel.StoreMessageDate" Role="StoreMessageDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreMessage">
+              <PropertyRef Name="StoreMessageId" />
+            </Principal>
+            <Dependent Role="StoreMessageDate">
+              <PropertyRef Name="StoreMessageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5495,14 +5733,48 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <EntityTypeMapping TypeName="CallCenterModel.AspNetMenu">
               <MappingFragment StoreEntitySet="AspNetMenu">
                 <ScalarProperty Name="IsObsolete" ColumnName="IsObsolete" />
+                <ScalarProperty Name="HasToShow" ColumnName="HasToShow" />
                 <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
                 <ScalarProperty Name="Action" ColumnName="Action" />
                 <ScalarProperty Name="Controller" ColumnName="Controller" />
                 <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="AspNetMenuId" ColumnName="AspNetMenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryMessage">
+            <EntityTypeMapping TypeName="CallCenterModel.CategoryMessage">
+              <MappingFragment StoreEntitySet="CategoryMessage">
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CategoryMessageId" ColumnName="CategoryMessageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreMessage">
+            <EntityTypeMapping TypeName="CallCenterModel.StoreMessage">
+              <MappingFragment StoreEntitySet="StoreMessage">
+                <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="StoreMessageId" ColumnName="StoreMessageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreMessageDate">
+            <EntityTypeMapping TypeName="CallCenterModel.StoreMessageDate">
+              <MappingFragment StoreEntitySet="StoreMessageDate">
+                <ScalarProperty Name="UserIdIns" ColumnName="UserIdIns" />
+                <ScalarProperty Name="DateApplied" ColumnName="DateApplied" />
+                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
+                <ScalarProperty Name="StoreMessageId" ColumnName="StoreMessageId" />
+                <ScalarProperty Name="CategoryMessageId" ColumnName="CategoryMessageId" />
+                <ScalarProperty Name="StoreMessageDateId" ColumnName="StoreMessageDateId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

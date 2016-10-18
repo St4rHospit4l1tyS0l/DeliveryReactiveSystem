@@ -10,7 +10,12 @@
         lstMenu = new List<MenuItem>();
     }
 
-    ViewBag.Menu = WebSharedContext.GetMenuPosition(role);    
+    ViewBag.Menu = WebSharedContext.GetMenuPosition(role) ?? new MenuItem
+    {
+        Position = 0,
+        Title = "NT",
+        MenuName = "NMN"
+    };
 }
 
 <!DOCTYPE html>
@@ -66,17 +71,17 @@
                             CM
                         </div>
                     </li>
-                    @foreach (var menu in lstMenu)
+                    @foreach (var menu in lstMenu.Where(e => e.HasToShow))
                     {
-                        <li class="@((int)(ViewBag.Menu / 1000) == menu.Position / 1000 ? "active" : "")">
+                        <li class="@((int)(ViewBag.Menu.Position / 1000) == menu.Position / 1000 ? "active" : "")">
                             @if (menu.SubMenu.Any())
                             {
-                                <a href="#"><i class="fa @menu.Icon"></i> <span class="nav-label">@menu.Title</span> </a>
-                                foreach (var subMenu in menu.SubMenu)
+                                <a href="#"><i class="fa @menu.Icon"></i> <span class="nav-label">@menu.MenuName</span> </a>
+                                foreach (var subMenu in menu.SubMenu.Where(e => e.HasToShow))
                                 {
                                     <ul class="nav nav-second-level">
-                                        <li class="@(ViewBag.Menu == subMenu.Position ? "active" : "")">
-                                            <a href="@Url.Action(subMenu.Action, subMenu.Controller, new { area = subMenu.Area })"><i class="fa @subMenu.Icon"></i> @subMenu.Title</a>
+                                        <li class="@(ViewBag.Menu.Position == subMenu.Position ? "active" : "")">
+                                            <a href="@Url.Action(subMenu.Action, subMenu.Controller, new { area = subMenu.Area })"><i class="fa @subMenu.Icon"></i> @subMenu.MenuName</a>
                                         </li>
                                     </ul>
                                 }
@@ -108,6 +113,40 @@
                     </ul>
 
                 </nav>
+            </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>@ViewBag.Menu.Title</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@Url.Action("Index", "Home", new { area = "" })">Inicio</a>
+                        </li>
+                        @foreach (var item in lstMenu)
+                        {
+                            if (item.Position == @ViewBag.Menu.Position)
+                            {
+                                <li>
+                                    @item.MenuName
+                                </li>
+                            }
+                            else if (item.Id == @ViewBag.Menu.ParentId)
+                            {
+                                <li>
+                                    @item.MenuName
+                                </li>
+                                foreach (var subItem in item.SubMenu)
+                                {
+                                    if (subItem.Position == @ViewBag.Menu.Position)
+                                    {
+                                        <li>
+                                            @subItem.MenuName
+                                        </li>
+                                    }
+                                }
+                            }
+                        }
+                    </ol>
+                </div>
             </div>
             @RenderBody()
             @Html.Partial("_SharedServices")

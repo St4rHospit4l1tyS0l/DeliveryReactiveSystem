@@ -87,6 +87,9 @@ namespace Drs.Repository.Entities
         public virtual DbSet<Module> Module { get; set; }
         public virtual DbSet<AspNetMenuRole> AspNetMenuRole { get; set; }
         public virtual DbSet<AspNetMenu> AspNetMenu { get; set; }
+        public virtual DbSet<CategoryMessage> CategoryMessage { get; set; }
+        public virtual DbSet<StoreMessage> StoreMessage { get; set; }
+        public virtual DbSet<StoreMessageDate> StoreMessageDate { get; set; }
     
         [DbFunction("CallCenterEntities", "ufnGetTopProductsByRangeDates")]
         public virtual IQueryable<ufnGetTopProductsByRangeDates_Result1> ufnGetTopProductsByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)

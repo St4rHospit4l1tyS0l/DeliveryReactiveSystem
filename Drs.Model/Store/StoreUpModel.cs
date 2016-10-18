@@ -8,7 +8,7 @@ namespace Drs.Model.Store
         public int FranchiseId { get; set; }
         public string ManUserId { get; set; }
         
-        [Required(AllowEmptyStrings = false, ErrorMessage = @"Nombre de la tienda es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = @"Nombre de la sucursal es requerido")]
         public string Name { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = @"La URL del web service es requerida")]

@@ -55,7 +55,7 @@ namespace Drs.Repository.Store
             };
 
             DbEntities.OrderToStore.Add(orderToStore);
-            SaveLogOrderToStore(orderToStore, "Se almacenó la información del pedido. Listo para el envío a la tienda " + model.Store.Value, orderToStore.LastStatus, now);
+            SaveLogOrderToStore(orderToStore, "Se almacenó la información del pedido. Listo para el envío a la sucursal " + model.Store.Value, orderToStore.LastStatus, now);
             DbEntities.SaveChanges();
             model.OrderToStoreId = orderToStore.OrderToStoreId;
             model.Status = orderToStore.LastStatus;

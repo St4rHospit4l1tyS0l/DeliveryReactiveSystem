@@ -1,32 +1,9 @@
-﻿@{
-    ViewBag.Title = "Fuera de línea de las tiendas";
-    ViewBag.Menu = 4003;
-}
-
-
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Administración de tiendas fuera de línea</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="@Url.Action("Index", "Home")">Inicio</a>
-            </li>
-            <li>
-                Tiendas
-            </li>
-            <li>
-                Fuera de línea
-            </li>
-        </ol>
-    </div>
-</div>
-
-<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="modalDlgController">
+﻿<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="modalDlgController">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Tiendas del Call Center</h5>
+                    <h5>Sucursales del Call Center</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -86,7 +63,7 @@
                 url: '@Url.Action("List", "Offline", new {area = "Store"})',
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['ID', 'Tienda', 'Franquicia', 'Dirección', 'UrlWs', 'Gerente'],
+                colNames: ['ID', 'Sucursal', 'Franquicia', 'Dirección', 'UrlWs', 'Gerente'],
                 colModel: [
                     { name: 'FranchiseStoreId', index: 'FranchiseStoreId', hidden: true },
                     { name: 'Name', index: 'Name', width: 180, align: "center", sorttype: 'string', searchoptions: { sopt: ['bw'] } },

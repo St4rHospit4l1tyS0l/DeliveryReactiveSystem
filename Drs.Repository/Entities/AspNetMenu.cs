@@ -26,8 +26,10 @@ namespace Drs.Repository.Entities
         public string Area { get; set; }
         public string Controller { get; set; }
         public string Action { get; set; }
+        public string MenuName { get; set; }
         public string Title { get; set; }
         public string Icon { get; set; }
+        public bool HasToShow { get; set; }
         public bool IsObsolete { get; set; }
     
         public virtual ICollection<AspNetMenu> AspNetMenu1 { get; set; }

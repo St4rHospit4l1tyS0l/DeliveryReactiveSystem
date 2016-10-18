@@ -156,6 +156,7 @@
     <Compile Include="Franchise\SyncFranchiseModel.cs" />
     <Compile Include="Franchise\TerminaFranchiseModel.cs" />
     <Compile Include="Franchise\UnSyncListModel.cs" />
+    <Compile Include="Notification\NotificationModel.cs" />
     <Compile Include="Order\ClientInfoGrid.cs" />
     <Compile Include="Order\FranchiseInfoModel.cs" />
     <Compile Include="Order\ItemLogOrder.cs" />
@@ -184,7 +185,9 @@
     <Compile Include="Settings\RecurrenceType.cs" />
     <Compile Include="Settings\ResponseCatalogs.cs" />
     <Compile Include="Shared\AccountConstants.cs" />
+    <Compile Include="Shared\ItemCategory.cs" />
     <Compile Include="Shared\MenuItem.cs" />
+    <Compile Include="Store\StoreNotificationModel.cs" />
     <Compile Include="Track\DailySearchModel.cs" />
     <Compile Include="Shared\ItemCatalog.cs" />
     <Compile Include="Shared\OptionModel.cs" />

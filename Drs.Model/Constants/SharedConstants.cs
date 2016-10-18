@@ -13,6 +13,7 @@ namespace Drs.Model.Constants
         
         public const string NOT_APPLICABLE = "N/A";
         public const int NULL_ID_VALUE = 0;
+        public const int DEFAULT_INT_VALUE = 0;
 
         public const string REPORT_DATE_FORMAT = "yyyy/MM/dd";
         public const string REPORT_NO_VALUE = "--";

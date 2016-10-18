@@ -24,14 +24,14 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <i class="fa fa-shopping-cart modal-icon"></i>
-                <h4 class="modal-title">Tienda</h4>
+                <h4 class="modal-title">Sucursal</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="ibox">
                             <div class="ibox-title navy-bg">
-                                <h5>Información de la tienda</h5>
+                                <h5>Información de la sucursal</h5>
                             </div>
                         </div>
                     </div>
@@ -48,10 +48,10 @@
                             
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <label class="col-xs-3 control-label font-noraml">Tienda:</label>
+                                    <label class="col-xs-3 control-label font-noraml">Sucursal:</label>
                                     <div class="col-xs-9">
                                         <input type="text" name="Name" ng-model="m.Name"
-                                               placeholder="Ingrese el nombre de la tienda"
+                                               placeholder="Ingrese el nombre de la sucursal"
                                                required="required" ng-maxlength="300" class="form-control">
                                         <span class="error" ng-show="FormCatId.Name.$error.required">*Campo requerido</span>
                                         <span class="error" ng-show="FormCatId.Name.$error.maxlength">*Longitud máxima de 300 caracteres</span>
@@ -84,9 +84,9 @@
                             @Html.Partial("~/Views/Shared/_Address.cshtml", "Address")
                             <div class="space-15"></div>
                             <div class="col-xs-12">
-                                <label class="col-xs-3 control-label font-noraml">Gerente de la tienda:</label>
+                                <label class="col-xs-3 control-label font-noraml">Gerente de la sucursal:</label>
                                 <div class="col-xs-4">
-                                    <select class="col-xs-12" data-placeholder="Elige un gerente de la tienda..." id="chosen-selectA"
+                                    <select class="col-xs-12" data-placeholder="Elige un gerente de la sucursal..." id="chosen-selectA"
                                             ng-change="m.ManUserId = m.manUser.StKey;"
                                             ng-options="c.Name for c in lstManUsers" ng-model="m.manUser"></select>
                                 </div>

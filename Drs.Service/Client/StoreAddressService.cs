@@ -179,7 +179,7 @@ namespace Drs.Service.Client
 
             if (dataResp == null)
             {
-                OnResultStoreAvailableError("No hay una tienda disponible en la dirección que seleccionó");
+                OnResultStoreAvailableError("No hay una sucursal disponible en la dirección que seleccionó");
                 if (bIsLastStore == false)
                     ExtractStores(obj.Data.LstData);
                 return;
