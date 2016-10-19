@@ -108,5 +108,31 @@ namespace Drs.Repository.Notification
                 Db.StoreMessage.Where(e => e.Message == model.Notification).Select(e => e.StoreMessageId).SingleOrDefault();
             return storeMessageId;
         }
+
+        public ResponseMessageModel DeleteNotification(StoreNotificationModel model)
+        {
+            var today = DateTime.Today;
+            var storeMessage = Db.StoreMessageDate.SingleOrDefault(e => e.FranchiseStoreId == model.FranchiseStoreId
+                                                               && e.DateApplied == today
+                                                               && e.CategoryMessageId == model.CategoryMessageId
+                                                               && e.StoreMessage.Message == model.Notification);
+
+            if (storeMessage == null)
+                return new ResponseMessageModel
+                {
+                    HasError = true,
+                    Message = "La notificación que desea eliminar ya no existe, por favor refresque su navegador para ver las notificaciones activas para el día actual"
+                };
+
+            Db.StoreMessageDate.Remove(storeMessage);
+            Db.SaveChanges();
+
+            return new ResponseMessageModel {HasError = false, Data = model.Notification};
+        }
+
+        public List<string> GetNotifications(string notification, int limit)
+        {
+            return Db.StoreMessage.Where(e => e.Message.Contains(notification)).Select(e => e.Message).Take(limit).ToList();
+        }
     }
 }

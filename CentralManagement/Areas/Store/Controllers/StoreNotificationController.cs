@@ -108,34 +108,69 @@ namespace CentralManagement.Areas.Store.Controllers
         }
 
         [HttpPost]
-        public ActionResult DoObsolete(int id)
+        public ActionResult DoDelete(StoreNotificationModel model)
         {
+
             try
             {
-                var response = new ResponseMessageModel();
-
-                using (var service = new StoreRepository())
+                if (ModelState.IsValid == false)
                 {
-                    service.DoObsoleteStoreOffline(id, User.Identity.GetUserId(), response);
+                    return Json(new ResponseMessageModel
+                    {
+                        HasError = true,
+                        Title = ResShared.TITLE_REGISTER_FAILED,
+                        Message = ResShared.ERROR_INVALID_MODEL
+                    });
                 }
 
-                if (response.HasError)
-                    response.Title = ResShared.TITLE_OBSOLETE_FAILED;
+                using (var repository = new NotificationRepository())
+                {
+                    using (var trans = repository.Db.Database.BeginTransaction())
+                    {
+                        var response = repository.DeleteNotification(model);
+                        trans.Commit();
+                        return Json(response);
+                    }
+                }
 
-                return Json(response);
             }
             catch (Exception ex)
             {
-                SharedLogger.LogError(ex, id);
+
+                SharedLogger.LogError(ex);
                 return Json(new ResponseMessageModel
                 {
                     HasError = true,
-                    Title = ResShared.TITLE_OBSOLETE_FAILED,
+                    Title = ResShared.TITLE_REGISTER_FAILED,
                     Message = ResShared.ERROR_UNKOWN
                 });
             }
         }
 
-
+        [HttpPost]
+        public ActionResult Notifications(string notification, int limit)
+        {
+            try
+            {
+                using (var repository = new NotificationRepository())
+                {
+                    var data = repository.GetNotifications(notification, limit);
+                    return Json(new ResponseMessageModel
+                    {
+                        HasError = false,
+                        Data = data,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+                return Json(new ResponseMessageModel
+                {
+                    HasError = false,
+                    Message = "Se presentó un problema al momento de consultar la información",
+                });
+            }
+        }
     }
 }
