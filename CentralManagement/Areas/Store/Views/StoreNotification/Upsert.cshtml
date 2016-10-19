@@ -1,0 +1,131 @@
+﻿@{
+    Layout = null;
+}
+
+<script>
+
+    $(document).ready(function () {
+        window.showModalFormDlg("#dlgUpModalId", "#FormId");
+    });
+
+</script>
+
+<div class="modal inmodal" id="dlgUpModalId" tabindex="-1" ng-controller="upsertController" role="dialog" aria-hidden="true" ng-cloak>
+    <div class="modal-dialog" style="width:960px" ng-controller="storeNotificationController">
+        <div class="modal-content animated flipInY">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <i class="fa fa-comments modal-icon"></i>
+                <h4 class="modal-title">Notificaciones de la sucursal al Call Center</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ibox">
+                            <div class="ibox-title navy-bg">
+                                <h5>Notificaciones de la sucursal {{m.StoreName}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form id="FormId" name="FormId" autocomplete="off" class="form-horizontal" role="form" ng-init='m = @(ViewBag.Model ?? "{}"); init();'>
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="FranchiseStoreId" name="FranchiseStoreId" ng-model="m.FranchiseStoreId" ng-update-hidden />
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2">
+                                    <h3 class="element-center">{{m.StoreName}}</h3>
+                                </div>
+                            </div>
+                            <div class="space-15"></div>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="form-group">
+                                        <label>Categoría</label>
+                                        <select class="form-control" ng-options="c.Name for c in categories" ng-model="m.catSelected"></select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-xs-offset-1">
+                                    <div class="form-group">
+                                        <label>Notificación (Producto/Promoción/Mensaje)</label>
+                                        <input type="text" class="form-control"
+                                               ng-model="m.notification"
+                                               typeahead="notification as notification for notification in notifications($viewValue, '@Url.Action("Notifications", "StoreNotification", new { area = "Store" })')"
+                                               placeholder='Ingresa la notificación'
+                                               typeahead-editable="false"
+                                               typeahead-loading="loadingData"
+                                               typeahead-wait-ms="500"
+                                               name="Notification"
+                                               required="required"
+                                               ng-maxlength="50" />
+                                        <i ng-show="loadingData" class="glyphicon glyphicon-refresh"></i>
+                                        <span class="error" ng-show="FormId.Notification.$error.required">*Campo requerido</span>
+                                        <span class="error" ng-show="FormId.Notification.$error.maxlength">*Longitud máxima de 50 caracteres</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    <div class="form-group">
+                                        <label>&nbsp;</label>
+                                        <button class="form-control btn btn-primary" ng-disabled="!FormId.Notification.$valid"
+                                                ng-click="addNotification('@Url.Action("DoUpsert", "StoreNotification", new {area = "Store"})')" type="submit">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <br />
+                                    <div ng-show="MsgError" class="alert alert-danger element-center">
+                                        {{MsgError}}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row" ng-repeat="cat in categories" ng-show="cat.items.length > 0">
+                            <div class="col-xs-offset-1 col-xs-10">
+                                <div class="ibox-content">
+                                    <label ng-style="{'color': 'white', 'background-color': cat.Color, 'padding' : '10px'}" class="control-label col-xs-12">
+                                        {{cat.Name}}
+                                    </label>
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-xs-1">Acción</th>
+                                                <th>Notificación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="itm in cat.items">
+                                                <td style="text-align: center">
+                                                    <button class="btn btn-warning btn-circle btn-tb"
+                                                            ng-click="deleteNotification('@Url.Action("DoDelete", "StoreNotification", new {area = "Store"})',itm)"
+                                                            title="Eliminar notificación" type="button">
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                </td>
+                                                <td>{{itm.Message}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-white" ng-click="cancel()">
+                    Regresar
+                </button>
+            </div>
+        </div>
+        <div class="blocker" ng-show="working">
+            <div>
+                Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />
+            </div>
+        </div>
+    </div>
+</div>

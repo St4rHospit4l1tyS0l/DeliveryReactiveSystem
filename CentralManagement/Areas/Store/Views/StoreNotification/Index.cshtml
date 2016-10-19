@@ -1,0 +1,120 @@
+﻿<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="modalDlgController">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Sucursales del Call Center</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="jqGrid_wrapper">
+                        <table id="GridId"></table>
+                        <div id="GridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blocker" ng-show="working">
+        <div>
+            Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />
+        </div>
+    </div>
+</div>
+
+@section css{
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
+    <link href="~/Content/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <link href="~/Content/plugins/chosen/chosen.css" rel="stylesheet" />
+    <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet">
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/js/plugins/jqGrid/i18n/grid.locale-es.js"></script>
+    <script src="~/Scripts/js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+
+    <script src="~/Scripts/app/shared/upsertCtrl.js"></script>
+    <script src="~/Scripts/app/shared/modalDlgCtrl.js"></script>
+    <script src="~/Scripts/app/shared/hiddenDrct.js"></script>
+    <script src="~/Scripts/app/ctrl/storeNotificationCtrl.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+
+            window.notifications = function (storeId) {
+                window.showUpsertParams({ storeId: storeId }, "#angJsjqGridId", "@Url.Action("Upsert", "StoreNotification", new {area = "Store"})", "#GridId");
+            };
+
+            jQuery("#GridId").jqGrid({
+                url: '@Url.Action("List", "StoreNotification", new { area = "Store" })',
+                datatype: "json",
+                mtype: 'POST',
+                colNames: ['ID', 'Sucursal', 'Franquicia', 'Dirección', 'Gerente', 'Acci&oacute;n'],
+                colModel: [
+                    { name: 'FranchiseStoreId', index: 'FranchiseStoreId', hidden: true },
+                    { name: 'Name', index: 'Name', width: 180, align: "center", sorttype: 'string', searchoptions: { sopt: ['bw'] } },
+                    { name: 'FranchiseName', index: 'FranchiseName', width: 110, align: "center", sorttype: 'string', search: false },
+                    { name: 'Address', index: 'Address', width: 200, align: "center", sorttype: 'string', search: false },
+                    { name: 'ManagerUser', index: 'ManagerUser', width: 90, align: "center", sorttype: 'string', search: false },
+                    { name: 'Action', width: 100, align: "center", sortable: false, search: false, formatter: window.actionFormatter }
+                ],
+                rowNum: 10,
+                rowList: [10, 30, 60],
+                pager: '#GridPager',
+                sortname: 'FranchiseStoreId',
+                height: 450,
+                viewrecords: true,
+                autowidth: true,
+                shrinkToFit: true,
+                sortorder: "desc",
+                caption: "",
+                add: false,
+                edit: false,
+                altRows: true,
+                hidegrid: false,
+                gridComplete: function () {
+                    var ids = $(this).jqGrid('getDataIDs');
+                    for (var i = 0; i < ids.length; i++) {
+                        var cl = ids[i];
+                        var be = "";
+                        be += "<a href=\"javascript:;\" style=\"display:inline-block;\" title=\"Asignar notificaciones de la sucursal\" onclick=\"window.notifications('" + cl + "');\"><i class=\"fa fa-comments icon-grid-st blue-light\"></i></a>&nbsp;&nbsp;";
+                        $(this).jqGrid('setRowData', ids[i], { Action: be });
+                    }
+                }
+            });
+
+            jQuery("#GridId").jqGrid('navGrid', '#GridPager', {
+                edit: false,
+                add: false,
+                refresh: true,
+                del: false,
+                search: false
+            });
+
+            jQuery("#GridId").jqGrid('filterToolbar', {
+                stringResult: true,
+                searchOperators: true,
+                searchOnEnter: true,
+                multipleSearch: true,
+                ignoreCase: true
+            });
+
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#GridId').setGridWidth(width);
+            });
+        });
+    </script>
+}
+
+
