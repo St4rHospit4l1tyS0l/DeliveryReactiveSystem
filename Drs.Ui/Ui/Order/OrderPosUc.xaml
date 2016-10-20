@@ -16,7 +16,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding}" FontSize="11" />
+                                <TextBlock Text="{Binding}" FontSize="11" TextWrapping="Wrap" Width="300"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
