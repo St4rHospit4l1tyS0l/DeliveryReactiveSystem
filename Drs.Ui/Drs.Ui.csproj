@@ -195,6 +195,8 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="Converter\EnumToVisualConverter.cs" />
+    <Compile Include="Converter\IntToVisibility.cs" />
+    <Compile Include="Converter\StringToSolidColorBrush.cs" />
     <Compile Include="Gmap\HtmlInteropService.cs" />
     <Compile Include="Resources\Localization\Shared.Designer.cs">
       <AutoGen>True</AutoGen>

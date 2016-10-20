@@ -5,6 +5,7 @@ using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Model.Constants;
 using Drs.Model.Order;
 using Drs.Model.Shared;
+using Drs.Repository.Log;
 using Drs.Service.ReactiveDelivery;
 using Drs.Model.Address;
 using Drs.Model.Store;
@@ -77,7 +78,7 @@ namespace Drs.Service.Client
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message + @" - ST - " + ex.StackTrace);
+                    SharedLogger.LogError(ex);
                 }
             }
         }

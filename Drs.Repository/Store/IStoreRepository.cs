@@ -33,5 +33,6 @@ namespace Drs.Repository.Store
         int GetFranchiseIdByStoreId(int franchiseStoreId);
         List<CoverageStoreModel> GetAvailableCoverageByFrachiseCode(string franchiseCode);
         List<StoreModel> GetStoresByIds(List<int> storesIds);
+        IEnumerable<StoreNotificationCategoryModel> GetNotificationsByStore(int storeId);
     }
 }

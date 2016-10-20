@@ -53,7 +53,7 @@
                                                ng-model="m.notification"
                                                typeahead="notification as notification for notification in notifications($viewValue, '@Url.Action("Notifications", "StoreNotification", new { area = "Store" })')"
                                                placeholder='Ingresa la notificación'
-                                               typeahead-editable="false"
+                                               typeahead-editable="true"
                                                typeahead-loading="loadingData"
                                                typeahead-wait-ms="500"
                                                name="Notification"

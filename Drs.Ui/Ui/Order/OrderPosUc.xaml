@@ -1,15 +1,45 @@
 ﻿<UserControl xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"  x:Class="Drs.Ui.Ui.Order.OrderPosUc"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-             d:DesignHeight="500" d:DesignWidth="1024" >
-    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical">
-        <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Cargando aplicación POS " Margin="0 60 0 0" FontFamily="Candara" FontSize="25" />
-        <mah:MetroProgressBar Height="25" Margin="40 20 40 0" Width="600" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
+             xmlns:converter="clr-namespace:Drs.Ui.Converter"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             Height="940" Width="1600" Margin="0 -31 0 0" >
+    <UserControl.Resources>
+        <converter:StringToSolidColorBrush x:Key="StringToSolidColorBrush"/>
+        <converter:IntToVisibility x:Key="IntToVisibility"/>
+        <DataTemplate x:Key="DataTemplateCategory">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                        Visibility="{Binding ItemsCount, Converter={StaticResource IntToVisibility}}">
+                <Label Content="{Binding CategoryName}" Margin="0 0 0 0" HorizontalContentAlignment="Center" 
+                       Background="{Binding Color, Converter={StaticResource StringToSolidColorBrush}}" Foreground="White" ></Label>
+                <ItemsControl Margin="6 4 0 10" ItemsSource="{Binding Notifications}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding}" FontSize="11" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemTemplate="{DynamicResource DataTemplateCategory}" ItemsSource="{Binding LstNotificaionCategories}">
+            </ItemsControl>
+        </ScrollViewer>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical">
+            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Cargando aplicación POS " Margin="0 60 0 0" FontFamily="Candara" FontSize="25" />
+            <mah:MetroProgressBar Height="25" Margin="40 20 40 0" Width="600" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
                               EllipseDiameter="10" EllipseOffset="10" IsIndeterminate="True" Foreground="#FF2480EE" />
-        <Button Width="200" Margin="0 30 0 0" Height="35" Content="  Recargar POS  " Style="{DynamicResource AccentedSquareButtonStyle}" 
+            <Button Width="200" Margin="0 30 0 0" Height="35" Content="  Mostrar POS  " Style="{DynamicResource AccentedSquareButtonStyle}" 
                     Command="{Binding ReloadPosCommand}" mah:ButtonHelper.PreserveTextCase="True" />
-    </StackPanel>
+        </StackPanel>
+
+    </Grid>
 </UserControl>

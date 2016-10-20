@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
@@ -57,7 +59,7 @@ namespace Drs.Service.Franchise
                     ProcessExt.ForceStartProcess(
                         Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.BIN_FOLDER),
                         SettingsData.AlohaIberToInit,
-                        SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty), true);
+                        SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty), CalculatePosEnviromentVariables());
 
                 if (process == null)
                 {
@@ -80,6 +82,23 @@ namespace Drs.Service.Franchise
                 //Copy directories of franchise 
                 DirExt.ForceCopyFolder(Path.Combine(SettingsData.AlohaPath, newDataFolderFranchise.ToString()), newDataFolder);
             }
+        }
+
+        public StringDictionary CalculatePosEnviromentVariables()
+        {
+            var strDic = new StringDictionary
+            {
+                {"AlohaLeft", (SystemParameters.PrimaryScreenWidth*(0.15625) + MoveToLeftIfNotificationIsEnabled()).ToString(CultureInfo.InvariantCulture)},
+                {"AlohaXRes", (SystemParameters.PrimaryScreenWidth * (0.52083)).ToString(CultureInfo.InvariantCulture)},
+                {"AlohaTop", (SystemParameters.PrimaryScreenHeight * (0.125)).ToString(CultureInfo.InvariantCulture)},
+                {"AlohaYRes", (SystemParameters.PrimaryScreenHeight * (0.74074)).ToString(CultureInfo.InvariantCulture)}
+            };
+            return strDic;
+        }
+
+        private double MoveToLeftIfNotificationIsEnabled()
+        {
+            return (SettingsData.Store.EnableStoreNotifications == false) ? 0 : SystemParameters.PrimaryScreenWidth * (0.1);
         }
 
         private void ReinitPosIfNotCurrentDobOrDifferentFranchise(bool isUpdated, string fileCode, string dataFolder,
@@ -134,6 +153,7 @@ namespace Drs.Service.Franchise
 
         private static void SetOnTopMostWindowForNotShowingPosWindow()
         {
+//#if DEBUG == false
             Observable.Interval(TimeSpan.FromMilliseconds(50))
                 .Take(30)
                 .ObserveOn(RxApp.MainThreadScheduler).Subscribe(_ =>
@@ -152,7 +172,7 @@ namespace Drs.Service.Franchise
                             wnd.Topmost = false;
                     }
                 });
-
+//#endif
         }
 
         private bool StartInjectPosData(PropagateOrderModel propagateOrder)

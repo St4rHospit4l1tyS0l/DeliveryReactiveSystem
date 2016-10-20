@@ -113,6 +113,7 @@ namespace Drs.ViewModel.Order
             addressList.ItemSelected += orderSummary.OnAddressSelected;
             addressList.ItemSelected += _storeAddressService.OnAddressSelected;
             addressList.ChangeStore += _storeAddressService.OnChangeStore;
+            addressList.ChangeStore += orderPos.OnChangeStore;
             _storeAddressService.StoresReceivedByAddress += addressList.OnStoresReceivedByAddress;
             _storeAddressService.StoreSelected += orderSummary.OnStoreSelected;
 

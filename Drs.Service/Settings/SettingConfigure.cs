@@ -46,8 +46,8 @@ namespace Drs.Service.Settings
             SettingsData.Store.ByZipCode = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.BY_ZIPCODE, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.TimeUpdateStoreOrder = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.TIME_UPDATE_STORE_ORDER, 30);
             SettingsData.Store.TimeSyncServerFilesOrder = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.TIME_SYNC_SERVER_FILES, 600);
-            
-            SettingsData.Store.MaxFailedStatusCounter = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.MAX_FAILED_STATUS_COUNTER, 864000);
+            SettingsData.Store.MaxFailedStatusCounter = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.MAX_FAILED_STATUS_COUNTER, 60);
+            SettingsData.Store.EnableStoreNotifications = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.ENABLE_STORE_NOTIFICATIONS, SettingsData.Constants.SystemConst.FALSE);
 
             ResolveRecurrence(dicSettings);
 

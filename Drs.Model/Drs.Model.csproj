@@ -187,6 +187,7 @@
     <Compile Include="Shared\AccountConstants.cs" />
     <Compile Include="Shared\ItemCategory.cs" />
     <Compile Include="Shared\MenuItem.cs" />
+    <Compile Include="Store\StoreNotificationCategoryModel.cs" />
     <Compile Include="Store\StoreNotificationModel.cs" />
     <Compile Include="Track\DailySearchModel.cs" />
     <Compile Include="Shared\ItemCatalog.cs" />

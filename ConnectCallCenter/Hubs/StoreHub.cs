@@ -104,6 +104,26 @@ namespace ConnectCallCenter.Hubs
                 return ResponseMessageData<StoreModel>.CreateCriticalMessage("No fue posible obtener una sucursal disponible para esa dirección o selección");
             }
         }
+
+
+        [HubMethodName(SharedConstants.Server.GET_NOTIFICATIONS_BY_STORE_STORE_HUB_METHOD), UsedImplicitly]
+        public ResponseMessageData<StoreNotificationCategoryModel> GetNotificationsByStore(int storeId)
+        {
+            try
+            {
+                var response = new ResponseMessageData<StoreNotificationCategoryModel>
+                {
+                    IsSuccess = true,
+                    LstData = AppInit.Container.Resolve<IStoreService>().GetNotificationsByStore(storeId)
+                };
+                return response;
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex);
+                return ResponseMessageData<StoreNotificationCategoryModel>.CreateCriticalMessage("No fue posible obtener las notificaciones para la sucursal seleccionada");
+            }
+        }
     }
 }
 

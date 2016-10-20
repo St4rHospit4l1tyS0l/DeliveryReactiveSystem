@@ -475,6 +475,14 @@ namespace Drs.Service.Store
             }
         }
 
+        public IEnumerable<StoreNotificationCategoryModel> GetNotificationsByStore(int storeId)
+        {
+            using (_repositoryStore)
+            {
+                return _repositoryStore.GetNotificationsByStore(storeId);
+            }
+        }
+
         private List<int> CalculateStoresCoverages(List<CoverageStoreModel> storesCoverage, AddressInfoModel addressInfo)
         {
             var lstStoresIds = new List<int>();

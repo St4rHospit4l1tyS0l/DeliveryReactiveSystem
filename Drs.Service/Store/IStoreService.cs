@@ -1,4 +1,5 @@
-﻿using Drs.Model.Order;
+﻿using System.Collections.Generic;
+using Drs.Model.Order;
 using Drs.Model.Shared;
 using Drs.Model.Store;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -13,5 +14,6 @@ namespace Drs.Service.Store
         void GetPreparationTime(string wsAddress, ResponseMessageData<StoreModel> response);
         StoreModel StoreAvailableByStore(ItemCatalog item, ResponseMessageData<StoreModel> response);
         StoreModel StoreAvailableForAddressMap(StoreAvailableModel model, ResponseMessageData<StoreModel> response);
+        IEnumerable<StoreNotificationCategoryModel> GetNotificationsByStore(int storeId);
     }
 }

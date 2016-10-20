@@ -129,7 +129,8 @@ namespace Drs.Model.Settings
                 public const string BY_ZIPCODE = "BY_ZIPCODE";
                 public const string TIME_UPDATE_STORE_ORDER = "TIME_UPDATE_STORE_ORDER";
                 public const string TIME_SYNC_SERVER_FILES = "TIME_SYNC_SERVER_FILES";
-                public const string MAX_FAILED_STATUS_COUNTER = "MAX_FAILED_STATUS_COUNTER"; 
+                public const string MAX_FAILED_STATUS_COUNTER = "MAX_FAILED_STATUS_COUNTER";
+                public const string ENABLE_STORE_NOTIFICATIONS = "ENABLE_STORE_NOTIFICATIONS";
 
                 public const int STORE_RESPONSE_ORDER_ERROR = 1100;
                 
@@ -241,6 +242,7 @@ namespace Drs.Model.Settings
             public static bool ByRegionD { get; set; }
             public static bool ByZipCode { get; set; }
             public static int MaxFailedStatusCounter { get; set; }
+            public static bool EnableStoreNotifications { get; set; }
         }
 
         public static class Recurrence

@@ -357,6 +357,18 @@ namespace Drs.Repository.Store
                 }).ToList();
         }
 
+        public IEnumerable<StoreNotificationCategoryModel> GetNotificationsByStore(int storeId)
+        {
+            var today = DateTime.Today;
+            return DbEntities.CategoryMessage.Select(e => new StoreNotificationCategoryModel
+            {
+                CategoryName = e.Category,
+                Color = e.Color,
+                Position = e.Position,
+                Notifications = e.StoreMessageDate.Where(i => i.DateApplied == today && i.FranchiseStoreId == storeId).Select(i => i.StoreMessage.Message).ToList()
+            }).ToList();
+        }
+
         public void SaveRecurrence(Recurrence recurrence)
         {
             DbEntities.Recurrence.Add(recurrence);

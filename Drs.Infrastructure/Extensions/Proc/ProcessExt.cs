@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Globalization;
@@ -45,7 +46,7 @@ namespace Drs.Infrastructure.Extensions.Proc
             }
         }
 
-        public static Process ForceStartProcess(string sPathFile, string sFileName, string sProcessName, bool bIsPos, int iTries = 4)
+        public static Process ForceStartProcess(string sPathFile, string sFileName, string sProcessName, StringDictionary dicEnvVars = null, int iTries = 4)
         {
             while (iTries >= 0)
             {
@@ -68,12 +69,12 @@ namespace Drs.Infrastructure.Extensions.Proc
                         }
                     };
 
-                    if (bIsPos)
+                    if (dicEnvVars != null && dicEnvVars.Count > 0)
                     {
-                        process.StartInfo.EnvironmentVariables["AlohaLeft"] = (SystemParameters.PrimaryScreenWidth * (0.15625)).ToString(CultureInfo.InvariantCulture);
-                        process.StartInfo.EnvironmentVariables["AlohaXRes"] = (SystemParameters.PrimaryScreenWidth * (0.52083)).ToString(CultureInfo.InvariantCulture);
-                        process.StartInfo.EnvironmentVariables["AlohaTop"] = (SystemParameters.PrimaryScreenHeight * (0.125)).ToString(CultureInfo.InvariantCulture);
-                        process.StartInfo.EnvironmentVariables["AlohaYRes"] = (SystemParameters.PrimaryScreenHeight * (0.74074)).ToString(CultureInfo.InvariantCulture);
+                        foreach (DictionaryEntry keyVal in dicEnvVars)
+                        {
+                            process.StartInfo.EnvironmentVariables[keyVal.Key.ToString()] = keyVal.Value.ToString();
+                        }
                     }
                     
                     process.Start();
