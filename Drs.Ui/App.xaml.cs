@@ -10,6 +10,7 @@ using Drs.Infrastructure.Crypto;
 using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Infrastructure.Logging;
 using Drs.Infrastructure.Model;
+using Drs.Infrastructure.Ui;
 using Drs.Model.Constants;
 using Drs.Model.Settings;
 using Drs.Model.Shared;
@@ -72,6 +73,8 @@ namespace Drs.Ui
                 splashVm.ShowProgress.Execute(null);
                 await Task.Delay(TimeSpan.FromMilliseconds(MILI_SECONDS_TO_INIT));
 
+                FixBrowserVersion();
+
                 var bootstrapper = new Bootstrapper();
                 var container = bootstrapper.Build();
                 Log.Info("Iniciando Delivery Reactive System...");
@@ -112,6 +115,12 @@ namespace Drs.Ui
                     Environment.NewLine, ex.Message, ex.InnerException == null ? String.Empty : ex.InnerException.Message), "Error al iniciar");
                 Shutdown();
             }
+        }
+
+        private void FixBrowserVersion()
+        {
+            var appName = System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            WebBrowserHelper.FixBrowserVersion(appName);
         }
 
         private void ShowNextWindow(IReactiveDeliveryClient reactiveDeliveryClient, Action showWnd, IShellContainerVm vm)

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reactive.Concurrency;
-using Drs.Model.Constants;
+﻿using System.Reactive.Concurrency;
 using Drs.ViewModel.External;
 using ReactiveUI;
 
