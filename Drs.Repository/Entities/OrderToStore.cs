@@ -42,10 +42,12 @@ namespace Drs.Repository.Entities
         public Nullable<System.DateTime> DateTimeCanceled { get; set; }
         public int FailedStatusCounter { get; set; }
         public int PosOrderStatus { get; set; }
+        public string ExtraNotes { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual CatPayment CatPayment { get; set; }
+        public virtual Client Client { get; set; }
         public virtual ClientPhone ClientPhone { get; set; }
         public virtual Franchise Franchise { get; set; }
         public virtual FranchiseStore FranchiseStore { get; set; }
@@ -53,6 +55,5 @@ namespace Drs.Repository.Entities
         public virtual ICollection<OrderToStoreLog> OrderToStoreLog { get; set; }
         public virtual ICollection<Recurrence> Recurrence { get; set; }
         public virtual ICollection<StoreStatus> StoreStatus { get; set; }
-        public virtual Client Client { get; set; }
     }
 }

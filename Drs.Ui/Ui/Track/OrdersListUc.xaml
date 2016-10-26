@@ -85,8 +85,16 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Fecha / Hora"  MinWidth="160" 
+                    <!--<DataGridTextColumn Header="Fecha / Hora"  MinWidth="160" 
                                     Binding="{Binding DateTimeOrder}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>-->
+                    <DataGridTextColumn Header="Hora"  MinWidth="90" 
+                                    Binding="{Binding TimeOrder}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -101,8 +109,16 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Id Orden" MinWidth="120"
+                    <!--<DataGridTextColumn Header="Id Orden" MinWidth="120"
                                     Binding="{Binding OrderAtoId}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>-->
+                    <DataGridTextColumn Header="Dirección" MinWidth="180"
+                                    Binding="{Binding MainAddress}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />

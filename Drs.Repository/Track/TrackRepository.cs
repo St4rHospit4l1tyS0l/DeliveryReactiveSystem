@@ -37,6 +37,7 @@ namespace Drs.Repository.Track
                 OrderTotal = e.PosOrder.Total,
                 LastStatus = e.LastStatus,
                 IsCanceled = e.IsCanceled,
+                MainAddress = e.Address.MainAddress + " | " + e.Address.ExtIntNumber,
                 Agent = e.AspNetUsers.UserDetail.FirstName + " " + e.AspNetUsers.UserDetail.LastName + " (" + e.AspNetUsers.UserName + ")"
             };
         }
@@ -71,6 +72,7 @@ namespace Drs.Repository.Track
                     FranchiseName = e.Franchise.Name,
                     WsAddress = e.FranchiseStore.WsAddress,
                     Mode = e.OrderMode,
+                    ExtraNotes = e.ExtraNotes,
                     PromiseTime = e.PromiseTime,
                     UserTakeOrder = e.AspNetUsers.UserName,
                     LstOrderPos = e.PosOrder.PosOrderItem

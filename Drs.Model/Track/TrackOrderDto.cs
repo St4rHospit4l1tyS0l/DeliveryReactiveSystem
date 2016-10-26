@@ -34,7 +34,7 @@ namespace Drs.Model.Track
         {
             get
             {
-                return StartDatetime.ToString("HH : mm");
+                return StartDatetime.ToString("HH:mm:ss");
             }
         }
 
@@ -118,6 +118,7 @@ namespace Drs.Model.Track
         }
 
         public string Agent { get; set; }
+        public string MainAddress { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

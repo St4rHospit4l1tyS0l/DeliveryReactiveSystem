@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:shared="clr-namespace:Drs.Ui.Ui.Shared"
              xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
-             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" Height="500" Width="1080">
+             mc:Ignorable="d" Height="500" Width="1200">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -47,19 +46,19 @@
         </StackPanel>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="27"></RowDefinition>
+                <RowDefinition Height="27"></RowDefinition>
+                <RowDefinition Height="27"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="125"></ColumnDefinition>
-                <ColumnDefinition Width="170"></ColumnDefinition>
+                <ColumnDefinition Width="135"></ColumnDefinition>
+                <ColumnDefinition Width="180"></ColumnDefinition>
                 <ColumnDefinition Width="120"></ColumnDefinition>
-                <ColumnDefinition Width="145"></ColumnDefinition>
+                <ColumnDefinition Width="160"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="145"></ColumnDefinition>
+                <ColumnDefinition Width="175"></ColumnDefinition>
                 <ColumnDefinition Width="120"></ColumnDefinition>
-                <ColumnDefinition Width="140"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <Label Content="Fecha/Hora pedido:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
@@ -72,6 +71,7 @@
             <Label Content="Total de la orden:" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
             <Label Content="Fecha / Hora cerrado:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
             <Label Content="Usuario:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
+            <Label Content="Notas:" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
 
             <TextBlock Text="{Binding OrderDetail.DateTimeOrder}" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
             <TextBlock Text="{Binding OrderDetail.OrderAtoId}" Grid.Row="0" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
@@ -83,6 +83,7 @@
             <TextBlock Text="{Binding OrderDetail.CurrOrderTotal}" Grid.Row="1" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
             <TextBlock Text="{Binding OrderDetail.StrEndDatetime}" Grid.Row="2" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
             <TextBlock Text="{Binding OrderDetail.UserTakeOrder}" Grid.Row="2" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
+            <TextBlock Text="{Binding OrderDetail.ExtraNotes}" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
 
         </Grid>
         <StackPanel Visibility="{Binding VisiblityStoreErrMsg}">
@@ -97,7 +98,7 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <StackPanel HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="10">
+            <StackPanel HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="10,11,10,9">
                 <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#8B00FF">
                     <Rectangle Width="20" Margin="10,0,5,0" Height="20" HorizontalAlignment="Center" Fill="#FFF" >
                         <Rectangle.OpacityMask >

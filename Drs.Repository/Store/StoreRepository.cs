@@ -51,7 +51,8 @@ namespace Drs.Repository.Store
                 StartDatetime = now,
                 UserInsId = model.UserId,
                 PaymentId = model.OrderDetails.Payment.Id,
-                PosOrderStatus = model.OrderDetails.PosOrderStatus
+                PosOrderStatus = model.OrderDetails.PosOrderStatus,
+                ExtraNotes = model.OrderDetails.ExtraNotes
             };
 
             DbEntities.OrderToStore.Add(orderToStore);

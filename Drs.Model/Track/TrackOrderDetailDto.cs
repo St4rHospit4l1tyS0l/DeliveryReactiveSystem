@@ -24,5 +24,6 @@ namespace Drs.Model.Track
         public List<ItemLogOrder> LstOrderLog { get; set; }
         public string WsAddress { get; set; }
         public string StoreErrMsg { get; set; }
+        public string ExtraNotes { get; set; }
     }
 }

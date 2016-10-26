@@ -80,7 +80,7 @@ namespace Drs.PosService.BsLogic
 
         private void OnSendPosError(Exception ex, PosCheck posCheck)
         {
-            OnSendPosError(ex.Message, posCheck);
+            OnSendPosError(ex.Message + " | " + ex.StackTrace + " | " + (ex.InnerException != null ? ex.InnerException.Message : " No inner"), posCheck);
         }
 
         private void OnSendPosError(string msgError, PosCheck posCheck)
@@ -89,7 +89,6 @@ namespace Drs.PosService.BsLogic
 
             if (_iTries++ > MAX_TRIES)
                 return;
-
             SendPosCheckInfo(posCheck);
         }
 

@@ -31,12 +31,12 @@ namespace Drs.Repository.Entities
             this.FranchiseStore2 = new HashSet<FranchiseStore>();
             this.FranchiseStoreOffLine = new HashSet<FranchiseStoreOffLine>();
             this.FranchiseStoreOffLine1 = new HashSet<FranchiseStoreOffLine>();
-            this.OrderToStore = new HashSet<OrderToStore>();
             this.PosOrder = new HashSet<PosOrder>();
             this.Resource = new HashSet<Resource>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
             this.StoreMessage = new HashSet<StoreMessage>();
             this.StoreMessageDate = new HashSet<StoreMessageDate>();
+            this.OrderToStore = new HashSet<OrderToStore>();
         }
     
         public string Id { get; set; }
@@ -67,12 +67,12 @@ namespace Drs.Repository.Entities
         public virtual ICollection<FranchiseStore> FranchiseStore2 { get; set; }
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine1 { get; set; }
-        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<PosOrder> PosOrder { get; set; }
         public virtual ICollection<Resource> Resource { get; set; }
         public virtual UserDetail UserDetail { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
         public virtual ICollection<StoreMessage> StoreMessage { get; set; }
         public virtual ICollection<StoreMessageDate> StoreMessageDate { get; set; }
+        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
     }
 }
