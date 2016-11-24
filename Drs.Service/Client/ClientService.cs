@@ -34,7 +34,7 @@ namespace Drs.Service.Client
             }
         }
 
-        public ResponseMessageData<RecurrenceResponseModel> CalculateRecurrence(List<int> lstClientId)
+        public ResponseMessageData<RecurrenceResponseModel> CalculateRecurrence(List<long> lstClientId)
         {
             var dtEnd = DateTime.Today;
             var dtEndShort = dtEnd.ToDateShort();
@@ -60,8 +60,8 @@ namespace Drs.Service.Client
             };
         }
 
-        private void GetRecurrenceByType(List<int> lstClientId, DateTime dtEnd, RecurrenceResponseModel recurrenceResponse, 
-            IEnumerable<KeyValuePair<string, RecurrenceType>> lstRecurrenceType, Func<long, int, decimal?> funcGetRecurrenceValue )
+        private void GetRecurrenceByType(List<long> lstClientId, DateTime dtEnd, RecurrenceResponseModel recurrenceResponse, 
+            IEnumerable<KeyValuePair<string, RecurrenceType>> lstRecurrenceType, Func<long, long, decimal?> funcGetRecurrenceValue )
         {
             foreach (var typeTime in lstRecurrenceType)
             {

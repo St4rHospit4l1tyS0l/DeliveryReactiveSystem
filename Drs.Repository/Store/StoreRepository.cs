@@ -46,13 +46,14 @@ namespace Drs.Repository.Store
                 ClientPhoneId = model.PhoneId,
                 ClientId = model.ClientId ?? SettingsData.Constants.Entities.NULL_ID_INT,
                 FranchiseId = model.FranchiseId,
-                FranchiseStoreId = model.Store.IdKey ?? SettingsData.Constants.Entities.NULL_ID_INT,
+                FranchiseStoreId = (int)(model.Store.IdKey ?? SettingsData.Constants.Entities.NULL_ID_INT),
                 PosOrderId = model.PosOrder.Id ?? SettingsData.Constants.Entities.NULL_ID_INT,
                 StartDatetime = now,
                 UserInsId = model.UserId,
                 PaymentId = model.OrderDetails.Payment.Id,
                 PosOrderStatus = model.OrderDetails.PosOrderStatus,
-                ExtraNotes = model.OrderDetails.ExtraNotes
+                ExtraNotes = model.OrderDetails.ExtraNotes,
+                InputType =  SettingsData.Constants.StoreOrder.INPUT_TYPE_DELIVERY
             };
 
             DbEntities.OrderToStore.Add(orderToStore);

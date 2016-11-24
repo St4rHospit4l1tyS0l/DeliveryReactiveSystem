@@ -108,7 +108,7 @@ namespace ConnectCallCenter.Hubs
         }
 
         [HubMethodName(SharedConstants.Server.CALCULATE_RECURRENCE_CLIENT_HUB_METHOD), UsedImplicitly]
-        public ResponseMessageData<RecurrenceResponseModel> CalculateRecurrence(List<int> lstClientId)
+        public ResponseMessageData<RecurrenceResponseModel> CalculateRecurrence(List<long> lstClientId)
         {
             try
             {

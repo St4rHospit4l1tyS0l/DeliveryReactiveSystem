@@ -211,7 +211,7 @@ namespace Drs.ViewModel.Order
         public override bool Initialize(bool bForceToInit = false, string parameters = null)
         {
             ResetValues();
-            return base.Initialize(bForceToInit);
+            return base.Initialize(bForceToInit, parameters);
         }
 
         private void OnSendOrderToStoreEventChanged(ResponseMessage resMsg)

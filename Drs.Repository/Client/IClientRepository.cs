@@ -9,12 +9,12 @@ namespace Drs.Repository.Client
     {
         IEnumerable<ListItemModel> SearchByPhone(string phone, int maxResults);
         IEnumerable<ListItemModel> SearchByCompany(string company, int maxResultsOnQuery);
-        int GetPhoneIdByPhone(string phone);
-        IEnumerable<ClientInfoModel> SearchClientsByPhoneId(int phoneId);
-        ClientInfoModel GetClientById(int clientId);
-        string GetPhoneById(int phoneId);
+        long GetPhoneIdByPhone(string phone);
+        IEnumerable<ClientInfoModel> SearchClientsByPhoneId(long phoneId);
+        ClientInfoModel GetClientById(long clientId);
+        string GetPhoneById(long phoneId);
         IEnumerable<ListItemModel> SearchClientsByClientName(string clientName, int maxResultsOnQuery);
-        int CountRecurrenceByTime(long dtStart, long dtEnd, int clientId);
-        decimal TotalRecurrenceByTotal(long dtStart, long dtEndShort, int clientId);
+        int CountRecurrenceByTime(long dtStart, long dtEnd, long clientId);
+        decimal TotalRecurrenceByTotal(long dtStart, long dtEndShort, long clientId);
     }
 }

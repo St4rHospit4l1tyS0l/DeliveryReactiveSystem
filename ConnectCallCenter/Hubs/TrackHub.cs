@@ -36,7 +36,7 @@ namespace ConnectCallCenter.Hubs
         }
 
         [HubMethodName(SharedConstants.Server.SEARCH_BY_CLIENTNAME_TRACK_HUB_METHOD), UsedImplicitly]
-        public ResponseMessageData<TrackOrderDto> SearchByClientName(PagerDto<int> client)
+        public ResponseMessageData<TrackOrderDto> SearchByClientName(PagerDto<long> client)
         {
             try
             {

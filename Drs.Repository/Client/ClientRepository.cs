@@ -29,12 +29,12 @@ namespace Drs.Repository.Client
                 .ToList();
         }
 
-        public int CountRecurrenceByTime(long dtStart, long dtEnd, int clientId)
+        public int CountRecurrenceByTime(long dtStart, long dtEnd, long clientId)
         {
             return DbEntities.Recurrence.Count(e => e.ClientId == clientId && e.TimestampShort >= dtStart && e.TimestampShort <= dtEnd);
         }
 
-        public decimal TotalRecurrenceByTotal(long dtStart, long dtEnd, int clientId)
+        public decimal TotalRecurrenceByTotal(long dtStart, long dtEnd, long clientId)
         {
             return DbEntities.Recurrence.Where(e => e.ClientId == clientId && e.TimestampShort >= dtStart && e.TimestampShort <= dtEnd)
                 .Sum(e => (decimal?) e.Total) ?? 0;
@@ -50,7 +50,7 @@ namespace Drs.Repository.Client
                 .ToList();
         }
 
-        public int GetPhoneIdByPhone(string phone)
+        public long GetPhoneIdByPhone(string phone)
         {
             var resPhone = DbEntities.ClientPhone.Where(e => e.Phone.Trim().ToUpper() == phone)
                 .Select(e => new { e.ClientPhoneId }).SingleOrDefault();
@@ -58,7 +58,7 @@ namespace Drs.Repository.Client
             return resPhone == null ? SharedConstants.NULL_ID_VALUE : resPhone.ClientPhoneId;
         }
 
-        public IEnumerable<ClientInfoModel> SearchClientsByPhoneId(int phoneId)
+        public IEnumerable<ClientInfoModel> SearchClientsByPhoneId(long phoneId)
         {
             return DbEntities.ClientPhone.Where(e => e.ClientPhoneId == phoneId)
                 .SelectMany(e => e.Client.Select(i => new
@@ -90,7 +90,7 @@ namespace Drs.Repository.Client
             }).ToList();
         }
 
-        public ClientInfoModel GetClientById(int clientId)
+        public ClientInfoModel GetClientById(long clientId)
         {
             return DbEntities.Client.Where(e => e.ClientId == clientId).Select(e => new ClientInfoModel
             {
@@ -106,7 +106,7 @@ namespace Drs.Repository.Client
 
         }
 
-        public string GetPhoneById(int phoneId)
+        public string GetPhoneById(long phoneId)
         {
             return DbEntities.ClientPhone.Where(e => e.ClientPhoneId == phoneId).Select(e => e.Phone).FirstOrDefault();
         }

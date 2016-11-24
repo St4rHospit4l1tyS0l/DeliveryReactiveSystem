@@ -97,7 +97,7 @@ namespace Drs.Service.Address
             phone = phone.Trim().ToUpper();
             using (_repository)
             {
-                int phoneId;
+                long phoneId;
                 using (_repositoryClient)
                 {
                     phoneId = _repositoryClient.GetPhoneIdByPhone(phone);

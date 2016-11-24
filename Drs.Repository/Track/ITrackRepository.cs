@@ -8,7 +8,7 @@ namespace Drs.Repository.Track
     public interface ITrackRepository : IDisposable
     {
         IEnumerable<TrackOrderDto> SearchByPhone(PagerDto<String> phone);
-        IEnumerable<TrackOrderDto> SearchByClient(PagerDto<int> client);
+        IEnumerable<TrackOrderDto> SearchByClient(PagerDto<long> client);
         TrackOrderDetailDto ShowDetailByOrderId(long orderId);
         IEnumerable<TrackOrderDto> SearchByDailyInfo(PagerDto<DailySearchModel> model);
     }

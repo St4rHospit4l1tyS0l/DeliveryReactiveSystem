@@ -24,12 +24,12 @@ namespace Drs.Repository.Entities
         public long OrderToStoreId { get; set; }
         public string LastStatus { get; set; }
         public System.DateTime LastUpdate { get; set; }
-        public int ClientPhoneId { get; set; }
-        public int AddressId { get; set; }
-        public int ClientId { get; set; }
+        public long ClientPhoneId { get; set; }
+        public long AddressId { get; set; }
+        public long ClientId { get; set; }
         public int FranchiseId { get; set; }
         public int FranchiseStoreId { get; set; }
-        public int PosOrderId { get; set; }
+        public long PosOrderId { get; set; }
         public string UserInsId { get; set; }
         public System.DateTime StartDatetime { get; set; }
         public Nullable<System.DateTime> EndDatetime { get; set; }
@@ -43,6 +43,7 @@ namespace Drs.Repository.Entities
         public int FailedStatusCounter { get; set; }
         public int PosOrderStatus { get; set; }
         public string ExtraNotes { get; set; }
+        public int InputType { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }

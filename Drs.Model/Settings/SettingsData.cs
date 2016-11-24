@@ -148,8 +148,9 @@ namespace Drs.Model.Settings
             {
                 public static string WsCustomerOrder = "CustomerOrder/CustomerOrder";
                 public static string WsQueryFunction = "QueryFunction/QueryFunction";
-                
+
                 public const int MINUTES_TO_BE_FUTURE_ORDER = 60;
+                public const int INPUT_TYPE_DELIVERY = 0;
             }
 
             public class TrackConst

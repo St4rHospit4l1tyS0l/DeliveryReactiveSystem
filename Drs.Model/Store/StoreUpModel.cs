@@ -13,7 +13,7 @@ namespace Drs.Model.Store
 
         [Required(AllowEmptyStrings = false, ErrorMessage = @"La URL del web service es requerida")]
         public string WsAddress { get; set; }
-        public int AddressId { get; set; }
+        public long AddressId { get; set; }
         public AddressModel Address { get; set; }
         public AddressModel AddressRes { get; set; }
         public string UserInsUpId { get; set; }

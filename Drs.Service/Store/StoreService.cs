@@ -70,14 +70,14 @@ namespace Drs.Service.Store
                     return resMsg;
                 }
 
-                var franchiseId = _repositoryStore.GetFranchiseIdByStoreId(store.IdKey.Value);
+                var franchiseId = _repositoryStore.GetFranchiseIdByStoreId((int)store.IdKey.Value);
 
                 model.Store = store;
                 model.FranchiseId = franchiseId;
                 model.UserId = AccountRepository.GetIdByUsername(model.Username, _repositoryStore.InnerDbEntities);
                 _repositoryStore.SaveOrderToStore(model);
 
-                var offline = _repositoryStore.IsStoreOnline(store.IdKey.Value, DateTime.UtcNow);
+                var offline = _repositoryStore.IsStoreOnline((int)store.IdKey.Value, DateTime.UtcNow);
 
                 if (offline != null)
                 {
@@ -548,7 +548,7 @@ namespace Drs.Service.Store
 
             var utcDateTime = DateTime.UtcNow;
 
-            var offline = _repositoryStore.IsStoreOnline(store.IdKey.Value, utcDateTime);
+            var offline = _repositoryStore.IsStoreOnline((int)store.IdKey.Value, utcDateTime);
             if (offline == null)
             {
                 response.IsSuccess = true;

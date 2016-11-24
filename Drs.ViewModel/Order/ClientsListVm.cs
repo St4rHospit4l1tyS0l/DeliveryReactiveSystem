@@ -187,7 +187,7 @@ namespace Drs.ViewModel.Order
             RxApp.MainThreadScheduler.Schedule(_ =>
             {
                 IsGettingData = false;
-                var lstRecurrence = new List<int>(obj.Data.LstData.Count());
+                var lstRecurrence = new List<long>(obj.Data.LstData.Count());
                 LstClients.Clear();
                 var bIsFirst = true;
                 foreach (var clientInfo in obj.Data.LstData)
@@ -209,7 +209,7 @@ namespace Drs.ViewModel.Order
 
                 if (lstRecurrence.Count != 0)
                 {
-                    _client.ExecutionProxy.ExecuteRequest<IList<int>, IList<int>, ResponseMessageData<RecurrenceResponseModel>, ResponseMessageData<RecurrenceResponseModel>>
+                    _client.ExecutionProxy.ExecuteRequest<IList<long>, IList<long>, ResponseMessageData<RecurrenceResponseModel>, ResponseMessageData<RecurrenceResponseModel>>
                         (lstRecurrence, TransferDto.SameType, SharedConstants.Server.CLIENT_HUB,
                         SharedConstants.Server.CALCULATE_RECURRENCE_CLIENT_HUB_METHOD, TransferDto.SameType)
                         .Subscribe(OnRecurrenceClientsOk, OnRecurrenceClientsError);

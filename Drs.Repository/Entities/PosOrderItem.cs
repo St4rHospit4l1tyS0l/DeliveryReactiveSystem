@@ -15,7 +15,7 @@ namespace Drs.Repository.Entities
     public partial class PosOrderItem
     {
         public long PosOrderItemId { get; set; }
-        public int PosOrderId { get; set; }
+        public long PosOrderId { get; set; }
         public long CheckItemId { get; set; }
         public long ItemId { get; set; }
         public string Name { get; set; }

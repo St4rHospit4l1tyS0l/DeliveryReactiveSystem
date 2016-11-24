@@ -68,7 +68,7 @@ namespace Drs.Repository.Order
             return company.CompanyId;
         }
 
-        public int SaveClient(ClientInfoModel model, bool bIsNew)
+        public long SaveClient(ClientInfoModel model, bool bIsNew)
         {
             var client = bIsNew ? new Entities.Client() : DbEntities.Client.Single(e => e.ClientId == model.ClientId);
 
@@ -143,7 +143,7 @@ namespace Drs.Repository.Order
             DbEntities.SaveChanges();
         }
 
-        public int? SavePosCheck(PosCheck model)
+        public long? SavePosCheck(PosCheck model)
         {
             var entity = new PosOrder
             {
@@ -183,7 +183,7 @@ namespace Drs.Repository.Order
             return model.Id;
         }
 
-        public int GetPhoneIdByPhone(string phone)
+        public long GetPhoneIdByPhone(string phone)
         {
             return DbEntities.ClientPhone.Where(e => e.Phone == phone).Select(e => e.ClientPhoneId).FirstOrDefault();
         }
@@ -202,7 +202,7 @@ namespace Drs.Repository.Order
         }
 
 
-        public IEnumerable<LastOrderInfoModel> GetLastNthOrdersIdByClientPhoneId(int clientPhoneId)
+        public IEnumerable<LastOrderInfoModel> GetLastNthOrdersIdByClientPhoneId(long clientPhoneId)
         {
             return DbEntities.OrderToStore.Where(e => e.ClientPhoneId == clientPhoneId)
             .OrderByDescending(e => e.OrderToStoreId)
@@ -217,7 +217,7 @@ namespace Drs.Repository.Order
             }).Take(5).ToList();
         }
 
-        public PosCheck GetPosCheckById(int posOrderId)
+        public PosCheck GetPosCheckById(long posOrderId)
         {
             return DbEntities.PosOrder.Where(e => e.PosOrderId == posOrderId)
                 .Select(e => new PosCheck

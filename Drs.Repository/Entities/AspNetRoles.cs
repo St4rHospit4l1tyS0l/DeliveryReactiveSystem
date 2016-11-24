@@ -16,17 +16,17 @@ namespace Drs.Repository.Entities
     {
         public AspNetRoles()
         {
+            this.AspNetMenuRole = new HashSet<AspNetMenuRole>();
             this.Permission = new HashSet<Permission>();
             this.AspNetUsers = new HashSet<AspNetUsers>();
-            this.AspNetMenuRole = new HashSet<AspNetMenuRole>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     
+        public virtual ICollection<AspNetMenuRole> AspNetMenuRole { get; set; }
         public virtual ICollection<Permission> Permission { get; set; }
         public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
-        public virtual ICollection<AspNetMenuRole> AspNetMenuRole { get; set; }
     }
 }

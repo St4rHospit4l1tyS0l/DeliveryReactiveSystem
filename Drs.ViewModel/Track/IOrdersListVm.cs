@@ -12,7 +12,7 @@ namespace Drs.ViewModel.Track
 
         event Action<long> ShowDetail;
         void OnPhoneChanged(string phone);        
-        void OnClientNameChanged(int clientId);
+        void OnClientNameChanged(long clientId);
         IReactiveList<TrackOrderDto> LstItems { get; set; }
         IReactiveCommand<Unit> CmdShowDetail { get; set; }
         IReactiveCommand<Unit> CmdCancelOrder { get; set; }

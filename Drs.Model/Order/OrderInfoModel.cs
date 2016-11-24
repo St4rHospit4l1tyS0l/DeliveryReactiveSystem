@@ -2,9 +2,9 @@
 {
     public class OrderInfoModel
     {
-        public int PosOrderId { get; set; }
-        public int ClientId { get; set; }
-        public int AddressId { get; set; }
+        public long PosOrderId { get; set; }
+        public long ClientId { get; set; }
+        public long AddressId { get; set; }
         public string Phone { get; set; }
     }
 }

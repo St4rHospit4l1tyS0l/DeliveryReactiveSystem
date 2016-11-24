@@ -322,7 +322,7 @@ namespace Drs.ViewModel.Order
 
         public long PreId { get; set; }
 
-        public int? Id { get; set; }
+        public long? Id { get; set; }
 
         public string ZipCode
         {
@@ -535,7 +535,7 @@ namespace Drs.ViewModel.Order
 
                 if (_countrySel == null || _countrySel.IdKey.HasValue == false || IsSearchByWaterfall == false)
                     return;
-                FillNextList(SettingsData.Constants.Control.CONTROL_REGION_A, _countrySel.IdKey.Value);
+                FillNextList(SettingsData.Constants.Control.CONTROL_REGION_A, (int)_countrySel.IdKey.Value);
             }
         }
 
@@ -549,7 +549,7 @@ namespace Drs.ViewModel.Order
                 this.RaiseAndSetIfChanged(ref _regionArSel, value);
                 if (_regionArSel == null || _regionArSel.IdKey.HasValue == false || IsSearchByWaterfall == false)
                     return;
-                FillNextList(SettingsData.Constants.Control.CONTROL_REGION_B, _regionArSel.IdKey.Value);
+                FillNextList(SettingsData.Constants.Control.CONTROL_REGION_B, (int)_regionArSel.IdKey.Value);
             }
         }
 
@@ -561,7 +561,7 @@ namespace Drs.ViewModel.Order
                 this.RaiseAndSetIfChanged(ref _regionBrSel, value);
                 if (_regionBrSel == null || _regionBrSel.IdKey.HasValue == false || IsSearchByWaterfall == false)
                     return;
-                FillNextList(SettingsData.Constants.Control.CONTROL_REGION_C, _regionBrSel.IdKey.Value);
+                FillNextList(SettingsData.Constants.Control.CONTROL_REGION_C, (int)_regionBrSel.IdKey.Value);
             }
         }
 
@@ -573,7 +573,7 @@ namespace Drs.ViewModel.Order
                 this.RaiseAndSetIfChanged(ref _regionCrSel, value);
                 if (_regionCrSel == null || _regionCrSel.IdKey.HasValue == false || IsSearchByWaterfall == false)
                     return;
-                FillNextList(SettingsData.Constants.Control.CONTROL_REGION_D, _regionCrSel.IdKey.Value);
+                FillNextList(SettingsData.Constants.Control.CONTROL_REGION_D, (int)_regionCrSel.IdKey.Value);
 
             }
         }
@@ -688,7 +688,7 @@ namespace Drs.ViewModel.Order
                 }
                 else
                 {
-                    ZipCodeId = addr.ZipCode.IdKey;
+                    ZipCodeId = (int ?)addr.ZipCode.IdKey;
                     ZipCode = addr.ZipCode.Value;
                     ZipCodeSearchVm.Search = ZipCodeId != null ? ZipCode : String.Empty;
                     ZipCodeSearchVm.IsDone = SharedConstants.Client.IS_TRUE;

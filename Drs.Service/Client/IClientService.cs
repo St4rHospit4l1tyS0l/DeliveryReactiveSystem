@@ -11,6 +11,6 @@ namespace Drs.Service.Client
         IEnumerable<ListItemModel> SearchByCompany(string company);
         IEnumerable<ClientInfoModel> SearchClientsByPhone(string phone);
         IEnumerable<ListItemModel> SearchClientsByClientName(string clientName);
-        ResponseMessageData<RecurrenceResponseModel> CalculateRecurrence(List<int> lstClientId);
+        ResponseMessageData<RecurrenceResponseModel> CalculateRecurrence(List<long> lstClientId);
     }
 }

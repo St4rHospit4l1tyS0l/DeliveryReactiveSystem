@@ -15,7 +15,7 @@ namespace Drs.Repository.Entities
     public partial class ClientStatistics
     {
         public int ClientStatisticsID { get; set; }
-        public int ClientId { get; set; }
+        public long ClientId { get; set; }
     
         public virtual Client Client { get; set; }
     }

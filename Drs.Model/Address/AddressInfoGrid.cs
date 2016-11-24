@@ -19,7 +19,7 @@ namespace Drs.Model.Address
             IsMap = false;
         }
 
-        public int? AddressId { get; set; }
+        public long? AddressId { get; set; }
         public string MainAddress { get; set; }
         public string ExtIntNumber { get; set; }
         public string Reference { get; set; }

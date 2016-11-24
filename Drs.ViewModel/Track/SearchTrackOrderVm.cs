@@ -101,9 +101,9 @@ namespace Drs.ViewModel.Track
         }
 
 
-        public event Action<int> ClientNameChanged;
+        public event Action<long> ClientNameChanged;
 
-        protected virtual void OnClientNameChanged(int clientName)
+        protected virtual void OnClientNameChanged(long clientName)
         {
             var handler = ClientNameChanged;
             if (handler != null) handler(clientName);

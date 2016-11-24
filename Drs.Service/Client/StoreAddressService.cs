@@ -102,7 +102,7 @@ namespace Drs.Service.Client
 
             var item = new ItemCatalog
             {
-                Id = orderModel.LastStoreModelByClientAddress.IdKey.Value,
+                Id = (int)orderModel.LastStoreModelByClientAddress.IdKey.Value,
                 Name = String.Format("{0} ({1})", orderModel.LastStoreModelByClientAddress.Value, orderModel.LastStoreModelByClientAddress.MainAddress),
                 Value = orderModel.LastStoreModelByClientAddress.MainAddress
             };
@@ -220,7 +220,7 @@ namespace Drs.Service.Client
 
             OnStoresReceivedByAddress(storeModels.Select(e => e.IdKey != null ? new ItemCatalog
             {
-                Id = e.IdKey.Value,
+                Id = (int)e.IdKey.Value,
                 Name = String.Format("{0} ({1})", e.Value, e.MainAddress),
                 Value = e.MainAddress
             } : null).ToList());

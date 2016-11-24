@@ -7,7 +7,7 @@ namespace Drs.Model.Client.Recurrence
 {
     public class RecurrenceClientModel
     {
-        public int ClientId { get; set; }
+        public long ClientId { get; set; }
         public List<String> LstName { get; set; }
         public List<decimal> LstValue { get; set; }
 

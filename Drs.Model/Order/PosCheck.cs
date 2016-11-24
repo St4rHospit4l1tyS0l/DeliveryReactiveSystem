@@ -38,7 +38,7 @@ namespace Drs.Model.Order
 
         public int CheckId { get; set; }
         public Guid GuidId { get; set; }
-        public int? Id { get; set; }
+        public long? Id { get; set; }
 
         public string FranchiseCode { get; set; }
         public DateTime OrderDateTime { get; set; }

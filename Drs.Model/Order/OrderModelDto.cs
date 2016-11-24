@@ -5,9 +5,9 @@ namespace Drs.Model.Order
 {
     public class OrderModelDto
     {
-        public int PhoneId { get; set; }
+        public long PhoneId { get; set; }
         public string FranchiseCode { get; set; }
-        public int? ClientId { get; set; }
+        public long? ClientId { get; set; }
         public AddressInfoModel AddressInfo { get; set; }
         public PosCheck PosOrder { get; set; }
         public StoreModel Store { get; set; }

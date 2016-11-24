@@ -42,7 +42,7 @@ namespace Drs.Repository.Track
             };
         }
 
-        public IEnumerable<TrackOrderDto> SearchByClient(PagerDto<int> client)
+        public IEnumerable<TrackOrderDto> SearchByClient(PagerDto<long> client)
         {
             var clientId = client.Data;
             var query = DbEntities.OrderToStore.Where(e => e.OrderAtoId != null &&

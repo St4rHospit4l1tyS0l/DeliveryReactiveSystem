@@ -15,7 +15,7 @@ namespace Drs.Repository.Entities
     public partial class Recurrence
     {
         public int RecurrenceId { get; set; }
-        public int ClientId { get; set; }
+        public long ClientId { get; set; }
         public long OrderToStoreId { get; set; }
         public System.DateTime Timestamp { get; set; }
         public long TimestampShort { get; set; }

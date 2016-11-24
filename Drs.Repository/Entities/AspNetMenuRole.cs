@@ -18,7 +18,7 @@ namespace Drs.Repository.Entities
         public int AspNetMenuId { get; set; }
         public string AspNetRoleId { get; set; }
     
-        public virtual AspNetRoles AspNetRoles { get; set; }
         public virtual AspNetMenu AspNetMenu { get; set; }
+        public virtual AspNetRoles AspNetRoles { get; set; }
     }
 }

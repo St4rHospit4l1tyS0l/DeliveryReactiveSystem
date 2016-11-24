@@ -16,7 +16,7 @@ namespace Drs.Model.Order
 
     public class ClientInfoModel : RecordModel
     {
-        public int? ClientId { get; set; }
+        public long? ClientId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

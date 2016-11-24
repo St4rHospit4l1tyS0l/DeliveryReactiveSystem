@@ -255,7 +255,7 @@ namespace Drs.ViewModel.Order
             });
         }
 
-        public int? ClientId { get; set; }
+        public long? ClientId { get; set; }
 
         public string Error { get { return string.Empty; } }
     }

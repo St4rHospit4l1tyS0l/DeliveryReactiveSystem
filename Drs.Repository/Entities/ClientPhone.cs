@@ -17,12 +17,12 @@ namespace Drs.Repository.Entities
         public ClientPhone()
         {
             this.ClientPhoneStatistics = new HashSet<ClientPhoneStatistics>();
+            this.OrderToStore = new HashSet<OrderToStore>();
             this.Address = new HashSet<Address>();
             this.Client = new HashSet<Client>();
-            this.OrderToStore = new HashSet<OrderToStore>();
         }
     
-        public int ClientPhoneId { get; set; }
+        public long ClientPhoneId { get; set; }
         public string Phone { get; set; }
         public string UserIdIns { get; set; }
         public string UserIdUpd { get; set; }
@@ -32,8 +32,8 @@ namespace Drs.Repository.Entities
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual AspNetUsers AspNetUsers1 { get; set; }
         public virtual ICollection<ClientPhoneStatistics> ClientPhoneStatistics { get; set; }
+        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<Address> Address { get; set; }
         public virtual ICollection<Client> Client { get; set; }
-        public virtual ICollection<OrderToStore> OrderToStore { get; set; }
     }
 }

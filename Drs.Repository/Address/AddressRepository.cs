@@ -45,7 +45,7 @@ namespace Drs.Repository.Address
                 .ToList();
         }
 
-        public int SaveAddress(AddressInfoModel model, bool bIsNew)
+        public long SaveAddress(AddressInfoModel model, bool bIsNew)
         {
             var address = bIsNew ? new Entities.Address() : DbEntities.Address.Single(e => e.AddressId == model.AddressId);
 
@@ -60,16 +60,16 @@ namespace Drs.Repository.Address
 
             address.ClientPhone.Add(phoneToAdd);
 
-            if (model.Country != null && model.Country.IdKey != null) address.CountryId = model.Country.IdKey.Value;
-            if (model.RegionA != null && model.RegionA.IdKey != null) address.RegionArId = model.RegionA.IdKey.Value;
-            if (model.RegionB != null && model.RegionB.IdKey != null) address.RegionBrId = model.RegionB.IdKey.Value;
-            if (model.RegionC != null && model.RegionC.IdKey != null) address.RegionCrId = model.RegionC.IdKey.Value;
-            if (model.RegionD != null && model.RegionD.IdKey != null) address.RegionDrId = model.RegionD.IdKey.Value;
+            if (model.Country != null && model.Country.IdKey != null) address.CountryId = (int)model.Country.IdKey.Value;
+            if (model.RegionA != null && model.RegionA.IdKey != null) address.RegionArId = (int)model.RegionA.IdKey.Value;
+            if (model.RegionB != null && model.RegionB.IdKey != null) address.RegionBrId = (int)model.RegionB.IdKey.Value;
+            if (model.RegionC != null && model.RegionC.IdKey != null) address.RegionCrId = (int)model.RegionC.IdKey.Value;
+            if (model.RegionD != null && model.RegionD.IdKey != null) address.RegionDrId = (int)model.RegionD.IdKey.Value;
 
             address.ExtIntNumber = model.ExtIntNumber;
             address.MainAddress = model.MainAddress;
             address.Reference = model.Reference;
-            if (model.ZipCode.IdKey != null) address.ZipCodeId = model.ZipCode.IdKey.Value;
+            if (model.ZipCode.IdKey != null) address.ZipCodeId = (int)model.ZipCode.IdKey.Value;
             address.IsMap = false;
 
             if (bIsNew)
@@ -80,7 +80,7 @@ namespace Drs.Repository.Address
         }
 
 
-        public int SaveAddressMap(AddressInfoModel model, bool bIsNew)
+        public long SaveAddressMap(AddressInfoModel model, bool bIsNew)
         {
             var address = bIsNew ? new Entities.Address() : DbEntities.Address.Single(e => e.AddressId == model.AddressId);
 
@@ -118,7 +118,7 @@ namespace Drs.Repository.Address
             return address.AddressId;
         }
 
-        public IEnumerable<AddressInfoModel> SearchAddressByPhoneId(int phoneId)
+        public IEnumerable<AddressInfoModel> SearchAddressByPhoneId(long phoneId)
         {
             return DbEntities.ClientPhone.Where(e => e.ClientPhoneId == phoneId)
                 .SelectMany(e => e.Address.Select(i => new
@@ -168,7 +168,7 @@ namespace Drs.Repository.Address
             ).ToList();
         }
 
-        public int Add(AddressModel model)
+        public long Add(AddressModel model)
         {
             var address = new Entities.Address
             {
@@ -188,7 +188,7 @@ namespace Drs.Repository.Address
             return address.AddressId;
         }
 
-        public void Update(int addressId, AddressModel model)
+        public void Update(long addressId, AddressModel model)
         {
             var address = DbEntities.Address.Single(e => e.AddressId == addressId);
             address.MainAddress = model.MainAddress;

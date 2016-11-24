@@ -13,15 +13,15 @@ namespace Drs.Repository.Order
         PhoneModel SavePhone(PhoneModel model);
         int? FindCompanyByName(string companyName);
         int SaveCompany(string companyName);
-        int SaveClient(ClientInfoModel model, bool b);
+        long SaveClient(ClientInfoModel model, bool b);
         bool RelPhoneClientExists(ClientPhoneModel model);
         void RemoveRelPhoneClient(ClientPhoneModel model);
         bool RelPhoneAddressExists(AddressPhoneModel model);
         void RemoveRelPhoneAddress(AddressPhoneModel model);
-        int? SavePosCheck(PosCheck model);
-        int GetPhoneIdByPhone(string phone);
+        long? SavePosCheck(PosCheck model);
+        long GetPhoneIdByPhone(string phone);
         OrderInfoModel GetPosOrderByOrderToStoreId(long orderToStoreId);
-        PosCheck GetPosCheckById(int posOrderId);
-        IEnumerable<LastOrderInfoModel> GetLastNthOrdersIdByClientPhoneId(int clientPhoneId);
+        PosCheck GetPosCheckById(long posOrderId);
+        IEnumerable<LastOrderInfoModel> GetLastNthOrdersIdByClientPhoneId(long clientPhoneId);
     }
 }
