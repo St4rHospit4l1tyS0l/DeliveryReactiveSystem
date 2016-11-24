@@ -37,18 +37,18 @@
                                VerticalContentAlignment="Center" Foreground="#FF729DB7" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                 <DatePicker Margin="10 0 0 0" Height="35" FontSize="14" FontFamily="Segoe UI Light" MinWidth="160"
                            HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                           SelectedDate="{Binding SearchDate}"/>
+                           SelectedDate="{Binding SearchDate, Mode=TwoWay}"/>
             </StackPanel>
             <StackPanel Margin="50 0 0 0" Height="45" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
                 <Label Content="Sucursal: " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                                VerticalContentAlignment="Center" Foreground="#FF729DB7" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                <ComboBox FontSize="14" FontFamily="Segoe UI Light" Height="35" MinWidth="200" SelectedValue="{Binding Path=StoreSelected}"
+                <ComboBox FontSize="14" FontFamily="Segoe UI Light" Height="35" MinWidth="200" SelectedValue="{Binding Path=StoreSelected, Mode=TwoWay}"
                           ItemsSource="{Binding LstStores}" DisplayMemberPath="Name"></ComboBox>
             </StackPanel>
             <StackPanel Margin="50 0 0 0" Height="45" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
                 <Label Content="Agente: " FontSize="16" FontFamily="Segoe UI Light" VerticalAlignment="Center" 
                                VerticalContentAlignment="Center" Foreground="#FF729DB7" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-                <ComboBox FontSize="14" FontFamily="Segoe UI Light" Height="35" MinWidth="200" SelectedValue="{Binding Path=AgentSelected}"
+                <ComboBox FontSize="14" FontFamily="Segoe UI Light" Height="35" MinWidth="200" SelectedValue="{Binding Path=AgentSelected, Mode=TwoWay}"
                           ItemsSource="{Binding LstAgents}" DisplayMemberPath="Name"></ComboBox>
             </StackPanel>
             <StackPanel Margin="50 0 0 0" Height="35" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">

@@ -17,7 +17,7 @@ namespace Drs.ViewModel.Status
         private DateTime _searchDate;
         private ItemCatalog _agentSelected;
         private ItemCatalog _storeSelected;
-        private DailySearchModel _dailySearchModel;
+        private readonly DailySearchModel _dailySearchModel;
 
         public SearchDailyOrderVm(IReactiveDeliveryClient client)
         {
@@ -32,13 +32,11 @@ namespace Drs.ViewModel.Status
 
         private async Task<Unit> OnSearchCommand()
         {
-            await Task.Run(() =>
-            {
-                _dailySearchModel.SearchDate = SearchDate;
-                _dailySearchModel.StoreId = _storeSelected.Id;
-                _dailySearchModel.AgentId = _agentSelected.Key;
-                OnDailySearch(_dailySearchModel);
-            });
+            _dailySearchModel.SearchDate = SearchDate;
+            _dailySearchModel.StoreId = StoreSelected.Id;
+            _dailySearchModel.AgentId = AgentSelected.Key;
+
+            await Task.Run(() => OnDailySearch(_dailySearchModel));
 
             return new Unit();
         }
