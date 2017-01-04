@@ -68,5 +68,13 @@ namespace Drs.Service.Report
                 return _repository.GetMonthSalesByDays(year, month);
             }
         }
+
+        public IEnumerable<MonthlySaleModel> GetSalesMonthlyByYear(int year)
+        {
+            using (_repository)
+            {
+                return _repository.GetSalesMonthlyByYear(year);
+            }
+        }
     }
 }

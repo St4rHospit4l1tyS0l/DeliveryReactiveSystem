@@ -195,6 +195,7 @@
     <Compile Include="Areas\Franchise\Controllers\SyncController.cs" />
     <Compile Include="Areas\Franchise\FranchiseAreaRegistration.cs" />
     <Compile Include="Areas\Report\Controllers\AgentSaleController.cs" />
+    <Compile Include="Areas\Report\Controllers\MonthlySaleController.cs" />
     <Compile Include="Areas\Report\Controllers\TopClientsController.cs" />
     <Compile Include="Areas\Report\Controllers\TopProductsController.cs" />
     <Compile Include="Areas\Report\Controllers\TimeSaleController.cs" />
@@ -430,7 +431,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\ctrl\franchiseAssignCtrl.js" />
-    <Content Include="Scripts\app\ctrl\reportCtrl.js" />
+    <Content Include="Scripts\app\ctrl\reportMonthSalesByDayCtrl.js" />
     <Content Include="Scripts\app\ctrl\reportTimeSaleCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeCoverageCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeNotificationCtrl.js" />
@@ -600,6 +601,7 @@
     <Content Include="Areas\Report\Views\TimeSale\IndexMonthSalesByDay.cshtml" />
     <Content Include="Areas\Store\Views\StoreNotification\Index.cshtml" />
     <Content Include="Areas\Store\Views\StoreNotification\Upsert.cshtml" />
+    <Content Include="Areas\Report\Views\MonthlySale\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CentralManagement.pubxml" />
     <Content Include="Resources\MonthlySales.json" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />

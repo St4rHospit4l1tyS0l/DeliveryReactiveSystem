@@ -78,7 +78,7 @@ namespace Drs.Repository.Catalog
             {
                 var roleIn = role;
                 var lstMenuRole = new List<MenuItem>();
-                foreach (var rel in lstRel.Where(e => e.AspNetRoleId == roleIn.Id))
+                foreach (var rel in lstRel.Where(e => e.AspNetRoleId == roleIn.Id).OrderBy(e => e.AspNetMenu.Position))
                 {
                     var itemMenu = lstMenu.FirstOrDefault(e => e.Id == rel.AspNetMenuId);
                     if(itemMenu == null)

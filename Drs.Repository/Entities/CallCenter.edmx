@@ -431,6 +431,13 @@
           <Property Name="Parameters" Type="nvarchar(max)" />
           <Property Name="IsObsolete" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="OrderStatusEnd">
+          <Key>
+            <PropertyRef Name="OrderStatusEndId" />
+          </Key>
+          <Property Name="OrderStatusEndId" Type="tinyint" Nullable="false" />
+          <Property Name="OrderStatusEnd" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="OrderToStore">
           <Key>
             <PropertyRef Name="OrderToStoreId" />
@@ -727,6 +734,26 @@ warning 6002: The table/view 'CallCenter.dbo.ViewLocation' does not have a prima
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="Code" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CallCenter.dbo.ViewMonthlySales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewMonthlySales">
+          <Key>
+            <PropertyRef Name="Key" />
+            <PropertyRef Name="OrderYear" />
+            <PropertyRef Name="OrderMonth" />
+            <PropertyRef Name="Franchise" />
+            <PropertyRef Name="FranchiseStoreId" />
+            <PropertyRef Name="FranchiseStore" />
+          </Key>
+          <Property Name="Key" Type="int" Nullable="false" />
+          <Property Name="OrderYear" Type="int" Nullable="false" />
+          <Property Name="OrderMonth" Type="int" Nullable="false" />
+          <Property Name="SalesPerMonth" Type="int" />
+          <Property Name="TotalPerMonth" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="Franchise" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FranchiseStoreId" Type="int" Nullable="false" />
+          <Property Name="FranchiseStore" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CallCenter.dbo.ViewMonthSalesByDay' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2000,6 +2027,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuModule" EntityType="Self.MenuModule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatusEnd" EntityType="Self.OrderStatusEnd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderToStore" EntityType="Self.OrderToStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderToStoreLog" EntityType="Self.OrderToStoreLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
@@ -2052,6 +2080,18 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
     [ViewLocation].[Description] AS [Description], 
     [ViewLocation].[Code] AS [Code]
     FROM [dbo].[ViewLocation] AS [ViewLocation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewMonthlySales" EntityType="Self.ViewMonthlySales" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewMonthlySales].[Key] AS [Key], 
+    [ViewMonthlySales].[OrderYear] AS [OrderYear], 
+    [ViewMonthlySales].[OrderMonth] AS [OrderMonth], 
+    [ViewMonthlySales].[SalesPerMonth] AS [SalesPerMonth], 
+    [ViewMonthlySales].[TotalPerMonth] AS [TotalPerMonth], 
+    [ViewMonthlySales].[Franchise] AS [Franchise], 
+    [ViewMonthlySales].[FranchiseStoreId] AS [FranchiseStoreId], 
+    [ViewMonthlySales].[FranchiseStore] AS [FranchiseStore]
+    FROM [dbo].[ViewMonthlySales] AS [ViewMonthlySales]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewMonthSalesByDay" EntityType="Self.ViewMonthSalesByDay" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2894,6 +2934,8 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="FranchisePhone" EntitySet="FranchisePhone" />
             <End Role="FranchiseStore" EntitySet="FranchiseStore" />
           </AssociationSet>
+          <EntitySet Name="OrderStatusEnd" EntityType="CallCenterModel.OrderStatusEnd" />
+          <EntitySet Name="ViewMonthlySales" EntityType="CallCenterModel.ViewMonthlySales" />
           </EntityContainer>
         <ComplexType Name="User_Sales_group_by_date_Result">
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
@@ -4924,6 +4966,31 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <End Type="CallCenterModel.FranchisePhone" Role="FranchisePhone" Multiplicity="*" />
           <End Type="CallCenterModel.FranchiseStore" Role="FranchiseStore" Multiplicity="*" />
         </Association>
+        <EntityType Name="OrderStatusEnd">
+          <Key>
+            <PropertyRef Name="OrderStatusEndId" />
+          </Key>
+          <Property Name="OrderStatusEndId" Type="Byte" Nullable="false" />
+          <Property Name="OrderStatusEnd1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ViewMonthlySales">
+          <Key>
+            <PropertyRef Name="Key" />
+            <PropertyRef Name="OrderYear" />
+            <PropertyRef Name="OrderMonth" />
+            <PropertyRef Name="Franchise" />
+            <PropertyRef Name="FranchiseStoreId" />
+            <PropertyRef Name="FranchiseStore" />
+          </Key>
+          <Property Name="Key" Type="Int32" Nullable="false" />
+          <Property Name="OrderYear" Type="Int32" Nullable="false" />
+          <Property Name="OrderMonth" Type="Int32" Nullable="false" />
+          <Property Name="SalesPerMonth" Type="Int32" />
+          <Property Name="TotalPerMonth" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="Franchise" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FranchiseStoreId" Type="Int32" Nullable="false" />
+          <Property Name="FranchiseStore" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5784,6 +5851,28 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               <ScalarProperty Name="FranchisePhoneId" ColumnName="FranchisePhoneId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="OrderStatusEnd">
+            <EntityTypeMapping TypeName="CallCenterModel.OrderStatusEnd">
+              <MappingFragment StoreEntitySet="OrderStatusEnd">
+                <ScalarProperty Name="OrderStatusEnd1" ColumnName="OrderStatusEnd" />
+                <ScalarProperty Name="OrderStatusEndId" ColumnName="OrderStatusEndId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewMonthlySales">
+            <EntityTypeMapping TypeName="CallCenterModel.ViewMonthlySales">
+              <MappingFragment StoreEntitySet="ViewMonthlySales">
+                <ScalarProperty Name="FranchiseStore" ColumnName="FranchiseStore" />
+                <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
+                <ScalarProperty Name="Franchise" ColumnName="Franchise" />
+                <ScalarProperty Name="TotalPerMonth" ColumnName="TotalPerMonth" />
+                <ScalarProperty Name="SalesPerMonth" ColumnName="SalesPerMonth" />
+                <ScalarProperty Name="OrderMonth" ColumnName="OrderMonth" />
+                <ScalarProperty Name="OrderYear" ColumnName="OrderYear" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

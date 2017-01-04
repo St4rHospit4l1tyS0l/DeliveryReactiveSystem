@@ -156,6 +156,8 @@
         <AssociationConnector Association="CallCenterModel.RelClientPhoneAddress" />
         <AssociationConnector Association="CallCenterModel.RelClientPhoneClient" />
         <AssociationConnector Association="CallCenterModel.RelFranchisePhoneStore" />
+        <EntityTypeShape EntityType="CallCenterModel.OrderStatusEnd" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewMonthlySales" Width="1.5" PointX="9.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

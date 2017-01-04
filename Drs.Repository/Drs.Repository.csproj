@@ -161,6 +161,9 @@
     </Compile>
     <Compile Include="Entities\Metadata\ViewStoreCoverageDto.cs" />
     <Compile Include="Entities\Metadata\ViewStoreCoverageJson.cs" />
+    <Compile Include="Entities\OrderStatusEnd.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Resource.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
@@ -204,6 +207,9 @@
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ViewLocation.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ViewMonthlySales.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ViewMonthSalesByDay.cs">

@@ -1,0 +1,91 @@
+﻿<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId" ng-controller="reportTimeSaleController">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Ventas por mes</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>
+                                        Elige el mes
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="input-group date monthDate" id="yearDate">
+                                        <input type="text" class="form-control" ng-model="m.startDate"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="btn btn-primary " ng-disabled="!m.startDate"
+                                            ng-click="search('@Url.Action("SearchMonthlyByYear", "MonthlySale", new { area = "Report" })', {RequestDate: m.startDate})">
+                                        <i class="fa fa-search-plus"></i> &nbsp;&nbsp;Buscar
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{msgErr}}
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Fecha </th>
+                                        <th class="text-center">Franquicia</th>
+                                        <th class="text-center">Sucursal</th>
+                                        <th class="text-center"># de órdenes</th>
+                                        <th class="text-center">Total de ventas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="r in lstResult">
+                                        <td class="text-center font-bold">{{r.YearMonth}}</td>
+                                        <td class="text-center">{{r.Franchise}}</td>
+                                        <td class="text-center">{{r.FranchiseStore}}</td>
+                                        <td class="text-center text-success font-bold">
+                                            {{r.SalesPerMonth}}
+                                        </td>
+                                        <td class="text-center text-navy font-bold">
+                                            {{r.TotalPerMonth | currency : "$ " : 2}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blocker" ng-show="working">
+        <div>
+            Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />
+        </div>
+    </div>
+</div>
+
+@section css{
+    <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+}
+
+@section scripts{
+
+    <script src="~/Scripts/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/app/ctrl/reportTimeSaleCtrl.js"></script>
+    <script src="~/Scripts/app/shared/initDatePicker.js"></script>
+}
+
+

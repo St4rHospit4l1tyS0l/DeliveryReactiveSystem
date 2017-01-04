@@ -23,5 +23,13 @@ namespace Drs.Infrastructure.Extensions
             return !DateTime.TryParseExact(sDate, "dd/MM/yyyy", null, DateTimeStyles.None, out dt) ? defaultDate : dt;
         }
 
+        public static string GetMonthName(this int iMonth)
+        {
+            if (iMonth < 1 || iMonth > 12)
+                return "---";
+
+            return new DateTimeFormatInfo().GetMonthName(iMonth);
+        }
+
     }
 }

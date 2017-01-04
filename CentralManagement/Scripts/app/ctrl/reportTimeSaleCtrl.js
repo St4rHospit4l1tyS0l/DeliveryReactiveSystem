@@ -15,6 +15,20 @@
             .error($scope.handleError);
     };
 
+    $scope.search = function (url) {
+        var m = $scope.m;
+        $scope.working = true;
+
+        $http({
+            method: 'POST',
+            url: url,
+            data: { year: m.startDate }
+        }).success($scope.handleSuccess)
+            .error($scope.handleError);
+    };
+
+
+
     $scope.handleSuccess = function (data) {
         $scope.working = false;
 

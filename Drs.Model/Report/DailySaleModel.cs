@@ -1,13 +1,14 @@
 ﻿namespace Drs.Model.Report
 {
-    public class DailySaleModel 
+    public class DailySaleModel
     {
 
         public string LastStatus { get; set; }
 
         public System.DateTime? OrderDate { get; set; }
-        
-        public string OrderDateTx {
+
+        public string OrderDateTx
+        {
             get
             {
                 return OrderDate == null ? "ND" : OrderDate.Value.ToString(Constants.SharedConstants.REPORT_DATE_FORMAT);

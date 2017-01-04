@@ -12,4 +12,11 @@
         minViewMode: 1,
         maxViewMode: 1
     });
+
+    $('#yearDate').datepicker({
+        format: 'yyyy',
+        startView: 2,
+        minViewMode: 2,
+        maxViewMode: 2
+    });
 });
