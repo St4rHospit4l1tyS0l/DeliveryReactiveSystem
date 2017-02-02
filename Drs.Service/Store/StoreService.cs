@@ -102,7 +102,7 @@ namespace Drs.Service.Store
                 return String.Format("La sucursal {0} no está en línea en estos momentos. Fuera de línea por tiempo indefinido.",
                     store.Value);
             }
-            
+
             return String.Format("La sucursal {0} no está en línea en estos momentos. Fuera de línea hasta {1}",
                 store.Value, offline.DateTimeEnd.ToLocalTime().ToString(SharedConstants.DATE_TIME_FORMAT));
         }
@@ -150,7 +150,7 @@ namespace Drs.Service.Store
                 {
                     Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_ORDER_OK,
                     IsSuccess = true,
-                    Message = String.Format("El pedido se ha enviado a la sucursal de forma exitosa. Fecha y tiempo estimado de llegada {0:F}", 
+                    Message = String.Format("El pedido se ha enviado a la sucursal de forma exitosa. Fecha y tiempo estimado de llegada {0:F}",
                         response.Order.promiseTimeField.ToDateTimeSafe())
                 });
 
@@ -257,7 +257,9 @@ namespace Drs.Service.Store
                             return result;
                         }
 
-                        SharedLogger.LogError(new Exception(String.Format("SendOrderToStore: {0} | {1} | {2} | {3}", result.IsSuccess, result.ErrMsg, result.ResultCode, result.ResultData)));
+                        SharedLogger.LogError(new Exception(
+                            String.Format("SendOrderToStore: {0} | {1} | {2} | {3}", result.IsSuccess, result.ErrMsg, result.ResultCode, result.ResultData))
+                            , model.PosOrder, model.Store, model.Phone, model.OrderDetails, model.OrderToStoreId);
                     }
                     catch (Exception ex)
                     {
@@ -310,7 +312,7 @@ namespace Drs.Service.Store
 
                 if (itemParent.subItemsField == null)
                 {
-                    itemParent.subItemsField = new List<Item>{itemToSend};
+                    itemParent.subItemsField = new List<Item> { itemToSend };
                 }
                 else
                 {
@@ -429,7 +431,7 @@ namespace Drs.Service.Store
                     catch (Exception ex)
                     {
                         SharedLogger.LogError(ex);
-                    } 
+                    }
                 }
 
                 return response;
@@ -442,7 +444,7 @@ namespace Drs.Service.Store
             using (_repositoryStore)
             {
                 var store = _repositoryStore.GetStoreById(item.Id);
-                return GetStoreAvailable(response, new List<StoreModel>{store}, false);
+                return GetStoreAvailable(response, new List<StoreModel> { store }, false);
             }
         }
 
@@ -459,7 +461,17 @@ namespace Drs.Service.Store
                     return null;
                 }
 
-                var storesIds = CalculateStoresCoverages(lstStoresCoverage, model.AddressInfo);
+                List<int> storesIds;
+
+                try
+                {
+                    storesIds = CalculateStoresCoverages(lstStoresCoverage, model.AddressInfo);
+                }
+                catch (Exception ex)
+                {
+                    SharedLogger.LogError(ex, lstStoresCoverage, model.AddressInfo);
+                    throw;
+                }
 
                 if (storesIds.Count == 0)
                 {
@@ -502,7 +514,7 @@ namespace Drs.Service.Store
                 //        lstStoresIds.Add(coverage.StoreId);
                 //}
             }
-            
+
             return lstStoresIds;
         }
 
