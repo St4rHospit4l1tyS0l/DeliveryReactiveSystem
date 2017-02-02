@@ -420,6 +420,18 @@ namespace Drs.Repository.Store
                 }).ToList();
         }
 
+
+        public List<ListItemModel> GetFranchisesStores()
+        {
+            return DbEntities.FranchiseStore.Where(e => e.IsObsolete == false && e.Franchise.IsObsolete == false)
+                .Select(e => new ListItemModel
+                {
+                    IdKey = e.FranchiseId,
+                    Key = e.FranchiseStoreId.ToString(),
+                    Value = e.Name
+                }).ToList();
+        }
+
         public StoreOfflineModel FindStoreOfflineModelById(int storeId, int? id)
         {
             if (id.HasValue)

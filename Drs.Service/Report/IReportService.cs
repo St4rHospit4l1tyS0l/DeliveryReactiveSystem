@@ -13,5 +13,6 @@ namespace Drs.Service.Report
         IEnumerable<ClientSalesModel> GetTopConsumerClientByRangeDates(DateTime startCalculatedDate, DateTime endCalculatedDate);
         IEnumerable<MonthSalesModel> GetMonthSalesByDays(int year, int month);
         IEnumerable<MonthlySaleModel> GetSalesMonthlyByYear(int year);
+        IEnumerable<ClientOrderModel> GetClientOrderInfoByFranchiseAndDate(ReportRequestModel requestModel);
     }
 }

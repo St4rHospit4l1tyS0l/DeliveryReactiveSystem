@@ -174,10 +174,12 @@
     <Compile Include="Order\QtItemModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Report\AgentSalesModel.cs" />
+    <Compile Include="Report\ClientOrderModel.cs" />
     <Compile Include="Report\ClientSalesModel.cs" />
     <Compile Include="Report\DailySaleModel.cs" />
     <Compile Include="Report\MonthlySaleModel.cs" />
     <Compile Include="Report\MonthSalesModel.cs" />
+    <Compile Include="Report\PosOrderInfoModel.cs" />
     <Compile Include="Report\ReportRequestModel.cs" />
     <Compile Include="Report\ReportRequestMonthModel.cs" />
     <Compile Include="Report\TopProductModel.cs" />

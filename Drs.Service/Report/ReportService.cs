@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Drs.Model.Report;
 using Drs.Repository.Report;
+using ReactiveUI;
 
 namespace Drs.Service.Report  
 {
@@ -74,6 +76,24 @@ namespace Drs.Service.Report
             using (_repository)
             {
                 return _repository.GetSalesMonthlyByYear(year);
+            }
+        }
+
+        public IEnumerable<ClientOrderModel> GetClientOrderInfoByFranchiseAndDate(ReportRequestModel requestModelTime)
+        {
+            using (_repository)
+            {
+                var dicItems = _repository.GetClientOrderInfoByFranchiseAndDate(requestModelTime).ToDictionary(e => e.OrderToStoreId);
+                var lstPosItems = _repository.GetPosOrderInfoByFranchiseAndDate(requestModelTime);
+
+                foreach (var posOrderInfoModel in lstPosItems)
+                {
+                    ClientOrderModel clientOrderModel;
+                    if (dicItems.TryGetValue(posOrderInfoModel.OrderToStoreId, out clientOrderModel))
+                        clientOrderModel.LstPosOrder.Add(posOrderInfoModel);
+                }
+                
+                return dicItems.Values;
             }
         }
     }

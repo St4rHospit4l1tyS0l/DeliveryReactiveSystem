@@ -203,6 +203,9 @@
     <Compile Include="Entities\ViewAgentSales.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ViewClientOrderInfoByFranchiseStore.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\ViewDailySales.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
@@ -213,6 +216,9 @@
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ViewMonthSalesByDay.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ViewPosOrderInfo.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ViewStoreCoverage.cs">

@@ -1,0 +1,138 @@
+﻿<div class="wrapper wrapper-content  animated fadeInRight" id="angJsjqGridId"
+     ng-controller="reportClientOrderController"
+     ng-init="lstFranchises = @(ViewBag.LstFranchises ?? "{}"); lstFranchiseStoresFull = @(ViewBag.LstFranchiseStores ?? "{}"); init();">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Órdenes por clientes</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label>
+                                        Franquicia
+                                    </label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>
+                                        Sucursal
+                                    </label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        Fechas
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <select class="col-xs-12"
+                                            ng-change="m.FranchiseId = m.franchise.StKey; onFranchiseChange();"
+                                            ng-options="c.Name for c in lstFranchises" ng-model="m.franchise"></select>
+                                </div>
+                                <div class="col-xs-2">
+                                    <select class="col-xs-12"
+                                            ng-change="m.FranchiseStoreId = m.franchise.Key;"
+                                            ng-options="c.Value for c in lstFranchiseStores" ng-model="m.franchiseStore"></select>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="input-daterange input-group" id="rangeDates">
+                                        <span class="input-group-addon">Del&nbsp;&nbsp;</span>
+                                        <input type="text" class="input-sm form-control" ng-model="m.startDate" name="start" />
+                                        <span class="input-group-addon">&nbsp;&nbsp;al&nbsp;&nbsp;</span>
+                                        <input type="text" class="input-sm form-control" ng-model="m.endDate" name="end" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <button class="btn btn-primary " ng-disabled="!m.startDate"
+                                            ng-click="search('@Url.Action("SearchByFranchiseAndDate", "ClientOrder", new { area = "Report" })')">
+                                        <i class="fa fa-search-plus"></i> &nbsp;&nbsp;Buscar
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <input type="checkbox" ng-model="m.showDetails" /> Mostrar detalles 
+                                </div>
+                                
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{msgErr}}
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Franquicia</th>
+                                        <th class="text-center">Sucursal</th>
+                                        <th class="text-center">Teléfono</th>
+                                        <th class="text-center">Cliente</th>
+                                        <th class="text-center">ATO</th>
+                                        <th class="text-center">Fecha</th>
+                                        <th class="text-center">Estado</th>
+                                        <th class="text-center">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="r in lstResult">
+                                    <tr>
+                                        <td class="text-center">{{r.FranchiseName}}</td>
+                                        <td class="text-center">{{r.FranchiseStoreName}}</td>
+                                        <td class="text-center font-bold">{{r.Phone}}</td>
+                                        <td class="text-center font-bold">{{r.FirstName}} {{r.LastName}}</td>
+                                        <td class="text-center">{{r.OrderAtoId}}</td>
+                                        <td class="text-center">{{r.OrderDateTimeTx}}</td>
+                                        <td class="text-center">{{r.LastStatus}}</td>
+                                        <td class="text-center text-navy font-bold">
+                                            {{r.Total | currency : "$ " : 2}}
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="rs in r.LstPosOrder" ng-show="m.showDetails">
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td class="text-center">{{rs.ItemId}}</td>
+                                        <td class="text-center">{{rs.Name}}</td>
+                                        <td class="text-center text-success font-bold">
+                                            {{rs.Price | currency : "$ " : 2}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blocker" ng-show="working">
+        <div>
+            Procesando...<img src="~/Content/img/ajax_loader.gif" alt="" />
+        </div>
+    </div>
+</div>
+
+@section css{
+    <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+}
+
+@section scripts{
+
+    <script src="~/Scripts/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/app/ctrl/reportClientOrderCtrl.js"></script>
+    <script src="~/Scripts/app/shared/initDatePicker.js"></script>
+}
+
+

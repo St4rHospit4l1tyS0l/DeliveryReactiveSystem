@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO.Packaging;
 using System.Linq;
 using Drs.Infrastructure.Extensions;
 using Drs.Model.Report;
-using Drs.Model.Settings;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
 
@@ -154,6 +152,63 @@ namespace Drs.Repository.Report
                     SalesPerMonth = e.SalesPerMonth,
                     TotalPerMonth = e.TotalPerMonth
                 }).ToList();
+        }
+
+        public IList<ClientOrderModel> GetClientOrderInfoByFranchiseAndDate(ReportRequestModel requestModelTime)
+        {
+            var query = DbEntities.ViewClientOrderInfoByFranchiseStore.AsQueryable();
+
+            if (requestModelTime.Id != EntityConstants.NULL_VALUE)
+                query = query.Where(e => e.FranchiseId == requestModelTime.Id);
+
+            if (requestModelTime.SecondId != EntityConstants.NULL_VALUE)
+                query = query.Where(e => e.FranchiseStoreId == requestModelTime.SecondId);
+
+            var startDate = requestModelTime.StartCalculatedDate;
+            var endDate = requestModelTime.EndCalculatedDate.AddDays(1);
+
+            query = query.Where(e => e.FirstDatetime >= startDate && e.FirstDatetime < endDate);
+
+
+            return query.Select(e => new ClientOrderModel
+            {
+                ClientId = e.ClientId,
+                FirstDatetime = e.FirstDatetime,
+                FirstName = e.FirstName,
+                FranchiseName = e.FranchiseName,
+                FranchiseStoreName = e.FranchiseStoreName,
+                LastName = e.LastName,
+                LastStatus = e.LastStatus,
+                OrderAtoId = e.OrderAtoId,
+                OrderToStoreId = e.OrderToStoreId,
+                Phone = e.Phone,
+                Total = e.Total
+            }).ToList();
+        }
+
+
+        public IList<PosOrderInfoModel> GetPosOrderInfoByFranchiseAndDate(ReportRequestModel requestModelTime)
+        {
+            var query = DbEntities.ViewPosOrderInfo.AsQueryable();
+
+            if (requestModelTime.Id != EntityConstants.NULL_VALUE)
+                query = query.Where(e => e.FranchiseId == requestModelTime.Id);
+
+            if (requestModelTime.SecondId != EntityConstants.NULL_VALUE)
+                query = query.Where(e => e.FranchiseStoreId == requestModelTime.SecondId);
+
+            var startDate = requestModelTime.StartCalculatedDate;
+            var endDate = requestModelTime.EndCalculatedDate.AddDays(1);
+
+            query = query.Where(e => e.FirstDatetime >= startDate && e.FirstDatetime < endDate);
+
+            return query.Select(e => new PosOrderInfoModel
+            {
+                ItemId = e.ItemId,
+                Name = e.Name,
+                OrderToStoreId = e.OrderToStoreId,
+                Price = e.Price
+            }).ToList();
         }
     }
 }

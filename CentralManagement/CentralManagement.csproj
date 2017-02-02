@@ -195,6 +195,7 @@
     <Compile Include="Areas\Franchise\Controllers\SyncController.cs" />
     <Compile Include="Areas\Franchise\FranchiseAreaRegistration.cs" />
     <Compile Include="Areas\Report\Controllers\AgentSaleController.cs" />
+    <Compile Include="Areas\Report\Controllers\ClientOrderController.cs" />
     <Compile Include="Areas\Report\Controllers\MonthlySaleController.cs" />
     <Compile Include="Areas\Report\Controllers\TopClientsController.cs" />
     <Compile Include="Areas\Report\Controllers\TopProductsController.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Areas\Terminal\Controllers\SettingController.cs" />
     <Compile Include="Areas\Terminal\TerminalAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -432,6 +434,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\ctrl\franchiseAssignCtrl.js" />
     <Content Include="Scripts\app\ctrl\reportMonthSalesByDayCtrl.js" />
+    <Content Include="Scripts\app\ctrl\reportClientOrderCtrl.js" />
     <Content Include="Scripts\app\ctrl\reportTimeSaleCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeCoverageCtrl.js" />
     <Content Include="Scripts\app\ctrl\storeNotificationCtrl.js" />
@@ -444,6 +447,7 @@
     <Content Include="Scripts\app\ctrl\userCtrl.js" />
     <Content Include="Scripts\app\ctrl\loginCtrl.js" />
     <Content Include="Scripts\app\ctrl\resetCtrl.js" />
+    <Content Include="Scripts\app\drct\subTableDrct.js" />
     <Content Include="Scripts\app\main\licenseDr.js" />
     <Content Include="Scripts\app\shared\addressCtrl.js" />
     <Content Include="Scripts\app\shared\hiddenDrct.js" />
@@ -602,6 +606,7 @@
     <Content Include="Areas\Store\Views\StoreNotification\Index.cshtml" />
     <Content Include="Areas\Store\Views\StoreNotification\Upsert.cshtml" />
     <Content Include="Areas\Report\Views\MonthlySale\Index.cshtml" />
+    <Content Include="Areas\Report\Views\ClientOrder\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CentralManagement.pubxml" />
     <Content Include="Resources\MonthlySales.json" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
@@ -1089,7 +1094,7 @@
     <Folder Include="Areas\Store\Views\Shared\" />
     <Folder Include="Areas\Terminal\Models\" />
     <Folder Include="Areas\Terminal\Views\Shared\" />
-    <Folder Include="Scripts\app\drct\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\FileUpload\" />
   </ItemGroup>
   <ItemGroup>

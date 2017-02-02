@@ -74,11 +74,13 @@ namespace Drs.Repository.Catalog
                     HasToShow = e.HasToShow
                 }).ToList();
 
-            foreach (var role in Db.AspNetRoles.Select(e => new {e.Id, e.Name}))
+            var roles = Db.AspNetRoles.Select(e => new {e.Id, e.Name}).ToList();
+            foreach (var role in roles)
             {
                 var roleIn = role;
                 var lstMenuRole = new List<MenuItem>();
-                foreach (var rel in lstRel.Where(e => e.AspNetRoleId == roleIn.Id).OrderBy(e => e.AspNetMenu.Position))
+                var relRoles = lstRel.Where(e => e.AspNetRoleId == roleIn.Id).OrderBy(e => e.AspNetMenu.Position).ToList();
+                foreach (var rel in relRoles)
                 {
                     var itemMenu = lstMenu.FirstOrDefault(e => e.Id == rel.AspNetMenuId);
                     if(itemMenu == null)
@@ -94,6 +96,8 @@ namespace Drs.Repository.Catalog
                         continue;
                     menuParent.SubMenu.Add(copyMenu);
                 }
+
+
 
                 var lstMenuRoots = lstMenuRole.Where(e => e.ParentId == null).ToList();
 

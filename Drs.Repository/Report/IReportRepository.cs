@@ -14,5 +14,8 @@ namespace Drs.Repository.Report
         IEnumerable<ClientSalesModel> GetTopConsumerClientByRangeDates(DateTime startDate, DateTime endDate);
         IEnumerable<MonthSalesModel> GetMonthSalesByDays(int year, int month);
         IEnumerable<MonthlySaleModel> GetSalesMonthlyByYear(int year);
+        IList<ClientOrderModel> GetClientOrderInfoByFranchiseAndDate(ReportRequestModel requestModelTime);
+        IList<PosOrderInfoModel> GetPosOrderInfoByFranchiseAndDate(ReportRequestModel requestModelTime);
+
     }
 }

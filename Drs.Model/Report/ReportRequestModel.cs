@@ -11,6 +11,10 @@ namespace Drs.Model.Report
 
         public string EndRequestDate { get; set; }
 
+        public int Id { get; set; }
+
+        public int SecondId { get; set; }
+        
         public DateTime StartCalculatedDate
         {
             get
