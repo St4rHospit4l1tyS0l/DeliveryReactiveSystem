@@ -5,6 +5,7 @@ using System.Linq;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Address;
 using Drs.Model.Franchise;
+using Drs.Repository.Log;
 using Drs.Repository.Order;
 using Newtonsoft.Json.Linq;
 
@@ -60,20 +61,22 @@ namespace Drs.Service.Franchise
 
         private List<SetCoverageStoreModel> ExtractCoverages(FranchiseCoverageModel franchiseCoverage, ResponseMessageModel response)
         {
+            var lstPoints = new List<string>();
+            
             try
             {
                 dynamic coverages = JArray.Parse(franchiseCoverage.Stores);
                 var lstCoverageStore = new  List<SetCoverageStoreModel>();
-                
+
                 foreach (var coverage in coverages)
                 {
                     var store = new SetCoverageStoreModel { StoreId = coverage.id, Coverage = new List<DbGeography>() };
                     foreach (var path in coverage.paths)
                     {
-                        var lstPoints = new List<string>();
+                        lstPoints = new List<string>();
                         foreach (var point in path.path)
                         {
-                            lstPoints.Add(String.Format("{0} {1}", point.lng, point.lat));
+                            lstPoints.Add(String.Format("{0} {1}", point.lng, point.lat).Replace(",", "."));
                         }
 
                         if (lstPoints.Count > 0)
@@ -103,6 +106,7 @@ namespace Drs.Service.Franchise
             {
                 response.HasError = true;
                 response.Message = "No fue posible obtener las coberturas debido a: " + ex.Message;
+                SharedLogger.LogError(ex, franchiseCoverage, String.Format("({0})", String.Join(", ", lstPoints)));
                 return null;
             }
         }

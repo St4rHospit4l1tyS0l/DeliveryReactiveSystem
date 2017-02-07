@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{55EA605F-7D01-4D03-89FA-8E815B00DD87}"
 EndProject
@@ -73,6 +73,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyIconWpf", "NotifyIconWpf\NotifyIconWpf.csproj", "{7AC63864-7638-41C4-969C-D3197EF2BED9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drs.VirtualPos.Ws", "Drs.VirtualPos.Ws\Drs.VirtualPos.Ws.csproj", "{239D9DFE-B25F-4A0B-915B-FE26ADA265D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installers", "Installers", "{3245B1EC-AB66-4CEF-B118-D4D3DA22DFDD}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DrsUi", "DrsUi\DrsUi.vdproj", "{562BE653-8A2B-456C-84A7-BB6B1CDA817A}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DrsConnectSyncService", "DrsConnectSyncService\DrsConnectSyncService.vdproj", "{58E838AF-8A04-43BF-82C4-D45262A7B90E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -160,6 +166,10 @@ Global
 		{239D9DFE-B25F-4A0B-915B-FE26ADA265D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{239D9DFE-B25F-4A0B-915B-FE26ADA265D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{239D9DFE-B25F-4A0B-915B-FE26ADA265D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{562BE653-8A2B-456C-84A7-BB6B1CDA817A}.Debug|Any CPU.ActiveCfg = Debug
+		{562BE653-8A2B-456C-84A7-BB6B1CDA817A}.Release|Any CPU.ActiveCfg = Release
+		{58E838AF-8A04-43BF-82C4-D45262A7B90E}.Debug|Any CPU.ActiveCfg = Debug
+		{58E838AF-8A04-43BF-82C4-D45262A7B90E}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -185,5 +195,7 @@ Global
 		{35AF8629-CBA2-48E0-AD39-D94682AD1C1F} = {55EA605F-7D01-4D03-89FA-8E815B00DD87}
 		{7AC63864-7638-41C4-969C-D3197EF2BED9} = {EF868D75-4DF3-4713-88F9-37CE9F986169}
 		{239D9DFE-B25F-4A0B-915B-FE26ADA265D6} = {1BD51628-6E9D-45E1-8BED-C8081CCE1470}
+		{562BE653-8A2B-456C-84A7-BB6B1CDA817A} = {3245B1EC-AB66-4CEF-B118-D4D3DA22DFDD}
+		{58E838AF-8A04-43BF-82C4-D45262A7B90E} = {3245B1EC-AB66-4CEF-B118-D4D3DA22DFDD}
 	EndGlobalSection
 EndGlobal

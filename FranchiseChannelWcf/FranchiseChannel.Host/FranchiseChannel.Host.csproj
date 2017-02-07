@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\FranchiseChannelHost.pubxml" />
+    <None Include="Properties\PublishProfiles\FranchiseChannelHostSyncWebPackage.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

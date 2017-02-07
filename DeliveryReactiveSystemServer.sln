@@ -48,6 +48,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectCallCenter", "Connec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CentralManagement", "CentralManagement\CentralManagement.csproj", "{ECD5C7F7-5790-4AF2-899F-4ED5AFC15241}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installers", "Installers", "{C97BCC50-64F8-4A8C-9AE0-523BE5AC0456}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HostConnectHubCallCenter", "HostConnectHubCallCenter\HostConnectHubCallCenter.vdproj", "{ABF76880-A422-437B-A4EC-B77BE034B269}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +106,8 @@ Global
 		{ECD5C7F7-5790-4AF2-899F-4ED5AFC15241}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECD5C7F7-5790-4AF2-899F-4ED5AFC15241}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECD5C7F7-5790-4AF2-899F-4ED5AFC15241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABF76880-A422-437B-A4EC-B77BE034B269}.Debug|Any CPU.ActiveCfg = Debug
+		{ABF76880-A422-437B-A4EC-B77BE034B269}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{89535441-B59E-4E88-A3C5-F6CB61349920} = {01C8B945-AA9D-4D07-B556-E839084A8236}
 		{C0D16FF4-182D-4AB5-B4F7-950279300418} = {01C8B945-AA9D-4D07-B556-E839084A8236}
 		{ECD5C7F7-5790-4AF2-899F-4ED5AFC15241} = {01C8B945-AA9D-4D07-B556-E839084A8236}
+		{ABF76880-A422-437B-A4EC-B77BE034B269} = {C97BCC50-64F8-4A8C-9AE0-523BE5AC0456}
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true

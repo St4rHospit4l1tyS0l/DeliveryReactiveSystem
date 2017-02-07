@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="HostWsCallCenter" />
+  <setParameter name="DefaultConnection-Web.config Connection String" value="Server=DEVELOPMENT1\SQL2012;Database=CallCenter;User Id=development;Password=development;" />
+  <setParameter name="CallCenterEntities-Web.config Connection String" value="metadata=res://*/Entities.CallCenter.csdl|res://*/Entities.CallCenter.ssdl|res://*/Entities.CallCenter.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DEVELOPMENT1\SQL2012;initial catalog=CallCenter;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework&quot;" />
+  <setParameter name="LogCallCenterEntities-Web.config Connection String" value="metadata=res://*/Entities.LogCallCenter.csdl|res://*/Entities.LogCallCenter.ssdl|res://*/Entities.LogCallCenter.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DEVELOPMENT1\SQL2012;initial catalog=LogCallCenter;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" />
+</parameters>

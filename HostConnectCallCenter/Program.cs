@@ -19,6 +19,8 @@ namespace HostConnectCallCenter
 
                 AppInit.Start();
 
+                SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
+
                 using (WebApp.Start<Startup>(ipPort))
                 {
                     Console.WriteLine("Server running at " + ipPort);
