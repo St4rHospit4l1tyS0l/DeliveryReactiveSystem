@@ -80,6 +80,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DrsUi", "DrsUi\DrsUi.vdproj
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DrsConnectSyncService", "DrsConnectSyncService\DrsConnectSyncService.vdproj", "{58E838AF-8A04-43BF-82C4-D45262A7B90E}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DrsPosInterface", "DrsPosInterface\DrsPosInterface.vdproj", "{D37D8D05-AB27-424A-A355-F53955122139}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -170,6 +172,8 @@ Global
 		{562BE653-8A2B-456C-84A7-BB6B1CDA817A}.Release|Any CPU.ActiveCfg = Release
 		{58E838AF-8A04-43BF-82C4-D45262A7B90E}.Debug|Any CPU.ActiveCfg = Debug
 		{58E838AF-8A04-43BF-82C4-D45262A7B90E}.Release|Any CPU.ActiveCfg = Release
+		{D37D8D05-AB27-424A-A355-F53955122139}.Debug|Any CPU.ActiveCfg = Debug
+		{D37D8D05-AB27-424A-A355-F53955122139}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -197,5 +201,6 @@ Global
 		{239D9DFE-B25F-4A0B-915B-FE26ADA265D6} = {1BD51628-6E9D-45E1-8BED-C8081CCE1470}
 		{562BE653-8A2B-456C-84A7-BB6B1CDA817A} = {3245B1EC-AB66-4CEF-B118-D4D3DA22DFDD}
 		{58E838AF-8A04-43BF-82C4-D45262A7B90E} = {3245B1EC-AB66-4CEF-B118-D4D3DA22DFDD}
+		{D37D8D05-AB27-424A-A355-F53955122139} = {3245B1EC-AB66-4CEF-B118-D4D3DA22DFDD}
 	EndGlobalSection
 EndGlobal

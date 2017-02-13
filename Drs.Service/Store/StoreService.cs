@@ -293,6 +293,7 @@ namespace Drs.Service.Store
                 var itemToSend = new Item
                 {
                     menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
+                    nameField = item.Name,
                     referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
                     quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
                     priceField = item.Price.ToString(CultureInfo.InvariantCulture),
