@@ -182,6 +182,20 @@ namespace Drs.Model.Settings
                 {
                     CLOSED,
                     CANCELED
+                };
+
+                public static readonly List<String> OrderStatus = new List<string>
+                {
+                    NONE.ToUpper(),
+                    PRE_DELAY.ToUpper(),
+                    IN_DELAY.ToUpper(),
+                    KITCHEN_DELAY.ToUpper(),
+                    COOKING.ToUpper(),
+                    PREPARED.ToUpper(),
+                    IN_TRANSIT.ToUpper(),
+                    FULFILLED.ToUpper(),
+                    CLOSED.ToUpper(),
+                    CANCELED.ToUpper()
                 }; 
 
             }

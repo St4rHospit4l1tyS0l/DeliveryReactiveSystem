@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Runtime.Versioning;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Address;
 using Drs.Model.Catalog;
@@ -157,8 +157,6 @@ namespace Drs.Repository.Store
             };
 
             DbEntities.OrderToStoreLog.Add(orderToStoreLog);
-            if (bHasToSave)
-                DbEntities.SaveChanges();
 
             var orderToStore = new OrderToStore
             {
@@ -170,7 +168,15 @@ namespace Drs.Repository.Store
 
             var entry = DbEntities.Entry(orderToStore);
             entry.Property(e => e.LastStatus).IsModified = true;
-            DbEntities.SaveChanges(); 
+
+            if (SettingsData.Constants.TrackConst.OrderStatusEnd.Any(e => e == status))
+            {
+                orderToStore.EndDatetime = timestamp;
+                entry.Property(e => e.EndDatetime).IsModified = true;
+            }
+
+            if (bHasToSave)
+                DbEntities.SaveChanges();
 
             return orderToStoreLog;
         }
@@ -192,13 +198,15 @@ namespace Drs.Repository.Store
             {
                 OrderToStoreId = orderToStoreId,
                 IsCanceled = true,
-                DateTimeCanceled = now
+                DateTimeCanceled = now,
+                LastStatus = string.Empty
             };
 
             DbEntities.OrderToStore.Attach(orderToStore);
             DbEntities.Entry(orderToStore).Property(e => e.IsCanceled).IsModified = true;
             DbEntities.Entry(orderToStore).Property(e => e.DateTimeCanceled).IsModified = true;
             DbEntities.SaveChanges();
+            ((IObjectContextAdapter)DbEntities).ObjectContext.Detach(orderToStore);
 
             SaveLogOrderToStore(orderToStoreId, "Cancelado por el cliente", SettingsData.Constants.TrackConst.CANCELED, now, true);
         }
@@ -369,6 +377,36 @@ namespace Drs.Repository.Store
                 Position = e.Position,
                 Notifications = e.StoreMessageDate.Where(i => i.DateApplied == today && i.FranchiseStoreId == storeId).Select(i => i.StoreMessage.Message).ToList()
             }).ToList();
+        }
+
+        public bool OrderExists(long orderId, string referenceId)
+        {
+            return DbEntities.OrderToStore.Any(e => e.OrderToStoreId == orderId && e.OrderAtoId == referenceId);
+        }
+
+        public List<OrderStoreModel> GetAllInProgressOrdersByStore(int storeId)
+        {
+            return DbEntities.OrderToStore.Where(e => e.FranchiseStoreId == storeId && !SettingsData.Constants.TrackConst.OrderStatusEnd.Contains(e.LastStatus))
+                .Select(e => new OrderStoreModel
+                {
+                    Address = e.Address.MainAddress + " " + e.Address.ExtIntNumber + ", " + e.Address.Reference + ", " + e.Address.RegionNameC + ", " + e.Address.RegionNameB + ", " + e.Address.RegionNameA + ", " + e.Address.ZipCode.Code,
+                    FirstName = e.Client.FirstName,
+                    LastName = e.Client.LastName,
+                    Notes = e.ExtraNotes,
+                    OrderId = e.OrderToStoreId.ToString(),
+                    OrderTime = e.StartDatetime,
+                    Phone = e.ClientPhone.Phone,
+                    ReferenceId = e.OrderAtoId,
+                    Total = (double)e.PosOrder.Total,
+                    LstOrderItems = e.PosOrder.PosOrderItem.Select(i => new OrderStoreItemModel
+                    {
+                        Id = i.CheckItemId,
+                        ItemName = i.Name,
+                        Price = (double)i.Price,
+                        ParentId = i.ParentId,
+                        Level = i.LevelItem
+                    }).ToList()
+                }).ToList();
         }
 
         public void SaveRecurrence(Recurrence recurrence)

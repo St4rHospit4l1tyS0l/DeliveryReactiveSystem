@@ -82,6 +82,7 @@
     <Content Include="Catalogs\Catalogs.svc" />
     <Content Include="Global.asax" />
     <Content Include="Setting\Setting.svc" />
+    <Content Include="Store\Store.svc" />
     <Content Include="Sync\SyncServer.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

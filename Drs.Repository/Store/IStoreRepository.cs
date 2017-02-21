@@ -34,5 +34,7 @@ namespace Drs.Repository.Store
         List<CoverageStoreModel> GetAvailableCoverageByFrachiseCode(string franchiseCode);
         List<StoreModel> GetStoresByIds(List<int> storesIds);
         IEnumerable<StoreNotificationCategoryModel> GetNotificationsByStore(int storeId);
+        bool OrderExists(long orderId, string referenceId);
+        List<OrderStoreModel> GetAllInProgressOrdersByStore(int storeId);
     }
 }

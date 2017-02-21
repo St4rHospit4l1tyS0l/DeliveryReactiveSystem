@@ -89,6 +89,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\ILoginSvc.cs" />
+    <Compile Include="Store\StoreSvc.cs" />
+    <Compile Include="Store\IStoreSvc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Account\LoginSvc.cs" />
     <Compile Include="Catalogs\ICatalogsSvc.cs" />

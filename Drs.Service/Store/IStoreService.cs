@@ -15,5 +15,7 @@ namespace Drs.Service.Store
         StoreModel StoreAvailableByStore(ItemCatalog item, ResponseMessageData<StoreModel> response);
         StoreModel StoreAvailableForAddressMap(StoreAvailableModel model, ResponseMessageData<StoreModel> response);
         IEnumerable<StoreNotificationCategoryModel> GetNotificationsByStore(int storeId);
+        ResponseMessageShared UpdateOrderStatus(long orderId, string referenceId, string comments, string status);
+        ResponseStoreOrdersMessage GetAllInProgressOrdersByStore(int storeId);
     }
 }

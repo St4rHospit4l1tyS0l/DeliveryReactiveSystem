@@ -297,7 +297,7 @@ namespace CentralManagement.Areas.Management.Controllers
                     {
                         HasError = true,
                         Title = ResShared.TITLE_REGISTER_FAILED,
-                        Message = "El usuario ya no existe o su contraseña ya fue modificada"
+                        Message = "No fue posible cambiar la contraseña debido a: " + string.Join(", ", result.Errors)
                     });
                 }
 

@@ -496,6 +496,51 @@ namespace Drs.Service.Store
             }
         }
 
+        public ResponseMessageShared UpdateOrderStatus(long orderId, string referenceId, string comments, string status)
+        {
+            var statusUpper = status.ToUpper();
+            if (SettingsData.Constants.TrackConst.OrderStatus.All(e => e != statusUpper))
+            {
+                return new ResponseMessageShared
+                {
+                    IsSuccess = false,
+                    Message = "Estatus de la orden no válido"
+                };
+
+            }
+            using (_repositoryStore)
+            {
+                if (!_repositoryStore.OrderExists(orderId, referenceId))
+                {
+                    return new ResponseMessageShared
+                    {
+                        IsSuccess = false,
+                        Message = "Orden no encontrada"
+                    };
+                }
+
+                _repositoryStore.SaveLogOrderToStore(orderId, comments, status, DateTime.Now, true);
+                return new ResponseMessageShared
+                {
+                    IsSuccess = true,
+                    Message = string.Empty
+                };
+            }
+        }
+
+        public ResponseStoreOrdersMessage GetAllInProgressOrdersByStore(int storeId)
+        {
+            using (_repositoryStore)
+            {
+                return new ResponseStoreOrdersMessage
+                {
+                    IsSuccess = true,
+                    LstOrders = _repositoryStore.GetAllInProgressOrdersByStore(storeId)
+                };
+            }
+        }
+
+
         private List<int> CalculateStoresCoverages(List<CoverageStoreModel> storesCoverage, AddressInfoModel addressInfo)
         {
             var lstStoresIds = new List<int>();
