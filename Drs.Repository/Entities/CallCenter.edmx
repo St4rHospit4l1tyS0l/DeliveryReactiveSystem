@@ -799,6 +799,32 @@ warning 6002: The table/view 'CallCenter.dbo.ViewMonthSalesByDay' does not have 
           <Property Name="TotalPerDay" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'CallCenter.dbo.ViewOrderInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewOrderInfo">
+          <Key>
+            <PropertyRef Name="OrderToStoreId" />
+            <PropertyRef Name="FranchiseName" />
+            <PropertyRef Name="FranchiseStoreName" />
+            <PropertyRef Name="StartDatetime" />
+            <PropertyRef Name="LastStatus" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="OrderToStoreId" Type="bigint" Nullable="false" />
+          <Property Name="FranchiseName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FranchiseStoreName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="StartDatetime" Type="datetime" Nullable="false" />
+          <Property Name="LastStatus" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="301" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1705" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'CallCenter.dbo.ViewPosOrderInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewPosOrderInfo">
           <Key>
@@ -2170,6 +2196,20 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
     [ViewMonthSalesByDay].[TotalPerDay] AS [TotalPerDay]
     FROM [dbo].[ViewMonthSalesByDay] AS [ViewMonthSalesByDay]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="ViewOrderInfo" EntityType="Self.ViewOrderInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewOrderInfo].[OrderToStoreId] AS [OrderToStoreId], 
+    [ViewOrderInfo].[FranchiseName] AS [FranchiseName], 
+    [ViewOrderInfo].[FranchiseStoreName] AS [FranchiseStoreName], 
+    [ViewOrderInfo].[StartDatetime] AS [StartDatetime], 
+    [ViewOrderInfo].[LastStatus] AS [LastStatus], 
+    [ViewOrderInfo].[Phone] AS [Phone], 
+    [ViewOrderInfo].[FullName] AS [FullName], 
+    [ViewOrderInfo].[Address] AS [Address], 
+    [ViewOrderInfo].[Total] AS [Total], 
+    [ViewOrderInfo].[UserName] AS [UserName]
+    FROM [dbo].[ViewOrderInfo] AS [ViewOrderInfo]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ViewPosOrderInfo" EntityType="Self.ViewPosOrderInfo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewPosOrderInfo].[FranchiseId] AS [FranchiseId], 
@@ -3017,6 +3057,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="ViewMonthlySales" EntityType="CallCenterModel.ViewMonthlySales" />
           <EntitySet Name="ViewPosOrderInfo" EntityType="CallCenterModel.ViewPosOrderInfo" />
           <EntitySet Name="ViewClientOrderInfoByFranchiseStore" EntityType="CallCenterModel.ViewClientOrderInfoByFranchiseStore" />
+          <EntitySet Name="ViewOrderInfo" EntityType="CallCenterModel.ViewOrderInfo" />
           </EntityContainer>
         <ComplexType Name="User_Sales_group_by_date_Result">
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
@@ -5119,6 +5160,30 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="LastStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
         </EntityType>
+        <EntityType Name="ViewOrderInfo">
+          <Key>
+            <PropertyRef Name="OrderToStoreId" />
+            <PropertyRef Name="FranchiseName" />
+            <PropertyRef Name="FranchiseStoreName" />
+            <PropertyRef Name="StartDatetime" />
+            <PropertyRef Name="LastStatus" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="OrderToStoreId" Type="Int64" Nullable="false" />
+          <Property Name="FranchiseName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FranchiseStoreName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StartDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="301" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="1705" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6030,6 +6095,22 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <ScalarProperty Name="FranchiseStoreId" ColumnName="FranchiseStoreId" />
                 <ScalarProperty Name="FranchiseName" ColumnName="FranchiseName" />
                 <ScalarProperty Name="FranchiseId" ColumnName="FranchiseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewOrderInfo">
+            <EntityTypeMapping TypeName="CallCenterModel.ViewOrderInfo">
+              <MappingFragment StoreEntitySet="ViewOrderInfo">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastStatus" ColumnName="LastStatus" />
+                <ScalarProperty Name="StartDatetime" ColumnName="StartDatetime" />
+                <ScalarProperty Name="FranchiseStoreName" ColumnName="FranchiseStoreName" />
+                <ScalarProperty Name="FranchiseName" ColumnName="FranchiseName" />
+                <ScalarProperty Name="OrderToStoreId" ColumnName="OrderToStoreId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -159,6 +159,7 @@
     <Compile Include="Notification\NotificationModel.cs" />
     <Compile Include="Order\ClientInfoGrid.cs" />
     <Compile Include="Order\FranchiseInfoModel.cs" />
+    <Compile Include="Order\InfoItemModel.cs" />
     <Compile Include="Order\ItemLogOrder.cs" />
     <Compile Include="Order\ItemModel.cs" />
     <Compile Include="Order\ItemPosOrder.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Order\OrderDetails.cs" />
     <Compile Include="Order\OrderInfoModel.cs" />
     <Compile Include="Order\OrderModel.cs" />
+    <Compile Include="Order\ViewInfoOrderModel.cs" />
     <Compile Include="Order\OrderModelDto.cs" />
     <Compile Include="Order\OrderSummaryItem.cs" />
     <Compile Include="Order\PhoneModel.cs" />

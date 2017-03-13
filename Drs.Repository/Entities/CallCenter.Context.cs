@@ -94,6 +94,7 @@ namespace Drs.Repository.Entities
         public virtual DbSet<ViewMonthlySales> ViewMonthlySales { get; set; }
         public virtual DbSet<ViewPosOrderInfo> ViewPosOrderInfo { get; set; }
         public virtual DbSet<ViewClientOrderInfoByFranchiseStore> ViewClientOrderInfoByFranchiseStore { get; set; }
+        public virtual DbSet<ViewOrderInfo> ViewOrderInfo { get; set; }
     
         [DbFunction("CallCenterEntities", "ufnGetTopProductsByRangeDates")]
         public virtual IQueryable<ufnGetTopProductsByRangeDates_Result1> ufnGetTopProductsByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)

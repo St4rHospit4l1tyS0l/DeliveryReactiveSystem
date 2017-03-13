@@ -198,6 +198,8 @@
     <Compile Include="Areas\Franchise\Controllers\SettingController.cs" />
     <Compile Include="Areas\Franchise\Controllers\SyncController.cs" />
     <Compile Include="Areas\Franchise\FranchiseAreaRegistration.cs" />
+    <Compile Include="Areas\Info\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Info\InfoAreaRegistration.cs" />
     <Compile Include="Areas\Report\Controllers\AgentSaleController.cs" />
     <Compile Include="Areas\Report\Controllers\ClientOrderController.cs" />
     <Compile Include="Areas\Report\Controllers\MonthlySaleController.cs" />
@@ -454,6 +456,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\ctrl\franchiseAssignCtrl.js" />
+    <Content Include="Scripts\app\ctrl\orderViewCtrl.js" />
     <Content Include="Scripts\app\ctrl\reportMonthSalesByDayCtrl.js" />
     <Content Include="Scripts\app\ctrl\reportClientOrderCtrl.js" />
     <Content Include="Scripts\app\ctrl\reportTimeSaleCtrl.js" />
@@ -628,6 +631,10 @@
     <Content Include="Areas\Store\Views\StoreNotification\Upsert.cshtml" />
     <Content Include="Areas\Report\Views\MonthlySale\Index.cshtml" />
     <Content Include="Areas\Report\Views\ClientOrder\Index.cshtml" />
+    <Content Include="Areas\Info\Views\web.config" />
+    <Content Include="Areas\Info\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Info\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Info\Views\Order\View.cshtml" />
     <None Include="Properties\PublishProfiles\CentralManagement.pubxml" />
     <Content Include="Resources\MonthlySales.json" />
     <None Include="Properties\PublishProfiles\CentralManagementWebPackage.pubxml" />
@@ -660,6 +667,7 @@
     <Content Include="Scripts\js\jquery-ui-1.10.4.min.js" />
     <Content Include="Scripts\js\jquery-ui.custom.min.js" />
     <Content Include="Scripts\js\logoupload.js" />
+    <Content Include="Scripts\js\maps.js" />
     <Content Include="Scripts\js\plugins\blueimp\jquery.blueimp-gallery.min.js" />
     <Content Include="Scripts\js\plugins\blueimp\jquery.fileupload.js" />
     <Content Include="Scripts\js\plugins\blueimp\jquery.iframe-transport.js" />
@@ -1110,6 +1118,8 @@
   <ItemGroup>
     <Folder Include="Areas\Franchise\Models\" />
     <Folder Include="Areas\Franchise\Views\Shared\" />
+    <Folder Include="Areas\Info\Models\" />
+    <Folder Include="Areas\Info\Views\Shared\" />
     <Folder Include="Areas\Management\Models\" />
     <Folder Include="Areas\Management\Views\Shared\" />
     <Folder Include="Areas\Report\Models\" />

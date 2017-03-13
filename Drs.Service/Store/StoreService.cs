@@ -330,10 +330,10 @@ namespace Drs.Service.Store
                     {
                         firstNameField = model.ClientInfo.FirstName.SubstringMax(27),
                         lastNameField = model.ClientInfo.LastName.SubstringMax(27),
-                        addressLine1Field = ((String.IsNullOrWhiteSpace(model.AddressInfo.ExtIntNumber) ? 
+                        addressLine1Field = (model.AddressInfo.MainAddress + (String.IsNullOrWhiteSpace(model.AddressInfo.ExtIntNumber) ? 
                                 String.Empty : 
-                                String.Format("{0} ", model.AddressInfo.ExtIntNumber))
-                                + model.AddressInfo.MainAddress).SubstringMax(44),
+                                String.Format("{0} ", model.AddressInfo.ExtIntNumber))).SubstringMax(44),
+                        addressLine2Field = model.AddressInfo.RegionC.Value,
                         cityField = model.AddressInfo.RegionB.Value,
                         stateField = model.AddressInfo.RegionA.Value,
                         zipCodeField = model.AddressInfo.ZipCode.Value,

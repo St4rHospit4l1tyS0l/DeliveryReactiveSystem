@@ -49,6 +49,8 @@ namespace Drs.Model.Settings
                 public const bool FALSE = false;
                 public const bool TRUE = true;
 
+                public const string CURRENCY_FORMAT = "$ {0:#,##0.00}";
+
                 public const string ALOHA_INI = "Aloha.ini";
                 public const string TRANS_LOG = "TRANS.LOG";
                 

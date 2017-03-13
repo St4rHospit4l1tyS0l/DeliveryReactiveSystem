@@ -389,7 +389,7 @@ namespace Drs.Repository.Store
             return DbEntities.OrderToStore.Where(e => e.FranchiseStoreId == storeId && !SettingsData.Constants.TrackConst.OrderStatusEnd.Contains(e.LastStatus))
                 .Select(e => new OrderStoreModel
                 {
-                    Address = e.Address.MainAddress + " " + e.Address.ExtIntNumber + ", " + e.Address.Reference + ", " + e.Address.RegionNameC + ", " + e.Address.RegionNameB + ", " + e.Address.RegionNameA + ", " + e.Address.ZipCode.Code,
+                    Address = e.Address.MainAddress + " " + e.Address.ExtIntNumber + ", " + e.Address.Reference + ", " + e.Address.RegionNameC + ", " + e.Address.RegionNameB + ", " + e.Address.RegionNameA + ", " + e.Address.ZipCodeValue,
                     FirstName = e.Client.FirstName,
                     LastName = e.Client.LastName,
                     Notes = e.ExtraNotes,

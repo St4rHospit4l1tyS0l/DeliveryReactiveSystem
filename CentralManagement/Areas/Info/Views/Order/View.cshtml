@@ -1,0 +1,142 @@
+﻿@{
+    Layout = null;
+}
+
+<script>
+
+    $(document).ready(function () {
+        window.showModalFormDlg("#dlgUpModalId", "#FormCatId");
+    });
+
+</script>
+<div class="modal inmodal" id="dlgUpModalId" tabindex="-1" ng-controller="upsertController" role="dialog" aria-hidden="true" ng-cloak>
+    <div class="modal-dialog" style="width:1250px" ng-controller="orderViewController">
+        <div class="modal-content animated flipInY">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <i class="fa fa-eye modal-icon"></i>
+                <h4 class="modal-title">Pedido</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" ng-init="m = @(ViewBag.Model ?? "{}"); init();">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="ibox">
+                                <div class="ibox-title navy-bg">
+                                    <h5>Información del pedido</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="wrapper wrapper-content animated fadeInUp">
+                                <div class="ibox">
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="m-b-md">
+                                                    <h2>Pedido #{{m.OrderToStoreId}}</h2>
+                                                </div>
+                                                <dl class="dl-horizontal">
+                                                    <dt>Estatus:</dt>
+                                                    <dd><span class="label label-warning-light">{{m.LastStatus}}</span></dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <dl class="dl-horizontal">
+                                                    <dt>Franquicia:</dt>
+                                                    <dd>{{m.FranchiseName}}</dd>
+                                                    <dt>Sucursal:</dt>
+                                                    <dd>{{m.FranchiseStoreName}}</dd>
+                                                    <dt>Cliente:</dt>
+                                                    <dd><b>{{m.FullName}}</b></dd>
+                                                    <dt>Teléfono:</dt>
+                                                    <dd><b>{{m.Phone}}</b></dd>
+                                                    <dt>Dirección:</dt>
+                                                    <dd><a href="#" class="text-navy">{{m.Address}} | {{m.Reference}}</a> </dd>
+                                                </dl>
+                                            </div>
+                                            <div class="col-xs-7" id="cluster_info">
+                                                <dl class="dl-horizontal">
+                                                    <dt>Sucursal:</dt>
+                                                    <dd>{{m.FranchiseStoreName}}</dd>
+                                                    <dt>Fecha | Hora:</dt>
+                                                    <dd>{{m.StartDatetimeTx}}</dd>
+                                                    <dt>Total:</dt>
+                                                    <dd><b>{{m.TotalTx}}</b></dd>
+                                                    <dt>Agente:</dt>
+                                                    <dd>{{m.UserNameIns}}</dd>
+                                                    <dt>Notas:</dt>
+                                                    <dd>{{m.Notes}}</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ibox">
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <div class="ibox float-e-margins">
+                                                    <div class="ibox-title">
+                                                        <h5>Resumen del pedido</h5>
+                                                    </div>
+                                                    <div class="ibox-content">
+
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="text-align: left">Producto</th>
+                                                                    <th style="text-align: right">Precio</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="it in m.LstItems">
+                                                                    <td style="text-align: left"><small>{{padding(it.LevelItem*4) + it.Name}}</small></td>
+                                                                    <td style="text-align: right"><small>$ {{it.Price}}</small></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="ibox ">
+                                                            <div class="ibox-title">
+                                                                <h5>Vista del mapa</h5>
+                                                            </div>
+                                                            <div class="ibox-content">
+                                                                <div style="min-height: 600px;" class="google-map" id="map1"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="ibox ">
+                                                            <div class="ibox-title">
+                                                                <h5>Vista de calle</h5>
+                                                            </div>
+                                                            <div class="ibox-content">
+                                                                <div class="google-map" id="pano" style="height: 500px"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
