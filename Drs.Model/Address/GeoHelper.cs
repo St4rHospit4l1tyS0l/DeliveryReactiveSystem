@@ -11,7 +11,7 @@ namespace Drs.Model.Address
 
         public static DbGeography PointFromText(string lat, string lng)
         {
-            return DbGeography.PointFromText(string.Format("POINT({0} {1})", lng, lat), SRID_GOOGLE_MAPS);
+            return DbGeography.PointFromText(string.Format("POINT({0} {1})", lng.Replace(",", "."), lat.Replace(",", ".")), SRID_GOOGLE_MAPS);
         }
 
         public static DbGeography PolygonFromText(string sPolygon)

@@ -48,6 +48,8 @@ namespace Drs.Service.Settings
             SettingsData.Store.TimeSyncServerFilesOrder = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.TIME_SYNC_SERVER_FILES, 600);
             SettingsData.Store.MaxFailedStatusCounter = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.MAX_FAILED_STATUS_COUNTER, 60);
             SettingsData.Store.EnableStoreNotifications = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.ENABLE_STORE_NOTIFICATIONS, SettingsData.Constants.SystemConst.FALSE);
+            SettingsData.Store.EnableOrderFeed = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.ENABLE_ORDER_FEED, SettingsData.Constants.SystemConst.FALSE);
+            SettingsData.Store.IntervalTimeOrderFeed = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.INTERVAL_TIME_ORDER_FEED, 60);
 
             ResolveRecurrence(dicSettings);
 

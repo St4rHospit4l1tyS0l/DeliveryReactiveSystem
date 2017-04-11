@@ -100,6 +100,12 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\OrderCloudFeed.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\OrderCloudFeed.Designer.cs">
+      <DependentUpon>OrderCloudFeed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\SyncServerFiles.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -122,6 +128,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Services\OrderCloudFeed.resx">
+      <DependentUpon>OrderCloudFeed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Services\SyncServerFiles.resx">
       <DependentUpon>SyncServerFiles.cs</DependentUpon>
