@@ -57,11 +57,14 @@ namespace CentralManagement.Controllers
 
     
      
-        public ActionResult Resource(Guid resource)
+        public ActionResult Resource(Guid? resource)
         {
+            if(!resource.HasValue)
+                return null;
+
             using (var repository = new ResourceRepository())
             {
-                var originalFileName = repository.GetFileNameByStoreName(resource);
+                var originalFileName = repository.GetFileNameByStoreName(resource.Value);
                 return String.IsNullOrEmpty(originalFileName) ? null : File(Path.Combine(FileUploadController.UploadFolder, resource.ToString()), MimeMapping.GetMimeMapping(originalFileName));
             }
         }

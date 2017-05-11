@@ -28,7 +28,6 @@ namespace Drs.Infrastructure.Extensions
             catch (Exception)
             {
                 return dtDefault.Value;
-                throw;
             }
 
         }

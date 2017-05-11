@@ -10,14 +10,13 @@ using Drs.Repository.Entities.Metadata;
 using Drs.Repository.Log;
 using Drs.Repository.Notification;
 using Drs.Repository.Shared;
-using Drs.Repository.Store;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using ResShared = CentralManagement.Resources.ResShared;
 
 namespace CentralManagement.Areas.Store.Controllers
 {
-    [Authorize(Roles = RoleConstants.MANAGER + ", " + RoleConstants.STORE_MANAGER)]
+    [Authorize(Roles = RoleConstants.MANAGER + ", " + RoleConstants.STORE_MANAGER_ALL + ", " + RoleConstants.STORE_MANAGER)]
     public class StoreNotificationController : Controller
     {
         public ActionResult Index()
@@ -52,7 +51,7 @@ namespace CentralManagement.Areas.Store.Controllers
                 {
                     ViewBag.Model = JsonConvert.SerializeObject(new
                     {
-                        Items = repository.GetNotificationOfToday(storeId),
+                        Items = repository.GetNotifications(storeId),
                         CatMessages = repository.GetCatMessages(),
                         StoreName = repository.GetStoreName(storeId),
                         FranchiseStoreId = storeId

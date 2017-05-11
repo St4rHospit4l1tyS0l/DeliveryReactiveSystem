@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Drs.Model.Settings
+@{
     Layout = null;
 }
 
@@ -174,6 +175,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" id="imageType" value="@SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_LOGO" />
                     @Html.Partial("~/Views/Shared/_UploadFile.cshtml")
                     <div class="space-15"></div>
                     <br />

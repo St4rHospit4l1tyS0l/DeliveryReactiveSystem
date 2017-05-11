@@ -14,6 +14,7 @@ $(function () {
                     $('#progress .progress-bar').css('width', '0').html("");
                 }, 2000);
                 scope.$apply(function () {
+                    scope.$emit('fileUploadSuccess', data.result);
                     scope.uf.m.UidFileName = data.result.ResourceName;
                     scope.uf.lstSuccess.push("Se ha adjuntado el archivo de manera correcta");
                 });
@@ -36,11 +37,11 @@ $(function () {
             $('#progress .progress-bar').css('width', progress + '%').html(progress + "%");
         },
         add: function (e, data) {
-            var parentId = $('#UpParentId').val();
+            var imageType = $('#imageType').val();
             var params = {};
 
-            if (parentId !== undefined) {
-                params.parentId = parentId;
+            if (imageType !== undefined) {
+                params.imageType = imageType;
             } 
             
             data.formData = params;

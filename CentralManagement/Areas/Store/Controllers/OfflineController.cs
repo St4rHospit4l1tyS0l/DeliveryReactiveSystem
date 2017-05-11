@@ -16,7 +16,7 @@ using ResShared = CentralManagement.Resources.ResShared;
 
 namespace CentralManagement.Areas.Store.Controllers
 {
-    [Authorize(Roles = RoleConstants.MANAGER + ", " + RoleConstants.INSTALLER + ", " + RoleConstants.STORE_MANAGER)]
+    [Authorize(Roles = RoleConstants.MANAGER + ", " + RoleConstants.INSTALLER + ", " + RoleConstants.STORE_MANAGER_ALL + ", " + RoleConstants.STORE_MANAGER)]
     public class OfflineController : Controller
     {
         public ActionResult Index()

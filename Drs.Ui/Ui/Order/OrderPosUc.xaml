@@ -10,13 +10,13 @@
         <DataTemplate x:Key="DataTemplateCategory">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                         Visibility="{Binding ItemsCount, Converter={StaticResource IntToVisibility}}">
-                <Label Content="{Binding CategoryName}" Margin="0 0 0 0" HorizontalContentAlignment="Center" 
+                <Label Content="{Binding CategoryName}" FontSize="21" Margin="0 0 0 0" HorizontalContentAlignment="Center" 
                        Background="{Binding Color, Converter={StaticResource StringToSolidColorBrush}}" Foreground="White" ></Label>
                 <ItemsControl Margin="6 4 0 10" ItemsSource="{Binding Notifications}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding}" FontSize="11" TextWrapping="Wrap" Width="300"/>
+                                <TextBlock Text="{Binding}" FontSize="19" TextWrapping="Wrap" Width="300"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

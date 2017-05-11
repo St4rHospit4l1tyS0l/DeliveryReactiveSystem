@@ -35,8 +35,8 @@ namespace Drs.Repository.Entities
             this.PosOrder = new HashSet<PosOrder>();
             this.Resource = new HashSet<Resource>();
             this.StoreMessage = new HashSet<StoreMessage>();
-            this.StoreMessageDate = new HashSet<StoreMessageDate>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.StoreMessageDate = new HashSet<StoreMessageDate>();
         }
     
         public string Id { get; set; }
@@ -71,8 +71,8 @@ namespace Drs.Repository.Entities
         public virtual ICollection<PosOrder> PosOrder { get; set; }
         public virtual ICollection<Resource> Resource { get; set; }
         public virtual ICollection<StoreMessage> StoreMessage { get; set; }
-        public virtual ICollection<StoreMessageDate> StoreMessageDate { get; set; }
         public virtual UserDetail UserDetail { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual ICollection<StoreMessageDate> StoreMessageDate { get; set; }
     }
 }

@@ -98,6 +98,7 @@ namespace Drs.Model.Settings
             {
                 public const int SYNC_FILE_TYPE_DATA = 3910;
                 public const int SYNC_FILE_TYPE_LOGO = 4721;
+                public const int SYNC_FILE_TYPE_IMAGE_NOTIFICATION = 5798;
             }
 
             public static class Franchise

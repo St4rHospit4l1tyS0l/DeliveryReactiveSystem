@@ -20,8 +20,8 @@ namespace Drs.Repository.Entities
             this.FranchiseStoreOffLine = new HashSet<FranchiseStoreOffLine>();
             this.OrderToStore = new HashSet<OrderToStore>();
             this.StoreAddressDistribution = new HashSet<StoreAddressDistribution>();
-            this.StoreMessageDate = new HashSet<StoreMessageDate>();
             this.FranchisePhone = new HashSet<FranchisePhone>();
+            this.StoreMessageDate = new HashSet<StoreMessageDate>();
         }
     
         public int FranchiseStoreId { get; set; }
@@ -45,8 +45,8 @@ namespace Drs.Repository.Entities
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<StoreAddressDistribution> StoreAddressDistribution { get; set; }
-        public virtual ICollection<StoreMessageDate> StoreMessageDate { get; set; }
         public virtual StoreStatus StoreStatus { get; set; }
         public virtual ICollection<FranchisePhone> FranchisePhone { get; set; }
+        public virtual ICollection<StoreMessageDate> StoreMessageDate { get; set; }
     }
 }

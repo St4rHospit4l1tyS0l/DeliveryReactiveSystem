@@ -22,37 +22,37 @@ app.controller('storeNotificationController', function ($scope, $http) {
         }
     };
 
+    $scope.$on('fileUploadSuccess', function (event, data) {
+        $scope.m.resourceName = data.ResourceName;
+    });
+
     $scope.deleteNotification = function (url, item) {
         $scope.working = true;
         $scope.MsgError = "";
 
-        var categoryMessageId = item.CategoryMessageId;
-        var franchiseStoreId = item.FranchiseStoreId;
-        $http.post(url, {
-            franchiseStoreId: franchiseStoreId,
-            categoryMessageId: categoryMessageId,
-            notification: item.Message
-        }).then(function (res) {
-            onSuccess(res.data, categoryMessageId, franchiseStoreId, false);
+        $http.post(url, item).then(function (res) {
+            onSuccess(res.data, item, false);
         }, onError);
     };
 
     $scope.addNotification = function (url) {
         $scope.working = true;
         $scope.MsgError = "";
+        
+        var item = {
+            CategoryMessageId: $scope.m.catSelected.Id,
+            FranchiseStoreId: $scope.m.FranchiseStoreId,
+            IsIndefinite: $scope.m.isIndefinite,
+            Message: $scope.m.message,
+            Resource: $scope.m.resourceName
+        };
 
-        var categoryMessageId = $scope.m.catSelected.Id;
-        var franchiseStoreId = $scope.m.FranchiseStoreId;
-        $http.post(url, {
-            franchiseStoreId: franchiseStoreId,
-            categoryMessageId: categoryMessageId,
-            notification: $scope.m.notification
-        }).then(function (res) {
-            onSuccess(res.data, categoryMessageId, franchiseStoreId, true);
+        $http.post(url, item).then(function (res) {
+            onSuccess(res.data, item, true);
         }, onError);
     };
 
-    function onSuccess(data, categoryMessageId, franchiseStoreId, bHasToInsert) {
+    function onSuccess(data, item, bHasToInsert) {
         $scope.working = false;
         if (data.HasError) {
             $scope.MsgError = data.Message;
@@ -60,20 +60,22 @@ app.controller('storeNotificationController', function ($scope, $http) {
         }
 
         if (bHasToInsert)
-            insertDataOnCategory(data.Data, categoryMessageId, franchiseStoreId);
+            insertDataOnCategory(data.Data, item);
         else
-            deleteDataOnCategory(data.Data, categoryMessageId);
+            deleteDataOnCategory(data.Data, item.CategoryMessageId);
     }
 
-    function insertDataOnCategory(notification, categoryMessageId, franchiseStoreId) {
+    function insertDataOnCategory(message, item) {
         for (var i = 0; i < $scope.categories.length; i++) {
             var category = $scope.categories[i];
 
-            if (category.Id === categoryMessageId) {
+            if (category.Id === item.CategoryMessageId) {
                 category.items.push({
-                    Message: notification,
-                    CategoryMessageId: categoryMessageId,
-                    FranchiseStoreId: franchiseStoreId
+                    Message: message,
+                    CategoryMessageId: item.CategoryMessageId,
+                    FranchiseStoreId: item.FranchiseStoreId,
+                    IsIndefinite: item.IsIndefinite,
+                    Resource: item.Resource
                 });
                 break;
             }
@@ -81,13 +83,13 @@ app.controller('storeNotificationController', function ($scope, $http) {
     }
 
 
-    function deleteDataOnCategory(notification, categoryMessageId) {
+    function deleteDataOnCategory(message, categoryMessageId) {
         for (var i = 0; i < $scope.categories.length; i++) {
             var category = $scope.categories[i];
 
             if (category.Id === categoryMessageId) {
                 for (var j = 0; j < category.items.length; j++) {
-                    if (category.items[j].Message !== notification)
+                    if (category.items[j].Message !== message)
                         continue;
                     category.items.splice(j, 1);
                     break;
@@ -101,7 +103,7 @@ app.controller('storeNotificationController', function ($scope, $http) {
         $scope.working = false;
         $scope.MsgError = res;
     }
-    
+
     $scope.notifications = function (val, url) {
         return $http.post(url, {
             notification: val,

@@ -15,6 +15,8 @@
         public const string REPORT_DATE_FORMAT = "yyyy/MM/dd";
         public const string REPORT_NO_VALUE = "--";
 
+        public const string NO_MESSAGE = "_";
+
         public static class Server
         {
             //Module Account

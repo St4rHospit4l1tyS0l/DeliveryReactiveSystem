@@ -4,7 +4,7 @@ namespace Drs.Model.Store
 {
     public class StoreNotificationModel
     {
-        private string _notification;
+        private string _message;
 
         [Required]
         public int FranchiseStoreId { get; set; }
@@ -13,14 +13,19 @@ namespace Drs.Model.Store
         public int CategoryMessageId { get; set; }
 
         [Required]
-        public string Notification
+        public bool IsIndefinite { get; set; }
+
+        public string Resource { get; set; }
+
+        [Required]
+        public string Message
         {
-            get { return _notification; }
+            get { return _message; }
             set
             {
-                _notification = value;
-                if (_notification != null)
-                    _notification = _notification.Trim().ToUpperInvariant();
+                _message = value;
+                if (_message != null)
+                    _message = _message.Trim().ToUpperInvariant();
             }
         }
     }

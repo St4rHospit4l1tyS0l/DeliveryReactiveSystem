@@ -13,16 +13,18 @@ namespace Drs.Repository.Notification
 {
     public class NotificationRepository : BaseOneRepository
     {
-        public List<NotificationModel> GetNotificationOfToday(int storeId)
+        public List<NotificationModel> GetNotifications(int storeId)
         {
             var today = DateTime.Today;
 
-            return Db.StoreMessageDate.Where(e => e.FranchiseStoreId == storeId && e.DateApplied == today)
+            return Db.StoreMessageDate.Where(e => e.FranchiseStoreId == storeId && (e.DateApplied == today || e.IsIndefinite))
                 .Select(e => new NotificationModel
                 {
                     Message = e.StoreMessage.Message,
                     CategoryMessageId = e.CategoryMessageId,
-                    FranchiseStoreId = e.FranchiseStoreId
+                    FranchiseStoreId = e.FranchiseStoreId,
+                    IsIndefinite = e.IsIndefinite,
+                    Resource = e.Resource
                 }).ToList();
         }
 
@@ -50,7 +52,7 @@ namespace Drs.Repository.Notification
             var today = DateTime.Today;
             if (storeMessageId == SharedConstants.DEFAULT_INT_VALUE)
             {
-                storeMessageId = InsertStoreMessage(model.Notification, userId);
+                storeMessageId = InsertStoreMessage(model.Message, userId);
             }
             else
             {
@@ -70,6 +72,8 @@ namespace Drs.Repository.Notification
                 DateApplied = today,
                 FranchiseStoreId = model.FranchiseStoreId,
                 StoreMessageId = storeMessageId,
+                IsIndefinite = model.IsIndefinite,
+                Resource = model.Resource,
                 UserIdIns = userId
             };
 
@@ -79,7 +83,7 @@ namespace Drs.Repository.Notification
             return new ResponseMessageModel
             {
                 HasError = false,
-                Data = model.Notification
+                Data = model.Message
             };
         }
 
@@ -87,7 +91,7 @@ namespace Drs.Repository.Notification
         {
             return Db.StoreMessageDate.Any(e => e.FranchiseStoreId == model.FranchiseStoreId 
                 && e.StoreMessageId == storeMessageId
-                && e.CategoryMessageId == model.CategoryMessageId && e.DateApplied == date);
+                && e.CategoryMessageId == model.CategoryMessageId && (e.IsIndefinite || e.DateApplied == date));
         }
 
         private int InsertStoreMessage(string notification, string userId)
@@ -105,7 +109,7 @@ namespace Drs.Repository.Notification
         private int GetStoreMessageIdByMessageIfExists(StoreNotificationModel model)
         {
             var storeMessageId =
-                Db.StoreMessage.Where(e => e.Message == model.Notification).Select(e => e.StoreMessageId).SingleOrDefault();
+                Db.StoreMessage.Where(e => e.Message == model.Message).Select(e => e.StoreMessageId).SingleOrDefault();
             return storeMessageId;
         }
 
@@ -113,9 +117,9 @@ namespace Drs.Repository.Notification
         {
             var today = DateTime.Today;
             var storeMessage = Db.StoreMessageDate.SingleOrDefault(e => e.FranchiseStoreId == model.FranchiseStoreId
-                                                               && e.DateApplied == today
+                                                               && (e.IsIndefinite || e.DateApplied == today)
                                                                && e.CategoryMessageId == model.CategoryMessageId
-                                                               && e.StoreMessage.Message == model.Notification);
+                                                               && e.StoreMessage.Message == model.Message);
 
             if (storeMessage == null)
                 return new ResponseMessageModel
@@ -127,7 +131,7 @@ namespace Drs.Repository.Notification
             Db.StoreMessageDate.Remove(storeMessage);
             Db.SaveChanges();
 
-            return new ResponseMessageModel {HasError = false, Data = model.Notification};
+            return new ResponseMessageModel {HasError = false, Data = model.Message};
         }
 
         public List<string> GetNotifications(string notification, int limit)

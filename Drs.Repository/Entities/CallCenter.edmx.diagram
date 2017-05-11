@@ -5,69 +5,73 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6c715760ce4748578ccdba8e8adbe1d0" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="CallCenterModel.Address" Width="1.5" PointX="5.25" PointY="72.875" />
+        <EntityTypeShape EntityType="CallCenterModel.Address" Width="1.5" PointX="6" PointY="17.25" />
         <EntityTypeShape EntityType="CallCenterModel.AddressHierarchy" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CallCenterModel.AspNetMenu" Width="1.5" PointX="0.75" PointY="43.25" />
-        <EntityTypeShape EntityType="CallCenterModel.AspNetMenuRole" Width="1.5" PointX="3" PointY="39.125" />
-        <EntityTypeShape EntityType="CallCenterModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="40" />
-        <EntityTypeShape EntityType="CallCenterModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="50.75" />
-        <EntityTypeShape EntityType="CallCenterModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="53.375" />
-        <EntityTypeShape EntityType="CallCenterModel.AspNetUsers" Width="1.5" PointX="3" PointY="42.75" />
+        <EntityTypeShape EntityType="CallCenterModel.AspNetMenu" Width="1.5" PointX="0.75" PointY="35.375" />
+        <EntityTypeShape EntityType="CallCenterModel.AspNetMenuRole" Width="1.5" PointX="3" PointY="36.25" />
+        <EntityTypeShape EntityType="CallCenterModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="40.125" />
+        <EntityTypeShape EntityType="CallCenterModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="39.125" />
+        <EntityTypeShape EntityType="CallCenterModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="36.625" />
+        <EntityTypeShape EntityType="CallCenterModel.AspNetUsers" Width="1.5" PointX="3" PointY="42.875" />
         <EntityTypeShape EntityType="CallCenterModel.CatDeliveryStatus" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CallCenterModel.CategoryMessage" Width="1.5" PointX="10.5" PointY="62.25" />
-        <EntityTypeShape EntityType="CallCenterModel.CatPayment" Width="1.5" PointX="13.25" PointY="35.875" />
-        <EntityTypeShape EntityType="CallCenterModel.Client" Width="1.5" PointX="8" PointY="65.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ClientPhone" Width="1.5" PointX="10.25" PointY="48.875" />
-        <EntityTypeShape EntityType="CallCenterModel.ClientPhoneStatistics" Width="1.5" PointX="12.5" PointY="58" />
-        <EntityTypeShape EntityType="CallCenterModel.ClientStatistics" Width="1.5" PointX="10.25" PointY="66.75" />
-        <EntityTypeShape EntityType="CallCenterModel.Company" Width="1.5" PointX="5.75" PointY="66.625" />
+        <EntityTypeShape EntityType="CallCenterModel.CategoryMessage" Width="1.5" PointX="10.5" PointY="41" />
+        <EntityTypeShape EntityType="CallCenterModel.CatPayment" Width="1.5" PointX="10.5" PointY="60.625" />
+        <EntityTypeShape EntityType="CallCenterModel.Client" Width="1.5" PointX="6" PointY="67.875" />
+        <EntityTypeShape EntityType="CallCenterModel.ClientPhone" Width="1.5" PointX="8.25" PointY="49" />
+        <EntityTypeShape EntityType="CallCenterModel.ClientPhoneStatistics" Width="1.5" PointX="10.5" PointY="44.875" />
+        <EntityTypeShape EntityType="CallCenterModel.ClientStatistics" Width="1.5" PointX="8.25" PointY="68.875" />
+        <EntityTypeShape EntityType="CallCenterModel.Company" Width="1.5" PointX="3.75" PointY="68.75" />
         <EntityTypeShape EntityType="CallCenterModel.Control" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="CallCenterModel.ControlTitle" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CallCenterModel.Country" Width="1.5" PointX="3" PointY="65.5" />
-        <EntityTypeShape EntityType="CallCenterModel.Franchise" Width="1.5" PointX="5.25" PointY="36.75" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseButton" Width="1.5" PointX="7.5" PointY="35.875" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseCoverage" Width="1.5" PointX="7.5" PointY="39.625" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseCoverageLog" Width="1.5" PointX="9.75" PointY="39.625" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseData" Width="1.5" PointX="7.5" PointY="60" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseDataFile" Width="1.5" PointX="12.75" PointY="44.5" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseDataVersion" Width="1.5" PointX="10.5" PointY="43.375" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchisePhone" Width="1.5" PointX="5.25" PointY="58.75" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseStore" Width="1.5" PointX="7.5" PointY="47.375" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseStoreGeoMap" Width="1.5" PointX="9.75" PointY="58.875" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseStoreOffLine" Width="1.5" PointX="12.75" PointY="48.125" />
-        <EntityTypeShape EntityType="CallCenterModel.InfoCallCenter" Width="1.5" PointX="6" PointY="29.25" />
-        <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminal" Width="1.5" PointX="8.25" PointY="29" />
-        <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminalFranchise" Width="1.5" PointX="10.5" PointY="36" />
-        <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminalVersion" Width="1.5" PointX="12.5" PointY="39" />
-        <EntityTypeShape EntityType="CallCenterModel.InfoServer" Width="1.5" PointX="8.25" PointY="32.125" />
+        <EntityTypeShape EntityType="CallCenterModel.Country" Width="1.5" PointX="3.75" PointY="9.875" />
+        <EntityTypeShape EntityType="CallCenterModel.Franchise" Width="1.5" PointX="5.25" PointY="59.625" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseButton" Width="1.5" PointX="10.5" PointY="47.375" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseCoverage" Width="1.5" PointX="7.5" PointY="82.75" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseCoverageLog" Width="1.5" PointX="9.75" PointY="82.75" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseData" Width="1.5" PointX="7.5" PointY="79.75" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseDataFile" Width="1.5" PointX="9.75" PointY="57.5" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseDataVersion" Width="1.5" PointX="7.5" PointY="53.5" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchisePhone" Width="1.5" PointX="5.25" PointY="52.75" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseStore" Width="1.5" PointX="10.5" PointY="50.875" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseStoreGeoMap" Width="1.5" PointX="12.75" PointY="62.5" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseStoreOffLine" Width="1.5" PointX="15.75" PointY="48" />
+        <EntityTypeShape EntityType="CallCenterModel.InfoCallCenter" Width="1.5" PointX="3" PointY="73.125" />
+        <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminal" Width="1.5" PointX="5.25" PointY="72.875" />
+        <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminalFranchise" Width="1.5" PointX="7.5" PointY="63.875" />
+        <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminalVersion" Width="1.5" PointX="7.5" PointY="60.875" />
+        <EntityTypeShape EntityType="CallCenterModel.InfoServer" Width="1.5" PointX="5.25" PointY="76" />
         <EntityTypeShape EntityType="CallCenterModel.Language" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CallCenterModel.MenuModule" Width="1.5" PointX="3" PointY="33.125" />
-        <EntityTypeShape EntityType="CallCenterModel.Module" Width="1.5" PointX="0.75" PointY="35.75" />
-        <EntityTypeShape EntityType="CallCenterModel.OrderToStore" Width="1.5" PointX="15.5" PointY="42" />
-        <EntityTypeShape EntityType="CallCenterModel.OrderToStoreLog" Width="1.5" PointX="17.75" PointY="51.125" />
-        <EntityTypeShape EntityType="CallCenterModel.Permission" Width="1.5" PointX="3" PointY="36.125" />
-        <EntityTypeShape EntityType="CallCenterModel.PosOrder" Width="1.5" PointX="5.25" PointY="43.5" />
-        <EntityTypeShape EntityType="CallCenterModel.PosOrderItem" Width="1.5" PointX="7.5" PointY="43.875" />
-        <EntityTypeShape EntityType="CallCenterModel.Recurrence" Width="1.5" PointX="17.75" PointY="44.5" />
-        <EntityTypeShape EntityType="CallCenterModel.RegionA" Width="1.5" PointX="3" PointY="78.375" />
-        <EntityTypeShape EntityType="CallCenterModel.RegionB" Width="1.5" PointX="3" PointY="69.25" />
-        <EntityTypeShape EntityType="CallCenterModel.RegionC" Width="1.5" PointX="3" PointY="73.75" />
-        <EntityTypeShape EntityType="CallCenterModel.RegionD" Width="1.5" PointX="3" PointY="82.625" />
-        <EntityTypeShape EntityType="CallCenterModel.Resource" Width="1.5" PointX="5.25" PointY="32.625" />
-        <EntityTypeShape EntityType="CallCenterModel.Setting" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CallCenterModel.StoreAddressDistribution" Width="1.5" PointX="9.75" PointY="55.125" />
-        <EntityTypeShape EntityType="CallCenterModel.StoreMessage" Width="1.5" PointX="5.25" PointY="56" />
-        <EntityTypeShape EntityType="CallCenterModel.StoreMessageDate" Width="1.5" PointX="12.75" PointY="52.875" />
-        <EntityTypeShape EntityType="CallCenterModel.StoreStatus" Width="1.5" PointX="20.75" PointY="46.25" />
-        <EntityTypeShape EntityType="CallCenterModel.UserDetail" Width="1.5" PointX="5.25" PointY="62.25" />
-        <EntityTypeShape EntityType="CallCenterModel.ZipCode" Width="1.5" PointX="0.75" PointY="78.875" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewAgentSales" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewDailySales" Width="1.5" PointX="6.75" PointY="4.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewLocation" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewMonthSalesByDay" Width="1.5" PointX="2.75" PointY="7.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewStoreCoverage" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewStoreInfo" Width="1.5" PointX="8.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewUserInfo" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="CallCenterModel.MenuModule" Width="1.5" PointX="3" PointY="51.25" />
+        <EntityTypeShape EntityType="CallCenterModel.Module" Width="1.5" PointX="0.75" PointY="43.875" />
+        <EntityTypeShape EntityType="CallCenterModel.OrderStatusEnd" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CallCenterModel.OrderToStore" Width="1.5" PointX="12.75" PointY="49.875" />
+        <EntityTypeShape EntityType="CallCenterModel.OrderToStoreLog" Width="1.5" PointX="15" PointY="59" />
+        <EntityTypeShape EntityType="CallCenterModel.Permission" Width="1.5" PointX="3" PointY="39.25" />
+        <EntityTypeShape EntityType="CallCenterModel.PosOrder" Width="1.5" PointX="5.25" PointY="44.625" />
+        <EntityTypeShape EntityType="CallCenterModel.PosOrderItem" Width="1.5" PointX="7.5" PointY="44.875" />
+        <EntityTypeShape EntityType="CallCenterModel.Recurrence" Width="1.5" PointX="15" PointY="52.375" />
+        <EntityTypeShape EntityType="CallCenterModel.RegionA" Width="1.5" PointX="3.75" PointY="23.125" />
+        <EntityTypeShape EntityType="CallCenterModel.RegionB" Width="1.5" PointX="3.75" PointY="27.375" />
+        <EntityTypeShape EntityType="CallCenterModel.RegionC" Width="1.5" PointX="3.75" PointY="13.625" />
+        <EntityTypeShape EntityType="CallCenterModel.RegionD" Width="1.5" PointX="3.75" PointY="18.25" />
+        <EntityTypeShape EntityType="CallCenterModel.Resource" Width="1.5" PointX="5.25" PointY="32.75" />
+        <EntityTypeShape EntityType="CallCenterModel.Setting" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CallCenterModel.StoreAddressDistribution" Width="1.5" PointX="12.75" PointY="58.875" />
+        <EntityTypeShape EntityType="CallCenterModel.StoreMessage" Width="1.5" PointX="5.25" PointY="41.875" />
+        <EntityTypeShape EntityType="CallCenterModel.StoreStatus" Width="1.5" PointX="18" PointY="52.375" />
+        <EntityTypeShape EntityType="CallCenterModel.UserDetail" Width="1.5" PointX="5.25" PointY="56.25" />
+        <EntityTypeShape EntityType="CallCenterModel.ZipCode" Width="1.5" PointX="1.5" PointY="23.625" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewAgentSales" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewClientOrderInfoByFranchiseStore" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewDailySales" Width="1.5" PointX="5.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewLocation" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewMonthlySales" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewMonthSalesByDay" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewOrderInfo" Width="1.5" PointX="9.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewPosOrderInfo" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewStoreCoverage" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewStoreInfo" Width="1.5" PointX="5.75" PointY="11.75" />
+        <EntityTypeShape EntityType="CallCenterModel.ViewUserInfo" Width="1.5" PointX="11.75" PointY="7.75" />
         <AssociationConnector Association="CallCenterModel.FK_Address_Country" />
         <AssociationConnector Association="CallCenterModel.FK_Address_RegionA" />
         <AssociationConnector Association="CallCenterModel.FK_Address_RegionB" />
@@ -99,9 +103,7 @@
         <AssociationConnector Association="CallCenterModel.FK_PosOrder_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_Resource_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_StoreMessage_AspNetUsers" />
-        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_AspNetUsers" />
         <AssociationConnector Association="CallCenterModel.FK_UserDetail_AspNetUsers" />
-        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_CategoryMessage" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_CatPayment" />
         <AssociationConnector Association="CallCenterModel.FK_Client_Company" />
         <AssociationConnector Association="CallCenterModel.FK_ClientStatistics_Client" />
@@ -128,7 +130,6 @@
         <AssociationConnector Association="CallCenterModel.FK_FranchiseStoreOffLine_FranchiseStore" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStore_FranchiseStore" />
         <AssociationConnector Association="CallCenterModel.FK_StoreAddressDistribution_FranchiseStore" />
-        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_FranchiseStore" />
         <AssociationConnector Association="CallCenterModel.FK_StoreStatus_FranchiseStore" />
         <AssociationConnector Association="CallCenterModel.FK_InfoClientTerminal_InfoCallCenter" />
         <AssociationConnector Association="CallCenterModel.FK_InfoServer_InfoCallCenter" />
@@ -151,17 +152,16 @@
         <AssociationConnector Association="CallCenterModel.FK_RegionC_ZipCode" />
         <AssociationConnector Association="CallCenterModel.FK_RegionD_RegionC" />
         <AssociationConnector Association="CallCenterModel.FK_RegionD_ZipCode" />
-        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_StoreMessage" />
         <AssociationConnector Association="CallCenterModel.AspNetUserRoles" />
         <AssociationConnector Association="CallCenterModel.RelClientPhoneAddress" />
         <AssociationConnector Association="CallCenterModel.RelClientPhoneClient" />
         <AssociationConnector Association="CallCenterModel.RelFranchisePhoneStore" />
-        <EntityTypeShape EntityType="CallCenterModel.OrderStatusEnd" Width="1.5" PointX="7.375" PointY="8.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewMonthlySales" Width="1.5" PointX="9.375" PointY="7.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewPosOrderInfo" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewClientOrderInfoByFranchiseStore" Width="1.5" PointX="0.75" PointY="10.75" />
-        <EntityTypeShape EntityType="CallCenterModel.ViewOrderInfo" Width="1.5" PointX="11.375" PointY="4.75" />
-        </Diagram>
+        <EntityTypeShape EntityType="CallCenterModel.StoreMessageDate" Width="1.5" PointX="12.75" PointY="45" />
+        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_AspNetUsers" />
+        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_CategoryMessage" />
+        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_FranchiseStore" />
+        <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_StoreMessage" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -20,6 +20,8 @@ namespace Drs.Repository.Entities
         public int FranchiseStoreId { get; set; }
         public System.DateTime DateApplied { get; set; }
         public string UserIdIns { get; set; }
+        public bool IsIndefinite { get; set; }
+        public string Resource { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual CategoryMessage CategoryMessage { get; set; }

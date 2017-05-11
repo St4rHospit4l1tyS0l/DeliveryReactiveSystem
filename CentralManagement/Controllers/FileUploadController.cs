@@ -50,6 +50,14 @@ namespace CentralManagement.Controllers
 
                 var originalFileName = GetDeserializedFileName(result.FileData.First());
 
+                var imageType = result.FormData.Get("imageType");
+                int imageTypeId;
+
+                if (string.IsNullOrWhiteSpace(imageType) || !int.TryParse(imageType, out imageTypeId))
+                {
+                    imageTypeId = SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_LOGO;
+                }
+
                 var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
 
                 var uploadFolder = UploadFolder;
@@ -72,7 +80,7 @@ namespace CentralManagement.Controllers
 
                 using (IResourceRepository repository = new ResourceRepository())
                 {
-                    repository.Save(originalFileName, uidFileName, uploadFolder, User.Identity.GetUserId(), SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_LOGO, checkSum);
+                    repository.Save(originalFileName, uidFileName, uploadFolder, User.Identity.GetUserId(), imageTypeId, checkSum);
                     return Request.CreateResponse(HttpStatusCode.OK, new { ResourceName = uidFileName.ToString(), IsSuccess = true });
                 }
 
