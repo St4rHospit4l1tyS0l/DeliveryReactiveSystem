@@ -20,14 +20,15 @@ namespace ManagementCallCenter.Sync
                     return GetSyncDataFileStream(request);
 
                 case SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_LOGO:
-                    return GetSyncLogoFileStream(request);
+                case SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_IMAGE_NOTIFICATION:
+                    return GetSyncResourceFileStream(request);
 
             }
 
             throw new NotSupportedException("El tipo de archivo no está soportado");
         }
 
-        private static ResponseMessageServerFileSync GetSyncLogoFileStream(RequestMessageServerFileSync request)
+        private static ResponseMessageServerFileSync GetSyncResourceFileStream(RequestMessageServerFileSync request)
         {
             var response = new ResponseMessageServerFileSync();
             try

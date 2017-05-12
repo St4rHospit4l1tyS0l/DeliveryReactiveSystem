@@ -22,7 +22,7 @@ namespace Drs.ViewModel.Order
             ItemBackgroundColor = new SolidColorBrush(model.Color.ToRgbColor());
             ItemBackgroundOverColor = new SolidColorBrush(model.Color.ToRgbLightColor(30));
             ItemBackgroundPressedColor = new SolidColorBrush(model.Color.ToRgbLightColor(-30));
-            var uri = new Uri((SharedConstants.Client.URI_RESOURCE + model.Image).AbsolutePathRelativeToEntryPointLocation());
+            var uri = new Uri((SharedConstants.Client.URI_LOGO + model.Image).AbsolutePathRelativeToEntryPointLocation());
             ItemLogo = new BitmapImage(uri);
             Title = model.Title;
             Products = model.Description;

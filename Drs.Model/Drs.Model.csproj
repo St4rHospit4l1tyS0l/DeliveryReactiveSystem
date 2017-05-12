@@ -193,10 +193,13 @@
     <Compile Include="Shared\ItemCategory.cs" />
     <Compile Include="Shared\MenuItem.cs" />
     <Compile Include="Shared\ResponseMessageShared.cs" />
+    <Compile Include="Store\MessageNotification.cs" />
+    <Compile Include="Store\MessageNotificationVm.cs" />
     <Compile Include="Store\OrderStoreItemModel.cs" />
     <Compile Include="Store\OrderStoreModel.cs" />
     <Compile Include="Store\ResponseStoreOrdersMessage.cs" />
     <Compile Include="Store\StoreNotificationCategoryModel.cs" />
+    <Compile Include="Store\StoreNotificationCategoryViewModel.cs" />
     <Compile Include="Store\StoreNotificationModel.cs" />
     <Compile Include="Track\DailySearchModel.cs" />
     <Compile Include="Shared\ItemCatalog.cs" />

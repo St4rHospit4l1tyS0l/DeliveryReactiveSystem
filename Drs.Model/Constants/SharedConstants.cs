@@ -16,6 +16,7 @@
         public const string REPORT_NO_VALUE = "--";
 
         public const string NO_MESSAGE = "_";
+        public const int ALL_FRANCHISES = -1;
 
         public static class Server
         {
@@ -84,7 +85,8 @@
 
         public static class Client
         {
-            public const string URI_RESOURCE = "Logos\\";
+            public const string URI_LOGO = "Logos\\";
+            public const string URI_IMAGE_NOTIFICATION = "ImageNotification\\";
 
             public const int RECORD_NEW = 1000;
             public const int RECORD_ONPROGRESS_TO_SAVED = 1001;

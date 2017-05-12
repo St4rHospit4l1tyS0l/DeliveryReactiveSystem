@@ -12,11 +12,12 @@
                         Visibility="{Binding ItemsCount, Converter={StaticResource IntToVisibility}}">
                 <Label Content="{Binding CategoryName}" FontSize="21" Margin="0 0 0 0" HorizontalContentAlignment="Center" 
                        Background="{Binding Color, Converter={StaticResource StringToSolidColorBrush}}" Foreground="White" ></Label>
-                <ItemsControl Margin="6 4 0 10" ItemsSource="{Binding Notifications}">
+                <ItemsControl Margin="6 4 0 10" ItemsSource="{Binding NotificationsVm}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding}" FontSize="19" TextWrapping="Wrap" Width="300"/>
+                            <StackPanel Orientation="Vertical">
+                                <Image Visibility="{Binding HasToShowResource}" Source="{Binding ItemImage}" MaxWidth="300" MaxHeight="300" Margin="0,5,0,0" ></Image>
+                                <TextBlock Text="{Binding Message}" FontSize="19" TextWrapping="Wrap" Width="300"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

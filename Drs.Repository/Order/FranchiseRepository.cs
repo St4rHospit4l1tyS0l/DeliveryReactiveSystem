@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Address;
+using Drs.Model.Constants;
 using Drs.Model.Franchise;
 using Drs.Model.Menu;
 using Drs.Model.Settings;
@@ -157,7 +157,31 @@ namespace Drs.Repository.Order
         {
             var lstSyncFranchise = GetListSyncByFranchise(eInfo);
             lstSyncFranchise.AddRange(GetListLogosByFranchise());
+            lstSyncFranchise.AddRange(GetListCurrentNotificationImage());
             return lstSyncFranchise;
+        }
+
+        private IEnumerable<SyncFranchiseModel> GetListCurrentNotificationImage()
+        {
+            var today = DateTime.Today;
+            var lstImages = DbEntities.StoreMessageDate.Where(e => (e.IsIndefinite || e.DateApplied == today) && e.Resource != null).Select(e => e.Resource).ToList();
+            return new List<SyncFranchiseModel>
+            {
+                new SyncFranchiseModel
+                {
+                    FranchiseId = SharedConstants.ALL_FRANCHISES,
+                    Code = "",
+                    Version = "",
+                    LstFiles = DbEntities.Resource.Where(e => e.FileType == SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_IMAGE_NOTIFICATION && lstImages.Contains(e.UidFileName)).
+                        Select(e => new SyncFileModel
+                        {
+                            FileName = e.UidFileName,
+                            CheckSum = e.CheckSum,
+                            FileType = e.FileType,
+                            FranchiseDataFileId = e.ResourceId
+                        }).ToList()
+                }
+            };
         }
 
         private IEnumerable<SyncFranchiseModel> GetListLogosByFranchise()

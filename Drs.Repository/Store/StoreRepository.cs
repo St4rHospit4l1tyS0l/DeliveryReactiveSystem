@@ -375,7 +375,12 @@ namespace Drs.Repository.Store
                 CategoryName = e.Category,
                 Color = e.Color,
                 Position = e.Position,
-                Notifications = e.StoreMessageDate.Where(i => (i.IsIndefinite || i.DateApplied == today) && i.FranchiseStoreId == storeId).Select(i => i.StoreMessage.Message).ToList()
+                Notifications = e.StoreMessageDate.Where(i => (i.IsIndefinite || i.DateApplied == today) && i.FranchiseStoreId == storeId)
+                                .Select(i => new MessageNotification
+                                {
+                                    Message = i.StoreMessage.Message,
+                                    Resource = i.Resource
+                                }).ToList()
             }).ToList();
         }
 

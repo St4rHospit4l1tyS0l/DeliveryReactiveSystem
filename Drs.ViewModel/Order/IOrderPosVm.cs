@@ -12,6 +12,6 @@ namespace Drs.ViewModel.Order
         Func<ClientFlags.ValidateOrder, ResponseMessage> ValidateModel { get; set; }
         Action ReloadPosAction { get; set; }
         void OnChangeStore(ItemCatalog item, bool bIsLastStore);
-        IReactiveList<StoreNotificationCategoryModel> LstNotificaionCategories { get; set; }
+        IReactiveList<StoreNotificationCategoryViewModel> LstNotificaionCategories { get; set; }
     }
 }

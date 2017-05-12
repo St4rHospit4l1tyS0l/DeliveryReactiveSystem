@@ -47,8 +47,13 @@ namespace Drs.Service.Sync
                                     break;
                                 }
                             case SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_LOGO:
+                            case SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_IMAGE_NOTIFICATION:
                                 {
-                                    tasks.Add(CheckLogosAndSync(syncFile, syncFranchiseModelCopy.Code, clientIn));
+                                    var uriPath = syncFile.FileType == SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_LOGO ? 
+                                        SharedConstants.Client.URI_LOGO :
+                                        SharedConstants.Client.URI_IMAGE_NOTIFICATION;
+
+                                    tasks.Add(CheckResourceAndSync(syncFile, uriPath, syncFile.FileType, clientIn));
                                     break;
                                 }
                             default:
@@ -64,7 +69,7 @@ namespace Drs.Service.Sync
 
                 var sb = new StringBuilder();
                 res.IsSuccess = true;
-                foreach (var syncFranchiseModel in lstFranchiseSyncFiles)
+                foreach (var syncFranchiseModel in lstFranchiseSyncFiles.Where(e => e.FranchiseId != SharedConstants.ALL_FRANCHISES))
                 {
                     try
                     {
@@ -98,31 +103,46 @@ namespace Drs.Service.Sync
             return res;
         }
 
-        private static Task CheckLogosAndSync(SyncFileModel syncFile, string code, SyncServerSvcClient clientIn)
+        private static Task CheckResourceAndSync(SyncFileModel syncFile, string uriPath, int fileType, SyncServerSvcClient clientIn)
         {
             return Task.Run(() =>
             {
                 try
                 {
-                    var path = Path.Combine(DirExt.GetCurrentDirectory(), SharedConstants.Client.URI_RESOURCE);
+                    var path = Path.Combine(DirExt.GetCurrentDirectory(), uriPath);
                     var fileNamePath = Path.Combine(path, syncFile.FileName);
 
                     if (CreateAndCheckFile(syncFile, path, fileNamePath)) 
                         return;
 
-                    GetAndSaveStreamToDisk(syncFile, clientIn, fileNamePath, SettingsData.Constants.FranchiseConst.SYNC_FILE_TYPE_LOGO);
+                    GetAndSaveStreamToDisk(syncFile, clientIn, fileNamePath, fileType);
 
                 }
                 catch (Exception ex)
                 {
                     syncFile.HasError = true;
-                    syncFile.Message = String.Format("Se presentó el siguiente error en el archivo (logo) {0}: {1}", syncFile.FileName, ex.Message + " -ST- " + ex.StackTrace);
+                    syncFile.Message = String.Format("Se presentó el siguiente error en el archivo (recurso tipo {0}) {1}: {2}",
+                        syncFile.FileType, syncFile.FileName, ex.Message + " -ST- " + ex.StackTrace);
                 }
             });
         }
 
         private static bool CreateAndCheckFile(SyncFileModel syncFile, string path, string fileNamePath)
         {
+            if (!Directory.Exists(path))
+            {
+                try
+                {
+                    Directory.CreateDirectory(path);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                return false;
+            }
+
+
             if (Directory.Exists(path))
             {
                 if (File.Exists(fileNamePath))
@@ -135,16 +155,7 @@ namespace Drs.Service.Sync
                     FileExt.ForceDeleteFile(fileNamePath);
                 }
             }
-            else
-            {
-                try
-                {
-                    Directory.CreateDirectory(path);
-                }
-                catch (Exception)
-                {
-                }
-            }
+            
             return false;
         }
 
