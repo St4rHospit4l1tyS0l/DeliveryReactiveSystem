@@ -9,6 +9,7 @@ app.controller('gMapController', function ($scope, $timeout) {
     $scope.m = {};
     $scope.c = {};
     $scope.isReady = false;
+    $scope.m.Address = {};
 
     var init = function () {
 
@@ -268,30 +269,46 @@ app.controller('gMapController', function ($scope, $timeout) {
         }
     };
 
-    function fillAddressField(address, comp) {
+    function fillAddressField(address, comp, c) {
         switch (comp.types[0]) {
             case 'street_number':
+                if (!c.NumExt.IsEnabled) return;
                 if (!address.NumExt) address.NumExt = comp.long_name;
                 break;
             case 'route':
+                if (!c.MainAddress.IsEnabled) return;
                 if (!address.MainAddress) address.MainAddress = comp.long_name;
+                break;
+            case 'political':
+                if (!c.RegionC.IsEnabled) return;
+                if (comp.types.length > 1 
+                    && comp.types[1] === 'sublocality'
+                    && !address.RegionC) 
+                    address.RegionC = comp.long_name;
                 break;
             case 'sublocality_level_1':
             case 'sublocality':
             case 'neighborhood':
+                if (!c.RegionC.IsEnabled) return;
                 if (!address.RegionC) address.RegionC = comp.long_name;
                 break;
+            case 'locality':
             case 'administrative_area_level_3':
             case 'administrative_area_level_2':
-                if (!address.RegionB) address.RegionB = comp.long_name;
+                if (!c.RegionB.IsEnabled) return;
+                //if (!address.RegionB)
+                address.RegionB = comp.long_name;
                 break;
             case 'administrative_area_level_1':
+                if (!c.RegionA.IsEnabled) return;
                 if (!address.RegionA) address.RegionA = comp.long_name;
                 break;
             case 'country':
+                if (!c.Country.IsEnabled) return;
                 if (!address.Country) address.Country = comp.long_name;
                 break;
             case 'postal_code':
+                if (!c.ZipCode.IsEnabled) return;
                 if (!address.ZipCode) address.ZipCode = comp.long_name;
                 break;
             default:
@@ -302,15 +319,20 @@ app.controller('gMapController', function ($scope, $timeout) {
 
     $scope.onSelectAddress = function (address) {
         $scope.addressSelected = address;
+
+        var reference = $scope.m.Address.Reference;
         $scope.m.Address = {};
+        $scope.m.Address.Reference = reference;
 
         var i, j, currComp = address.address_components, comp;
+
+        //alert(JSON.stringify(currComp));
 
         for (j = 0; j < currComp.length; j++) {
             comp = currComp[j];
             if(!comp.types || comp.types.length === 0)
                 continue;
-            fillAddressField($scope.m.Address, comp);
+            fillAddressField($scope.m.Address, comp, $scope.c);
         }
 
         var bIsLess = true;
@@ -328,7 +350,7 @@ app.controller('gMapController', function ($scope, $timeout) {
                 comp = currComp[j];
                 if (!comp.types || comp.types.length === 0)
                     continue;
-                fillAddressField($scope.m.Address, comp);
+                fillAddressField($scope.m.Address, comp, $scope.c);
             }
         }
         

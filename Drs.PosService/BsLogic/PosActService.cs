@@ -34,7 +34,7 @@ namespace Drs.PosService.BsLogic
                 {
                     foreach (IIberObject objItem in chkObject.GetEnum(INTERNAL_CHECKS_ENTRIES))
                     {
-                        if(objItem.GetLongVal("MOD_CODE") == 8) continue; //ITEM DELETED
+                        if (objItem.GetLongVal("MOD_CODE") == 8) continue; //ITEM DELETED
 
                         var idCheckItem = objItem.GetLongVal("ID");
                         var idItem = objItem.GetLongVal("DATA");
@@ -65,9 +65,10 @@ namespace Drs.PosService.BsLogic
                 }
 
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                MessageBox.Show(ex.Message + @" - " + ex.StackTrace);
+                //
+                //MessageBox.Show(ex.Message + @" - " + ex.StackTrace);
             }
         }
 

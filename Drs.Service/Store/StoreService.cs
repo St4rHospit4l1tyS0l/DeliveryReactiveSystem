@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Globalization;
 using System.Linq;
 using System.ServiceModel;
@@ -544,7 +545,20 @@ namespace Drs.Service.Store
         private List<int> CalculateStoresCoverages(List<CoverageStoreModel> storesCoverage, AddressInfoModel addressInfo)
         {
             var lstStoresIds = new List<int>();
-            var gPoint = GeoHelper.PointFromText(addressInfo.Lat, addressInfo.Lng);
+            DbGeography gPoint;
+
+            try
+            {
+                if (string.IsNullOrEmpty(addressInfo.Lat) || string.IsNullOrEmpty(addressInfo.Lng))
+                    return lstStoresIds;
+
+                gPoint = GeoHelper.PointFromText(addressInfo.Lat, addressInfo.Lng);
+            }
+            catch (Exception ex)
+            {
+                SharedLogger.LogError(ex, addressInfo.Lat, addressInfo.Lng);
+                return lstStoresIds;
+            }
 
             foreach (var coverage in storesCoverage)
             {
