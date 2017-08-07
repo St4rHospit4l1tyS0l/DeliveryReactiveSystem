@@ -291,12 +291,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_4E6B42CFBB922BACD0144DCEEE42F80C"
-        "OwnerKey" = "8:_125AFF9FE7B1651DB5EE40B5A0AACBA8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_501080EFEEBCD81D13F11AE4C9EF8443"
         "OwnerKey" = "8:_415FD936CA8155F12C8DDCC324A2010F"
         "MsmSig" = "8:_UNDEFINED"
@@ -485,6 +479,12 @@
         {
         "MsmKey" = "8:_759462EE8D429276A00A4196F76B6178"
         "OwnerKey" = "8:_18E6B30FC9BE43EA988BD245656B4D94"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7AC31143A93AA48B731C8EB066D405D8"
+        "OwnerKey" = "8:_125AFF9FE7B1651DB5EE40B5A0AACBA8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -892,12 +892,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F3907F095B6BE6C811C0F6EA5F6443C9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_18E6B30FC9BE43EA988BD245656B4D94"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1129,6 +1123,12 @@
         "OwnerKey" = "8:_9C4958D81D790BD8FF719917684AE6F6"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F3907F095B6BE6C811C0F6EA5F6443C9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -1147,6 +1147,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -1163,6 +1171,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -1615,26 +1631,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4E6B42CFBB922BACD0144DCEEE42F80C"
-            {
-            "SourcePath" = "8:IBERQS.tlb"
-            "TargetName" = "8:IBERQS.tlb"
-            "Tag" = "8:"
-            "Folder" = "8:_9E1AF2544BE741B592DCD1F85732C368"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:2"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_501080EFEEBCD81D13F11AE4C9EF8443"
             {
             "AssemblyRegister" = "3:1"
@@ -1916,7 +1912,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Drs.ViewModel, Version=16.8.6253.14520, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Drs.ViewModel, Version=16.8.6397.31468, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_73D7AA5A047C0D758294D20AFB378A7A"
@@ -1970,6 +1966,26 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7AC31143A93AA48B731C8EB066D405D8"
+            {
+            "SourcePath" = "8:IBER.tlb"
+            "TargetName" = "8:IBER.tlb"
+            "Tag" = "8:"
+            "Folder" = "8:_9E1AF2544BE741B592DCD1F85732C368"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:2"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
@@ -2557,15 +2573,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DrsPosInterface"
-        "ProductCode" = "8:{B89A831E-1E75-44AD-B9DD-F5B4AFC157C7}"
-        "PackageCode" = "8:{2B360E37-8E4E-4DD1-8452-4D451EB6A4DC}"
+        "ProductCode" = "8:{729330D1-E1D9-423E-AA57-11252746D6DD}"
+        "PackageCode" = "8:{0B742E69-21F4-41C1-A869-7FA9E626CD8D}"
         "UpgradeCode" = "8:{00FBE1B0-FF9A-46E1-9B84-DFEE46629CF4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:17.02.13"
+        "ProductVersion" = "8:17.7.7"
         "Manufacturer" = "8:Star Hospitality Solutions"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

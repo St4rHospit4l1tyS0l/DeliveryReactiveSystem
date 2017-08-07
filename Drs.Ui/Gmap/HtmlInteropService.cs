@@ -29,7 +29,8 @@ namespace Drs.Ui.Gmap
                 mv.Controls,
                 mv.AddressMapInfo,
                 mv.Franchise.LastConfig,
-                mv.Franchise.StoresCoverage
+                mv.Franchise.StoresCoverage,
+                mv.MapRegionCodeSearch
             });
         }
 

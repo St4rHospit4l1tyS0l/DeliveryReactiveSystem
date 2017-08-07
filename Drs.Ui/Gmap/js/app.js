@@ -38,8 +38,9 @@ app.controller('gMapController', function ($scope, $timeout) {
             window.gDrsMap = new google.maps.Map(window.document.getElementById('map'), mapOptions);
 
             var input = window.document.getElementById('pac-input');
+            //alert(infoM.MapRegionCodeSearch);
             autocomplete = new google.maps.places.Autocomplete(input, {
-                componentRestrictions: { country: 'MX' }
+                componentRestrictions: { country: infoM.MapRegionCodeSearch } //REGION TO LIMIT SEARCH
             });
             autocomplete.bindTo('bounds', window.gDrsMap);
             window.gDrsMap.controls[google.maps.ControlPosition.TOP_CENTER].push(input);

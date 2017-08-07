@@ -4,6 +4,7 @@ using Drs.Infrastructure.JqGrid.Model;
 using Drs.Infrastructure.Resources;
 using Drs.Model.Constants;
 using Drs.Model.Franchise;
+using Drs.Model.Settings;
 using Drs.Repository.Entities;
 using Drs.Repository.Entities.Metadata;
 using Drs.Repository.Log;
@@ -44,8 +45,10 @@ namespace CentralManagement.Areas.Store.Controllers
                     ViewBag.Model = JsonConvert.SerializeObject(new
                     {
                         Franchise = repository.GetFranchiseMapInfoById(id),
-                        LstStoresByFranchise = repository.GetListStoresByFranchiseId(id),
-                    });           
+                        LstStoresByFranchise = repository.GetListStoresByFranchiseId(id)
+                    });
+
+                    ViewBag.MapKey = SettingsData.Address.MapKey;
                 }
             }
             catch (Exception ex)

@@ -51,6 +51,7 @@ namespace Drs.ViewModel.Order
         private List<IReactiveList<ListItemModel>> _lstRegions;
         private Visibility _visibilityMap;
         private Visibility _visibilityManual;
+        public string MapRegionCodeSearch { get; private set; }
 
         public UpsertAddressFoVm(IAutoCompleteTextVm zipCodeSearchVm, IReactiveDeliveryClient client)
         {
@@ -78,9 +79,12 @@ namespace Drs.ViewModel.Order
 
             _lstRegions = new List<IReactiveList<ListItemModel>> { Countries, RegionsA, RegionsB, RegionsC, RegionsD };
 
+            MapRegionCodeSearch = SettingsData.Address.MapRegionCodeSearch;
+
             UpsertCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => Save());
 
         }
+
 
         public void Save(AddressMapInfoModel model)
         {

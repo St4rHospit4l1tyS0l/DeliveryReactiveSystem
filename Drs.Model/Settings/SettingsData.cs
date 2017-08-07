@@ -32,6 +32,7 @@ namespace Drs.Model.Settings
                 public const string STORE = "STORE";
                 public const string TRACK = "TRACK";
                 public const string RECURRENCE = "RECURRENCE";
+                public const string ADDRESS = "ADDRESS";                
             }
 
             public static class SystemConst
@@ -216,6 +217,15 @@ namespace Drs.Model.Settings
                 public const string LEVEL_BRONZE = "Bronze";
             
             }
+
+            public class AddressConst
+            {
+                public const string MAP_KEY = "MAP_KEY";
+                public const string MAP_KEY_DEFAULT = "NOKEY";
+                public const string MAP_REGION_CODE_SEARCH = "MAP_REGION_SEARCH";
+                public const string MAP_REGION_CODE_SEARCH_DEFAULT = "MX";
+
+            }
         }
 
         public static class Server
@@ -265,6 +275,12 @@ namespace Drs.Model.Settings
             public static bool EnableStoreNotifications { get; set; }
             public static bool EnableOrderFeed { get; set; }
             public static int IntervalTimeOrderFeed { get; set; }
+        }
+
+        public class Address
+        {
+            public static string MapKey { get; set; }
+            public static string MapRegionCodeSearch { get; set; }
         }
 
         public static class Recurrence

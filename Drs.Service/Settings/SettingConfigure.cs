@@ -25,7 +25,6 @@ namespace Drs.Service.Settings
             SettingsData.Client.TablePosName = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.TABLE_POS_NAME, "Mp");
             SettingsData.Client.RowsSizeGrids = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.CLIENT, SettingsData.Constants.ClientConst.ROWS_SIZE_GRIDS, 10);
             
-
             SettingsData.Language = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.SYSTEM, SettingsData.Constants.SystemConst.LANGUAGE, 1);
             SettingsData.FirstRegion = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.SYSTEM, SettingsData.Constants.Control.CONTROL_FIRST_ADDRESS, SettingsData.Constants.Control.CONTROL_COUNTRY);
             SettingsData.LastRegion = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.SYSTEM, SettingsData.Constants.Control.CONTROL_LAST_ADDRESS, SettingsData.Constants.Control.CONTROL_REGION_C);
@@ -37,7 +36,6 @@ namespace Drs.Service.Settings
             SettingsData.MinutesToBeFutureOrder = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.SystemConst.MINUTES_TO_BE_FUTURE_ORDER, SettingsData.Constants.StoreOrder.MINUTES_TO_BE_FUTURE_ORDER);
             SettingsData.CultureSystem = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.SYSTEM, SettingsData.Constants.SystemConst.CULTURE_SYSTEM, SettingsData.Constants.SystemConst.CULTURE_SYSTEM_DEFAULT);
             
-
             SettingsData.Store.ByCountry = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.BY_COUNTRY, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.ByRegionA = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.BY_REGIONA, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.ByRegionB = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.BY_REGIONB, SettingsData.Constants.SystemConst.FALSE);
@@ -50,6 +48,10 @@ namespace Drs.Service.Settings
             SettingsData.Store.EnableStoreNotifications = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.ENABLE_STORE_NOTIFICATIONS, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.EnableOrderFeed = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.ENABLE_ORDER_FEED, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.IntervalTimeOrderFeed = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.INTERVAL_TIME_ORDER_FEED, 60);
+
+            SettingsData.Address.MapKey = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.ADDRESS, SettingsData.Constants.AddressConst.MAP_KEY, SettingsData.Constants.AddressConst.MAP_KEY_DEFAULT);
+            SettingsData.Address.MapRegionCodeSearch = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.ADDRESS, SettingsData.Constants.AddressConst.MAP_REGION_CODE_SEARCH, SettingsData.Constants.AddressConst.MAP_REGION_CODE_SEARCH_DEFAULT);
+            
 
             ResolveRecurrence(dicSettings);
 

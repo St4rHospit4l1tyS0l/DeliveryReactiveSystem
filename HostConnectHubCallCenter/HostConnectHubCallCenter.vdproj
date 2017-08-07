@@ -411,12 +411,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7D8A1063C563FF0529D000E71127F507"
-        "OwnerKey" = "8:_8744297324A1A54D57657237C44C42CF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_86AFAEF87802706ECB759D1C2ABF8C78"
         "OwnerKey" = "8:_4E43767A06E5DFB87872AD0CF2F51005"
         "MsmSig" = "8:_UNDEFINED"
@@ -653,6 +647,12 @@
         {
         "MsmKey" = "8:_A5261A7673F9B590A239293C97317D0E"
         "OwnerKey" = "8:_A93A0B77891C2936C8E39BA68E14B9C4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A601F75C26DA449816B0EF134221F8D5"
+        "OwnerKey" = "8:_8744297324A1A54D57657237C44C42CF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1042,12 +1042,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CEA759ABF52A9F22367190D0BA4BBB3E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C9AEE4CB383A4A9DBA9A25FA41A13D63"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1315,6 +1309,12 @@
         "OwnerKey" = "8:_6A1BA747BF30AC7AC6252ADB31287229"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CEA759ABF52A9F22367190D0BA4BBB3E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -1340,6 +1340,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
         "Release"
@@ -1958,26 +1966,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7D8A1063C563FF0529D000E71127F507"
-            {
-            "SourcePath" = "8:IBERQS.tlb"
-            "TargetName" = "8:IBERQS.tlb"
-            "Tag" = "8:"
-            "Folder" = "8:_57D9A7481FDD43C0A769CF42E8DF5520"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:2"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_86AFAEF87802706ECB759D1C2ABF8C78"
             {
             "AssemblyRegister" = "3:1"
@@ -2381,6 +2369,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A601F75C26DA449816B0EF134221F8D5"
+            {
+            "SourcePath" = "8:IBER.tlb"
+            "TargetName" = "8:IBER.tlb"
+            "Tag" = "8:"
+            "Folder" = "8:_57D9A7481FDD43C0A769CF42E8DF5520"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:2"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A93A0B77891C2936C8E39BA68E14B9C4"
             {
             "AssemblyRegister" = "3:1"
@@ -2416,7 +2424,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Drs.ViewModel, Version=16.8.6252.36909, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Drs.ViewModel, Version=16.8.6397.31468, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_AC4F44B4792992FA6787C373C0DB72D1"
@@ -3006,15 +3014,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:HostConnect Hub CallCenter"
-        "ProductCode" = "8:{E9B98DB5-F7DE-4846-8158-DBB7EBC63697}"
-        "PackageCode" = "8:{E21BD3D9-80D6-40A8-BCEC-CA7966420802}"
+        "ProductCode" = "8:{D5BD53EE-FEE1-48F3-AF87-57825A3E541C}"
+        "PackageCode" = "8:{3290B6C9-CA98-4240-BA1B-93CF1F2C1DCF}"
         "UpgradeCode" = "8:{5256EDB3-9E2E-4E29-9F87-BE060FAC0032}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:17.2.6"
+        "ProductVersion" = "8:17.7.7"
         "Manufacturer" = "8:Star Hospitality Solutions"
         "ARPHELPTELEPHONE" = "8:52 55 5039 1149"
         "ARPHELPLINK" = "8:"
