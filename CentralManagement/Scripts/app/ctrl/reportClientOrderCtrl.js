@@ -1,9 +1,20 @@
-﻿app.controller('reportClientOrderController', function ($scope, $http, $timeout) {
+﻿Date.prototype.yyyymmdd = function () {
+    var mm = this.getMonth() + 1; // getMonth() is zero-based
+    var dd = this.getDate();
+
+    return [this.getFullYear(),
+            (mm > 9 ? '' : '0') + mm,
+            (dd > 9 ? '' : '0') + dd
+    ].join('/');
+};
+
+app.controller('reportClientOrderController', function ($scope, $http, $timeout) {
     $scope.m = {};
 
     $scope.init = function () {
         $scope.m.FranchiseId = -1;
         $scope.m.franchise = window.initCatalog($scope.lstFranchises, $scope.m.FranchiseId);
+        $scope.m.startDate = new Date().yyyymmdd();
         $scope.onFranchiseChange();
     };
 

@@ -6,6 +6,7 @@
              xmlns:shared="clr-namespace:Drs.Ui.Ui.Shared"
              xmlns:vmShr="clr-namespace:Drs.ViewModel.Shared;assembly=Drs.ViewModel"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" Height="500" Width="1200">
 
     <UserControl.Resources>
@@ -40,9 +41,11 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Label Content="Teléfono: " FontSize="16" Foreground="{DynamicResource AccentColorBrush}"></Label>
-            <TextBlock Text="{Binding OrderDetail.Phone}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Margin="20 0" FontSize="16"></TextBlock>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.Phone, Mode=OneWay}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Margin="20 0" FontSize="16" BorderThickness="0"></TextBox>
             <Label Margin="20 0 0 0" Content="Cliente: " FontSize="16" Foreground="{DynamicResource AccentColorBrush}"></Label>
-            <TextBlock Text="{Binding OrderDetail.FullName}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Margin="20 0" FontSize="16"></TextBlock>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.FullName, Mode=OneWay}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Margin="20 0" FontSize="16" BorderThickness="0"></TextBox>
+            <Button Width="140" Margin="50 0 0 0" Height="35" Content="  Copiar ID Orden  " Style="{DynamicResource AccentedSquareButtonStyle}" 
+                    Command="{Binding CopyIdOrder}" controls:ButtonHelper.PreserveTextCase="True" />
         </StackPanel>
         <Grid>
             <Grid.RowDefinitions>
@@ -73,18 +76,17 @@
             <Label Content="Usuario:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
             <Label Content="Notas:" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Right" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></Label>
 
-            <TextBlock Text="{Binding OrderDetail.DateTimeOrder}" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.OrderAtoId}" Grid.Row="0" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.StoreName}" Grid.Row="0" Grid.Column="5" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.FranchiseName}" Grid.Row="0" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.LastStatusEx}" Grid.Row="1" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.PromiseTime}" Grid.Row="1" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.Mode}" Grid.Row="1" Grid.Column="5" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.CurrOrderTotal}" Grid.Row="1" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.StrEndDatetime}" Grid.Row="2" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.UserTakeOrder}" Grid.Row="2" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-            <TextBlock Text="{Binding OrderDetail.ExtraNotes}" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}"></TextBlock>
-
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.DateTimeOrder, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.OrderAtoId, Mode=OneWay}" Grid.Row="0" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.StoreName, Mode=OneWay}" Grid.Row="0" Grid.Column="5" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.FranchiseName, Mode=OneWay}" Grid.Row="0" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.LastStatusEx, Mode=OneWay}" Grid.Row="1" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.PromiseTime, Mode=OneWay}" Grid.Row="1" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.Mode, Mode=OneWay}" Grid.Row="1" Grid.Column="5" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.CurrOrderTotal, Mode=OneWay}" Grid.Row="1" Grid.Column="7" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.StrEndDatetime, Mode=OneWay}" Grid.Row="2" Grid.Column="1" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.UserTakeOrder, Mode=OneWay}" Grid.Row="2" Grid.Column="3" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding OrderDetail.ExtraNotes, Mode=OneWay}" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" Foreground="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontFamily="{DynamicResource BaseFontFamily}" FontSize="{DynamicResource BaseFontSize}" BorderThickness="0"></TextBox>
         </Grid>
         <StackPanel Visibility="{Binding VisiblityStoreErrMsg}">
             <Label Margin="20 0 0 0" Content="{Binding OrderDetail.StoreErrMsg}"  FontSize="12" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Foreground="Red"></Label>

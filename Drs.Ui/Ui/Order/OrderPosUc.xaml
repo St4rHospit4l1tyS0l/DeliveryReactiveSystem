@@ -40,6 +40,8 @@
                               EllipseDiameter="10" EllipseOffset="10" IsIndeterminate="True" Foreground="#FF2480EE" />
             <Button Width="200" Margin="0 30 0 0" Height="35" Content="  Mostrar POS  " Style="{DynamicResource AccentedSquareButtonStyle}" 
                     Command="{Binding ReloadPosCommand}" mah:ButtonHelper.PreserveTextCase="True" />
+            <Button Width="200" Margin="0 30 0 0" Height="35" Content="  Reiniciar POS  " Style="{DynamicResource AccentedSquareButtonStyle}" 
+                    Command="{Binding RestartPosCommand}" mah:ButtonHelper.PreserveTextCase="True" />
         </StackPanel>
 
     </Grid>

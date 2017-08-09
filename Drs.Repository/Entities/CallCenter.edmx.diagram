@@ -34,7 +34,7 @@
         <EntityTypeShape EntityType="CallCenterModel.FranchisePhone" Width="1.5" PointX="5.25" PointY="52.75" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseStore" Width="1.5" PointX="10.5" PointY="50.875" />
         <EntityTypeShape EntityType="CallCenterModel.FranchiseStoreGeoMap" Width="1.5" PointX="12.75" PointY="62.5" />
-        <EntityTypeShape EntityType="CallCenterModel.FranchiseStoreOffLine" Width="1.5" PointX="15.75" PointY="48" />
+        <EntityTypeShape EntityType="CallCenterModel.FranchiseStoreOffLine" Width="2.125" PointX="15.75" PointY="48" />
         <EntityTypeShape EntityType="CallCenterModel.InfoCallCenter" Width="1.5" PointX="3" PointY="73.125" />
         <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminal" Width="1.5" PointX="5.25" PointY="72.875" />
         <EntityTypeShape EntityType="CallCenterModel.InfoClientTerminalFranchise" Width="1.5" PointX="7.5" PointY="63.875" />

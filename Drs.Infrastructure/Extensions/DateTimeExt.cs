@@ -20,7 +20,7 @@ namespace Drs.Infrastructure.Extensions
             if (String.IsNullOrEmpty(sDate))
                 return defaultDate;
             DateTime dt;
-            return !DateTime.TryParseExact(sDate, "dd/MM/yyyy", null, DateTimeStyles.None, out dt) ? defaultDate : dt;
+            return !DateTime.TryParseExact(sDate, "yyyy/MM/dd", null, DateTimeStyles.None, out dt) ? defaultDate : dt;
         }
 
         public static string GetMonthName(this int iMonth)

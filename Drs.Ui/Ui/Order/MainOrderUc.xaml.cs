@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Drs.Infrastructure.Ui;
 
 namespace Drs.Ui.Ui.Order
 {
@@ -10,7 +11,12 @@ namespace Drs.Ui.Ui.Order
         public MainOrderUc()
         {
             InitializeComponent();
+            ScreenSizeResponsive.FixSize(MainGrid);
+            ScreenSizeResponsive.FixClientAddressWidth(ClientControl);
+            ScreenSizeResponsive.FixClientAddressWidth(AddressControl);
+            //MainGrid.Height = 900;
+            ScreenSizeResponsive.FixOrderDetailWidth(MainGrid.ColumnDefinitions);
         }
-
+            
     }
 }

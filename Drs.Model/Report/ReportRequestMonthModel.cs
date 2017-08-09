@@ -17,7 +17,7 @@ namespace Drs.Model.Report
                     return _month.Value;
                 if (String.IsNullOrWhiteSpace(RequestDate))
                     return -1;
-                _month = int.Parse(RequestDate.Substring(0,2));
+                _month = int.Parse(RequestDate.Substring(5,2));
                 return _month.Value;
             }
         }
@@ -29,7 +29,7 @@ namespace Drs.Model.Report
                     return _year.Value;
                 if (String.IsNullOrWhiteSpace(RequestDate))
                     return -1;
-                _year = int.Parse(RequestDate.Substring(3, 4));
+                _year = int.Parse(RequestDate.Substring(0, 4));
                 return _year.Value;
             }
         }

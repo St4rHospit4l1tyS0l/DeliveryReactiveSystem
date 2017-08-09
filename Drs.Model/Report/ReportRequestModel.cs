@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Drs.Infrastructure.Extensions;
 
 namespace Drs.Model.Report
@@ -39,5 +40,7 @@ namespace Drs.Model.Report
 
             }
         }
+
+        public List<int> ListStoresIds { get; set; }
     }
 }

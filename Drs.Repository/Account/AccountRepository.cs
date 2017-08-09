@@ -303,5 +303,10 @@ namespace Drs.Repository.Account
                 .Select(e => e.AspNetRoles.Select(i => i.Name).FirstOrDefault()).FirstOrDefault();
         }
 
+        public List<int> GetStoresIdsByUser(string userId)
+        {
+            return DbEntities.FranchiseStore.Where(e => e.AspNetUsers2.Id == userId)
+                .Select(e => e.FranchiseStoreId).ToList();
+        }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Concurrency;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using Drs.Infrastructure.Extensions.Enumerables;
 using Drs.Model.Constants;
@@ -20,10 +23,24 @@ namespace Drs.ViewModel.Track
         private TrackOrderDetailDto _orderDetail;
         private Visibility _visiblityStoreErrMsg;
 
+        public IReactiveCommand<Unit> CopyIdOrder { get; set; }
+
         public OrderDetailVm(IReactiveDeliveryClient client)
         {
             _client = client;
             VisiblityStoreErrMsg = Visibility.Collapsed;
+            CopyIdOrder = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => OnCopyIdOrder());
+        }
+
+        private async Task<Unit> OnCopyIdOrder()
+        {
+            await Task.Run(() =>
+            {
+                if (OrderDetail == null) return;
+                RxApp.MainThreadScheduler.Schedule(_ => Clipboard.SetText(OrderDetail.OrderAtoId));
+            });
+
+            return new Unit();
         }
 
         public void OnShowDetail(long orderToStoreId)

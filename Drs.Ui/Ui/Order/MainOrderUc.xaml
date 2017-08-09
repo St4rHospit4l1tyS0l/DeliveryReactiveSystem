@@ -44,7 +44,7 @@
     </UserControl.Resources>
 
     <Viewbox Name="VwBoxMainOrder">
-        <Grid Height="1080" Width="1900">
+        <Grid Name="MainGrid" Height="1080" Width="1900">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -69,7 +69,7 @@
             <ContentControl  Content="{Binding BackPrevious}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" >
             </ContentControl>
 
-            <ContentControl  Content="{Binding OrderSummary}"  Grid.Column="2" Grid.Row="1" Margin="20,8" Width="300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <ContentControl  Content="{Binding OrderSummary}"  Grid.Column="2" Grid.Row="1" Margin="20, 57, 20, 8" Width="300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             </ContentControl>
 
             <StackPanel Margin="15, 0" Grid.Column="1" Grid.Row="1">
@@ -99,12 +99,12 @@
                         <StackPanel Orientation="Vertical">
                             <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#FF51A0FF" Margin="0,0,0,0"></Rectangle>
                             <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0" >
-                                <ContentControl  Content="{Binding ClientsList}" Width="1450" MaxHeight="350" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+                                <ContentControl Name="ClientControl"  Content="{Binding ClientsList}" Width="1450" MaxHeight="350" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
                                 </ContentControl>
                             </StackPanel>
                             <Rectangle HorizontalAlignment="Stretch" Height="2" Stroke="#898989" Margin="0,20,0,20"></Rectangle>
                             <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 0" >
-                                <ContentControl  Content="{Binding AddressList}" Width="1450" MaxHeight="350" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+                                <ContentControl Name="AddressControl"  Content="{Binding AddressList}" Width="1450" MaxHeight="350" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
                                 </ContentControl>
                             </StackPanel>
                         </StackPanel>

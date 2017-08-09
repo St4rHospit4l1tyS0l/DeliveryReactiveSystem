@@ -13,6 +13,7 @@ using Drs.Infrastructure.Extensions;
 using Drs.Infrastructure.Extensions.Io;
 using Drs.Infrastructure.Extensions.Proc;
 using Drs.Infrastructure.Logging;
+using Drs.Infrastructure.Ui;
 using Drs.Model.Constants;
 using Drs.Model.Franchise;
 using Drs.Model.Order;
@@ -59,7 +60,8 @@ namespace Drs.Service.Franchise
                     ProcessExt.ForceStartProcess(
                         Path.Combine(SettingsData.AlohaPath, SettingsData.Constants.Franchise.BIN_FOLDER),
                         SettingsData.AlohaIberToInit,
-                        SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty), CalculatePosEnviromentVariables());
+                        SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty),
+                            ScreenSizeResponsive.CalculatePosEnviromentVariables(SettingsData.Store.EnableStoreNotifications));
 
                 if (process == null)
                 {
@@ -82,23 +84,6 @@ namespace Drs.Service.Franchise
                 //Copy directories of franchise 
                 DirExt.ForceCopyFolder(Path.Combine(SettingsData.AlohaPath, newDataFolderFranchise.ToString()), newDataFolder);
             }
-        }
-
-        public StringDictionary CalculatePosEnviromentVariables()
-        {
-            var strDic = new StringDictionary
-            {
-                {"AlohaLeft", (SystemParameters.PrimaryScreenWidth*(0.15625) + MoveToLeftIfNotificationIsEnabled()).ToString(CultureInfo.InvariantCulture)},
-                {"AlohaXRes", (SystemParameters.PrimaryScreenWidth * (0.52083)).ToString(CultureInfo.InvariantCulture)},
-                {"AlohaTop", (SystemParameters.PrimaryScreenHeight * (0.125)).ToString(CultureInfo.InvariantCulture)},
-                {"AlohaYRes", (SystemParameters.PrimaryScreenHeight * (0.74074)).ToString(CultureInfo.InvariantCulture)}
-            };
-            return strDic;
-        }
-
-        private double MoveToLeftIfNotificationIsEnabled()
-        {
-            return (SettingsData.Store.EnableStoreNotifications == false) ? 0 : SystemParameters.PrimaryScreenWidth * (0.1);
         }
 
         private void ReinitPosIfNotCurrentDobOrDifferentFranchise(bool isUpdated, string fileCode, string dataFolder,

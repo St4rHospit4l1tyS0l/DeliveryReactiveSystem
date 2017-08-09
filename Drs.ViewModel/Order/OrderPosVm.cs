@@ -29,6 +29,7 @@ namespace Drs.ViewModel.Order
         private IDisposable _subscription;
 
         public IReactiveCommand<Unit> ReloadPosCommand { get; set; }
+        public IReactiveCommand<Unit> RestartPosCommand { get; set; }
         public IReactiveList<StoreNotificationCategoryViewModel> LstNotificaionCategories { get; set; }
 
 
@@ -36,6 +37,7 @@ namespace Drs.ViewModel.Order
         {
             _client = client;
             ReloadPosCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => OnReloadPos());
+            RestartPosCommand = ReactiveCommand.CreateAsyncTask(Observable.Return(true), _ => OnRestartPos());
             LstNotificaionCategories = new ReactiveList<StoreNotificationCategoryViewModel>();
         }
 
@@ -43,6 +45,24 @@ namespace Drs.ViewModel.Order
         {
             await Task.Run(() =>
             {
+                if (!PosService.DeletePosFoldersDataAndNewDataIfPosIsDown())
+                {
+                    ShowPosApp();
+                    return;
+                }
+                ReloadPosAction.SafeExecuteAction();
+            });
+
+            return new Unit();
+        }
+
+
+        private async Task<Unit> OnRestartPos()
+        {
+            await Task.Run(() =>
+            {
+                ProcessExt.ForceKillProcess(SettingsData.AlohaIber.Replace(SettingsData.Constants.EXTENSION_EXE, String.Empty));
+
                 if (!PosService.DeletePosFoldersDataAndNewDataIfPosIsDown())
                 {
                     ShowPosApp();

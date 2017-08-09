@@ -1,13 +1,13 @@
 ﻿$(document).ready(function () {
     $('#rangeDates').datepicker({
-        format: 'dd/mm/yyyy',
+        format: 'yyyy/mm/dd',
         startView: 1,
-        startDate: '01/01/1970',
-        endDate: '01/01/2200'
+        startDate: '1970/01/01',
+        endDate: '2200/01/01'
     });
 
     $('#monthDate').datepicker({
-        format: 'mm/yyyy',
+        format: 'yyyy/mm',
         startView: 1,
         minViewMode: 1,
         maxViewMode: 1

@@ -164,6 +164,9 @@ namespace Drs.Repository.Report
             if (requestModelTime.SecondId != EntityConstants.NULL_VALUE)
                 query = query.Where(e => e.FranchiseStoreId == requestModelTime.SecondId);
 
+            if (requestModelTime.ListStoresIds != null)
+                query = query.Where(e => requestModelTime.ListStoresIds.Contains(e.FranchiseStoreId));
+
             var startDate = requestModelTime.StartCalculatedDate;
             var endDate = requestModelTime.EndCalculatedDate.AddDays(1);
 
