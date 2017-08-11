@@ -209,6 +209,7 @@
       <xs:element name="paymentTotalField" nillable="true" type="xs:string" />
       <xs:element name="prepTimeField" nillable="true" type="xs:string" />
       <xs:element name="promiseTimeField" nillable="true" type="xs:string" />
+      <xs:element name="promosField" nillable="true" type="tns:ArrayOfOrderPromosPromo" />
       <xs:element name="referenceIdField" nillable="true" type="xs:string" />
       <xs:element name="sequenceNumberField" nillable="true" type="xs:string" />
       <xs:element name="sourceField" nillable="true" type="xs:string" />
@@ -314,6 +315,34 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Item" nillable="true" type="tns:Item" />
+  <xs:complexType name="ArrayOfOrderPromosPromo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderPromosPromo" nillable="true" type="tns:OrderPromosPromo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderPromosPromo" nillable="true" type="tns:ArrayOfOrderPromosPromo" />
+  <xs:complexType name="OrderPromosPromo">
+    <xs:sequence>
+      <xs:element name="amountField" nillable="true" type="xs:string" />
+      <xs:element name="identifierDataField" nillable="true" type="xs:string" />
+      <xs:element name="itemSelectionsField" nillable="true" type="tns:ArrayOfItemSelection" />
+      <xs:element name="promoTypeIdField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderPromosPromo" nillable="true" type="tns:OrderPromosPromo" />
+  <xs:complexType name="ArrayOfItemSelection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemSelection" nillable="true" type="tns:ItemSelection" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItemSelection" nillable="true" type="tns:ArrayOfItemSelection" />
+  <xs:complexType name="ItemSelection">
+    <xs:sequence>
+      <xs:element name="groupIdField" nillable="true" type="xs:string" />
+      <xs:element name="itemReferenceIdField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItemSelection" nillable="true" type="tns:ItemSelection" />
   <xs:complexType name="ArrayOfOrderTendersTender">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderTendersTender" nillable="true" type="tns:OrderTendersTender" />

@@ -24,15 +24,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.1.110:8732/CustomerOrder/" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.1.5:8732/CustomerOrder/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="26bd068f-e7fa-4823-b89e-8db7485f79ba" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?xsd=xsd0" />
-    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="9b72d47b-35e6-49b2-bb61-0d50023d0035" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?disco" />
-    <MetadataFile FileName="item41.xsd" MetadataType="Schema" ID="f0f839e8-31f0-4910-aabf-8cc365df2f03" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?xsd=xsd1" />
-    <MetadataFile FileName="CustomerOrder1.wsdl" MetadataType="Wsdl" ID="4b41c9b2-2657-46fa-a32c-fdabe4b50410" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?wsdl" />
-    <MetadataFile FileName="item42.xsd" MetadataType="Schema" ID="df22842a-0629-4b72-9506-7d6a1b6d24a6" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?xsd=xsd3" />
-    <MetadataFile FileName="item43.xsd" MetadataType="Schema" ID="10e56745-0ebc-4643-b768-c25a1c5e10fc" SourceId="1" SourceUrl="http://192.168.1.110:8732/CustomerOrder/?xsd=xsd2" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="9d97c1d6-3c38-4f9c-8e1d-52e217f54dc8" SourceId="1" SourceUrl="http://192.168.1.5:8732/CustomerOrder/?xsd=xsd3" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="f951458d-7bd1-4623-82c2-5b547a471fb4" SourceId="1" SourceUrl="http://192.168.1.5:8732/CustomerOrder/?xsd=xsd1" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="02d8ea0c-9558-4afa-9c84-f9c77daa0106" SourceId="1" SourceUrl="http://192.168.1.5:8732/CustomerOrder/?xsd=xsd2" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="d32359e6-e844-4741-82a0-852043215d8c" SourceId="1" SourceUrl="http://192.168.1.5:8732/CustomerOrder/?disco" />
+    <MetadataFile FileName="CustomerOrder.wsdl" MetadataType="Wsdl" ID="0ea8e1e6-b3df-4740-b8fe-078c14b8d558" SourceId="1" SourceUrl="http://192.168.1.5:8732/CustomerOrder/?wsdl" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="524a9cb9-a349-4308-ac96-0218baef9382" SourceId="1" SourceUrl="http://192.168.1.5:8732/CustomerOrder/?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1111,6 +1111,8 @@ namespace Drs.Service.CustomerOrder {
         
         private string promiseTimeFieldField;
         
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.OrderPromosPromo> promosFieldField;
+        
         private string referenceIdFieldField;
         
         private string sequenceNumberFieldField;
@@ -1399,6 +1401,19 @@ namespace Drs.Service.CustomerOrder {
                 if ((object.ReferenceEquals(this.promiseTimeFieldField, value) != true)) {
                     this.promiseTimeFieldField = value;
                     this.RaisePropertyChanged("promiseTimeField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.OrderPromosPromo> promosField {
+            get {
+                return this.promosFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.promosFieldField, value) != true)) {
+                    this.promosFieldField = value;
+                    this.RaisePropertyChanged("promosField");
                 }
             }
         }
@@ -2675,6 +2690,95 @@ namespace Drs.Service.CustomerOrder {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OrderPromosPromo", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class OrderPromosPromo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private string amountFieldField;
+        
+        private string identifierDataFieldField;
+        
+        private System.Collections.Generic.List<Drs.Service.CustomerOrder.ItemSelection> itemSelectionsFieldField;
+        
+        private string promoTypeIdFieldField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string amountField {
+            get {
+                return this.amountFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.amountFieldField, value) != true)) {
+                    this.amountFieldField = value;
+                    this.RaisePropertyChanged("amountField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string identifierDataField {
+            get {
+                return this.identifierDataFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.identifierDataFieldField, value) != true)) {
+                    this.identifierDataFieldField = value;
+                    this.RaisePropertyChanged("identifierDataField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Collections.Generic.List<Drs.Service.CustomerOrder.ItemSelection> itemSelectionsField {
+            get {
+                return this.itemSelectionsFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemSelectionsFieldField, value) != true)) {
+                    this.itemSelectionsFieldField = value;
+                    this.RaisePropertyChanged("itemSelectionsField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string promoTypeIdField {
+            get {
+                return this.promoTypeIdFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.promoTypeIdFieldField, value) != true)) {
+                    this.promoTypeIdFieldField = value;
+                    this.RaisePropertyChanged("promoTypeIdField");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OrderTendersTender", Namespace="http://schemas.datacontract.org/2004/07/")]
     [System.SerializableAttribute()]
     public partial class OrderTendersTender : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -3211,6 +3315,65 @@ namespace Drs.Service.CustomerOrder {
                 if ((object.ReferenceEquals(this.useTakeOutPriceFieldField, value) != true)) {
                     this.useTakeOutPriceFieldField = value;
                     this.RaisePropertyChanged("useTakeOutPriceField");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ItemSelection", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.SerializableAttribute()]
+    public partial class ItemSelection : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private string groupIdFieldField;
+        
+        private string itemReferenceIdFieldField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string groupIdField {
+            get {
+                return this.groupIdFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.groupIdFieldField, value) != true)) {
+                    this.groupIdFieldField = value;
+                    this.RaisePropertyChanged("groupIdField");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string itemReferenceIdField {
+            get {
+                return this.itemReferenceIdFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.itemReferenceIdFieldField, value) != true)) {
+                    this.itemReferenceIdFieldField = value;
+                    this.RaisePropertyChanged("itemReferenceIdField");
                 }
             }
         }

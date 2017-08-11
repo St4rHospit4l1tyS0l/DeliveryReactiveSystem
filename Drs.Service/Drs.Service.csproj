@@ -232,7 +232,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Service References\CustomerOrder\CustomerOrder1.wsdl" />
+    <None Include="Service References\CustomerOrder\CustomerOrder.wsdl" />
     <None Include="Service References\CustomerOrder\Drs.Service.CustomerOrder.ResponseGen.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -242,16 +242,16 @@
     <None Include="Service References\CustomerOrder\Drs.Service.CustomerOrder.ResponseTor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\CustomerOrder\item4.xsd">
+    <None Include="Service References\CustomerOrder\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\CustomerOrder\item41.xsd">
+    <None Include="Service References\CustomerOrder\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\CustomerOrder\item42.xsd">
+    <None Include="Service References\CustomerOrder\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\CustomerOrder\item43.xsd">
+    <None Include="Service References\CustomerOrder\item3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\LicProxySvc\LicProxy.xsd">
@@ -393,14 +393,12 @@
     <None Include="Service References\QueryFunction\item.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\CustomerOrder\item1.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
+    <None Include="Service References\CustomerOrder\item.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -289,16 +289,24 @@ namespace Drs.Service.Store
             var lstItem = new List<Item>();
             var dictItem = new Dictionary<long, Item>();
 
+            var hasPromo = model.PosOrder.Promos != null && model.PosOrder.Promos.Any();
+
             foreach (var item in model.PosOrder.LstItems)
             {
+                if (hasPromo)
+                {
+                    if(model.PosOrder.Promos.ContainsKey(item.ItemId))
+                        continue;
+                }
+
                 var itemToSend = new Item
                 {
                     menuItemIdField = item.ItemId.ToString(CultureInfo.InvariantCulture),
                     nameField = item.Name,
                     referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
                     quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
-                    priceField = item.Price.ToString(CultureInfo.InvariantCulture),
-                    levelField = item.Level.ToString(CultureInfo.InvariantCulture)
+                    //priceField = item.Price.ToString(CultureInfo.InvariantCulture),
+                    levelField = item.Level.ToString(CultureInfo.InvariantCulture),
 
                 };
 
@@ -321,7 +329,7 @@ namespace Drs.Service.Store
                     itemParent.subItemsField.Add(itemToSend);
                 }
 
-            }
+            } 
 
             var order = new CustomerOrder.Order
             {
@@ -355,6 +363,33 @@ namespace Drs.Service.Store
                     }
                 }
             };
+
+            if (hasPromo)
+            {
+                order.promosField = model.PosOrder.Promos.Values.Select(e =>
+                {
+                    var j = -1;
+                    return new OrderPromosPromo
+                    {
+                        promoTypeIdField = e.PromoTypeId.ToString(CultureInfo.InvariantCulture),
+                        itemSelectionsField = e.LstEntries.Select(i =>
+                        {
+                            Item item;
+
+                            if (dictItem.TryGetValue(i, out item))
+                                item.priceField = null;
+
+                            j++;
+                            return new ItemSelection
+                            {
+                                groupIdField = j.ToString(CultureInfo.InvariantCulture),
+                                itemReferenceIdField = i.ToString(CultureInfo.InvariantCulture)
+                            };
+                        }).ToList()
+
+                    };
+                }).ToList();
+            }
 
             if (model.OrderDetails.PosOrderStatus == SettingsData.Constants.StoreConst.MODE_DELIVERY_FUTURE)
             {

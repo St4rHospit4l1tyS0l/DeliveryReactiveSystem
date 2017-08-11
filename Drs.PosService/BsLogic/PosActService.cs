@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using AdmInterceptActivity;
 using Drs.Infrastructure.Extensions.Enumerables;
@@ -18,30 +19,51 @@ namespace Drs.PosService.BsLogic
         public const int INTERNAL_CHECKS = 540;
         public const int INTERNAL_CHECKS_ENTRIES = 542;
         public const int INTERNAL_ENTRIES_ITEM_DATA = 562;
+        public const int INTERNAL_CHECKS_PROMOS = 544;
+        public const int INTERNAL_PROMOS_ITEMS = 621;
+
         private int _iTries;
+        private static PosCheck _currentCheck;
 
         private void GetInternalItems(int iCheckId)
         {
             var pDepot = new IberDepot();
             try
             {
+
                 _iTries = 0;
                 var posCheck = new PosCheck();
                 var lstItems = new List<ItemModel>();
                 var dictLevels = new Dictionary<int, ItemModel>();
 
+
+
                 foreach (IIberObject chkObject in pDepot.FindObjectFromId(INTERNAL_CHECKS, iCheckId))
                 {
+                    GetPromosIfAny(chkObject, posCheck);
+
                     foreach (IIberObject objItem in chkObject.GetEnum(INTERNAL_CHECKS_ENTRIES))
                     {
-                        if (objItem.GetLongVal("MOD_CODE") == 8) continue; //ITEM DELETED
+                        var modCode = objItem.GetLongVal("MOD_CODE");
+                        if (modCode == 8) continue; //ITEM DELETED
 
-                        var idCheckItem = objItem.GetLongVal("ID");
                         var idItem = objItem.GetLongVal("DATA");
+                        if (idItem <= 0) continue;
+
+                        //var type = objItem.GetStringVal("TYPE");
+                        //var mode = objItem.GetStringVal("MODE");
+                        //var routing = objItem.GetStringVal("ROUTING");
+                        //var menu = objItem.GetStringVal("MENU");
+                        var origin = objItem.GetStringVal("ORIGIN");
+                        
+                        var idCheckItem = objItem.GetLongVal("ID");
                         var itemName = objItem.GetStringVal("DISP_NAME");
                         var price = objItem.GetDoubleVal("PRICE");
                         var level = objItem.GetLongVal("LEVEL");
-                        var item = new ItemModel { ItemId = idItem, CheckItemId = idCheckItem, Name = itemName, IsIdSpecified = true, Price = price, Level = level };
+                        var item = new ItemModel { ItemId = idItem, CheckItemId = idCheckItem, Name = itemName, IsIdSpecified = true, Price = price, Level = level, 
+                            ModCode = modCode, Origin = origin };
+
+                        //Console.WriteLine(type + mode + origin + routing + menu);
 
                         dictLevels[level] = item;
 
@@ -61,19 +83,47 @@ namespace Drs.PosService.BsLogic
                     posCheck.Total = dValue;
                     posCheck.LstItems = lstItems;
 
-                    SendPosCheckInfo(posCheck);
+                    //var strPosCheck = posCheck.Serialize(); 
+                    //Console.WriteLine(strPosCheck);
+                    _currentCheck = posCheck;
+                    //SendPosCheckInfo(_currentCheck);
                 }
 
             }
             catch //(Exception ex)
             {
-                //
                 //MessageBox.Show(ex.Message + @" - " + ex.StackTrace);
+            }
+        }
+
+        private void GetPromosIfAny(IIberObject chkObject, PosCheck posCheck)
+        {
+            try
+            {
+                var dicPromos = new Dictionary<long, PromoModel>();
+                foreach (IIberObject objInternal in chkObject.GetEnum(INTERNAL_CHECKS_PROMOS))
+                {
+                    var promoModel = new PromoModel { PromoEntryId = objInternal.GetLongVal("ID"), PromoTypeId = objInternal.GetLongVal("PROMOTION_ID") };
+
+                    var lstEntries = (from IIberObject objElement in objInternal.GetEnum(INTERNAL_PROMOS_ITEMS) select objElement.GetLongVal("ID")).ToList();
+
+                    promoModel.LstEntries = lstEntries;
+                    dicPromos.Add(promoModel.PromoEntryId, promoModel);
+                }
+                posCheck.Promos = dicPromos;
+
+            }
+            catch
+            {
+                //return null;
             }
         }
 
         private void SendPosCheckInfo(PosCheck posCheck)
         {
+            if (posCheck == null)
+                return;
+            
             Client.ExecutionProxy.ExecuteRequest<PosCheck, PosCheck, ResponseMessageData<bool>, ResponseMessageData<bool>>
                 (posCheck, TransferDto.SameType, SharedConstants.Server.POS_RECEIVER_HUB, SharedConstants.Server.ORDER_POS_RECEIVER_HUB_METHOD, TransferDto.SameType)
                 .Subscribe(x => OnSendPosOk(x, posCheck), x => OnSendPosError(x, posCheck));
@@ -131,12 +181,13 @@ namespace Drs.PosService.BsLogic
 
         public void OpenCheck(int iemployeeId, int iqueueId, int itableId, int icheckId)
         {
-
+            _currentCheck = null;
         }
 
         public void CloseCheck(int iemployeeId, int iqueueId, int itableId, int icheckId)
         {
-            GetInternalItems(icheckId);
+            //GetInternalItems(icheckId);
+            SendPosCheckInfo(_currentCheck);
         }
 
         public void TransferTable(int ifromEmployeeId, int itoEmployeeId, int itableId, string sNewName, int iIsGetCheck)
@@ -185,7 +236,7 @@ namespace Drs.PosService.BsLogic
 
         public void OrderItems(int iEmployeeId, int iQueueId, int iTableId, int iCheckId, int iModeId)
         {
-
+            GetInternalItems(iCheckId);
         }
 
         public void HoldItems(int iEmployeeId, int iQueueId, int iTableId, int iCheckId)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Drs.Model.Order
 {
@@ -37,5 +38,16 @@ namespace Drs.Model.Order
         public long? ParentId { get; set; }
         public long Level { get; set; }
         public long CheckItemId { get; set; }
+        public string Origin { get; set; }
+        public int ModCode { get; set; }
+
+        //public int ModCode { get; set; }
+    }
+
+    public class PromoModel
+    {
+        public int PromoEntryId { get; set; }
+        public int PromoTypeId { get; set; }
+        public List<int> LstEntries { get; set; }
     }
 }

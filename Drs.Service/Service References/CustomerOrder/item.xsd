@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LASA_CallCenter_Interface_Ws.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LASA_CallCenter_Interface_Ws.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.1.110:8732/CustomerOrder/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
+  <xs:import schemaLocation="http://192.168.1.5:8732/CustomerOrder/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
   <xs:complexType name="ResponseTor">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ResponseMessage">
