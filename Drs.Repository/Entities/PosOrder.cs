@@ -18,6 +18,7 @@ namespace Drs.Repository.Entities
         {
             this.OrderToStore = new HashSet<OrderToStore>();
             this.PosOrderItem = new HashSet<PosOrderItem>();
+            this.PosOrderPromo = new HashSet<PosOrderPromo>();
         }
     
         public long PosOrderId { get; set; }
@@ -33,5 +34,6 @@ namespace Drs.Repository.Entities
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<PosOrderItem> PosOrderItem { get; set; }
+        public virtual ICollection<PosOrderPromo> PosOrderPromo { get; set; }
     }
 }

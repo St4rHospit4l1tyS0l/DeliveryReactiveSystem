@@ -169,10 +169,11 @@ namespace Drs.Service.Order
                     return new ResponseMessageData<PropagateOrderModel>
                     {
                         IsSuccess = false,
-                        Message = "No existe información del tiquete"
+                        Message = "No existe información del pedido"
                     };
                 }
 
+                posCheck.ConvertToDicPromos();
 
                 var repositoryFranchise = new FranchiseRepository(_repository.Db);
 

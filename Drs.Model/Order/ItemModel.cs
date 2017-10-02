@@ -38,10 +38,9 @@ namespace Drs.Model.Order
         public long? ParentId { get; set; }
         public long Level { get; set; }
         public long CheckItemId { get; set; }
-        public string Origin { get; set; }
+        public int Origin { get; set; }
         public int ModCode { get; set; }
 
-        //public int ModCode { get; set; }
     }
 
     public class PromoModel
@@ -49,5 +48,6 @@ namespace Drs.Model.Order
         public int PromoEntryId { get; set; }
         public int PromoTypeId { get; set; }
         public List<int> LstEntries { get; set; }
+        public string EntriesIdsSelected { get; set; }
     }
 }

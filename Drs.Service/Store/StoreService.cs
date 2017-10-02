@@ -305,9 +305,10 @@ namespace Drs.Service.Store
                     nameField = item.Name,
                     referenceIdField = item.CheckItemId.ToString(CultureInfo.InvariantCulture),
                     quantityField = SettingsData.Constants.StoreConst.QUANTITY_ITEM,
-                    //priceField = item.Price.ToString(CultureInfo.InvariantCulture),
+                    priceField = item.Price.ToString(CultureInfo.InvariantCulture),
                     levelField = item.Level.ToString(CultureInfo.InvariantCulture),
-
+                    modCodeIdField = item.ModCode.ToString(CultureInfo.InvariantCulture),
+                    modGroupIdField = item.Level > 0 ? item.Origin.ToString(CultureInfo.InvariantCulture) : null
                 };
 
                 dictItem[item.CheckItemId] = itemToSend;

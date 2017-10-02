@@ -54,7 +54,7 @@ namespace Drs.PosService.BsLogic
                         //var mode = objItem.GetStringVal("MODE");
                         //var routing = objItem.GetStringVal("ROUTING");
                         //var menu = objItem.GetStringVal("MENU");
-                        var origin = objItem.GetStringVal("ORIGIN");
+                        var origin = objItem.GetLongVal("ORIGIN");
                         
                         var idCheckItem = objItem.GetLongVal("ID");
                         var itemName = objItem.GetStringVal("DISP_NAME");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using Drs.Model.Shared;
+using Newtonsoft.Json;
 
 namespace Drs.Model.Order
 {
@@ -43,6 +44,7 @@ namespace Drs.Model.Order
         public string FranchiseCode { get; set; }
         public DateTime OrderDateTime { get; set; }
         public Dictionary<long, PromoModel> Promos { get; set; }
+        public List<PromoModel> LstPromos { get; set; }
 
         public void FixItemParents()
         {
@@ -62,6 +64,21 @@ namespace Drs.Model.Order
                     item.Parent = dictItems[item.ParentId.Value];
                 }
             }
+        }
+
+        public void ConvertToDicPromos()
+        {
+            if (LstPromos == null || !LstPromos.Any())
+                return;
+
+            Promos = LstPromos.ToDictionary(e => (long)e.PromoEntryId, e => new PromoModel
+            {
+                PromoEntryId = e.PromoEntryId,
+                PromoTypeId = e.PromoTypeId,
+                LstEntries = JsonConvert.DeserializeObject<List<int>>(e.EntriesIdsSelected)
+            });
+
+            LstPromos = null;
         }
     }
 }

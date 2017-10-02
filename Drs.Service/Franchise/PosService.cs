@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
@@ -217,7 +215,7 @@ namespace Drs.Service.Franchise
             {
                 var sMsg = ex.AlohaError();
                 SharedLogger.LogErrorToFile(ex, sMsg);
-                MessageBox.Show("Refresh Error: " + sMsg + " | " + ex.Message);
+                //MessageBox.Show("Refresh Error: " + sMsg + " | " + ex.Message);
                 return false;
             }
 
@@ -244,8 +242,13 @@ namespace Drs.Service.Franchise
                 LasaFOHLib67.IberFuncs funcs = new LasaFOHLib67.IberFuncsClass();
                 var dicParents = new Dictionary<long, int>();
                 var bLastItemIsEndItem = true;
+                var hasPromo = propagateOrder.PosCheck.Promos != null && propagateOrder.PosCheck.Promos.Count > 0;
+                
                 foreach (var itemModel in propagateOrder.PosCheck.LstItems)
                 {
+                    if(hasPromo && propagateOrder.PosCheck.Promos.ContainsKey(itemModel.ItemId))
+                        continue;
+
                     bLastItemIsEndItem = false;
                     int entryId;
                     if (itemModel.ParentId == null)
@@ -264,7 +267,7 @@ namespace Drs.Service.Franchise
                     if (!dicParents.TryGetValue(itemModel.ParentId.Value, out entryId))
                         continue;
 
-                    entryId = funcs.ModItem(termId, entryId, (int)itemModel.ItemId, "", -999999999, 0);
+                    entryId = funcs.ModItem(termId, entryId, (int)itemModel.ItemId, "", -999999999, itemModel.ModCode);
                     dicParents.Add(itemModel.CheckItemId, entryId);
                 }
 

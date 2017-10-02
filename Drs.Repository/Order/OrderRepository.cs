@@ -8,6 +8,7 @@ using Drs.Model.Order;
 using Drs.Repository.Account;
 using Drs.Repository.Entities;
 using Drs.Repository.Shared;
+using Newtonsoft.Json;
 
 namespace Drs.Repository.Order
 {
@@ -178,6 +179,21 @@ namespace Drs.Repository.Order
                 itemModel.CheckItemId = item.PosOrderItemId;
             }
 
+            if (model.Promos != null && model.Promos.Any())
+            {
+                var lstPromos = model.Promos.Values.Select(promo => new PosOrderPromo
+                {
+                    PosOrderId =  entity.PosOrderId,
+                    EntriesIdsSelected = JsonConvert.SerializeObject(promo.LstEntries), 
+                    PromoEntryId = promo.PromoEntryId, 
+                    PromoTypeId = promo.PromoTypeId
+                }).ToList();
+
+                DbEntities.PosOrderPromo.AddRange(lstPromos);
+                DbEntities.SaveChanges();
+            }
+
+
             model.Id = entity.PosOrderId;
             DbEntities.Entry(entity).State = EntityState.Detached;
             return model.Id;
@@ -237,6 +253,12 @@ namespace Drs.Repository.Order
                         Level = i.LevelItem,
                         ParentId = i.ParentId
                     }).ToList(),
+                    LstPromos = e.PosOrderPromo.Select(i => new PromoModel
+                    {
+                        PromoEntryId = i.PromoEntryId,
+                        PromoTypeId = i.PromoTypeId,
+                        EntriesIdsSelected = i.EntriesIdsSelected
+                    }).ToList()
                 }).FirstOrDefault();
         }
 

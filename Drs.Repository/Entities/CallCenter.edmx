@@ -510,6 +510,18 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="4" Nullable="false" />
           <Property Name="LevelItem" Type="int" Nullable="false" />
           <Property Name="ParentId" Type="bigint" />
+          <Property Name="ModCode" Type="int" Nullable="false" />
+          <Property Name="Origin" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PosOrderPromo">
+          <Key>
+            <PropertyRef Name="PosOrderPromoId" />
+          </Key>
+          <Property Name="PosOrderPromoId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PosOrderId" Type="bigint" Nullable="false" />
+          <Property Name="PromoTypeId" Type="int" Nullable="false" />
+          <Property Name="PromoEntryId" Type="int" Nullable="false" />
+          <Property Name="EntriesIdsSelected" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Recurrence">
           <Key>
@@ -1630,6 +1642,18 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PosOrderPromo_PosOrder">
+          <End Role="PosOrder" Type="Self.PosOrder" Multiplicity="1" />
+          <End Role="PosOrderPromo" Type="Self.PosOrderPromo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosOrder">
+              <PropertyRef Name="PosOrderId" />
+            </Principal>
+            <Dependent Role="PosOrderPromo">
+              <PropertyRef Name="PosOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Recurrence_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Recurrence" Type="Self.Recurrence" Multiplicity="*" />
@@ -2112,6 +2136,7 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosOrder" EntityType="Self.PosOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosOrderItem" EntityType="Self.PosOrderItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosOrderPromo" EntityType="Self.PosOrderPromo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recurrence" EntityType="Self.Recurrence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegionA" EntityType="Self.RegionA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegionB" EntityType="Self.RegionB" Schema="dbo" store:Type="Tables" />
@@ -2494,6 +2519,10 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="PosOrder" EntitySet="PosOrder" />
             <End Role="PosOrderItem" EntitySet="PosOrderItem" />
           </AssociationSet>
+          <AssociationSet Name="FK_PosOrderPromo_PosOrder" Association="Self.FK_PosOrderPromo_PosOrder">
+            <End Role="PosOrder" EntitySet="PosOrder" />
+            <End Role="PosOrderPromo" EntitySet="PosOrderPromo" />
+          </AssociationSet>
           <AssociationSet Name="FK_Recurrence_Client" Association="Self.FK_Recurrence_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Recurrence" EntitySet="Recurrence" />
@@ -2682,8 +2711,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySet Name="OrderToStore" EntityType="CallCenterModel.OrderToStore" />
           <EntitySet Name="OrderToStoreLog" EntityType="CallCenterModel.OrderToStoreLog" />
           <EntitySet Name="Permission" EntityType="CallCenterModel.Permission" />
-          <EntitySet Name="PosOrder" EntityType="CallCenterModel.PosOrder" />
-          <EntitySet Name="PosOrderItem" EntityType="CallCenterModel.PosOrderItem" />
           <EntitySet Name="Recurrence" EntityType="CallCenterModel.Recurrence" />
           <EntitySet Name="RegionA" EntityType="CallCenterModel.RegionA" />
           <EntitySet Name="RegionB" EntityType="CallCenterModel.RegionB" />
@@ -2818,10 +2845,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="FK_OrderToStore_AspNetUsers" Association="CallCenterModel.FK_OrderToStore_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PosOrder_AspNetUsers" Association="CallCenterModel.FK_PosOrder_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="PosOrder" EntitySet="PosOrder" />
           </AssociationSet>
           <AssociationSet Name="FK_Resource_AspNetUsers" Association="CallCenterModel.FK_Resource_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2967,10 +2990,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             <End Role="Module" EntitySet="Module" />
             <End Role="Permission" EntitySet="Permission" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderToStore_PosOrder" Association="CallCenterModel.FK_OrderToStore_PosOrder">
-            <End Role="PosOrder" EntitySet="PosOrder" />
-            <End Role="OrderToStore" EntitySet="OrderToStore" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderToStoreLog_OrderToStore" Association="CallCenterModel.FK_OrderToStoreLog_OrderToStore">
             <End Role="OrderToStore" EntitySet="OrderToStore" />
             <End Role="OrderToStoreLog" EntitySet="OrderToStoreLog" />
@@ -2982,10 +3001,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="FK_StoreStatus_OrderToStore" Association="CallCenterModel.FK_StoreStatus_OrderToStore">
             <End Role="OrderToStore" EntitySet="OrderToStore" />
             <End Role="StoreStatus" EntitySet="StoreStatus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PosOrderItem_PosOrder" Association="CallCenterModel.FK_PosOrderItem_PosOrder">
-            <End Role="PosOrder" EntitySet="PosOrder" />
-            <End Role="PosOrderItem" EntitySet="PosOrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_RegionA_ZipCode" Association="CallCenterModel.FK_RegionA_ZipCode">
             <End Role="ZipCode" EntitySet="ZipCode" />
@@ -3059,6 +3074,25 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <AssociationSet Name="FK_StoreMessageDate_StoreMessage" Association="CallCenterModel.FK_StoreMessageDate_StoreMessage">
             <End Role="StoreMessage" EntitySet="StoreMessage" />
             <End Role="StoreMessageDate" EntitySet="StoreMessageDate" />
+          </AssociationSet>
+          <EntitySet Name="PosOrderPromo" EntityType="CallCenterModel.PosOrderPromo" />
+          <EntitySet Name="PosOrder" EntityType="CallCenterModel.PosOrder" />
+          <EntitySet Name="PosOrderItem" EntityType="CallCenterModel.PosOrderItem" />
+          <AssociationSet Name="FK_PosOrder_AspNetUsers" Association="CallCenterModel.FK_PosOrder_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PosOrder" EntitySet="PosOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderToStore_PosOrder" Association="CallCenterModel.FK_OrderToStore_PosOrder">
+            <End Role="PosOrder" EntitySet="PosOrder" />
+            <End Role="OrderToStore" EntitySet="OrderToStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosOrderItem_PosOrder" Association="CallCenterModel.FK_PosOrderItem_PosOrder">
+            <End Role="PosOrder" EntitySet="PosOrder" />
+            <End Role="PosOrderItem" EntitySet="PosOrderItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosOrderPromo_PosOrder" Association="CallCenterModel.FK_PosOrderPromo_PosOrder">
+            <End Role="PosOrder" EntitySet="PosOrder" />
+            <End Role="PosOrderPromo" EntitySet="PosOrderPromo" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="User_Sales_group_by_date_Result">
@@ -3281,12 +3315,12 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="FranchiseStoreOffLine" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers" FromRole="AspNetUsers" ToRole="FranchiseStoreOffLine" />
           <NavigationProperty Name="FranchiseStoreOffLine1" Relationship="CallCenterModel.FK_FranchiseStoreOffLine_AspNetUsers1" FromRole="AspNetUsers" ToRole="FranchiseStoreOffLine" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_AspNetUsers" FromRole="AspNetUsers" ToRole="OrderToStore" />
-          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrder_AspNetUsers" FromRole="AspNetUsers" ToRole="PosOrder" />
           <NavigationProperty Name="Resource" Relationship="CallCenterModel.FK_Resource_AspNetUsers" FromRole="AspNetUsers" ToRole="Resource" />
           <NavigationProperty Name="StoreMessage" Relationship="CallCenterModel.FK_StoreMessage_AspNetUsers" FromRole="AspNetUsers" ToRole="StoreMessage" />
           <NavigationProperty Name="UserDetail" Relationship="CallCenterModel.FK_UserDetail_AspNetUsers" FromRole="AspNetUsers" ToRole="UserDetail" />
           <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="StoreMessageDate" Relationship="CallCenterModel.FK_StoreMessageDate_AspNetUsers" FromRole="AspNetUsers" ToRole="StoreMessageDate" />
+          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrder_AspNetUsers" FromRole="AspNetUsers" ToRole="PosOrder" />
         </EntityType>
         <EntityType Name="CatDeliveryStatus">
           <Key>
@@ -3718,10 +3752,10 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <NavigationProperty Name="ClientPhone" Relationship="CallCenterModel.FK_OrderToStore_ClientPhone" FromRole="OrderToStore" ToRole="ClientPhone" />
           <NavigationProperty Name="Franchise" Relationship="CallCenterModel.FK_OrderToStore_Franchise" FromRole="OrderToStore" ToRole="Franchise" />
           <NavigationProperty Name="FranchiseStore" Relationship="CallCenterModel.FK_OrderToStore_FranchiseStore" FromRole="OrderToStore" ToRole="FranchiseStore" />
-          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="OrderToStore" ToRole="PosOrder" />
           <NavigationProperty Name="OrderToStoreLog" Relationship="CallCenterModel.FK_OrderToStoreLog_OrderToStore" FromRole="OrderToStore" ToRole="OrderToStoreLog" />
           <NavigationProperty Name="Recurrence" Relationship="CallCenterModel.FK_Recurrence_OrderToStore" FromRole="OrderToStore" ToRole="Recurrence" />
           <NavigationProperty Name="StoreStatus" Relationship="CallCenterModel.FK_StoreStatus_OrderToStore" FromRole="OrderToStore" ToRole="StoreStatus" />
+          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="OrderToStore" ToRole="PosOrder" />
         </EntityType>
         <EntityType Name="OrderToStoreLog">
           <Key>
@@ -3743,37 +3777,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetRoles" Relationship="CallCenterModel.FK_Permission_AspNetRoles" FromRole="Permission" ToRole="AspNetRoles" />
           <NavigationProperty Name="Module" Relationship="CallCenterModel.FK_Permission_Module" FromRole="Permission" ToRole="Module" />
-        </EntityType>
-        <EntityType Name="PosOrder">
-          <Key>
-            <PropertyRef Name="PosOrderId" />
-          </Key>
-          <Property Name="PosOrderId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FranchiseCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CheckId" Type="Int32" Nullable="false" />
-          <Property Name="GuidId" Type="Guid" Nullable="false" />
-          <Property Name="OrderDatetime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <Property Name="Taxes" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_PosOrder_AspNetUsers" FromRole="PosOrder" ToRole="AspNetUsers" />
-          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="PosOrder" ToRole="OrderToStore" />
-          <NavigationProperty Name="PosOrderItem" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrder" ToRole="PosOrderItem" />
-        </EntityType>
-        <EntityType Name="PosOrderItem">
-          <Key>
-            <PropertyRef Name="PosOrderItemId" />
-          </Key>
-          <Property Name="PosOrderItemId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PosOrderId" Type="Int64" Nullable="false" />
-          <Property Name="CheckItemId" Type="Int64" Nullable="false" />
-          <Property Name="ItemId" Type="Int64" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <Property Name="LevelItem" Type="Int32" Nullable="false" />
-          <Property Name="ParentId" Type="Int64" />
-          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrderItem" ToRole="PosOrder" />
         </EntityType>
         <EntityType Name="Recurrence">
           <Key>
@@ -4483,18 +4486,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PosOrder_AspNetUsers">
-          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PosOrder">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Resource_AspNetUsers">
           <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
           <End Type="CallCenterModel.Resource" Role="Resource" Multiplicity="*" />
@@ -4927,18 +4918,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderToStore_PosOrder">
-          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
-          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PosOrder">
-              <PropertyRef Name="PosOrderId" />
-            </Principal>
-            <Dependent Role="OrderToStore">
-              <PropertyRef Name="PosOrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderToStoreLog_OrderToStore">
           <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="1" />
           <End Type="CallCenterModel.OrderToStoreLog" Role="OrderToStoreLog" Multiplicity="*" />
@@ -4972,18 +4951,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Principal>
             <Dependent Role="StoreStatus">
               <PropertyRef Name="LastOrderToStoreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PosOrderItem_PosOrder">
-          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
-          <End Type="CallCenterModel.PosOrderItem" Role="PosOrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PosOrder">
-              <PropertyRef Name="PosOrderId" />
-            </Principal>
-            <Dependent Role="PosOrderItem">
-              <PropertyRef Name="PosOrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5185,6 +5152,99 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
             </Principal>
             <Dependent Role="StoreMessageDate">
               <PropertyRef Name="StoreMessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PosOrderPromo">
+          <Key>
+            <PropertyRef Name="PosOrderPromoId" />
+          </Key>
+          <Property Name="PosOrderPromoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PosOrderId" Type="Int64" Nullable="false" />
+          <Property Name="PromoTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PromoEntryId" Type="Int32" Nullable="false" />
+          <Property Name="EntriesIdsSelected" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrderPromo_PosOrder" FromRole="PosOrderPromo" ToRole="PosOrder" />
+        </EntityType>
+        <EntityType Name="PosOrder">
+          <Key>
+            <PropertyRef Name="PosOrderId" />
+          </Key>
+          <Property Name="PosOrderId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FranchiseCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CheckId" Type="Int32" Nullable="false" />
+          <Property Name="GuidId" Type="Guid" Nullable="false" />
+          <Property Name="OrderDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Taxes" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <NavigationProperty Name="AspNetUsers" Relationship="CallCenterModel.FK_PosOrder_AspNetUsers" FromRole="PosOrder" ToRole="AspNetUsers" />
+          <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStore_PosOrder" FromRole="PosOrder" ToRole="OrderToStore" />
+          <NavigationProperty Name="PosOrderItem" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrder" ToRole="PosOrderItem" />
+          <NavigationProperty Name="PosOrderPromo" Relationship="CallCenterModel.FK_PosOrderPromo_PosOrder" FromRole="PosOrder" ToRole="PosOrderPromo" />
+        </EntityType>
+        <EntityType Name="PosOrderItem">
+          <Key>
+            <PropertyRef Name="PosOrderItemId" />
+          </Key>
+          <Property Name="PosOrderItemId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PosOrderId" Type="Int64" Nullable="false" />
+          <Property Name="CheckItemId" Type="Int64" Nullable="false" />
+          <Property Name="ItemId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="LevelItem" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int64" />
+          <Property Name="ModCode" Type="Int32" Nullable="false" />
+          <Property Name="Origin" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PosOrder" Relationship="CallCenterModel.FK_PosOrderItem_PosOrder" FromRole="PosOrderItem" ToRole="PosOrder" />
+        </EntityType>
+        <Association Name="FK_PosOrder_AspNetUsers">
+          <End Type="CallCenterModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosOrder">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderToStore_PosOrder">
+          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
+          <End Type="CallCenterModel.OrderToStore" Role="OrderToStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosOrder">
+              <PropertyRef Name="PosOrderId" />
+            </Principal>
+            <Dependent Role="OrderToStore">
+              <PropertyRef Name="PosOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosOrderItem_PosOrder">
+          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
+          <End Type="CallCenterModel.PosOrderItem" Role="PosOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosOrder">
+              <PropertyRef Name="PosOrderId" />
+            </Principal>
+            <Dependent Role="PosOrderItem">
+              <PropertyRef Name="PosOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosOrderPromo_PosOrder">
+          <End Type="CallCenterModel.PosOrder" Role="PosOrder" Multiplicity="1" />
+          <End Type="CallCenterModel.PosOrderPromo" Role="PosOrderPromo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosOrder">
+              <PropertyRef Name="PosOrderId" />
+            </Principal>
+            <Dependent Role="PosOrderPromo">
+              <PropertyRef Name="PosOrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5745,35 +5805,6 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PosOrder">
-            <EntityTypeMapping TypeName="CallCenterModel.PosOrder">
-              <MappingFragment StoreEntitySet="PosOrder">
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="OrderDatetime" ColumnName="OrderDatetime" />
-                <ScalarProperty Name="GuidId" ColumnName="GuidId" />
-                <ScalarProperty Name="CheckId" ColumnName="CheckId" />
-                <ScalarProperty Name="FranchiseCode" ColumnName="FranchiseCode" />
-                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PosOrderItem">
-            <EntityTypeMapping TypeName="CallCenterModel.PosOrderItem">
-              <MappingFragment StoreEntitySet="PosOrderItem">
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="LevelItem" ColumnName="LevelItem" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
-                <ScalarProperty Name="CheckItemId" ColumnName="CheckItemId" />
-                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
-                <ScalarProperty Name="PosOrderItemId" ColumnName="PosOrderItemId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Recurrence">
             <EntityTypeMapping TypeName="CallCenterModel.Recurrence">
               <MappingFragment StoreEntitySet="Recurrence">
@@ -6117,6 +6148,48 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
                 <ScalarProperty Name="StoreMessageId" ColumnName="StoreMessageId" />
                 <ScalarProperty Name="CategoryMessageId" ColumnName="CategoryMessageId" />
                 <ScalarProperty Name="StoreMessageDateId" ColumnName="StoreMessageDateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PosOrderPromo">
+            <EntityTypeMapping TypeName="CallCenterModel.PosOrderPromo">
+              <MappingFragment StoreEntitySet="PosOrderPromo">
+                <ScalarProperty Name="EntriesIdsSelected" ColumnName="EntriesIdsSelected" />
+                <ScalarProperty Name="PromoEntryId" ColumnName="PromoEntryId" />
+                <ScalarProperty Name="PromoTypeId" ColumnName="PromoTypeId" />
+                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
+                <ScalarProperty Name="PosOrderPromoId" ColumnName="PosOrderPromoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PosOrder">
+            <EntityTypeMapping TypeName="CallCenterModel.PosOrder">
+              <MappingFragment StoreEntitySet="PosOrder">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderDatetime" ColumnName="OrderDatetime" />
+                <ScalarProperty Name="GuidId" ColumnName="GuidId" />
+                <ScalarProperty Name="CheckId" ColumnName="CheckId" />
+                <ScalarProperty Name="FranchiseCode" ColumnName="FranchiseCode" />
+                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PosOrderItem">
+            <EntityTypeMapping TypeName="CallCenterModel.PosOrderItem">
+              <MappingFragment StoreEntitySet="PosOrderItem">
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="ModCode" ColumnName="ModCode" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="LevelItem" ColumnName="LevelItem" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="CheckItemId" ColumnName="CheckItemId" />
+                <ScalarProperty Name="PosOrderId" ColumnName="PosOrderId" />
+                <ScalarProperty Name="PosOrderItemId" ColumnName="PosOrderItemId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
