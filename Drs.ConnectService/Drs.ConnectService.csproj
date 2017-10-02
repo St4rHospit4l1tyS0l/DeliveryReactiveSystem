@@ -106,6 +106,12 @@
     <Compile Include="Services\OrderCloudFeed.Designer.cs">
       <DependentUpon>OrderCloudFeed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\SendEmailToStore.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\SendEmailToStore.Designer.cs">
+      <DependentUpon>SendEmailToStore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\SyncServerFiles.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -131,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Services\OrderCloudFeed.resx">
       <DependentUpon>OrderCloudFeed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Services\SendEmailToStore.resx">
+      <DependentUpon>SendEmailToStore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Services\SyncServerFiles.resx">
       <DependentUpon>SyncServerFiles.cs</DependentUpon>

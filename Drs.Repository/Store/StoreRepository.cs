@@ -294,7 +294,9 @@ namespace Drs.Repository.Store
                 DatetimeIns = DateTime.Today,
                 IsObsolete = false,
                 WsAddress = model.WsAddress,
-                ManageUserId = model.ManUserId
+                ManageUserId = model.ManUserId,
+                StoreEmail = model.StoreEmail,
+                HasSendEmailWhenNewOrder = model.HasSendEmailWhenNewOrder
             };
             DbEntities.FranchiseStore.Add(franchiseStore);
             DbEntities.SaveChanges();
@@ -311,6 +313,8 @@ namespace Drs.Repository.Store
             franchiseStore.IsObsolete = false;
             franchiseStore.WsAddress = model.WsAddress;
             franchiseStore.ManageUserId = model.ManUserId;
+            franchiseStore.StoreEmail = model.StoreEmail;
+            franchiseStore.HasSendEmailWhenNewOrder = model.HasSendEmailWhenNewOrder;
             DbEntities.SaveChanges();
         }
 
@@ -432,6 +436,8 @@ namespace Drs.Repository.Store
                     AddressId = e.AddressId,
                     ManUserId = e.ManageUserId,
                     WsAddress = e.WsAddress,
+                    StoreEmail = e.StoreEmail,
+                    HasSendEmailWhenNewOrder = e.HasSendEmailWhenNewOrder,
                     Address = new AddressModel
                     {
                         CountryId = e.Address.CountryId,
@@ -601,5 +607,59 @@ namespace Drs.Repository.Store
                 }).ToList();
         }
 
+        public void SaveOrderToStoreEmail(long orderToStoreId)
+        {
+            DbEntities.OrderToStoreEmail.Add(new OrderToStoreEmail
+            {
+                OrderToStoreId = orderToStoreId,
+                IsSent = false,
+                TriesToSent = 0
+            });
+            DbEntities.SaveChanges();
+        }
+
+        public List<EmailOrderToStore> GetOrdersToSendByEmail(int maxTries)
+        {
+            return DbEntities.OrderToStoreEmail.Where(e => e.OrderToStore.FranchiseStore.HasSendEmailWhenNewOrder 
+                && e.IsSent == false && e.TriesToSent < maxTries)
+                .Select(e => new EmailOrderToStore
+                {
+                    AtoOrderId = e.OrderToStore.OrderAtoId,
+                    StoreName = e.OrderToStore.FranchiseStore.Name,
+                    PromiseDate = e.OrderToStore.PromiseTime,
+                    Client = new EmailClientOrder
+                    {
+                        FullName = e.OrderToStore.Client.FirstName + " " + e.OrderToStore.Client.LastName,
+                        Email = e.OrderToStore.Client.Email
+                    },
+                    PhoneNumber = e.OrderToStore.ClientPhone.Phone,
+                    Address = new EmailAddressOrder
+                    {
+                        Reference = e.OrderToStore.Address.Reference,
+                        ExtIntNumber = e.OrderToStore.Address.ExtIntNumber,
+                        MainAddress = e.OrderToStore.Address.MainAddress,
+                        RegionD = e.OrderToStore.Address.RegionNameD,
+                        RegionC = e.OrderToStore.Address.RegionNameC,
+                        RegionB = e.OrderToStore.Address.RegionNameB,
+                        RegionA = e.OrderToStore.Address.RegionNameA,
+                        Country = e.OrderToStore.Address.CountryName,
+                    },
+                    PosOrder = new EmailPosOrder
+                    {
+                        OrderDate = e.OrderToStore.PosOrder.OrderDatetime,
+                        Total = e.OrderToStore.PosOrder.Total,
+                        ItemsPosOrder = e.OrderToStore.PosOrder.PosOrderItem.Select(i => new EmailItemsPosOrder
+                        {
+                            Id = i.ItemId,
+                            Name = i.Name,
+                            Price = i.Price
+                        }).ToList()
+                    },
+                    ExtraNotes = e.OrderToStore.ExtraNotes,
+                    OrderMode = e.OrderToStore.OrderMode,
+                    Emails = e.OrderToStore.FranchiseStore.StoreEmail
+                }).ToList();
+        }
     }
+
 }

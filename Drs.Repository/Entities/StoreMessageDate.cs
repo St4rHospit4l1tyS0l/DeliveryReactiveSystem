@@ -25,7 +25,7 @@ namespace Drs.Repository.Entities
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual CategoryMessage CategoryMessage { get; set; }
-        public virtual FranchiseStore FranchiseStore { get; set; }
         public virtual StoreMessage StoreMessage { get; set; }
+        public virtual FranchiseStore FranchiseStore { get; set; }
     }
 }

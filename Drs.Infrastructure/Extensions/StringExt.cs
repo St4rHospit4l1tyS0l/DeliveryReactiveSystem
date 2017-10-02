@@ -50,5 +50,14 @@ namespace Drs.Infrastructure.Extensions
             return sb.ToString();
         }
 
+        public static bool IsValidId(this string sId)
+        {
+            if (String.IsNullOrWhiteSpace(sId))
+                return false;
+            long id;
+
+            return long.TryParse(sId, out id) && id > 0;
+        }
+
     }
 }

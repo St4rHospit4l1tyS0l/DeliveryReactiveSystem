@@ -26,9 +26,6 @@ namespace Drs.Repository.Entities
             this.FranchiseDataVersion1 = new HashSet<FranchiseDataVersion>();
             this.FranchisePhone = new HashSet<FranchisePhone>();
             this.FranchisePhone1 = new HashSet<FranchisePhone>();
-            this.FranchiseStore = new HashSet<FranchiseStore>();
-            this.FranchiseStore1 = new HashSet<FranchiseStore>();
-            this.FranchiseStore2 = new HashSet<FranchiseStore>();
             this.FranchiseStoreOffLine = new HashSet<FranchiseStoreOffLine>();
             this.FranchiseStoreOffLine1 = new HashSet<FranchiseStoreOffLine>();
             this.OrderToStore = new HashSet<OrderToStore>();
@@ -37,6 +34,9 @@ namespace Drs.Repository.Entities
             this.AspNetRoles = new HashSet<AspNetRoles>();
             this.StoreMessageDate = new HashSet<StoreMessageDate>();
             this.PosOrder = new HashSet<PosOrder>();
+            this.FranchiseStore = new HashSet<FranchiseStore>();
+            this.FranchiseStore1 = new HashSet<FranchiseStore>();
+            this.FranchiseStore2 = new HashSet<FranchiseStore>();
         }
     
         public string Id { get; set; }
@@ -62,9 +62,6 @@ namespace Drs.Repository.Entities
         public virtual ICollection<FranchiseDataVersion> FranchiseDataVersion1 { get; set; }
         public virtual ICollection<FranchisePhone> FranchisePhone { get; set; }
         public virtual ICollection<FranchisePhone> FranchisePhone1 { get; set; }
-        public virtual ICollection<FranchiseStore> FranchiseStore { get; set; }
-        public virtual ICollection<FranchiseStore> FranchiseStore1 { get; set; }
-        public virtual ICollection<FranchiseStore> FranchiseStore2 { get; set; }
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine1 { get; set; }
         public virtual ICollection<OrderToStore> OrderToStore { get; set; }
@@ -74,5 +71,8 @@ namespace Drs.Repository.Entities
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
         public virtual ICollection<StoreMessageDate> StoreMessageDate { get; set; }
         public virtual ICollection<PosOrder> PosOrder { get; set; }
+        public virtual ICollection<FranchiseStore> FranchiseStore { get; set; }
+        public virtual ICollection<FranchiseStore> FranchiseStore1 { get; set; }
+        public virtual ICollection<FranchiseStore> FranchiseStore2 { get; set; }
     }
 }

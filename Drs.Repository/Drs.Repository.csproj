@@ -166,6 +166,9 @@
     <Compile Include="Entities\OrderStatusEnd.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\OrderToStoreEmail.cs">
+      <DependentUpon>CallCenter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\PosOrderPromo.cs">
       <DependentUpon>CallCenter.tt</DependentUpon>
     </Compile>

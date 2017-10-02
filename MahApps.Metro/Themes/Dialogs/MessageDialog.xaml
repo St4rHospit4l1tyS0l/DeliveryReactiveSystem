@@ -8,12 +8,12 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0"
+        <TextBox Grid.Row="0"
                     Margin="0 5 0 0"
                     FontSize="{StaticResource DialogMessageFontSize}"
                     Text="{Binding Message, RelativeSource={RelativeSource AncestorType=Dialogs:MessageDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
-                    TextWrapping="Wrap"
-                    Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Dialogs:MessageDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" />
+                    TextWrapping="Wrap" Height="150" IsReadOnly="True"
+                    Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Dialogs:MessageDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
 
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"

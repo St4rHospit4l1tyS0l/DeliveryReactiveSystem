@@ -151,8 +151,9 @@ namespace Drs.Service.Store
                 {
                     Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_ORDER_OK,
                     IsSuccess = true,
-                    Message = String.Format("El pedido se ha enviado a la sucursal de forma exitosa. Fecha y tiempo estimado de llegada {0:F}",
-                        response.Order.promiseTimeField.ToDateTimeSafe())
+                    Message = String.Format("El pedido se ha enviado a la sucursal de forma exitosa.{0}Identificador del pedido en la sucursal:{1}" +
+                                            "{0}Fecha y tiempo estimado de llegada {2:F}",
+                        Environment.NewLine, response.Order.orderIdField, response.Order.promiseTimeField.ToDateTimeSafe())
                 });
 
                 SaveRecurrence(model);
@@ -202,6 +203,8 @@ namespace Drs.Service.Store
                 {
                     repository.UpdateOrderMode(model.OrderToStoreId, response.Order.orderIdField, response.Order.statusField,
                         response.Order.modeField, response.Order.modeChargeField, response.Order.promiseTimeField.ToDateTimeSafe());
+
+                    repository.SaveOrderToStoreEmail(model.OrderToStoreId);
                 }
 
             }
@@ -246,21 +249,23 @@ namespace Drs.Service.Store
                     try
                     {
                         var result = client.AddOrder(order);
-                        if (result.IsSuccess)
+                        if (result.IsSuccess && result.Order.orderIdField.IsValidId())
                         {
                             clients.Caller.OnSendToStoreEventChange(new ResponseMessage
                             {
                                 Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_CALL_WS_SUCCESS,
                                 IsSuccess = true,
-                                Message = String.Format("Pedido enviado de forma exitosa")
+                                Message = String.Format("Pedido (ATO ID {0}) enviado de forma exitosa", result.Order.orderIdField)
                             });
                             client.Close();
                             return result;
                         }
 
+                        var resultOrderId = result.IsSuccess ? result.Order.orderIdField : "ND";
+
                         SharedLogger.LogError(new Exception(
-                            String.Format("SendOrderToStore: {0} | {1} | {2} | {3}", result.IsSuccess, result.ErrMsg, result.ResultCode, result.ResultData))
-                            , model.PosOrder, model.Store, model.Phone, model.OrderDetails, model.OrderToStoreId);
+                            String.Format("SendOrderToStore: {0} | {1} | {2} | {3} | {4}", result.IsSuccess, result.ErrMsg, result.ResultCode, result.ResultData))
+                            , model.PosOrder, model.Store, model.Phone, model.OrderDetails, model.OrderToStoreId, resultOrderId);
                     }
                     catch (Exception ex)
                     {

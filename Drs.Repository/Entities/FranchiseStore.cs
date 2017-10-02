@@ -20,8 +20,8 @@ namespace Drs.Repository.Entities
             this.FranchiseStoreOffLine = new HashSet<FranchiseStoreOffLine>();
             this.OrderToStore = new HashSet<OrderToStore>();
             this.StoreAddressDistribution = new HashSet<StoreAddressDistribution>();
-            this.FranchisePhone = new HashSet<FranchisePhone>();
             this.StoreMessageDate = new HashSet<StoreMessageDate>();
+            this.FranchisePhone = new HashSet<FranchisePhone>();
         }
     
         public int FranchiseStoreId { get; set; }
@@ -35,6 +35,8 @@ namespace Drs.Repository.Entities
         public bool IsObsolete { get; set; }
         public string WsAddress { get; set; }
         public string ManageUserId { get; set; }
+        public string StoreEmail { get; set; }
+        public bool HasSendEmailWhenNewOrder { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
@@ -45,8 +47,8 @@ namespace Drs.Repository.Entities
         public virtual ICollection<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual ICollection<OrderToStore> OrderToStore { get; set; }
         public virtual ICollection<StoreAddressDistribution> StoreAddressDistribution { get; set; }
+        public virtual ICollection<StoreMessageDate> StoreMessageDate { get; set; }
         public virtual StoreStatus StoreStatus { get; set; }
         public virtual ICollection<FranchisePhone> FranchisePhone { get; set; }
-        public virtual ICollection<StoreMessageDate> StoreMessageDate { get; set; }
     }
 }

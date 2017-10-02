@@ -45,7 +45,7 @@
                             <input type="hidden" id="FranchiseId" name="FranchiseId" ng-model="m.FranchiseId" ng-update-hidden />
                             <input type="hidden" id="AddressId" name="AddressId" ng-model="m.AddressId" ng-update-hidden />
                             <input type="hidden" id="ManUserId" name="ManUserId" ng-model="m.ManUserId" ng-update-hidden />
-                            
+
                             <div class="row">
                                 <div class="col-xs-6">
                                     <label class="col-xs-3 control-label font-noraml">Sucursal:</label>
@@ -91,11 +91,30 @@
                                             ng-options="c.Name for c in lstManUsers" ng-model="m.manUser"></select>
                                 </div>
                             </div>
+                            <br/>
+                            <br/>
+                            <div class="col-xs-12">
+                                <label class="col-xs-3 control-label font-noraml">Correo electrónico sucursal:</label>
+                                <div class="col-xs-8">
+                                    <input type="email" name="StoreEmail" ng-model="m.StoreEmail"
+                                           placeholder="Ingrese el correo electrónico de la sucursal"
+                                           required="required" ng-maxlength="500" class="form-control">
+                                    <span class="error" ng-show="FormCatId.StoreEmail.$error.required">*Campo requerido</span>
+                                    <span class="error" ng-show="FormCatId.StoreEmail.$error.maxlength">*Longitud máxima de 500 caracteres</span>
+                                    <span class="error" ng-show="FormCatId.StoreEmail.$error.email">*Correo electrónico no válido</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="col-xs-8 col-xs-offset-3">
+                                    <input type="hidden" ng-model="m.HasSendEmailWhenNewOrder" name="HasSendEmailWhenNewOrder" ng-update-hidden>
+                                    <input type="checkbox" ng-model="m.HasSendEmailWhenNewOrder"> Enviar correo electrónico a la sucursal cuando se envíe un pedido
+                                </div>
+                            </div>
                         </form>
                         <br />
                         <div class="row">
                             <div class="col-xs-12">
-                                <br/>
+                                <br />
                                 <div ng-show="MsgError" class="alert alert-danger element-center">
                                     {{MsgError}}
                                 </div>

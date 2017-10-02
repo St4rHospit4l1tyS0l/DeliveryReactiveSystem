@@ -36,5 +36,7 @@ namespace Drs.Repository.Store
         IEnumerable<StoreNotificationCategoryModel> GetNotificationsByStore(int storeId);
         bool OrderExists(long orderId, string referenceId);
         List<OrderStoreModel> GetAllInProgressOrdersByStore(int storeId);
+        void SaveOrderToStoreEmail(long orderToStoreId);
+
     }
 }

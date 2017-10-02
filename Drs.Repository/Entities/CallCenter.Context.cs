@@ -54,7 +54,6 @@ namespace Drs.Repository.Entities
         public virtual DbSet<FranchiseDataFile> FranchiseDataFile { get; set; }
         public virtual DbSet<FranchiseDataVersion> FranchiseDataVersion { get; set; }
         public virtual DbSet<FranchisePhone> FranchisePhone { get; set; }
-        public virtual DbSet<FranchiseStore> FranchiseStore { get; set; }
         public virtual DbSet<FranchiseStoreGeoMap> FranchiseStoreGeoMap { get; set; }
         public virtual DbSet<FranchiseStoreOffLine> FranchiseStoreOffLine { get; set; }
         public virtual DbSet<InfoCallCenter> InfoCallCenter { get; set; }
@@ -96,6 +95,8 @@ namespace Drs.Repository.Entities
         public virtual DbSet<PosOrderPromo> PosOrderPromo { get; set; }
         public virtual DbSet<PosOrder> PosOrder { get; set; }
         public virtual DbSet<PosOrderItem> PosOrderItem { get; set; }
+        public virtual DbSet<FranchiseStore> FranchiseStore { get; set; }
+        public virtual DbSet<OrderToStoreEmail> OrderToStoreEmail { get; set; }
     
         [DbFunction("CallCenterEntities", "ufnGetTopProductsByRangeDates")]
         public virtual IQueryable<ufnGetTopProductsByRangeDates_Result1> ufnGetTopProductsByRangeDates(Nullable<System.DateTime> starDate, Nullable<System.DateTime> endDate)

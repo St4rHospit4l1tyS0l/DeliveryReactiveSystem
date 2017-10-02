@@ -136,6 +136,7 @@
     <Compile Include="Concurrency\IConcurrencyService.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Configuration\SettingAddress.cs" />
+    <Compile Include="Email\SendEmailService.cs" />
     <Compile Include="Factory\FactoryAddress.cs" />
     <Compile Include="Factory\LangAddress.cs" />
     <Compile Include="Franchise\FranchiseCoverageService.cs" />
@@ -194,11 +195,13 @@
     <Compile Include="Settings\ISettingService.cs" />
     <Compile Include="Store\ConnectionPoolWs.cs" />
     <Compile Include="Store\ContainerStoresConnection.cs" />
+    <Compile Include="Store\ISendEmailToStoreService.cs" />
     <Compile Include="Store\IUpdateOrderService.cs" />
     <Compile Include="Store\StoreService.cs" />
     <Compile Include="Store\IStoreService.cs" />
     <Compile Include="Store\StoreSettingService.cs" />
     <Compile Include="Store\UpdateOrderClient.cs" />
+    <Compile Include="Store\SendEmailToStoreService.cs" />
     <Compile Include="Store\UpdateOrderService.cs" />
     <Compile Include="Sync\SyncFileService.cs" />
     <Compile Include="Track\ITrackService.cs" />

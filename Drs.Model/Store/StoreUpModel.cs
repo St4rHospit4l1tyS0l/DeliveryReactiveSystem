@@ -17,5 +17,9 @@ namespace Drs.Model.Store
         public AddressModel Address { get; set; }
         public AddressModel AddressRes { get; set; }
         public string UserInsUpId { get; set; }
+        
+        [Required(AllowEmptyStrings = false, ErrorMessage = @"Correo electrónico de la sucursal")]
+        public string StoreEmail { get; set; }
+        public bool HasSendEmailWhenNewOrder { get; set; }
     }
 }
