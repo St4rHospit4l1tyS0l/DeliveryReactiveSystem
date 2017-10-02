@@ -1,0 +1,32 @@
+A) Puertos en el servidor (aplicaciones Web y base de datos):
+
+Entrada:
+ 80  (Central Management)
+ 8123 (Host Connect CallCenter)
+ 4209 (Franchise Source)
+ 2898 (Host CallCenter)
+
+Si la aplicación Web no está en el mismo servidor que la base de datos, es necesario abrir el puerto 1433 de SQL en el servidor de la base de datos. Se sugiere tener en el mismo servidor las aplicaciones Web y la base de datos.
+
+Salida:
+
+ 8732 (LASA CallCenter), con la IP de la sucursal
+
+
+B) Puertos para el equipo de cada agente:
+ 
+
+Salida:
+ 80  (Central Management)
+ 8123 (Host Connect CallCenter)
+ 2898 (Host CallCenter)
+
+
+
+C) Puertos para cada sucursal
+
+Entrada:
+ 8732 (LASA CallCenter)
+
+Salida
+ 80 (Central Management), con la IP del servidor
