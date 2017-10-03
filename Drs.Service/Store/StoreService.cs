@@ -151,7 +151,7 @@ namespace Drs.Service.Store
                 {
                     Code = SettingsData.Constants.StoreConst.STORE_RESPONSE_ORDER_OK,
                     IsSuccess = true,
-                    Message = String.Format("El pedido se ha enviado a la sucursal de forma exitosa.{0}Identificador del pedido en la sucursal:{1}" +
+                    Message = String.Format("El pedido se ha enviado a la sucursal de forma exitosa.{0}# del pedido en la sucursal: {1}" +
                                             "{0}Fecha y tiempo estimado de llegada {2:F}",
                         Environment.NewLine, response.Order.orderIdField, response.Order.promiseTimeField.ToDateTimeSafe())
                 });

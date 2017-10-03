@@ -163,7 +163,7 @@
         <AssociationConnector Association="CallCenterModel.FK_StoreMessageDate_FranchiseStore" />
         <AssociationConnector Association="CallCenterModel.FK_StoreStatus_FranchiseStore" />
         <AssociationConnector Association="CallCenterModel.RelFranchisePhoneStore" />
-        <EntityTypeShape EntityType="CallCenterModel.OrderToStoreEmail" Width="1.5" PointX="15" PointY="55.75" />
+        <EntityTypeShape EntityType="CallCenterModel.OrderToStoreEmail" Width="1.5" PointX="15" PointY="44.625" />
         <AssociationConnector Association="CallCenterModel.FK_OrderToStoreEmail_OrderToStore" />
       </Diagram>
     </edmx:Diagrams>

@@ -59,5 +59,10 @@ namespace Drs.Infrastructure.Extensions
             return long.TryParse(sId, out id) && id > 0;
         }
 
+        public static string AddIfNotNull(string value, string separator = "<br/>")
+        {
+            return string.IsNullOrWhiteSpace(value) ? string.Empty : separator + value;
+        }
+
     }
 }

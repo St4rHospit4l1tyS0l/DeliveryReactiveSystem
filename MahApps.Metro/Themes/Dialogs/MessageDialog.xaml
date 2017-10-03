@@ -11,10 +11,11 @@
         <TextBox Grid.Row="0"
                     Margin="0 5 0 0"
                     FontSize="{StaticResource DialogMessageFontSize}"
+                    TextAlignment="Center"
                     Text="{Binding Message, RelativeSource={RelativeSource AncestorType=Dialogs:MessageDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap" Height="150" IsReadOnly="True"
-                    Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Dialogs:MessageDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
-
+                    Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Dialogs:MessageDialog, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" 
+                    Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="#FFE8E8E8" BorderThickness="0" />
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right"

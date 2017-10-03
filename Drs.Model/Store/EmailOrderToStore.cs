@@ -14,15 +14,25 @@ namespace Drs.Model.Store
         public string ExtraNotes { get; set; }
         public string OrderMode { get; set; }
         public EmailPosOrder PosOrder { get; set; }
-        public string Emails { get; set; }
-    }
+        public string DestinationEmails { get; set; }
+        public long OrderToStoreId { get; set; }
+        public long OrderToStoreEmailId { get; set; }
+        public int TriesToSend { get; set; }
 
-    public class EmailSettings
-    {
-        public string Host { get; set; }
-        public int Port { get; set; }
-        public bool EnableSsl { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string BuildBody(string template)
+        {
+            return string.Format(template, AtoOrderId, StoreName, Client.GetInfo(), PhoneNumber,
+                Address.GetInfo(), GetInfo(), PosOrder.GetInfo());
+        }
+
+        private string GetInfo()
+        {
+            return string.Format("Fecha/hora del pedido: {0}<br/>Fecha/hora de entrega del pedido:{1}Notas:{2}<br/>Modo del pedido:{3}Identificador interno:{4}",
+                PosOrder != null ? PosOrder.OrderDate.ToString("yyyy / MM / dd  |  HH:mm:ss") : "ND", 
+                PromiseDate.HasValue? PromiseDate.Value.ToString("yyyy / MM / dd  |  HH:mm:ss") : "ND",
+                ExtraNotes,
+                OrderMode,
+                OrderToStoreId);
+        }
     }
 }

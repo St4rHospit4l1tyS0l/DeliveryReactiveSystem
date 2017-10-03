@@ -613,7 +613,7 @@ namespace Drs.Repository.Store
             {
                 OrderToStoreId = orderToStoreId,
                 IsSent = false,
-                TriesToSent = 0
+                TriesToSend = 0
             });
             DbEntities.SaveChanges();
         }
@@ -621,9 +621,12 @@ namespace Drs.Repository.Store
         public List<EmailOrderToStore> GetOrdersToSendByEmail(int maxTries)
         {
             return DbEntities.OrderToStoreEmail.Where(e => e.OrderToStore.FranchiseStore.HasSendEmailWhenNewOrder 
-                && e.IsSent == false && e.TriesToSent < maxTries)
+                && e.IsSent == false && e.TriesToSend < maxTries)
                 .Select(e => new EmailOrderToStore
                 {
+                    OrderToStoreId = e.OrderToStore.OrderToStoreId,
+                    OrderToStoreEmailId = e.OrderToStoreEmailId,
+                    TriesToSend = e.TriesToSend,
                     AtoOrderId = e.OrderToStore.OrderAtoId,
                     StoreName = e.OrderToStore.FranchiseStore.Name,
                     PromiseDate = e.OrderToStore.PromiseTime,
@@ -657,8 +660,28 @@ namespace Drs.Repository.Store
                     },
                     ExtraNotes = e.OrderToStore.ExtraNotes,
                     OrderMode = e.OrderToStore.OrderMode,
-                    Emails = e.OrderToStore.FranchiseStore.StoreEmail
+                    DestinationEmails = e.OrderToStore.FranchiseStore.StoreEmail
                 }).ToList();
+        }
+
+        public void UpdateOrderToSendByEmail(long orderToStoreEmailId, int triesToSend, bool isSent)
+        {
+            var orderToStoreEmail = new OrderToStoreEmail
+            {
+                OrderToStoreEmailId = orderToStoreEmailId,
+                TriesToSend = triesToSend,
+                IsSent = isSent,
+                SendTimestamp = isSent ? DateTime.Now : (DateTime?)null
+            };
+            DbEntities.OrderToStoreEmail.Attach(orderToStoreEmail);
+
+            var entry = DbEntities.Entry(orderToStoreEmail);
+            entry.Property(e => e.OrderToStoreEmailId).IsModified = true;
+            entry.Property(e => e.TriesToSend).IsModified = true;
+            entry.Property(e => e.IsSent).IsModified = true;
+            entry.Property(e => e.SendTimestamp).IsModified = true;
+
+            DbEntities.SaveChanges();
         }
     }
 

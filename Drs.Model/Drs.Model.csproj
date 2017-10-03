@@ -198,6 +198,7 @@
     <Compile Include="Store\EmailItemsPosOrder.cs" />
     <Compile Include="Store\EmailOrderToStore.cs" />
     <Compile Include="Store\EmailPosOrder.cs" />
+    <Compile Include="Store\EmailSettings.cs" />
     <Compile Include="Store\MessageNotification.cs" />
     <Compile Include="Store\MessageNotificationVm.cs" />
     <Compile Include="Store\OrderStoreItemModel.cs" />

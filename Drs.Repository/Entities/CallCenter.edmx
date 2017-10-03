@@ -474,8 +474,9 @@
           </Key>
           <Property Name="OrderToStoreEmailId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderToStoreId" Type="bigint" Nullable="false" />
-          <Property Name="TriesToSent" Type="int" Nullable="false" />
+          <Property Name="TriesToSend" Type="int" Nullable="false" />
           <Property Name="IsSent" Type="bit" Nullable="false" />
+          <Property Name="SendTimestamp" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="OrderToStoreLog">
           <Key>
@@ -5290,8 +5291,9 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           </Key>
           <Property Name="OrderToStoreEmailId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderToStoreId" Type="Int64" Nullable="false" />
-          <Property Name="TriesToSent" Type="Int32" Nullable="false" />
+          <Property Name="TriesToSend" Type="Int32" Nullable="false" />
           <Property Name="IsSent" Type="Boolean" Nullable="false" />
+          <Property Name="SendTimestamp" Type="DateTime" Precision="7" />
           <NavigationProperty Name="OrderToStore" Relationship="CallCenterModel.FK_OrderToStoreEmail_OrderToStore" FromRole="OrderToStoreEmail" ToRole="OrderToStore" />
         </EntityType>
         <Association Name="FK_OrderToStoreEmail_OrderToStore">
@@ -6256,8 +6258,9 @@ warning 6035: The relationship 'FK_PosOrder_Franchise' has columns that are not 
           <EntitySetMapping Name="OrderToStoreEmail">
             <EntityTypeMapping TypeName="CallCenterModel.OrderToStoreEmail">
               <MappingFragment StoreEntitySet="OrderToStoreEmail">
+                <ScalarProperty Name="SendTimestamp" ColumnName="SendTimestamp" />
                 <ScalarProperty Name="IsSent" ColumnName="IsSent" />
-                <ScalarProperty Name="TriesToSent" ColumnName="TriesToSent" />
+                <ScalarProperty Name="TriesToSend" ColumnName="TriesToSend" />
                 <ScalarProperty Name="OrderToStoreId" ColumnName="OrderToStoreId" />
                 <ScalarProperty Name="OrderToStoreEmailId" ColumnName="OrderToStoreEmailId" />
               </MappingFragment>

@@ -135,7 +135,7 @@ namespace Drs.Model.Settings
                 public const string TIME_SYNC_SERVER_FILES = "TIME_SYNC_SERVER_FILES";
                 public const string TIME_SEND_ORDER_EMAIL = "TIME_SEND_ORDER_EMAIL";
                 public const string MAX_TRIES_SEND_ORDER_EMAIL = "MAX_TRIES_SEND_ORDER_EMAIL";
-                public const string FULL_PATH_TEMPLATE_EMAIL = "FULL_PATH_TEMPLATE_EMAIL";
+                public const string EMAIL_SETTINGS = "EMAIL_SETTINGS";
                 public const string MAX_FAILED_STATUS_COUNTER = "MAX_FAILED_STATUS_COUNTER";
                 public const string ENABLE_STORE_NOTIFICATIONS = "ENABLE_STORE_NOTIFICATIONS";
                 public const string ENABLE_ORDER_FEED = "ENABLE_ORDER_FEED";
@@ -270,7 +270,7 @@ namespace Drs.Model.Settings
             public static int TimeUpdateStoreOrder { get; set; }
             public static int TimeSendOrderEmail { get; set; }
             public static int MaxTriesSendOrderEmail { get; set; }
-            public static string FullPathTemplateEmail { get; set; }
+            public static string EmailSettings { get; set; }
             public static bool ByCountry { get; set; }
             public static bool ByRegionA { get; set; }
             public static bool ByRegionB { get; set; }

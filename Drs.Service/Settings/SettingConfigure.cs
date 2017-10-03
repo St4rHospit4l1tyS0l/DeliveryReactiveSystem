@@ -45,7 +45,7 @@ namespace Drs.Service.Settings
             SettingsData.Store.TimeUpdateStoreOrder = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.TIME_UPDATE_STORE_ORDER, 30);
             SettingsData.Store.TimeSendOrderEmail = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.TIME_SEND_ORDER_EMAIL, 30);
             SettingsData.Store.MaxTriesSendOrderEmail = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.MAX_TRIES_SEND_ORDER_EMAIL, 20);
-            SettingsData.Store.FullPathTemplateEmail = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.FULL_PATH_TEMPLATE_EMAIL, "TemplateOrderEmail.html");
+            SettingsData.Store.EmailSettings = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.EMAIL_SETTINGS, "{}");
             SettingsData.Store.TimeSyncServerFilesOrder = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.TIME_SYNC_SERVER_FILES, 600);
             SettingsData.Store.MaxFailedStatusCounter = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.MAX_FAILED_STATUS_COUNTER, 60);
             SettingsData.Store.EnableStoreNotifications = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.ENABLE_STORE_NOTIFICATIONS, SettingsData.Constants.SystemConst.FALSE);

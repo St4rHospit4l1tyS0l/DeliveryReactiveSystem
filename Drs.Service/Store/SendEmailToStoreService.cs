@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,13 +14,14 @@ using Drs.Model.Store;
 using Drs.Repository.Log;
 using Drs.Repository.Store;
 using Drs.Service.QueryFunction;
+using Newtonsoft.Json;
 
 namespace Drs.Service.Store
 {
     public class SendEmailToStoreService : ISendEmailToStoreService
     {
         private readonly EventLog _eventLog;
-        private string _template;
+        private EmailSettings _emailSettings;
 
         public SendEmailToStoreService(EventLog eventLog)
         {
@@ -31,39 +34,86 @@ namespace Drs.Service.Store
             {
                 try
                 {
-                    if (_template == null)
-                        _template = ReadTemplate(SettingsData.Store.FullPathTemplateEmail);
+                    if (_emailSettings == null)
+                        _emailSettings = ReadEmailSettings(SettingsData.Store.EmailSettings);
 
-                    if (_template != null)
+                    if (_emailSettings != null)
                     {
                         var lstEmailsToSend = GetEmailsToSend(SettingsData.Store.MaxTriesSendOrderEmail);
-
-                        SendEmails(lstEmailsToSend, _template);
+                        SendEmails(lstEmailsToSend, _emailSettings);
                     }
-                    
-    
                 }
                 catch (Exception ex)
                 {
                     _eventLog.WriteEntry(ex.Message + " -ST- " + ex.StackTrace, EventLogEntryType.Error);
+                    SharedLogger.LogError(ex);
                 }
 
                 Task.Delay(TimeSpan.FromSeconds(SettingsData.Store.TimeSendOrderEmail), token).Wait(token);
             }
         }
 
-        private void SendEmails(List<EmailOrderToStore> lstEmailsToSend, string template)
+        private EmailSettings ReadEmailSettings(string emailSettings)
         {
-            foreach (var emailOrder in lstEmailsToSend)
+            try
             {
-                try
-                {
+                var settings = JsonConvert.DeserializeObject<EmailSettings>(emailSettings);
 
-                }
-                catch (Exception ex)
+                settings.Template = ReadTemplate(settings.TemplatePath);
+
+                if (settings.Template == null)
+                    return null;
+                
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                _eventLog.WriteEntry(ex.Message + " -ST- " + ex.StackTrace, EventLogEntryType.Error);
+                SharedLogger.LogError(ex);
+                return null;
+            }
+        }
+
+        private void SendEmails(List<EmailOrderToStore> lstEmailsToSend, EmailSettings emailSettings)
+        {
+            using (var repository = new StoreRepository())
+            {
+                using (var client = new SmtpClient(emailSettings.Host, emailSettings.Port))
                 {
-                    _eventLog.WriteEntry(ex.Message + " -ST- " + ex.StackTrace, EventLogEntryType.Error);
-                    SharedLogger.LogError(ex);
+                    client.DeliveryFormat = SmtpDeliveryFormat.International;
+                    client.EnableSsl = emailSettings.EnableSsl;
+                    client.Credentials = new NetworkCredential(emailSettings.Username, emailSettings.Password);
+                    client.UseDefaultCredentials = false;
+
+                    foreach (var emailOrder in lstEmailsToSend)
+                    {
+                        try
+                        {
+                            emailOrder.TriesToSend++;
+                            using (var mail = new MailMessage())
+                            {
+                                var body = emailOrder.BuildBody(emailSettings.Template);
+
+                                foreach (var destination in emailOrder.DestinationEmails.Split(','))
+                                {
+                                    mail.To.Add(new MailAddress(destination));
+                                }
+
+                                mail.Sender = new MailAddress(emailSettings.Sender);
+                                mail.Subject = string.Format(emailSettings.Title, emailOrder.AtoOrderId);
+                                mail.Body = body;
+                                mail.IsBodyHtml = true;
+                            }
+
+                            repository.UpdateOrderToSendByEmail(emailOrder.OrderToStoreEmailId, emailOrder.TriesToSend, true);
+                        }
+                        catch (Exception ex)
+                        {
+                            _eventLog.WriteEntry(ex.Message + " -ST- " + ex.StackTrace, EventLogEntryType.Error);
+                            SharedLogger.LogError(ex);
+                            repository.UpdateOrderToSendByEmail(emailOrder.OrderToStoreEmailId, emailOrder.TriesToSend, false);
+                        }
+                    }
                 }
             }
         }
@@ -82,43 +132,5 @@ namespace Drs.Service.Store
                 return repository.GetOrdersToSendByEmail(maxTriesSendOrderEmail);
             }
         }
-        /*
-        private Task ExecuteGetOrderStatus(TrackOrderModel order, UpdateOrderClient conn, CancellationToken token)
-        {
-            return Task.Run(() =>
-            {
-                var response = conn.CallWsGetOrder(long.Parse(order.AtoOrderId), _eventLog);
-                ProcessOrderReponse(order, response);
-            }, token);
-        }
-
-        private void ProcessOrderReponse(TrackOrderModel order, ResponseRd response)
-        {
-            try
-            {
-                using (var repository = new StoreRepository())
-                {
-                    repository.Db.Configuration.ValidateOnSaveEnabled = false;
-                    if (response != null && response.IsSuccess && response.Order != null && String.IsNullOrWhiteSpace(response.Order.statusField) == false)
-                    {
-                        if (order.LastStatus == response.Order.statusField)
-                            return;
-                        
-                        repository.UpdateOrderStatus(order.OrderToStoreId, response.Order.statusField, response.Order.promiseTimeField.ToDateTimeSafe());
-                        return;
-                    }
-
-                    if(response != null && response.IsSuccess == false)
-                        _eventLog.WriteEntry(String.Format("Order Call Failed OrderId: {0} AtoOrderId: {1}  - Error: {2} | {3}", order.OrderToStoreId, order.AtoOrderId,
-                            String.IsNullOrWhiteSpace(response.ExcMsg) ? "" : response.ErrMsg, String.IsNullOrWhiteSpace(response.ResultData) ? "" : response.ResultData), EventLogEntryType.Warning);
-
-                    repository.UpdateOrderStatusFailedRetrieve(order.OrderToStoreId, order.FailedStatusCounter);
-                }
-            }
-            catch (Exception ex)
-            {
-                _eventLog.WriteEntry(ex.Message + " -ST- " + ex.StackTrace, EventLogEntryType.Error);
-            }
-        }*/
     }
 }
