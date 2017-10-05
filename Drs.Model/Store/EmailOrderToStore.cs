@@ -27,9 +27,9 @@ namespace Drs.Model.Store
 
         private string GetInfo()
         {
-            return string.Format("Fecha/hora del pedido: {0}<br/>Fecha/hora de entrega del pedido:{1}Notas:{2}<br/>Modo del pedido:{3}Identificador interno:{4}",
-                PosOrder != null ? PosOrder.OrderDate.ToString("yyyy / MM / dd  |  HH:mm:ss") : "ND", 
-                PromiseDate.HasValue? PromiseDate.Value.ToString("yyyy / MM / dd  |  HH:mm:ss") : "ND",
+            return string.Format("Fecha/hora del pedido: {0}<br/>Fecha/hora de entrega del pedido: {1}<br/>Notas adicionales: {2}<br/>Modo del pedido: {3}<br/>Identificador interno: {4}",
+                PosOrder != null ? PosOrder.OrderDate.ToString("yyyy/MM/dd - HH:mm:ss") : "ND", 
+                PromiseDate.HasValue? PromiseDate.Value.ToString("yyyy/MM/dd - HH:mm:ss") : "ND",
                 ExtraNotes,
                 OrderMode,
                 OrderToStoreId);

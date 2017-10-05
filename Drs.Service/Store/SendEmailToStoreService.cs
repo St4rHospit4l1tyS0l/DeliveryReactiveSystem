@@ -40,7 +40,9 @@ namespace Drs.Service.Store
                     if (_emailSettings != null)
                     {
                         var lstEmailsToSend = GetEmailsToSend(SettingsData.Store.MaxTriesSendOrderEmail);
-                        SendEmails(lstEmailsToSend, _emailSettings);
+
+                        if (lstEmailsToSend != null && lstEmailsToSend.Any())
+                            SendEmails(lstEmailsToSend, _emailSettings);
                     }
                 }
                 catch (Exception ex)
@@ -80,10 +82,10 @@ namespace Drs.Service.Store
             {
                 using (var client = new SmtpClient(emailSettings.Host, emailSettings.Port))
                 {
-                    client.DeliveryFormat = SmtpDeliveryFormat.International;
+                    //client.DeliveryFormat = SmtpDeliveryFormat.International;
                     client.EnableSsl = emailSettings.EnableSsl;
                     client.Credentials = new NetworkCredential(emailSettings.Username, emailSettings.Password);
-                    client.UseDefaultCredentials = false;
+                    //client.UseDefaultCredentials = false;
 
                     foreach (var emailOrder in lstEmailsToSend)
                     {
@@ -94,15 +96,17 @@ namespace Drs.Service.Store
                             {
                                 var body = emailOrder.BuildBody(emailSettings.Template);
 
-                                foreach (var destination in emailOrder.DestinationEmails.Split(','))
+                                foreach (var destination in emailOrder.DestinationEmails.Split(';'))
                                 {
                                     mail.To.Add(new MailAddress(destination));
                                 }
 
-                                mail.Sender = new MailAddress(emailSettings.Sender);
+                                mail.From = new MailAddress(emailSettings.Sender);
+                                mail.Sender = mail.From;
                                 mail.Subject = string.Format(emailSettings.Title, emailOrder.AtoOrderId);
                                 mail.Body = body;
                                 mail.IsBodyHtml = true;
+                                client.Send(mail);
                             }
 
                             repository.UpdateOrderToSendByEmail(emailOrder.OrderToStoreEmailId, emailOrder.TriesToSend, true);

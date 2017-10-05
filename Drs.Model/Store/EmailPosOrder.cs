@@ -12,8 +12,11 @@ namespace Drs.Model.Store
 
         public string GetInfo()
         {
-            return ItemsPosOrder.Aggregate(string.Empty, (current, items) => current + string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>", 
-                items.Id, items.Name, items.Price.ToString("C")));
+            string result = string.Empty;
+            foreach (EmailItemsPosOrder order in ItemsPosOrder)
+                result = result + string.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>", order.Id, order.Name, order.Price.ToString("C"));
+            result = result + string.Format("<tr><td>&nbsp;</td><td style\"color: #1689CE;\">Total</td><td>{0}</td></tr>", Total.ToString("C"));
+            return result;
         }
     }
 }
