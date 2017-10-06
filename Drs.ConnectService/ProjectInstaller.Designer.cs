@@ -31,6 +31,7 @@
             this.processInstaller = new System.ServiceProcess.ServiceProcessInstaller();
             this.UpdateOrderStatusInstaller = new System.ServiceProcess.ServiceInstaller();
             this.SyncServerFilesInstaller = new System.ServiceProcess.ServiceInstaller();
+            this.SendEmailToStoreInstaller = new System.ServiceProcess.ServiceInstaller();
             // 
             // processInstaller
             // 
@@ -50,13 +51,21 @@
             this.SyncServerFilesInstaller.DisplayName = "Drs.SyncServerFiles Service";
             this.SyncServerFilesInstaller.ServiceName = "SyncServerFiles";
             this.SyncServerFilesInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            //  
+            // SendEmailToStoreInstaller
+            // 
+            this.SendEmailToStoreInstaller.Description = "Service to send an email when order was sent to store";
+            this.SendEmailToStoreInstaller.DisplayName = "Drs.SendEmailToStore Service";
+            this.SendEmailToStoreInstaller.ServiceName = "SendEmailToStore";
+            this.SendEmailToStoreInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
             // 
             this.Installers.AddRange(new System.Configuration.Install.Installer[] {
             this.processInstaller,
             this.UpdateOrderStatusInstaller,
-            this.SyncServerFilesInstaller});
+            this.SyncServerFilesInstaller,
+            this.SendEmailToStoreInstaller});
 
         }
 
@@ -65,5 +74,6 @@
         private System.ServiceProcess.ServiceProcessInstaller processInstaller;
         private System.ServiceProcess.ServiceInstaller UpdateOrderStatusInstaller;
         private System.ServiceProcess.ServiceInstaller SyncServerFilesInstaller;
+        private System.ServiceProcess.ServiceInstaller SendEmailToStoreInstaller;
     }
 }
