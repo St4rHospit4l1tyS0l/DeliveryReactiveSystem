@@ -93,8 +93,8 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>-->
-                    <DataGridTextColumn Header="Hora"  MinWidth="90" 
-                                    Binding="{Binding TimeOrder}" >
+                    <DataGridTextColumn Header="Fecha | Hora"  MinWidth="90" 
+                                    Binding="{Binding SmallTimeOrder}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center" />

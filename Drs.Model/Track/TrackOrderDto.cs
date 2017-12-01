@@ -30,11 +30,11 @@ namespace Drs.Model.Track
             }
         }
 
-        public string TimeOrder
+        public string SmallTimeOrder
         {
             get
             {
-                return StartDatetime.ToString("HH:mm:ss");
+                return StartDatetime.ToString("yy/MM/dd|HH:mm");
             }
         }
 

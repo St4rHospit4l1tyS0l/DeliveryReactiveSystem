@@ -60,3 +60,12 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS (SELECT * FROM Setting WHERE GroupName = 'STORE' AND KeyName = 'ENABLE_SEND_EMAIL')
+BEGIN
+	INSERT INTO Setting(GroupName, KeyName, Value, Description)
+		VALUES('STORE', 'ENABLE_SEND_EMAIL', 
+		'false', 
+		'Habilita o deshabilita el envío de correos')
+END
+GO
+

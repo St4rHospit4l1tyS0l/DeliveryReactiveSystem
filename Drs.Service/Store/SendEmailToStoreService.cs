@@ -30,10 +30,14 @@ namespace Drs.Service.Store
 
         public void DoSendEmailTask(CancellationToken token)
         {
+            if (!SettingsData.Store.EnableSendEmail)
+                return;
+
             while (true)
             {
                 try
                 {
+
                     if (_emailSettings == null)
                         _emailSettings = ReadEmailSettings(SettingsData.Store.EmailSettings);
 

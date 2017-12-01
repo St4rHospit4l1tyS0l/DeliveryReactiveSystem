@@ -140,6 +140,7 @@ namespace Drs.Model.Settings
                 public const string ENABLE_STORE_NOTIFICATIONS = "ENABLE_STORE_NOTIFICATIONS";
                 public const string ENABLE_ORDER_FEED = "ENABLE_ORDER_FEED";
                 public const string INTERVAL_TIME_ORDER_FEED = "INTERVAL_TIME_ORDER_FEED";
+                public const string ENABLE_SEND_EMAIL = "ENABLE_SEND_EMAIL";
 
                 public const int STORE_RESPONSE_ORDER_ERROR = 1100;
                 
@@ -281,6 +282,7 @@ namespace Drs.Model.Settings
             public static bool EnableStoreNotifications { get; set; }
             public static bool EnableOrderFeed { get; set; }
             public static int IntervalTimeOrderFeed { get; set; }
+            public static bool EnableSendEmail { get; set; }
         }
 
         public class Address

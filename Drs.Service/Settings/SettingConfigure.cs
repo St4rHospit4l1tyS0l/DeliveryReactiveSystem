@@ -51,6 +51,7 @@ namespace Drs.Service.Settings
             SettingsData.Store.EnableStoreNotifications = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.ENABLE_STORE_NOTIFICATIONS, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.EnableOrderFeed = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.ENABLE_ORDER_FEED, SettingsData.Constants.SystemConst.FALSE);
             SettingsData.Store.IntervalTimeOrderFeed = GetIntSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.INTERVAL_TIME_ORDER_FEED, 60);
+            SettingsData.Store.EnableSendEmail = GetBooleanSettingValue(dicSettings, SettingsData.Constants.Group.STORE, SettingsData.Constants.StoreConst.ENABLE_SEND_EMAIL, false);
 
             SettingsData.Address.MapKey = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.ADDRESS, SettingsData.Constants.AddressConst.MAP_KEY, SettingsData.Constants.AddressConst.MAP_KEY_DEFAULT);
             SettingsData.Address.MapRegionCodeSearch = GetStringSettingValue(dicSettings, SettingsData.Constants.Group.ADDRESS, SettingsData.Constants.AddressConst.MAP_REGION_CODE_SEARCH, SettingsData.Constants.AddressConst.MAP_REGION_CODE_SEARCH_DEFAULT);

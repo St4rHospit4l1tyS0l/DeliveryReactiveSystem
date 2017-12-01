@@ -204,7 +204,8 @@ namespace Drs.Service.Store
                     repository.UpdateOrderMode(model.OrderToStoreId, response.Order.orderIdField, response.Order.statusField,
                         response.Order.modeField, response.Order.modeChargeField, response.Order.promiseTimeField.ToDateTimeSafe());
 
-                    repository.SaveOrderToStoreEmail(model.OrderToStoreId);
+                    if(SettingsData.Store.EnableSendEmail)
+                        repository.SaveOrderToStoreEmail(model.OrderToStoreId);
                 }
 
             }

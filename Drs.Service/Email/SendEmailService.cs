@@ -23,10 +23,10 @@ namespace Drs.Service.Email
 
                 using (var client = new SmtpClient(emailSettings.Host, emailSettings.Port))
                 {
+                    client.UseDefaultCredentials = false;
                     client.DeliveryFormat = SmtpDeliveryFormat.International;
                     client.EnableSsl = emailSettings.EnableSsl;
                     client.Credentials = new NetworkCredential(emailSettings.Username, emailSettings.Password);
-                    client.UseDefaultCredentials = false;
                     client.Send(mail);
                 }
             }
